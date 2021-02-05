@@ -1060,16 +1060,16 @@ static const u16 sPickupItems[] =
 static const u16 sRarePickupItems[] =
 {
     ITEM_HYPER_POTION,
-    ITEM_NUGGET,
-    ITEM_KINGS_ROCK,
-    ITEM_FULL_RESTORE,
+    ITEM_REVIVE,
     ITEM_ETHER,
-    ITEM_WHITE_HERB,
-    ITEM_TM44_REST,
+	ITEM_FULL_RESTORE,
+    ITEM_MAX_REVIVE,
     ITEM_ELIXIR,
-    ITEM_TM01_FOCUS_PUNCH,
+    ITEM_NUGGET,
+    ITEM_RARE_CANDY,
+    ITEM_WHITE_HERB,
+    ITEM_KINGS_ROCK,
     ITEM_LEFTOVERS,
-    ITEM_TM26_EARTHQUAKE,
 };
 
 static const u8 sPickupProbabilities[] =
