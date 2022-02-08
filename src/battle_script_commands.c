@@ -1205,7 +1205,7 @@ static const u8 sTerrainToType[BATTLE_TERRAIN_COUNT] =
     [BATTLE_TERRAIN_WATER]            = TYPE_WATER,
     [BATTLE_TERRAIN_POND]             = TYPE_WATER,
     [BATTLE_TERRAIN_CAVE]             = TYPE_ROCK,
-    [BATTLE_TERRAIN_BUILDING]         = TYPE_NORMAL,
+    [BATTLE_TERRAIN_BUILDING]         = TYPE_STEEL,
     [BATTLE_TERRAIN_SOARING]          = TYPE_FLYING,
     [BATTLE_TERRAIN_SKY_PILLAR]       = TYPE_FLYING,
     [BATTLE_TERRAIN_BURIAL_GROUND]    = TYPE_GHOST,
@@ -1215,19 +1215,11 @@ static const u8 sTerrainToType[BATTLE_TERRAIN_COUNT] =
     [BATTLE_TERRAIN_SNOW]             = TYPE_ICE,
     [BATTLE_TERRAIN_ICE]              = TYPE_ICE,
     [BATTLE_TERRAIN_VOLCANO]          = TYPE_FIRE,
-    [BATTLE_TERRAIN_DISTORTION_WORLD] = TYPE_NORMAL,
+    [BATTLE_TERRAIN_DISTORTION_WORLD] = TYPE_GHOST,
     [BATTLE_TERRAIN_SPACE]            = TYPE_DRAGON,
     [BATTLE_TERRAIN_ULTRA_SPACE]      = TYPE_PSYCHIC,
-#if B_CAMOUFLAGE_TYPES >= GEN_5
-    [BATTLE_TERRAIN_MOUNTAIN]         = TYPE_GROUND,
-    [BATTLE_TERRAIN_PLAIN]            = TYPE_GROUND,
-#elif B_CAMOUFLAGE_TYPES == GEN_4
     [BATTLE_TERRAIN_MOUNTAIN]         = TYPE_ROCK,
     [BATTLE_TERRAIN_PLAIN]            = TYPE_GROUND,
-#else
-    [BATTLE_TERRAIN_MOUNTAIN]         = TYPE_ROCK,
-    [BATTLE_TERRAIN_PLAIN]            = TYPE_NORMAL,
-#endif
 };
 
 // In Battle Palace, moves are chosen based on the pokemons nature rather than by the player
@@ -3173,7 +3165,7 @@ void SetMoveEffect(bool32 primary, u32 certain)
                         RecordAbilityBattle(gBattlerTarget, gLastUsedAbility);
                     }
                     else if (gBattleMons[gBattlerAttacker].item != 0
-                        || gBattleMons[gBattlerTarget].item == ITEM_ENIGMA_BERRY
+                        || gBattleMons[gBattlerTarget].item == ITEM_ENIGMA_BERRY_E_READER
                         || gBattleMons[gBattlerTarget].item == 0)
                     {
                         gBattlescriptCurrInstr++;
@@ -3876,7 +3868,7 @@ static void Cmd_getexp(void)
 
                 item = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM);
 
-                if (item == ITEM_ENIGMA_BERRY)
+                if (item == ITEM_ENIGMA_BERRY_E_READER)
                     holdEffect = gSaveBlock1Ptr->enigmaBerry.holdEffect;
                 else
                     holdEffect = ItemId_GetHoldEffect(item);
@@ -3925,7 +3917,7 @@ static void Cmd_getexp(void)
         {
             item = GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_HELD_ITEM);
 
-            if (item == ITEM_ENIGMA_BERRY)
+            if (item == ITEM_ENIGMA_BERRY_E_READER)
                 holdEffect = gSaveBlock1Ptr->enigmaBerry.holdEffect;
             else
                 holdEffect = ItemId_GetHoldEffect(item);
@@ -13411,6 +13403,7 @@ static void Cmd_handleballthrow(void)
         u8 catchRate;
     
         gLastThrownBall = gLastUsedItem;
+
         if (gBattleTypeFlags & BATTLE_TYPE_SAFARI)
             catchRate = gBattleStruct->safariCatchFactor * 1275 / 100;
         else
@@ -13613,18 +13606,8 @@ static void Cmd_handleballthrow(void)
         if (gBattleMons[gBattlerTarget].status1 & (STATUS1_POISON | STATUS1_BURN | STATUS1_PARALYSIS | STATUS1_TOXIC_POISON))
             odds = (odds * 15) / 10;
 
-        if (gLastUsedItem != ITEM_SAFARI_BALL)
-        {
-            if (gLastUsedItem == ITEM_MASTER_BALL)
-            {
-                gBattleResults.usedMasterBall = TRUE;
-            }
-            else
-            {
-                if (gBattleResults.catchAttempts[gLastUsedItem - ITEM_ULTRA_BALL] < 255)
-                    gBattleResults.catchAttempts[gLastUsedItem - ITEM_ULTRA_BALL]++;
-            }
-        }
+        if (gBattleResults.catchAttempts[gLastUsedItem - FIRST_BALL] < 255)
+            gBattleResults.catchAttempts[gLastUsedItem - FIRST_BALL]++;
 
         if (odds > 254) // mon caught
         {
