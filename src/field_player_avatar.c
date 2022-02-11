@@ -1661,6 +1661,7 @@ static void Task_WaitStopSurfing(u8 taskId)
         ScriptContext2_Disable();
         DestroySprite(&gSprites[playerObjEvent->fieldEffectSpriteId]);
         DestroyTask(taskId);
+		playerObjEvent->triggerGroundEffectsOnMove = TRUE;
     }
 }
 

@@ -22,6 +22,17 @@ enum {
     FONT_BOLD, // JP glyph set only
 };
 
+// Géneros
+#define PLACEHOLDER_ID_OA            0xE
+#define PLACEHOLDER_ID_A             0xF
+#define PLACEHOLDER_ID_ELLA          0x10
+#define PLACEHOLDER_ID_ElLa          0x11
+#define PLACEHOLDER_ID_ITA           0x12
+#define PLACEHOLDER_ID_ITOITA        0x13
+#define PLACEHOLDER_ID_EA            0x14
+#define PLACEHOLDER_ID_COLOR_PLAYER  0x15
+#define PLACEHOLDER_ID_COLOR_RIVAL   0x16
+
 // Return values for font functions
 enum {
     RENDER_PRINT,
