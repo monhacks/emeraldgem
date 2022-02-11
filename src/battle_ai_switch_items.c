@@ -18,6 +18,17 @@
 static bool8 HasSuperEffectiveMoveAgainstOpponents(bool8 noRng);
 static bool8 FindMonWithFlagsAndSuperEffective(u16 flags, u8 moduloPercent);
 static bool8 ShouldUseItem(void);
+static bool8 EnemyMonHasSpecificSuperEffectiveRevealedMove(void);
+
+static bool8 EnemyMonHasSpecificSuperEffectiveRevealedMove(void)
+{
+    u8 opposingPosition = BATTLE_OPPOSITE(GetBattlerPosition(gActiveBattler));
+		if (gMoveResultFlags & MOVE_RESULT_SUPER_EFFECTIVE) {
+			*(gBattleStruct->AI_monToSwitchIntoId + gActiveBattler) = PARTY_SIZE;
+			BtlController_EmitTwoReturnValues(1, B_ACTION_SWITCH, 0);
+			return TRUE;
+	}
+}
 
 void GetAIPartyIndexes(u32 battlerId, s32 *firstId, s32 *lastId)
 {
@@ -951,17 +962,5 @@ static bool8 ShouldUseItem(void)
     return FALSE;
 }
 
-static bool8 EnemyMonHasSpecificSuperEffectiveRevealedMove(void)
-{
-    u8 opposingPosition = BATTLE_OPPOSITE(GetBattlerPosition(gActiveBattler));
-	if (gBattleMons[GetBattlerAtPosition(opposingPosition)].species == YOUR_SPECIES_HERE) {
-		u8 moveFlags = AI_TypeCalc(gLastLandedMoves[gActiveBattler], gBattleMons[gActiveBattler].species, gBattleMons[gActiveBattler].ability);
-		if (gLastLandedMoves[gActiveBattler] == YOUR_MOVE_HERE && (moveFlags & MOVE_RESULT_SUPER_EFFECTIVE)) {
-			*(gBattleStruct->AI_monToSwitchIntoId + gActiveBattler) = PARTY_SIZE;
-			BtlController_EmitTwoReturnValues(1, B_ACTION_SWITCH, 0);
-			return TRUE;
-		}
-	}
-}
 
 

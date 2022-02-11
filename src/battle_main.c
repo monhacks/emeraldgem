@@ -237,6 +237,7 @@ EWRAM_DATA bool8 gHasFetchedBall = FALSE;
 EWRAM_DATA u8 gLastUsedBall = 0;
 EWRAM_DATA u16 gLastThrownBall = 0;
 EWRAM_DATA bool8 gSwapDamageCategory = FALSE; // Photon Geyser, Shell Side Arm, Light That Burns the Sky
+EWRAM_DATA u8 gMaxPartyLevel = 1;
 
 void (*gPreBattleCallback1)(void);
 void (*gBattleMainFunc)(void);
