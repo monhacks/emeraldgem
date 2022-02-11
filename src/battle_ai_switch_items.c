@@ -481,6 +481,8 @@ bool32 ShouldSwitch(void)
 
     if (availableToSwitch == 0)
         return FALSE;
+	if (EnemyMonHasSpecificSuperEffectiveRevealedMove())
+		return TRUE;
     if (ShouldSwitchIfAllBadMoves())
         return TRUE;
     if (ShouldSwitchIfPerishSong())
@@ -948,3 +950,18 @@ static bool8 ShouldUseItem(void)
 
     return FALSE;
 }
+
+static bool8 EnemyMonHasSpecificSuperEffectiveRevealedMove(void)
+{
+    u8 opposingPosition = BATTLE_OPPOSITE(GetBattlerPosition(gActiveBattler));
+	if (gBattleMons[GetBattlerAtPosition(opposingPosition)].species == YOUR_SPECIES_HERE) {
+		u8 moveFlags = AI_TypeCalc(gLastLandedMoves[gActiveBattler], gBattleMons[gActiveBattler].species, gBattleMons[gActiveBattler].ability);
+		if (gLastLandedMoves[gActiveBattler] == YOUR_MOVE_HERE && (moveFlags & MOVE_RESULT_SUPER_EFFECTIVE)) {
+			*(gBattleStruct->AI_monToSwitchIntoId + gActiveBattler) = PARTY_SIZE;
+			BtlController_EmitTwoReturnValues(1, B_ACTION_SWITCH, 0);
+			return TRUE;
+		}
+	}
+}
+
+
