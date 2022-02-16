@@ -115,6 +115,7 @@ static const u8 sPartyMenuSpriteCoords[PARTY_LAYOUT_COUNT][PARTY_SIZE][4 * 2] =
 static const u32 sConfirmButton_Tilemap[] = INCBIN_U32("graphics/interface/party_menu_confirm_button.bin");
 static const u32 sCancelButton_Tilemap[] = INCBIN_U32("graphics/interface/party_menu_cancel_button.bin");
 
+
 // Text colors for BG, FG, and Shadow in that order
 static const u8 sFontColorTable[][3] =
 {
@@ -455,6 +456,18 @@ static const struct WindowTemplate sDoWhatWithItemMsgWindowTemplate =
     .baseBlock = 0x299,
 };
 
+static const struct WindowTemplate sWhichOneUseMsgWindowTemplate =
+{
+    .bg = 2,
+    .tilemapLeft = 1,
+    .tilemapTop = 17,
+    .width = 16,
+    .height = 2,
+    .paletteNum = 15,
+    .baseBlock = 0x299,
+};
+
+
 static const struct WindowTemplate sDoWhatWithMailMsgWindowTemplate =
 {
     .bg = 2,
@@ -648,6 +661,7 @@ static const u8 *const sActionStringTable[] =
     [PARTY_MSG_RESTORE_WHICH_MOVE]     = gText_RestoreWhichMove,
     [PARTY_MSG_BOOST_PP_WHICH_MOVE]    = gText_BoostPp,
     [PARTY_MSG_DO_WHAT_WITH_ITEM]      = gText_DoWhatWithItem,
+    [PARTY_MSG_WHICH_ONE_USE]      	   = gText_WhichOneUse,
     [PARTY_MSG_DO_WHAT_WITH_MAIL]      = gText_DoWhatWithMail,
     [PARTY_MSG_ALREADY_HOLDING_ONE]    = gText_AlreadyHoldingOne,
 };
@@ -685,6 +699,7 @@ enum
     MENU_SWITCH,
     MENU_CANCEL1,
     MENU_ITEM,
+	MENU_HMS,
     MENU_GIVE,
     MENU_TAKE_ITEM,
     MENU_MAIL,
@@ -733,6 +748,7 @@ struct
     [MENU_SUMMARY] = {gText_Summary5, CursorCb_Summary},
 	[MENU_NICKNAME] = {gText_Nickname, CursorCb_Nickname},
 	[MENU_MOVES] = {gText_Moves_Menu, CursorCb_Moves},
+	[MENU_HMS] = {gText_Hidden_Moves_Menu, CursorCb_HiddenMoves},
     [MENU_SWITCH] = {gText_Switch2, CursorCb_Switch},
     [MENU_CANCEL1] = {gText_Cancel2, CursorCb_Cancel1},
     [MENU_ITEM] = {gText_Item, CursorCb_Item},
@@ -775,6 +791,7 @@ static const u8 sPartyMenuAction_EnterSummaryCancel[] = {MENU_ENTER, MENU_SUMMAR
 static const u8 sPartyMenuAction_NoEntrySummaryCancel[] = {MENU_NO_ENTRY, MENU_SUMMARY, MENU_CANCEL1};
 static const u8 sPartyMenuAction_StoreSummaryCancel[] = {MENU_STORE, MENU_SUMMARY, MENU_CANCEL1};
 static const u8 sPartyMenuAction_GiveTakeItemCancel[] = {MENU_GIVE, MENU_TAKE_ITEM, MENU_CANCEL2};
+static const u8 sPartyMenuAction_HiddenMovesCancel[] = {MENU_HMS, MENU_CANCEL2};
 static const u8 sPartyMenuAction_ReadTakeMailCancel[] = {MENU_READ, MENU_TAKE_MAIL, MENU_CANCEL2};
 static const u8 sPartyMenuAction_RegisterSummaryCancel[] = {MENU_REGISTER, MENU_SUMMARY, MENU_CANCEL1};
 static const u8 sPartyMenuAction_TradeSummaryCancel1[] = {MENU_TRADE1, MENU_SUMMARY, MENU_CANCEL1};
@@ -793,6 +810,7 @@ enum
     ACTIONS_STORE,
     ACTIONS_SUMMARY_ONLY,
     ACTIONS_ITEM,
+	ACTIONS_HMS,
     ACTIONS_MAIL,
     ACTIONS_REGISTER,
     ACTIONS_TRADE,
@@ -811,6 +829,7 @@ static const u8 *const sPartyMenuActions[] =
     [ACTIONS_STORE]         = sPartyMenuAction_StoreSummaryCancel,
     [ACTIONS_SUMMARY_ONLY]  = sPartyMenuAction_SummaryCancel,
     [ACTIONS_ITEM]          = sPartyMenuAction_GiveTakeItemCancel,
+	[ACTIONS_HMS]			= sPartyMenuAction_HiddenMovesCancel,
     [ACTIONS_MAIL]          = sPartyMenuAction_ReadTakeMailCancel,
     [ACTIONS_REGISTER]      = sPartyMenuAction_RegisterSummaryCancel,
     [ACTIONS_TRADE]         = sPartyMenuAction_TradeSummaryCancel1,
@@ -829,6 +848,7 @@ static const u8 sPartyMenuActionCounts[] =
     [ACTIONS_STORE]         = ARRAY_COUNT(sPartyMenuAction_StoreSummaryCancel),
     [ACTIONS_SUMMARY_ONLY]  = ARRAY_COUNT(sPartyMenuAction_SummaryCancel),
     [ACTIONS_ITEM]          = ARRAY_COUNT(sPartyMenuAction_GiveTakeItemCancel),
+    [ACTIONS_HMS]          = ARRAY_COUNT(sPartyMenuAction_HiddenMovesCancel),
     [ACTIONS_MAIL]          = ARRAY_COUNT(sPartyMenuAction_ReadTakeMailCancel),
     [ACTIONS_REGISTER]      = ARRAY_COUNT(sPartyMenuAction_RegisterSummaryCancel),
     [ACTIONS_TRADE]         = ARRAY_COUNT(sPartyMenuAction_TradeSummaryCancel1),
@@ -841,6 +861,12 @@ static const u16 sFieldMoves[] =
     MOVE_CUT, MOVE_FLASH, MOVE_ROCK_SMASH, MOVE_STRENGTH, MOVE_SURF, MOVE_FLY, MOVE_DIVE, MOVE_WATERFALL, MOVE_TELEPORT,
     MOVE_DIG, MOVE_SECRET_POWER, MOVE_MILK_DRINK, MOVE_SOFT_BOILED, MOVE_SWEET_SCENT, FIELD_MOVE_TERMINATOR
 };
+static const u16 sFieldNOTMoves[] =
+{
+    MOVE_FLY, MOVE_TELEPORT, MOVE_DIG, MOVE_SECRET_POWER, MOVE_MILK_DRINK,
+	MOVE_SOFT_BOILED, MOVE_SWEET_SCENT, FIELD_MOVE_TERMINATOR
+};
+
 
 struct
 {

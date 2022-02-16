@@ -98,11 +98,41 @@ LittlerootTown_MaysHouse_1F_EventScript_YoureNewNeighbor::
 	applymovement LOCALID_RIVAL_MOM, LittlerootTown_MaysHouse_1F_Movement_RivalMomApproach
 	waitmovement 0
 	special GetRivalSonDaughterString
-	msgbox RivalsHouse_1F_Text_OhYoureTheNewNeighbor, MSGBOX_DEFAULT
+	checkplayergender
+	goto_if_eq VAR_RESULT, FEMALE, LittlerootTown_MaysHouse_1F_EventScript_YoureNewNeighbor_1
+	msgbox LittlerootTown_MaysHouse_1F_EventScript_YoureNewNeighbor_Text_1
 	setflag FLAG_MET_RIVAL_MOM
 	setvar VAR_LITTLEROOT_HOUSES_STATE_BRENDAN, 2
 	releaseall
 	end
+
+LittlerootTown_MaysHouse_1F_EventScript_YoureNewNeighbor_1:
+	msgbox LittlerootTown_MaysHouse_1F_EventScript_YoureNewNeighbor_Text_0
+	setflag FLAG_MET_RIVAL_MOM
+	setvar VAR_LITTLEROOT_HOUSES_STATE_BRENDAN, 2
+	releaseall
+	end
+
+
+LittlerootTown_MaysHouse_1F_EventScript_YoureNewNeighbor_Text_0:
+	.string "Marta: ¡AH! ¿QUIÉN ERES?\p"
+	.string "… … … … … … … … …\n"
+	.string "… … … … … … … … …\p"
+	.string "Ah, ya veo, eres {PLAYER}, {ELLA} hij{OA} de\n"
+	.string "Norman y Daiana…\p"
+	.string "Pues, nuestro hijo vive arriba, ¡Ve a\n"
+	.string "presentarte!$"
+RivalsHouse_1F_Text_OhYoureTheNewNeighbor:
+	.string "ASDDSAASDDSAASDDSAASD$"
+
+LittlerootTown_MaysHouse_1F_EventScript_YoureNewNeighbor_Text_1:
+	.string "Marta: ¡AH! ¿QUIÉN ERES?\p"
+	.string "… … … … … … … … …\n"
+	.string "… … … … … … … … …\p"
+	.string "Ah, ya veo, eres {PLAYER}, {ELLA} hij{OA} de\n"
+	.string "Norman y Daiana…\p"
+	.string "Pues, nuestra hija vive arriba, ¡Ve a\n"
+	.string "presentarte!$"
 
 LittlerootTown_MaysHouse_1F_Movement_RivalMomApproach:
 	walk_down
@@ -320,17 +350,7 @@ LittlerootTown_MaysHouse_1F_Movement_MayGoUpstairs2:
 	walk_up
 	step_end
 
-RivalsHouse_1F_Text_OhYoureTheNewNeighbor:
-	.string "Oh, hello. And you are?\p"
-	.string "… … … … … … … … …\n"
-	.string "… … … … … … … … …\p"
-	.string "Oh, you're {PLAYER}{KUN}, our new next-door\n"
-	.string "neighbor! Hi!\p"
-	.string "We have a {STR_VAR_1} about the same\n"
-	.string "age as you.\p"
-	.string "Our {STR_VAR_1} was excited about making\n"
-	.string "a new friend.\p"
-	.string "Our {STR_VAR_1} is upstairs, I think.$"
+
 
 RivalsHouse_1F_Text_LikeChildLikeFather:
 	.string "Like child, like father.\p"

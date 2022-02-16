@@ -16,6 +16,7 @@
 #include "constants/cable_club.h"
 #include "constants/coins.h"
 #include "constants/contest.h"
+#include "constants/mugshots.h"
 #include "constants/daycare.h"
 #include "constants/decorations.h"
 #include "constants/easy_chat.h"
@@ -654,6 +655,7 @@ EventScript_SetBrineyLocation_Route109::
 	.include "data/scripts/obtain_item.inc"
 	.include "data/scripts/record_mix.inc"
 	.include "data/scripts/pc.inc"
+	.include "data/scripts/trade_machine.inc"
 
 @ scripts/notices.inc? signs.inc? See comment about text/notices.inc
 Common_EventScript_ShowPokemartSign::

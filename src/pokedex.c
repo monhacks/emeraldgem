@@ -1,5 +1,8 @@
 #include "global.h"
 #include "battle_main.h"
+#include "constants/map_groups.h"
+#include "constants/weather.h"
+#include "field_weather.h"
 #ifdef BATTLE_ENGINE
 #include "battle_util.h"
 #endif
@@ -8225,7 +8228,8 @@ static u8 PrintEvolutionTargetSpeciesAndMethod(u8 taskId, u16 species, u8 depth,
                 StringExpandPlaceholders(gStringVar4, gText_EVO_ITEM_FEMALE );
                 break;
             case EVO_LEVEL_RAIN:
-                //if (j == WEATHER_RAIN || j == WEATHER_RAIN_THUNDERSTORM || j == WEATHER_DOWNPOUR)
+				j = GetCurrentWeather();
+                if (j == WEATHER_RAIN || j == WEATHER_RAIN_THUNDERSTORM || j == WEATHER_DOWNPOUR)
                 StringExpandPlaceholders(gStringVar4, gText_EVO_LEVEL_RAIN );
                 break;
             case EVO_SPECIFIC_MON_IN_PARTY:

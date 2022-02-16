@@ -7,6 +7,7 @@
 #include "international_string_util.h"
 #include "main.h"
 #include "menu.h"
+#include "random.h"
 #include "palette.h"
 #include "pokedex.h"
 #include "pokemon.h"
@@ -489,19 +490,20 @@ static void Task_StarterChoose(u8 taskId)
 static void Task_HandleStarterChooseInput(u8 taskId)
 {
     u8 selection = gTasks[taskId].tStarterSelection;
-
     if (JOY_NEW(A_BUTTON))
     {
         u8 spriteId;
-
+		u32 value;
+		u32 personality;
         ClearStarterLabel();
+		FlagSet(FLAG_SHINY_STARTER);
 
         // Create white circle background
         spriteId = CreateSprite(&sSpriteTemplate_StarterCircle, sPokeballCoords[selection][0], sPokeballCoords[selection][1], 1);
         gTasks[taskId].tCircleSpriteId = spriteId;
 
         // Create Pokemon sprite
-        spriteId = CreatePokemonFrontSprite(GetStarterPokemon(gTasks[taskId].tStarterSelection), sPokeballCoords[selection][0], sPokeballCoords[selection][1]);
+		spriteId = CreatePokemonFrontSprite(GetStarterPokemon(gTasks[taskId].tStarterSelection), sPokeballCoords[selection][0], sPokeballCoords[selection][1]);
         gSprites[spriteId].affineAnims = &sAffineAnims_StarterPokemon;
         gSprites[spriteId].callback = SpriteCB_StarterPokemon;
 

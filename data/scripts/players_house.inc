@@ -676,5 +676,71 @@ PlayersHouse_1F_Movement_PlayerApproachTVForLatiFemale:
 	step_end
 
 EventScript_RunningShoesManual::
-	msgbox PlayersHouse_1F_Text_RunningShoesManual, MSGBOX_SIGN
+	lockall
+	msgbox EventScript_RunningShoesManual_Text_0, MSGBOX_YESNO
+	compare VAR_RESULT, 1
+	goto_if_eq EventScript_RunningShoesManual_2
+	msgbox EventScript_RunningShoesManual_Text_4
+	releaseall
 	end
+
+EventScript_RunningShoesManual_1:
+	releaseall
+	end
+
+EventScript_RunningShoesManual_2:
+	msgbox EventScript_RunningShoesManual_Text_1, MSGBOX_YESNO
+	compare VAR_RESULT, 1
+	goto_if_eq EventScript_RunningShoesManual_5
+	msgbox EventScript_RunningShoesManual_Text_4
+	releaseall
+	end
+
+EventScript_RunningShoesManual_5:
+	msgbox EventScript_RunningShoesManual_Text_2, MSGBOX_YESNO
+	compare VAR_RESULT, 1
+	goto_if_eq EventScript_RunningShoesManual_8
+	msgbox EventScript_RunningShoesManual_Text_4
+	releaseall
+	end
+
+EventScript_RunningShoesManual_8:
+	msgbox EventScript_RunningShoesManual_Text_3
+	goto EventScript_RunningShoesManual_1
+
+
+EventScript_RunningShoesManual_Text_0:
+	.string "¡Parece una guía para Entrenadores!\n"
+	.string "Tiene varias páginas.\p"
+	.string "“Consejo 1: En cada Centro Pokémon,\n"
+	.string "hay Máquinas Especiales, ¡y siempre\l"
+	.string "habrá alguien especial también!\p"
+	.string "¡Habla con todos, interactúa con todo!”\p"
+	.string "¿Seguir leyendo?$"
+
+EventScript_RunningShoesManual_Text_1:
+	.string "“Consejo 2: Cada Pokémon puede ser\n"
+	.string "renombrado desde el menú, pero\l"
+	.string "también, puedes cambiar sus\l"
+	.string "Movimientos.\p"
+	.string "¡Siempre revisa qué puedes enseñarle, y\n"
+	.string "no tengas miedo de cambiar sus\l"
+	.string "movimientos frecuentemente!”\p"
+	.string "¿Seguir leyendo?$"
+
+EventScript_RunningShoesManual_Text_2:
+	.string "“Consejo 3: ¡Cada PokéBall es distinta!\n"
+	.string "¡Nunca olvides leer lo que cada una\l"
+	.string "hace!”\p"
+	.string "¿Seguir leyendo?$"
+
+EventScript_RunningShoesManual_Text_3:
+	.string "“Consejo 4: ¡Recuera que puedes\n"
+	.string "escapar de un Pokémon salvaje tocando\l"
+	.string "R, y que puedes capturar uno con L!\l"
+	.string "¡Eso te ahorrará tiempo!”\p"
+	.string "Ese fue el último consejo.$"
+
+EventScript_RunningShoesManual_Text_4:
+	.string "Mucho leer por hoy.$"
+	

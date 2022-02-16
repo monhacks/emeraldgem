@@ -335,13 +335,19 @@ static void HandleInputChooseAction(void)
         PlayerBufferExecCompleted();
     }
     #if B_LAST_USED_BALL == TRUE
-    else if (JOY_NEW(B_LAST_USED_BALL_BUTTON) && CanThrowLastUsedBall())
+    else if (JOY_NEW(L_BUTTON) && CanThrowLastUsedBall())
     {
         PlaySE(SE_SELECT);
         TryHideLastUsedBall();
         BtlController_EmitTwoReturnValues(BUFFER_B, B_ACTION_THROW_BALL, 0);
         PlayerBufferExecCompleted();
     }
+	else if (JOY_NEW(R_BUTTON)) {
+		PlaySE(SE_SELECT);
+		TryHideLastUsedBall();
+		BtlController_EmitTwoReturnValues(BUFFER_B, B_ACTION_RUN, 0);
+		PlayerBufferExecCompleted();
+	}
     #endif
 }
 

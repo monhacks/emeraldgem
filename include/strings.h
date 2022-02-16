@@ -18,6 +18,15 @@ extern const u8 gText_ExpandedPlaceholder_Brendan[];
 extern const u8 gText_ExpandedPlaceholder_May[];
 extern const u8 gText_Nickname[];
 extern const u8 gText_Moves_Menu[];
+extern const u8 gText_SoldOut[];
+extern const u8 gText_SoldOut2[];
+extern const u8 gText_ThrowInPremierBalls[];
+extern const u8 gText_ThrowInCherishBalls[];
+extern const u8 gText_MenuPC[];
+extern const u8 gText_WhichOneUse[];
+extern const u8 gText_Hidden_Moves_Menu[];
+
+
 
 extern const u8 gText_FromSpace[];
 

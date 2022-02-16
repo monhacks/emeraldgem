@@ -431,12 +431,15 @@ SECTIONS {
         *libc.a:libcfunc.o(.text);
         *libc.a:lseekr.o(.text);
         *libc.a:readr.o(.text);
+		src/mugshot.o(.text);
+
     } =0
 
     .rodata :
     ALIGN(4)
     {
         src/rom_header.o(.rodata);
+		src/mugshot.o(.rodata);
         src/rom_header_gf.o(.rodata);
         src/main.o(.rodata);
         gflib/bg.o(.rodata);

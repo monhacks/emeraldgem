@@ -1,5 +1,6 @@
 EventScript_PC::
 	lockall
+	setflag FLAG_POKEMONPCMENU
 	setvar VAR_0x8004, 0
 	special DoPCTurnOnEffect
 	playse SE_PC_ON
@@ -53,6 +54,7 @@ EventScript_AccessLanettesPC::
 EventScript_TurnOffPC::
 	setvar VAR_0x8004, 0
 	playse SE_PC_OFF
+	clearflag FLAG_POKEMONPCMENU
 	special DoPCTurnOffEffect
 	releaseall
 	end

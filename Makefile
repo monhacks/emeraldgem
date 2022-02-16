@@ -17,8 +17,6 @@ ifneq ($(wildcard $(TOOLCHAIN)/bin),)
 export PATH := $(TOOLCHAIN)/bin:$(PATH)
 endif
 endif
-SCRIPT := tools/poryscript/poryscript$(EXE)
-
 
 PREFIX := arm-none-eabi-
 OBJCOPY := $(PREFIX)objcopy
@@ -245,7 +243,7 @@ mostlyclean: tidynonmodern tidymodern
 	rm -f $(DATA_ASM_SUBDIR)/maps/connections.inc $(DATA_ASM_SUBDIR)/maps/events.inc $(DATA_ASM_SUBDIR)/maps/groups.inc $(DATA_ASM_SUBDIR)/maps/headers.inc
 	find $(DATA_ASM_SUBDIR)/maps \( -iname 'connections.inc' -o -iname 'events.inc' -o -iname 'header.inc' \) -exec rm {} +
 	rm -f $(AUTO_GEN_TARGETS)
-	rm -f $(patsubst %.pory,%.inc,$(shell find data/ -type f -name '*.pory'))	
+	rm -f $(patsubst %.pory,%.inc,$(shell find data/ -type f -name '*.pory'))
 	@$(MAKE) clean -C berry_fix
 	@$(MAKE) clean -C libagbsyscall
 
@@ -343,7 +341,7 @@ endif
 endef
 $(foreach src, $(C_SRCS), $(eval $(call C_DEP,$(patsubst $(C_SUBDIR)/%.c,$(C_BUILDDIR)/%.o,$(src)),$(src),$(patsubst $(C_SUBDIR)/%.c,%,$(src)))))
 endif
-
+SCRIPT := tools/poryscript/poryscript$(EXE)
 ifeq ($(NODEP),1)
 $(GFLIB_BUILDDIR)/%.o: $(GFLIB_SUBDIR)/%.c $$(c_dep)
 ifeq (,$(KEEP_TEMPS))

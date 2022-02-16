@@ -133,20 +133,20 @@ static const u16 sFR_MessageBoxTiles[] = INCBIN_U16("graphics/text_window/fr_mes
 
 // strings
 static const u8 sText_Empty[] = _("");
-static const u8 sText_Quests[] = _("   Side\n Quests");
-static const u8 sText_QuestMenu_Begin[] = _("Begin");
-static const u8 sText_QuestMenu_End[] = _("End");
-static const u8 sText_QuestMenu_Details[] = _("Details");
-static const u8 sText_QuestMenu_Reward[] = _("Reward");
+static const u8 sText_Quests[] = _("   Misiones");
+static const u8 sText_QuestMenu_Begin[] = _("Empezar");
+static const u8 sText_QuestMenu_End[] = _("Terminar");
+static const u8 sText_QuestMenu_Details[] = _("Detalles");
+static const u8 sText_QuestMenu_Reward[] = _("Premio");
 static const u8 sText_QuestMenu_Unk[] = _("{COLOR}{LIGHT_GRAY}?????????");
-static const u8 sText_QuestMenu_Active[] = _("{COLOR}{GREEN}Active");
-static const u8 sText_QuestMenu_Complete[] = _("{COLOR}{BLUE}Done");
-static const u8 sText_QuestMenu_Exit[] = _("Exit the Quest Menu");
-static const u8 sText_QuestMenu_SelectedQuest[] = _("Do what with\nthis quest?");
-static const u8 sText_QuestMenu_DisplayDetails[] = _("POC: {STR_VAR_1}\nMap: {STR_VAR_2}");
-static const u8 sText_QuestMenu_DisplayReward[] = _("Reward:\n{STR_VAR_1}");
-static const u8 sText_QuestMenu_BeginQuest[] = _("Initiating Quest:\n{STR_VAR_1}");
-static const u8 sText_QuestMenu_EndQuest[] = _("Cancelling Quest:\n{STR_VAR_1}");
+static const u8 sText_QuestMenu_Active[] = _("{COLOR}{GREEN}Activa");
+static const u8 sText_QuestMenu_Complete[] = _("{COLOR}{BLUE}Hecha");
+static const u8 sText_QuestMenu_Exit[] = _("Salir el Menú de Misiones");
+static const u8 sText_QuestMenu_SelectedQuest[] = _("¿Que harás con\nesta misión?");
+static const u8 sText_QuestMenu_DisplayDetails[] = _("PDE: {STR_VAR_1}\nMapa: {STR_VAR_2}");
+static const u8 sText_QuestMenu_DisplayReward[] = _("Premio:\n{STR_VAR_1}");
+static const u8 sText_QuestMenu_BeginQuest[] = _("Iniciando Misión:\n{STR_VAR_1}");
+static const u8 sText_QuestMenu_EndQuest[] = _("Cancelando Misión:\n{STR_VAR_1}");
 
 #define side_quest(n, d, p, m, r) {.name = n, .desc = d, .poc = p, .map = m, .reward = r}
 static const struct SideQuest sSideQuests[SIDE_QUEST_COUNT] =
