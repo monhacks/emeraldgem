@@ -152,4 +152,4 @@
 	.include "src/rhh_copyright.o"
 	.include "src/quests.o"
 	.include "src/debug.o"
-
+	.include "src/tm_case.o"

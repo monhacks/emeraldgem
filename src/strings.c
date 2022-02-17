@@ -2118,4 +2118,11 @@ const u8 gText_SideQuestReward_30[] = _("Reward 30");
 const u8 gText_Nickname[] = _("Apodo");
 const u8 gText_Moves_Menu[] = _("Cambiar Movs");
 
+// fr_tm_case_port
+const u8 gText_TMCase[] =               _("Estuche MT");
+const u8 gText_Close[] =                _("Cerrar");
+const u8 gText_TMCaseWillBePutAway[] =  _("El Estuche MT será\nguardado.");
+const u8 gText_FontSmall[] =            _("{FONT_SMALL}");
+const u8 gText_FontShort[] =            _("{FONT_SHORT}");
+const u8 gText_TMCase_Blue[] =          _("{COLOR_HIGHLIGHT_SHADOW BLUE TRANSPARENT LIGHT_BLUE}{STR_VAR_2}");
 
