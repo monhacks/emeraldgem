@@ -49,11 +49,11 @@
 #define FLAG_POKEMONPCMENU    0x25 // Unused Flag
 #define FLAG_PARTY_MOVES  	  0x26 // Unused Flag
 #define FLAG_JUST_ONE_HM    0x27 // Unused Flag
-#define FLAG_UNUSED_0x028    0x28 // Unused Flag
-#define FLAG_UNUSED_0x029    0x29 // Unused Flag
-#define FLAG_UNUSED_0x02A    0x2A // Unused Flag
-#define FLAG_UNUSED_0x02B    0x2B // Unused Flag
-#define FLAG_UNUSED_0x02C    0x2C // Unused Flag
+#define FLAG_SYS_NO_COLLISION    0x28 // Unused Flag
+#define FLAG_SYS_NO_ENCOUNTER    0x29 // Unused Flag
+#define FLAG_SYS_NO_TRAINER_SEE    0x2A // Unused Flag
+#define FLAG_SYS_NO_BAG_USE    0x2B // Unused Flag
+#define FLAG_SYS_NO_CATCHING    0x2C // Unused Flag
 #define FLAG_UNUSED_0x02D    0x2D // Unused Flag
 #define FLAG_UNUSED_0x02E    0x2E // Unused Flag
 #define FLAG_UNUSED_0x02F    0x2F // Unused Flag
