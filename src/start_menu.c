@@ -162,6 +162,7 @@ static const u8* const sPyramidFloorNames[] =
 static const struct WindowTemplate sPyramidFloorWindowTemplate_2 = {0, 1, 1, 0xA, 4, 0xF, 8};
 static const struct WindowTemplate sPyramidFloorWindowTemplate_1 = {0, 1, 1, 0xC, 4, 0xF, 8};
 
+static const u8 gText_MenuDebug[] = _("DEBUG");
 static const u8 sText_QuestMenu[] = _("QUESTS");
 static const struct MenuAction sStartMenuItems[] =
 {
@@ -180,26 +181,10 @@ static const struct MenuAction sStartMenuItems[] =
     [MENU_ACTION_RETIRE_FRONTIER]   = {gText_MenuRetire, {.u8_void = StartMenuBattlePyramidRetireCallback}},
     [MENU_ACTION_PYRAMID_BAG]       = {gText_MenuBag, {.u8_void = StartMenuBattlePyramidBagCallback}},
     [MENU_ACTION_QUEST_MENU]        = {sText_QuestMenu, {.u8_void = QuestMenuCallback}},
+    [MENU_ACTION_DEBUG]        = {gText_MenuDebug, {.u8_void = StartMenuDebugCallback}},
 };
-static const u8 gText_MenuDebug[] = _("DEBUG");
 
-static const struct MenuAction sStartMenuItems[] =
-{
-    {gText_MenuPokedex, {.u8_void = StartMenuPokedexCallback}},
-    {gText_MenuPokemon, {.u8_void = StartMenuPokemonCallback}},
-    {gText_MenuBag, {.u8_void = StartMenuBagCallback}},
-    {gText_MenuPokenav, {.u8_void = StartMenuPokeNavCallback}},
-    {gText_MenuPlayer, {.u8_void = StartMenuPlayerNameCallback}},
-    {gText_MenuSave, {.u8_void = StartMenuSaveCallback}},
-    {gText_MenuOption, {.u8_void = StartMenuOptionCallback}},
-    {gText_MenuExit, {.u8_void = StartMenuExitCallback}},
-    {gText_MenuRetire, {.u8_void = StartMenuSafariZoneRetireCallback}},
-    {gText_MenuPlayer, {.u8_void = StartMenuLinkModePlayerNameCallback}},
-    {gText_MenuRest, {.u8_void = StartMenuSaveCallback}},
-    {gText_MenuRetire, {.u8_void = StartMenuBattlePyramidRetireCallback}},
-    {gText_MenuBag, {.u8_void = StartMenuBattlePyramidBagCallback}},
-    {gText_MenuDebug, {.u8_void = StartMenuDebugCallback}},
-};
+
 
 static const struct BgTemplate sBgTemplates_LinkBattleSave[] =
 {

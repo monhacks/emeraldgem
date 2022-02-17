@@ -973,7 +973,6 @@ static const u8 sText_CantThrowPokeBall_TwoMons[] = _("Cannot throw a ball!\nThe
 static const u8 sText_CantThrowPokeBall_SemiInvulnerable[] = _("Cannot throw a ball!\nThere's no Pokémon in sight!\p");
 void ItemUseInBattle_PokeBall(u8 taskId)
 {
-    switch (GetBallThrowableState())
     #ifdef TX_DEBUGGING
     if (FlagGet(FLAG_SYS_NO_CATCHING)){ //DEBUG
         static const u8 sText_BallsCannotBeUsed[] = _("Poké Balls cannot be used\nright now!\p");
@@ -981,8 +980,7 @@ void ItemUseInBattle_PokeBall(u8 taskId)
         return;
     }
     #endif
-    if (IsPlayerPartyAndPokemonStorageFull() == FALSE) // have room for mon?
-    {
+    switch (GetBallThrowableState()) {
     case BALL_THROW_ABLE:
     default:
         RemoveBagItem(gSpecialVar_ItemId, 1);

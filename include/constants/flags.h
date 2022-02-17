@@ -54,7 +54,7 @@
 #define FLAG_SYS_NO_TRAINER_SEE    0x2A // Unused Flag
 #define FLAG_SYS_NO_BAG_USE    0x2B // Unused Flag
 #define FLAG_SYS_NO_CATCHING    0x2C // Unused Flag
-#define FLAG_UNUSED_0x02D    0x2D // Unused Flag
+#define FLAG_REMOVE_WARP_FADE    0x2D // Unused Flag
 #define FLAG_UNUSED_0x02E    0x2E // Unused Flag
 #define FLAG_UNUSED_0x02F    0x2F // Unused Flag
 #define FLAG_UNUSED_0x030    0x30 // Unused Flag
