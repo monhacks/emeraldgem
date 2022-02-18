@@ -3308,7 +3308,6 @@ extern const u8 gText_PkmnForSwap[];
 extern const u8 gText_SamePkmnInPartyAlready[];
 extern const u8 gText_Cancel3[];
 
-<<<<<<< HEAD
 // Género
 extern const u8 gText_ExpandedPlaceholder_O[];
 extern const u8 gText_ExpandedPlaceholder_A[];
@@ -3321,7 +3320,6 @@ extern const u8 gText_ExpandedPlaceholder_ITA[];
 extern const u8 gText_ExpandedPlaceholder_ITO[];
 extern const u8 gText_ExpandedPlaceholder_COLOR_MALE[];
 extern const u8 gText_ExpandedPlaceholder_COLOR_FEMALE[];
-=======
 // fr_tm_case_port
 extern const u8 gText_TMCase[];
 extern const u8 gText_Close[];
@@ -3329,6 +3327,5 @@ extern const u8 gText_TMCaseWillBePutAway[];
 extern const u8 gText_FontSmall[];
 extern const u8 gText_FontShort[];
 extern const u8 gText_TMCase_Blue[];
->>>>>>> 154b92b4383a2fb73d617f4d65134b4bdbe68e83
 
 #endif // GUARD_STRINGS_H

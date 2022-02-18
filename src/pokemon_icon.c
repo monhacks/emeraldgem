@@ -2453,7 +2453,7 @@ const u8 gMonIconPaletteIndicesFemale[] =
     [SPECIES_PYROAR] = 2,
 };
 
-const struct SpritePalette gMonIconPaletteTable[6] =
+const struct SpritePalette gMonIconPaletteTable[12] =
 {
     { gMonIconPalettes[0], POKE_ICON_BASE_PAL_TAG + 0 },
     { gMonIconPalettes[1], POKE_ICON_BASE_PAL_TAG + 1 },
@@ -2461,6 +2461,12 @@ const struct SpritePalette gMonIconPaletteTable[6] =
     { gMonIconPalettes[3], POKE_ICON_BASE_PAL_TAG + 3 },
     { gMonIconPalettes[4], POKE_ICON_BASE_PAL_TAG + 4 },
     { gMonIconPalettes[5], POKE_ICON_BASE_PAL_TAG + 5 },
+    { gMonIconPalettes[6], POKE_ICON_BASE_PAL_TAG + 6 },
+    { gMonIconPalettes[7], POKE_ICON_BASE_PAL_TAG + 7 },
+    { gMonIconPalettes[8], POKE_ICON_BASE_PAL_TAG + 8 },
+    { gMonIconPalettes[9], POKE_ICON_BASE_PAL_TAG + 9 },
+    { gMonIconPalettes[10], POKE_ICON_BASE_PAL_TAG + 10 },
+    { gMonIconPalettes[11], POKE_ICON_BASE_PAL_TAG + 11 },
 };
 
 static const struct OamData sMonIconOamData =

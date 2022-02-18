@@ -499,7 +499,7 @@ static void InitTMCaseListMenuItems(void)
     gMultiuseListMenuTemplate.totalItems = sTMCaseDynamicResources->numTMs;
     gMultiuseListMenuTemplate.windowId = 0;
     gMultiuseListMenuTemplate.header_X = 0;
-    gMultiuseListMenuTemplate.item_X = 8;
+	gMultiuseListMenuTemplate.item_X = 8;
     gMultiuseListMenuTemplate.cursor_X = 0;
     gMultiuseListMenuTemplate.lettersSpacing = 0;
     gMultiuseListMenuTemplate.itemVerticalPadding = 2;
@@ -520,7 +520,7 @@ static void GetTMNumberAndMoveString(u8 * dest, u16 itemId)
     StringCopy(gStringVar4, gText_FontSmall);
     if (itemId >= ITEM_HM01)
     {
-        StringAppend(gStringVar4, sText_ClearTo18);
+		StringAppend(gStringVar4, sText_ClearTo18);
         StringAppend(gStringVar4, gText_NumberClear01);
         ConvertIntToDecimalStringN(gStringVar1, itemId - ITEM_HM01 + 1, STR_CONV_MODE_LEADING_ZEROS, 1);
         StringAppend(gStringVar4, gStringVar1);
@@ -559,15 +559,15 @@ static void TMCase_ItemPrintFunc(u8 windowId, u32 itemId, u8 y)
 {
     if (itemId != -2)
     {
-        if (!ItemId_GetImportance(BagGetItemIdByPocketPosition(POCKET_TM_HM, itemId)))
+        if  (itemId >= ITEM_HM01)
+        {
+            PlaceHMTileInWindow(windowId, 8, y);
+        }
+        else
         {
             // ConvertIntToDecimalStringN(gStringVar1, BagGetQuantityByPocketPosition(POCKET_TM_HM, itemId), STR_CONV_MODE_RIGHT_ALIGN, 3);
             // StringExpandPlaceholders(gStringVar4, gText_xVar1);
             // AddTextPrinterParameterized_ColorByIndex(windowId, 0, gStringVar4, 0x7E, y, 0, 0, 0xFF, 1);
-        }
-        else
-        {
-            PlaceHMTileInWindow(windowId, 8, y);
         }
     }
 }
@@ -807,11 +807,14 @@ static void Task_SelectTMAction_FromFieldBag(u8 taskId)
     Free(strbuf);
 
     //show HM icon
-    if (ItemId_GetImportance(gSpecialVar_ItemId))
-    {
-        PlaceHMTileInWindow(2, 0, 2);
-        CopyWindowToVram(2, 2);
-    }
+	if (gSpecialVar_ItemId >= ITEM_HM01)
+		{
+			PlaceHMTileInWindow(2, 0, 2);
+			CopyWindowToVram(2, 2);
+		}
+	else
+	{
+	}
 
     ScheduleBgCopyTilemapToVram(0);
     ScheduleBgCopyTilemapToVram(1);
@@ -1172,7 +1175,7 @@ static void TintPartyMonIcons(u8 tm)
         species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES);
         if (!CanSpeciesLearnTMHM(species, tm))
         {
-            gSprites[spriteIdData[i]].oam.paletteNum = 7 + spriteIdPalette[i];
+            gSprites[spriteIdData[i]].oam.paletteNum = spriteIdPalette[i] + 6;
         }
         else
         {

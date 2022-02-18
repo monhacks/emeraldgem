@@ -302,7 +302,7 @@ const u8 gText_ItemsPocket[] = _("Objetos");
 const u8 gText_PokeBallsPocket[] = _("Poké Balls");
 const u8 gText_TMHMPocket[] = _("MTs y MOs");
 const u8 gText_BerriesPocket[] = _("Bayas");
-const u8 gText_KeyItemsPocket[] = _("Objetos Clave");
+const u8 gText_KeyItemsPocket[] = _("Obj. Clave");
 
 const u8 *const gPocketNamesStringsTable[] =
 {
@@ -313,7 +313,7 @@ const u8 *const gPocketNamesStringsTable[] =
     [KEYITEMS_POCKET] = gText_KeyItemsPocket
 };
 
-const u8 gText_NumberItem_TMBerry[] = _("{NO}{STR_VAR_1}{CLEAR 0x07}{STR_VAR_2}");
+const u8 gText_NumberItem_TMBerry[] = _("{CLEAR 0x07}{STR_VAR_2}");
 const u8 gText_NumberItem_HM[] = _("{CLEAR_TO 0x11}{STR_VAR_1}{CLEAR 0x05}{STR_VAR_2}");
 const u8 gText_SizeSlash[] = _("SIZE /");
 const u8 gText_FirmSlash[] = _("FIRM /");

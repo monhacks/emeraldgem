@@ -36,6 +36,7 @@ static const u16 sSpritePal_PorygonShiny[] = INCBIN_U16("graphics/rhh_copyright/
 #define PORY_POS_X  -32
 #define PORY_POS_Y  115
 #define PORYGON_COLLISION_POS_X 140
+#define PORYGON_COLLISION_POS_Y  115
 #define PORYGON_WAIT_TIME   99
 
 #define DIZZY_ANIM_SPEED    4
@@ -244,11 +245,9 @@ void RhhIntro_LoadCopyrightSpriteGraphics()
 
 void RhhIntro_CreateCopyRightSprites()
 {
-    sDizzyId = CreateSprite(&sSpriteTemplate_DizzyEgg, 0, DIZZY_POS_Y, 0);
-    gSprites[sDizzyId].x = DIZZY_POS_X;
+    sDizzyId = CreateSprite(&sSpriteTemplate_DizzyEgg, DIZZY_POS_X, DIZZY_POS_Y, 0);
 
-    sPoryId = CreateSprite(&sSpriteTemplate_Porygon, 0, PORY_POS_Y, 0);
-    gSprites[sPoryId].x = PORY_POS_X;
+    sPoryId = CreateSprite(&sSpriteTemplate_Porygon, PORY_POS_X, PORY_POS_Y + 8, 0);
 }
 
 void RhhIntro_ShowRhhCredits()
@@ -291,7 +290,7 @@ static void SpriteCallbacK_DizzyWalking(struct Sprite* sprite)
 static void SpriteCallback_PorygonHit(struct Sprite* sprite)
 {
     sprite->x-=2;
-    sprite ->y = Sin2(18 + sprite->sTimer * 4) / 12;
+    sprite ->y = Sin2(180 + sprite->sTimer * 4) / 128;
 
     if (sprite->sTimer >= 48)
     {
@@ -317,7 +316,7 @@ static void SpriteCallback_PorygonFlying(struct Sprite* sprite)
     {
         sprite->x += 6;
 
-        if (sprite->sTimer % 32 >= 16)
+        if (sprite->sTimer % 32 >= 6)
             sprite->y--;
         else
             sprite->y++;
