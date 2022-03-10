@@ -3,12 +3,40 @@
 
 Route101_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, Route101_OnTransition
+	map_script MAP_SCRIPT_ON_RESUME, Route101_OnResume
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, Route101_OnFrame
 	.byte 0
 
+Route101_OnResume:
+	special GetDayOrNight
+	goto_if_eq VAR_RESULT, 1, Route101_OnResume_Night
+	goto_if_eq VAR_RESULT, 0, Route101_OnResume_Day
+	end
+	
+Route101_OnResume_Night:
+	setvar VAR_DAYNIGHT, 1
+	end
+	
+Route101_OnResume_Day:
+	setvar VAR_DAYNIGHT, 0
+	end
+
 Route101_OnTransition:
+	special GetDayOrNight
+	goto_if_eq VAR_RESULT, 1, Route101_OnTransition_Night
+	goto_if_eq VAR_RESULT, 0, Route101_OnTransition_Day
+	end
+	
+Route101_OnTransition_Night:
+	setvar VAR_DAYNIGHT, 1
 	call ProfBirch_EventScript_UpdateLocation
 	end
+
+Route101_OnTransition_Day:
+	setvar VAR_DAYNIGHT, 0
+	call ProfBirch_EventScript_UpdateLocation
+	end
+
 
 Route101_OnFrame:
 	map_script_2 VAR_ROUTE101_STATE, 0, Route101_EventScript_HideMapNamePopup
@@ -207,14 +235,18 @@ Route101_Movement_Unused2:
 	step_end
 
 Route101_EventScript_Youngster::
+	goto_if_eq VAR_DAYNIGHT, 1, Route101_EventScript_Night
 	msgbox Route101_Text_TakeTiredPokemonToPokeCenter, MSGBOX_NPC
 	end
-
+Route101_EventScript_Night::
+	msgbox Route101_Text_TakeTiredPokemonToPokeCenter2, MSGBOX_NPC
+	end
 Route101_EventScript_Boy::
 	msgbox Route101_Text_WildPokemonInTallGrass, MSGBOX_NPC
 	end
 
 Route101_EventScript_RouteSign::
+	setflag FLAG_RTC_ENABLED
 	msgbox Route101_Text_RouteSign, MSGBOX_SIGN
 	end
 
@@ -261,42 +293,42 @@ Route101_Movement_BirchApproachPlayer:
 	step_end
 
 Route101_Text_HelpMe:
-	.string "H-help me!$"
+	.string "¡A-Ayúdame!$"
 
 Route101_Text_PleaseHelp:
-	.string "Hello! You over there!\n"
-	.string "Please! Help!\p"
-	.string "In my BAG!\n"
-	.string "There's a POKé BALL!$"
+	.string "???: ¡Tú, sí, tú!\n"
+	.string "¡En mi Mochila hay {COLOR LIGHT_RED SHADOW RED} Pokéballs{COLOR DARK_GRAY SHADOW LIGHT_GRAY}, agarra una\l"
+	.string "y sálvame, soy alérgico a este Pokémon!$"
 
 Route101_Text_DontLeaveMe:
-	.string "Wh-Where are you going?!\n"
-	.string "Don't leave me like this!$"
+	.string "???: ¡¿A-adónde vas?! ¡NO ME DEJES!$"
 
 Route101_Text_YouSavedMe:
-	.string "PROF. BIRCH: Whew…\p"
-	.string "I was in the tall grass studying wild\n"
-	.string "POKéMON when I was jumped.\p"
-	.string "You saved me.\n"
-	.string "Thanks a lot!\p"
-	.string "Oh?\p"
-	.string "Hi, you're {PLAYER}{KUN}!\p"
-	.string "This is not the place to chat, so come\n"
-	.string "by my POKéMON LAB later, okay?$"
+	.string "???: ¡UFF! ¡MUCHÍSIMAS GRACIAS!\p"
+	.string "Eso estuvo cerca…\n"
+	.string "Estaba estudiando el comportamiento\l"
+	.string "de los {COLOR BLUE} nuevos Pokémon que migraron{COLOR DARK_GRAY}, y\l"
+	.string "me atacó un Poochyena…\p"
+	.string "Ya era muy tarde cuando noté que no\n"
+	.string "tenía mis EPI-Pen…\p"
+	.string "¡Por cierto, yo soy el {COLOR BLUE}Profesor Birch{COLOR DARK_GRAY}!\p"
+	.string "Profe Birch: ¡Encantado de conocerte!\n"
+	.string "Te invito a mi Laboratorio para charlar\l"
+	.string "más.$"
+
 
 Route101_Text_TakeTiredPokemonToPokeCenter:
-	.string "If POKéMON get tired, take them to\n"
-	.string "a POKéMON CENTER.\p"
-	.string "There's a POKéMON CENTER in OLDALE\n"
-	.string "TOWN right close by.$"
-
+	.string "Si tus Pokémon se cansan,\n"
+	.string "llévalos al Centro Pokémon de\l"
+	.string "inmediato.$"
+Route101_Text_TakeTiredPokemonToPokeCenter2:
+	.string "Es de noche.$"
 Route101_Text_WildPokemonInTallGrass:
-	.string "Wild POKéMON will jump out at you in\n"
-	.string "tall grass.\p"
-	.string "If you want to catch POKéMON, you have\n"
-	.string "to go into the tall grass and search.$"
+	.string "Los Pokémon salvajes te atacarán a la\n"
+	.string "mínima que hagas.\p"
+	.string "¡Ten cuidado en las Rutas!$"
 
 Route101_Text_RouteSign:
-	.string "ROUTE 101\n"
-	.string "{UP_ARROW} OLDALE TOWN$"
+	.string "{COLOR LIGHT_RED SHADOW RED}RUTA 101{COLOR DARK_GRAY SHADOW LIGHT_GRAY}\n"
+	.string "{UP_ARROW} {COLOR LIGHT_GREEN SHADOW GREEN}PUEBLO OLDALE{COLOR DARK_GRAY SHADOW LIGHT_GRAY}$"
 

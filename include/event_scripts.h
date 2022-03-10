@@ -516,6 +516,7 @@ extern const u8 LittlerootTown_BrendansHouse_2F_EventScript_PC[];
 extern const u8 LittlerootTown_MaysHouse_2F_EventScript_PC[];
 extern const u8 EventScript_PC[];
 extern const u8 EventScript_TradeMachine[];
+extern const u8 SCRIPT_SelfTrade_V2[];
 extern const u8 EventScript_TestSignpostMsg[];
 extern const u8 EventScript_HiddenItemScript[];
 extern const u8 EventScript_TV[];

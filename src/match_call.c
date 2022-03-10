@@ -1021,7 +1021,11 @@ extern const u8 gBirchDexRatingText_OnANationwideBasis[];
 
 void InitMatchCallCounters(void)
 {
-    RtcCalcLocalTime();
+    	RtcCalcLocalTime();
+	if (FlagGet(FLAG_RTC_ENABLED)) {
+		gLocalTime.hours = Rtc_GetCurrentHour();
+		gLocalTime.minutes = Rtc_GetCurrentMinute();
+	}
     sMatchCallState.minutes = GetCurrentTotalMinutes(&gLocalTime) + 10;
     sMatchCallState.stepCounter = 0;
 }
@@ -1034,7 +1038,11 @@ static u32 GetCurrentTotalMinutes(struct Time *time)
 static bool32 UpdateMatchCallMinutesCounter(void)
 {
     int curMinutes;
-    RtcCalcLocalTime();
+    	RtcCalcLocalTime();
+	if (FlagGet(FLAG_RTC_ENABLED)) {
+		gLocalTime.hours = Rtc_GetCurrentHour();
+		gLocalTime.minutes = Rtc_GetCurrentMinute();
+	}
     curMinutes = GetCurrentTotalMinutes(&gLocalTime);
     if (sMatchCallState.minutes > curMinutes || curMinutes - sMatchCallState.minutes > 9)
     {

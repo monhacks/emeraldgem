@@ -1906,16 +1906,16 @@ const u32 gItemIconPalette_SecretKey[] = INCBIN_U32("graphics/items/icon_palette
 const u32 gItemIcon_BikeVoucher[] = INCBIN_U32("graphics/items/icons/bike_voucher.4bpp.lz");
 const u32 gItemIconPalette_BikeVoucher[] = INCBIN_U32("graphics/items/icon_palettes/bike_voucher.gbapal.lz");
 
-const u32 gItemIcon_GoldTeeth[] = INCBIN_U32("graphics/items/icons/gold_teeth.4bpp.lz");
-const u32 gItemIconPalette_GoldTeeth[] = INCBIN_U32("graphics/items/icon_palettes/gold_teeth.gbapal.lz");
+const u32 gItemIcon_GoldTeeth[] = INCBIN_U32("graphics/interface/tick.4bpp.lz");
+const u32 gItemIconPalette_GoldTeeth[] = INCBIN_U32("graphics/interface/tick-active.gbapal.lz");
 
 const u32 gItemIcon_CardKey[] = INCBIN_U32("graphics/items/icons/card_key.4bpp.lz");
 const u32 gItemIconPalette_CardKey[] = INCBIN_U32("graphics/items/icon_palettes/card_key.gbapal.lz");
 
 const u32 gItemIcon_LiftKey[] = INCBIN_U32("graphics/items/icons/lift_key.4bpp.lz");
 
-const u32 gItemIcon_SilphScope[] = INCBIN_U32("graphics/items/icons/silph_scope.4bpp.lz");
-const u32 gItemIconPalette_SilphScope[] = INCBIN_U32("graphics/items/icon_palettes/silph_scope.gbapal.lz");
+const u32 gItemIcon_SilphScope[] = INCBIN_U32("graphics/interface/active.4bpp.lz");
+const u32 gItemIconPalette_SilphScope[] = INCBIN_U32("graphics/interface/tick-active.gbapal.lz");
 
 const u32 gItemIcon_TriPass[] = INCBIN_U32("graphics/items/icons/tri_pass.4bpp.lz");
 const u32 gItemIconPalette_TriPass[] = INCBIN_U32("graphics/items/icon_palettes/tri_pass.gbapal.lz");

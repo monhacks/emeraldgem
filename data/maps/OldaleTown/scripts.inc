@@ -46,16 +46,10 @@ OldaleTown_EventScript_MartEmployee::
 	playbgm MUS_FOLLOW_ME, FALSE
 	msgbox OldaleTown_Text_IWorkAtPokemonMart, MSGBOX_DEFAULT
 	closemessage
-	switch VAR_FACING
-	case DIR_SOUTH, OldaleTown_EventScript_GoToMartSouth
-	case DIR_NORTH, OldaleTown_EventScript_GoToMartNorth
-	case DIR_EAST, OldaleTown_EventScript_GoToMartEast
+	goto OldaleTown_EventScript_GoToMartSouth
 	end
 
 OldaleTown_EventScript_GoToMartSouth::
-	applymovement LOCALID_MART_EMPLOYEE, OldaleTown_Movement_EmployeeSouth
-	applymovement OBJ_EVENT_ID_PLAYER, OldaleTown_Movement_PlayerSouth
-	waitmovement 0
 	goto OldaleTown_EventScript_ExplainPokemonMart
 	end
 
@@ -74,7 +68,6 @@ OldaleTown_EventScript_GoToMartEast::
 	end
 
 OldaleTown_EventScript_ExplainPokemonMart::
-	msgbox OldaleTown_Text_ThisIsAPokemonMart, MSGBOX_DEFAULT
 	giveitem ITEM_POTION
 	goto_if_eq VAR_RESULT, FALSE, OldaleTown_EventScript_BagIsFull
 	msgbox OldaleTown_Text_PotionExplanation, MSGBOX_DEFAULT
@@ -344,13 +337,15 @@ OldaleTown_Movement_ReturnToOriginalPosition:
 	step_end
 
 OldaleTown_Text_SavingMyProgress:
-	.string "I want to take a rest, so I'm saving my\n"
-	.string "progress.$"
+	.string "Quiero jugar sin la molestia de los\n"
+	.string "sonidos…\p"
+	.string "Estoy cambiando las opciones a “Sin\n"
+	.string "Sonidos”.$"
+
 
 OldaleTown_Text_IWorkAtPokemonMart:
-	.string "Hi!\n"
-	.string "I work at a POKéMON MART.\p"
-	.string "Can I get you to come with me?$"
+	.string "¡Hola! ¡Trabajo en una Tienda Pokémon, y\n"
+	.string "me gustaría darte esto!$"
 
 OldaleTown_Text_ThisIsAPokemonMart:
 	.string "This is a POKéMON MART.\n"
@@ -361,41 +356,34 @@ OldaleTown_Text_ThisIsAPokemonMart:
 	.string "a promotional item.$"
 
 OldaleTown_Text_PotionExplanation:
-	.string "A POTION can be used anytime, so it's\n"
-	.string "even more useful than a POKéMON CENTER\l"
-	.string "in certain situations.$"
+	.string "¡Es una Poción de cortesía!\p"
+	.string "Espero que eso haga que quieras\n"
+	.string "comprar en nuestra tienda.$"
 
 OldaleTown_Text_WaitDontComeInHere:
-	.string "Aaaaah! Wait!\n"
-	.string "Please don't come in here.\p"
-	.string "I just discovered the footprints of\n"
-	.string "a rare POKéMON!\p"
-	.string "Wait until I finish sketching\n"
-	.string "them, okay?$"
+	.string "¡NOOOOOO! ¡BASTA!\p"
+	.string "¡ESTAMOS INVESTIGANDO POKÉMON QUE HAN\n"
+	.string "MIGRADO RECIENTEMENTE A HOENN! ¡Vas a\l"
+	.string "arruinar todo si pasas!$"
 
 OldaleTown_Text_DiscoveredFootprints:
-	.string "I just discovered the footprints of\n"
-	.string "a rare POKéMON!\p"
-	.string "Wait until I finish sketching\n"
-	.string "them, okay?$"
+	.string "¡Vas a arruinar\n"
+	.string "todo si pasas!$"
 
 OldaleTown_Text_FinishedSketchingFootprints:
-	.string "I finished sketching the footprints of\n"
-	.string "a rare POKéMON.\p"
-	.string "But it turns out they were only my\n"
-	.string "own footprints…$"
+	.string "Pues… Sólo era un Ralts…$"
 
 OldaleTown_Text_MayLetsGoBack:
-	.string "MAY: {PLAYER}{KUN}!\n"
-	.string "Over here!\l"
-	.string "Let's hurry home!$"
+	.string "MAY: ¡{PLAYER}{KUN}!\n"
+	.string "¡CUÁNTO TARDAS!\l"
+	.string "Volvamos a casa.$"
 
 OldaleTown_Text_BrendanLetsGoBack:
-	.string "BRENDAN: I'm heading back to my dad's\n"
-	.string "LAB now.\l"
-	.string "{PLAYER}, you should hustle back, too.$"
+	.string "BRENDAN: Estoy volviendo a mi casa,\n"
+	.string "{PLAYER}, no seas un{A} inútil\l"
+	.string "y sígueme.$"
 
 OldaleTown_Text_CitySign:
-	.string "OLDALE TOWN\n"
-	.string "“Where things start off scarce.”$"
+	.string "{COLOR LIGHT_GREEN SHADOW GREEN} PUEBLO OLDALE\n"
+	.string "{COLOR DARK_GRAY SHADOW LIGHT_GRAY} “Donde nunca pasa nada.”$"
 

@@ -238,10 +238,7 @@ static void HandleInputChooseAction(void)
     DoBounceEffect(gActiveBattler, BOUNCE_HEALTHBOX, 7, 1);
     DoBounceEffect(gActiveBattler, BOUNCE_MON, 7, 1);
 
-    if (JOY_REPEAT(DPAD_ANY) && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_L_EQUALS_A)
-        gPlayerDpadHoldFrames++;
-    else
-        gPlayerDpadHoldFrames = 0;
+    gPlayerDpadHoldFrames = 0;
 
     if (JOY_NEW(A_BUTTON))
     {
@@ -371,10 +368,7 @@ static void HandleInputChooseTarget(void)
             EndBounceEffect(i, BOUNCE_HEALTHBOX);
     }
 
-    if (JOY_HELD(DPAD_ANY) && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_L_EQUALS_A)
-        gPlayerDpadHoldFrames++;
-    else
-        gPlayerDpadHoldFrames = 0;
+    gPlayerDpadHoldFrames = 0;
 
     if (JOY_NEW(A_BUTTON))
     {
@@ -527,11 +521,8 @@ static void HideShownTargets(void)
 
 static void HandleInputShowEntireFieldTargets(void)
 {
-    if (JOY_HELD(DPAD_ANY) && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_L_EQUALS_A)
-        gPlayerDpadHoldFrames++;
-    else
-        gPlayerDpadHoldFrames = 0;
-
+    gPlayerDpadHoldFrames = 0;
+	
     if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
@@ -555,10 +546,7 @@ static void HandleInputShowEntireFieldTargets(void)
 
 static void HandleInputShowTargets(void)
 {
-    if (JOY_HELD(DPAD_ANY) && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_L_EQUALS_A)
-        gPlayerDpadHoldFrames++;
-    else
-        gPlayerDpadHoldFrames = 0;
+    gPlayerDpadHoldFrames = 0;
 
     if (JOY_NEW(A_BUTTON))
     {
@@ -597,10 +585,7 @@ static void HandleInputChooseMove(void)
     u32 canSelectTarget = 0;
     struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct*)(&gBattleResources->bufferA[gActiveBattler][4]);
 
-    if (gMain.heldKeys & DPAD_ANY && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_L_EQUALS_A)
-        gPlayerDpadHoldFrames++;
-    else
-        gPlayerDpadHoldFrames = 0;
+    gPlayerDpadHoldFrames = 0;
 
     if (gMain.newKeys & A_BUTTON)
     {

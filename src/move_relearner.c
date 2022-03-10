@@ -594,7 +594,7 @@ static void DoMoveRelearnerMain(void)
         }
         break;
     case MENU_STATE_PRINT_STOP_TEACHING:
-        StringCopy(gStringVar2, gMoveNames[GetCurrentSelectedMove()]);
+        StringCopy(gStringVar2, gLongMoveNames[GetCurrentSelectedMove()]);
         FormatAndPrintText(gText_MoveRelearnerStopTryingToTeachMove);
         sMoveRelearnerStruct->state++;
         break;
@@ -710,13 +710,13 @@ static void DoMoveRelearnerMain(void)
                 u16 moveId = GetMonData(&gPlayerParty[sMoveRelearnerStruct->partyMon], MON_DATA_MOVE1 + sMoveRelearnerStruct->moveSlot);
 				u8 oldPP;
 
-                StringCopy(gStringVar3, gMoveNames[moveId]);
+                StringCopy(gStringVar3, gLongMoveNames[moveId]);
                 RemoveMonPPBonus(&gPlayerParty[sMoveRelearnerStruct->partyMon], sMoveRelearnerStruct->moveSlot);
 				oldPP = GetMonData(&gPlayerParty[sMoveRelearnerStruct->partyMon], MON_DATA_PP1 + GetMoveSlotToReplace(), NULL);
                 SetMonMoveSlot(&gPlayerParty[sMoveRelearnerStruct->partyMon], GetCurrentSelectedMove(), sMoveRelearnerStruct->moveSlot);
 				if (GetMonData(&gPlayerParty[sMoveRelearnerStruct->partyMon], MON_DATA_PP1 + GetMoveSlotToReplace(), NULL) > oldPP)
                     SetMonData(&gPlayerParty[sMoveRelearnerStruct->partyMon], MON_DATA_PP1 + GetMoveSlotToReplace(), &oldPP);
-                StringCopy(gStringVar2, gMoveNames[GetCurrentSelectedMove()]);
+                StringCopy(gStringVar2, gLongMoveNames[GetCurrentSelectedMove()]);
                 FormatAndPrintText(gText_MoveRelearnerAndPoof);
                 sMoveRelearnerStruct->state = MENU_STATE_DOUBLE_FANFARE_FORGOT_MOVE;
                 gSpecialVar_0x8004 = TRUE;
@@ -825,7 +825,7 @@ static void HandleInput(bool8 showContest)
         PlaySE(SE_SELECT);
         RemoveScrollArrows();
         sMoveRelearnerStruct->state = MENU_STATE_PRINT_TEACH_MOVE_PROMPT;
-        StringCopy(gStringVar2, gMoveNames[itemId]);
+        StringCopy(gStringVar2, gLongMoveNames[itemId]);
         StringExpandPlaceholders(gStringVar4, gText_MoveRelearnerTeachMoveConfirm);
         MoveRelearnerPrintText(gStringVar4);
         break;

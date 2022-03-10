@@ -43,8 +43,44 @@ PetalburgCity_EventScript_WallyTutorial::
 	applymovement OBJ_EVENT_ID_PLAYER, PetalburgCity_Movement_WallyTutorialPlayer
 	waitmovement 0
 	msgbox Route102_Text_WatchMeCatchPokemon, MSGBOX_DEFAULT
-	special StartWallyTutorialBattle
-	waitstate
+	fadescreen FADE_TO_BLACK
+	closemessage
+	delay 60
+	msgbox Route102_Text_UnRalts, MSGBOX_DEFAULT
+	closemessage
+	playmoncry SPECIES_ZIGZAGOON, CRY_MODE_NORMAL
+	msgbox Route102_Text_Sigsa, MSGBOX_DEFAULT
+	waitmoncry
+	closemessage
+	playmoncry SPECIES_RALTS, CRY_MODE_NORMAL
+	msgbox Route102_Text_Ralts, MSGBOX_DEFAULT
+	waitmoncry
+	closemessage
+	delay 60
+	msgbox Route102_Text_PokeballVe, MSGBOX_DEFAULT
+	playse SE_BALL_THROW
+	waitse
+	closemessage
+	playse SE_BALL_OPEN
+	delay 10
+	playmoncry SPECIES_RALTS, CRY_MODE_NORMAL
+	msgbox Route102_Text_Ralts, MSGBOX_DEFAULT
+	waitmoncry
+	closemessage
+	delay 60
+	playse SE_BALL
+	waitse
+	delay 20
+	playse SE_BALL
+	waitse
+	delay 20
+	playse SE_BALL
+	waitse
+	delay 60
+	playse SE_PIN
+	waitse
+	fadescreen FADE_FROM_BLACK
+	playfanfare MUS_EVOLVED
 	msgbox Route102_Text_WallyIDidIt, MSGBOX_DEFAULT
 	applymovement LOCALID_WALLY, Common_Movement_WalkInPlaceFasterLeft, MAP_PETALBURG_CITY
 	waitmovement LOCALID_WALLY, MAP_PETALBURG_CITY
@@ -60,6 +96,21 @@ PetalburgCity_EventScript_WallyTutorial::
 	waitstate
 	releaseall
 	end
+
+Route102_Text_Sigsa:
+	.string "¡ZIGZA!$"
+Route102_Text_Ralts:
+	.string "¡R-RALTS!$"
+Route102_Text_UnRalts:
+	.string "Wally: ¡WOW! ¡Un Ralts!\n"
+	.string "Estos son raros, leí en un libro.\l"
+	.string "Bueno, ahora es tiempo de atraparlo…\l"
+	.string "Eh… ¿Cómo…?\p"
+	.string "Em… Z-Zigzagon… ¡Tacleada!$"
+
+Route102_Text_PokeballVe:
+	.string "Wally: ¡Y-y-y-y ahora, eh…!\p"
+	.string "¡POKÉBALL, CAPTÚRALO!$"
 
 PetalburgCity_EventScript_WalkToWallyHouse::
 	lockall
@@ -704,32 +755,138 @@ PetalburgCity_EventScript_GymBoy::
 	msgbox PetalburgCity_Text_AreYouRookieTrainer, MSGBOX_NPC
 	end
 
+Petalburg_Leaf::
+	lockall
+	faceplayer
+	goto_if_unset FLAG_DEFEATED_LEAF, Petalburg_Leaf_2
+	msgbox Petalburg_Leaf_Text_3
+	fadescreen FADE_TO_BLACK
+	setflag FLAG_DEFEATED_LEAF
+	removeobject 10
+	delay 60
+	fadescreen FADE_FROM_BLACK
+Petalburg_Leaf_1:
+	releaseall
+	return
+
+Petalburg_Leaf_2:
+	msgbox Petalburg_Leaf_Text_0
+	trainerbattle_no_intro TRAINER_LEAF, Leaf_Defeated_Message
+	msgbox Petalburg_Leaf_Text_1
+	giveitem ITEM_CHERISH_BALL, 30
+	msgbox Petalburg_Leaf_Text_2
+	fadescreen FADE_TO_BLACK
+	setflag FLAG_DEFEATED_LEAF
+	removeobject 10
+	delay 60
+	fadescreen FADE_FROM_BLACK
+	goto Petalburg_Leaf_1
+
+
+Petalburg_Leaf_Text_0:
+	.string "???: ¡AH!\n"
+	.string "¡Me encontraste!\p"
+	.string "¡P-por favor no me hagas nada! ¡S-solo\n"
+	.string "estoy jugando con los Pokémon Bebé\l"
+	.string "que aparecen acá!\p"
+	.string "… … … … …\n"
+	.string "Ah, que solo venías a explorar…\l"
+	.string "Entiendo…\l"
+	.string "Pues ya que me encontraste, déjame\l"
+	.string "contarte algo, y escucha bien que es un\l"
+	.string "secretito importantísimo que no debe\l"
+	.string "saber nadie pero nadie nadie, ¿sí?\p"
+	.string "Bueeeeno, pues…\n"
+	.string "Yo…\l"
+	.string "Soy {COLOR GREEN}Leaf{COLOR DARK_GRAY}, y soy una de las {COLOR GREEN}Campeonas de\l"
+	.string "la Liga Añil de Kanto{COLOR DARK_GRAY} y me propuse a\l"
+	.string "venir a Hoenn para investigar la\l"
+	.string "migración de Pokémon, que parece estar\l"
+	.string "relacionada al clima. ¿Y te digo otro\l"
+	.string "secretito más, uno que aún más\l"
+	.string "secretoso que el otro, y que nadie\l"
+	.string "NADIE debe saber?\p"
+	.string "Leaf: Bueno, bueno ahorita te cuento…\n"
+	.string "Hace poco volví a iniciar, con un Equipo\l"
+	.string "Pokémon nuevo bien nuevecito… Una\l"
+	.string "nueva aventura por la Región de Hoenn,\l"
+	.string "para investigar qué está pasando…\p"
+	.string "Y como veo que tienes potencial, voy a\n"
+	.string "hacer una cosita muy cositezca…\l"
+	.string "¡Vamos a tener una Batalla, y voy a\l"
+	.string "ganarte, JA JA JA!$"
+
+Petalburg_Leaf_Text_1:
+	.string "Leaf: ¡AH!\n"
+	.string "¡Me ganaste!\l"
+	.string "¡INCREÍBLE!\p"
+	.string "¡Eres un{A} Entrenador{A}\n"
+	.string "poderosisimisimísim{OA} de l{OA}s que ganan\l"
+	.string "batallas batallonezcas!\p"
+	.string "Pero bueno, bueeno, me ganaste, así que\n"
+	.string "tengo que decirte al menos una de las\l"
+	.string "cosas que descubrí: {COLOR GREEN}Hoenn tiene una\l"
+	.string "gran resistencia al cambio climático{COLOR DARK_GRAY},\l"
+	.string "pero incluso con eso, el ser humano\l"
+	.string "sigue logrando arruinar tanto las\l"
+	.string "cosas, que está afectando incluso a\l"
+	.string "Hoenn.\p"
+	.string "Mi sospecha es que los Pokémon han\n"
+	.string "venido a Hoenn en busca de un hogar\l"
+	.string "más seguro, pero por ahora es solo una\l"
+	.string "teoría teorizadora, nada más ni nada\l"
+	.string "menos.\p"
+	.string "… … … … …\n"
+	.string "¡Ah!\l"
+	.string "Se me olvidaba darte algo por vencer a\l"
+	.string "una campeona campeonística como yo.$"
+
+Petalburg_Leaf_Text_2:
+	.string "Leaf: Es una Gloria Ball, una Pokéball\n"
+	.string "especial creada para conmemorar un\l"
+	.string "evento importantísimo; y tiene la\l"
+	.string "peculiar capacidad de atrapar a los\l"
+	.string "Pokémon raros, de esos rarísimos que\l"
+	.string "no se dejan atrapar ni con las Ultra\l"
+	.string "Ball ni las Ocaso Ball.\p"
+	.string "Úsala sabiamente, pues no sirve muy\n"
+	.string "bien con Pokémon fáciles facilitos de\l"
+	.string "atrapar, solo con los más caprichosos.\p"
+	.string "Bueeeeno, ya no te detengo más. ¡Sigue\n"
+	.string "adelante! ¡Nos vemos!$"
+
+Petalburg_Leaf_Text_3:
+	.string "Leaf: QUE HAGO ACÁ NO SE SUPONE QUE\n"
+	.string "ESTÉ ACÁ QUE???$"
+	
+Leaf_Defeated_Message:
+	.string "¡AH! ¡WOW!\p"
+	.string "Los Entrenadores en Hoenn\n"
+	.string "no dejan nada que desear!$"
+
 PetalburgCity_Text_WhereIsWally:
-	.string "Where has our WALLY gone?\p"
-	.string "We have to leave for VERDANTURF TOWN\n"
-	.string "very soon…$"
+	.string "¿A dónde se ha ido Wally?\p"
+	.string "Tenemos que irnos a la\n"
+	.string "Ciudad Verdantuff pronto…$"
 
 PetalburgCity_Text_AreYouRookieTrainer:
-	.string "Hiya! Are you maybe…\n"
-	.string "A rookie TRAINER?\p"
-	.string "Do you know what POKéMON TRAINERS\n"
-	.string "do when they reach a new town?\p"
-	.string "They first check what kind of GYM\n"
-	.string "is in the town.$"
+	.string "¡Holis! ¿Será que eres…\n"
+	.string "Un{A} novat{OA}?\p"
+	.string "¡Pues ven aquí!$"
 
 PetalburgCity_Text_ThisIsPetalburgGym:
-	.string "See? This is PETALBURG CITY's GYM.$"
+	.string "Este es el Gimnasio Petalburg.$"
 
 PetalburgCity_Text_ThisIsGymSign:
-	.string "This is the GYM's sign. Look for it\n"
-	.string "whenever you're looking for a GYM.$"
+	.string "Eso es un cartel.$"
 
 PetalburgCity_Text_WaterReflection:
-	.string "My face is reflected in the water.\p"
-	.string "It's a shining grin full of hope…\p"
-	.string "Or it could be a look of somber silence\n"
-	.string "struggling with fear…\p"
-	.string "What do you see reflected in your face?$"
+	.string "Reflejada es,\n"
+	.string "mi cara en el agua,\l"
+	.string "melacólica.\p"
+	.string "¿Y tu cara, cuál\n"
+	.string "emoción reflejará?\l"
+	.string "¿Será que lo sabrás?$"
 
 PetalburgCity_Text_FullPartyExplanation:
 	.string "Let's say you have six POKéMON.\n"
@@ -738,30 +895,32 @@ PetalburgCity_Text_FullPartyExplanation:
 	.string "BOX over a PC connection.$"
 
 PetalburgCity_Text_GymSign:
-	.string "PETALBURG CITY POKéMON GYM\n"
-	.string "LEADER: NORMAN\l"
-	.string "“A man in pursuit of power!”$"
+	.string "Gimnasio Pokémon de Petalburg\n"
+	.string "Líder: Norman\l"
+	.string "“¡El hombre que persigue el poder!”$"
 
 PetalburgCity_Text_CitySign:
-	.string "PETALBURG CITY\n"
-	.string "“Where people mingle with nature.”$"
+	.string "{COLOR RED}CIUDAD PETALBURG{COLOR DARK_GRAY}\n"
+	.string "“Donde las personas viven en armonía\l"
+	.string "con la naturaleza”$"
+
 
 PetalburgCity_Text_WallyHouseSign:
-	.string "WALLY'S HOUSE$"
+	.string "Casa de Wally$"
 
 PetalburgCity_Text_AreYouATrainer:
-	.string "Excuse me!\p"
-	.string "Let me guess, from the way you're\n"
-	.string "dressed, are you a POKéMON TRAINER?$"
+	.string "Hola, dime, ¿Eres un{A} Entrenador{A}?$"
 
 PetalburgCity_Text_WellMaybeNot:
-	.string "… … … … … …\p"
-	.string "Well, maybe not.\n"
-	.string "Your clothes aren't all that dirty.\p"
-	.string "You're either a rookie TRAINER,\n"
-	.string "or maybe you're just an ordinary kid.$"
+	.string "Quizás no… Algo me dice, en la forma en\n"
+	.string "la que te vistes… Que, o bien eres un{A}\l"
+	.string "novat{OA}, o sólamente eres un{A} niñ{OA}\l"
+	.string "ordinari{OA}…$"
+
 
 PetalburgCity_Text_ImLookingForTalentedTrainers:
-	.string "I'm roaming the land in search of\n"
-	.string "talented TRAINERS.\p"
-	.string "I'm sorry to have taken your time.$"
+	.string "Verás, estoy en busca de Entrenadores\n"
+	.string "poderosos para {COLOR BLUE}un proyecto especial{COLOR DARK_GRAY}\l"
+	.string "en el que estoy trabajando…$"
+	
+	

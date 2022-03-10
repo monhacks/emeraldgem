@@ -85,7 +85,7 @@ struct
     [MENUITEM_BATTLESCENE]  = {DrawChoices_BattleScene, ProcessInput_Options_Two},
     [MENUITEM_BATTLESTYLE]  = {DrawChoices_BattleStyle, ProcessInput_Options_Two},
     [MENUITEM_SOUND]        = {DrawChoices_Sound,       ProcessInput_Options_Two},
-    [MENUITEM_BUTTONMODE]   = {DrawChoices_ButtonMode,  ProcessInput_Options_Three},
+    [MENUITEM_BUTTONMODE]   = {DrawChoices_ButtonMode,  ProcessInput_Options_Two},
     [MENUITEM_HP_BAR]       = {DrawChoices_HpBar,       ProcessInput_Options_Eleven},
     [MENUITEM_EXP_BAR]      = {DrawChoices_HpBar,       ProcessInput_Options_Eleven},
     [MENUITEM_UNIT_SYSTEM]  = {DrawChoices_UnitSystem,  ProcessInput_Options_Two},
@@ -626,12 +626,10 @@ static int ButtonMode_ProcessInput(int selection)
 static void DrawChoices_ButtonMode(int selection, int y)
 {
     u8 styles[3] = {0};
-    int xMid = GetMiddleX(gText_ButtonTypeNormal, gText_ButtonTypeLR, gText_ButtonTypeLEqualsA);
 
     styles[selection] = 1;
     DrawOptionMenuChoice(gText_ButtonTypeNormal, 104, y, styles[0]);
-    DrawOptionMenuChoice(gText_ButtonTypeLR, xMid, y, styles[1]);
-    DrawOptionMenuChoice(gText_ButtonTypeLEqualsA, GetStringRightAlignXOffset(1, gText_ButtonTypeLEqualsA, 198), y, styles[2]);
+    DrawOptionMenuChoice(gText_ButtonTypeLR, GetStringRightAlignXOffset(FONT_NORMAL, gText_ButtonTypeNormal, 198), y, styles[1]);
 }
 
 static void DrawChoices_HpBar(int selection, int y)

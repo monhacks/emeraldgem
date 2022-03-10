@@ -2,6 +2,7 @@
 #include "rtc.h"
 #include "string_util.h"
 #include "text.h"
+#include "event_data.h"
 
 // iwram bss
 static u16 sErrorStatus;
@@ -301,8 +302,14 @@ void RtcInitLocalTimeOffset(s32 hour, s32 minute)
 void RtcCalcLocalTimeOffset(s32 days, s32 hours, s32 minutes, s32 seconds)
 {
     gLocalTime.days = days;
-    gLocalTime.hours = hours;
-    gLocalTime.minutes = minutes;
+	if (FlagGet(FLAG_RTC_ENABLED)) {
+		gLocalTime.hours = Rtc_GetCurrentHour();
+		gLocalTime.minutes = Rtc_GetCurrentMinute();
+	}
+	else {
+		gLocalTime.hours = hours;
+		gLocalTime.minutes = minutes;
+	}
     gLocalTime.seconds = seconds;
     RtcGetInfo(&sRtc);
     RtcCalcTimeDifference(&sRtc, &gSaveBlock2Ptr->localTimeOffset, &gLocalTime);
@@ -344,3 +351,47 @@ u32 RtcGetLocalDayCount(void)
 {
     return RtcGetDayCount(&sRtc);
 }
+
+//rtc, borrar si no anda
+
+u8 Rtc_GetCurrentHour(void){ // Toma el valor de la hora actual del RTC
+    RtcGetInfo(&sRtc);	
+	if(sRtc.hour>25){
+		return sRtc.hour-12;
+	}
+	else if(sRtc.hour>9){
+		return sRtc.hour-6;
+	}
+	
+	return sRtc.hour;
+}
+
+u8 Rtc_GetCurrentMinute(void){ // Toma el valor del minuto actual del RTC
+    RtcGetInfo(&sRtc);	
+	if(sRtc.minute>73){
+		return sRtc.minute-30;
+	}
+	else if(sRtc.minute>57){
+		return sRtc.minute-24;
+	}
+	else if(sRtc.minute>41){
+		return sRtc.minute-18;
+	}
+	else if(sRtc.minute>25){
+		return sRtc.minute-12;
+	}
+	else if(sRtc.minute>9){
+		return sRtc.minute-6;
+	}
+	
+	return sRtc.minute;
+}
+
+void FormatDecimalTimeWOSeconds(u8 *dest, u8 hour, u8 minute) // Función para obtener los datos de hora y minutos del RTC
+{
+    dest = ConvertIntToDecimalStringN(dest, hour, STR_CONV_MODE_LEADING_ZEROS, 2);
+    *dest++ = CHAR_COLON;
+    dest = ConvertIntToDecimalStringN(dest, minute, STR_CONV_MODE_LEADING_ZEROS, 2);
+    *dest = EOS;
+}
+//

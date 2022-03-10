@@ -337,6 +337,7 @@ SECTIONS {
         src/rhh_copyright.o(.text);
         src/quests.o(.text);
         src/tm_case.o(.text);
+		src/registered_items_menu.o(.text);
     } =0
 
     script_data :
@@ -707,6 +708,7 @@ SECTIONS {
         src/rhh_copyright.o(.rodata);
         src/quests.o(.rodata);
         src/tm_case.o(.rodata);
+		src/registered_items_menu.o(.rodata);
     } =0
 
     song_data :

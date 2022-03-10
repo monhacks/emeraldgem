@@ -307,11 +307,11 @@ PetalburgCity_EventScript_ItemMaxRevive::
 	end
 
 PetalburgCity_EventScript_ItemEther::
-	finditem ITEM_ETHER
+	finditem ITEM_RELIC_CROWN
 	end
 
 MauvilleCity_EventScript_ItemXSpeed::
-	finditem ITEM_X_SPEED
+	finditem ITEM_RELIC_CROWN
 	end
 
 RustboroCity_EventScript_ItemXDefend::

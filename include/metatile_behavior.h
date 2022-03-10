@@ -51,6 +51,7 @@ bool8 MetatileBehavior_IsCounter(u8);
 bool8 MetatileBehavior_IsPlayerFacingTVScreen(u8 tile, u8 playerDir);
 bool8 MetatileBehavior_IsPC(u8);
 bool8 MetatileBehavior_IsTradeMachine(u8);
+bool8 MetatileBehavior_IsTradeMachine2(u8);
 bool8 MetatileBehavior_IsCableBoxResults1(u8);
 bool8 MetatileBehavior_IsOpenSecretBaseDoor(u8);
 bool8 MetatileBehavior_IsSecretBaseCave(u8);

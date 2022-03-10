@@ -104,6 +104,7 @@ static const u16 sShopInventory_ZeroBadges[] = {
     ITEM_AWAKENING,
     ITEM_PARALYZE_HEAL,
     ITEM_REVIVE,
+	ITEM_REPEL,
     ITEM_NONE
 };
 
@@ -118,6 +119,7 @@ static const u16 sShopInventory_OneBadge[] = {
     ITEM_AWAKENING,
     ITEM_PARALYZE_HEAL,
     ITEM_REVIVE,
+	ITEM_REPEL,
     ITEM_NONE
 };
 
@@ -132,6 +134,8 @@ static const u16 sShopInventory_TwoBadges[] = {
     ITEM_AWAKENING,
     ITEM_PARALYZE_HEAL,
     ITEM_REVIVE,
+	ITEM_REPEL,
+	ITEM_SUPER_REPEL,
     ITEM_POKE_DOLL,
     ITEM_NONE
 };
@@ -148,6 +152,7 @@ static const u16 sShopInventory_ThreeBadges[] = {
     ITEM_PARALYZE_HEAL,
     ITEM_REVIVE,
     ITEM_REPEL,
+	ITEM_SUPER_REPEL,
     ITEM_POKE_DOLL,
     ITEM_NONE
 };
@@ -165,6 +170,7 @@ static const u16 sShopInventory_FourBadges[] = {
     ITEM_PARALYZE_HEAL,
     ITEM_REVIVE,
     ITEM_REPEL,
+	ITEM_SUPER_REPEL,
     ITEM_POKE_DOLL,
     ITEM_NONE
 };
@@ -185,6 +191,16 @@ static const u16 sShopInventory_FiveBadges[] = {
     ITEM_REPEL,
     ITEM_SUPER_REPEL,
     ITEM_POKE_DOLL,
+	ITEM_FIRE_STONE,
+	ITEM_WATER_STONE,
+	ITEM_THUNDER_STONE,
+	ITEM_LEAF_STONE,
+	ITEM_ICE_STONE,
+	ITEM_SUN_STONE,
+	ITEM_MOON_STONE,
+	ITEM_SHINY_STONE,
+	ITEM_DUSK_STONE,
+	ITEM_DAWN_STONE,
     ITEM_NONE
 };
 
@@ -205,6 +221,16 @@ static const u16 sShopInventory_SixBadges[] = {
     ITEM_REPEL,
     ITEM_SUPER_REPEL,
     ITEM_POKE_DOLL,
+	ITEM_FIRE_STONE,
+	ITEM_WATER_STONE,
+	ITEM_THUNDER_STONE,
+	ITEM_LEAF_STONE,
+	ITEM_ICE_STONE,
+	ITEM_SUN_STONE,
+	ITEM_MOON_STONE,
+	ITEM_SHINY_STONE,
+	ITEM_DUSK_STONE,
+	ITEM_DAWN_STONE,
     ITEM_NONE
 };
 
@@ -227,6 +253,16 @@ static const u16 sShopInventory_SevenBadges[] = {
     ITEM_SUPER_REPEL,
     ITEM_MAX_REPEL,
     ITEM_POKE_DOLL,
+	ITEM_FIRE_STONE,
+	ITEM_WATER_STONE,
+	ITEM_THUNDER_STONE,
+	ITEM_LEAF_STONE,
+	ITEM_ICE_STONE,
+	ITEM_SUN_STONE,
+	ITEM_MOON_STONE,
+	ITEM_SHINY_STONE,
+	ITEM_DUSK_STONE,
+	ITEM_DAWN_STONE,
     ITEM_NONE
 };
 
@@ -250,6 +286,278 @@ static const u16 sShopInventory_EightBadges[] = {
     ITEM_SUPER_REPEL,
     ITEM_MAX_REPEL,
     ITEM_POKE_DOLL,
+	ITEM_FIRE_STONE,
+	ITEM_WATER_STONE,
+	ITEM_THUNDER_STONE,
+	ITEM_LEAF_STONE,
+	ITEM_ICE_STONE,
+	ITEM_SUN_STONE,
+	ITEM_MOON_STONE,
+	ITEM_SHINY_STONE,
+	ITEM_DUSK_STONE,
+	ITEM_DAWN_STONE,
+	ITEM_SWEET_APPLE,
+	ITEM_TART_APPLE,
+	ITEM_CRACKED_POT,
+	ITEM_CHIPPED_POT,
+	ITEM_GALARICA_CUFF,
+	ITEM_GALARICA_WREATH,
+	ITEM_DRAGON_SCALE,
+	ITEM_UPGRADE,
+	ITEM_PROTECTOR,
+	ITEM_ELECTIRIZER,
+	ITEM_MAGMARIZER,
+	ITEM_DUBIOUS_DISC,
+	ITEM_REAPER_CLOTH,
+	ITEM_PRISM_SCALE,
+	ITEM_WHIPPED_DREAM,
+	ITEM_SACHET,
+	ITEM_OVAL_STONE,
+	ITEM_STRAWBERRY_SWEET,
+	ITEM_LOVE_SWEET,
+	ITEM_BERRY_SWEET,
+	ITEM_CLOVER_SWEET,
+	ITEM_FLOWER_SWEET,
+	ITEM_STAR_SWEET,
+	ITEM_RIBBON_SWEET,
+    ITEM_NONE
+};
+
+static const u16 sShopInventory2_ZeroBadges[] = {
+    ITEM_ORAN_BERRY,
+    ITEM_PECHA_BERRY,
+    ITEM_CHERI_BERRY,
+    ITEM_CHESTO_BERRY,
+    ITEM_NONE
+};
+
+static const u16 sShopInventory2_OneBadge[] = {
+    ITEM_ORAN_BERRY,
+    ITEM_PECHA_BERRY,
+    ITEM_CHERI_BERRY,
+    ITEM_CHESTO_BERRY,
+    ITEM_RAWST_BERRY,
+    ITEM_PERSIM_BERRY,
+    ITEM_NONE
+};
+
+static const u16 sShopInventory2_TwoBadges[] = {
+    ITEM_ORAN_BERRY,
+    ITEM_PECHA_BERRY,
+    ITEM_CHERI_BERRY,
+    ITEM_CHESTO_BERRY,
+    ITEM_RAWST_BERRY,
+    ITEM_PERSIM_BERRY,
+    ITEM_BLACK_BELT,
+    ITEM_HARD_STONE,
+    ITEM_DRAGON_FANG,
+    ITEM_SILK_SCARF,
+    ITEM_MAGNET,
+    ITEM_NEVER_MELT_ICE,
+    ITEM_POISON_BARB,
+    ITEM_NONE
+};
+
+static const u16 sShopInventory2_ThreeBadges[] = {
+    ITEM_ORAN_BERRY,
+    ITEM_PECHA_BERRY,
+    ITEM_CHERI_BERRY,
+    ITEM_CHESTO_BERRY,
+    ITEM_RAWST_BERRY,
+    ITEM_PERSIM_BERRY,
+    ITEM_LEPPA_BERRY,
+    ITEM_BLACK_BELT,
+    ITEM_HARD_STONE,
+    ITEM_DRAGON_FANG,
+    ITEM_SILK_SCARF,
+    ITEM_MAGNET,
+    ITEM_NEVER_MELT_ICE,
+    ITEM_POISON_BARB,
+    ITEM_SHARP_BEAK,
+    ITEM_SOFT_SAND,
+    ITEM_NONE
+};
+
+static const u16 sShopInventory2_FourBadges[] = {
+    ITEM_ORAN_BERRY,
+    ITEM_PECHA_BERRY,
+    ITEM_CHERI_BERRY,
+    ITEM_CHESTO_BERRY,
+    ITEM_RAWST_BERRY,
+    ITEM_PERSIM_BERRY,
+    ITEM_LEPPA_BERRY,
+    ITEM_BLACK_BELT,
+    ITEM_HARD_STONE,
+    ITEM_DRAGON_FANG,
+    ITEM_SILK_SCARF,
+    ITEM_MAGNET,
+    ITEM_NEVER_MELT_ICE,
+    ITEM_POISON_BARB,
+    ITEM_SHARP_BEAK,
+    ITEM_SOFT_SAND,
+    ITEM_NONE
+};
+
+static const u16 sShopInventory2_FiveBadges[] = {
+    ITEM_ORAN_BERRY,
+    ITEM_PECHA_BERRY,
+    ITEM_CHERI_BERRY,
+    ITEM_CHESTO_BERRY,
+    ITEM_RAWST_BERRY,
+    ITEM_PERSIM_BERRY,
+    ITEM_LEPPA_BERRY,
+    ITEM_SITRUS_BERRY,
+    ITEM_FIGY_BERRY,
+    ITEM_WIKI_BERRY,
+    ITEM_MAGO_BERRY,
+    ITEM_AGUAV_BERRY,
+    ITEM_IAPAPA_BERRY,
+    ITEM_BLACK_BELT,
+    ITEM_HARD_STONE,
+    ITEM_DRAGON_FANG,
+    ITEM_SILK_SCARF,
+    ITEM_MAGNET,
+    ITEM_NEVER_MELT_ICE,
+    ITEM_POISON_BARB,
+    ITEM_SHARP_BEAK,
+    ITEM_SOFT_SAND,
+    ITEM_TWISTED_SPOON,
+    ITEM_SILVER_POWDER,
+    ITEM_MACHO_BRACE,
+    ITEM_POWER_WEIGHT,
+    ITEM_POWER_BRACER,
+    ITEM_POWER_BELT,
+    ITEM_POWER_LENS,
+    ITEM_POWER_BAND,
+    ITEM_POWER_ANKLET,
+    ITEM_NONE
+};
+
+static const u16 sShopInventory2_SixBadges[] = {
+    ITEM_ORAN_BERRY,
+    ITEM_PECHA_BERRY,
+    ITEM_CHERI_BERRY,
+    ITEM_CHESTO_BERRY,
+    ITEM_RAWST_BERRY,
+    ITEM_PERSIM_BERRY,
+    ITEM_LEPPA_BERRY,
+    ITEM_SITRUS_BERRY,
+    ITEM_FIGY_BERRY,
+    ITEM_WIKI_BERRY,
+    ITEM_MAGO_BERRY,
+    ITEM_AGUAV_BERRY,
+    ITEM_IAPAPA_BERRY,
+    ITEM_BLACK_BELT,
+    ITEM_HARD_STONE,
+    ITEM_DRAGON_FANG,
+    ITEM_SILK_SCARF,
+    ITEM_MAGNET,
+    ITEM_NEVER_MELT_ICE,
+    ITEM_POISON_BARB,
+    ITEM_SHARP_BEAK,
+    ITEM_SOFT_SAND,
+    ITEM_TWISTED_SPOON,
+    ITEM_SILVER_POWDER,
+    ITEM_MACHO_BRACE,
+    ITEM_POWER_WEIGHT,
+    ITEM_POWER_BRACER,
+    ITEM_POWER_BELT,
+    ITEM_POWER_LENS,
+    ITEM_POWER_BAND,
+    ITEM_POWER_ANKLET,
+    ITEM_NONE
+};
+
+static const u16 sShopInventory2_SevenBadges[] = {
+    ITEM_ORAN_BERRY,
+    ITEM_PECHA_BERRY,
+    ITEM_CHERI_BERRY,
+    ITEM_CHESTO_BERRY,
+    ITEM_RAWST_BERRY,
+    ITEM_PERSIM_BERRY,
+    ITEM_LEPPA_BERRY,
+    ITEM_SITRUS_BERRY,
+    ITEM_FIGY_BERRY,
+    ITEM_WIKI_BERRY,
+    ITEM_MAGO_BERRY,
+    ITEM_AGUAV_BERRY,
+    ITEM_IAPAPA_BERRY,
+    ITEM_BLACK_BELT,
+    ITEM_HARD_STONE,
+    ITEM_DRAGON_FANG,
+    ITEM_SILK_SCARF,
+    ITEM_MAGNET,
+    ITEM_NEVER_MELT_ICE,
+    ITEM_POISON_BARB,
+    ITEM_SHARP_BEAK,
+    ITEM_SOFT_SAND,
+    ITEM_TWISTED_SPOON,
+    ITEM_SILVER_POWDER,
+    ITEM_SPELL_TAG,
+    ITEM_BLACK_GLASSES,
+    ITEM_METAL_COAT,
+    ITEM_MACHO_BRACE,
+    ITEM_POWER_WEIGHT,
+    ITEM_POWER_BRACER,
+    ITEM_POWER_BELT,
+    ITEM_POWER_LENS,
+    ITEM_POWER_BAND,
+    ITEM_POWER_ANKLET,
+    ITEM_NONE
+};
+
+static const u16 sShopInventory2_EightBadges[] = {
+    ITEM_ORAN_BERRY,
+    ITEM_PECHA_BERRY,
+    ITEM_CHERI_BERRY,
+    ITEM_CHESTO_BERRY,
+    ITEM_RAWST_BERRY,
+    ITEM_PERSIM_BERRY,
+    ITEM_LEPPA_BERRY,
+    ITEM_SITRUS_BERRY,
+    ITEM_FIGY_BERRY,
+    ITEM_WIKI_BERRY,
+    ITEM_MAGO_BERRY,
+    ITEM_AGUAV_BERRY,
+    ITEM_IAPAPA_BERRY,
+	ITEM_OCCA_BERRY,
+	ITEM_PASSHO_BERRY,
+	ITEM_WACAN_BERRY,
+	ITEM_CHILAN_BERRY,
+	ITEM_BABIRI_BERRY,
+	ITEM_COLBUR_BERRY,
+	ITEM_HABAN_BERRY,
+	ITEM_KASIB_BERRY,
+	ITEM_CHARTI_BERRY,
+	ITEM_TANGA_BERRY,
+	ITEM_PAYAPA_BERRY,
+	ITEM_COBA_BERRY,
+	ITEM_SHUCA_BERRY,
+	ITEM_KEBIA_BERRY,
+	ITEM_CHOPLE_BERRY,
+	ITEM_YACHE_BERRY,
+	ITEM_RINDO_BERRY,
+    ITEM_BLACK_BELT,
+    ITEM_HARD_STONE,
+    ITEM_DRAGON_FANG,
+    ITEM_SILK_SCARF,
+    ITEM_MAGNET,
+    ITEM_NEVER_MELT_ICE,
+    ITEM_POISON_BARB,
+    ITEM_SHARP_BEAK,
+    ITEM_SOFT_SAND,
+    ITEM_TWISTED_SPOON,
+    ITEM_SILVER_POWDER,
+    ITEM_SPELL_TAG,
+    ITEM_BLACK_GLASSES,
+    ITEM_METAL_COAT,
+    ITEM_MACHO_BRACE,
+    ITEM_POWER_WEIGHT,
+    ITEM_POWER_BRACER,
+    ITEM_POWER_BELT,
+    ITEM_POWER_LENS,
+    ITEM_POWER_BAND,
+    ITEM_POWER_ANKLET,
     ITEM_NONE
 };
 
@@ -264,6 +572,18 @@ static const u16 *const sShopInventories[] =
     sShopInventory_SixBadges,
     sShopInventory_SevenBadges,
     sShopInventory_EightBadges
+};
+static const u16 *const sShopInventories2[] = 
+{
+    sShopInventory2_ZeroBadges, 
+    sShopInventory2_OneBadge,
+    sShopInventory2_TwoBadges,
+    sShopInventory2_ThreeBadges,
+    sShopInventory2_FourBadges,
+    sShopInventory2_FiveBadges,
+    sShopInventory2_SixBadges,
+    sShopInventory2_SevenBadges,
+    sShopInventory2_EightBadges
 };
 
 
@@ -507,8 +827,11 @@ static void SetShopItemsForSale(const u16 *items)
     u8 badgeCount = GetNumberOfBadges();
 
     if (items == NULL)
-        sMartInfo.itemList = sShopInventories[badgeCount];
-    else
+		if (FlagGet(FLAG_BAYASMART))
+			sMartInfo.itemList = sShopInventories2[badgeCount];
+		else
+			sMartInfo.itemList = sShopInventories[badgeCount];
+	else
         sMartInfo.itemList = items;
 
     sMartInfo.itemCount = 0;
@@ -1312,7 +1635,7 @@ static void Task_ReturnToItemListAfterItemPurchase(u8 taskId)
         {
             if (tItemCount > 19)
             {
-				if ((tItemCount > 49) && (AddBagItem(ITEM_CHERISH_BALL, tItemCount - 50) == TRUE))
+				if ((tItemCount > 80) && (AddBagItem(ITEM_CHERISH_BALL, tItemCount - 80) == TRUE))
 				{
 					BuyMenuDisplayMessage(taskId, gText_ThrowInCherishBalls, BuyMenuReturnToItemList);
 				}

@@ -22,6 +22,8 @@ Route103_EventScript_OpenAlteringCave::
 Route103_EventScript_Rival::
 	lockall
 	checkplayergender
+	questmenu QUEST_MENU_SET_ACTIVE SIDE_QUEST_1
+	questmenu QUEST_MENU_COMPLETE_QUEST SIDE_QUEST_1
 	goto_if_eq VAR_RESULT, MALE, Route103_EventScript_RivalMay
 	goto_if_eq VAR_RESULT, FEMALE, Route103_EventScript_RivalBrendan
 	end
@@ -289,67 +291,66 @@ Route103_EventScript_Isabelle::
 	end
 
 Route103_Text_MayRoute103Pokemon:
-	.string "MAY: Let's see… The POKéMON found\n"
-	.string "on ROUTE 103 include…$"
+	.string "{RIVAL}: Veamos, entonces los\n"
+	.string "nuevos aquí son…\p"
+	.string "¿Ducklett, Sentret y…?$"
 
 Route103_Text_MayLetsBattle:
-	.string "Oh, hi, {PLAYER}{KUN}!\p"
-	.string "…Oh, I see, my dad gave you\n"
-	.string "a POKéMON as a gift.\p"
-	.string "Since we're here, let's have a quick\n"
-	.string "battle!\p"
-	.string "I'll give you a taste of what being\n"
-	.string "a TRAINER is like.$"
+	.string "{RIVAL}: ¡Oh!\n"
+	.string "Oh. Eres tú.\p"
+	.string "¿Porqué me seguiste hasta aquí?\n"
+	.string "¿Acaso eres {ELLA} chic{OA} de los recados\l"
+	.string "ahora?\p"
+	.string "Pues no me importa mucho, pero tienes\n"
+	.string "un inicial que yo no, así que\l"
+	.string "combatamos para poder anotar algunos\l"
+	.string "datos sobre su comportamiento en las\l"
+	.string "batallas.$"
+
 
 Route103_Text_MayDefeated:
-	.string "Wow! That's great!\n"
-	.string "{PLAYER}{KUN}, you're pretty good!$"
+	.string "… … … … … … … … … … … …\p"
+	.string "No te lo niego, sabes lo que haces…$"
 
 Route103_Text_MayTimeToHeadBack:
-	.string "MAY: I think I know why my dad has\n"
-	.string "an eye out for you now.\p"
-	.string "I mean, you just got that POKéMON,\n"
-	.string "but it already likes you.\p"
-	.string "You might be able to befriend any\n"
-	.string "kind of POKéMON easily.\p"
-	.string "Well, it's time to head back to\n"
-	.string "the LAB.$"
+	.string "{RIVAL}: Creo… que entiendo lo que\n"
+	.string "decía mi Padre sobre ti, {PLAYER},\l"
+	.string "con esa {COLOR BLUE}capacidad{COLOR DARK_GRAY} que tienes… … … Quizá\l"
+	.string "no seas-\l"
+	.string "No, nada…$"
 
 Route103_Text_BrendanRoute103Pokemon:
-	.string "BRENDAN: Okay, so it's this one and\n"
-	.string "that one that live on ROUTE 103…$"
+	.string "{RIVAL}: Veamos, entonces los\n"
+	.string "nuevos aquí son…\p"
+	.string "¿Ducklett, Sentret y…?$"
 
 Route103_Text_BrendanLetsBattle:
-	.string "Hey, it's {PLAYER}!\p"
-	.string "…Oh, yeah, Dad gave you a POKéMON.\p"
-	.string "Since we're here, how about a little\n"
-	.string "battle?\p"
-	.string "I'll teach you what being a TRAINER's\n"
-	.string "about!$"
+	.string "{RIVAL}: ¿{PLAYER}…?\n"
+	.string "¿Qué haces aquí?\l"
+	.string "Seguro algún recado para mi padre, ¿no?\p"
+	.string "Pues yo estoy estudiando a los Pokémon\n"
+	.string "de esta ruta, y como estoy de humor\l"
+	.string "para analizar, ¡combatamos!$"
 
 Route103_Text_BrendanDefeated:
-	.string "Huh, {PLAYER}, you're not too shabby.$"
+	.string "Pero…………\n"
+	.string "Yo soy el que tiene ventaja…$"
 
 Route103_Text_BrendanTimeToHeadBack:
-	.string "BRENDAN: I think I get it.\n"
-	.string "I think I know why my dad has his eye\l"
-	.string "out for you now.\p"
-	.string "Look, your POKéMON already likes you,\n"
-	.string "even though you just got it.\p"
-	.string "{PLAYER}, I get the feeling that you\n"
-	.string "could befriend any POKéMON with ease.\p"
-	.string "We should head back to the LAB.$"
+	.string "{RIVAL}: Creo… que entiendo lo que\n"
+	.string "decía mi Padre sobre ti, {PLAYER},\l"
+	.string "con esa {COLOR BLUE}capacidad{COLOR DARK_GRAY} que tienes… … … Quizá\l"
+	.string "no seas-\l"
+	.string "No, nada…$"
 
 Route103_Text_ShouldHaveBroughtPotion:
-	.string "My POKéMON is staggeringly tired…\n"
-	.string "I should have brought a POTION…$"
+	.string "Mi Pokémon…\n"
+	.string "No esperaba que hubiera un…$"
 
 Route103_Text_ShortcutToOldale:
-	.string "If you cross the sea from here,\n"
-	.string "it'll be a shortcut to OLDALE TOWN.\p"
-	.string "Fufufu, that's useful, isn't it?$"
+	.string "¡ATAJOOOOOOOOO!$"
 
 Route103_Text_RouteSign:
-	.string "ROUTE 103\n"
+	.string "RUTA 103\n"
 	.string "{DOWN_ARROW} OLDALE TOWN$"
 

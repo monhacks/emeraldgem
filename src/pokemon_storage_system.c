@@ -1412,7 +1412,7 @@ static void UnusedDrawTextWindow(const u8 *string, void *dst, u16 offset, u8 bgC
     RemoveWindow(windowId);
 }
 
-u8 CountMonsInBox(u8 boxId)
+u16 CountMonsInBox(u8 boxId)
 {
     u16 i, count;
 
@@ -1756,7 +1756,7 @@ static s16 StorageSystemGetNextMonIndex(struct BoxPokemon *box, s8 startIdx, u8 
 
 void ResetPokemonStorageSystem(void)
 {
-    u16 boxId, boxPosition;
+    u8 boxId, boxPosition;
 
     SetCurrentBox(0);
     for (boxId = 0; boxId < TOTAL_BOXES_COUNT; boxId++)
@@ -5352,7 +5352,7 @@ static bool8 ScrollToBox(void)
 static s8 DetermineBoxScrollDirection(u8 boxId)
 {
     u8 i;
-    u8 currentBox = StorageGetCurrentBox();
+    u16 currentBox = StorageGetCurrentBox();
 
     for (i = 0; currentBox != boxId; i++)
     {
@@ -7198,13 +7198,10 @@ static u8 InBoxInput_Normal(void)
         if (JOY_NEW(B_BUTTON))
             return INPUT_PRESSED_B;
 
-        if (gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_LR)
-        {
             if (JOY_HELD(L_BUTTON))
                 return INPUT_SCROLL_LEFT;
             if (JOY_HELD(R_BUTTON))
                 return INPUT_SCROLL_RIGHT;
-        }
 
         if (JOY_NEW(SELECT_BUTTON))
         {
@@ -7367,13 +7364,10 @@ static u8 InBoxInput_MovingMultiple(void)
     }
     else
     {
-        if (gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_LR)
-        {
             if (JOY_HELD(L_BUTTON))
                 return INPUT_SCROLL_LEFT;
             if (JOY_HELD(R_BUTTON))
                 return INPUT_SCROLL_RIGHT;
-        }
 
         return INPUT_NONE;
     }
@@ -7535,13 +7529,10 @@ static u8 HandleInput_OnBox(void)
         if (JOY_HELD(DPAD_RIGHT))
             return INPUT_SCROLL_RIGHT;
 
-        if (gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_LR)
-        {
             if (JOY_HELD(L_BUTTON))
                 return INPUT_SCROLL_LEFT;
             if (JOY_HELD(R_BUTTON))
                 return INPUT_SCROLL_RIGHT;
-        }
 
         if (JOY_NEW(A_BUTTON))
         {

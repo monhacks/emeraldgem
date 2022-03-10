@@ -6,10 +6,10 @@ OldaleTown_House1_EventScript_Woman::
 	end
 
 OldaleTown_House1_Text_LeftPokemonGoesOutFirst:
-	.string "When a POKéMON battle starts, the one\n"
-	.string "at the left of the list goes out first.\p"
-	.string "So, when you get more POKéMON in your\n"
-	.string "party, try switching around the order\l"
-	.string "of your POKéMON.\p"
-	.string "It could give you an advantage.$"
+	.string "Cuando un Pokémon tiene equipado el\n"
+	.string "Repartir Experiencia, recibirá\l"
+	.string "el {COLOR BLUE}triple de puntos de experiencia{COLOR DARK_GRAY}\l"
+	.string "que recibiría normalmente, esto\l"
+	.string "para entrenarlo más rápidamente.\p"
+	.string "Aunque no sé dónde se consigue eso.$"
 

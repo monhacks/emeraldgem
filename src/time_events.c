@@ -83,7 +83,11 @@ void UpdateShoalTideFlag(void)
 
     if (IsMapTypeOutdoors(GetLastUsedWarpMapType()))
     {
-        RtcCalcLocalTime();
+        	RtcCalcLocalTime();
+	if (FlagGet(FLAG_RTC_ENABLED)) {
+		gLocalTime.hours = Rtc_GetCurrentHour();
+		gLocalTime.minutes = Rtc_GetCurrentMinute();
+	}
         if (tide[gLocalTime.hours])
             FlagSet(FLAG_SYS_SHOAL_TIDE);
         else

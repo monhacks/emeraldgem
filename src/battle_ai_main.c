@@ -1665,6 +1665,8 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
                 score -= 10;
             else if (GetHealthPercentage(battlerAtk) >= 90)
                 score -= 9; //No point in healing, but should at least do it if nothing better
+			else if (GetHealthPercentage(battlerAtk) == 100)
+                score -= 10; //No point in healing, but should at least do it if nothing better
             break;
         case EFFECT_MORNING_SUN:
         case EFFECT_SYNTHESIS:
@@ -1675,6 +1677,8 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
                 score -= 10;
             else if (GetHealthPercentage(battlerAtk) >= 90)
                 score -= 9; //No point in healing, but should at least do it if nothing better
+			else if (GetHealthPercentage(battlerAtk) == 100)
+                score -= 10; //No point in healing, but should at least do it if nothing better
             break;
         case EFFECT_PURIFY:
             if (!(gBattleMons[battlerDef].status1 & STATUS1_ANY))

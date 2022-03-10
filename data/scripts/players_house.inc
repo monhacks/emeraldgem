@@ -59,11 +59,59 @@ LittlerootTown_MaysHouse_2F_EventScript_WallClock::
 
 PlayersHouse_2F_EventScript_WallClock::
 	goto_if_set FLAG_SET_WALL_CLOCK, PlayersHouse_2F_EventScript_CheckWallClock
+	playse SE_PIN
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_ExclamationMark
+	msgbox PlayersHouse_1F_Text_ChooseTimeThing, MSGBOX_DEFAULT
+	multichoice 22, 8, MULTI_CLOCK_OR_RTC, FALSE
+	switch VAR_RESULT
+	case 0, PlayersHouse_2F_EventScript_ChoseClock
+	case 1, PlayersHouse_2F_EventScript_ChoseRTC
+	end
+PlayersHouse_1F_Text_ChooseTimeThing:
+	.string "¡AVISO! LEE ESTO CON ATENCIÓN.\n"
+	.string "POR FAVOR, SELECCIONAR SI DESEA\l"
+	.string "CONTINUAR USANDO EL RELOJ DEL\l"
+	.string "JUEGO, O EL RELOJ REAL DE SU\l"
+	.string "DISPOSITIVO.\p"
+	.string "Tenga en cuenta que esta\n"
+	.string "acción no se puede cambiar.$"
+	
+PlayersHouse_1F_Text_ChooseClock:
+	.string "¿Está segur{OA} que quiere\n"
+	.string "usar el reloj falso del\l"
+	.string "juego?$"
+PlayersHouse_1F_Text_ChooseRTC:
+	.string "¿Está segur{OA} que quiere\n"
+	.string "usar el reloj real de\l"
+	.string "su dispositivo?$"
+PlayersHouse_2F_EventScript_ChoseClock::
+	msgbox PlayersHouse_1F_Text_ChooseClock, MSGBOX_YESNO
+	compare VAR_RESULT, 1
+	goto_if_ne PlayersHouse_2F_EventScript_WallClock
 	msgbox PlayersHouse_2F_Text_ClockIsStopped, MSGBOX_DEFAULT
 	call PlayersHouse_2F_EventScript_SetWallClock
 	delay 30
-	setvar VAR_LITTLEROOT_INTRO_STATE, 6
 	setflag FLAG_SET_WALL_CLOCK
+	setvar VAR_LITTLEROOT_INTRO_STATE, 6
+	setflag FLAG_HIDE_LITTLEROOT_TOWN_PLAYERS_HOUSE_VIGOROTH_1
+	setflag FLAG_HIDE_LITTLEROOT_TOWN_PLAYERS_HOUSE_VIGOROTH_2
+	checkplayergender
+	call_if_eq VAR_RESULT, MALE, PlayersHouse_2F_EventScript_MomComesUpstairsMale
+	call_if_eq VAR_RESULT, FEMALE, PlayersHouse_2F_EventScript_MomComesUpstairsFemale
+	playse SE_EXIT
+	removeobject VAR_0x8008
+	releaseall
+	end
+
+PlayersHouse_2F_EventScript_ChoseRTC::
+	msgbox PlayersHouse_1F_Text_ChooseRTC, MSGBOX_YESNO
+	compare VAR_RESULT, 1
+	goto_if_ne PlayersHouse_2F_EventScript_WallClock
+	closemessage
+	delay 30
+	setflag FLAG_SET_WALL_CLOCK
+	setflag FLAG_RTC_ENABLED
+	setvar VAR_LITTLEROOT_INTRO_STATE, 6
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_PLAYERS_HOUSE_VIGOROTH_1
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_PLAYERS_HOUSE_VIGOROTH_2
 	checkplayergender

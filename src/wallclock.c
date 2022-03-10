@@ -1001,7 +1001,11 @@ static void UpdateClockPeriod(u8 taskId, u8 direction)
 
 static void InitClockWithRtc(u8 taskId)
 {
-    RtcCalcLocalTime();
+    	RtcCalcLocalTime();
+	if (FlagGet(FLAG_RTC_ENABLED)) {
+		gLocalTime.hours = Rtc_GetCurrentHour();
+		gLocalTime.minutes = Rtc_GetCurrentMinute();
+	}
     gTasks[taskId].tHours = gLocalTime.hours;
     gTasks[taskId].tMinutes = gLocalTime.minutes;
     gTasks[taskId].tMinuteHandAngle = gTasks[taskId].tMinutes * 6;

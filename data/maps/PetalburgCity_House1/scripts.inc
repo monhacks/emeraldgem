@@ -10,19 +10,18 @@ PetalburgCity_House1_EventScript_Woman::
 	end
 
 PetalburgCity_House1_Text_TravelingIsWonderful:
-	.string "Traveling is wonderful!\p"
-	.string "When I was young, I roamed the seas\n"
-	.string "and the mountains!$"
+	.string "¡Viajar es increíble!\p"
+	.string "Sentir el viento en mi pelo, acompañar a\n"
+	.string "mis Pokémon y mis amigos, ¡Viajar lo era\l"
+	.string "todo para mí!\p"
+	.string "Pero mi familia me importa mucho más\n"
+	.string "ahora.$"
 
 PetalburgCity_House1_Text_GoOnAdventure:
-	.string "Sigh…\p"
-	.string "I wish I could go on an adventure\n"
-	.string "with some POKéMON…\p"
-	.string "Crawl through some damp grass…\n"
-	.string "Climb rocky, rugged mountains…\p"
-	.string "Cross the raging seas…\n"
-	.string "Wander about in dark caves…\p"
-	.string "And, sometimes, even get a little\n"
-	.string "homesick…\p"
-	.string "It must be fabulous to travel!$"
+	.string "No sé qué hacer, quiero ir de viaje, pero\n"
+	.string "también quiero quedarme…\p"
+	.string "-suspiro- También me gustaría tener\n"
+	.string "amigos nuevos, quizá un novio o novia,\l"
+	.string "viajar por todo el mundo junto a todos\l"
+	.string "mis Pokémon…$"
 

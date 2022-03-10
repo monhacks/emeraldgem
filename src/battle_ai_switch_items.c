@@ -18,17 +18,6 @@
 static bool8 HasSuperEffectiveMoveAgainstOpponents(bool8 noRng);
 static bool8 FindMonWithFlagsAndSuperEffective(u16 flags, u8 moduloPercent);
 static bool8 ShouldUseItem(void);
-static bool8 EnemyMonHasSpecificSuperEffectiveRevealedMove(void);
-
-static bool8 EnemyMonHasSpecificSuperEffectiveRevealedMove(void)
-{
-    u8 opposingPosition = BATTLE_OPPOSITE(GetBattlerPosition(gActiveBattler));
-		if (gMoveResultFlags & MOVE_RESULT_SUPER_EFFECTIVE) {
-			*(gBattleStruct->AI_monToSwitchIntoId + gActiveBattler) = PARTY_SIZE;
-			BtlController_EmitTwoReturnValues(1, B_ACTION_SWITCH, 0);
-			return TRUE;
-	}
-}
 
 void GetAIPartyIndexes(u32 battlerId, s32 *firstId, s32 *lastId)
 {
@@ -48,6 +37,77 @@ void GetAIPartyIndexes(u32 battlerId, s32 *firstId, s32 *lastId)
         *firstId = 0, *lastId = 6;
     }
 }
+
+static bool8 HasBadOdds(void)
+{
+	u8 opposingPosition; //Variable initialization
+    u8 opposingBattler;
+	u8 atkType1;
+	u8 atkType2;
+	u8 defType1;
+	u8 defType2;
+	u16 move;
+	s32 i, j;
+	struct Pokemon *party = NULL;
+	
+	u32 typeDmg=UQ_4_12(1.0); //baseline typing damage
+	
+	u16 species = GetMonData(&party[i], MON_DATA_SPECIES);
+	
+	opposingPosition = BATTLE_OPPOSITE(GetBattlerPosition(gActiveBattler));
+    opposingBattler = GetBattlerAtPosition(opposingPosition);
+	
+	atkType1 = gBattleMons[opposingBattler].type1;//Gets types of player(opposingBattler) and computer (gActiveBattler)
+	atkType2 = gBattleMons[opposingBattler].type2;
+	defType1 = gBattleMons[gActiveBattler].type1;
+	defType2 = gBattleMons[gActiveBattler].type2;
+	
+    if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE) //Won't bother configuring this for double battles. Those are complex enough.
+        return FALSE;
+
+	typeDmg *= UQ_4_12_TO_INT(GetTypeModifier(atkType1, defType1));//Calculates the type advantage
+	if (atkType2!=atkType1)
+		typeDmg *=UQ_4_12_TO_INT(GetTypeModifier(atkType2, defType1));
+	if (defType2!=defType1)
+	{
+		typeDmg *=UQ_4_12_TO_INT(GetTypeModifier(atkType1, defType2));
+		if (atkType2!=atkType1)
+			typeDmg *=UQ_4_12_TO_INT(GetTypeModifier(atkType2, defType2));
+	}
+	if (typeDmg>=UQ_4_12(2.0)) //If the player has a 2x type advantage or greater...
+	{
+		if (GetMostSuitableMonToSwitchInto()==PARTY_SIZE) //If there is no better option...
+			return FALSE;
+		if ((!HasSuperEffectiveMoveAgainstOpponents(FALSE))
+			&& (gBattleMons[gActiveBattler].hp >= gBattleMons[gActiveBattler].maxHP/2)) //If the computer doesn't have a super effective move AND they have >1/2 their HP...
+		{
+			for (i = 0; i < MAX_MON_MOVES; i++) //Then check their moves to see if they have a status move. If you have a status move, you probably want to use it even if you don't have the advantage.
+			{
+				move = gBattleMons[gActiveBattler].moves[i]; //List of status moves under consideration
+				if ((move == MOVE_REFLECT || move == MOVE_LIGHT_SCREEN 
+				|| move == MOVE_SPIKES || move == MOVE_TOXIC_SPIKES || move == MOVE_STEALTH_ROCK || move == MOVE_STICKY_WEB || move == MOVE_LEECH_SEED || move == MOVE_EXPLOSION
+				|| move == MOVE_SELF_DESTRUCT || move == MOVE_SLEEP_POWDER || move == MOVE_YAWN || move == MOVE_LOVELY_KISS || move == MOVE_GRASS_WHISTLE || move == MOVE_HYPNOSIS 
+				|| move == MOVE_TOXIC || move == MOVE_BANEFUL_BUNKER || move == MOVE_WILL_O_WISP || move == MOVE_TRICK || move == MOVE_TRICK_ROOM || move== MOVE_WONDER_ROOM
+				|| move ==  MOVE_PSYCHO_SHIFT || move == MOVE_FAKE_OUT || move == MOVE_STUN_SPORE || move == MOVE_THUNDER_WAVE || move == MOVE_NUZZLE || move == MOVE_GLARE
+				|| move == MOVE_ROOST || move == MOVE_MIRACLE_EYE || move == MOVE_GRAVITY || move == MOVE_HEALING_WISH || move == MOVE_BRINE || move == MOVE_TAILWIND
+				|| move == MOVE_EMBARGO || move == MOVE_HEAL_BLOCK || move == MOVE_TRUMP_CARD || move == MOVE_POWER_TRICK || move == MOVE_COPYCAT || move == MOVE_POWER_SWAP
+				|| move == MOVE_GUARD_SWAP || move == MOVE_AQUA_RING || move == MOVE_MAGNET_RISE || move == MOVE_NASTY_PLOT || move == MOVE_ATTACK_ORDER || move == MOVE_DEFEND_ORDER
+				|| move == MOVE_HEAL_ORDER || move == MOVE_HONE_CLAWS || move == MOVE_SOAK || move == MOVE_SIMPLE_BEAM || move == MOVE_SHELL_SMASH || move == MOVE_WORK_UP
+				|| move == MOVE_TRICK_OR_TREAT || move == MOVE_NOBLE_ROAR || move == MOVE_GRASSY_TERRAIN || move == MOVE_MISTY_TERRAIN || move == MOVE_ELECTRIFY
+				|| move == MOVE_BABY_DOLL_EYES || move == MOVE_PSYCHIC_TERRAIN || move == MOVE_OBSTRUCT || move == MOVE_ELECTRIC_TERRAIN || move == MOVE_SOLAR_BEAM
+				) && Random()%5<4) // (check has a 1/5 chance of failing regardless)
+				{
+					return FALSE;
+				}
+			}
+			*(gBattleStruct->AI_monToSwitchIntoId + gActiveBattler) = PARTY_SIZE; //Status move check failed. Let's get the Pokémon out of there.
+			BtlController_EmitTwoReturnValues(1, B_ACTION_SWITCH, 0);
+			return TRUE;
+		}
+	}
+	return FALSE;
+}
+
 
 static bool8 ShouldSwitchIfAllBadMoves(void)
 {
@@ -492,14 +552,14 @@ bool32 ShouldSwitch(void)
 
     if (availableToSwitch == 0)
         return FALSE;
-	if (EnemyMonHasSpecificSuperEffectiveRevealedMove())
-		return TRUE;
     if (ShouldSwitchIfAllBadMoves())
         return TRUE;
     if (ShouldSwitchIfPerishSong())
         return TRUE;
     if (ShouldSwitchIfWonderGuard())
         return TRUE;
+	if (HasBadOdds())
+		return TRUE;
     if (FindMonThatAbsorbsOpponentsMove())
         return TRUE;
     if (ShouldSwitchIfNaturalCure())
@@ -774,9 +834,7 @@ u8 GetMostSuitableMonToSwitchInto(void)
     if (bestMonId != PARTY_SIZE)
         return bestMonId;
 
-    bestMonId = GetBestMonDmg(party, firstId, lastId, invalidMons, opposingBattler);
-    if (bestMonId != PARTY_SIZE)
-        return bestMonId;
+
 
     return PARTY_SIZE;
 }

@@ -23,12 +23,13 @@
 #include "constants/items.h"
 #include "constants/layouts.h"
 #include "constants/weather.h"
+#include "rtc.h"
 
 extern const u8 EventScript_RepelWoreOff[];
 
 #define MAX_ENCOUNTER_RATE 2880
 
-#define NUM_FEEBAS_SPOTS 6
+#define NUM_FEEBAS_SPOTS 200
 
 // Number of accessible fishing spots in each section of Route 119
 // Each section is an area of the route between the y coordinates in sRoute119WaterTileData
@@ -132,8 +133,6 @@ static bool8 CheckFeebas(void)
             route119Section = 2;
 
         // 50% chance of encountering Feebas (assuming this is a Feebas spot)
-        if (Random() % 100 > 49)
-            return FALSE;
 
         FeebasSeedRng(gSaveBlock1Ptr->dewfordTrends[0].rand);
 
@@ -161,6 +160,7 @@ static bool8 CheckFeebas(void)
             if (spotId == feebasSpots[i])
                 return TRUE;
         }
+	return TRUE;
     }
     return FALSE;
 }
@@ -300,7 +300,20 @@ static u8 ChooseWildMonLevel(const struct WildPokemon *wildPokemon)
 static u16 GetCurrentMapWildMonHeaderId(void)
 {
     u16 i;
-
+	u16 nightorday;
+		RtcCalcLocalTime();
+	if (FlagGet(FLAG_RTC_ENABLED)) {
+		gLocalTime.hours = Rtc_GetCurrentHour();
+		gLocalTime.minutes = Rtc_GetCurrentMinute();
+	}
+	if (gLocalTime.hours < 8 || gLocalTime.hours >19)
+	{
+		nightorday = 1; //Day
+	}
+	else
+	{
+		nightorday = 0; //Night
+	}
     for (i = 0; ; i++)
     {
         const struct WildPokemonHeader *wildHeader = &gWildMonHeaders[i];
@@ -310,6 +323,77 @@ static u16 GetCurrentMapWildMonHeaderId(void)
         if (gWildMonHeaders[i].mapGroup == gSaveBlock1Ptr->location.mapGroup &&
             gWildMonHeaders[i].mapNum == gSaveBlock1Ptr->location.mapNum)
         {
+            if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(PETALBURG_CITY) &&
+                gSaveBlock1Ptr->location.mapNum == MAP_NUM(PETALBURG_CITY)) {
+
+				i += nightorday;
+				}
+            if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ROUTE101) &&
+                gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE101)) {
+
+				i += nightorday;
+				}
+			if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ROUTE102) &&
+                gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE102)) {
+
+				i += nightorday;
+				}
+			if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ROUTE103) &&
+                gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE103)) {
+
+				i += nightorday;
+				}
+			if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ROUTE104) &&
+                gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE104)) {
+
+				i += nightorday;
+				}
+			if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ROUTE110) &&
+                gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE110)) {
+
+				i += nightorday;
+				}
+			if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ROUTE111) &&
+                gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE111)) {
+
+				i += nightorday;
+				}
+			if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ROUTE114) &&
+                gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE114)) {
+
+				i += nightorday;
+				}
+			if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ROUTE116) &&
+                gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE116)) {
+
+				i += nightorday;
+				}
+			if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ROUTE117) &&
+                gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE117)) {
+
+				i += nightorday;
+				}
+			if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ROUTE118) &&
+                gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE118)) {
+
+				i += nightorday;
+				}
+			if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ROUTE120) &&
+                gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE120)) {
+
+				i += nightorday;
+				}
+			if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ROUTE121) &&
+                gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE121)) {
+
+				i += nightorday;
+				}
+			if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ROUTE123) &&
+                gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE123)) {
+
+				i += nightorday;
+				}
+			
             if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ALTERING_CAVE) &&
                 gSaveBlock1Ptr->location.mapNum == MAP_NUM(ALTERING_CAVE))
             {

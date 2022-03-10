@@ -27,8 +27,7 @@ gText_Birch_BoyOrGirl::
 
 gText_Birch_WhatsYourName::
 	.string "¡Genial!\n"
-	.string "¿Qué nombre te\n"
-	.string "gustaría usar?$"
+	.string "¿Qué nombre te gustaría usar?$"
 
 gText_Birch_SoItsPlayer::
 	.string "¿{PLAYER}{KUN}?$"
@@ -36,7 +35,7 @@ gText_Birch_SoItsPlayer::
 gText_Birch_YourePlayer::
 	.string "¡Perfecto!\p"
 	.string "Eres {PLAYER}{KUN}, quien viene\n"
-	.string "de Johto hasta Littleroot.\l"
+	.string "de Johto hasta Littleroot.\p"
 	.string "$"
 
 gText_Birch_AreYouReady::

@@ -11929,16 +11929,16 @@ const struct Trainer gTrainers[] = {
 
     [TRAINER_LEAF] =
     {
-        .partyFlags = 0,
+        .partyFlags = F_TRAINER_PARTY_HELD_ITEM | F_TRAINER_PARTY_CUSTOM_MOVESET,
         .trainerClass = TRAINER_CLASS_RIVAL,
         .encounterMusic_gender = F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_MALE,
         .trainerPic = TRAINER_PIC_LEAF,
         .trainerName = _("LEAF"),
-        .items = {},
+        .items = {ITEM_HYPER_POTION, ITEM_FULL_HEAL, ITEM_X_ATTACK, ITEM_FULL_RESTORE},
         .doubleBattle = FALSE,
-        .aiFlags = 0,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY,
         .partySize = ARRAY_COUNT(sParty_Leaf),
-        .party = {.NoItemDefaultMoves = sParty_Leaf},
+        .party = {.ItemCustomMoves = sParty_Leaf},
     },
 
     [TRAINER_BRENDAN_PLACEHOLDER] =

@@ -25,6 +25,8 @@ extern const u8 gText_ThrowInCherishBalls[];
 extern const u8 gText_MenuPC[];
 extern const u8 gText_WhichOneUse[];
 extern const u8 gText_Hidden_Moves_Menu[];
+extern const u8 gText_GameClock[];
+extern const u8 gText_RTC[];
 
 
 

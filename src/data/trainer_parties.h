@@ -12411,11 +12411,41 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Red[] = {
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Leaf[] = {
+static const struct TrainerMonItemCustomMoves sParty_Leaf[] = {
     {
-    .iv = 0,
-    .lvl = 5,
-    .species = SPECIES_BULBASAUR,
+    .iv = 250,
+    .lvl = 30,
+    .species = SPECIES_KECLEON,
+    .heldItem = ITEM_ORAN_BERRY,
+    .moves = {MOVE_FURY_SWIPES, MOVE_RECOVER, MOVE_FIRE_PUNCH, MOVE_THUNDER_PUNCH}
+    },
+    {
+    .iv = 250,
+    .lvl = 30,
+    .species = SPECIES_EEVEE,
+    .heldItem = ITEM_BLACK_GLASSES,
+    .moves = {MOVE_CRUNCH, MOVE_RECOVER, MOVE_THUNDER_FANG, MOVE_DOUBLE_EDGE}
+    },
+    {
+    .iv = 250,
+    .lvl = 29,
+    .species = SPECIES_CHIMECHO,
+    .heldItem = ITEM_SITRUS_BERRY,
+    .moves = {MOVE_RECOVER, MOVE_HEAL_BELL, MOVE_PSYCHIC, MOVE_YAWN}
+    },
+    {	
+    .iv = 250,
+    .lvl = 30,
+    .species = SPECIES_GLISCOR,
+    .heldItem = ITEM_TOXIC_ORB,
+    .moves = {MOVE_TOXIC, MOVE_EARTHQUAKE, MOVE_AERIAL_ACE, MOVE_VENOSHOCK}
+    },
+    {
+    .iv = 500,
+    .lvl = 31,
+    .species = SPECIES_VENUSAUR,
+    .heldItem = ITEM_SITRUS_BERRY,
+    .moves = {MOVE_SOLAR_BEAM, MOVE_SUNNY_DAY, MOVE_SLUDGE_BOMB, MOVE_SYNTHESIS}
     }
 };
 

@@ -12,6 +12,18 @@ PetalburgCity_Mart_EventScript_Clerk::
 	release
 	end
 
+PetalburgCity_Mart_EventScript_Clerk2::
+	lock
+	faceplayer
+	message gText_HowMayIServeYou
+	waitmessage
+	setflag FLAG_BAYASMART
+	pokemart 0
+	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
+	clearflag FLAG_BAYASMART
+	release
+	end
+
 	.align 2
 PetalburgCity_Mart_Pokemart_Basic:
 	.2byte ITEM_POKE_BALL
@@ -67,20 +79,30 @@ PetalburgCity_Mart_EventScript_Man::
 	end
 
 PetalburgCity_Mart_Text_WeakWillGrowStronger:
-	.string "Even if a POKéMON is weak now,\n"
-	.string "it will grow stronger.\p"
-	.string "The most important thing is love!\n"
-	.string "Love for your POKéMON!$"
+	.string "La mayoría de las Tiendas Pokémon son\n"
+	.string "parejas de casados que han abierto el\l"
+	.string "establecimiento con sus propias manos.\p"
+	.string "Uno vende objetos como Pokéballs y\n"
+	.string "objetos curativos, mientras que otro\l"
+	.string "vende objetos que se pueden equipar a\l"
+	.string "tus Pokémon, como Bayas, Hierbas, ¡O\l"
+	.string "incluso objetos para entrenarlos!$"
 
 PetalburgCity_Mart_Text_RepelIsUseful:
-	.string "Do you use REPEL?\n"
-	.string "It keeps POKéMON away, so it's\l"
-	.string "useful when you're in a hurry.$"
+	.string "La mayoría de las Tiendas Pokémon son\n"
+	.string "parejas de casados que han abierto el\l"
+	.string "establecimiento con sus propias manos.\p"
+	.string "Uno vende objetos como Pokéballs y\n"
+	.string "objetos curativos, mientras que otro\l"
+	.string "vende objetos que se pueden equipar a\l"
+	.string "tus Pokémon, como Bayas, Hierbas, ¡O\l"
+	.string "incluso objetos para entrenarlos!$"
 
 PetalburgCity_Mart_Text_TakeSomeAntidotesWithYou:
-	.string "Do you have any ANTIDOTES with\n"
-	.string "you?\p"
-	.string "If you walk around with a poisoned\n"
-	.string "POKéMON, it will lose HP until it faints.\l"
-	.string "Take some ANTIDOTES with you.$"
+	.string "Los objetos que encuentres en una\n"
+	.string "Tienda cambiarán dependiendo de la\l"
+	.string "cantidad de Medallas que poseas, pero\l"
+	.string "también hay algunas Tiendas con cosas\l"
+	.string "propias.$"
+
 

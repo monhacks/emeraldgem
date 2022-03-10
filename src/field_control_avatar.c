@@ -35,6 +35,7 @@
 #include "constants/map_types.h"
 #include "constants/songs.h"
 #include "constants/trainer_hill.h"
+#include "registered_items_menu.h"
 
 static EWRAM_DATA u8 sWildEncounterImmunitySteps = 0;
 static EWRAM_DATA u16 sPreviousPlayerMetatileBehavior = 0;
@@ -86,6 +87,7 @@ void FieldClearPlayerInput(struct FieldInput *input)
     input->input_field_1_3 = FALSE;
     input->dpadDirection = 0;
 	input->pressedRButton = FALSE;
+	input->pressedListButton = FALSE;
 }
 
 void FieldGetPlayerInput(struct FieldInput *input, u16 newKeys, u16 heldKeys)
@@ -106,6 +108,9 @@ void FieldGetPlayerInput(struct FieldInput *input, u16 newKeys, u16 heldKeys)
                 input->pressedAButton = TRUE;
             if (newKeys & B_BUTTON)
                 input->pressedBButton = TRUE;
+			            //tx_registered_items_menu
+            if (newKeys & L_BUTTON)
+                input->pressedListButton = TRUE;
         }
 
         if (heldKeys & (DPAD_UP | DPAD_DOWN | DPAD_LEFT | DPAD_RIGHT))
@@ -187,6 +192,7 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
 
     if (input->pressedBButton && TrySetupDiveEmergeScript() == TRUE)
         return TRUE;
+	
     if (input->tookStep)
     {
         IncrementGameStat(GAME_STAT_STEPS);
@@ -220,8 +226,13 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
         ShowStartMenu();
         return TRUE;
     }
-    if (input->pressedSelectButton && UseRegisteredKeyItemOnField() == TRUE)
+    if (input->pressedSelectButton && UseRegisteredKeyItemOnField(0) == TRUE)
         return TRUE;
+    else if (input->pressedListButton)
+    {
+        TxRegItemsMenu_OpenMenu();
+        return TRUE;
+    }
 	if (input->pressedRButton && TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_MACH_BIKE | PLAYER_AVATAR_FLAG_ACRO_BIKE))
     {
 		ObjectEventClearHeldMovementIfActive(&gObjectEvents[gPlayerAvatar.objectEventId]);
@@ -439,6 +450,8 @@ static const u8 *GetInteractedMetatileScript(struct MapPosition *position, u8 me
         return EventScript_PC;
 	if (MetatileBehavior_IsTradeMachine(metatileBehavior) == TRUE)
 		return EventScript_TradeMachine;
+	if (MetatileBehavior_IsTradeMachine2(metatileBehavior) == TRUE)
+		return SCRIPT_SelfTrade_V2;
     if (MetatileBehavior_IsClosedSootopolisDoor(metatileBehavior) == TRUE)
         return EventScript_ClosedSootopolisDoor;
     if (MetatileBehavior_IsSkyPillarClosedDoor(metatileBehavior) == TRUE)

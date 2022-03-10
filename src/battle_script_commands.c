@@ -13528,7 +13528,11 @@ static void Cmd_handleballthrow(void)
             break;
         #ifdef ITEM_EXPANSION
         case ITEM_DUSK_BALL:
-            RtcCalcLocalTime();
+            	RtcCalcLocalTime();
+	if (FlagGet(FLAG_RTC_ENABLED)) {
+		gLocalTime.hours = Rtc_GetCurrentHour();
+		gLocalTime.minutes = Rtc_GetCurrentMinute();
+	}
             if ((gLocalTime.hours >= 20 && gLocalTime.hours <= 3) || gMapHeader.cave || gMapHeader.mapType == MAP_TYPE_UNDERGROUND)
                 #if B_DUSK_BALL_MODIFIER >= GEN_7
                     ballMultiplier = 30;
@@ -13775,6 +13779,11 @@ static void Cmd_trysetcaughtmondexflags(void)
     {
         gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
     }
+   else if (!FlagGet(FLAG_SYS_POKEDEX_GET))
+   {
+       HandleSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_SET_CAUGHT, personality);  
+       gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
+   }
     else
     {
         HandleSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_SET_CAUGHT, personality);

@@ -133,14 +133,14 @@ static const u16 sFR_MessageBoxTiles[] = INCBIN_U16("graphics/text_window/fr_mes
 
 // strings
 static const u8 sText_Empty[] = _("");
-static const u8 sText_Quests[] = _("   Misiones");
+static const u8 sText_Quests[] = _("Misiones");
 static const u8 sText_QuestMenu_Begin[] = _("Empezar");
 static const u8 sText_QuestMenu_End[] = _("Terminar");
 static const u8 sText_QuestMenu_Details[] = _("Detalles");
 static const u8 sText_QuestMenu_Reward[] = _("Premio");
 static const u8 sText_QuestMenu_Unk[] = _("{COLOR}{LIGHT_GRAY}?????????");
-static const u8 sText_QuestMenu_Active[] = _("{COLOR}{GREEN}Activa");
-static const u8 sText_QuestMenu_Complete[] = _("{COLOR}{BLUE}Hecha");
+static const u8 sText_QuestMenu_Active[] = _("{COLOR}{BLUE}O");
+static const u8 sText_QuestMenu_Complete[] = _("{COLOR}{GREEN}V");
 static const u8 sText_QuestMenu_Exit[] = _("Salir el Menú de Misiones");
 static const u8 sText_QuestMenu_SelectedQuest[] = _("¿Que harás con\nesta misión?");
 static const u8 sText_QuestMenu_DisplayDetails[] = _("PDE: {STR_VAR_1}\nMapa: {STR_VAR_2}");
@@ -194,10 +194,10 @@ static const u16 sSideQuestDifficultyItemIds[] =
 static const u8 sSideQuestDifficulties[SIDE_QUEST_COUNT] = 
 {
     [SIDE_QUEST_1] = QUEST_DIFFICULTY_EASY,
-    [SIDE_QUEST_2] = QUEST_DIFFICULTY_EASY,
-    [SIDE_QUEST_3] = QUEST_DIFFICULTY_EASY,
-    [SIDE_QUEST_4] = QUEST_DIFFICULTY_EASY,
-    [SIDE_QUEST_5] = QUEST_DIFFICULTY_EASY,
+    [SIDE_QUEST_2] = QUEST_DIFFICULTY_HARD,
+    [SIDE_QUEST_3] = QUEST_DIFFICULTY_EXTREME,
+    [SIDE_QUEST_4] = QUEST_DIFFICULTY_MEDIUM,
+    [SIDE_QUEST_5] = QUEST_DIFFICULTY_EXTREME,
     [SIDE_QUEST_6] = QUEST_DIFFICULTY_EASY,
     [SIDE_QUEST_7] = QUEST_DIFFICULTY_EASY,
     [SIDE_QUEST_8] = QUEST_DIFFICULTY_EASY,
@@ -813,8 +813,8 @@ static void QuestMenu_MoveCursorFunc(s32 itemIndex, bool8 onInit, struct ListMen
         {
             if (GetSetQuestFlag(itemIndex, FLAG_GET_UNLOCKED))
             {
-                itemId = sSideQuestDifficultyItemIds[sSideQuestDifficulties[itemIndex]];
-                desc = sSideQuests[itemIndex].desc;
+				itemId = sSideQuestDifficultyItemIds[sSideQuestDifficulties[itemIndex]];
+				desc = sSideQuests[itemIndex].desc;
             }
             else
             {

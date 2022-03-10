@@ -7654,9 +7654,15 @@ u8 GetLedgeJumpDirection(s16 x, s16 y, u8 direction)
 
     index--;
     behavior = MapGridGetMetatileBehaviorAt(x, y);
-
-    if (ledgeBehaviorFuncs[index](behavior) == TRUE)
-        return index + 1;
+	if (FlagGet(FLAG_OMNIJUMP_UPGRADE)){
+		u8 i;
+		for (i=0; i<4; i++){
+			if (ledgeBehaviorFuncs[index](behavior) == TRUE)
+				return index + 1;
+		}
+	}
+	else if (ledgeBehaviorFuncs[index](behavior) == TRUE)
+		return index + 1;
 
     return DIR_NONE;
 }

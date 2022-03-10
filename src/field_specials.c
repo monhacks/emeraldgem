@@ -129,6 +129,26 @@ static void SetInitialFansOfPlayer(void);
 static u16 PlayerGainRandomTrainerFan(void);
 static void BufferFanClubTrainerName_(struct LinkBattleRecords *linkRecords, u8 a, u8 b);
 
+void GetDayOrNight(void)
+{
+	u8 nightorday;
+		RtcCalcLocalTime();
+	if (FlagGet(FLAG_RTC_ENABLED)) {
+		gLocalTime.hours = Rtc_GetCurrentHour();
+		gLocalTime.minutes = Rtc_GetCurrentMinute();
+	}
+	if (gLocalTime.hours >= 8 && gLocalTime.hours <=19)
+	{
+		nightorday = 0; //Day
+	}
+	else
+	{
+		nightorday = 1; //Night
+	}
+	gSpecialVar_Result = nightorday;
+}
+
+
 void Special_ShowDiploma(void)
 {
     SetMainCallback2(CB2_ShowDiploma);
@@ -1694,7 +1714,7 @@ bool8 BufferTMHMMoveName(void)
 {
     if (gSpecialVar_0x8004 >= ITEM_TM01 && gSpecialVar_0x8004 <= ITEM_HM08)
     {
-        StringCopy(gStringVar2, gMoveNames[ItemIdToBattleMoveId(gSpecialVar_0x8004)]);
+        StringCopy(gStringVar2, gLongMoveNames[ItemIdToBattleMoveId(gSpecialVar_0x8004)]);
         return TRUE;
     }
 
@@ -3157,11 +3177,11 @@ void BufferBattleFrontierTutorMoveName(void)
 {
     if (gSpecialVar_0x8005 != 0)
     {
-        StringCopy(gStringVar1, gMoveNames[sBattleFrontier_TutorMoves2[gSpecialVar_0x8004]]);
+        StringCopy(gStringVar1, gLongMoveNames[sBattleFrontier_TutorMoves2[gSpecialVar_0x8004]]);
     }
     else
     {
-        StringCopy(gStringVar1, gMoveNames[sBattleFrontier_TutorMoves1[gSpecialVar_0x8004]]);
+        StringCopy(gStringVar1, gLongMoveNames[sBattleFrontier_TutorMoves1[gSpecialVar_0x8004]]);
     }
 }
 

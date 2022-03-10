@@ -1498,19 +1498,7 @@ static u8 CheckValidityOfTradeMons(u8 *aliveMons, u8 playerPartyCount, u8 player
     partnerMonIdx %= PARTY_SIZE;
     partnerSpecies = GetMonData(&gEnemyParty[partnerMonIdx], MON_DATA_SPECIES);
 
-    // Partner cant trade illegitimate Deoxys or Mew
-    if (partnerSpecies == SPECIES_DEOXYS || partnerSpecies == SPECIES_MEW)
-    {
-        if (!GetMonData(&gEnemyParty[partnerMonIdx], MON_DATA_EVENT_LEGAL))
-            return PARTNER_MON_INVALID;
-    }
 
-    // Partner cant trade Egg or non-Hoenn mon if player doesn't have National Dex
-    if (!IsNationalPokedexEnabled())
-    {
-        if (sTradeMenuData->isEgg[TRADE_PARTNER][partnerMonIdx] || !IsSpeciesInHoennDex(partnerSpecies))
-            return PARTNER_MON_INVALID;
-    }
 
     if (hasLiveMon)
         hasLiveMon = BOTH_MONS_VALID;
@@ -2355,11 +2343,6 @@ static u32 CanTradeSelectedMon(struct Pokemon *playerParty, int partyCount, int 
         }
     }
 
-    if (species[monIdx] == SPECIES_DEOXYS || species[monIdx] == SPECIES_MEW)
-    {
-        if (!GetMonData(&playerParty[monIdx], MON_DATA_EVENT_LEGAL))
-            return CANT_TRADE_INVALID_MON;
-    }
 
     // Make Eggs not count for numMonsLeft
     for (i = 0; i < partyCount; i++)
@@ -2424,11 +2407,6 @@ s32 GetGameProgressForLinkTrade(void)
 
 static bool32 IsDeoxysOrMewUntradable(u16 species, bool8 isEventLegal)
 {
-    if (species == SPECIES_DEOXYS || species == SPECIES_MEW)
-    {
-        if (!isEventLegal)
-            return TRUE;
-    }
     return FALSE;
 }
 
@@ -4554,12 +4532,20 @@ u16 GetTradeSpecies(void)
 
 void CreateInGameTradePokemon(void)
 {
+	u16 heldItem[1];
+	heldItem[0] = ITEM_EVERSTONE;
     if(gSpecialVar_0x8004 == 6)  // Version 1 (a value greater than return value range of 0-5 and not 255)
         gEnemyParty[0] = gPlayerParty[gSpecialVar_0x8005];
     else if(gSpecialVar_0x8004 == 7) // Version 2 Step 1 (trade your pokemon for the defined pokemon below and saves your pokemon data to the trader)
     {
         struct Pokemon *pokemon = &gEnemyParty[0];
-        CreateMon(pokemon, SPECIES_MEW, 99, 32, FALSE, 0, OT_ID_PRESET, 0); // (After the trade this pokemon is set as "Seen and caught" in the players pokedex!)
+		if (GetMonData(&gPlayerParty[gSpecialVar_0x8005], MON_DATA_SPECIES) == SPECIES_SHELMET)
+			CreateMon(pokemon, SPECIES_KARRABLAST, 99, 32, FALSE, 0, OT_ID_PRESET, 0); 
+		else if (GetMonData(&gPlayerParty[gSpecialVar_0x8005], MON_DATA_SPECIES) == SPECIES_KARRABLAST)
+			CreateMon(pokemon, SPECIES_SHELMET, 99, 32, FALSE, 0, OT_ID_PRESET, 0); 
+		else
+			CreateMon(pokemon, SPECIES_MEW, 99, 32, FALSE, 0, OT_ID_PRESET, 0); // (After the trade this pokemon is set as "Seen and caught" in the players pokedex!)
+		SetMonData(&gEnemyParty[0], MON_DATA_HELD_ITEM, heldItem);
         gEnemyParty[1] = gPlayerParty[gSpecialVar_0x8005];
     }
     else if(gSpecialVar_0x8004 == 8) // Version 2 Step 2 (trades your saved pokemon from the trader back to you)

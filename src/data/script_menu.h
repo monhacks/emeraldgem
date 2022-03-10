@@ -6,6 +6,14 @@ static const struct MenuAction MultichoiceList_BrineyOnDewford[] =
     {gText_Exit},
 };
 
+static const struct MenuAction MultichoiceList_ClockOrRTC[] =
+{
+    {gText_GameClock},
+    {gText_RTC},
+};
+
+
+
 static const struct MenuAction MultichoiceList_EnterInfo[] =
 {
     {gText_Enter2},
@@ -793,7 +801,7 @@ static const struct MultichoiceListStruct sMultichoiceLists[] =
     [MULTI_BASE_PC_WITH_REGISTRY]      = MULTICHOICE(MultichoiceList_BasePCWithRegistry),
     [MULTI_REGISTER_MENU]              = MULTICHOICE(MultichoiceList_RegisterMenu),
     [MULTI_SSTIDAL_LILYCOVE]           = MULTICHOICE(MultichoiceList_Exit),
-    [MULTI_UNUSED_9]                   = MULTICHOICE(MultichoiceList_Exit),
+    [MULTI_CLOCK_OR_RTC]               = MULTICHOICE(MultichoiceList_ClockOrRTC),
     [MULTI_UNUSED_10]                  = MULTICHOICE(MultichoiceList_Exit),
     [MULTI_FRONTIER_PASS_INFO]         = MULTICHOICE(MultichoiceList_FrontierPassInfo),
     [MULTI_BIKE]                       = MULTICHOICE(MultichoiceList_Bike),

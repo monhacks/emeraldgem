@@ -2471,17 +2471,17 @@ static const u8 sMonFrontAnimIdsTable[NUM_SPECIES - 1] =
     [SPECIES_EELEKTROSS - 1]    = ANIM_V_SQUISH_AND_BOUNCE,
     [SPECIES_ELGYEM - 1]        = ANIM_V_SQUISH_AND_BOUNCE,
     [SPECIES_BEHEEYEM - 1]      = ANIM_V_SQUISH_AND_BOUNCE,
-    [SPECIES_LITWICK - 1]       = ANIM_V_SQUISH_AND_BOUNCE,
-    [SPECIES_LAMPENT - 1]       = ANIM_V_SQUISH_AND_BOUNCE,
-    [SPECIES_CHANDELURE - 1]    = ANIM_V_SQUISH_AND_BOUNCE,
-    [SPECIES_AXEW - 1]          = ANIM_V_SQUISH_AND_BOUNCE,
-    [SPECIES_FRAXURE - 1]       = ANIM_V_SQUISH_AND_BOUNCE,
-    [SPECIES_HAXORUS - 1]       = ANIM_V_SQUISH_AND_BOUNCE,
-    [SPECIES_CUBCHOO - 1]       = ANIM_V_SQUISH_AND_BOUNCE,
-    [SPECIES_BEARTIC - 1]       = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_LITWICK - 1]       = ANIM_SHAKE_GLOW_RED_SLOW,
+    [SPECIES_LAMPENT - 1]       = ANIM_SHAKE_GLOW_RED_SLOW,
+    [SPECIES_CHANDELURE - 1]    = ANIM_SHAKE_GLOW_RED_SLOW,
+    [SPECIES_AXEW - 1]          = ANIM_H_VIBRATE,
+    [SPECIES_FRAXURE - 1]       = ANIM_H_VIBRATE,
+    [SPECIES_HAXORUS - 1]       = ANIM_H_VIBRATE,
+    [SPECIES_CUBCHOO - 1]       = ANIM_GROW_VIBRATE,
+    [SPECIES_BEARTIC - 1]       = ANIM_SHRINK_GROW_SLOW,
     [SPECIES_CRYOGONAL - 1]     = ANIM_V_SQUISH_AND_BOUNCE,
-    [SPECIES_SHELMET - 1]       = ANIM_V_SQUISH_AND_BOUNCE,
-    [SPECIES_ACCELGOR - 1]      = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_SHELMET - 1]       = ANIM_V_JUMPS_H_JUMPS,
+    [SPECIES_ACCELGOR - 1]      = ANIM_V_JUMPS_H_JUMPS,
     [SPECIES_STUNFISK - 1]      = ANIM_V_SQUISH_AND_BOUNCE,
     [SPECIES_MIENFOO - 1]       = ANIM_V_SQUISH_AND_BOUNCE,
     [SPECIES_MIENSHAO - 1]      = ANIM_V_SQUISH_AND_BOUNCE,
@@ -6326,27 +6326,47 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, u
                     targetSpecies = gEvolutionTable[species][i].targetSpecies;
                 break;
             case EVO_FRIENDSHIP_DAY:
-                RtcCalcLocalTime();
+                	RtcCalcLocalTime();
+	if (FlagGet(FLAG_RTC_ENABLED)) {
+		gLocalTime.hours = Rtc_GetCurrentHour();
+		gLocalTime.minutes = Rtc_GetCurrentMinute();
+	}
                 if (gLocalTime.hours >= 12 && gLocalTime.hours < 24 && friendship >= 220)
                     targetSpecies = gEvolutionTable[species][i].targetSpecies;
                 break;
             case EVO_LEVEL_DAY:
-                RtcCalcLocalTime();
+                	RtcCalcLocalTime();
+	if (FlagGet(FLAG_RTC_ENABLED)) {
+		gLocalTime.hours = Rtc_GetCurrentHour();
+		gLocalTime.minutes = Rtc_GetCurrentMinute();
+	}
                 if (gLocalTime.hours >= 12 && gLocalTime.hours < 24 && gEvolutionTable[species][i].param <= level)
                     targetSpecies = gEvolutionTable[species][i].targetSpecies;
                 break;
             case EVO_FRIENDSHIP_NIGHT:
-                RtcCalcLocalTime();
+                	RtcCalcLocalTime();
+	if (FlagGet(FLAG_RTC_ENABLED)) {
+		gLocalTime.hours = Rtc_GetCurrentHour();
+		gLocalTime.minutes = Rtc_GetCurrentMinute();
+	}
                 if (gLocalTime.hours >= 0 && gLocalTime.hours < 12 && friendship >= 220)
                     targetSpecies = gEvolutionTable[species][i].targetSpecies;
                 break;
             case EVO_LEVEL_NIGHT:
-                RtcCalcLocalTime();
+                	RtcCalcLocalTime();
+	if (FlagGet(FLAG_RTC_ENABLED)) {
+		gLocalTime.hours = Rtc_GetCurrentHour();
+		gLocalTime.minutes = Rtc_GetCurrentMinute();
+	}
                 if (gLocalTime.hours >= 0 && gLocalTime.hours < 12 && gEvolutionTable[species][i].param <= level)
                     targetSpecies = gEvolutionTable[species][i].targetSpecies;
                 break;
             case EVO_ITEM_HOLD_NIGHT:
-                RtcCalcLocalTime();
+                	RtcCalcLocalTime();
+	if (FlagGet(FLAG_RTC_ENABLED)) {
+		gLocalTime.hours = Rtc_GetCurrentHour();
+		gLocalTime.minutes = Rtc_GetCurrentMinute();
+	}
                 if (gLocalTime.hours >= 0 && gLocalTime.hours < 12 && heldItem == gEvolutionTable[species][i].param)
                 {
                     heldItem = 0;
@@ -6355,7 +6375,11 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, u
                 }
                 break;
             case EVO_ITEM_HOLD_DAY:
-                RtcCalcLocalTime();
+                	RtcCalcLocalTime();
+	if (FlagGet(FLAG_RTC_ENABLED)) {
+		gLocalTime.hours = Rtc_GetCurrentHour();
+		gLocalTime.minutes = Rtc_GetCurrentMinute();
+	}
                 if (gLocalTime.hours >= 12 && gLocalTime.hours < 24 && heldItem == gEvolutionTable[species][i].param)
                 {
                     heldItem = 0;
@@ -6364,7 +6388,11 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, u
                 }
                 break;
             case EVO_LEVEL_DUSK:
-                RtcCalcLocalTime();
+                	RtcCalcLocalTime();
+	if (FlagGet(FLAG_RTC_ENABLED)) {
+		gLocalTime.hours = Rtc_GetCurrentHour();
+		gLocalTime.minutes = Rtc_GetCurrentMinute();
+	}
                 if (gLocalTime.hours >= 17 && gLocalTime.hours < 18 && gEvolutionTable[species][i].param <= level)
                     targetSpecies = gEvolutionTable[species][i].targetSpecies;
                 break;
@@ -8161,7 +8189,11 @@ u16 GetFormChangeTargetSpeciesBoxMon(struct BoxPokemon *mon, u16 method, u32 arg
                         targetSpecies = formChanges[i].targetSpecies;
                     break;
                 case FORM_ITEM_USE_TIME:
-                    RtcCalcLocalTime();
+                    	RtcCalcLocalTime();
+	if (FlagGet(FLAG_RTC_ENABLED)) {
+		gLocalTime.hours = Rtc_GetCurrentHour();
+		gLocalTime.minutes = Rtc_GetCurrentMinute();
+	}
                     if (arg == formChanges[i].param1)
                     {
                         switch (formChanges[i].param2)

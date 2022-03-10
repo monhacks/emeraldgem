@@ -247,8 +247,106 @@ LittlerootTown_EventScript_SetRivalBirchPosForDexUpgradeFemale::
 	end
 
 LittlerootTown_EventScript_FatMan::
-	msgbox LittlerootTown_Text_CanUsePCToStoreItems, MSGBOX_NPC
-	end
+	questmenu QUEST_MENU_CHECK_UNLOCKED SIDE_QUEST_3
+	lockall
+	faceplayer
+	compare VAR_RESULT, TRUE
+	goto_if_eq LittlerootTown_EventScript_FatMan_2
+	msgbox LittlerootTown_EventScript_FatMan_Text_5
+LittlerootTown_EventScript_FatMan_1:
+	releaseall
+	return
+
+LittlerootTown_EventScript_FatMan_2:
+	compare VAR_MISTERIO, 3
+	goto_if_ge LittlerootTown_EventScript_FatMan_5
+	goto_if_unset FLAG_ALEX, LittlerootTown_EventScript_FatMan_11
+	msgbox LittlerootTown_EventScript_FatMan_Text_3
+	goto LittlerootTown_EventScript_FatMan_1
+
+LittlerootTown_EventScript_FatMan_5:
+	questmenu QUEST_MENU_CHECK_COMPLETE SIDE_QUEST_3
+	compare VAR_RESULT, TRUE
+	goto_if_eq LittlerootTown_EventScript_FatMan_9
+LittlerootTown_EventScript_FatMan_8:
+	goto_if_unset FLAG_ALEX, LittlerootTown_EventScript_FatMan_14
+	msgbox LittlerootTown_EventScript_FatMan_Text_3
+	goto LittlerootTown_EventScript_FatMan_1
+
+LittlerootTown_EventScript_FatMan_9:
+	msgbox LittlerootTown_EventScript_FatMan_Text_0
+	goto LittlerootTown_EventScript_FatMan_8
+
+LittlerootTown_EventScript_FatMan_11:
+	msgbox LittlerootTown_EventScript_FatMan_Text_4
+	addvar VAR_MISTERIO, 1
+	setflag FLAG_ALEX
+	goto LittlerootTown_EventScript_FatMan_1
+
+LittlerootTown_EventScript_FatMan_14:
+	msgbox LittlerootTown_EventScript_FatMan_Text_1
+	msgbox LittlerootTown_EventScript_FatMan_Text_2
+	addvar VAR_MISTERIO, 1
+	setflag FLAG_ALEX
+	goto LittlerootTown_EventScript_FatMan_1
+
+
+
+LittlerootTown_EventScript_FatMan_Text_0:
+	.string "Carlos: Mi esposo me dice siempre que\n"
+	.string "paso demasiado tiempo afuera…\p"
+	.string "… … … … … … … …\p"
+	.string "Entonces… Sabes sobre… … …\n"
+	.string "… … … Aquel día…\p"
+	.string "-inhala- UUFFF… Bueno, no sé tanto\n"
+	.string "sobre {COLOR RED}Pokémon que cambian su forma{COLOR DARK_GRAY},\l"
+	.string "pero sí sospecho que es mejor\l"
+	.string "dejarlo así. Ya le derrotamos.\p"
+	.string "… … … … … … … … … … … …\p"
+	.string "Tal vez, y sólo tal vez,\n"
+	.string "otra gente sepa más.$"
+
+LittlerootTown_EventScript_FatMan_Text_1:
+	.string "Carlos: Quizá… Ya sea el momento de\n"
+	.string "hablar con Birch sobre esto. Ha estado\l"
+	.string "evitando hacerlo desde entonces, pero\l"
+	.string "pasa que él dedicó mucho a resolver\l"
+	.string "este misterio. Quizá, sólo quizá seas\l"
+	.string "capaz de resolver esto.$"
+
+LittlerootTown_EventScript_FatMan_Text_2:
+	.string "… … … … … … … … … … … …\p"
+	.string "Tal vez, y sólo tal vez,\n"
+	.string "otra gente sepa más.$"
+
+LittlerootTown_EventScript_FatMan_Text_3:
+	.string "Carlos: Mi esposo me dice siempre que\n"
+	.string "paso demasiado tiempo afuera…\p"
+	.string "… … … … … … … …\p"
+	.string "Entonces… Sabes sobre… … …\n"
+	.string "… … … Aquel día…\p"
+	.string "-inhala- UUFFF… Bueno, no sé tanto\n"
+	.string "sobre {COLOR RED}Pokémon que cambian su forma{COLOR DARK_GRAY},\l"
+	.string "pero sí sospecho que es mejor\l"
+	.string "dejarlo así. Ya le derrotamos.\p"
+	.string "… … … … … … … … … … … …\p"
+	.string "Aunque tal vez, y sólo tal vez, tenga\n"
+	.string "una idea. Hay un Pokémon de una lejana\l"
+	.string "región que es capaz de cambiar su\l"
+	.string "forma, pero no sé cómo funciona.\l"
+	.string "Quizás…\p"
+	.string "… … … … … … … … … … … …\n"
+	.string "No, no podría haber causado tanto daño\l"
+	.string "de ser así…$"
+
+LittlerootTown_EventScript_FatMan_Text_4:
+	.string "Carlos: ¡Hola, {PLAYER}!\p"
+	.string "Entonces… ¿Era un {COLOR RED}Zoroark{COLOR DARK_GRAY}?\p"
+	.string "Eso significa que mis teorías\n"
+	.string "eran correctas…\l"
+	.string "Entonces las ilusiones de\l"
+	.string "Zoroark son así de fuertes…$"
+
 
 LittlerootTown_EventScript_Boy::
 	msgbox LittlerootTown_Text_BirchSpendsDaysInLab, MSGBOX_NPC
@@ -278,6 +376,7 @@ LittlerootTown_EventScript_YouSavedBirch::
 	lockall
 	msgbox LittlerootTown_EventScript_YouSavedBirch_Text_0
 	addmoney 10
+	questmenu QUEST_MENU_COMPLETE_QUEST SIDE_QUEST_3
 	msgbox LittlerootTown_EventScript_YouSavedBirch_Text_1
 	releaseall
 	return
@@ -966,7 +1065,7 @@ LittlerootTown_Text_ComeHomeIfAnythingHappens:
 	.string "Cuídate mucho, mi amor…\n"
 	.string "Voy a extrañarte…$"
 
-LittlerootTown_Text_CanUsePCToStoreItems:
+LittlerootTown_EventScript_FatMan_Text_5:
 	.string "Carlos: Mi esposo me dice siempre que\n"
 	.string "paso demasiado tiempo afuera, pero es\l"
 	.string "que ¡Acá es mejor!\p"

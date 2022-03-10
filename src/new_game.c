@@ -45,6 +45,7 @@
 #include "mystery_gift.h"
 #include "union_room_chat.h"
 #include "constants/items.h"
+#include "registered_items_menu.h"
 
 extern const u8 EventScript_ResetAllMapFlags[];
 
@@ -90,14 +91,14 @@ static void InitPlayerTrainerId(void)
 // L=A isnt set here for some reason.
 static void SetDefaultOptions(void)
 {
-    gSaveBlock2Ptr->optionsTextSpeed = OPTIONS_TEXT_SPEED_FAST;
+    gSaveBlock2Ptr->optionsTextSpeed = OPTIONS_TEXT_SPEED_FASTER;
     gSaveBlock2Ptr->optionsWindowFrameType = 0;
     gSaveBlock2Ptr->optionsSound = OPTIONS_SOUND_STEREO;
     gSaveBlock2Ptr->optionsBattleStyle = OPTIONS_BATTLE_STYLE_SHIFT;
     gSaveBlock2Ptr->optionsBattleSceneOff = FALSE;
     gSaveBlock2Ptr->regionMapZoom = FALSE;
 	gSaveBlock2Ptr->optionsButtonMode = OPTIONS_BUTTON_MODE_LR;
-    gSaveBlock2Ptr->optionsUnitSystem = 0;  //tx_optionsPlus
+    gSaveBlock2Ptr->optionsUnitSystem = 1;  //tx_optionsPlus
     gSaveBlock2Ptr->optionsHpBarSpeed = 0;  //tx_optionsPlus
     gSaveBlock2Ptr->optionsExpBarSpeed = 0; //tx_optionsPlus
 }
@@ -186,7 +187,7 @@ void NewGameInitData(void)
     ResetPokemonStorageSystem();
     ClearRoamerData();
     ClearRoamerLocationData();
-    gSaveBlock1Ptr->registeredItem = 0;
+    gSaveBlock1Ptr->registeredItemSelect = 0;
     ClearBag();
     NewGameInitPCItems();
     ClearPokeblocks();

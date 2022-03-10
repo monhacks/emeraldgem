@@ -235,7 +235,7 @@
 #define VAR_SOOTOPOLIS_WALLACE_STATE         0x40D8
 #define VAR_HAS_TALKED_TO_SEAFLOOR_CAVERN_ENTRANCE_GRUNT 0x40D9
 #define VAR_REGISTER_BIRCH_STATE             0x40DA
-#define VAR_UNUSED_0x40DB                    0x40DB // Unused Var
+#define VAR_MISTERIO	                     0x40DB // Unused Var
 #define VAR_UNUSED_0x40DC                    0x40DC // Unused Var
 #define VAR_GIFT_PICHU_SLOT                  0x40DD
 #define VAR_GIFT_UNUSED_1                    0x40DE // Var is written to, but never read
@@ -267,7 +267,7 @@
 #define VAR_HIDDEN_MOVE_2                    0x40F8 // Unused Var
 #define VAR_HIDDEN_MOVE_3                    0x40F9 // Unused Var
 #define VAR_HIDDEN_MOVE_4                    0x40FA // Unused Var
-#define VAR_UNUSED_0x40FB                    0x40FB // Unused Var
+#define VAR_DAYNIGHT     		             0x40FB // Unused Var
 #define VAR_UNUSED_0x40FC                    0x40FC // Unused Var
 #define VAR_UNUSED_0x40FD                    0x40FD // Unused Var
 #define VAR_UNUSED_0x40FE                    0x40FE // Unused Var

@@ -48,6 +48,7 @@
 #include "constants/songs.h"
 #include "union_room.h"
 #include "constants/rgb.h"
+#include "rtc.h"
 
 // Menu actions
 enum
@@ -146,6 +147,10 @@ static void Task_WaitForBattleTowerLinkSave(u8 taskId);
 static bool8 FieldCB_ReturnToFieldStartMenu(void);
 
 static const struct WindowTemplate sSafariBallsWindowTemplate = {0, 1, 1, 9, 4, 0xF, 8};
+//rtc, borrar si no anda
+static const struct WindowTemplate sStartMenuWindowTemplate = {0, 1, 1, 4, 2, 0xF, 8}; // Parámetros de la ventana extra
+static void ShowStartMenuExtraWindow(void);
+//
 
 static const u8* const sPyramidFloorNames[] =
 {
@@ -162,8 +167,8 @@ static const u8* const sPyramidFloorNames[] =
 static const struct WindowTemplate sPyramidFloorWindowTemplate_2 = {0, 1, 1, 0xA, 4, 0xF, 8};
 static const struct WindowTemplate sPyramidFloorWindowTemplate_1 = {0, 1, 1, 0xC, 4, 0xF, 8};
 
-static const u8 gText_MenuDebug[] = _("DEBUG");
-static const u8 sText_QuestMenu[] = _("QUESTS");
+static const u8 gText_MenuDebug[] = _("Debug");
+static const u8 sText_QuestMenu[] = _("Misiones");
 static const struct MenuAction sStartMenuItems[] =
 {
     [MENU_ACTION_POKEDEX]           = {gText_MenuPokedex, {.u8_void = StartMenuPokedexCallback}},
@@ -341,7 +346,8 @@ static void BuildNormalStartMenu(void)
     
     AddStartMenuAction(MENU_ACTION_SAVE);
     AddStartMenuAction(MENU_ACTION_OPTION);
-    AddStartMenuAction(MENU_ACTION_EXIT);
+	if (FlagGet(FLAG_SET_WALL_CLOCK))
+		ShowStartMenuExtraWindow();
 }
 
 static void BuildDebugStartMenu(void)
@@ -377,7 +383,7 @@ static void BuildSafariZoneStartMenu(void)
     AddStartMenuAction(MENU_ACTION_PC);
     AddStartMenuAction(MENU_ACTION_PLAYER);
     AddStartMenuAction(MENU_ACTION_OPTION);
-    AddStartMenuAction(MENU_ACTION_EXIT);
+    
 }
 
 static void BuildLinkModeStartMenu(void)
@@ -392,7 +398,7 @@ static void BuildLinkModeStartMenu(void)
 
     AddStartMenuAction(MENU_ACTION_PLAYER_LINK);
     AddStartMenuAction(MENU_ACTION_OPTION);
-    AddStartMenuAction(MENU_ACTION_EXIT);
+    
 }
 
 static void BuildUnionRoomStartMenu(void)
@@ -407,7 +413,7 @@ static void BuildUnionRoomStartMenu(void)
 
     AddStartMenuAction(MENU_ACTION_PLAYER);
     AddStartMenuAction(MENU_ACTION_OPTION);
-    AddStartMenuAction(MENU_ACTION_EXIT);
+    
 }
 
 static void BuildBattlePikeStartMenu(void)
@@ -416,7 +422,7 @@ static void BuildBattlePikeStartMenu(void)
     AddStartMenuAction(MENU_ACTION_POKEMON);
     AddStartMenuAction(MENU_ACTION_PLAYER);
     AddStartMenuAction(MENU_ACTION_OPTION);
-    AddStartMenuAction(MENU_ACTION_EXIT);
+    
 }
 
 static void BuildBattlePyramidStartMenu(void)
@@ -427,7 +433,7 @@ static void BuildBattlePyramidStartMenu(void)
     AddStartMenuAction(MENU_ACTION_REST_FRONTIER);
     AddStartMenuAction(MENU_ACTION_RETIRE_FRONTIER);
     AddStartMenuAction(MENU_ACTION_OPTION);
-    AddStartMenuAction(MENU_ACTION_EXIT);
+    
 }
 
 static void BuildMultiPartnerRoomStartMenu(void)
@@ -435,7 +441,7 @@ static void BuildMultiPartnerRoomStartMenu(void)
     AddStartMenuAction(MENU_ACTION_POKEMON);
     AddStartMenuAction(MENU_ACTION_PLAYER);
     AddStartMenuAction(MENU_ACTION_OPTION);
-    AddStartMenuAction(MENU_ACTION_EXIT);
+    
 }
 
 static void ShowSafariBallsWindow(void)
@@ -464,7 +470,22 @@ static void ShowPyramidFloorWindow(void)
     CopyWindowToVram(sBattlePyramidFloorWindowId, COPYWIN_GFX);
 }
 
-static void RemoveExtraStartMenuWindows(void)
+//static void RemoveExtraStartMenuWindows(void)
+//{
+  //  if (GetSafariZoneFlag())
+    //{
+      //  ClearStdWindowAndFrameToTransparent(sSafariBallsWindowId, FALSE);
+        //CopyWindowToVram(sSafariBallsWindowId, COPYWIN_GFX);
+        //RemoveWindow(sSafariBallsWindowId);
+//    }
+//    if (InBattlePyramid())
+  //  {
+    //    ClearStdWindowAndFrameToTransparent(sBattlePyramidFloorWindowId, FALSE);
+      //  RemoveWindow(sBattlePyramidFloorWindowId);
+    //}
+//}
+// rtc, borrar si no sirve
+static void RemoveExtraStartMenuWindows(void) //Modificado el 23/1/2019
 {
     if (GetSafariZoneFlag())
     {
@@ -472,12 +493,19 @@ static void RemoveExtraStartMenuWindows(void)
         CopyWindowToVram(sSafariBallsWindowId, COPYWIN_GFX);
         RemoveWindow(sSafariBallsWindowId);
     }
-    if (InBattlePyramid())
+	else if (InBattlePyramid()) //Antes eran dos if separados
     {
         ClearStdWindowAndFrameToTransparent(sBattlePyramidFloorWindowId, FALSE);
         RemoveWindow(sBattlePyramidFloorWindowId);
     }
+	else{ //Borra de la pantalla la venta auxiliar de la hora
+        ClearStdWindowAndFrameToTransparent(sSafariBallsWindowId, FALSE);
+        RemoveWindow(sSafariBallsWindowId);	
+		
+	}
 }
+//
+
 
 static bool32 PrintStartMenuActions(s8 *pIndex, u32 count)
 {
@@ -1510,3 +1538,19 @@ static bool8 QuestMenuCallback(void)
     CreateTask(Task_OpenQuestMenuFromStartMenu, 0);
     return TRUE;
 }
+
+//rtc, borrar si no anda
+static void ShowStartMenuExtraWindow(void) // Función que carga una ventana auxiliar en el menú de pausa.
+{	
+    sSafariBallsWindowId = AddWindow(&sStartMenuWindowTemplate);
+    PutWindowTilemap(sSafariBallsWindowId);
+    DrawStdWindowFrame(sSafariBallsWindowId, FALSE);
+	if (!FlagGet(FLAG_RTC_ENABLED))
+		FormatDecimalTimeWOSeconds(gStringVar4, gLocalTime.hours, gLocalTime.minutes);
+	else 
+		FormatDecimalTimeWOSeconds(gStringVar4, Rtc_GetCurrentHour(), Rtc_GetCurrentMinute());
+    AddTextPrinterParameterized(sSafariBallsWindowId, 1, gStringVar4, 0, 1, TEXT_SKIP_DRAW, NULL);
+    CopyWindowToVram(sSafariBallsWindowId, COPYWIN_GFX);
+}
+//
+

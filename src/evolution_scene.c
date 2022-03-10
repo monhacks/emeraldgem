@@ -12,6 +12,7 @@
 #include "link.h"
 #include "link_rfu.h"
 #include "m4a.h"
+#include "quests.h"
 #include "main.h"
 #include "menu.h"
 #include "overworld.h"
@@ -765,6 +766,7 @@ static void Task_EvolutionScene(u8 taskId)
     case EVOSTATE_SET_MON_EVOLVED:
         if (IsCryFinished())
         {
+			GetSetQuestFlag(SIDE_QUEST_6, FLAG_SET_COMPLETED);
             StringExpandPlaceholders(gStringVar4, gText_CongratsPkmnEvolved);
             BattlePutTextOnWindow(gStringVar4, B_WIN_MSG);
             PlayBGM(MUS_EVOLVED);
@@ -1186,6 +1188,7 @@ static void Task_TradeEvolutionScene(u8 taskId)
     case T_EVOSTATE_SET_MON_EVOLVED:
         if (IsCryFinished())
         {
+			GetSetQuestFlag(SIDE_QUEST_6, FLAG_SET_COMPLETED);
             StringExpandPlaceholders(gStringVar4, gText_CongratsPkmnEvolved);
             DrawTextOnTradeWindow(0, gStringVar4, 1);
             PlayFanfare(MUS_EVOLVED);
