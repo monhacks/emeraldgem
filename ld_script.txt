@@ -338,6 +338,7 @@ SECTIONS {
         src/quests.o(.text);
         src/tm_case.o(.text);
 		src/registered_items_menu.o(.text);
+        src/field_name_box.o(.text);
     } =0
 
     script_data :
@@ -709,6 +710,7 @@ SECTIONS {
         src/quests.o(.rodata);
         src/tm_case.o(.rodata);
 		src/registered_items_menu.o(.rodata);
+        src/field_name_box.o(.rodata);
     } =0
 
     song_data :
