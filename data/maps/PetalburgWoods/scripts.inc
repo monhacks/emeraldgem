@@ -14,15 +14,52 @@ PetalburgWoods_EventScript_DevonResearcherLeft::
 	playbgm MUS_ENCOUNTER_AQUA, FALSE
 	applymovement LOCALID_GRUNT, PetalburgWoods_Movement_AquaEntrance
 	waitmovement 0
+	namebox Archie
 	msgbox PetalburgWoods_Text_IWasGoingToAmbushYou, MSGBOX_DEFAULT
+	hidenamebox
 	closemessage
 	applymovement LOCALID_GRUNT, PetalburgWoods_Movement_AquaApproachResearcherLeft
 	waitmovement 0
-	applymovement LOCALID_DEVON_EMPLOYEE, Common_Movement_WalkInPlaceFasterUp
+	applymovement LOCALID_DEVON_EMPLOYEE, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
 	msgbox PetalburgWoods_Text_HandOverThosePapers, MSGBOX_DEFAULT
 	closemessage
 	applymovement LOCALID_DEVON_EMPLOYEE, PetalburgWoods_Movement_DevonResearcherFleeToPlayerLeft
+	waitmovement 0
+	msgbox PetalburgWoods_Text_YouHaveToHelpMe, MSGBOX_DEFAULT
+	closemessage
+	applymovement LOCALID_GRUNT, PetalburgWoods_Movement_AquaApproachPlayer
+	waitmovement 0
+	msgbox PetalburgWoods_Text_NoOneCrossesTeamAqua, MSGBOX_DEFAULT
+	trainerbattle_no_intro TRAINER_GRUNT_PETALBURG_WOODS, PetalburgWoods_Text_YoureKiddingMe
+	applymovement LOCALID_GRUNT, PetalburgWoods_Movement_AquaBackOff
+	waitmovement 0
+	call PetalburgWoods_EventScript_DevonResearcherPostBattle
+	applymovement OBJ_EVENT_ID_PLAYER, PetalburgWoods_Movement_WatchResearcherLeave
+	applymovement LOCALID_DEVON_EMPLOYEE, PetalburgWoods_Movement_DevonResearcherExitLeft
+	waitmovement 0
+	goto PetalburgWoods_EventScript_RemoveDevonResearcher
+	end
+
+PetalburgWoods_EventScript_DevonResearcherCenter::
+	lockall
+	call PetalburgWoods_EventScript_DevonResearcherIntro
+	applymovement LOCALID_DEVON_EMPLOYEE, PetalburgWoods_Movement_DevonResearcherApproachPlayerCenter
+	waitmovement 0
+	msgbox PetalburgWoods_Text_HaveYouSeenShroomish, MSGBOX_DEFAULT
+	closemessage
+	playbgm MUS_ENCOUNTER_AQUA, FALSE
+	applymovement LOCALID_GRUNT, PetalburgWoods_Movement_AquaEntrance
+	waitmovement 0
+	msgbox PetalburgWoods_Text_IWasGoingToAmbushYou, MSGBOX_DEFAULT
+	closemessage
+	applymovement LOCALID_GRUNT, PetalburgWoods_Movement_AquaApproachResearcherCenter
+	waitmovement 0
+	applymovement LOCALID_DEVON_EMPLOYEE, Common_Movement_WalkInPlaceFasterLeft
+	waitmovement 0
+	msgbox PetalburgWoods_Text_HandOverThosePapers, MSGBOX_DEFAULT
+	closemessage
+	applymovement LOCALID_DEVON_EMPLOYEE, PetalburgWoods_Movement_DevonResearcherFleeToPlayerCenter
 	waitmovement 0
 	msgbox PetalburgWoods_Text_YouHaveToHelpMe, MSGBOX_DEFAULT
 	closemessage
@@ -55,15 +92,16 @@ PetalburgWoods_EventScript_DevonResearcherRight::
 	closemessage
 	applymovement LOCALID_GRUNT, PetalburgWoods_Movement_AquaApproachResearcherRight
 	waitmovement 0
-	applymovement LOCALID_DEVON_EMPLOYEE, Common_Movement_WalkInPlaceFasterUp
+	applymovement LOCALID_DEVON_EMPLOYEE, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
 	msgbox PetalburgWoods_Text_HandOverThosePapers, MSGBOX_DEFAULT
 	closemessage
 	applymovement LOCALID_DEVON_EMPLOYEE, PetalburgWoods_Movement_DevonResearcherFleeToPlayerRight
 	waitmovement 0
 	msgbox PetalburgWoods_Text_YouHaveToHelpMe, MSGBOX_DEFAULT
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterUp
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
+	applymovement LOCALID_GRUNT, PetalburgWoods_Movement_AquaApproachPlayer
 	msgbox PetalburgWoods_Text_NoOneCrossesTeamAqua, MSGBOX_DEFAULT
 	trainerbattle_no_intro TRAINER_GRUNT_PETALBURG_WOODS, PetalburgWoods_Text_YoureKiddingMe
 	applymovement LOCALID_GRUNT, PetalburgWoods_Movement_AquaBackOff
@@ -88,7 +126,7 @@ PetalburgWoods_EventScript_DevonResearcherPostBattle::
 	applymovement LOCALID_GRUNT, PetalburgWoods_Movement_AquaRunAway
 	waitmovement 0
 	removeobject LOCALID_GRUNT
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterDown
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	msgbox PetalburgWoods_Text_ThatWasAwfullyClose, MSGBOX_DEFAULT
 	giveitem ITEM_GREAT_BALL
@@ -135,61 +173,79 @@ PetalburgWoods_Movement_DevonResearcherLookAround:
 	step_end
 
 PetalburgWoods_Movement_DevonResearcherExitLeft:
-	walk_fast_right
-	walk_fast_up
-	walk_fast_up
-	walk_fast_up
-	walk_fast_up
-	walk_fast_up
-	walk_fast_up
-	walk_fast_up
+	walk_fast_down
+	walk_fast_left
+	walk_fast_left
+	walk_fast_left
+	walk_fast_left
+	walk_fast_left
+	walk_fast_left
+	walk_fast_left
+	walk_fast_left
 	step_end
 
 PetalburgWoods_Movement_DevonResearcherApproachPlayerLeft:
 	delay_16
 	face_player
-	walk_down
-	walk_down
+	walk_up
+	walk_right
+	walk_right
 	step_end
 
 PetalburgWoods_Movement_DevonResearcherApproachPlayerRight:
 	delay_16
 	face_player
 	walk_down
-	walk_down
-	walk_down
-	walk_in_place_faster_right
+	walk_right
+	walk_right
+	step_end
+PetalburgWoods_Movement_DevonResearcherApproachPlayerCenter:
+	delay_16
+	face_player
+	walk_right
+	walk_right
 	step_end
 
 PetalburgWoods_Movement_DevonResearcherExitRight:
+	walk_fast_up
 	walk_fast_left
-	walk_fast_up
-	walk_fast_up
-	walk_fast_up
-	walk_fast_up
-	walk_fast_up
-	walk_fast_up
-	walk_fast_up
+	walk_fast_left
+	walk_fast_left
+	walk_fast_left
+	walk_fast_left
+	walk_fast_left
+	walk_fast_left
+	walk_fast_left
 	step_end
 
 PetalburgWoods_Movement_WatchResearcherLeave:
 	delay_16
 	delay_16
-	walk_in_place_faster_up
+	walk_in_place_faster_left
 	step_end
 
 PetalburgWoods_Movement_DevonResearcherFleeToPlayerLeft:
+	walk_fast_down
 	walk_fast_right
+	walk_fast_right
+	walk_fast_up
+	walk_in_place_faster_left
+	step_end
+
+PetalburgWoods_Movement_DevonResearcherFleeToPlayerCenter:
 	walk_fast_down
-	walk_fast_down
-	walk_fast_left
-	walk_in_place_faster_up
+	walk_fast_right
+	walk_fast_right
+	walk_fast_up
+	walk_in_place_faster_left
 	step_end
 
 PetalburgWoods_Movement_DevonResearcherFleeToPlayerRight:
-	walk_fast_down
+	walk_fast_up
 	walk_fast_right
-	walk_in_place_faster_up
+	walk_fast_right
+	walk_fast_down
+	walk_in_place_faster_left
 	step_end
 
 PetalburgWoods_Movement_DevonResearcherStartExit:
@@ -203,41 +259,49 @@ PetalburgWoods_Movement_DevonResearcherStartExit:
 	step_end
 
 PetalburgWoods_Movement_AquaApproachResearcherLeft:
-	walk_fast_down
-	walk_fast_down
+	walk_fast_up
+	walk_fast_right
+	walk_fast_right
 	step_end
 
 PetalburgWoods_Movement_AquaBackOff:
 	lock_facing_direction
-	walk_up
+	walk_left
 	unlock_facing_direction
 	step_end
 
 PetalburgWoods_Movement_AquaRunAway:
-	walk_fast_up
-	walk_fast_up
-	walk_fast_up
-	walk_fast_up
-	walk_fast_up
+	walk_fast_left
+	walk_fast_left
+	walk_fast_left
+	walk_fast_left
+	walk_fast_left
+	walk_fast_left
+	walk_fast_left
 	delay_16
 	delay_16
 	step_end
 
 PetalburgWoods_Movement_AquaApproachResearcherRight:
 	walk_fast_down
-	walk_fast_down
-	walk_fast_down
+	walk_fast_right
+	walk_fast_right
+	step_end
+
+PetalburgWoods_Movement_AquaApproachResearcherCenter:
+	walk_fast_right
+	walk_fast_right
 	step_end
 
 PetalburgWoods_Movement_AquaEntrance:
-	walk_down
-	walk_down
-	delay_16
-	delay_16
+	walk_right
+	walk_right
+	walk_right
+	walk_right
 	step_end
 
 PetalburgWoods_Movement_AquaApproachPlayer:
-	walk_down
+	walk_right
 	step_end
 
 PetalburgWoods_EventScript_Boy1::
@@ -249,13 +313,34 @@ PetalburgWoods_EventScript_Boy2::
 	end
 
 PetalburgWoods_EventScript_Girl::
-	lock
+	lockall
 	faceplayer
-	goto_if_set FLAG_RECEIVED_MIRACLE_SEED, PetalburgWoods_EventScript_ExplainMiracleSeed
 	msgbox PetalburgWoods_Text_TryUsingThisItem, MSGBOX_DEFAULT
-	giveitem ITEM_MIRACLE_SEED
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
-	setflag FLAG_RECEIVED_MIRACLE_SEED
+	pokemart PetalburgWoods_SpecialMart
+	msgbox PetalburgWoods_Text_MiracleSeedExplanation, MSGBOX_DEFAULT
+	releaseall
+	end
+
+.align 2
+PetalburgWoods_SpecialMart:
+	.2byte ITEM_MIRACLE_SEED
+	.2byte ITEM_MYSTIC_WATER
+	.2byte ITEM_CHARCOAL
+    .2byte ITEM_BLACK_BELT
+    .2byte ITEM_HARD_STONE
+    .2byte ITEM_DRAGON_FANG
+    .2byte ITEM_SILK_SCARF
+    .2byte ITEM_MAGNET
+    .2byte ITEM_NEVER_MELT_ICE
+    .2byte ITEM_POISON_BARB
+    .2byte ITEM_SHARP_BEAK
+    .2byte ITEM_SOFT_SAND
+    .2byte ITEM_TWISTED_SPOON
+    .2byte ITEM_SILVER_POWDER
+    .2byte ITEM_SPELL_TAG
+    .2byte ITEM_BLACK_GLASSES
+    .2byte ITEM_METAL_COAT
+	.2byte ITEM_NONE
 	release
 	end
 
@@ -319,158 +404,153 @@ PetalburgWoods_EventScript_JamesRematch::
 	end
 
 PetalburgWoods_Text_NotAOneToBeFound:
-	.string "Hmmm…\n"
-	.string "Not a one to be found…$"
+	.string "Mmhhh…\n"
+	.string "No hay ni uno…$"
 
 PetalburgWoods_Text_HaveYouSeenShroomish:
-	.string "Hello, have you seen any POKéMON\n"
-	.string "called SHROOMISH around here?\p"
-	.string "I really love that POKéMON.$"
+	.string "¡Hola! ¿Has visto al Pokémon\n"
+	.string "“Shroomish” por aquí?\p"
+	.string "¡Amo a ese Pokémon!\n"
+	.string "¡Oh, y escuché que “Morellul” suele\l"
+	.string "aparecer de noche!$"
 
 PetalburgWoods_Text_IWasGoingToAmbushYou:
-	.string "I was going to ambush you, but you\n"
-	.string "had to dawdle in PETALBURG WOODS\l"
-	.string "forever, didn't you?\p"
-	.string "I got sick of waiting, so here I am!$"
+	.string "¿Porqué estás escapando de mí?\n"
+	.string "¡Ya dame los {COLOR BLUE}Planos{COLOR DARK_GRAY} y déjame terminar\l"
+	.string "esta misión!$"
 
 PetalburgWoods_Text_HandOverThosePapers:
-	.string "You! DEVON RESEARCHER!\p"
-	.string "Hand over those papers!$"
+	.string "¿Así que es eso, eh? ¿La gran\n"
+	.string "corporación Devon se arrepintió?\p"
+	.string "¡No me importa, ya dame esos Planos!$"
 
 PetalburgWoods_Text_YouHaveToHelpMe:
-	.string "Aiyeeeh!\p"
-	.string "You're a POKéMON TRAINER, aren't you?\n"
-	.string "You've got to help me, please!$"
+	.string "¡AAAAAAHHHHH!\p"
+	.string "¡T-T-TU ERES ENTRENADOR{A}, ¿NO?!\n"
+	.string "PUES SIRVE DE ALGO Y AYÚDAME.$"
 
 PetalburgWoods_Text_NoOneCrossesTeamAqua:
-	.string "Hunh? What do you think you're doing?\n"
-	.string "What, you're going to protect him?\p"
-	.string "No one who crosses TEAM AQUA\n"
-	.string "gets any mercy, not even a kid!\p"
-	.string "Come on and battle me!$"
+	.string "Ojojojojo, ¿Así que vas a protegerlo,\n"
+	.string "no? ¡Pues déjame decirte que eso no\l"
+	.string "funcionará con el poderoso {COLOR LIGHT_BLUE}{SHADOW BLUE}Equipo\l"
+	.string "Aqua{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}!$"
 
 PetalburgWoods_Text_YoureKiddingMe:
-	.string "You're kidding me! You're tough!$"
+	.string "¡I-imposible!\n"
+	.string "¡Eres fuerte!$"
 
 PetalburgWoods_Text_YouveGotSomeNerve:
-	.string "Grrr… You've got some nerve\n"
-	.string "meddling with TEAM AQUA!\l"
-	.string "Come on and battle me again!\p"
-	.string "I wish I could say that, but I'm out of\n"
-	.string "POKéMON…\p"
-	.string "And, hey, we of TEAM AQUA are also\n"
-	.string "after something in RUSTBORO.\p"
-	.string "I'll let you go today!$"
+	.string "¡ARGH!\n"
+	.string "¡Eres un{A} estúpid{OA} por meterte con el\l"
+	.string "grandioso Equipo Aqua!\l"
+	.string "No sólo soy yo en esta organización!\l"
+	.string "¡Somos cientos, CIENTOS!\p"
+	.string "Pero no importa, después de todo, no es\n"
+	.string "lo único que el Equipo Aqua encargó en\l"
+	.string "Rustboro………$"
 
 PetalburgWoods_Text_ThatWasAwfullyClose:
-	.string "Whew…\n"
-	.string "That was awfully close!\p"
-	.string "Thanks to you, he didn't rob me of\n"
-	.string "these important papers.\p"
-	.string "I know, I'll give you a GREAT BALL as\n"
-	.string "my thanks!$"
+	.string "Fiu…\n"
+	.string "Eso estuvo demasiado cerca…\l"
+	.string "¡Pero bueno, gracias de todas formas!\p"
+	.string "Aunque… Me preocupa lo que dijo\n"
+	.string "respecto a que tienen algo en\l"
+	.string "Rustboro…\p"
+	.string "¡Ya me encargaré de eso luego, ahora\n"
+	.string "ten esta Superball!$"
 
 PetalburgWoods_Text_TeamAquaAfterSomethingInRustboro:
-	.string "Didn't that TEAM AQUA thug say\n"
-	.string "they were after something in\l"
-	.string "RUSTBORO, too?$"
+	.string "…………………………………$"
 
 PetalburgWoods_Text_ICantBeWastingTime:
-	.string "Uh-oh! It's a crisis!\n"
-	.string "I can't be wasting time!$"
+	.string "¡AAAAHHHHHHH CRISIIIISSSS!\n"
+	.string "¡DEBO CUIDARLAS O SERÁN ROBADAS!$"
 
 PetalburgWoods_Text_YoureLoadedWithItems:
-	.string "You're loaded with items.\n"
-	.string "I can't give you this GREAT BALL.$"
+	.string "De alguna forma no tienes espacio.$"
 
 PetalburgWoods_Text_GoBugPokemonTeam:
-	.string "I caught a whole bunch of POKéMON!\p"
-	.string "Go, go, go!\n"
-	.string "My BUG POKéMON team!$"
+	.string "¡Atrapé muchos bichos!\p"
+	.string "¡Go, go, go!\n"
+	.string "¡Mi monotype Bicho!$"
 
 PetalburgWoods_Text_ICouldntWin:
-	.string "I have all these POKéMON,\n"
-	.string "but I couldn't win…$"
+	.string "Incluso con tantos,\n"
+	.string "no pude ganar…$"
 
 PetalburgWoods_Text_ImOutOfPokeBalls:
-	.string "I caught a bunch of POKéMON.\n"
-	.string "Now I'm out of POKé BALLS.$"
+	.string "Pokéballs. Necesito.$"
 
 PetalburgWoods_Text_InstantlyPopularWithBugPokemon:
-	.string "If you take BUG POKéMON to school,\n"
-	.string "you get to be instantly popular!$"
+	.string "Si llevas tus Pokémon al colegio,\n"
+	.string "¡Te harás muy popular!$"
 
 PetalburgWoods_Text_CantBePopularIfILose:
-	.string "I can't be popular if I lose.$"
+	.string "Pero si pierdo me odiarán.$"
 
 PetalburgWoods_Text_PeopleRespectYou:
-	.string "If you have a big BUG POKéMON,\n"
-	.string "people respect you for it.$"
+	.string "Si tienes un tipo Bicho grande,\n"
+	.string "la gente se interesará en ti.\p"
+	.string "Al menos eso dijo mi papá.$"
 
 PetalburgWoods_Text_IWantRematch1:
-	.string "I want a rematch when my BUG\n"
-	.string "POKéMON grow up!\p"
-	.string "I'm registering you in my POKéNAV!$"
+	.string "¡DAME LA REVANCHA!\p"
+	.string "¡TE DIRÉ CUANDO HAYAN CRECIDO!$"
 
 PetalburgWoods_Text_IWantRematch2:
-	.string "I want a rematch when my BUG \n"
-	.string "POKéMON grow up!\p"
-	.string "I'm registering you in my POKéNAV!$"
+	.string "¡DAME LA REVANCHA!\p"
+	.string "¡TE DIRÉ CUANDO HAYAN CRECIDO!$"
 
 PetalburgWoods_Text_MyPokemonHaveGrown:
-	.string "My BUG POKéMON have grown.\n"
-	.string "I'll be popular again.$"
+	.string "Mis Bichos ahora son grandes.\n"
+	.string "Todo-digo todas me amarán.$"
 
 PetalburgWoods_Text_CantBePopularIfLose:
-	.string "I can't be popular if I lose.$"
+	.string ":($"
 
 PetalburgWoods_Text_IveBeenTrainingHard:
-	.string "You get to be popular if you have\n"
-	.string "strong POKéMON, right?\l"
-	.string "So, I've been training hard.$"
+	.string "Los Pokémon fuertes impresionan\n"
+	.string "a los-las chicas, ¿no?\l"
+	.string "Entrené mucho para eso.$"
 
 PetalburgWoods_Text_StayOutOfTallGrass:
-	.string "Yo, there!\n"
-	.string "Your POKéMON doing okay?\p"
-	.string "If your POKéMON are weak and you want\n"
-	.string "to avoid battles, you should stay out\l"
-	.string "of tall grass.$"
+	.string "¡Che, vos!\n"
+	.string "¿Están bien tus Pokes?\p"
+	.string "Si no es asi, esquivá el pasto.$"
 
 PetalburgWoods_Text_HiddenItemsExplanation:
-	.string "Sometimes, there are things on the\n"
-	.string "ground even if you can't see them.\p"
-	.string "That's why I always check where I'm\n"
-	.string "walking.$"
+	.string "Aveces, hay Pokémon escondidos\n"
+	.string "en el pasto que se mueve solo.\p"
+	.string "Estoy buscando un Phantum acá.$"
 
 PetalburgWoods_Text_TryUsingThisItem:
-	.string "Oh, neat!\n"
-	.string "That's the BADGE from RUSTBORO GYM!\p"
-	.string "You must be a TRAINER.\n"
-	.string "You should try using this item.$"
+	.string "¡Ah, genial!\n"
+	.string "¡Es la {COLOR GREEN}Medalla de Rustboro{COLOR DARK_GRAY}!\p"
+	.string "¡Esta es una tienda especial!$"
 
 PetalburgWoods_Text_MiracleSeedExplanation:
-	.string "It's a MIRACLE SEED.\n"
-	.string "If a POKéMON holds that item, its\l"
-	.string "GRASS-type moves become stronger.\p"
-	.string "Besides MIRACLE SEED, I think there are\n"
-	.string "other convenient items for POKéMON\l"
-	.string "to hold.$"
+	.string "¡Vuelva pronto!$"
 
 PetalburgWoods_Text_TrainerTipsExperience:
-	.string "TRAINER TIPS\p"
-	.string "Any POKéMON that appears even once\n"
-	.string "in a battle is awarded EXP Points.\p"
-	.string "To raise a weak POKéMON, put it at the\n"
-	.string "left of the team list.\p"
-	.string "As soon as a battle starts, switch it\n"
-	.string "out. It will earn EXP Points without\l"
-	.string "being exposed to any harm.$"
+	.string "¡PISTAS PARA ENTRENADORES!\p"
+	.string "¡No subestimes el poder de los Pokémon\n"
+	.string "de Tipo Bicho! ¡Algunos pueden ponerte\l"
+	.string "las cosas muy difíciles con sus\l"
+	.string "combinaciones de tipo!$"
 
 PetalburgWoods_Text_TrainerTipsPP:
-	.string "TRAINER TIPS\p"
-	.string "In addition to Hit Points (HP), POKéMON\n"
-	.string "have Power Points (PP) that are used to\l"
-	.string "make moves during battle.\p"
-	.string "If a POKéMON runs out of PP, it must be\n"
-	.string "taken to a POKéMON CENTER.$"
+	.string "¡PISTAS PARA ENTRENADORES!\p"
+	.string "Si ves que un parche de pasto se mueve,\n"
+	.string "acércate sigilosamente. Podría\l"
+	.string "tratarse de un poderoso {COLOR RED}Pokémon raro{COLOR DARK_GRAY}.\p"
+	.string "Asimismo, si estás buscando la {COLOR RED}versión\n"
+	.string "Shiny{COLOR DARK_GRAY} de un Pokémon, puedes vencerlo o\l"
+	.string "capturarlo una y otra, y otra vez hasta\l"
+	.string "formar una {COLOR RED}cadena{COLOR DARK_GRAY}, que se mantendrá\l"
+	.string "hasta que escapes del Pokémon\l"
+	.string "encadenado, o hasta que\l"
+	.string "derrotes/captures al Pokémon\l"
+	.string "incorrecto. ¡Y no te preocupes!\l"
+	.string "Mientras más avances en la cdena, más\l"
+	.string "fácil será encontrarlo.$"
 

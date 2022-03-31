@@ -288,7 +288,7 @@ LittlerootTown_BrendansHouse_1F_Movement_BrendanGoUpstairs2:
 	step_end
 
 PlayersHouse_1F_Text_IsntItNiceInHere:
-	.string "Mamá: ¿Ves, amor?\p"
+	.string "¿Ves, amor?\p"
 	.string "Nuestra casa es muy linda.$"
 
 PlayersHouse_1F_Text_MoversPokemonGoSetClock:
@@ -299,14 +299,14 @@ PlayersHouse_1F_Text_MoversPokemonGoSetClock:
 	.string "bonito que deberías poner en hora.$"
 
 PlayersHouse_1F_Text_ArentYouInterestedInRoom:
-	.string "Mamá: Te dije que hicieras algo, ¿no?$"
+	.string "Te dije que hicieras algo, ¿no?$"
 
 PlayersHouse_1F_Text_GoSetTheClock:
-	.string "Mamá: {PLAYER}.\p"
+	.string "{PLAYER}.\p"
 	.string "No te vas hasta que ajustes ese reloj.$"
 
 PlayersHouse_1F_Text_OhComeQuickly:
-	.string "Mamá: ¡{PLAYER}, {PLAYER}!\n"
+	.string "¡{PLAYER}, {PLAYER}!\n"
 	.string "¡MIRA!$"
 
 PlayersHouse_1F_Text_MaybeDadWillBeOn:
@@ -314,7 +314,7 @@ PlayersHouse_1F_Text_MaybeDadWillBeOn:
 	.string "¡Una entrevista, además!$"
 
 PlayersHouse_1F_Text_ItsOverWeMissedHim:
-	.string "Mamá: ……………………………………………$"
+	.string "……………………………………………$"
 
 PlayersHouse_1F_Text_GoIntroduceYourselfNextDoor:
 	.string "¡El amigo de la infancia de Papá vive\n"
@@ -325,22 +325,22 @@ PlayersHouse_1F_Text_GoIntroduceYourselfNextDoor:
 	.string "saludarlos!$"
 
 PlayersHouse_1F_Text_SeeYouHoney:
-	.string "Mamá: ¡Hasta luego amor!$"
+	.string "¡Hasta luego amor!$"
 
 PlayersHouse_1F_Text_DidYouMeetProfBirch:
-	.string "Mamá: ¿Ya fuiste?$"
+	.string "¿Ya fuiste?$"
 
 PlayersHouse_1F_Text_YouShouldRestABit:
-	.string "Mamá: ¿Cómo va todo, amor?\n"
+	.string "¿Cómo va todo, amor?\n"
 	.string "Te ves cansad{OA}.\p"
 	.string "Descansa un rato, amor,\n"
 	.string "y toma algo de paso.$"
 
 PlayersHouse_1F_Text_TakeCareHoney:
-	.string "Mamá: ¡Cuídate cariño!$"
+	.string "¡Cuídate cariño!$"
 
 PlayersHouse_1F_Text_GotDadsBadgeHeresSomethingFromMom:
-	.string "Mamá: ¡WOW! ¡Es la medalla de tu Papá!\p"
+	.string "¡WOW! ¡Es la medalla de tu Papá!\p"
 	.string "¡Pues ahora tu señora madre te dará\n"
 	.string "algo también!$"
 
@@ -348,7 +348,7 @@ PlayersHouse_1F_Text_DontPushYourselfTooHard:
 	.string "Por favor, cuídate mucho, amor.$"
 
 PlayersHouse_1F_Text_IsThatAPokenav:
-	.string "Mamá: ¿Qué es eso, amor? ¿Un Pokénav?\p"
+	.string "¿¿Qué es eso, amor? ¿Un Pokénav?\p"
 	.string "¡Entonces agrégame ahí, así te llamo\n"
 	.string "cada vez que te extraño!$"
 

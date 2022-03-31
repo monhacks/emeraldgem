@@ -1549,6 +1549,8 @@ void CB2_WhiteOut(void)
 
     if (++gMain.state >= 120)
     {
+		VarSet(VAR_CHAIN,0);
+        VarSet(VAR_SPECIESCHAINED,0);
         FieldClearVBlankHBlankCallbacks();
         StopMapMusic();
         ResetSafariZoneFlag_();

@@ -168,6 +168,19 @@ EA            = FD 14
 COLOR_PLAYER  = FD 15
 COLOR_RIVAL   = FD 16
 
+@ semántica del género del rival
+AO            = FD 17
+ARIVAL        = FD 18
+LAEL          = FD 19
+LaEl          = FD 1A
+ITARIVAL      = FD 1B
+ITAITO        = FD 1C
+AE            = FD 1D
+ElElla        = FD 1E
+ELELLA        = FD 1F
+EllaEl        = FD 20
+ELLAEL        = FD 21
+
 @ Hiragana
 'あ' = 01
 'い' = 02
@@ -423,6 +436,8 @@ B_DEF_TEAM1 = FD 3A
 B_DEF_TEAM2 = FD 3B
 B_ACTIVE_NAME = FD 3C
 B_ACTIVE_NAME2 = FD 3D @ no Illusion check
+B_TARGET_OF_REVIVE = FD 3E
+
 
 @ indicates the end of a town/city name (before " TOWN" or " CITY")
 NAME_END = FC 00

@@ -3897,7 +3897,7 @@ static void Cmd_getexp(void)
                     if (*exp == 0)
                         *exp = 1;
 
-                    gExpShareExp = calculatedExp / 2 / viaExpShare;
+                    gExpShareExp = calculatedExp * 3 / viaExpShare;
                     if (gExpShareExp == 0)
                         gExpShareExp = 1;
                 }
@@ -3971,9 +3971,11 @@ static void Cmd_getexp(void)
                     if ((holdEffect == HOLD_EFFECT_EXP_SHARE) && ((gBattleMoveDamage == 0) || (B_SPLIT_EXP < GEN_6)))
                         gBattleMoveDamage += gExpShareExp;
                     if (holdEffect == HOLD_EFFECT_LUCKY_EGG)
-                        gBattleMoveDamage = (gBattleMoveDamage * 150) / 100;
+                        gBattleMoveDamage = (gBattleMoveDamage * 200) / 100;
                     if (gBattleTypeFlags & BATTLE_TYPE_TRAINER && B_TRAINER_EXP_MULTIPLIER <= GEN_7)
                         gBattleMoveDamage = (gBattleMoveDamage * 150) / 100;
+					if (gSaveBlock2Ptr->optionsButtonMode == 1)
+                        gBattleMoveDamage = (gBattleMoveDamage * 300) / 100;
                     #if (B_SCALED_EXP >= GEN_5) && (B_SCALED_EXP != GEN_6)
                     {
                         // Note: There is an edge case where if a pokemon receives a large amount of exp, it wouldn't be properly calculated
@@ -7661,11 +7663,16 @@ static void Cmd_various(void)
     s32 i, j;
     u8 data[10];
     u32 side, bits;
+	u8 reviveMons = 0;
+
 
     if (gBattleControllerExecFlags)
         return;
 
     gActiveBattler = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
+
+
+
 
     switch (gBattlescriptCurrInstr[2])
     {
@@ -9503,6 +9510,31 @@ static void Cmd_various(void)
             gBattlescriptCurrInstr += 7;
         return;
     }
+	case VARIOUS_USE_REVIVE_ON_OPPONENT:
+	for(i = 0; i < PARTY_SIZE; i++)
+		{
+			u16 currentMonMax = GetMonData(&gEnemyParty[i], MON_DATA_MAX_HP);
+			u16 currentMonHalf = currentMonMax / 2;
+			if(GetMonData(&gEnemyParty[i], MON_DATA_HP) == 0)
+			{
+				gBattleStruct->wildVictorySong = i;
+				switch(gLastUsedItem)
+				{
+					// Half health (revive)
+					case ITEM_REVIVE:
+						SetMonData(&gEnemyParty[i], MON_DATA_HP, &currentMonHalf);
+						break;
+					// Full Health (max revive, revival herb)
+					case ITEM_MAX_REVIVE:
+					case ITEM_REVIVAL_HERB:
+						SetMonData(&gEnemyParty[i], MON_DATA_HP, &currentMonMax);
+						break;
+				}
+				break;
+			}
+		}
+		break;
+
     } // End of switch (gBattlescriptCurrInstr[2])
 
     gBattlescriptCurrInstr += 3;
@@ -10255,26 +10287,70 @@ static u32 ChangeStatBuffs(s8 statValue, u32 statId, u32 flags, const u8 *BS_ptr
                 statValue = -2;
             gBattleTextBuff2[0] = B_BUFF_PLACEHOLDER_BEGIN;
             index = 1;
-            if (statValue == -2)
+			gBattleTextBuff2[1] = B_BUFF_STRING;
+			gBattleTextBuff2[2] = STRINGID_STATFELL;
+			gBattleTextBuff2[3] = STRINGID_STATFELL >> 8;
+			index = 4;
+		
+			if (statValue == -2)
+			{
+				gBattleTextBuff2[index] = B_BUFF_STRING;
+				index++;
+				gBattleTextBuff2[index] = STRINGID_STATSHARPLY;
+				index++;
+				gBattleTextBuff2[index] = STRINGID_STATSHARPLY >> 8;
+				index++;
+				gBattleTextBuff2[index] = B_BUFF_EOS;
+			}
+			else if (statValue <= -3)
+			{
+				gBattleTextBuff2[index] = B_BUFF_STRING;
+				index++;
+				gBattleTextBuff2[index] = STRINGID_SEVERELY & 0xFF;
+				index++;
+				gBattleTextBuff2[index] = STRINGID_SEVERELY >> 8;
+				index++;
+			}
+			
+            /*if (statValue == -2)
             {
                 gBattleTextBuff2[1] = B_BUFF_STRING;
-                gBattleTextBuff2[2] = STRINGID_STATHARSHLY;
-                gBattleTextBuff2[3] = STRINGID_STATHARSHLY >> 8;
-                index = 4;
+				index = 2;
+                gBattleTextBuff3[1] = STRINGID_STATSHARPLY;
+                gBattleTextBuff3[2] = STRINGID_STATSHARPLY >> 8;
+                index = 3;
             }
             else if (statValue <= -3)
             {
                 gBattleTextBuff2[1] = B_BUFF_STRING;
-                gBattleTextBuff2[2] = STRINGID_SEVERELY & 0xFF;
-                gBattleTextBuff2[3] = STRINGID_SEVERELY >> 8;
-                index = 4;
+				index = 2;
+                gBattleTextBuff3[1] = STRINGID_SEVERELY & 0xFF;
+                gBattleTextBuff3[2] = STRINGID_SEVERELY >> 8;
+                index = 3;
             }
-            gBattleTextBuff2[index] = B_BUFF_STRING;
-            index++;
-            gBattleTextBuff2[index] = STRINGID_STATFELL;
-            index++;
-            gBattleTextBuff2[index] = STRINGID_STATFELL >> 8;
-            index++;
+			gBattleTextBuff2[index] = B_BUFF_STRING;
+				index++;
+			//if (statValue == -1) {
+				gBattleTextBuff2[index] = STRINGID_STATFELL;
+				index++;
+				gBattleTextBuff2[index] = STRINGID_STATFELL >> 8;
+				index++;
+				gBattleTextBuff2[index] = STRINGID_STATHARSHLY;
+				index++;
+				gBattleTextBuff2[index] = STRINGID_STATHARSHLY >> 8;
+				index++;
+				//PREPARE_STRING_BUFFER(gBattleTextBuff3, STRINGID_STATNOTROSE);
+			//}
+			else {
+				gBattleTextBuff2[index] = STRINGID_STATFELL;
+				index++;
+				gBattleTextBuff2[index] = STRINGID_STATFELL >> 8;
+				index++;
+				gBattleTextBuff2[index] = STRINGID_STATHARSHLY;
+				index++;
+				gBattleTextBuff2[index] = STRINGID_STATHARSHLY >> 8;
+				index++;
+			}*/
             gBattleTextBuff2[index] = B_BUFF_EOS;
             
             if (gBattleMons[gActiveBattler].statStages[statId] == MIN_STAT_STAGE)
@@ -10295,28 +10371,48 @@ static u32 ChangeStatBuffs(s8 statValue, u32 statId, u32 flags, const u8 *BS_ptr
             statValue = 1;
         else if (gBattleMons[gActiveBattler].statStages[statId] == 10 && statValue > 2)
             statValue = 2;
+		/*if (statValue == 2)
+			PREPARE_STAT_BUFFER(gBattleTextBuff2, STRINGID_STATSHARPLY);
+		else if (statValue >= 3)
+			PREPARE_STAT_BUFFER(gBattleTextBuff2, STRINGID_DRASTICALLY);
+		else
+			PREPARE_STAT_BUFFER(gBattleTextBuff2, STRINGID_STATHARSHLY);
+		PREPARE_STAT_BUFFER(gBattleTextBuff3, STRINGID_STATROSE);*/
         gBattleTextBuff2[0] = B_BUFF_PLACEHOLDER_BEGIN;
         index = 1;
+		gBattleTextBuff2[1] = B_BUFF_STRING;
+		gBattleTextBuff2[2] = STRINGID_STATROSE;
+		gBattleTextBuff2[3] = STRINGID_STATROSE >> 8;
+		index = 4;
+		
         if (statValue == 2)
         {
-            gBattleTextBuff2[1] = B_BUFF_STRING;
-            gBattleTextBuff2[2] = STRINGID_STATSHARPLY;
-            gBattleTextBuff2[3] = STRINGID_STATSHARPLY >> 8;
-            index = 4;
+            gBattleTextBuff2[index] = B_BUFF_STRING;
+			index++;
+            gBattleTextBuff2[index] = STRINGID_STATSHARPLY;
+			index++;
+            gBattleTextBuff2[index] = STRINGID_STATSHARPLY >> 8;
+			index++;
+			gBattleTextBuff2[index] = B_BUFF_EOS;
         }
         else if (statValue >= 3)
         {
-            gBattleTextBuff2[1] = B_BUFF_STRING;
-            gBattleTextBuff2[2] = STRINGID_DRASTICALLY & 0xFF;
-            gBattleTextBuff2[3] = STRINGID_DRASTICALLY >> 8;
-            index = 4;
+            gBattleTextBuff2[index] = B_BUFF_STRING;
+			index++;
+            gBattleTextBuff2[index] = STRINGID_DRASTICALLY & 0xFF;
+			index++;
+            gBattleTextBuff2[index] = STRINGID_DRASTICALLY >> 8;
+			index++;
+			gBattleTextBuff2[index] = B_BUFF_EOS;
         }
-        gBattleTextBuff2[index] = B_BUFF_STRING;
-        index++;
-        gBattleTextBuff2[index] = STRINGID_STATROSE;
-        index++;
-        gBattleTextBuff2[index] = STRINGID_STATROSE >> 8;
-        index++;
+			//PREPARE_STAT_BUFFER(gBattleTextBuff3, STRINGID_STATHARSHLY);
+		/*}
+		else {
+			gBattleTextBuff2[index] = STRINGID_STATNOTROSE;
+			index++;
+			gBattleTextBuff2[index] = STRINGID_STATNOTROSE >> 8;
+			index++;
+		}*/
         gBattleTextBuff2[index] = B_BUFF_EOS;
 
         if (gBattleMons[gActiveBattler].statStages[statId] == MAX_STAT_STAGE)
@@ -10954,10 +11050,7 @@ static void Cmd_tryinfatuating(void)
     }
     else
     {
-        if (GetGenderFromSpeciesAndPersonality(speciesAttacker, personalityAttacker) == GetGenderFromSpeciesAndPersonality(speciesTarget, personalityTarget)
-            || gBattleMons[gBattlerTarget].status2 & STATUS2_INFATUATION
-            || GetGenderFromSpeciesAndPersonality(speciesAttacker, personalityAttacker) == MON_GENDERLESS
-            || GetGenderFromSpeciesAndPersonality(speciesTarget, personalityTarget) == MON_GENDERLESS)
+        if (gBattleMons[gBattlerTarget].status2 & STATUS2_INFATUATION)
         {
             gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
         }

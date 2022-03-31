@@ -843,6 +843,9 @@ static u8 GetAI_ItemType(u16 itemId, const u8 *itemEffect)
 {
     if (itemId == ITEM_FULL_RESTORE)
         return AI_ITEM_FULL_RESTORE;
+	else if(itemEffect[4] & ITEM4_REVIVE) 
+	return AI_ITEM_REVIVE; 
+
     else if (itemEffect[4] & ITEM4_HEAL_HP)
         return AI_ITEM_HEAL_HP;
     else if (itemEffect[3] & ITEM3_STATUS_ALL)
@@ -891,6 +894,7 @@ static bool8 ShouldUseItem(void)
 
     for (i = 0; i < MAX_TRAINER_ITEMS; i++)
     {
+		u8 loop;
         u16 item;
         const u8 *itemEffects;
         u8 paramOffset;
@@ -938,7 +942,7 @@ static bool8 ShouldUseItem(void)
                 shouldUse = TRUE;
             }
             if (itemEffects[3] & ITEM3_POISON && (gBattleMons[gActiveBattler].status1 & STATUS1_POISON
-                                               || gBattleMons[gActiveBattler].status1 & STATUS1_TOXIC_POISON))
+                                               || gBattleMons[gActiveBattler].status1 & STATUS1_TOXIC_POISON) && gBattleMons[gActiveBattler].ability != ABILITY_POISON_HEAL)
             {
                 *(gBattleStruct->AI_itemFlags + gActiveBattler / 2) |= (1 << AI_HEAL_POISON);
                 shouldUse = TRUE;
@@ -1004,6 +1008,17 @@ static bool8 ShouldUseItem(void)
             if (gDisableStructs[gActiveBattler].isFirstTurn != 0 && gSideTimers[battlerSide].mistTimer == 0)
                 shouldUse = TRUE;
             break;
+		case AI_ITEM_REVIVE:
+			for(loop = 0; loop < PARTY_SIZE; loop++)
+			{
+				if(GetMonData(&party[loop], MON_DATA_HP) == 0)
+				{ 
+					shouldUse = TRUE;
+					break;
+				} 
+			}
+			break;
+
         case AI_ITEM_NOT_RECOGNIZABLE:
             return FALSE;
         }

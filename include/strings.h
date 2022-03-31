@@ -3311,6 +3311,7 @@ extern const u8 gText_Summary2[];
 extern const u8 gText_PkmnForSwap[];
 extern const u8 gText_SamePkmnInPartyAlready[];
 extern const u8 gText_Cancel3[];
+extern const u8 gText_RightArrow[];
 
 // Género
 extern const u8 gText_ExpandedPlaceholder_O[];
@@ -3324,6 +3325,10 @@ extern const u8 gText_ExpandedPlaceholder_ITA[];
 extern const u8 gText_ExpandedPlaceholder_ITO[];
 extern const u8 gText_ExpandedPlaceholder_COLOR_MALE[];
 extern const u8 gText_ExpandedPlaceholder_COLOR_FEMALE[];
+extern const u8 gText_ExpandedPlaceholder_EL2[];
+extern const u8 gText_ExpandedPlaceholder_ELLA[];
+extern const u8 gText_ExpandedPlaceholder_El2[];
+extern const u8 gText_ExpandedPlaceholder_Ella[];
 // fr_tm_case_port
 extern const u8 gText_TMCase[];
 extern const u8 gText_Close[];

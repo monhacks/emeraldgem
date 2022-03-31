@@ -759,8 +759,10 @@ Petalburg_Leaf::
 	lockall
 	faceplayer
 	goto_if_unset FLAG_DEFEATED_LEAF, Petalburg_Leaf_2
+	namebox Leaf
 	msgbox Petalburg_Leaf_Text_3
 	fadescreen FADE_TO_BLACK
+	hidenamebox
 	setflag FLAG_DEFEATED_LEAF
 	removeobject 10
 	delay 60
@@ -770,12 +772,22 @@ Petalburg_Leaf_1:
 	return
 
 Petalburg_Leaf_2:
+	namebox Unknown
 	msgbox Petalburg_Leaf_Text_0
+	hidenamebox
+	namebox Leaf
+	msgbox Petalburg_Leaf_Text_02
+	hidenamebox
 	trainerbattle_no_intro TRAINER_LEAF, Leaf_Defeated_Message
+	namebox Leaf
 	msgbox Petalburg_Leaf_Text_1
+	hidenamebox
 	giveitem ITEM_CHERISH_BALL, 30
+	namebox Leaf
 	msgbox Petalburg_Leaf_Text_2
 	fadescreen FADE_TO_BLACK
+	hidenamebox
+	closemessage
 	setflag FLAG_DEFEATED_LEAF
 	removeobject 10
 	delay 60
@@ -784,7 +796,7 @@ Petalburg_Leaf_2:
 
 
 Petalburg_Leaf_Text_0:
-	.string "???: ¡AH!\n"
+	.string "¡AH!\n"
 	.string "¡Me encontraste!\p"
 	.string "¡P-por favor no me hagas nada! ¡S-solo\n"
 	.string "estoy jugando con los Pokémon Bebé\l"
@@ -805,8 +817,9 @@ Petalburg_Leaf_Text_0:
 	.string "relacionada al clima. ¿Y te digo otro\l"
 	.string "secretito más, uno que aún más\l"
 	.string "secretoso que el otro, y que nadie\l"
-	.string "NADIE debe saber?\p"
-	.string "Leaf: Bueno, bueno ahorita te cuento…\n"
+	.string "NADIE debe saber?$"
+Petalburg_Leaf_Text_02:
+	.string "Bueno, bueno ahorita te cuento…\n"
 	.string "Hace poco volví a iniciar, con un Equipo\l"
 	.string "Pokémon nuevo bien nuevecito… Una\l"
 	.string "nueva aventura por la Región de Hoenn,\l"
@@ -817,7 +830,7 @@ Petalburg_Leaf_Text_0:
 	.string "ganarte, JA JA JA!$"
 
 Petalburg_Leaf_Text_1:
-	.string "Leaf: ¡AH!\n"
+	.string "¡AH!\n"
 	.string "¡Me ganaste!\l"
 	.string "¡INCREÍBLE!\p"
 	.string "¡Eres un{A} Entrenador{A}\n"
@@ -842,7 +855,7 @@ Petalburg_Leaf_Text_1:
 	.string "una campeona campeonística como yo.$"
 
 Petalburg_Leaf_Text_2:
-	.string "Leaf: Es una Gloria Ball, una Pokéball\n"
+	.string "Es una Gloria Ball, una Pokéball\n"
 	.string "especial creada para conmemorar un\l"
 	.string "evento importantísimo; y tiene la\l"
 	.string "peculiar capacidad de atrapar a los\l"
@@ -856,7 +869,7 @@ Petalburg_Leaf_Text_2:
 	.string "adelante! ¡Nos vemos!$"
 
 Petalburg_Leaf_Text_3:
-	.string "Leaf: QUE HAGO ACÁ NO SE SUPONE QUE\n"
+	.string "¿¿¿QUE HAGO ACÁ NO SE SUPONE QUE\n"
 	.string "ESTÉ ACÁ QUE???$"
 	
 Leaf_Defeated_Message:
@@ -878,7 +891,7 @@ PetalburgCity_Text_ThisIsPetalburgGym:
 	.string "Este es el Gimnasio Petalburg.$"
 
 PetalburgCity_Text_ThisIsGymSign:
-	.string "Eso es un cartel.$"
+	.string "¡Buena suerte!$"
 
 PetalburgCity_Text_WaterReflection:
 	.string "Reflejada es,\n"
@@ -889,10 +902,8 @@ PetalburgCity_Text_WaterReflection:
 	.string "¿Será que lo sabrás?$"
 
 PetalburgCity_Text_FullPartyExplanation:
-	.string "Let's say you have six POKéMON.\n"
-	.string "If you catch another one…\p"
-	.string "It is automatically sent to a STORAGE\n"
-	.string "BOX over a PC connection.$"
+	.string "El PC es maravilloso.\n"
+	.string "Ojalá tuviera más espacio…$"
 
 PetalburgCity_Text_GymSign:
 	.string "Gimnasio Pokémon de Petalburg\n"

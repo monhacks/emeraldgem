@@ -72,6 +72,8 @@
 #define B_TXT_DEF_TEAM2 0x3B // your/the opposing
 #define B_TXT_ACTIVE_NAME 0x3C
 #define B_TXT_ACTIVE_NAME2 0x3D // no Illusion check
+#define B_TXT_TARGET_OF_REVIVE 0x3E
+
 
 // for B_TXT_BUFF1, B_TXT_BUFF2 and B_TXT_BUFF3
 
@@ -293,6 +295,7 @@ extern const u8 gText_Loss[];
 extern const u8 gText_Draw[];
 extern const u8 gText_StatSharply[];
 extern const u8 gText_StatRose[];
+extern const u8 sText_StatNOTRose[];
 extern const u8 gText_DefendersStatRose[];
 extern const u8 gText_PkmnGettingPumped[];
 extern const u8 gText_PkmnShroudedInMist[];

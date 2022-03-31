@@ -62,9 +62,9 @@
 #define FLAG_RTC_ENABLED  	 0x32 // Unused Flag
 #define FLAG_DEFEATED_LEAF    0x33 // Unused Flag
 #define FLAG_BAYASMART       0x34 // Unused Flag
-#define FLAG_UNUSED_0x035    0x35 // Unused Flag
-#define FLAG_UNUSED_0x036    0x36 // Unused Flag
-#define FLAG_UNUSED_0x037    0x37 // Unused Flag
+#define FLAG_DEFEATED_WALLY_DEWFORD_TOWN    0x35 // Unused Flag
+#define FLAG_DONT_GET_MUCH_EXP_TRAINER    0x36 // Unused Flag
+#define FLAG_MENU_DEXRELATED    0x37 // Unused Flag
 #define FLAG_UNUSED_0x038    0x38 // Unused Flag
 #define FLAG_UNUSED_0x039    0x39 // Unused Flag
 #define FLAG_UNUSED_0x03A    0x3A // Unused Flag

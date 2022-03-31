@@ -32,6 +32,18 @@ enum {
 #define PLACEHOLDER_ID_EA            0x14
 #define PLACEHOLDER_ID_COLOR_PLAYER  0x15
 #define PLACEHOLDER_ID_COLOR_RIVAL   0x16
+// Géneros Rival
+#define PLACEHOLDER_ID_AO            0x17
+#define PLACEHOLDER_ID_ARIVAL        0x18
+#define PLACEHOLDER_ID_LAEL          0x19
+#define PLACEHOLDER_ID_LaEl          0x1A
+#define PLACEHOLDER_ID_ITARIVAL      0x1B
+#define PLACEHOLDER_ID_ITAITO        0x1C
+#define PLACEHOLDER_ID_AE            0x1D
+#define PLACEHOLDER_ID_ElElla  		 0x1E
+#define PLACEHOLDER_ID_ELELLA   	 0x1F
+#define PLACEHOLDER_ID_EllaEl  		 0x20
+#define PLACEHOLDER_ID_ELLAEL   	 0x21
 
 // Return values for font functions
 enum {

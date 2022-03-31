@@ -53,6 +53,7 @@
 // Menu actions
 enum
 {
+	MENU_ACTION_DEXRELATED,
     MENU_ACTION_POKEDEX,
     MENU_ACTION_POKEMON,
     MENU_ACTION_BAG,
@@ -62,6 +63,8 @@ enum
     MENU_ACTION_SAVE,
     MENU_ACTION_OPTION,
     MENU_ACTION_EXIT,
+    MENU_ACTION_RIGHT,
+    MENU_ACTION_LEFT,
     MENU_ACTION_RETIRE_SAFARI,
     MENU_ACTION_PLAYER_LINK,
     MENU_ACTION_REST_FRONTIER,
@@ -106,12 +109,16 @@ static bool8 StartMenuPlayerNameCallback(void);
 static bool8 StartMenuSaveCallback(void);
 static bool8 StartMenuOptionCallback(void);
 static bool8 StartMenuExitCallback(void);
+static bool8 StartMenuRightCallback(void);
+static bool8 StartMenuLeftCallback(void);
 static bool8 StartMenuSafariZoneRetireCallback(void);
 static bool8 StartMenuLinkModePlayerNameCallback(void);
 static bool8 StartMenuBattlePyramidRetireCallback(void);
 static bool8 StartMenuBattlePyramidBagCallback(void);
 static bool8 QuestMenuCallback(void);
 static bool8 StartMenuDebugCallback(void);
+static bool8 StartMenuDexRelatedCallback(void);
+
 
 // Menu callbacks
 static bool8 SaveStartCallback(void);
@@ -169,8 +176,12 @@ static const struct WindowTemplate sPyramidFloorWindowTemplate_1 = {0, 1, 1, 0xC
 
 static const u8 gText_MenuDebug[] = _("Debug");
 static const u8 sText_QuestMenu[] = _("Misiones");
+static const u8 gText_MenuDexRelated[] = _("Dex y Otros");
+static const u8 gText_LeftArrow[] = _("{LEFT_ARROW}");
 static const struct MenuAction sStartMenuItems[] =
 {
+	
+    [MENU_ACTION_DEXRELATED]           = {gText_MenuDexRelated, {.u8_void = StartMenuDexRelatedCallback}},
     [MENU_ACTION_POKEDEX]           = {gText_MenuPokedex, {.u8_void = StartMenuPokedexCallback}},
     [MENU_ACTION_POKEMON]           = {gText_MenuPokemon, {.u8_void = StartMenuPokemonCallback}},
     [MENU_ACTION_BAG]               = {gText_MenuBag, {.u8_void = StartMenuBagCallback}},
@@ -180,6 +191,8 @@ static const struct MenuAction sStartMenuItems[] =
     [MENU_ACTION_SAVE]              = {gText_MenuSave, {.u8_void = StartMenuSaveCallback}},
     [MENU_ACTION_OPTION]            = {gText_MenuOption, {.u8_void = StartMenuOptionCallback}},
     [MENU_ACTION_EXIT]              = {gText_MenuExit, {.u8_void = StartMenuExitCallback}},
+    [MENU_ACTION_RIGHT]              = {gText_RightArrow, {.u8_void = StartMenuRightCallback}},
+    [MENU_ACTION_LEFT]              = {gText_LeftArrow, {.u8_void = StartMenuLeftCallback}},
     [MENU_ACTION_RETIRE_SAFARI]     = {gText_MenuRetire, {.u8_void = StartMenuSafariZoneRetireCallback}},
     [MENU_ACTION_PLAYER_LINK]       = {gText_MenuPlayer, {.u8_void = StartMenuLinkModePlayerNameCallback}},
     [MENU_ACTION_REST_FRONTIER]     = {gText_MenuRest, {.u8_void = StartMenuSaveCallback}},
@@ -232,6 +245,7 @@ static const struct WindowTemplate sSaveInfoWindowTemplate = {
 static void BuildStartMenuActions(void);
 static void AddStartMenuAction(u8 action);
 static void BuildNormalStartMenu(void);
+static void BuildDexRelatedStartMenu(void);
 static void BuildDebugStartMenu(void);
 static void BuildSafariZoneStartMenu(void);
 static void BuildLinkModeStartMenu(void);
@@ -274,45 +288,51 @@ static void BuildStartMenuActions(void)
 {
     sNumStartMenuActions = 0;
 
-    if (IsOverworldLinkActive() == TRUE)
-    {
-        BuildLinkModeStartMenu();
-    }
-    else if (InUnionRoom() == TRUE)
-    {
-        BuildUnionRoomStartMenu();
-    }
-    else if (GetSafariZoneFlag() == TRUE)
-    {
-        BuildSafariZoneStartMenu();
-    }
-    else if (InBattlePike())
-    {
-        BuildBattlePikeStartMenu();
-    }
-    else if (InBattlePyramid())
-    {
-        BuildBattlePyramidStartMenu();
-    }
-    else if (InMultiPartnerRoom())
-    {
-        BuildMultiPartnerRoomStartMenu();
-    }
-    #ifdef TX_DEBUGGING
-        if (TX_DEBUG_MENU_OPTION)
-        {
-            BuildDebugStartMenu();
-        }
-        else
-        {
-            BuildNormalStartMenu();
-        }
-    #else
-        else
-            {
-                BuildNormalStartMenu();
-            }
-    #endif
+	if (FlagGet(FLAG_MENU_DEXRELATED))
+	{
+		BuildDexRelatedStartMenu();
+	}
+	else {
+		if (IsOverworldLinkActive() == TRUE)
+		{
+			BuildLinkModeStartMenu();
+		}
+		else if (InUnionRoom() == TRUE)
+		{
+			BuildUnionRoomStartMenu();
+		}
+		else if (GetSafariZoneFlag() == TRUE)
+		{
+			BuildSafariZoneStartMenu();
+		}
+		else if (InBattlePike())
+		{
+			BuildBattlePikeStartMenu();
+		}
+		else if (InBattlePyramid())
+		{
+			BuildBattlePyramidStartMenu();
+		}
+		else if (InMultiPartnerRoom())
+		{
+			BuildMultiPartnerRoomStartMenu();
+		}
+		#ifdef TX_DEBUGGING
+			if (TX_DEBUG_MENU_OPTION)
+			{
+				BuildDebugStartMenu();
+			}
+			else
+			{
+				BuildNormalStartMenu();
+			}
+		#else
+			else
+				{
+					BuildNormalStartMenu();
+				}
+		#endif
+	}
 }
 
 static void AddStartMenuAction(u8 action)
@@ -320,36 +340,37 @@ static void AddStartMenuAction(u8 action)
     AppendToList(sCurrentStartMenuActions, &sNumStartMenuActions, action);
 }
 
-static void BuildNormalStartMenu(void)
-{
-    if (FlagGet(FLAG_SYS_POKEDEX_GET) == TRUE)
-    {
+
+static void BuildDexRelatedStartMenu(void) {
+	if (FlagGet(FLAG_SYS_POKEDEX_GET) == TRUE)
         AddStartMenuAction(MENU_ACTION_POKEDEX);
-    }
-    if (FlagGet(FLAG_SYS_POKEMON_GET) == TRUE)
-    {
-        AddStartMenuAction(MENU_ACTION_POKEMON);
+	if (FlagGet(FLAG_SYS_POKENAV_GET))
+		AddStartMenuAction(MENU_ACTION_POKENAV);
+	if (FlagGet(FLAG_QUEST_MENU_ACTIVE))
+		AddStartMenuAction(MENU_ACTION_QUEST_MENU);
+	if (FlagGet(FLAG_POKEMONPCMENU))
 		AddStartMenuAction(MENU_ACTION_PC);
-    }
-
-    AddStartMenuAction(MENU_ACTION_BAG);
-
-    if (FlagGet(FLAG_SYS_POKENAV_GET) == TRUE)
-    {
-        AddStartMenuAction(MENU_ACTION_POKENAV);
-    }
-
-    AddStartMenuAction(MENU_ACTION_PLAYER);
-    
-    if (FlagGet(FLAG_SYS_QUEST_MENU_GET))
-        AddStartMenuAction(MENU_ACTION_QUEST_MENU);
-    
-    AddStartMenuAction(MENU_ACTION_SAVE);
-    AddStartMenuAction(MENU_ACTION_OPTION);
-	if (FlagGet(FLAG_SET_WALL_CLOCK))
-		ShowStartMenuExtraWindow();
+	
 }
 
+static void BuildNormalStartMenu(void)
+{
+	if (FlagGet(FLAG_SYS_POKEMON_GET) == TRUE)
+		{
+			AddStartMenuAction(MENU_ACTION_POKEMON);
+			if (!FlagGet(FLAG_SYS_POKEDEX_GET)) {
+				AddStartMenuAction(MENU_ACTION_PC);
+			}
+		}
+		AddStartMenuAction(MENU_ACTION_BAG);
+		
+		AddStartMenuAction(MENU_ACTION_PLAYER);
+		
+		AddStartMenuAction(MENU_ACTION_SAVE);
+		AddStartMenuAction(MENU_ACTION_OPTION);
+		if (FlagGet(FLAG_SET_WALL_CLOCK))
+			ShowStartMenuExtraWindow();
+}
 static void BuildDebugStartMenu(void)
 {    
     if (FlagGet(FLAG_SYS_POKEDEX_GET) == TRUE)
@@ -498,7 +519,7 @@ static void RemoveExtraStartMenuWindows(void) //Modificado el 23/1/2019
         ClearStdWindowAndFrameToTransparent(sBattlePyramidFloorWindowId, FALSE);
         RemoveWindow(sBattlePyramidFloorWindowId);
     }
-	else{ //Borra de la pantalla la venta auxiliar de la hora
+	else if (FlagGet(FLAG_SET_WALL_CLOCK)){ //Borra de la pantalla la venta auxiliar de la hora
         ClearStdWindowAndFrameToTransparent(sSafariBallsWindowId, FALSE);
         RemoveWindow(sSafariBallsWindowId);	
 		
@@ -680,19 +701,46 @@ static bool8 HandleStartMenuInput(void)
             && gMenuCallback != StartMenuExitCallback
             && gMenuCallback != StartMenuDebugCallback
             && gMenuCallback != StartMenuSafariZoneRetireCallback
-            && gMenuCallback != StartMenuBattlePyramidRetireCallback)
+            && gMenuCallback != StartMenuBattlePyramidRetireCallback
+			&& gMenuCallback != StartMenuRightCallback
+			&& gMenuCallback != StartMenuLeftCallback)
         {
            FadeScreen(FADE_TO_BLACK, 0);
         }
 
         return FALSE;
     }
-
+	if (JOY_NEW(DPAD_RIGHT) && !FlagGet(FLAG_MENU_DEXRELATED) && FlagGet(FLAG_SYS_POKEDEX_GET))
+	{
+		PlayerFreeze();
+		FlagSet(FLAG_MENU_DEXRELATED);
+		HideStartMenu();
+		ShowStartMenu();
+		return TRUE;
+	}
+	if (JOY_NEW(DPAD_LEFT) && FlagGet(FLAG_MENU_DEXRELATED))
+	{
+		PlayerFreeze();
+		HideStartMenu();
+		FlagClear(FLAG_MENU_DEXRELATED);
+		ShowStartMenu();
+		return TRUE;
+	}
     if (JOY_NEW(START_BUTTON | B_BUTTON))
     {
-        RemoveExtraStartMenuWindows();
-        HideStartMenu();
-        return TRUE;
+		if (FlagGet(FLAG_MENU_DEXRELATED)){
+			FlagClear(FLAG_MENU_DEXRELATED);
+			PlayerFreeze();
+			HideStartMenuWindow();
+			ShowStartMenu();
+			return TRUE;
+		}
+		else 
+		{
+			RemoveExtraStartMenuWindows();
+			HideStartMenu();
+			return TRUE;
+		}
     }
 
     return FALSE;
@@ -707,6 +755,18 @@ static bool8 StartMenuPokedexCallback(void)
         RemoveExtraStartMenuWindows();
         CleanupOverworldWindowsAndTilemaps();
         SetMainCallback2(CB2_OpenPokedex);
+
+        return TRUE;
+    }
+
+    return FALSE;
+}
+static bool8 StartMenuDexRelatedCallback(void)
+{
+    if (!gPaletteFade.active)
+    {
+        RemoveExtraStartMenuWindows();
+		ShowStartMenu();
 
         return TRUE;
     }
@@ -824,6 +884,21 @@ static bool8 StartMenuExitCallback(void)
 {
     RemoveExtraStartMenuWindows();
     HideStartMenu(); // Hide start menu
+
+    return TRUE;
+}
+static bool8 StartMenuRightCallback(void)
+{
+    RemoveExtraStartMenuWindows();
+	ShowStartMenu();
+
+    return TRUE;
+}
+static bool8 StartMenuLeftCallback(void)
+{
+    RemoveExtraStartMenuWindows();
+	FlagClear(FLAG_MENU_DEXRELATED);
+	ShowStartMenu();
 
     return TRUE;
 }

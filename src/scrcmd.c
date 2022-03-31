@@ -2402,3 +2402,11 @@ bool8 ScrCmd_hidenamebox(struct ScriptContext *ctx) {
         ClearNamebox();
     return FALSE;
 }
+
+void ScrCmd_changeframe(struct ScriptContext *ctx)
+{
+	u8 frameNumber = ScriptReadByte(ctx);
+	
+	frameNumber--;
+	gSaveBlock2Ptr->optionsWindowFrameType = frameNumber;	
+}

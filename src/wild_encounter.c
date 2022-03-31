@@ -489,7 +489,18 @@ static void CreateWildMon(u16 species, u8 level)
         CreateMonWithGenderNatureLetter(&gEnemyParty[0], species, level, USE_RANDOM_IVS, gender, PickWildMonNature(), 0);
         return;
     }
-
+	if (VarGet(VAR_SPECIESCHAINED) != GetMonData(&gEnemyParty[0], MON_DATA_SPECIES) && (Random() % 99) < (VarGet(VAR_CHAIN) + 25) && (VarGet(VAR_CHAIN) >= 3))
+        species = VarGet(VAR_SPECIESCHAINED);
+	if (VarGet(VAR_SPECIESCHAINED) != GetMonData(&gEnemyParty[0], MON_DATA_SPECIES) && (Random() % 99) < (VarGet(VAR_CHAIN) - 10) && (VarGet(VAR_CHAIN) >= 15))
+        species = SPECIES_BLISSEY;
+	if (gSaveBlock2Ptr->optionsButtonMode == 1 && (Random() % 99) < 19)
+		species = SPECIES_BLISSEY;
+	if (gSaveBlock2Ptr->optionsButtonMode == 1 && (Random() % 99) < 19)
+		species = SPECIES_AUDINO;
+	if (gSaveBlock2Ptr->optionsButtonMode == 1 && (Random() % 99) < 19)
+		species = SPECIES_CHANSEY;
+	if (gSaveBlock2Ptr->optionsButtonMode == 1 && (Random() % 99) < 19)
+		species = SPECIES_HAPPINY;
     CreateMonWithNature(&gEnemyParty[0], species, level, USE_RANDOM_IVS, PickWildMonNature());
 }
 

@@ -114,6 +114,7 @@ LittlerootTown_ProfessorBirchsLab_OnFrame:
 LittlerootTown_ProfessorBirchsLab_EventScript_GiveStarterEvent::
 	lockall
 	bufferleadmonspeciesname STR_VAR_1
+	namebox Birch
 	message LittlerootTown_ProfessorBirchsLab_Text_LikeYouToHavePokemon
 	waitmessage
 	playfanfare MUS_OBTAIN_ITEM
@@ -129,6 +130,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_NicknameStarter::
 
 LittlerootTown_ProfessorBirchsLab_EventScript_GoSeeRival::
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_MightBeGoodIdeaToGoSeeRival, MSGBOX_DEFAULT
+	hidenamebox
 	questmenu QUEST_MENU_UNLOCK_QUEST SIDE_QUEST_1
 	setflag FLAG_SYS_QUEST_MENU_GET
 	playfanfare MUS_OBTAIN_ITEM
@@ -137,17 +139,20 @@ LittlerootTown_ProfessorBirchsLab_EventScript_GoSeeRival::
 	setflag FLAG_OMNIJUMP_UPGRADE
 	message MisionObtenida
 	waitfanfare
+	namebox Birch
 	msgbox LittlerootTown_EsUnaMision, MSGBOX_DEFAULT
+	hidenamebox
 	clearflag FLAG_HIDE_ROUTE_101_BOY
 	setvar VAR_BIRCH_LAB_STATE, 3
 	releaseall
 	end
+	
 MisionObtenida:
 	.string "¡La misión {COLOR LIGHT_RED SHADOW RED}“{STR_VAR_1}”{COLOR DARK_GRAY SHADOW LIGHT_GRAY}\n"
 	.string "ha sido desbloqueada!$"
 
 LittlerootTown_EsUnaMision:
-	.string "Profe Birch: Acabo de darte una {COLOR BLUE}Misión{COLOR DARK_GRAY SHADOW LIGHT_GRAY}.\n"
+	.string "Acabo de darte una {COLOR BLUE}Misión{COLOR DARK_GRAY SHADOW LIGHT_GRAY}.\n"
 	.string "Las misiones son objetivos que las\l"
 	.string "personas en Hoenn te darán, y que, al\l"
 	.string "cumplirse, te regalarán una\l"
@@ -541,7 +546,9 @@ LittlerootTown_ProfessorBirchsLab_EventScript_TryRatePokedexOrRegister::
 	goto_if_eq VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 3, ProfBirch_EventScript_RatePokedexOrRegister
 	goto_if_ge VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 6, ProfBirch_EventScript_RatePokedexOrRegister
 	goto_if_eq VAR_BIRCH_LAB_STATE, 5, LittlerootTown_ProfessorBirchsLab_EventScript_PokemonAwait
+	namebox Birch
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_BirchRivalGoneHome, MSGBOX_DEFAULT
+	hidenamebox
 	release
 	end
 
@@ -560,16 +567,22 @@ EventScript_RegisterProfBirch::
 	end
 
 LittlerootTown_ProfessorBirchsLab_EventScript_GivePokedex::
+	namebox Birch
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_HeardYouBeatRivalTakePokedex, MSGBOX_DEFAULT
+	hidenamebox
 	call LittlerootTown_ProfessorBirchsLab_EventScript_ReceivePokedex
+	namebox Birch
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_ExplainPokedex, MSGBOX_DEFAULT
+	hidenamebox
 	giveitem ITEM_ORAN_BERRY, 5
 	questmenu QUEST_MENU_UNLOCK_QUEST SIDE_QUEST_2
 	questmenu QUEST_MENU_UNLOCK_QUEST SIDE_QUEST_5
 	questmenu QUEST_MENU_UNLOCK_QUEST SIDE_QUEST_6
 	questmenu QUEST_MENU_UNLOCK_QUEST SIDE_QUEST_8
 	questmenu QUEST_MENU_UNLOCK_QUEST SIDE_QUEST_11
+	namebox Birch
 	msgbox TeHeDadoMas, MSGBOX_DEFAULT
+	hidenamebox
 	applymovement LOCALID_RIVAL, LittlerootTown_ProfessorBirchsLab_Movement_RivalApproachPlayer
 	waitmovement 0
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterRight
@@ -586,7 +599,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_GivePokedex::
 	end
 
 TeHeDadoMas:
-	.string "Profe Birch: Te he dado algunas\n"
+	.string "Te he dado algunas\n"
 	.string "misiones más, {PLAYER}, ¡Estoy seguro\l"
 	.string "que podrás completarlas!\p"
 	.string "Una vez lo hagas, ¡puedes volver\n"
@@ -784,7 +797,7 @@ LittlerootTown_ProfessorBirchsLab_Text_BirchEnjoysRivalsHelpToo:
 	.string "There's a lot of love there.$"
 
 LittlerootTown_ProfessorBirchsLab_Text_LikeYouToHavePokemon:
-	.string "Profe Birch: Así que, {PLAYER}, veo\n"
+	.string "Así que, {PLAYER}, veo\n"
 	.string "que lo que tu padre dice de tí es\l"
 	.string "cierto… Tienes la inusual capacidad de\l"
 	.string "{COLOR BLUE}saber los movimientos de los Pokémon a\l"
@@ -800,7 +813,7 @@ LittlerootTown_ProfessorBirchsLab_Text_WhyNotGiveNicknameToMon:
 	.string "give a nickname to that {STR_VAR_1}?$"
 
 LittlerootTown_ProfessorBirchsLab_Text_MightBeGoodIdeaToGoSeeRival:
-	.string "Profe Birch: Entonces, {PLAYER}, tú y\n"
+	.string "Entonces, {PLAYER}, tú y\n"
 	.string "tu {STR_VAR_1} parecen muy unidos,\l"
 	.string "¡Incluso aunque se conocieran hoy!\p"
 	.string "{RIVAL} está estudiando en la Ruta\n"
@@ -819,15 +832,15 @@ LittlerootTown_ProfessorBirchsLab_Text_DontBeThatWay:
 	.string "You should go meet my kid.$"
 
 LittlerootTown_ProfessorBirchsLab_Text_BirchRivalGoneHome:
-	.string "Profe Birch: ¿{RIVAL}?\p"
+	.string "¿{RIVAL}?\p"
 	.string "Está en su casa, creo.\p"
 	.string "O quizá no…$"
 
 LittlerootTown_ProfessorBirchsLab_Text_HeardYouBeatRivalTakePokedex:
-	.string "Profe Birch: ¡{PLAYER}! ¡Escuché que\n"
+	.string "¡{PLAYER}! ¡Escuché que\n"
 	.string "venciste el equipo de {RIVAL}…!\p"
 	.string "¡IMPRESIONANTE!\n"
-	.string "{RIVAL} me ha estado ayudando a \l"
+	.string "{RIVAL} me ha estado ayudando a\l"
 	.string "investigar, y ¡Aún con su\l"
 	.string "experiencia le has ganado! ¡JA!\p"
 	.string "Me sorprendes, {PLAYER}, así que,\n"

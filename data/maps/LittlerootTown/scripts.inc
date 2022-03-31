@@ -149,7 +149,11 @@ LittlerootTown_EventScript_GoInsideWithMom::
 	delay 10
 	applymovement LOCALID_MOM, LittlerootTown_Movement_MomApproachPlayerAtTruck
 	waitmovement 0
+	namebox Mama
+	changeframe 2
 	msgbox LittlerootTown_Text_OurNewHomeLetsGoInside, MSGBOX_DEFAULT
+	changeframe 1
+	hidenamebox
 	closemessage
 	applymovement LOCALID_MOM, LittlerootTown_Movement_MomApproachDoor
 	applymovement OBJ_EVENT_ID_PLAYER, LittlerootTown_Movement_PlayerApproachDoor
@@ -167,6 +171,9 @@ LittlerootTown_EventScript_GoInsideWithMom::
 	clearflag FLAG_HIDE_LITTLEROOT_TOWN_FAT_MAN
 	clearflag FLAG_HIDE_MAP_NAME_POPUP
 	return
+
+Mama:
+	.string "{COLOR LIGHT_RED}{SHADOW RED}Mamá$"
 
 LittlerootTown_Movement_MomExitHouse:
 	walk_down
@@ -247,15 +254,20 @@ LittlerootTown_EventScript_SetRivalBirchPosForDexUpgradeFemale::
 	end
 
 LittlerootTown_EventScript_FatMan::
+	namebox Carlos
 	questmenu QUEST_MENU_CHECK_UNLOCKED SIDE_QUEST_3
 	lockall
 	faceplayer
 	compare VAR_RESULT, TRUE
 	goto_if_eq LittlerootTown_EventScript_FatMan_2
+	changeframe 1
 	msgbox LittlerootTown_EventScript_FatMan_Text_5
 LittlerootTown_EventScript_FatMan_1:
 	releaseall
 	return
+
+Carlos:
+	.string "Carlos$"
 
 LittlerootTown_EventScript_FatMan_2:
 	compare VAR_MISTERIO, 3
@@ -293,7 +305,7 @@ LittlerootTown_EventScript_FatMan_14:
 
 
 LittlerootTown_EventScript_FatMan_Text_0:
-	.string "Carlos: Mi esposo me dice siempre que\n"
+	.string "Mi esposo me dice siempre que\n"
 	.string "paso demasiado tiempo afuera…\p"
 	.string "… … … … … … … …\p"
 	.string "Entonces… Sabes sobre… … …\n"
@@ -307,7 +319,7 @@ LittlerootTown_EventScript_FatMan_Text_0:
 	.string "otra gente sepa más.$"
 
 LittlerootTown_EventScript_FatMan_Text_1:
-	.string "Carlos: Quizá… Ya sea el momento de\n"
+	.string "Quizá… Ya sea el momento de\n"
 	.string "hablar con Birch sobre esto. Ha estado\l"
 	.string "evitando hacerlo desde entonces, pero\l"
 	.string "pasa que él dedicó mucho a resolver\l"
@@ -320,7 +332,7 @@ LittlerootTown_EventScript_FatMan_Text_2:
 	.string "otra gente sepa más.$"
 
 LittlerootTown_EventScript_FatMan_Text_3:
-	.string "Carlos: Mi esposo me dice siempre que\n"
+	.string "Mi esposo me dice siempre que\n"
 	.string "paso demasiado tiempo afuera…\p"
 	.string "… … … … … … … …\p"
 	.string "Entonces… Sabes sobre… … …\n"
@@ -340,7 +352,7 @@ LittlerootTown_EventScript_FatMan_Text_3:
 	.string "de ser así…$"
 
 LittlerootTown_EventScript_FatMan_Text_4:
-	.string "Carlos: ¡Hola, {PLAYER}!\p"
+	.string "¡Hola, {PLAYER}!\p"
 	.string "Entonces… ¿Era un {COLOR RED}Zoroark{COLOR DARK_GRAY}?\p"
 	.string "Eso significa que mis teorías\n"
 	.string "eran correctas…\l"
@@ -587,7 +599,9 @@ LittlerootTown_EventScript_GiveRunningShoesTrigger::
 	checkplayergender
 	call_if_eq VAR_RESULT, MALE, LittlerootTown_EventScript_SetHomeDoorCoordsMale
 	call_if_eq VAR_RESULT, FEMALE, LittlerootTown_EventScript_SetHomeDoorCoordsFemale
+	namebox Mama
 	msgbox LittlerootTown_Text_WaitPlayer, MSGBOX_DEFAULT
+	hidenamebox
 	closemessage
 	checkplayergender
 	call_if_eq VAR_RESULT, MALE, LittlerootTown_EventScript_MomApproachPlayerMale
@@ -1008,34 +1022,38 @@ LittlerootTown_EventScript_SetReceivedRunningShoes::
 	end
 
 LittlerootTown_EventScript_GiveRunningShoes::
+	namebox Mama
 	msgbox LittlerootTown_Text_WearTheseRunningShoes, MSGBOX_DEFAULT
+	hidenamebox
 	giveitem ITEM_ACRO_BIKE, 1
 	playfanfare MUS_OBTAIN_ITEM
 	waitfanfare
 	setflag FLAG_RECEIVED_RUNNING_SHOES
+	namebox Mama
 	msgbox LittlerootTown_Text_ExplainRunningShoes, MSGBOX_DEFAULT
 	msgbox LittlerootTown_Text_ComeHomeIfAnythingHappens, MSGBOX_DEFAULT
+	hidenamebox
 	closemessage
 	delay 30
 	return
 
 LittlerootTown_Text_OurNewHomeLetsGoInside:
-	.string "Mamá: ¡LLegamos, amor!\p"
+	.string "¡LLegamos, amor!\p"
 	.string "Lamento haberte dejado en el camión,\n"
 	.string "pero no teníamos más dinero para que\l"
 	.string "viajes en un auto separado…\p"
 	.string "¡Pero bueno, esto es Villa Littleroot!\n"
 	.string "¿Te gusta? Se me hace que es un lugar\l"
-	.string "tranquilo para vivir, además, hay un{A}\l"
-	.string "chic{OA} de tu edad con quien podrías\l"
+	.string "tranquilo para vivir, además, hay {COLOR_RIVAL} un{ARIVAL}\l"
+	.string "chic{AO} {COLOR DARK_GRAY} de tu edad con quien podrías\l"
 	.string "llevarte bien…\p"
 	.string "¡Entremos!$"
 
 LittlerootTown_Text_WaitPlayer:
-	.string "Mamá: ¡Alto, {PLAYER}!$"
+	.string "¡Alto, {PLAYER}!$"
 
 LittlerootTown_Text_WearTheseRunningShoes:
-	.string "Mamá: ¡Cariño! ¿Ya le hablaste al Profe?\p"
+	.string "¡Cariño! ¿Ya le hablaste al Profe?\p"
 	.string "¡Ah, ya veo que te dio un Pokémon!\p"
 	.string "Y es el mismo que tu padre eligió…\n"
 	.string "-sniff sniff- … … …\l"
@@ -1049,7 +1067,7 @@ LittlerootTown_Text_SwitchShoesWithRunningShoes:
 	.string "RUNNING SHOES.$"
 
 LittlerootTown_Text_ExplainRunningShoes:
-	.string "Mamá: Amor, esa Bici es especial. Es\n"
+	.string "Amor, esa Bici es especial. Es\n"
 	.string "capaz de {COLOR BLUE}cambiar de función{COLOR DARK_GRAY} si tocas el\l"
 	.string "botón R. De esa forma, podrás viajar\l"
 	.string "por toda la región Hoenn.$"
@@ -1066,7 +1084,7 @@ LittlerootTown_Text_ComeHomeIfAnythingHappens:
 	.string "Voy a extrañarte…$"
 
 LittlerootTown_EventScript_FatMan_Text_5:
-	.string "Carlos: Mi esposo me dice siempre que\n"
+	.string "Mi esposo me dice siempre que\n"
 	.string "paso demasiado tiempo afuera, pero es\l"
 	.string "que ¡Acá es mejor!\p"
 	.string "El aire es fresco y limpio, la naturaleza\n"

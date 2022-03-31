@@ -88,6 +88,9 @@ static void RegisterTrainerInMatchCall(void);
 static void HandleRematchVarsOnBattleEnd(void);
 static const u8 *GetIntroSpeechOfApproachingTrainer(void);
 static const u8 *GetTrainerCantBattleSpeech(void);
+extern const u8 ChainNumber[];
+extern const u8 ChainBroke[];
+extern const u8 AddChain[];
 
 EWRAM_DATA static u16 sTrainerBattleMode = 0;
 EWRAM_DATA u16 gTrainerBattleOpponent_A = 0;
@@ -617,7 +620,7 @@ void StartRegiBattle(void)
 
 static void CB2_EndWildBattle(void)
 {
-    CpuFill16(0, (void*)(BG_PLTT), BG_PLTT_SIZE);
+/*    CpuFill16(0, (void*)(BG_PLTT), BG_PLTT_SIZE);
     ResetOamRange(0, 128);
 
     if (IsPlayerDefeated(gBattleOutcome) == TRUE && !InBattlePyramid() && !InBattlePike())
@@ -626,6 +629,70 @@ static void CB2_EndWildBattle(void)
     }
     else
     {
+        SetMainCallback2(CB2_ReturnToField);
+        gFieldCallback = FieldCB_ReturnToFieldNoScriptCheckMusic;
+    }*/
+	//cadena salvaje
+	u16 species;
+    u16 ptr;
+    u8 nickname[POKEMON_NAME_LENGTH + 1];
+    u16 lastPokemonFound;
+    species = GetMonData(&gEnemyParty[0], MON_DATA_SPECIES);
+    CpuFill16(0, (void*)(BG_PLTT), BG_PLTT_SIZE);
+    ResetOamRange(0, 128);
+    if (IsPlayerDefeated(gBattleOutcome) == TRUE && !InBattlePyramid() && !InBattlePike())
+    {
+        SetMainCallback2(CB2_WhiteOut);
+    }
+    else
+    {
+        if ((gBattleOutcome != B_OUTCOME_WON) && (gBattleOutcome != B_OUTCOME_CAUGHT))
+        {
+            if (species == VarGet(VAR_SPECIESCHAINED) && VarGet(VAR_CHAIN) >= 1)
+            {
+                VarSet(VAR_CHAIN,0);
+                VarSet(VAR_SPECIESCHAINED,0);
+            }
+            else if ((species != VarGet(VAR_SPECIESCHAINED)) && (VarGet(VAR_CHAIN) >= 1))
+                species = VarGet(VAR_SPECIESCHAINED);
+        }
+        else if ((gBattleOutcome == B_OUTCOME_WON) || (gBattleOutcome == B_OUTCOME_CAUGHT))
+        {
+            if (VarGet(VAR_CHAIN) == 0)
+            {
+                VarSet(VAR_SPECIESCHAINED,species);
+				if (gBattleOutcome == B_OUTCOME_CAUGHT)
+					VarSet(VAR_CHAIN, VarGet(VAR_CHAIN) + 2);
+				else
+					VarSet(VAR_CHAIN, VarGet(VAR_CHAIN) + 1);
+            }
+            else if ((species == VarGet(VAR_SPECIESCHAINED)) && VarGet(VAR_CHAIN) >=60) {
+				GetSpeciesName(gStringVar2 ,VarGet(VAR_SPECIESCHAINED));
+                ScriptContext1_SetupScript(ChainNumber);
+                VarSet(VAR_CHAIN,60);
+			}
+            else if ((species == VarGet(VAR_SPECIESCHAINED)) && VarGet(VAR_CHAIN) >=3)
+            {
+				if (gBattleOutcome == B_OUTCOME_CAUGHT)
+					VarSet(VAR_CHAIN, VarGet(VAR_CHAIN) + 2);
+				else
+					VarSet(VAR_CHAIN, VarGet(VAR_CHAIN) + 1);
+                GetSpeciesName(gStringVar2 ,VarGet(VAR_SPECIESCHAINED));
+                ScriptContext1_SetupScript(ChainNumber);
+            }
+            else if ((species == VarGet(VAR_SPECIESCHAINED)) && (VarGet(VAR_CHAIN) <=2)){
+				if (gBattleOutcome == B_OUTCOME_CAUGHT)
+					VarSet(VAR_CHAIN, VarGet(VAR_CHAIN) + 2);
+				else
+					VarSet(VAR_CHAIN, VarGet(VAR_CHAIN) + 1);
+			}
+            else if ((species != VarGet(VAR_SPECIESCHAINED)) && (VarGet(VAR_CHAIN) >= 3)) {
+                VarSet(VAR_CHAIN,0);
+                VarSet(VAR_SPECIESCHAINED,0);
+				GetSpeciesName(gStringVar2 ,VarGet(species));
+                ScriptContext1_SetupScript(ChainBroke);
+			}
+        }
         SetMainCallback2(CB2_ReturnToField);
         gFieldCallback = FieldCB_ReturnToFieldNoScriptCheckMusic;
     }

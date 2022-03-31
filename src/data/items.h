@@ -1599,7 +1599,7 @@ const struct Item gItems[] =
         .itemId = ITEM_ESCAPE_ROPE,
         .description = sEscapeRopeDesc,
         #if I_KEY_ESCAPE_ROPE >= GEN_8
-            .price = 0,
+            .price = 5000,
             .importance = 1,
             .pocket = POCKET_KEY_ITEMS,
         #else

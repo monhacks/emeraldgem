@@ -229,6 +229,9 @@
 #define VARIOUS_SET_SKY_DROP                    139
 #define VARIOUS_CLEAR_SKY_DROP                  140
 #define VARIOUS_SKY_DROP_YAWN                   141
+#define VARIOUS_USE_REVIVE_ON_OPPONENT          142
+
+
 
 // Cmd_manipulatedamage
 #define DMG_CHANGE_SIGN            0

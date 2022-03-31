@@ -66,15 +66,19 @@ Route101_EventScript_StartBirchRescue::
 	applymovement LOCALID_ZIGZAGOON, Route101_Movement_ZigzagoonFaceBirch
 	applymovement LOCALID_BIRCH, Route101_Movement_BirchFaceZigzagoon
 	waitmovement 0
+	namebox Unknown
 	msgbox Route101_Text_PleaseHelp, MSGBOX_DEFAULT
 	closemessage
+	hidenamebox
 	setvar VAR_ROUTE101_STATE, 2
 	releaseall
 	end
 
 Route101_EventScript_PreventExitSouth::
 	lockall
+	namebox Unknown
 	msgbox Route101_Text_DontLeaveMe, MSGBOX_DEFAULT
+	hidenamebox
 	closemessage
 	applymovement OBJ_EVENT_ID_PLAYER, Route101_Movement_PreventExitSouth
 	waitmovement 0
@@ -83,8 +87,10 @@ Route101_EventScript_PreventExitSouth::
 
 Route101_EventScript_PreventExitWest::
 	lockall
+	namebox Unknown
 	msgbox Route101_Text_DontLeaveMe, MSGBOX_DEFAULT
 	closemessage
+	hidenamebox
 	applymovement OBJ_EVENT_ID_PLAYER, Route101_Movement_PreventExitWest
 	waitmovement 0
 	releaseall
@@ -92,8 +98,10 @@ Route101_EventScript_PreventExitWest::
 
 Route101_EventScript_PreventExitNorth::
 	lockall
+	namebox Unknown
 	msgbox Route101_Text_DontLeaveMe, MSGBOX_DEFAULT
 	closemessage
+	hidenamebox
 	applymovement OBJ_EVENT_ID_PLAYER, Route101_Movement_PreventExitNorth
 	waitmovement 0
 	releaseall
@@ -264,7 +272,12 @@ Route101_EventScript_BirchsBag::
 	waitstate
 	applymovement LOCALID_BIRCH, Route101_Movement_BirchApproachPlayer
 	waitmovement 0
+	namebox Unknown
 	msgbox Route101_Text_YouSavedMe, MSGBOX_DEFAULT
+	hidenamebox
+	namebox Birch
+	msgbox Route101_Text_YouSavedMe2, MSGBOX_DEFAULT
+	hidenamebox
 	special HealPlayerParty
 	setflag FLAG_HIDE_ROUTE_101_BIRCH_ZIGZAGOON_BATTLE
 	clearflag FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_BIRCH
@@ -296,23 +309,24 @@ Route101_Text_HelpMe:
 	.string "¡A-Ayúdame!$"
 
 Route101_Text_PleaseHelp:
-	.string "???: ¡Tú, sí, tú!\n"
+	.string "¡Tú, sí, tú!\n"
 	.string "¡En mi Mochila hay {COLOR LIGHT_RED SHADOW RED} Pokéballs{COLOR DARK_GRAY SHADOW LIGHT_GRAY}, agarra una\l"
 	.string "y sálvame, soy alérgico a este Pokémon!$"
 
 Route101_Text_DontLeaveMe:
-	.string "???: ¡¿A-adónde vas?! ¡NO ME DEJES!$"
+	.string "¡¿A-adónde vas?! ¡NO ME DEJES!$"
 
 Route101_Text_YouSavedMe:
-	.string "???: ¡UFF! ¡MUCHÍSIMAS GRACIAS!\p"
+	.string "¡UFF! ¡MUCHÍSIMAS GRACIAS!\p"
 	.string "Eso estuvo cerca…\n"
 	.string "Estaba estudiando el comportamiento\l"
 	.string "de los {COLOR BLUE} nuevos Pokémon que migraron{COLOR DARK_GRAY}, y\l"
 	.string "me atacó un Poochyena…\p"
 	.string "Ya era muy tarde cuando noté que no\n"
 	.string "tenía mis EPI-Pen…\p"
-	.string "¡Por cierto, yo soy el {COLOR BLUE}Profesor Birch{COLOR DARK_GRAY}!\p"
-	.string "Profe Birch: ¡Encantado de conocerte!\n"
+	.string "¡Por cierto, yo soy el {COLOR BLUE}Profesor Birch{COLOR DARK_GRAY}!$"
+Route101_Text_YouSavedMe2:
+	.string "¡Encantado de conocerte!\n"
 	.string "Te invito a mi Laboratorio para charlar\l"
 	.string "más.$"
 

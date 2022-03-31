@@ -42,7 +42,7 @@ u8 *StringCopy_Nickname(u8 *dest, const u8 *src)
     return &dest[i];
 }
 
-//Género
+//Género player
 static const u8 *ExpandPlaceholder_OA(void)
 {
     if (gSaveBlock2Ptr->playerGender == MALE)
@@ -98,6 +98,97 @@ static const u8 *ExpandPlaceholder_EA(void)
     else
         return gText_ExpandedPlaceholder_A;
 }
+
+//Género rival
+static const u8 *ExpandPlaceholder_AO(void)
+{
+    if (gSaveBlock2Ptr->playerGender == MALE)
+        return gText_ExpandedPlaceholder_A;
+    else
+        return gText_ExpandedPlaceholder_O;
+}
+
+static const u8 *ExpandPlaceholder_ARIVAL(void)
+{
+    if (gSaveBlock2Ptr->playerGender == MALE)
+        return gText_ExpandedPlaceholder_A;
+    else
+        return gText_ExpandedPlaceholder_Kun;
+}
+
+static const u8 *ExpandPlaceholder_LaEl(void)
+{
+    if (gSaveBlock2Ptr->playerGender == MALE)
+        return gText_ExpandedPlaceholder_La;
+    else
+        return gText_ExpandedPlaceholder_El;
+}
+
+static const u8 *ExpandPlaceholder_LAEL(void)
+{
+    if (gSaveBlock2Ptr->playerGender == MALE)
+        return gText_ExpandedPlaceholder_LA;
+    else
+        return gText_ExpandedPlaceholder_EL;
+}
+
+static const u8 *ExpandPlaceholder_ITARIVAL(void)
+{
+    if (gSaveBlock2Ptr->playerGender == MALE)
+        return gText_ExpandedPlaceholder_ITA;
+    else
+        return gText_ExpandedPlaceholder_Kun;
+}
+
+static const u8 *ExpandPlaceholder_ITAITO(void)
+{
+    if (gSaveBlock2Ptr->playerGender == MALE)
+        return gText_ExpandedPlaceholder_ITA;
+    else
+        return gText_ExpandedPlaceholder_ITO;
+}
+
+static const u8 *ExpandPlaceholder_AE(void)
+{
+    if (gSaveBlock2Ptr->playerGender == MALE)
+        return gText_ExpandedPlaceholder_A;
+    else
+        return gText_ExpandedPlaceholder_E;
+}
+
+static const u8 *ExpandPlaceholder_ElElla(void)
+{
+    if (gSaveBlock2Ptr->playerGender == MALE)
+        return gText_ExpandedPlaceholder_El2;
+    else
+        return gText_ExpandedPlaceholder_Ella;
+}
+
+static const u8 *ExpandPlaceholder_ELELLA(void)
+{
+    if (gSaveBlock2Ptr->playerGender == MALE)
+        return gText_ExpandedPlaceholder_EL2;
+    else
+        return gText_ExpandedPlaceholder_ELLA;
+}
+
+static const u8 *ExpandPlaceholder_EllaEl(void)
+{
+    if (gSaveBlock2Ptr->playerGender == MALE)
+        return gText_ExpandedPlaceholder_Ella;
+    else
+        return gText_ExpandedPlaceholder_El2;
+}
+
+static const u8 *ExpandPlaceholder_ELLAEL(void)
+{
+    if (gSaveBlock2Ptr->playerGender == MALE)
+        return gText_ExpandedPlaceholder_ELLA;
+    else
+        return gText_ExpandedPlaceholder_EL2;
+}
+
+
 
 static const u8 *ExpandPlaceholder_COLOR_PLAYER(void)
 {
@@ -193,6 +284,15 @@ u16 StringLength(const u8 *str)
         length++;
 
     return length;
+}
+
+u16 StringLengthMinusColor(const u8 *str)
+{
+    u16 length = 0;
+	u16 i = 0;
+	while (str[length] != EOS)
+       length++;   
+	return length;
 }
 
 s32 StringCompare(const u8 *str1, const u8 *str2)
@@ -600,6 +700,17 @@ const u8 *GetExpandedPlaceholder(u32 id)
         [PLACEHOLDER_ID_EA] = ExpandPlaceholder_EA,
         [PLACEHOLDER_ID_COLOR_PLAYER] = ExpandPlaceholder_COLOR_PLAYER,
         [PLACEHOLDER_ID_COLOR_RIVAL] = ExpandPlaceholder_COLOR_RIVAL,
+		[PLACEHOLDER_ID_AO] = ExpandPlaceholder_AO,
+        [PLACEHOLDER_ID_ARIVAL] = ExpandPlaceholder_ARIVAL,
+        [PLACEHOLDER_ID_LAEL] = ExpandPlaceholder_LAEL,
+        [PLACEHOLDER_ID_LaEl] = ExpandPlaceholder_LaEl,
+        [PLACEHOLDER_ID_ITARIVAL] = ExpandPlaceholder_ITARIVAL,
+        [PLACEHOLDER_ID_ITAITO] = ExpandPlaceholder_ITAITO,
+        [PLACEHOLDER_ID_AE] = ExpandPlaceholder_AE,
+        [PLACEHOLDER_ID_ELELLA] = ExpandPlaceholder_ELELLA,
+        [PLACEHOLDER_ID_ElElla] = ExpandPlaceholder_ElElla,
+        [PLACEHOLDER_ID_ELLAEL] = ExpandPlaceholder_ELLAEL,
+        [PLACEHOLDER_ID_EllaEl] = ExpandPlaceholder_EllaEl,
     };
 
     if (id >= ARRAY_COUNT(funcs))

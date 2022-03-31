@@ -6,6 +6,7 @@
 #include "task.h"
 #include "text.h"
 #include "field_name_box.h"
+#include "menu.h"
 
 #define NAMEBOX_TAG 0x2722
 
@@ -20,12 +21,25 @@ static void Task_DisplayNamebox(u8 taskId);
 static void LoadNameboxSprite(s8 x, s8 y);
 static void AddTextPrinterForName();
 static void ClearNameboxTiles();
+void ShowNameboxMenuExtraWindow(const u8 *str);
 
 static EWRAM_DATA u8 sNameboxWindowId = 0;
 static EWRAM_DATA u8 sNameboxGfxId = 0;
 
 static const u32 sNamebox_Gfx[] = INCBIN_U32("graphics/text_window/name_box.4bpp.lz");
 static const u16 sNamebox_Pal[] = INCBIN_U16("graphics/text_window/name_box.gbapal");
+
+#define NAMEBOX_WIDTH 64
+#define NAMEBOX_HEIGHT 32
+#define NAMEBOX_SIZE (NAMEBOX_WIDTH * NAMEBOX_HEIGHT / 2)
+
+static const struct WindowTemplate sNameboxWindowTemplate = {0, 1, 12, 8, 2, 15, 0}; // Parámetros de la ventana extra
+
+//rtc, borrar si no anda
+
+
+
+
 
 static const struct OamData sOam_Namebox =
 {
@@ -40,6 +54,7 @@ static const struct OamData sOam_Namebox =
     .priority = 1,
     .paletteNum = 0,
 };
+
 
 
 static const struct CompressedSpriteSheet sSpriteSheet_Namebox = {
@@ -76,22 +91,59 @@ static const struct WindowTemplate sNamebox_WindowTemplate =
 {
     .bg = 0,
     .tilemapLeft = 1, 
-    .tilemapTop = 12,
+    .tilemapTop = 11,
     .width = 6, 
     .height = 2,                //required to be at least two
     .paletteNum = 15,
-    .baseBlock = 0x188          //placed before the msgbox tiles
+    .baseBlock = 0x8          //placed before the msgbox tiles
 };
 
+static const struct WindowTemplate sNamebox_WindowTemplate2 =
+{
+    .bg = 0,
+    .tilemapLeft = 1, 
+    .tilemapTop = 11,
+    .width = 8, 
+    .height = 2,                //required to be at least two
+    .paletteNum = 15,
+    .baseBlock = 0x8          //placed before the msgbox tiles
+};
+
+static const struct WindowTemplate sNamebox_WindowTemplate3 =
+{
+    .bg = 0,
+    .tilemapLeft = 1, 
+    .tilemapTop = 11,
+    .width = 10, 
+    .height = 2,                //required to be at least two
+    .paletteNum = 15,
+    .baseBlock = 0x8          //placed before the msgbox tiles
+};
+
+void ShowNameboxMenuExtraWindow(const u8 *str) // Función que carga una ventana auxiliar en el menú de pausa.
+{	
+	u16 lenght = StringLength(str);
+	if (lenght >= 12)
+		sNameboxWindowId = AddWindow(&sNamebox_WindowTemplate3);
+	else if (lenght <= 8)
+		sNameboxWindowId = AddWindow(&sNamebox_WindowTemplate);
+	else 
+		sNameboxWindowId = AddWindow(&sNamebox_WindowTemplate2);
+	PutWindowTilemap(sNameboxWindowId);
+    DrawStdWindowFrame(sNameboxWindowId, FALSE);
+    AddTextPrinterParameterized(sNameboxWindowId, 1, str, 0, 1, TEXT_SKIP_DRAW, NULL);
+    CopyWindowToVram(sNameboxWindowId, 3);
+}
 
 void ShowFieldName(const u8 *str) {
     if(IsNameboxDisplayed())
             ClearNamebox();
             
-    LoadNameboxWindow(&sNamebox_WindowTemplate);
+    /*LoadNameboxWindow(&sNamebox_WindowTemplate);
     StringExpandPlaceholders(gStringVar3, str);
     AddTextPrinterForName();
-    CreateTask_DisplayNamebox();
+    CreateTask_DisplayNamebox(); */
+	ShowNameboxMenuExtraWindow(str);
 }
 
 bool8 IsNameboxDisplayed() {
@@ -101,10 +153,9 @@ bool8 IsNameboxDisplayed() {
 }
 
 void ClearNamebox() {
-    ClearNameboxTiles();
+	ClearStdWindowAndFrameToTransparent(sNameboxWindowId, FALSE);
     RemoveWindow(sNameboxWindowId);
     sNameboxWindowId = 0;
-    DestroySpriteAndFreeResources(&gSprites[sNameboxGfxId]);
 }
 
 

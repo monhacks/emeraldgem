@@ -23,7 +23,6 @@
 #include "field_specials.h"
 #include "field_weather.h"
 #include "fieldmap.h"
-#include "fldeff.h"
 #include "fldeff_misc.h"
 #include "frontier_util.h"
 #include "gpu_regs.h"
@@ -76,6 +75,7 @@
 #include "constants/rgb.h"
 #include "constants/songs.h"
 #include "naming_screen.h"
+#include "fldeff.h"
 
 #define PARTY_PAL_SELECTED     (1 << 0)
 #define PARTY_PAL_FAINTED      (1 << 1)

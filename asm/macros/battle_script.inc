@@ -2084,3 +2084,7 @@
 	.macro skydropyawn
 	various 0, VARIOUS_SKY_DROP_YAWN
 	.endm
+
+	.macro usereviveonopponent
+	various 0, VARIOUS_USE_REVIVE_ON_OPPONENT
+	.endm
