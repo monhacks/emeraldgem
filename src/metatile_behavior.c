@@ -41,7 +41,7 @@ static const u8 sTileBitAttributes[] =
     [MB_SHOAL_CAVE_ENTRANCE] = TILE_ATTRIBUTES(TRUE, FALSE, FALSE),
     [MB_TRADE_SELF] = TILE_ATTRIBUTES(FALSE, FALSE, FALSE),
     [MB_TRADE_SELF_2] = TILE_ATTRIBUTES(FALSE, FALSE, FALSE),
-    [MB_UNUSED_1F] = TILE_ATTRIBUTES(FALSE, FALSE, FALSE),
+    [MB_SIGNPOST] = TILE_ATTRIBUTES(FALSE, FALSE, FALSE),
     [MB_ICE] = TILE_ATTRIBUTES(TRUE, FALSE, FALSE),
     [MB_SAND] = TILE_ATTRIBUTES(TRUE, FALSE, FALSE),
     [MB_SEAWEED] = TILE_ATTRIBUTES(TRUE, TRUE, TRUE),
@@ -1539,3 +1539,9 @@ bool8 MetatileBehavior_IsTrainerHillTimer(u8 metatileBehavior)
     else
         return FALSE;
 }
+
+bool8 MetatileBehavior_IsSignpost(u8 mb)
+{
+    return (mb == MB_SIGNPOST);
+}
+

@@ -694,7 +694,11 @@ EventScript_BackupMrBrineyLocation::
 	.include "data/scripts/rival_graphics.inc"
 	.include "data/scripts/set_gym_trainers.inc"
 
-Common_EventScript_ShowBagIsFull::
+EventScript_CancelMessageBox::
+	release
+	end
+
+Common_EventScript_ShowBagIsFull:: @ 8272054
 	msgbox gText_TooBadBagIsFull, MSGBOX_DEFAULT
 	release
 	end

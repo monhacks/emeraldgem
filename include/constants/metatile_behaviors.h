@@ -32,7 +32,7 @@
 #define MB_SHOAL_CAVE_ENTRANCE 0x1C
 #define MB_TRADE_SELF 0x1D
 #define MB_TRADE_SELF_2 0x1E
-#define MB_UNUSED_1F 0x1F
+#define MB_SIGNPOST 0x1F
 #define MB_ICE 0x20
 #define MB_SAND 0x21
 #define MB_SEAWEED 0x22

@@ -4,6 +4,7 @@
 #include "mystery_gift.h"
 #include "util.h"
 #include "constants/event_objects.h"
+#include "field_message_box.h"
 #include "constants/map_scripts.h"
 
 #define RAM_SCRIPT_MAGIC 51
@@ -20,6 +21,8 @@ static u8 sScriptContext1Status;
 static struct ScriptContext sScriptContext1;
 static struct ScriptContext sScriptContext2;
 static bool8 sScriptContext2Enabled;
+static u8 sMsgIsSignPost;
+static u8 sMsgBoxIsCancelable;
 
 extern ScrCmdFunc gScriptCmdTable[];
 extern ScrCmdFunc gScriptCmdTableEnd[];
@@ -446,4 +449,36 @@ void InitRamScript_NoObjectEvent(u8 *script, u16 scriptSize)
     if (scriptSize > sizeof(gSaveBlock1Ptr->ramScript.data.script))
         scriptSize = sizeof(gSaveBlock1Ptr->ramScript.data.script);
     InitRamScript(script, scriptSize, MAP_GROUP(UNDEFINED), MAP_NUM(UNDEFINED), NO_OBJECT);
+}
+
+// auto read signposts
+void SetWalkingIntoSignVars(void)
+{
+    gWalkAwayFromSignInhibitTimer = 6;
+    sMsgBoxIsCancelable = TRUE;
+}
+
+bool32 IsMsgSignPost(void)
+{
+    return sMsgIsSignPost;
+}
+
+void ResetFacingNpcOrSignPostVars(void)
+{
+    sMsgIsSignPost = FALSE;
+}
+
+void MsgSetSignPost(void)
+{
+    sMsgIsSignPost = TRUE;
+}
+
+void ClearMsgBoxCancelableState(void)
+{
+    sMsgBoxIsCancelable = FALSE;
+}
+
+bool32 CanWalkAwayToCancelMsgBox(void)
+{
+    return sMsgBoxIsCancelable;
 }
