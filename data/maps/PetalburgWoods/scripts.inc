@@ -470,9 +470,10 @@ PetalburgWoods_Text_YoureLoadedWithItems:
 	.string "De alguna forma no tienes espacio.$"
 
 PetalburgWoods_Text_GoBugPokemonTeam:
-	.string "¡Atrapé muchos bichos!\p"
-	.string "¡Go, go, go!\n"
-	.string "¡Mi monotype Bicho!$"
+	.string "¡AL ESCONDERME EN EL ARBOL,\n"
+	.string "PUDE ATRAPAR MUCHOS BICHOS!\p"
+	.string "¡GO, GO, GO!\n"
+	.string "¡MI MONOTYPE BICHO!$"
 
 PetalburgWoods_Text_ICouldntWin:
 	.string "Incluso con tantos,\n"
@@ -494,11 +495,11 @@ PetalburgWoods_Text_PeopleRespectYou:
 	.string "Al menos eso dijo mi papá.$"
 
 PetalburgWoods_Text_IWantRematch1:
-	.string "¡DAME LA REVANCHA!\p"
+	.string "¡QUIERO LA REVANCHA!\p"
 	.string "¡TE DIRÉ CUANDO HAYAN CRECIDO!$"
 
 PetalburgWoods_Text_IWantRematch2:
-	.string "¡DAME LA REVANCHA!\p"
+	.string "¡QUIERO LA REVANCHA!\p"
 	.string "¡TE DIRÉ CUANDO HAYAN CRECIDO!$"
 
 PetalburgWoods_Text_MyPokemonHaveGrown:
@@ -506,7 +507,9 @@ PetalburgWoods_Text_MyPokemonHaveGrown:
 	.string "Todo-digo todas me amarán.$"
 
 PetalburgWoods_Text_CantBePopularIfLose:
-	.string ":($"
+	.string "Mis bichos no fueron lo\n"
+	.string "suficientemente fuertes para\l"
+	.string "impresionarte.$"
 
 PetalburgWoods_Text_IveBeenTrainingHard:
 	.string "Los Pokémon fuertes impresionan\n"
@@ -519,9 +522,10 @@ PetalburgWoods_Text_StayOutOfTallGrass:
 	.string "Si no es asi, esquivá el pasto.$"
 
 PetalburgWoods_Text_HiddenItemsExplanation:
-	.string "Aveces, hay Pokémon escondidos\n"
-	.string "en el pasto que se mueve solo.\p"
-	.string "Estoy buscando un Phantum acá.$"
+	.string "Aveces, hay Pokémon raros\n"
+	.string "que aparecen al {COLOR RED}encadenar{COLOR DARK_GRAY}\l"
+	.string "Pokemon salvajes.\p
+	.string "Por ejemplo, estoy buscando un Phantum.$"
 
 PetalburgWoods_Text_TryUsingThisItem:
 	.string "¡Ah, genial!\n"
@@ -540,10 +544,7 @@ PetalburgWoods_Text_TrainerTipsExperience:
 
 PetalburgWoods_Text_TrainerTipsPP:
 	.string "¡PISTAS PARA ENTRENADORES!\p"
-	.string "Si ves que un parche de pasto se mueve,\n"
-	.string "acércate sigilosamente. Podría\l"
-	.string "tratarse de un poderoso {COLOR RED}Pokémon raro{COLOR DARK_GRAY}.\p"
-	.string "Asimismo, si estás buscando la {COLOR RED}versión\n"
+	.string "Si estás buscando la {COLOR RED}versión\n"
 	.string "Shiny{COLOR DARK_GRAY} de un Pokémon, puedes vencerlo o\l"
 	.string "capturarlo una y otra, y otra vez hasta\l"
 	.string "formar una {COLOR RED}cadena{COLOR DARK_GRAY}, que se mantendrá\l"

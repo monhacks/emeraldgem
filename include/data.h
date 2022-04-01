@@ -25,7 +25,7 @@ struct MonCoords
 #define GET_MON_COORDS_WIDTH(size)((size >> 4) * 8)
 #define GET_MON_COORDS_HEIGHT(size)((size & 0xF) * 8)
 
-struct TrainerMonNoItemDefaultMoves
+/*struct TrainerMonNoItemDefaultMoves
 {
     u16 iv;
     u8 lvl;
@@ -51,23 +51,33 @@ struct TrainerMonNoItemCustomMoves
     u16 moves[MAX_MON_MOVES];
 };
 
-struct TrainerMonItemCustomMoves
+struct TrainerMonItemCustomMoves*/
+struct TrainerMon
 {
     u16 iv;
+    u8 nickname[POKEMON_NAME_LENGTH + 1];
     u8 lvl;
     u16 species;
 	u8 abilityNums;
     u16 heldItem;
     u16 moves[MAX_MON_MOVES];
+    u8 hiddenPower:5;
+    u8 difficulty:3;
+    u8 build:3;
+    u8 ball:5;
+    u16 ability:2;
+    u16 friendship:2;
+    u16 gender:2;
+    u16 shiny:1;
+    u16 nature:5;
+    u16 unused:4;
 };
 
 union TrainerMonPtr
 {
-    const struct TrainerMonNoItemDefaultMoves *NoItemDefaultMoves;
-    const struct TrainerMonNoItemCustomMoves *NoItemCustomMoves;
-    const struct TrainerMonItemDefaultMoves *ItemDefaultMoves;
-    const struct TrainerMonItemCustomMoves *ItemCustomMoves;
+    const struct TrainerMon *TrainerMon;
 };
+
 
 struct Trainer
 {

@@ -857,9 +857,8 @@ RustboroCity_EventScript_MayEncounter::
 
 RustboroCity_EventScript_MayAskToBattle::
 	setvar VAR_0x8008, 1
-	msgbox RustboroCity_Text_MayWantToBattle, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, YES, RustboroCity_EventScript_BattleMay
-	msgbox RustboroCity_Text_MayOhHaventRaisedPokemonEnough, MSGBOX_DEFAULT
+	msgbox RustboroCity_Text_MayWantToBattle, MSGBOX_DEFAULT
+	goto RustboroCity_EventScript_BattleMay
 	releaseall
 	end
 
@@ -901,23 +900,22 @@ RustboroCity_EventScript_BattleMayMudkip::
 	end
 
 RustboroCity_EventScript_BrendanEncounter::
-	goto_if_set FLAG_DEFEATED_RIVAL_RUSTBORO, RustboroCity_EventScript_BrendanBrineyHint
-	goto_if_set FLAG_MET_RIVAL_RUSTBORO, RustboroCity_EventScript_BrendanAskToBattle
+	goto_if_set FLAG_DEFEATED_RIVAL_RUSTBORO, RustboroCity_EventScript_MayBrineyHint
+	goto_if_set FLAG_MET_RIVAL_RUSTBORO, RustboroCity_EventScript_MayAskToBattle
 	setflag FLAG_MET_RIVAL_RUSTBORO
-	msgbox RustboroCity_Text_BrendanHiLetsRegister, MSGBOX_DEFAULT
+	msgbox RustboroCity_Text_MayHiLetsRegister, MSGBOX_DEFAULT
 	closemessage
 	delay 30
 	playfanfare MUS_REGISTER_MATCH_CALL
-	msgbox RustboroCity_Text_RegisteredBrendan, MSGBOX_DEFAULT
+	msgbox RustboroCity_Text_RegisteredMay, MSGBOX_DEFAULT
 	waitfanfare
 	closemessage
 	delay 30
 	setflag FLAG_ENABLE_RIVAL_MATCH_CALL
 	setvar VAR_RUSTBORO_CITY_STATE, 8
 	setvar VAR_ROUTE104_STATE, 2
-	msgbox RustboroCity_Text_BrendanPassedBrineyWantToBattle, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, YES, RustboroCity_EventScript_BattleBrendan
-	msgbox RustboroCity_Text_BrendanNoConfidenceInPokemon, MSGBOX_DEFAULT
+	msgbox RustboroCity_Text_MayPassedBrineyWantToBattle, MSGBOX_DEFAULT
+	goto RustboroCity_EventScript_BattleBrendan
 	call RustboroCity_EventScript_RestoreBgm
 	releaseall
 	end
@@ -1135,26 +1133,33 @@ RustboroCity_Text_PleaseComeWithMe:
 	.string "Please come with me!$"
 
 RustboroCity_Text_MayHiLetsRegister:
-	.string "MAY: Oh, hi, {PLAYER}{KUN}!\p"
-	.string "You had a MATCH CALL feature put\n"
-	.string "on your POKéNAV!\p"
-	.string "Let's register each other so we can\n"
-	.string "contact one another anytime!\p"
-	.string "… … … … … …$"
+	.string "Ah, hola, {PLAYER}.\n"
+	.string "¿También te dieron el PC Portátil y el\l"
+	.string "PokéNav?\l"
+	.string "Creí que eran raros de conseguir…\p"
+	.string "¡Pero bueno! Ya que estamos, añádeme a\n"
+	.string "tu lista de contactos para… Bueno…\l"
+	.string "Porque sí, lo que sea.$"
 
 RustboroCity_Text_RegisteredMay:
-	.string "Registered MAY\n"
-	.string "in the POKéNAV.$"
+	.string "{RIVAL} se registró sol{AO} en tu\n"
+	.string "PokeNav.$"
 
 RustboroCity_Text_MayPassedBrineyWantToBattle:
-	.string "MAY: Oh, by the way, I passed\n"
-	.string "MR. BRINEY in PETALBURG WOODS.\p"
-	.string "I guess he's on his way home to his\n"
-	.string "cottage by the sea.\p"
-	.string "How's your POKéDEX coming along,\n"
-	.string "{PLAYER}{KUN}? Mine's looking pretty decent!\p"
-	.string "So…\n"
-	.string "How about a little battle?$"
+	.string "Ah, sí, necesito saber, ¿Cómo va tu\n"
+	.string "Pokédex?\n"
+	.string "Seguro que no tan bien como la mía.\p"
+	.string "La mía está increíble, ¿Sabías?\p"
+	.string "Además, algo me dijo mi Papá sobre las\n"
+	.string "Dexes, que podemos {COLOR GREEN}intercambiar los\l"
+	.string "datos de la Pokédex{COLOR DARK_GRAY} para poder\l"
+	.string "completarla más rápido.\p"
+	.string "Realmente no quiero necesitar tu ayuda\n"
+	.string "para esto, y también dudo que hacerlo\l"
+	.string "vaya a registrarme nuevos Pokémon. Así\l"
+	.string "que hagamos una cosa:\p"
+	.string "Si me ganas en una Batalla Pokémon, voy\n"
+	.string "a intercambiarte los datos.$"
 
 RustboroCity_Text_MayOhHaventRaisedPokemonEnough:
 	.string "MAY: Oh, what's the matter?\p"
@@ -1167,19 +1172,27 @@ RustboroCity_Text_MayWantToBattle:
 	.string "How about a little battle here?$"
 
 RustboroCity_Text_MayImNotGoingToLose:
-	.string "MAY: You just became a TRAINER,\n"
-	.string "{PLAYER}{KUN}. I'm not going to lose!$"
+	.string "¡Ganaré!$"
 
 RustboroCity_Text_MayDefeat:
-	.string "Yikes!\n"
-	.string "You're better than I expected!$"
+	.string "………………………………………………\n"
+	.string "No… Puedo derrotarte…\l"
+	.string "Pero si he… Considerado todo…$"
 
 RustboroCity_Text_MayMrBrineyHint:
-	.string "MAY: Oh, by the way, MR. BRINEY, who\n"
-	.string "I just passed…\p"
-	.string "{PLAYER}{KUN}, you just moved here so you\n"
-	.string "might not know this, but MR. BRINEY\l"
-	.string "was once a revered seafarer.$"
+	.string "Pues bueno, terminemos esto.\p"
+	.string "………………………………………………\n"
+	.string "………………………………………………\l"
+	.string "………………………………………………\l"
+	.string "………………………………………………\l"
+	.string "………………………………………………\l"
+	.string "………………………………………………\p"
+	.string "Listo, te he añadido a tu Pokédex como\n"
+	.string "{COLOR RED}atrapados{COLOR DARK_GRAY} los Pokémon que tengo yo.\p"
+	.string "Ah, sí, el Señor Briney me pidió que te\n"
+	.string "dijera que te está esperando en su\l"
+	.string "cabaña en la Ruta 104.$"
+
 
 RustboroCity_Text_BrendanHiLetsRegister:
 	.string "BRENDAN: Oh, hey, {PLAYER}!\p"
@@ -1213,12 +1226,12 @@ RustboroCity_Text_BrendanWantToBattle:
 	.string "Want to have a battle with me?$"
 
 RustboroCity_Text_BrendanIWontGoEasy:
-	.string "BRENDAN: I know you just became\n"
-	.string "a TRAINER, but I won't go easy!$"
+	.string "¡Ganaré!$"
 
 RustboroCity_Text_BrendanDefeat:
-	.string "Hmm…\n"
-	.string "You're pretty good.$"
+	.string "………………………………………………\n"
+	.string "No… Puedo derrotarte…\l"
+	.string "Pero si he… Considerado todo…$"
 
 RustboroCity_Text_BrendanMrBrineyHint:
 	.string "BRENDAN: By the way, you know\n"

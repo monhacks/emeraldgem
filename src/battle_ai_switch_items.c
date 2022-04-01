@@ -18,6 +18,28 @@
 static bool8 HasSuperEffectiveMoveAgainstOpponents(bool8 noRng);
 static bool8 FindMonWithFlagsAndSuperEffective(u16 flags, u8 moduloPercent);
 static bool8 ShouldUseItem(void);
+static bool8 EnemyMonHasSpecificSuperEffectiveRevealedMove(void);
+
+/*static bool8 EnemyMonHasSpecificSuperEffectiveRevealedMove(void)
+{
+    u8 opposingPosition = BATTLE_OPPOSITE(GetBattlerPosition(gActiveBattler));
+		if (gLastLandedMoves[opposingPosition] != (MOVE_REFLECT || MOVE_LIGHT_SCREEN 
+				|| MOVE_SPIKES || MOVE_TOXIC_SPIKES || MOVE_STEALTH_ROCK || MOVE_STICKY_WEB || MOVE_LEECH_SEED || MOVE_EXPLOSION
+				|| MOVE_SELF_DESTRUCT || MOVE_SLEEP_POWDER || MOVE_YAWN || MOVE_LOVELY_KISS || MOVE_GRASS_WHISTLE || MOVE_HYPNOSIS 
+				|| MOVE_TOXIC || MOVE_BANEFUL_BUNKER || MOVE_WILL_O_WISP || MOVE_TRICK || MOVE_TRICK_ROOM || MOVE_WONDER_ROOM
+				||  MOVE_PSYCHO_SHIFT || MOVE_FAKE_OUT || MOVE_STUN_SPORE || MOVE_THUNDER_WAVE || MOVE_NUZZLE || MOVE_GLARE
+				|| MOVE_ROOST || MOVE_MIRACLE_EYE || MOVE_GRAVITY || MOVE_HEALING_WISH || MOVE_BRINE || MOVE_TAILWIND
+				|| MOVE_EMBARGO || MOVE_HEAL_BLOCK || MOVE_TRUMP_CARD || MOVE_POWER_TRICK || MOVE_COPYCAT || MOVE_POWER_SWAP
+				|| MOVE_GUARD_SWAP || MOVE_AQUA_RING || MOVE_MAGNET_RISE || MOVE_NASTY_PLOT || MOVE_ATTACK_ORDER || MOVE_DEFEND_ORDER
+				|| MOVE_HEAL_ORDER || MOVE_HONE_CLAWS || MOVE_SOAK || MOVE_SIMPLE_BEAM || MOVE_SHELL_SMASH || MOVE_WORK_UP
+				|| MOVE_TRICK_OR_TREAT || MOVE_NOBLE_ROAR || MOVE_GRASSY_TERRAIN || MOVE_MISTY_TERRAIN || MOVE_ELECTRIFY
+				|| MOVE_BABY_DOLL_EYES || MOVE_PSYCHIC_TERRAIN || MOVE_OBSTRUCT || MOVE_ELECTRIC_TERRAIN || MOVE_SOLAR_BEAM
+				) && (gMoveResultFlags & MOVE_RESULT_SUPER_EFFECTIVE)) {
+			*(gBattleStruct->AI_monToSwitchIntoId + opposingPosition) = PARTY_SIZE;
+			BtlController_EmitTwoReturnValues(1, B_ACTION_SWITCH, 0);
+			return TRUE;
+		}
+}*/
 
 void GetAIPartyIndexes(u32 battlerId, s32 *firstId, s32 *lastId)
 {
@@ -498,6 +520,8 @@ bool32 ShouldSwitch(void)
     s32 i;
     s32 availableToSwitch;
 
+/*	if (EnemyMonHasSpecificSuperEffectiveRevealedMove())
+		return TRUE;*/
     if (gBattleMons[gActiveBattler].status2 & (STATUS2_WRAPPED | STATUS2_ESCAPE_PREVENTION))
         return FALSE;
     if (gStatuses3[gActiveBattler] & STATUS3_ROOTED)
@@ -506,7 +530,7 @@ bool32 ShouldSwitch(void)
         return FALSE;
     if (gBattleTypeFlags & BATTLE_TYPE_ARENA)
         return FALSE;
-
+	
     availableToSwitch = 0;
 
     if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
@@ -571,6 +595,8 @@ bool32 ShouldSwitch(void)
     if (FindMonWithFlagsAndSuperEffective(MOVE_RESULT_DOESNT_AFFECT_FOE, 2)
         || FindMonWithFlagsAndSuperEffective(MOVE_RESULT_NOT_VERY_EFFECTIVE, 3))
         return TRUE;
+	/*if (gBattleMons[gActiveBattler].status2 & STATUS2_CONFUSION)
+        return TRUE;*/
 
     return FALSE;
 }

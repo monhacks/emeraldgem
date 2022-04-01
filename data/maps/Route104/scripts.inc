@@ -205,7 +205,7 @@ Route104_EventScript_BrendanEncounter::
 	end
 
 Route104_EventScript_BrendanAskToBattle::
-	msgbox Route104_Text_BrendanLetsBattle, MSGBOX_YESNO
+	msgbox Route104_Text_MayLetsBattle, MSGBOX_DEFAULT
 	goto_if_eq VAR_RESULT, YES, Route104_EventScript_BattleBrendan
 	msgbox Route104_Text_BrendanNoConfidence, MSGBOX_DEFAULT
 	releaseall
@@ -220,7 +220,7 @@ Route104_EventScript_BattleBrendan::
 	end
 
 Route104_EventScript_BrendanDefeated::
-	msgbox Route104_Text_BrendanPostBattle, MSGBOX_DEFAULT
+	msgbox Route104_Text_MayPostBattle, MSGBOX_DEFAULT
 	call_if_eq VAR_0x8008, 0, Route104_EventScript_RestoreMusic
 	releaseall
 	end
@@ -1129,8 +1129,7 @@ Route104_Text_MayHaventRaisedPokemon:
 	.string "That's not very good for a TRAINER!$"
 
 Route104_Text_MayLetsBattle:
-	.string "MAY: So, what do you think?\n"
-	.string "How about a little battle here?$"
+	.string "¡PELEA!$"
 
 Route104_Text_MayIntro:
 	.string "¡Ganaré!$"
