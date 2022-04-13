@@ -12,6 +12,7 @@
 #include "trig.h"
 #include "constants/field_effects.h"
 #include "constants/songs.h"
+#include "palette.h"
 
 #define OBJ_EVENT_PAL_TAG_NONE 0x11FF // duplicate of define in event_object_movement.c
 
@@ -31,6 +32,8 @@ static void SynchroniseSurfPosition(struct ObjectEvent *, struct Sprite *);
 static void UpdateBobbingEffect(struct ObjectEvent *, struct Sprite *, struct Sprite *);
 static void SpriteCB_UnderwaterSurfBlob(struct Sprite *);
 static u32 ShowDisguiseFieldEffect(u8, u8, u8);
+
+
 
 // Used by several field effects to determine which of a group it is
 #define sFldEff    data[1]
@@ -86,7 +89,7 @@ static void LoadObjectReflectionPalette(struct ObjectEvent *objectEvent, struct 
     }
     else
     {
-        LoadObjectRegularReflectionPalette(objectEvent, reflectionSprite->oam.paletteNum);
+       LoadObjectRegularReflectionPalette(objectEvent, reflectionSprite->oam.paletteNum);
     }
 }
 
@@ -141,6 +144,7 @@ static void UpdateObjectReflectionSprite(struct Sprite *reflectionSprite)
     else
     {
         reflectionSprite->oam.paletteNum = gReflectionEffectPaletteMap[mainSprite->oam.paletteNum];
+		
         reflectionSprite->oam.shape = mainSprite->oam.shape;
         reflectionSprite->oam.size = mainSprite->oam.size;
         reflectionSprite->oam.matrixNum = mainSprite->oam.matrixNum | ST_OAM_VFLIP;
@@ -184,6 +188,7 @@ u8 CreateWarpArrowSprite(void)
     struct Sprite *sprite;
 
     spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[FLDEFFOBJ_ARROW], 0, 0, 0x52);
+	
     if (spriteId != MAX_SPRITES)
     {
         sprite = &gSprites[spriteId];

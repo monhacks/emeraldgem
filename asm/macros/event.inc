@@ -1765,6 +1765,12 @@
 	.2byte \frameNumber
 	.endm
 	
+	.macro checkpartytype type:req
+	.byte 0xe7
+	.2byte \type
+	.endm
+	
+	
 		@ Calls a script if the Player's Pokedex has seen the specified Pokemon.
 	.macro call_if_mon_seen species:req, script:req
 	setvar VAR_TEMP_1, \species

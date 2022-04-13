@@ -232,6 +232,16 @@ RustboroCity_EventScript_LittleBoy::
 	release
 	end
 
+RustboroCity_EventScript_LittleBoyNo::
+	msgbox RustboroCity_Text_LittleBoyNo, MSGBOX_DEFAULT
+	applymovement LOCALID_LITTLE_BOY, Common_Movement_FaceOriginalDirection
+	waitmovement 0
+	release
+	end
+	
+ RustboroCity_Text_LittleBoyNo:
+	.string "No tienes tipos Normal.$"
+
 RustboroCity_EventScript_LittleGirl::
 	lock
 	faceplayer
@@ -295,7 +305,7 @@ RustboroCity_EventScript_StolenGoodsScene::
 	addobject LOCALID_GRUNT
 	addobject LOCALID_DEVON_EMPLOYEE
 	applymovement LOCALID_GRUNT, RustboroCity_Movement_GruntEscape
-	waitmovement 0
+	waitmovement 0 
 	removeobject LOCALID_GRUNT
 	applymovement LOCALID_DEVON_EMPLOYEE, RustboroCity_Movement_EmployeeChaseGrunt1
 	waitmovement 0
@@ -600,7 +610,8 @@ RustboroCity_EventScript_ReturnGoods::
 	call_if_eq VAR_TEMP_1, 3, RustboroCity_EventScript_EmployeeApproachPlayerDown2
 	call_if_eq VAR_TEMP_1, 4, RustboroCity_EventScript_EmployeeFacePlayerRight
 	msgbox RustboroCity_Text_YouGotItThankYou, MSGBOX_DEFAULT
-	giveitem ITEM_GREAT_BALL
+	giveitem ITEM_GREAT_BALL, 5
+	giveitem ITEM_NET_BALL, 5
 	call_if_eq VAR_RESULT, FALSE, RustboroCity_EventScript_BagFull
 	msgbox RustboroCity_Text_PleaseComeWithMe, MSGBOX_DEFAULT
 	closemessage
@@ -871,10 +882,31 @@ RustboroCity_EventScript_BattleMay::
 	end
 
 RustboroCity_EventScript_MayBrineyHint::
+	goto_if_set FLAG_MAY_YA_HISO, RustboroCity_EventScript_MayBrineyNoHint
 	msgbox RustboroCity_Text_MayMrBrineyHint, MSGBOX_DEFAULT
+	setcaughtmon SPECIES_POOCHYENA
+	setcaughtmon SPECIES_WURMPLE
+	setcaughtmon SPECIES_PHANTUMP
+	setcaughtmon SPECIES_HAPPINY
+	setcaughtmon SPECIES_ZIGZAGOON
+	setcaughtmon SPECIES_AUDINO
+	setcaughtmon SPECIES_TREECKO
+	setcaughtmon SPECIES_MUDKIP
+	setcaughtmon SPECIES_TORCHIC
+	setflag FLAG_MAY_YA_HISO
 	call_if_eq VAR_0x8008, 0, RustboroCity_EventScript_RestoreBgm
 	releaseall
 	end
+
+RustboroCity_EventScript_MayBrineyNoHint::
+	msgbox RustboroCity_Text_MayNoMrBrineyHint, MSGBOX_DEFAULT
+	call_if_eq VAR_0x8008, 0, RustboroCity_EventScript_RestoreBgm
+	releaseall
+	end
+RustboroCity_Text_MayNoMrBrineyHint:
+	.string "Ah, sí, el Señor Briney me pidió que te\n"
+	.string "dijera que te está esperando en su\l"
+	.string "cabaña en la Ruta 104.$"
 
 RustboroCity_EventScript_RestoreBgm::
 	savebgm MUS_DUMMY
@@ -884,18 +916,21 @@ RustboroCity_EventScript_RestoreBgm::
 RustboroCity_EventScript_BattleMayTreecko::
 	trainerbattle_no_intro TRAINER_MAY_RUSTBORO_TREECKO, RustboroCity_Text_MayDefeat
 	setflag FLAG_DEFEATED_RIVAL_RUSTBORO
+	setcaughtmon SPECIES_LOTAD
 	goto RustboroCity_EventScript_MayBrineyHint
 	end
 
 RustboroCity_EventScript_BattleMayTorchic::
 	trainerbattle_no_intro TRAINER_MAY_RUSTBORO_TORCHIC, RustboroCity_Text_MayDefeat
 	setflag FLAG_DEFEATED_RIVAL_RUSTBORO
+	setcaughtmon SPECIES_SLUGMA
 	goto RustboroCity_EventScript_MayBrineyHint
 	end
 
 RustboroCity_EventScript_BattleMayMudkip::
 	trainerbattle_no_intro TRAINER_MAY_RUSTBORO_MUDKIP, RustboroCity_Text_MayDefeat
 	setflag FLAG_DEFEATED_RIVAL_RUSTBORO
+	setcaughtmon SPECIES_TORKOAL
 	goto RustboroCity_EventScript_MayBrineyHint
 	end
 
@@ -944,19 +979,25 @@ RustboroCity_EventScript_BrendanBrineyHint::
 RustboroCity_EventScript_BattleBrendanTreecko::
 	trainerbattle_no_intro TRAINER_BRENDAN_RUSTBORO_TREECKO, RustboroCity_Text_BrendanDefeat
 	setflag FLAG_DEFEATED_RIVAL_RUSTBORO
-	goto RustboroCity_EventScript_BrendanBrineyHint
+	setcaughtmon SPECIES_HAPPINY
+	setcaughtmon SPECIES_LOTAD
+	goto RustboroCity_EventScript_MayBrineyHint
 	end
 
 RustboroCity_EventScript_BattleBrendanTorchic::
 	trainerbattle_no_intro TRAINER_BRENDAN_RUSTBORO_TORCHIC, RustboroCity_Text_BrendanDefeat
 	setflag FLAG_DEFEATED_RIVAL_RUSTBORO
-	goto RustboroCity_EventScript_BrendanBrineyHint
+	setcaughtmon SPECIES_SLUGMA
+	setcaughtmon SPECIES_HAPPINY
+	goto RustboroCity_EventScript_MayBrineyHint
 	end
 
 RustboroCity_EventScript_BattleBrendanMudkip::
 	trainerbattle_no_intro TRAINER_BRENDAN_RUSTBORO_MUDKIP, RustboroCity_Text_BrendanDefeat
 	setflag FLAG_DEFEATED_RIVAL_RUSTBORO
-	goto RustboroCity_EventScript_BrendanBrineyHint
+	setcaughtmon SPECIES_WINGULL
+	setcaughtmon SPECIES_HAPPINY
+	goto RustboroCity_EventScript_MayBrineyHint
 	end
 
 RustboroCity_Movement_RivalApproachPlayer0:
@@ -1080,53 +1121,47 @@ RustboroCity_Text_CatchRarePokemonIfIGoToSchool:
 	.string "to catch rare POKéMON easily?$"
 
 RustboroCity_Text_PokemonCanChangeLookFromExp:
-	.string "If a POKéMON gains experience in\n"
-	.string "battles, it can sometimes change in\l"
-	.string "the way it looks.$"
+	.string "La evolución es un misterio.\n"
+	.string "Aunque se sabe que produce mucha,\l"
+	.string "pero que mucha energía.$"
 
 RustboroCity_Text_PokemonChangeShape:
-	.string "A POKéMON changes shape?\n"
-	.string "If one did that, I would be shocked!$"
+	.string "Si alguien usara la energia evolutiva\n"
+	.string "para cosas malas, ¡Lo mataría!$"
 
 RustboroCity_Text_TradePokemonGrowFast:
-	.string "A POKéMON you get in a trade from\n"
-	.string "someone grows fast.\p"
-	.string "But if you don't have certain GYM\n"
-	.string "BADGES, it may not obey you…$"
+	.string "Los Pokémon te desobedecerán pasado\n"
+	.string "cierto nivel, pero te\l"
+	.string "respetarán al ganar medallas…$"
 
 RustboroCity_Text_OutOfTheWay:
-	.string "Get out!\n"
-	.string "Out of the way!$"
+	.string "¡FUERA!\n"
+	.string "¡LARGO DE AQUÍ!$"
 
 RustboroCity_Text_WaitDontTakeMyGoods:
-	.string "Wait! Pleeeaaase!\p"
-	.string "Don't take my GOODS!$"
+	.string "¡NOOO! ¡POR FAVOOOORRR!\p"
+	.string "¡NO SE LLEVEN MIS PARTES!$"
 
 RustboroCity_Text_HelpMeIWasRobbed:
-	.string "Oh, it's you!\p"
-	.string "You're that fantastic TRAINER who\n"
-	.string "helped me in PETALBURG WOODS!\p"
-	.string "Help me! I was robbed by TEAM AQUA!\n"
-	.string "I have to get the DEVON GOODS back!\p"
-	.string "If I don't…\n"
-	.string "I'm going to be in serious trouble.$"
+	.string "¡E-eres tú!\p"
+	.string "¡Ayúdame, me han robado!\n"
+	.string "¡El {COLOR BLUE}Equipo Aqua{COLOR DARK_GRAY}se robó las {COLOR RED}Partes{COLOR DARK_GRAY}!\p"
+	.string "Si no las re-recupero…\n"
+	.string "AHHHH NO QUIERO PENSAR EN ESO.$"
 
 RustboroCity_Text_ShadyCharacterTookOffTowardsTunnel:
-	.string "That shady character, I think he took\n"
-	.string "off towards the tunnel over there.$"
+	.string "Ese lin-ladrón s-se fue para allá.\n"
+	.string "Corrió al túnel nuevo.$"
 
 RustboroCity_Text_YouGotItThankYou:
-	.string "Oh! How did it go?\n"
-	.string "The DEVON GOODS?\p"
-	.string "You did!\n"
-	.string "You got them back!\p"
-	.string "You really are a great TRAINER!\p"
-	.string "I know! As my thanks, I'll give you\n"
-	.string "another GREAT BALL!$"
+	.string "¿CÓMO T-TE FUE?\n"
+	.string "¡AH SI! ¡LO HICISTE!\p"
+	.string "¡Recuperaste las {COLOR RED}Partes Devon{COLOR DARK_GRAY}!\p"
+	.string "¡En serio eres genial!\p"
+	.string "¡Como recompensa, ten esto!$"
 
 RustboroCity_Text_YoureLoadedWithItems:
-	.string "You're loaded with items.\n"
-	.string "I can't give you this GREAT BALL.$"
+	.string "Ah, que mal. Bueno no importa.$"
 
 RustboroCity_Text_PleaseComeWithMe:
 	.string "Excuse me, please!\n"

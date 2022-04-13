@@ -524,7 +524,7 @@ PetalburgWoods_Text_StayOutOfTallGrass:
 PetalburgWoods_Text_HiddenItemsExplanation:
 	.string "Aveces, hay Pokémon raros\n"
 	.string "que aparecen al {COLOR RED}encadenar{COLOR DARK_GRAY}\l"
-	.string "Pokemon salvajes.\p
+	.string "Pokemon salvajes.\p"
 	.string "Por ejemplo, estoy buscando un Phantum.$"
 
 PetalburgWoods_Text_TryUsingThisItem:

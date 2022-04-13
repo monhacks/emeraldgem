@@ -348,7 +348,7 @@ static void BuildDexRelatedStartMenu(void) {
 		AddStartMenuAction(MENU_ACTION_POKENAV);
 	if (FlagGet(FLAG_QUEST_MENU_ACTIVE))
 		AddStartMenuAction(MENU_ACTION_QUEST_MENU);
-	if (FlagGet(FLAG_POKEMONPCMENU))
+	if (FlagGet(FLAG_ENABLED_PC))
 		AddStartMenuAction(MENU_ACTION_PC);
 	
 }

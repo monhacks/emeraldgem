@@ -1070,3 +1070,5 @@ Common_EventScript_LegendaryFlewAway::
 	.include "data/scripts/chain.inc"
 
 	.include "data/maps/LittlerootTown_MLMHouse/scripts.inc"
+
+	.include "data/maps/Ciudaddeprueba/scripts.inc"

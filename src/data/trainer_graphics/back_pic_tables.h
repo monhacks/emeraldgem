@@ -31,8 +31,22 @@ const struct CompressedSpriteSheet gTrainerBackPicTable[] =
 
 const struct CompressedSpritePalette gTrainerBackPicPaletteTable[] =
 {
-    TRAINER_BACK_PAL(BRENDAN, gTrainerPalette_Brendan),
-    TRAINER_BACK_PAL(MAY, gTrainerPalette_May),
+	#if COLORSKIN <= WHITESKIN
+		TRAINER_BACK_PAL(BRENDAN, gTrainerPalette_Brendan),
+		TRAINER_BACK_PAL(MAY, gTrainerPalette_May),
+	#endif
+	#if COLORSKIN == BROWNSKIN1
+		TRAINER_BACK_PAL(BRENDAN, gTrainerPalette_Brendan2),
+		TRAINER_BACK_PAL(MAY, gTrainerPalette_May2),
+	#endif
+	#if COLORSKIN == BROWNSKIN2
+		TRAINER_BACK_PAL(BRENDAN, gTrainerPalette_Brendan3),
+		TRAINER_BACK_PAL(MAY, gTrainerPalette_May3),
+	#endif
+	#if COLORSKIN >= DARKSKIN
+		TRAINER_BACK_PAL(BRENDAN, gTrainerPalette_Brendan4),
+		TRAINER_BACK_PAL(MAY, gTrainerPalette_May4),
+	#endif
     TRAINER_BACK_PAL(RED, gTrainerBackPicPalette_Red),
     TRAINER_BACK_PAL(LEAF, gTrainerBackPicPalette_Leaf),
     TRAINER_BACK_PAL(RUBY_SAPPHIRE_BRENDAN, gTrainerPalette_RubySapphireBrendan),

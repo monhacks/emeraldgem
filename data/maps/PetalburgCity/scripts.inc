@@ -934,4 +934,3 @@ PetalburgCity_Text_ImLookingForTalentedTrainers:
 	.string "poderosos para {COLOR BLUE}un proyecto especial{COLOR DARK_GRAY}\l"
 	.string "en el que estoy trabajando…$"
 	
-	

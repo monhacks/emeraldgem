@@ -5016,6 +5016,13 @@ bool8 MonKnowsMove(struct Pokemon *mon, u16 move)
     return FALSE;
 }
 
+bool8 MonIsType(u16 species, u16 type)
+{
+    if (gBaseStats[species].type1 == type || gBaseStats[species].type2 == type)
+            return TRUE;
+    return FALSE;
+}
+
 bool8 BoxMonKnowsMove(struct BoxPokemon *mon, u16 move)
 {
     u8 i;

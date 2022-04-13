@@ -6927,7 +6927,13 @@ extern const u32 gTrainerPalette_Sailor[];
 extern const u32 gTrainerPalette_MagmaAdmin[];
 extern const u32 gTrainerPalette_Wally[];
 extern const u32 gTrainerPalette_Brendan[];
+extern const u32 gTrainerPalette_Brendan2[];
+extern const u32 gTrainerPalette_Brendan3[];
+extern const u32 gTrainerPalette_Brendan4[];
 extern const u32 gTrainerPalette_May[];
+extern const u32 gTrainerPalette_May2[];
+extern const u32 gTrainerPalette_May3[];
+extern const u32 gTrainerPalette_May4[];
 extern const u32 gTrainerPalette_BugCatcher[];
 extern const u32 gTrainerPalette_PokemonRangerM[];
 extern const u32 gTrainerPalette_PokemonRangerF[];
@@ -10075,7 +10081,13 @@ extern const u16 gFrontierFactorySelectMenu_Pal[];
 
 // Object event pals
 extern const u16 gObjectEventPal_Brendan[];
+extern const u16 gObjectEventPal_Brendan2[];
+extern const u16 gObjectEventPal_Brendan3[];
+extern const u16 gObjectEventPal_Brendan4[];
 extern const u16 gObjectEventPal_May[];
+extern const u16 gObjectEventPal_May2[];
+extern const u16 gObjectEventPal_May3[];
+extern const u16 gObjectEventPal_May4[];
 extern const u16 gObjectEventPal_RubySapphireBrendan[];
 extern const u16 gObjectEventPal_RubySapphireMay[];
 

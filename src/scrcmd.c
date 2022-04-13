@@ -50,6 +50,7 @@
 #include "window.h"
 #include "quests.h"
 #include "constants/event_objects.h"
+#include "battle.h"
 
 #include "field_name_box.h"
 
@@ -2412,3 +2413,26 @@ void ScrCmd_changeframe(struct ScriptContext *ctx)
 	frameNumber--;
 	gSaveBlock2Ptr->optionsWindowFrameType = frameNumber;	
 }
+
+bool8 ScrCmd_checkpartytype(struct ScriptContext *ctx)
+{
+    u8 i;
+    u16 type = ScriptReadHalfword(ctx);
+
+    gSpecialVar_Result = PARTY_SIZE;
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        u16 species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES, NULL);
+        if (!species)
+            break;
+        if (!GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG) && MonIsType(species, type) == TRUE)
+        {
+            gSpecialVar_Result = i;
+            gSpecialVar_0x8004 = species;
+            break;
+        }
+    }
+    return FALSE;
+}
+
+

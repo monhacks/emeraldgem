@@ -1729,3 +1729,23 @@ gTilesetPalettes_UnionRoom::
 	.align 2
 gTilesetTiles_UnionRoom::
 	.incbin "data/tilesets/secondary/union_room/tiles.4bpp.lz"
+
+	.align 2
+gTilesetPalettes_nuevito::
+	.incbin "data/tilesets/primary/nuevito/palettes/00.gbapal"
+	.incbin "data/tilesets/primary/nuevito/palettes/01.gbapal"
+	.incbin "data/tilesets/primary/nuevito/palettes/02.gbapal"
+	.incbin "data/tilesets/primary/nuevito/palettes/03.gbapal"
+	.incbin "data/tilesets/primary/nuevito/palettes/04.gbapal"
+	.incbin "data/tilesets/primary/nuevito/palettes/05.gbapal"
+	.incbin "data/tilesets/primary/nuevito/palettes/06.gbapal"
+	.incbin "data/tilesets/primary/nuevito/palettes/07.gbapal"
+	.incbin "data/tilesets/primary/nuevito/palettes/08.gbapal"
+	.incbin "data/tilesets/primary/nuevito/palettes/09.gbapal"
+	.incbin "data/tilesets/primary/nuevito/palettes/10.gbapal"
+	.incbin "data/tilesets/primary/nuevito/palettes/11.gbapal"
+	.incbin "data/tilesets/primary/nuevito/palettes/12.gbapal"
+
+	.align 2
+gTilesetTiles_nuevito::
+	.incbin "data/tilesets/primary/nuevito/tiles.4bpp.lz"

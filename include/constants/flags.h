@@ -65,10 +65,10 @@
 #define FLAG_DEFEATED_WALLY_DEWFORD_TOWN    0x35 // Unused Flag
 #define FLAG_DONT_GET_MUCH_EXP_TRAINER    0x36 // Unused Flag
 #define FLAG_MENU_DEXRELATED    0x37 // Unused Flag
-#define FLAG_UNUSED_0x038    0x38 // Unused Flag
-#define FLAG_UNUSED_0x039    0x39 // Unused Flag
-#define FLAG_UNUSED_0x03A    0x3A // Unused Flag
-#define FLAG_UNUSED_0x03B    0x3B // Unused Flag
+#define FLAG_ENABLED_PC    0x38 // Unused Flag
+#define FLAG_MAY_YA_HISO    0x39 // Unused Flag
+#define FLAG_HIDDEN_ITEM_GYM_1    0x3A // Unused Flag
+#define FLAG_BAGLESS    0x3B // Unused Flag
 #define FLAG_UNUSED_0x03C    0x3C // Unused Flag
 #define FLAG_UNUSED_0x03D    0x3D // Unused Flag
 #define FLAG_UNUSED_0x03E    0x3E // Unused Flag

@@ -98,6 +98,15 @@
     #define GEN_8 5
 #endif
 
+#ifndef WHITESKIN
+		#define WHITESKIN  0
+		#define BROWNSKIN1 1
+		#define BROWNSKIN2 2
+		#define DARKSKIN   3
+#endif
+
+#define COLORSKIN 					DARKSKIN // changes the colorskin of the character
+
 // Calculation settings
 #define B_CRIT_CHANCE               GEN_7 // Chances of a critical hit landing. See CalcCritChanceStage.
 #define B_CRIT_MULTIPLIER           GEN_5 // In Gen6+, critical hits multiply damage by 1.5 instead of 2.

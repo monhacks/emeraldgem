@@ -1,7 +1,18 @@
 @ Interact with cuttable tree
 EventScript_CutTree::
 	lockall
-	goto_if_unset FLAG_BADGE01_GET, EventScript_CheckTreeCantCut
+	checkpartytype TYPE_GRASS
+	goto_if_ne VAR_RESULT, PARTY_SIZE, EventScript_CanCutTree
+	checkpartytype TYPE_BUG
+	goto_if_ne VAR_RESULT, PARTY_SIZE, EventScript_CanCutTree
+	checkpartytype TYPE_FLYING
+	goto_if_ne VAR_RESULT, PARTY_SIZE, EventScript_CanCutTree
+	checkpartytype TYPE_STEEL
+	goto_if_ne VAR_RESULT, PARTY_SIZE, EventScript_CanCutTree
+	goto EventScript_CanCutTree
+	releaseall
+	end
+EventScript_CanCutTree::
 	setfieldeffectargument 0, VAR_RESULT
 	bufferpartymonnick STR_VAR_1, VAR_RESULT
 	buffermovename STR_VAR_2, MOVE_CUT
@@ -44,20 +55,30 @@ EventScript_CancelCut::
 	end
 
 Text_WantToCut:
-	.string "This tree looks like it can be\n"
-	.string "CUT down!\p"
-	.string "Would you like to CUT it?$"
+	.string "¿Quieres cortar este árbol?$"
 
 Text_MonUsedFieldMove:
-	.string "{STR_VAR_1} used {STR_VAR_2}!$"
+	.string "¡{STR_VAR_1} cortó el árbol!$"
 
 Text_CantCut:
-	.string "This tree looks like it can be\n"
-	.string "CUT down!$"
+	.string "¡Puedes cortar este árbol!$"
 
 @ Interact with smashable rock
 EventScript_RockSmash::
 	lockall
+	goto_if_unset FLAG_BADGE03_GET, EventScript_CantSmashRock
+	checkpartytype TYPE_FIGHTING
+	goto_if_ne VAR_RESULT, PARTY_SIZE, EventScript_CanRockSmash
+	checkpartytype TYPE_STEEL
+	goto_if_ne VAR_RESULT, PARTY_SIZE, EventScript_CanRockSmash
+	checkpartytype TYPE_GROUND
+	goto_if_ne VAR_RESULT, PARTY_SIZE, EventScript_CanRockSmash
+	checkpartytype TYPE_GRASS
+	goto_if_ne VAR_RESULT, PARTY_SIZE, EventScript_CanRockSmash
+	goto EventScript_CanRockSmash
+	releaseall
+	end
+EventScript_CanRockSmash::
 	goto_if_unset FLAG_BADGE03_GET, EventScript_CantSmashRock
 	setfieldeffectargument 0, VAR_RESULT
 	bufferpartymonnick STR_VAR_1, VAR_RESULT
@@ -110,16 +131,15 @@ EventScript_CancelSmash::
 	end
 
 Text_WantToSmash:
-	.string "This rock appears to be breakable.\n"
-	.string "Would you like to use ROCK SMASH?$"
+	.string "¿Quieres romper esta roca?$"
 
 Text_CantSmash:
-	.string "It's a rugged rock, but a POKéMON\n"
-	.string "may be able to smash it.$"
+	.string "Esta roca se puede romper.$"
 
 EventScript_StrengthBoulder::
 	lockall
 	goto_if_unset FLAG_BADGE04_GET, EventScript_CantStrength
+	goto_if_set FLAG_SYS_USE_STRENGTH, EventScript_CheckActivatedBoulder
 	setfieldeffectargument 0, VAR_RESULT
 	msgbox Text_WantToStrength, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, EventScript_CancelStrength
@@ -158,25 +178,34 @@ EventScript_CancelStrength::
 	end
 
 Text_WantToStrength:
-	.string "It's a big boulder, but a POKéMON\n"
-	.string "may be able to push it aside.\p"
-	.string "Would you like to use STRENGTH?$"
+	.string "¿Quieres mover este peñasco?$"
 
 Text_MonUsedStrength:
-	.string "{STR_VAR_1} used STRENGTH!\p"
-	.string "{STR_VAR_1}'s STRENGTH made it\n"
-	.string "possible to move boulders around!$"
+	.string "¡{PLAYER} usó la fuerza de\n"
+	.string "{STR_VAR_1}! ¡Con su ayuda,\l"
+	.string "{PLAYER} puede mover las piedras\l"
+	.string "a gusto!$"
 
 Text_CantStrength:
-	.string "It's a big boulder, but a POKéMON\n"
-	.string "may be able to push it aside.$"
+	.string "Podrías mover esta piedra.$"
 
 Text_StrengthActivated:
-	.string "STRENGTH made it possible to move\n"
-	.string "boulders around.$"
+	.string "¡Con la ayuda de tus Pokémon,\n"
+	.string "las piedras son fáciles de mover!$"
 
 EventScript_UseWaterfall::
 	lockall
+	checkpartytype TYPE_WATER
+	goto_if_ne VAR_RESULT, PARTY_SIZE, EventScript_CanUseWaterfall
+	checkpartytype TYPE_ICE
+	goto_if_ne VAR_RESULT, PARTY_SIZE, EventScript_CanUseWaterfall
+	checkpartytype TYPE_NORMAL
+	goto_if_ne VAR_RESULT, PARTY_SIZE, EventScript_CanUseWaterfall
+	goto EventScript_CanUseWaterfall
+	releaseall
+	end
+	
+EventScript_CanUseWaterfall::
 	bufferpartymonnick STR_VAR_1, VAR_RESULT
 	setfieldeffectargument 0, VAR_RESULT
 	msgbox Text_WantToWaterfall, MSGBOX_YESNO
@@ -196,18 +225,27 @@ EventScript_EndWaterfall::
 	end
 
 Text_CantWaterfall:
-	.string "A wall of water is crashing down with\n"
-	.string "a mighty roar.$"
+	.string "Una pared enorme de agua ruge\n"
+	.string "con poder y maestría.$"
 
 Text_WantToWaterfall:
-	.string "It's a large waterfall.\n"
-	.string "Would you like to use WATERFALL?$"
+	.string "La cascada ruge con poder y maestría\n"
+	.string "¿Deseas escalarla?$"
 
 Text_MonUsedWaterfall:
-	.string "{STR_VAR_1} used WATERFALL.$"
+	.string "{STR_VAR_1} ayudó a {PLAYER}\na escalar la cascada.$"
 
 EventScript_UseDive::
 	lockall
+	checkpartytype TYPE_WATER
+	goto_if_ne VAR_RESULT, PARTY_SIZE, EventScript_CanDive
+	checkpartytype TYPE_ICE
+	goto_if_ne VAR_RESULT, PARTY_SIZE, EventScript_CanDive
+	goto EventScript_CantDive
+	releaseall
+	end
+EventScript_CanDive::
+	goto_if_unset FLAG_BADGE07_GET, EventScript_CantDive
 	bufferpartymonnick STR_VAR_1, VAR_RESULT
 	setfieldeffectargument 0, VAR_RESULT
 	setfieldeffectargument 1, 1
@@ -229,6 +267,15 @@ EventScript_EndDive::
 
 EventScript_UseDiveUnderwater::
 	lockall
+	checkpartytype TYPE_WATER
+	goto_if_ne VAR_RESULT, PARTY_SIZE, EventScript_CanSurface
+	checkpartytype TYPE_ICE
+	goto_if_ne VAR_RESULT, PARTY_SIZE, EventScript_CanSurface
+	goto EventScript_CantSurface
+	releaseall
+	end
+	
+EventScript_CanSurface::
 	bufferpartymonnick STR_VAR_1, VAR_RESULT
 	setfieldeffectargument 0, VAR_RESULT
 	setfieldeffectargument 1, 1
@@ -250,27 +297,27 @@ EventScript_EndSurface::
 	end
 
 Text_CantDive:
-	.string "The sea is deep here. A POKéMON\n"
-	.string "may be able to go underwater.$"
+	.string "El agua está profunda y hermosa.$"
 
 Text_WantToDive:
-	.string "The sea is deep here.\n"
-	.string "Would you like to use DIVE?$"
+	.string "El agua está profunda y hermosa.\n"
+	.string "¿Quieres bucear?$"
 
 Text_MonUsedDive:
-	.string "{STR_VAR_1} used DIVE.$"
+	.string "{STR_VAR_1} te ayuda a Bucear.$"
 
 Text_CantSurface:
-	.string "Light is filtering down from above.\n"
-	.string "A POKéMON may be able to surface.$"
+	.string "Brillan hermsosos los rayos del sol\n"
+	.string "iluminando esta zona.$"
 
 Text_WantToSurface:
-	.string "Light is filtering down from above.\n"
-	.string "Would you like to use DIVE?$"
+	.string "Brillan hermsosos los rayos del sol\n"
+	.string "iluminando esta zona.\l"
+	.string "¿Quieres volver a la superficie?$"
 
 EventScript_FailSweetScent::
 	msgbox Text_FailSweetScent, MSGBOX_SIGN
 	end
 
 Text_FailSweetScent:
-	.string "Looks like there's nothing here…$"
+	.string "Aca no hay nada…$"

@@ -934,7 +934,7 @@
     {
       "id": "LAYOUT_RUSTBORO_CITY_GYM",
       "name": "RustboroCity_Gym_Layout",
-      "width": 11,
+      "width": 15,
       "height": 20,
       "primary_tileset": "gTileset_Building",
       "secondary_tileset": "gTileset_RustboroGym",
@@ -4420,6 +4420,16 @@
       "secondary_tileset": "gTileset_BrendansMaysHouse",
       "border_filepath": "data/layouts/LittlerootTown_MLMHouse/border.bin",
       "blockdata_filepath": "data/layouts/LittlerootTown_MLMHouse/map.bin"
+    },
+    {
+      "id": "LAYOUT_CIUDADDEPRUEBA",
+      "name": "Ciudaddeprueba_Layout",
+      "width": 40,
+      "height": 40,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Petalburg",
+      "border_filepath": "data/layouts/Ciudaddeprueba/border.bin",
+      "blockdata_filepath": "data/layouts/Ciudaddeprueba/map.bin"
     }
   ]
 }

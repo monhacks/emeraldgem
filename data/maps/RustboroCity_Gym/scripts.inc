@@ -1,3 +1,4 @@
+.set LOCALID_HINT_GUY, 4
 RustboroCity_Gym_MapScripts::
 	.byte 0
 
@@ -9,8 +10,109 @@ RustboroCity_Gym_EventScript_Roxanne::
 	msgbox RustboroCity_Gym_Text_RoxannePostBattle, MSGBOX_DEFAULT
 	release
 	end
+RustboroCity_Gym_Trigger_Nada::
+	release
+	end
+RustboroCity_Gym_Trigger_Up1::
+	clearflag FLAG_ENABLED_PC
+	getpartysize
+	goto_if_lt VAR_RESULT, 4, RustboroCity_Gym_Trigger_Nada
+	lockall
+	playse SE_PIN
+	applymovement LOCALID_HINT_GUY, Common_Movement_FaceUp
+	applymovement LOCALID_HINT_GUY, Common_Movement_ExclamationMark
+	waitmovement 0
+	msgbox RustboroCity_Gym_WaitYouCant
+	playse SE_PIN
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceDown
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_ExclamationMark
+	waitmovement 0
+	delay 30
+	applymovement OBJ_EVENT_ID_PLAYER, RustboroCity_Gym_PlayerWalkDown
+	waitmovement 0
+	setflag FLAG_ENABLED_PC
+	goto RustboroCity_Gym_EventScript_GymGuide
+	end
+	
+RustboroCity_Gym_PlayerWalkDown:
+	walk_down
+	face_right
+	step_end
+RustboroCity_Gym_PlayerWalkRight:
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	face_up
+	step_end
+RustboroCity_Gym_PlayerWalkLeft:
+	walk_left
+	face_up
+	step_end
+RustboroCity_Gym_WaitYouCant:
+	.string "¡Alto! ¡No puedes hacer eso!$"
+RustboroCity_Gym_ForThisGym:
+	.string "No sé si lo sabías, pero en la región\n"
+	.string "Hoenn, {COLOR BLUE}los gimnasios tienen\l"
+	.string "requirimientos especiales{COLOR DARK_GRAY} que debes\l"
+	.string "cumplir para poder entrar y batallar en\l"
+	.string "ellos.\p"
+	.string "Para este Gimnasio en específico,\n"
+	.string "necesitas usar sólo 3 Pokémon. De esa\l"
+	.string "forma tú y la líder tendrán la misma\l"
+	.string "cantidad de Pokémon.\p"
+	.string "Además, no podrás usar el\n"
+	.string "{COLOR RED}Sistema de Almacenamiento Portátil{COLOR DARK_GRAY}\n"
+	.string "dentro del Gimnasio.\p"
+	.string "¡Pero cada Gimnasio es diferente!$"
+
+RustboroCity_Gym_Trigger_Left::
+	clearflag FLAG_ENABLED_PC
+	getpartysize
+	goto_if_lt VAR_RESULT, 4, RustboroCity_Gym_Trigger_Nada
+	lockall
+	applymovement LOCALID_HINT_GUY, Common_Movement_FaceUp
+	waitmovement 0
+	playse SE_PIN
+	applymovement LOCALID_HINT_GUY, Common_Movement_ExclamationMark
+	waitmovement 0
+	msgbox RustboroCity_Gym_WaitYouCant
+	playse SE_PIN
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceRight
+	waitmovement 0
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_ExclamationMark
+	delay 30
+	applymovement OBJ_EVENT_ID_PLAYER, RustboroCity_Gym_PlayerWalkRight
+	waitmovement 0
+	setflag FLAG_ENABLED_PC
+	goto RustboroCity_Gym_EventScript_GymGuide
+	end 
+
+RustboroCity_Gym_Trigger_Right::
+	clearflag FLAG_ENABLED_PC
+	getpartysize
+	goto_if_lt VAR_RESULT, 4, RustboroCity_Gym_Trigger_Nada
+	lockall
+	applymovement LOCALID_HINT_GUY, Common_Movement_FaceLeft
+	waitmovement 0
+	playse SE_PIN
+	applymovement LOCALID_HINT_GUY, Common_Movement_ExclamationMark
+	waitmovement 0
+	msgbox RustboroCity_Gym_WaitYouCant
+	playse SE_PIN
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceLeft
+	waitmovement 0
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_ExclamationMark
+	delay 30
+	applymovement OBJ_EVENT_ID_PLAYER, RustboroCity_Gym_PlayerWalkLeft
+	waitmovement 0
+	setflag FLAG_ENABLED_PC
+	goto RustboroCity_Gym_EventScript_GymGuide
+	end
+
 
 RustboroCity_Gym_EventScript_RoxanneDefeated::
+	setflag FLAG_ENABLED_PC
 	message RustboroCity_Gym_Text_ReceivedStoneBadge
 	waitmessage
 	call Common_EventScript_PlayGymBadgeFanfare
@@ -54,11 +156,13 @@ RustboroCity_Gym_EventScript_Marc::
 	end
 
 RustboroCity_Gym_EventScript_GymGuide::
-	lock
+	lockall
 	faceplayer
+	setflag FLAG_BAGLESS
 	goto_if_set FLAG_DEFEATED_RUSTBORO_GYM, RustboroCity_Gym_EventScript_GymGuidePostVictory
-	msgbox RustboroCity_Gym_Text_GymGuideAdvice, MSGBOX_DEFAULT
-	release
+	msgbox RustboroCity_Gym_ForThisGym
+	applymovement LOCALID_HINT_GUY, Common_Movement_FaceOriginalDirection
+	releaseall
 	end
 
 RustboroCity_Gym_EventScript_GymGuidePostVictory::
