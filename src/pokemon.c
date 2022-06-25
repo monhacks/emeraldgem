@@ -7328,42 +7328,64 @@ bool8 TryIncrementMonLevel(struct Pokemon *mon)
     }
 }
 
-u32 CanMonLearnTMHM(struct Pokemon *mon, u16 tm)
+u32 CanMonLearnTMHM(struct Pokemon *mon, u8 tm)
 {
     u16 species = GetMonData(mon, MON_DATA_SPECIES2, 0);
     if (species == SPECIES_EGG)
     {
         return 0;
     }
-    else if (tm < 64)
+    else if (tm < 32)
     {
         u32 mask = 1 << tm;
         return gTMHMLearnsets[species][0] & mask;
     }
-    else
+    else if (tm < 64)
     {
-        u32 mask = 1 << (tm - 64);
+        u32 mask = 1 << (tm - 32);
         return gTMHMLearnsets[species][1] & mask;
     }
+	else if (tm < 96)
+	{
+		u32 mask = 1 << (tm - 64);
+        return gTMHMLearnsets[species][2] & mask;
+	}
+	else
+	{
+		u32 mask = 1 << (tm - 96);
+        return gTMHMLearnsets[species][3] & mask;
+	}
 }
 
-u32 CanSpeciesLearnTMHM(u16 species, u16 tm)
+u32 CanSpeciesLearnTMHM(u16 species, u8 tm)
 {
     if (species == SPECIES_EGG)
     {
         return 0;
     }
-    else if (tm < 64)
+    else if (tm < 32)
     {
         u32 mask = 1 << tm;
         return gTMHMLearnsets[species][0] & mask;
     }
-    else
+    else if (tm < 64)
     {
-        u32 mask = 1 << (tm - 64);
+        u32 mask = 1 << (tm - 32);
         return gTMHMLearnsets[species][1] & mask;
     }
+    else if (tm < 96)
+    {
+        u32 mask = 1 << (tm - 64);
+        return gTMHMLearnsets[species][2] & mask;
+    }
+    else
+    {
+        u32 mask = 1 << (tm - 96);
+        return gTMHMLearnsets[species][3] & mask;
+    }
 }
+
+
 
 u8 GetMoveRelearnerMoves(struct Pokemon *mon, u16 *moves)
 {
