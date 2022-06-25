@@ -69,10 +69,10 @@
 #define FLAG_MAY_YA_HISO    0x39 // Unused Flag
 #define FLAG_HIDDEN_ITEM_GYM_1    0x3A // Unused Flag
 #define FLAG_BAGLESS    0x3B // Unused Flag
-#define FLAG_UNUSED_0x03C    0x3C // Unused Flag
-#define FLAG_UNUSED_0x03D    0x3D // Unused Flag
-#define FLAG_UNUSED_0x03E    0x3E // Unused Flag
-#define FLAG_UNUSED_0x03F    0x3F // Unused Flag
+#define FLAG_EVENTOMISTERIOSO1    0x3C // Unused Flag
+#define FLAG_HIDE_RALTS_102  0x3D // Unused Flag
+#define FLAG_HIDE_ZIGZA_102	 0x3E // Unused Flag
+#define FLAG_HIDE_BALL_102    0x3F // Unused Flag
 #define FLAG_UNUSED_0x040    0x40 // Unused Flag
 #define FLAG_UNUSED_0x041    0x41 // Unused Flag
 #define FLAG_UNUSED_0x042    0x42 // Unused Flag
@@ -190,7 +190,7 @@
 #define FLAG_RECEIVED_TM40                   0xAA
 #define FLAG_RECEIVED_TM04                   0xAB
 #define FLAG_RECEIVED_TM03                   0xAC
-#define FLAG_DECORATION_0                    0xAD
+#define FLAG_HIDE_SECRET_BASE_TRAINER        0xAD
 #define FLAG_DECORATION_1                    0xAE
 #define FLAG_DECORATION_2                    0xAF
 #define FLAG_DECORATION_3                    0xB0

@@ -28,6 +28,20 @@
 #include "walda_phrase.h"
 #include "constants/event_objects.h"
 #include "constants/rgb.h"
+#include "main.h"
+#include "text.h"
+#include "field_screen_effect.h"
+#include "script_pokemon_util.h"
+#include "constants/items.h"
+#include "item.h"
+#include "field_message_box.h"
+#include "script.h"
+extern const u8 Password1[];
+extern const u8 Password2[];
+extern const u8 Password3[];
+extern const u8 PasswordMuchos[];
+extern const u8 PasswordFallo[];
+extern const u8 PasswordEvento1[];
 
 enum {
     INPUT_NONE,
@@ -1408,10 +1422,10 @@ static void NamingScreen_CreatePlayerIcon(void)
     u8 rivalGfxId;
     u8 spriteId;
 
-    rivalGfxId = GetRivalAvatarGraphicsIdByStateIdAndGender(0, sNamingScreen->monSpecies);
+    rivalGfxId = GetRivalAvatarGraphicsIdByStateIdAndGender(PLAYER_AVATAR_STATE_NORMAL, sNamingScreen->monSpecies);
     spriteId = CreateObjectGraphicsSprite(rivalGfxId, SpriteCallbackDummy, 56, 37, 0);
     gSprites[spriteId].oam.priority = 3;
-    StartSpriteAnim(&gSprites[spriteId], 4);
+    StartSpriteAnim(&gSprites[spriteId], ANIM_STD_GO_SOUTH);
 }
 
 static void NamingScreen_CreatePCIcon(void)
@@ -1438,7 +1452,7 @@ static void NamingScreen_CreateWaldaDadIcon(void)
 
     spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_MAN_1, SpriteCallbackDummy, 56, 37, 0);
     gSprites[spriteId].oam.priority = 3;
-    StartSpriteAnim(&gSprites[spriteId], 4);
+    StartSpriteAnim(&gSprites[spriteId], ANIM_STD_GO_SOUTH);
 }
 
 //--------------------------------------------------
@@ -2138,6 +2152,17 @@ static const struct NamingScreenTemplate sWaldaWordsScreenTemplate =
     .title = gText_TellHimTheWords,
 };
 
+static const struct NamingScreenTemplate sPasswordScreenTemplate =
+{
+    .copyExistingString = TRUE,
+    .maxChars = 15,
+    .iconFunction = 2,
+    .addGenderIcon = FALSE,
+    .initialPage = KBPAGE_LETTERS_UPPER,
+    .unused = 11,
+    .title = gText_MainMenuMysteryGift2,
+};
+
 static const struct NamingScreenTemplate *const sNamingScreenTemplates[] =
 {
     [NAMING_SCREEN_PLAYER]     = &sPlayerNamingScreenTemplate,
@@ -2145,6 +2170,7 @@ static const struct NamingScreenTemplate *const sNamingScreenTemplates[] =
     [NAMING_SCREEN_CAUGHT_MON] = &sMonNamingScreenTemplate,
     [NAMING_SCREEN_NICKNAME]   = &sMonNamingScreenTemplate,
     [NAMING_SCREEN_WALDA]      = &sWaldaWordsScreenTemplate,
+    [NAMING_SCREEN_PASSWORD]   = &sPasswordScreenTemplate,
 };
 
 static const struct OamData sOam_8x8 =
@@ -2574,5 +2600,75 @@ static const struct SpritePalette sSpritePalettes[] =
     {gNamingScreenMenu_Pal + 0x40,  PALTAG_OK_BUTTON},
     {}
 };
+
+
+//contraseñas
+static const u8 gText_Recompensa1[] = _("WORLDOFPOKEMON");
+static const u8 gText_Recompensa2[] = _("PASSWORD");
+static const u8 gText_Recompensa3[] = _("RECIEVEPOKEMON");
+static const u8 gText_Recompensa4[] = _("ABCDEFG");
+static const u8 gText_Recompensa5[] = _("POKEMON");
+static const u8 gText_Recompensa6[] = _("A");
+static const u8 gText_Recompensa7[] = _("B");
+static const u8 gText_Recompensa8[] = _("CODE");
+
+void DoPasswordNamingScreen(void)
+{
+    StringCopy(gStringVar2, GetWaldaPhrasePtr());
+    DoNamingScreen(NAMING_SCREEN_PASSWORD, gStringVar2, 0, 0, 0, CB2_HandleGivenPassword);
+}
+
+static void CB2_HandleGivenPassword(void)
+{
+	if (StringCompare(gStringVar2, gText_Recompensa1) == 0) {
+		ScriptGiveMon(SPECIES_MEW, 100, ITEM_MASTER_BALL, 0, 0, 0);
+		AddBagItem(ITEM_MASTER_BALL, 15);
+		GetSpeciesName(gStringVar1, SPECIES_MEW);
+		CopyItemName(ITEM_MASTER_BALL, gStringVar2);
+		ScriptContext1_SetupScript(Password2);
+		
+    }
+	else if (StringCompare(gStringVar2, gText_Recompensa2) == 0) {
+		ScriptGiveMon(SPECIES_ARCEUS, 100, ITEM_MASTER_BALL, 0, 0, 0);
+		AddBagItem(ITEM_MASTER_BALL, 15);
+		AddBagItem(ITEM_RARE_CANDY, 151);
+		GetSpeciesName(gStringVar1, SPECIES_ARCEUS);
+		CopyItemName(ITEM_MASTER_BALL, gStringVar2);
+		CopyItemName(ITEM_RARE_CANDY, gStringVar3);
+		ScriptContext1_SetupScript(Password3);
+    }
+	else if (StringCompare(gStringVar2, gText_Recompensa3) == 0) {
+		ScriptGiveMon(SPECIES_GIRATINA, 100, ITEM_MASTER_BALL, 0, 0, 0);
+		AddBagItem(ITEM_RARE_CANDY, 151);
+		GetSpeciesName(gStringVar1, SPECIES_GIRATINA);
+		CopyItemName(ITEM_RARE_CANDY, gStringVar2);
+		ScriptContext1_SetupScript(Password2);
+    }
+	else if (StringCompare(gStringVar2, gText_Recompensa4) == 0) {
+		ScriptGiveMon(SPECIES_RESHIRAM, 100, ITEM_MASTER_BALL, 0, 0, 0);
+		ScriptGiveMon(SPECIES_ZEKROM, 100, ITEM_MASTER_BALL, 0, 0, 0);
+		ScriptGiveMon(SPECIES_KYUREM, 100, ITEM_MASTER_BALL, 0, 0, 0);
+		AddBagItem(ITEM_MASTER_BALL, 15);
+		ScriptContext1_SetupScript(PasswordMuchos);
+    }
+	else if (StringCompare(gStringVar2, gText_Recompensa5) == 0) {
+		ScriptGiveMon(SPECIES_DITTO, 1, ITEM_POKE_BALL, 0, 0, 0);
+		GetSpeciesName(gStringVar1, SPECIES_DITTO);
+		ScriptContext1_SetupScript(Password1);
+    }
+	else if (StringCompare(gStringVar2, gText_Recompensa6) == 0) {
+		ScriptGiveMon(SPECIES_DITTO, 1, ITEM_POKE_BALL, 0, 0, 0);
+		GetSpeciesName(gStringVar1, SPECIES_DITTO);
+		ScriptContext1_SetupScript(Password1);
+    }
+	if (StringCompare(gStringVar2, gText_Recompensa8) == 0) {
+		ScriptContext1_SetupScript(PasswordEvento1);
+    }
+	else
+		ScriptContext1_SetupScript(PasswordFallo);
+
+    gFieldCallback = FieldCB_ContinueScriptHandleMusic;
+    SetMainCallback2(CB2_ReturnToField);
+}
 
 

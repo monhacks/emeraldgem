@@ -1669,7 +1669,7 @@ static bool32 UpdateRandomTrainerRematches(const struct RematchTrainer *table, u
                 ret = TRUE;
             }
             else if (FlagGet(FLAG_MATCH_CALL_REGISTERED + i)
-             && (Random() % 100) <= 30)  // 31% chance of getting a rematch.
+             && (Random() % 100) <= 64)  // 65% chance of getting a rematch.
             {
                 SetRematchIdForTrainer(table, i);
                 ret = TRUE;
@@ -1845,18 +1845,15 @@ static bool32 HasAtLeastFiveBadges(void)
 
 void IncrementRematchStepCounter(void)
 {
-    if (HasAtLeastFiveBadges())
-    {
-        if (gSaveBlock1Ptr->trainerRematchStepCounter >= STEP_COUNTER_MAX)
-            gSaveBlock1Ptr->trainerRematchStepCounter = STEP_COUNTER_MAX;
-        else
-            gSaveBlock1Ptr->trainerRematchStepCounter++;
-    }
+	if (gSaveBlock1Ptr->trainerRematchStepCounter >= STEP_COUNTER_MAX)
+		gSaveBlock1Ptr->trainerRematchStepCounter = STEP_COUNTER_MAX;
+	else
+		gSaveBlock1Ptr->trainerRematchStepCounter++;
 }
 
 static bool32 IsRematchStepCounterMaxed(void)
 {
-    if (HasAtLeastFiveBadges() && gSaveBlock1Ptr->trainerRematchStepCounter >= STEP_COUNTER_MAX)
+    if (gSaveBlock1Ptr->trainerRematchStepCounter >= STEP_COUNTER_MAX)
         return TRUE;
     else
         return FALSE;

@@ -28,6 +28,7 @@
 #include "constants/items.h"
 #include "constants/songs.h"
 #include "constants/rgb.h"
+#include "tv.h"
 
 #define TM_CASE_TM_TAG 400
 
@@ -517,6 +518,7 @@ static void InitTMCaseListMenuItems(void)
 
 static void GetTMNumberAndMoveString(u8 * dest, u16 itemId)
 {
+	u16 item_ID = itemId - ITEM_TM01 + 1;
     StringCopy(gStringVar4, gText_FontSmall);
     if (itemId >= ITEM_HM01)
     {
@@ -527,8 +529,22 @@ static void GetTMNumberAndMoveString(u8 * dest, u16 itemId)
     }
     else
     {
-        StringAppend(gStringVar4, gText_NumberClear01);
-        ConvertIntToDecimalStringN(gStringVar1, itemId - ITEM_TM01 + 1, STR_CONV_MODE_LEADING_ZEROS, 2);
+		StringAppend(gStringVar4, gText_NumberClear01);
+		if (item_ID >= 100)
+			{
+				ConvertIntToDecimalString(0, item_ID);
+			}
+			else if (item_ID >= 10)
+			{
+				gStringVar1[0] = CHAR_0;
+				ConvertIntToDecimalStringN(gStringVar1 + 1, item_ID, STR_CONV_MODE_RIGHT_ALIGN, CountDigits(item_ID));
+			}
+			else
+			{
+				gStringVar1[0] = CHAR_0;
+				gStringVar1[1] = CHAR_0;
+				ConvertIntToDecimalStringN(gStringVar1 + 2, item_ID, STR_CONV_MODE_RIGHT_ALIGN, CountDigits(item_ID));
+			}
         StringAppend(gStringVar4, gStringVar1);
     }
     StringAppend(gStringVar4, sText_SingleSpace);
@@ -999,7 +1015,7 @@ static void PrintStringTMCaseOnWindow3(void)
 static void DrawMoveInfoUIMarkers(void)
 {
     #ifndef POKEMON_EXPANSION
-        BlitMenuInfoIcon(4, 19, 0, 0); // "Type" sprite
+        BlitMenuInfoIcon(4, 20, 0, 0); // "Type" sprite
         BlitMenuInfoIcon(4, 20, 0, 12); // "Power" sprite
         BlitMenuInfoIcon(4, 21, 0, 24); // "Accuracy" sprite
         BlitMenuInfoIcon(4, 22, 0, 36); // "PP" sprite

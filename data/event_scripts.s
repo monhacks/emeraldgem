@@ -62,7 +62,6 @@
 
 	.section script_data, "aw", %progbits
 
-@ 81DB67C
 	.include "data/script_cmd_table.inc"
 
 gSpecialVars::
@@ -1068,6 +1067,7 @@ Common_EventScript_LegendaryFlewAway::
 	.include "data/text/birch_speech.inc"
 	.include "data/text/name_boxes.inc"
 	.include "data/scripts/chain.inc"
+	.include "data/scripts/password_system.inc"
 
 	.include "data/maps/LittlerootTown_MLMHouse/scripts.inc"
 

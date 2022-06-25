@@ -97,6 +97,8 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_VigorothCarryingBo
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_VigorothFacingAway;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BirchsBag;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_EnemyZigzagoon;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Chimecho;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Ralts;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Artist;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RivalBrendanNormal;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RivalBrendanMachBike;
@@ -486,6 +488,8 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_LINK_RS_MAY] =              &gObjectEventGraphicsInfo_RubySapphireMay,
     [OBJ_EVENT_GFX_LUGIA] =                    &gObjectEventGraphicsInfo_Lugia,
     [OBJ_EVENT_GFX_HOOH] =                     &gObjectEventGraphicsInfo_HoOh,
+    [OBJ_EVENT_GFX_RALTS] =                    &gObjectEventGraphicsInfo_Ralts,
+    [OBJ_EVENT_GFX_CHIMECHO] =                 &gObjectEventGraphicsInfo_Chimecho,
 };
 
 const struct ObjectEventGraphicsInfo *const gMauvilleOldManGraphicsInfoPointers[] = {

@@ -105,7 +105,8 @@
 		#define DARKSKIN   3
 #endif
 
-#define COLORSKIN 					DARKSKIN // changes the colorskin of the character
+#define COLORSKINBRENDAN 					BROWNSKIN1 // changes the colorskin of the character
+#define COLORSKINMAY	 					WHITESKIN // changes the colorskin of the character
 
 // Calculation settings
 #define B_CRIT_CHANCE               GEN_7 // Chances of a critical hit landing. See CalcCritChanceStage.

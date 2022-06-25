@@ -617,6 +617,7 @@
 #define STRINGID_STATNOTROSE	 					  613
 
 #define BATTLESTRINGS_COUNT                           614
+#define BATTLESTRINGS_TABLE_START  STRINGID_TRAINER1LOSETEXT
 
 // The below IDs are all indexes into battle message tables,
 // used to determine which of a set of messages to print.

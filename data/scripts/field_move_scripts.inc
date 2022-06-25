@@ -9,8 +9,9 @@ EventScript_CutTree::
 	goto_if_ne VAR_RESULT, PARTY_SIZE, EventScript_CanCutTree
 	checkpartytype TYPE_STEEL
 	goto_if_ne VAR_RESULT, PARTY_SIZE, EventScript_CanCutTree
+	goto_if_unset FLAG_BADGE01_GET, EventScript_CancelCut
 	goto EventScript_CanCutTree
-	releaseall
+	releaseall 
 	end
 EventScript_CanCutTree::
 	setfieldeffectargument 0, VAR_RESULT
@@ -79,7 +80,6 @@ EventScript_RockSmash::
 	releaseall
 	end
 EventScript_CanRockSmash::
-	goto_if_unset FLAG_BADGE03_GET, EventScript_CantSmashRock
 	setfieldeffectargument 0, VAR_RESULT
 	bufferpartymonnick STR_VAR_1, VAR_RESULT
 	buffermovename STR_VAR_2, MOVE_ROCK_SMASH
@@ -241,7 +241,7 @@ EventScript_UseDive::
 	goto_if_ne VAR_RESULT, PARTY_SIZE, EventScript_CanDive
 	checkpartytype TYPE_ICE
 	goto_if_ne VAR_RESULT, PARTY_SIZE, EventScript_CanDive
-	goto EventScript_CantDive
+	goto EventScript_CanDive
 	releaseall
 	end
 EventScript_CanDive::
@@ -271,7 +271,7 @@ EventScript_UseDiveUnderwater::
 	goto_if_ne VAR_RESULT, PARTY_SIZE, EventScript_CanSurface
 	checkpartytype TYPE_ICE
 	goto_if_ne VAR_RESULT, PARTY_SIZE, EventScript_CanSurface
-	goto EventScript_CantSurface
+	goto EventScript_CanSurface
 	releaseall
 	end
 	

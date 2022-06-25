@@ -9,6 +9,12 @@
 #include "overworld.h"
 #include "pokemon_storage_system.h"
 #include "field_screen_effect.h"
+#include "script_pokemon_util.h"
+#include "strings.h"
+#include "constants/items.h"
+#include "item.h"
+#include "field_message_box.h"
+#include "script.h"
 
 extern const u8 gText_Peekaboo[];
 
@@ -52,6 +58,8 @@ void DoWaldaNamingScreen(void)
     StringCopy(gStringVar2, GetWaldaPhrasePtr());
     DoNamingScreen(NAMING_SCREEN_WALDA, gStringVar2, 0, 0, 0, CB2_HandleGivenWaldaPhrase);
 }
+
+
 
 static void CB2_HandleGivenWaldaPhrase(void)
 {

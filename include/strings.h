@@ -436,6 +436,7 @@ extern const u8 gText_FirmSlash[];
 extern const u8 gText_CloseBag[];
 extern const u8 gText_NumberItem_HM[];
 extern const u8 gText_NumberItem_TMBerry[];
+extern const u8 gText_NumberItem_TMBerry100[];
 extern const u8 gText_xVar1[];
 extern const u8 gText_ReturnToVar1[];
 extern const u8 gText_SelectorArrow2[];
@@ -3312,6 +3313,12 @@ extern const u8 gText_PkmnForSwap[];
 extern const u8 gText_SamePkmnInPartyAlready[];
 extern const u8 gText_Cancel3[];
 extern const u8 gText_RightArrow[];
+//contraseñas
+/*extern const u8 gText_Recompensa1[];
+extern const u8 gText_Recompensa2[];
+extern const u8 gText_Recompensa3[];
+extern const u8 gText_Recompensa4[];
+extern const u8 gText_Recompensa5[];*/
 
 // Género
 extern const u8 gText_ExpandedPlaceholder_O[];

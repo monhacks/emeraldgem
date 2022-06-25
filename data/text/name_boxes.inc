@@ -8,6 +8,8 @@ Marta:
 	.string "{COLOR LIGHT_RED}{SHADOW RED}Marta$"
 Rival:
 	.string "{COLOR_RIVAL}{RIVAL}$"
+Player:
+	.string "{COLOR_PLAYER}{PLAYER}$"
 Roxanne:
 	.string "{COLOR RED}Roxanne$"
 Brawly:
@@ -73,5 +75,16 @@ MamaWally:
 
 Cientifico:
 	.string "{COLOR BLUE}Cientifico$"
-
 	
+Alex:
+	.string "{COLOR BLUE}Alex$"
+	
+Esmeralda:
+	.string "{COLOR RED}Esmerada$"
+
+NoDeberiasVerlo:
+	.string "No tendrías que poder ver esto.\n"
+	.string "Si ves este mensaje, contacta al\l"
+	.string "desarrollador y dile cómo y porqué\l"
+	.string "este evento se muestra cuando\l"
+	.string "no tendría que pasar.$"

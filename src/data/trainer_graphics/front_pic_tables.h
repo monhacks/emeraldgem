@@ -269,20 +269,28 @@ const struct CompressedSpritePalette gTrainerFrontPicPaletteTable[] =
     TRAINER_PAL(SAILOR, gTrainerPalette_Sailor),
     TRAINER_PAL(MAGMA_ADMIN, gTrainerPalette_MagmaAdmin),
     TRAINER_PAL(WALLY, gTrainerPalette_Wally),
-	#if COLORSKIN <= WHITESKIN
+	#if COLORSKINBRENDAN <= WHITESKIN
 		TRAINER_PAL(BRENDAN, gTrainerPalette_Brendan),
+	#endif
+	#if COLORSKINMAY <= WHITESKIN
 		TRAINER_PAL(MAY, gTrainerPalette_May),
 	#endif
-	#if COLORSKIN == BROWNSKIN1
+	#if COLORSKINBRENDAN == BROWNSKIN1
 		TRAINER_PAL(BRENDAN, gTrainerPalette_Brendan2),
+	#endif
+	#if COLORSKINMAY == BROWNSKIN1
 		TRAINER_PAL(MAY, gTrainerPalette_May2),
 	#endif
-	#if COLORSKIN == BROWNSKIN2
+	#if COLORSKINBRENDAN == BROWNSKIN2
 		TRAINER_PAL(BRENDAN, gTrainerPalette_Brendan3),
+	#endif
+	#if COLORSKINMAY == BROWNSKIN2
 		TRAINER_PAL(MAY, gTrainerPalette_May3),
 	#endif
-	#if COLORSKIN >= DARKSKIN
+	#if COLORSKINBRENDAN >= DARKSKIN
 		TRAINER_PAL(BRENDAN, gTrainerPalette_Brendan4),
+	#endif
+	#if COLORSKINMAY >= DARKSKIN
 		TRAINER_PAL(MAY, gTrainerPalette_May4),
 	#endif
     TRAINER_PAL(BUG_CATCHER, gTrainerPalette_BugCatcher),

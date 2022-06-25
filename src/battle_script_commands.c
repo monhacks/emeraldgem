@@ -4732,7 +4732,7 @@ static void Cmd_playanimation(void)
     }
 }
 
-// Same as playanimation, expect it takes a pointer to some animation id, instead of taking the value directly
+// Same as playanimation, except it takes a pointer to some animation id, instead of taking the value directly
 static void Cmd_playanimation_var(void)
 {
     const u16* argumentPtr;
@@ -12172,8 +12172,18 @@ static void Cmd_recoverbasedonsunlight(void)
             else
                 gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP / 2;
         }
-        else
-        {
+        else if (gCurrentMove == MOVE_MOONLIGHT)
+		{
+			gLocalTime.hours = Rtc_GetCurrentHour();
+			if ((!(gBattleWeather & B_WEATHER_ANY) || !WEATHER_HAS_EFFECT || GetBattlerHoldEffect(gBattlerAttacker, TRUE) == HOLD_EFFECT_UTILITY_UMBRELLA) && (gLocalTime.hours >= 20 || gLocalTime.hours < 8))
+                gBattleMoveDamage = 20 * gBattleMons[gBattlerAttacker].maxHP / 30;
+            else if ((gBattleWeather & B_WEATHER_ANY) && WEATHER_HAS_EFFECT && GetBattlerHoldEffect(gBattlerAttacker, TRUE) != HOLD_EFFECT_UTILITY_UMBRELLA && (gLocalTime.hours >= 20 || gLocalTime.hours < 8))
+				gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP / 2;
+			else
+                gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP / 3;
+		}
+		else
+		{
             if (!(gBattleWeather & B_WEATHER_ANY) || !WEATHER_HAS_EFFECT || GetBattlerHoldEffect(gBattlerAttacker, TRUE) == HOLD_EFFECT_UTILITY_UMBRELLA)
                 gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP / 2;
             else if (gBattleWeather & B_WEATHER_SUN)

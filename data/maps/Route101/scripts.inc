@@ -243,11 +243,15 @@ Route101_Movement_Unused2:
 	step_end
 
 Route101_EventScript_Youngster::
-	goto_if_eq VAR_DAYNIGHT, 1, Route101_EventScript_Night
+	goto_if_set FLAG_EVENTOMISTERIOSO1, Route101_EventScript_Night
 	msgbox Route101_Text_TakeTiredPokemonToPokeCenter, MSGBOX_NPC
 	end
 Route101_EventScript_Night::
 	msgbox Route101_Text_TakeTiredPokemonToPokeCenter2, MSGBOX_NPC
+	setwildbattle SPECIES_SNORLAX, 95, ITEM_LEFTOVERS
+	dowildbattle
+	giveitem ITEM_LEFTOVERS, 10
+	clearflag FLAG_EVENTOMISTERIOSO1
 	end
 Route101_EventScript_Boy::
 	msgbox Route101_Text_WildPokemonInTallGrass, MSGBOX_NPC
@@ -336,7 +340,10 @@ Route101_Text_TakeTiredPokemonToPokeCenter:
 	.string "llévalos al Centro Pokémon de\l"
 	.string "inmediato.$"
 Route101_Text_TakeTiredPokemonToPokeCenter2:
-	.string "Es de noche.$"
+	.string "Ah, entonces veo que activaste el\n"
+	.string "evento misterioso. ¡Pues a ver si\l"
+	.string "puedes derrotar a este poderosísimo\l"
+	.string "Pokémon!$"
 Route101_Text_WildPokemonInTallGrass:
 	.string "Los Pokémon salvajes te atacarán a la\n"
 	.string "mínima que hagas.\p"

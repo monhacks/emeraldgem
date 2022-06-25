@@ -40,8 +40,14 @@ script MLMHouse_EventScript_FatMan {
 script MLMHouse_EventScript_Daughter {
     lockall
 	faceplayer
-	questmenu (QUEST_MENU_COMPLETE_QUEST SIDE_QUEST_3)
-      msgbox(format("Esmeralda: ¡Hola! ¡Encantada!\p¿Ya has conocido a los Chimecho de mis papás? ¡Los han tenido desde que eran Chingling!\pMe pregunto… ¿Porqué ambos tienen uno?\nQuizás… ¡Fue una declaración de amor!\l¿O quizás de lealtad?\l¡AH, ME INTRIGA LA RESPUESTA!"))
+      msgbox(format("Esmeralda: ¡Hola! ¡Encantada!\p¿Ya has conocido a los Chimecho de mis papás? ¡Los han tenido desde que eran Chingling!\pMe pregunto… ¿Porqué ambos tienen uno?\lQuizás… ¡Fue una declaración de amor!\l¿O quizás de lealtad?\p¡AH, ME INTRIGA LA RESPUESTA!"))
     releaseall
 }
 
+script MLMHouse_EventScript_Chimecho {
+	lockall
+	faceplayer
+	playmoncry (SPECIES_CHIMECHO, CRY_MODE_NORMAL)
+	msgbox(format("¡Chimecho!"))
+	releaseall
+}

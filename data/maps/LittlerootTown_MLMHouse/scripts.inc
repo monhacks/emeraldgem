@@ -50,8 +50,16 @@ MLMHouse_EventScript_FatMan_14:
 MLMHouse_EventScript_Daughter::
 	lockall
 	faceplayer
-	questmenu QUEST_MENU_COMPLETE_QUEST SIDE_QUEST_3
 	msgbox MLMHouse_EventScript_Daughter_Text_0
+	releaseall
+	return
+
+
+MLMHouse_EventScript_Chimecho::
+	lockall
+	faceplayer
+	playmoncry SPECIES_CHIMECHO, CRY_MODE_NORMAL
+	msgbox MLMHouse_EventScript_Chimecho_Text_0
 	releaseall
 	return
 
@@ -130,7 +138,10 @@ MLMHouse_EventScript_Daughter_Text_0:
 	.string "papás? ¡Los han tenido desde que eran\l"
 	.string "Chingling!\p"
 	.string "Me pregunto… ¿Porqué ambos tienen\n"
-	.string "uno?\n"
+	.string "uno?\l"
 	.string "Quizás… ¡Fue una declaración de amor!\l"
-	.string "¿O quizás de lealtad?\l"
+	.string "¿O quizás de lealtad?\p"
 	.string "¡AH, ME INTRIGA LA RESPUESTA!$"
+
+MLMHouse_EventScript_Chimecho_Text_0:
+	.string "¡Chimecho!$"

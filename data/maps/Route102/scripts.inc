@@ -17,6 +17,12 @@ Route102_EventScript_Boy::
 	msgbox Route102_Text_CatchWholeBunchOfPokemon, MSGBOX_NPC
 	end
 
+Error::
+	lockall
+	msgbox NoDeberiasVerlo, MSGBOX_NPC
+	releaseall
+	end
+
 Route102_EventScript_Calvin::
 	trainerbattle_single TRAINER_CALVIN_1, Route102_Text_CalvinIntro, Route102_Text_CalvinDefeated, Route102_EventScript_CalvinRegisterMatchCallAfterBattle
 	specialvar VAR_RESULT, ShouldTryRematchBattle
@@ -89,7 +95,7 @@ Route102_Text_LetsGoBack:
 	.string "¡Volvamos al Gimnasio!$"
 
 Route102_Text_ImNotVeryTall:
-	.string "No…soy tan alte, así que\n"
+	.string "No…soy tan alto, así que\n"
 	.string "me hundo en el pasto alto.\p"
 	.string "Ayúdame… Soy alérgico-\n"
 	.string "-AAAA…\l"

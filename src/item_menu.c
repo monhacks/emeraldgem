@@ -54,6 +54,7 @@
 #include "constants/items.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
+#include "tv.h"
 
 #define TAG_POCKET_SCROLL_ARROW 110
 #define TAG_BAG_SCROLL_ARROW    111
@@ -951,8 +952,28 @@ static void LoadBagItemListBuffers(u8 pocketId)
     gMultiuseListMenuTemplate.maxShowed = gBagMenu->numShownItems[pocketId];
 }
 
+static void BufferTMHMNumber(u16 item_ID)
+{
+    if (item_ID >= 100)
+    {
+        ConvertIntToDecimalString(0, item_ID);
+    }
+    else if (item_ID >= 10)
+    {
+        gStringVar1[0] = CHAR_0;
+        ConvertIntToDecimalStringN(gStringVar1, item_ID, STR_CONV_MODE_RIGHT_ALIGN, CountDigits(item_ID));
+    }
+    else
+    {
+        gStringVar1[0] = CHAR_0;
+        gStringVar1[1] = CHAR_0;
+        ConvertIntToDecimalStringN(gStringVar1, item_ID, STR_CONV_MODE_RIGHT_ALIGN, CountDigits(item_ID));
+    }
+}
+
 static void GetItemName(s8 *dest, u16 itemId)
 {
+	u16 item_ID = itemId - ITEM_TM01 + 1;
     switch (gBagPosition.pocket)
     {
     case TMHM_POCKET:
@@ -960,15 +981,32 @@ static void GetItemName(s8 *dest, u16 itemId)
         if (itemId >= ITEM_HM01)
         {
             // Get HM number
+			//BufferTMHMNumber(itemId - ITEM_HM01 + 1);
             ConvertIntToDecimalStringN(gStringVar1, itemId - ITEM_HM01 + 1, STR_CONV_MODE_LEADING_ZEROS, 1);
             StringExpandPlaceholders(dest, gText_NumberItem_HM);
         }
         else
         {
             // Get TM number
-            ConvertIntToDecimalStringN(gStringVar1, itemId - ITEM_TM01 + 1, STR_CONV_MODE_LEADING_ZEROS, 2);
-            StringExpandPlaceholders(dest, gText_NumberItem_TMBerry);
-        }
+			//BufferTMHMNumber(itemId - ITEM_TM01 + 1);
+				//ConvertIntToDecimalStringN(gStringVar1, itemId - ITEM_TM01 + 1, STR_CONV_MODE_LEADING_ZEROS, 5);
+			if (item_ID >= 100)
+			{
+				StringCopy(ConvertIntToDecimalStringN(0, item_ID, STR_CONV_MODE_RIGHT_ALIGN, CountDigits(item_ID)), gText_NumberItem_TMBerry);
+			}
+			else if (item_ID >= 10)
+			{
+				gStringVar1[0] = CHAR_0;
+				StringCopy(ConvertIntToDecimalStringN(gStringVar1, item_ID, STR_CONV_MODE_RIGHT_ALIGN, CountDigits(item_ID)), gText_NumberItem_TMBerry);
+			}
+			else
+			{
+				gStringVar1[0] = CHAR_0;
+				gStringVar1[1] = CHAR_0;
+				StringCopy(ConvertIntToDecimalStringN(gStringVar1, item_ID, STR_CONV_MODE_RIGHT_ALIGN, CountDigits(item_ID)), gText_NumberItem_TMBerry);
+			}
+			//StringExpandPlaceholders(dest, gText_NumberItem_TMBerry);
+		}
         break;
     case BERRIES_POCKET:
         ConvertIntToDecimalStringN(gStringVar1, itemId - FIRST_BERRY_INDEX + 1, STR_CONV_MODE_LEADING_ZEROS, 2);

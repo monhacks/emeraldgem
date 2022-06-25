@@ -49,6 +49,8 @@
 #include "union_room.h"
 #include "constants/rgb.h"
 #include "rtc.h"
+#include "walda_phrase.h"
+#include "naming_screen.h"
 
 // Menu actions
 enum
@@ -63,6 +65,7 @@ enum
     MENU_ACTION_SAVE,
     MENU_ACTION_OPTION,
     MENU_ACTION_EXIT,
+    MENU_ACTION_EXIT2,
     MENU_ACTION_RIGHT,
     MENU_ACTION_LEFT,
     MENU_ACTION_RETIRE_SAFARI,
@@ -71,6 +74,7 @@ enum
     MENU_ACTION_RETIRE_FRONTIER,
     MENU_ACTION_PYRAMID_BAG,
     MENU_ACTION_QUEST_MENU,
+    MENU_ACTION_PASSWORDS,
     MENU_ACTION_DEBUG,
 };
 
@@ -116,6 +120,7 @@ static bool8 StartMenuLinkModePlayerNameCallback(void);
 static bool8 StartMenuBattlePyramidRetireCallback(void);
 static bool8 StartMenuBattlePyramidBagCallback(void);
 static bool8 QuestMenuCallback(void);
+static bool8 PasswordCallback(void);
 static bool8 StartMenuDebugCallback(void);
 static bool8 StartMenuDexRelatedCallback(void);
 
@@ -178,6 +183,8 @@ static const u8 gText_MenuDebug[] = _("Debug");
 static const u8 sText_QuestMenu[] = _("Misiones");
 static const u8 gText_MenuDexRelated[] = _("Dex y Otros");
 static const u8 gText_LeftArrow[] = _("{LEFT_ARROW}");
+static const u8 sText_Passwords[] = _("Claves");
+static const u8 gText_MenuExit2[] = _("Salir {DPAD_LEFT}");
 static const struct MenuAction sStartMenuItems[] =
 {
 	
@@ -191,6 +198,7 @@ static const struct MenuAction sStartMenuItems[] =
     [MENU_ACTION_SAVE]              = {gText_MenuSave, {.u8_void = StartMenuSaveCallback}},
     [MENU_ACTION_OPTION]            = {gText_MenuOption, {.u8_void = StartMenuOptionCallback}},
     [MENU_ACTION_EXIT]              = {gText_MenuExit, {.u8_void = StartMenuExitCallback}},
+    [MENU_ACTION_EXIT2]              = {gText_MenuExit2, {.u8_void = StartMenuExitCallback}},
     [MENU_ACTION_RIGHT]              = {gText_RightArrow, {.u8_void = StartMenuRightCallback}},
     [MENU_ACTION_LEFT]              = {gText_LeftArrow, {.u8_void = StartMenuLeftCallback}},
     [MENU_ACTION_RETIRE_SAFARI]     = {gText_MenuRetire, {.u8_void = StartMenuSafariZoneRetireCallback}},
@@ -199,6 +207,7 @@ static const struct MenuAction sStartMenuItems[] =
     [MENU_ACTION_RETIRE_FRONTIER]   = {gText_MenuRetire, {.u8_void = StartMenuBattlePyramidRetireCallback}},
     [MENU_ACTION_PYRAMID_BAG]       = {gText_MenuBag, {.u8_void = StartMenuBattlePyramidBagCallback}},
     [MENU_ACTION_QUEST_MENU]        = {sText_QuestMenu, {.u8_void = QuestMenuCallback}},
+    [MENU_ACTION_PASSWORDS]        = {sText_Passwords, {.u8_void = PasswordCallback}},
     [MENU_ACTION_DEBUG]        = {gText_MenuDebug, {.u8_void = StartMenuDebugCallback}},
 };
 
@@ -350,6 +359,8 @@ static void BuildDexRelatedStartMenu(void) {
 		AddStartMenuAction(MENU_ACTION_QUEST_MENU);
 	if (FlagGet(FLAG_ENABLED_PC))
 		AddStartMenuAction(MENU_ACTION_PC);
+	AddStartMenuAction(MENU_ACTION_PASSWORDS);
+	AddStartMenuAction(MENU_ACTION_EXIT2);
 	
 }
 
@@ -359,7 +370,8 @@ static void BuildNormalStartMenu(void)
 		{
 			AddStartMenuAction(MENU_ACTION_POKEMON);
 			if (!FlagGet(FLAG_SYS_POKEDEX_GET)) {
-				AddStartMenuAction(MENU_ACTION_PC);
+				if (FlagGet(FLAG_ENABLED_PC))
+					AddStartMenuAction(MENU_ACTION_PC);
 			}
 		}
 		AddStartMenuAction(MENU_ACTION_BAG);
@@ -368,6 +380,7 @@ static void BuildNormalStartMenu(void)
 		
 		AddStartMenuAction(MENU_ACTION_SAVE);
 		AddStartMenuAction(MENU_ACTION_OPTION);
+		AddStartMenuAction(MENU_ACTION_EXIT);
 		if (FlagGet(FLAG_SET_WALL_CLOCK))
 			ShowStartMenuExtraWindow();
 }
@@ -393,6 +406,8 @@ static void BuildDebugStartMenu(void)
     AddStartMenuAction(MENU_ACTION_SAVE);
     AddStartMenuAction(MENU_ACTION_OPTION);
     AddStartMenuAction(MENU_ACTION_DEBUG);
+    AddStartMenuAction(MENU_ACTION_EXIT);
+
 }
 
 static void BuildSafariZoneStartMenu(void)
@@ -404,6 +419,7 @@ static void BuildSafariZoneStartMenu(void)
     AddStartMenuAction(MENU_ACTION_PC);
     AddStartMenuAction(MENU_ACTION_PLAYER);
     AddStartMenuAction(MENU_ACTION_OPTION);
+    AddStartMenuAction(MENU_ACTION_EXIT);
     
 }
 
@@ -419,6 +435,7 @@ static void BuildLinkModeStartMenu(void)
 
     AddStartMenuAction(MENU_ACTION_PLAYER_LINK);
     AddStartMenuAction(MENU_ACTION_OPTION);
+    AddStartMenuAction(MENU_ACTION_EXIT);
     
 }
 
@@ -434,6 +451,7 @@ static void BuildUnionRoomStartMenu(void)
 
     AddStartMenuAction(MENU_ACTION_PLAYER);
     AddStartMenuAction(MENU_ACTION_OPTION);
+    AddStartMenuAction(MENU_ACTION_EXIT);
     
 }
 
@@ -443,6 +461,7 @@ static void BuildBattlePikeStartMenu(void)
     AddStartMenuAction(MENU_ACTION_POKEMON);
     AddStartMenuAction(MENU_ACTION_PLAYER);
     AddStartMenuAction(MENU_ACTION_OPTION);
+    AddStartMenuAction(MENU_ACTION_EXIT);
     
 }
 
@@ -454,6 +473,7 @@ static void BuildBattlePyramidStartMenu(void)
     AddStartMenuAction(MENU_ACTION_REST_FRONTIER);
     AddStartMenuAction(MENU_ACTION_RETIRE_FRONTIER);
     AddStartMenuAction(MENU_ACTION_OPTION);
+    AddStartMenuAction(MENU_ACTION_EXIT);
     
 }
 
@@ -462,6 +482,7 @@ static void BuildMultiPartnerRoomStartMenu(void)
     AddStartMenuAction(MENU_ACTION_POKEMON);
     AddStartMenuAction(MENU_ACTION_PLAYER);
     AddStartMenuAction(MENU_ACTION_OPTION);
+    AddStartMenuAction(MENU_ACTION_EXIT);
     
 }
 
@@ -688,6 +709,8 @@ static bool8 HandleStartMenuInput(void)
 
     if (JOY_NEW(A_BUTTON))
     {
+		if (FlagGet(FLAG_MENU_DEXRELATED))
+			FlagClear(FLAG_MENU_DEXRELATED);
         PlaySE(SE_SELECT);
         if (sStartMenuItems[sCurrentStartMenuActions[sStartMenuCursorPos]].func.u8_void == StartMenuPokedexCallback)
         {
@@ -730,9 +753,8 @@ static bool8 HandleStartMenuInput(void)
     {
 		if (FlagGet(FLAG_MENU_DEXRELATED)){
 			FlagClear(FLAG_MENU_DEXRELATED);
-			PlayerFreeze();
-			HideStartMenuWindow();
-			ShowStartMenu();
+			RemoveExtraStartMenuWindows();
+			HideStartMenu();
 			return TRUE;
 		}
 		else 
@@ -882,6 +904,7 @@ static bool8 StartMenuOptionCallback(void)
 
 static bool8 StartMenuExitCallback(void)
 {
+	FlagClear(FLAG_MENU_DEXRELATED);
     RemoveExtraStartMenuWindows();
     HideStartMenu(); // Hide start menu
 
@@ -1611,6 +1634,12 @@ void AppendToList(u8 *list, u8 *pos, u8 newEntry)
 static bool8 QuestMenuCallback(void)
 {
     CreateTask(Task_OpenQuestMenuFromStartMenu, 0);
+    return TRUE;
+}
+
+static bool8 PasswordCallback(void)
+{
+    DoPasswordNamingScreen();
     return TRUE;
 }
 

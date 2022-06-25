@@ -3,17 +3,44 @@ RustboroCity_Gym_MapScripts::
 	.byte 0
 
 RustboroCity_Gym_EventScript_Roxanne::
+	namebox Roxanne
 	trainerbattle_single TRAINER_ROXANNE_1, RustboroCity_Gym_Text_RoxanneIntro, RustboroCity_Gym_Text_RoxanneDefeat, RustboroCity_Gym_EventScript_RoxanneDefeated, NO_MUSIC
+	hidenamebox
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, RustboroCity_Gym_EventScript_RoxanneRematch
 	goto_if_unset FLAG_RECEIVED_TM39, RustboroCity_Gym_EventScript_GiveRockTomb
+	namebox Roxanne
 	msgbox RustboroCity_Gym_Text_RoxannePostBattle, MSGBOX_DEFAULT
+	hidenamebox
 	release
 	end
 RustboroCity_Gym_Trigger_Nada::
+	setflag FLAG_TEMP_1
+	release
+	end
+RustboroCity_Gym_Trigger_Clear_Down::
+	clearflag FLAG_TEMP_1
+	setflag FLAG_ENABLED_PC
+	applymovement OBJ_EVENT_ID_PLAYER, RustboroCity_Gym_PlayerWalkDown
+	waitmovement 0
+	release
+	end
+RustboroCity_Gym_Trigger_Clear_Left::
+	clearflag FLAG_TEMP_1
+	setflag FLAG_ENABLED_PC
+	applymovement OBJ_EVENT_ID_PLAYER, RustboroCity_Gym_PlayerWalkLeft
+	waitmovement 0
+	release
+	end
+RustboroCity_Gym_Trigger_Clear_Right::
+	clearflag FLAG_TEMP_1
+	setflag FLAG_ENABLED_PC
+	applymovement OBJ_EVENT_ID_PLAYER, RustboroCity_Gym_PlayerWalkRight1
+	waitmovement 0
 	release
 	end
 RustboroCity_Gym_Trigger_Up1::
+	goto_if_set FLAG_TEMP_1, RustboroCity_Gym_Trigger_Clear_Down
 	clearflag FLAG_ENABLED_PC
 	getpartysize
 	goto_if_lt VAR_RESULT, 4, RustboroCity_Gym_Trigger_Nada
@@ -30,27 +57,29 @@ RustboroCity_Gym_Trigger_Up1::
 	delay 30
 	applymovement OBJ_EVENT_ID_PLAYER, RustboroCity_Gym_PlayerWalkDown
 	waitmovement 0
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceRight
+	waitmovement 0
 	setflag FLAG_ENABLED_PC
 	goto RustboroCity_Gym_EventScript_GymGuide
 	end
 	
 RustboroCity_Gym_PlayerWalkDown:
 	walk_down
-	face_right
 	step_end
 RustboroCity_Gym_PlayerWalkRight:
 	walk_right
 	walk_right
 	walk_right
 	walk_right
-	face_up
+	step_end
+RustboroCity_Gym_PlayerWalkRight1:
+	walk_right
 	step_end
 RustboroCity_Gym_PlayerWalkLeft:
 	walk_left
-	face_up
 	step_end
 RustboroCity_Gym_WaitYouCant:
-	.string "¡Alto! ¡No puedes hacer eso!$"
+	.string "¡Alto! ¡No puedes pasar así!$"
 RustboroCity_Gym_ForThisGym:
 	.string "No sé si lo sabías, pero en la región\n"
 	.string "Hoenn, {COLOR BLUE}los gimnasios tienen\l"
@@ -58,15 +87,16 @@ RustboroCity_Gym_ForThisGym:
 	.string "cumplir para poder entrar y batallar en\l"
 	.string "ellos.\p"
 	.string "Para este Gimnasio en específico,\n"
-	.string "necesitas usar sólo 3 Pokémon. De esa\l"
-	.string "forma tú y la líder tendrán la misma\l"
-	.string "cantidad de Pokémon.\p"
+	.string "necesitas usar 3 Pokémon o menos. De\l"
+	.string "esa forma tú y la líder tendrán la\l"
+	.string "misma cantidad de Pokémon.\p"
 	.string "Además, no podrás usar el\n"
 	.string "{COLOR RED}Sistema de Almacenamiento Portátil{COLOR DARK_GRAY}\n"
 	.string "dentro del Gimnasio.\p"
 	.string "¡Pero cada Gimnasio es diferente!$"
 
 RustboroCity_Gym_Trigger_Left::
+	goto_if_set FLAG_TEMP_1, RustboroCity_Gym_Trigger_Clear_Right
 	clearflag FLAG_ENABLED_PC
 	getpartysize
 	goto_if_lt VAR_RESULT, 4, RustboroCity_Gym_Trigger_Nada
@@ -84,11 +114,14 @@ RustboroCity_Gym_Trigger_Left::
 	delay 30
 	applymovement OBJ_EVENT_ID_PLAYER, RustboroCity_Gym_PlayerWalkRight
 	waitmovement 0
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceUp
+	waitmovement 0
 	setflag FLAG_ENABLED_PC
 	goto RustboroCity_Gym_EventScript_GymGuide
 	end 
 
 RustboroCity_Gym_Trigger_Right::
+	goto_if_set FLAG_TEMP_1, RustboroCity_Gym_Trigger_Clear_Left
 	clearflag FLAG_ENABLED_PC
 	getpartysize
 	goto_if_lt VAR_RESULT, 4, RustboroCity_Gym_Trigger_Nada
@@ -105,6 +138,8 @@ RustboroCity_Gym_Trigger_Right::
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_ExclamationMark
 	delay 30
 	applymovement OBJ_EVENT_ID_PLAYER, RustboroCity_Gym_PlayerWalkLeft
+	waitmovement 0
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceUp
 	waitmovement 0
 	setflag FLAG_ENABLED_PC
 	goto RustboroCity_Gym_EventScript_GymGuide
@@ -129,6 +164,7 @@ RustboroCity_Gym_EventScript_RoxanneDefeated::
 
 RustboroCity_Gym_EventScript_GiveRockTomb::
 	giveitem ITEM_TM39
+	giveitem ITEM_TM51
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_TM39
 	msgbox RustboroCity_Gym_Text_ExplainRockTomb, MSGBOX_DEFAULT
@@ -207,154 +243,121 @@ RustboroCity_Gym_EventScript_RegisterRoxanne::
 	releaseall
 	end
 
-RustboroCity_Gym_Text_GymGuideAdvice:
-	.string "Yo, how's it going?\p"
-	.string "Listen, my friend!\n"
-	.string "Would you like to become the CHAMPION?\p"
-	.string "I'm no TRAINER, not me, but I can\n"
-	.string "sure give you winning advice.\p"
-	.string "That's settled, then! We'll aim for the\n"
-	.string "POKéMON CHAMPIONSHIP together!\p"
-	.string "It's your job as a TRAINER to collect\n"
-	.string "GYM BADGES, am I right?\p"
-	.string "But GYM LEADERS aren't pushovers!\p"
-	.string "And that's where I come in!\n"
-	.string "I'm here to provide expert advice!\p"
-	.string "ROXANNE, the GYM LEADER, is a user\n"
-	.string "of ROCK-type POKéMON.\p"
-	.string "The ROCK type is very durable, but\n"
-	.string "it can't stand WATER-type and\l"
-	.string "GRASS-type moves.\p"
-	.string "Come see me afterwards, if you beat\n"
-	.string "the GYM LEADER.\p"
-	.string "Well, go for it!$"
 
 RustboroCity_Gym_Text_GymGuidePostVictory:
-	.string "Whoa! What a breathtaking victory!\n"
-	.string "My cheering must've worked!\p"
-	.string "Great!\n"
-	.string "Check your TRAINER CARD.\p"
-	.string "The STONE BADGE you got should be\n"
-	.string "properly recorded on it.\p"
-	.string "In other words…\p"
-	.string "You've climbed the first step on\n"
-	.string "the stairs to the CHAMPIONSHIP!\p"
-	.string "That's got to feel awesome!$"
+	.string "¡Esa batalla fue increíble!$"
 
 RustboroCity_Gym_Text_JoshIntro:
-	.string "Don't take us GYM TRAINERS lightly!\n"
-	.string "I'll show you why we're better!$"
+	.string "¡Te mostraré un gran poder!$"
 
 RustboroCity_Gym_Text_JoshDefeat:
-	.string "You were too good for me…$"
+	.string "Eres demasiado buen{OA}…$"
 
 RustboroCity_Gym_Text_JoshPostBattle:
-	.string "You haven't seen anything of the ROCK\n"
-	.string "type's terrifying power!$"
+	.string "¡Aún te falta mucho!$"
 
 RustboroCity_Gym_Text_TommyIntro:
-	.string "If you can't beat me, you won't stand\n"
-	.string "a chance against ROXANNE!$"
+	.string "Si no me puedes vencer,\n"
+	.string "¡Olvídate de ganarle a Roxanne!$"
 
 RustboroCity_Gym_Text_TommyDefeat:
-	.string "Wow! You've got some potential!$"
+	.string "¡Wow! ¡Tienes potencial!$"
 
 RustboroCity_Gym_Text_TommyPostBattle:
-	.string "ROXANNE is stronger than me by\n"
-	.string "several times.\p"
-	.string "You'd better be on your guard!$"
+	.string "Roxanne sobrepasa mi poder\n"
+	.string "por kilómetros.\p"
+	.string "¡Mejor ten cuidado!$"
 
 RustboroCity_Gym_Text_MarcIntro:
-	.string "We might be in the middle of town,\n"
-	.string "but so what?\p"
-	.string "My ROCK POKéMON need room to\n"
-	.string "rampage!$"
+	.string "¿Sabías qué?\p"
+	.string "¡Mis Pokémon tipo Roca son\n"
+	.string "lo mejor que hay!$"
 
 RustboroCity_Gym_Text_MarcDefeat:
-	.string "Oh, man oh man!\n"
-	.string "Our challenger is one feisty customer!$"
+	.string "¿Sabías qué?\n"
+	.string "¡Mi marido me hará lavar los platos!$"
 
 RustboroCity_Gym_Text_MarcPostBattle:
-	.string "I have to hand it to our LEADER.\p"
-	.string "It took smarts and sense for her to\n"
-	.string "pick the ROCK type at her young age.$"
+	.string "Tengo muchos datos nuevos que aprender.\p"
+	.string "Me tomó mucho tiempo llegar aquí,\n"
+	.string "¡No tuve que apostar hacer quehaceres\l"
+	.string "con mi marido si mantenía una racha!$"
 
 RustboroCity_Gym_Text_RoxanneIntro:
-	.string "Hello, I am ROXANNE, the RUSTBORO\n"
-	.string "POKéMON GYM LEADER.\p"
-	.string "I became a GYM LEADER so that I might\n"
-	.string "apply what I learned at the POKéMON\l"
-	.string "TRAINER'S SCHOOL in battle.\p"
-	.string "Would you kindly demonstrate how you\n"
-	.string "battle, and with which POKéMON?$"
+	.string "¡Hola, soy Roxanne, la {COLOR RED}Líder del Gimnasio{COLOR DARK_GRAY}\n"
+	.string "de Ciudad Rustboro.\p"
+	.string "Esta seguramente es la primera vez\n"
+	.string "que entras en un Gimnasio de Hoenn, ¿no?\l"
+	.string "Pues déjame decirte que aquí, los\l"
+	.string "Gimnasios tienen {COLOR BLUE}requisitos especiales\l"
+	.string "que debes cumplir para entrar{COLOR DARK_GRAY},\l"
+	.string "y por ejemplo, en este Gimnasio,\l"
+	.string "se han de usar un máximo de 3 Pokémon.\p"
+	.string "¡Además! El acceso al {COLOR RED}Sistema de\n"
+	.string "Almacenamiento Portátil está prohibido{COLOR DARK_GRAY},\l"
+	.string "para evitar pilluelos que quieran\l"
+	.string "saltarse estas reglas.\p"
+	.string "¡Pero basta de charlas, vamos al grano!\p"
+	.string "¡Vas a enfrentarte ahora, a la\n"
+	.string "chica prodigio de Ciudad Rustboro!$"
 
 RustboroCity_Gym_Text_RoxanneDefeat:
-	.string "So…\n"
-	.string "I lost…\p"
-	.string "It seems that I still have much more\n"
-	.string "to learn…\p"
-	.string "I understand.\p"
-	.string "The POKéMON LEAGUE's rules state\n"
-	.string "that TRAINERS are to be given this\l"
-	.string "if they defeat a GYM LEADER.\p"
-	.string "Please accept the official POKéMON\n"
-	.string "LEAGUE STONE BADGE.$"
+	.string "Así que…\n"
+	.string "Perdí…\p"
+	.string "Ni con mi gran conocimiento conseguido\n"
+	.string "con años de estudio de los combates\l"
+	.string "pude ganarte.\p"
+	.string "¡Acepto mi derrota humildemente!\n"
+	.string "¡Eres increíble, {PLAYER}!$"
 
 RustboroCity_Gym_Text_ReceivedStoneBadge:
-	.string "{PLAYER} received the STONE BADGE\n"
-	.string "from ROXANNE.$"
+	.string "{PLAYER} recibió la\n"
+	.string "{COLOR RED}Medalla Piedra{COLOR DARK_GRAY} de ROXANNE.$"
 
 RustboroCity_Gym_Text_StoneBadgeInfoTakeThis:
-	.string "The STONE BADGE heightens the ATTACK\n"
-	.string "power of your POKéMON.\p"
-	.string "It also enables them to use the HM move\n"
-	.string "CUT outside of battle.\p"
-	.string "Please take this with you, too.$"
+	.string "Esa es una Medalla de Gimnasio,\n"
+	.string "aunque seguro ya las conoces.\p"
+	.string "Por favor, toma esto como premio.$"
 
 RustboroCity_Gym_Text_ExplainRockTomb:
-	.string "That TECHNICAL MACHINE, TM39,\n"
-	.string "contains ROCK TOMB.\p"
-	.string "It not only inflicts damage by dropping\n"
-	.string "rocks, it also lowers SPEED.\p"
-	.string "If you use a TM, it instantly teaches\n"
-	.string "the move to a POKéMON.\p"
-	.string "Remember, a TM can be used only once,\n"
-	.string "so think before you use it.$"
+	.string "¡Es la {COLOR BLUE}Máquina Técnica 39{COLOR DARK_GRAY}, Antiaéreo!\n"
+	.string "Antiaéreo es un movimiento tipo Roca\l"
+	.string "que causa que el rival {COLOR BLUE}pierda el tipo\l"
+	.string "Volador hasta que sea reemplazado{COLOR DARK_GRAY}.\p"
+	.string "¡Recuerda que las MTs no se gastan!$"
 
 RustboroCity_Gym_Text_RoxannePostBattle:
-	.string "Since you are so strong, you should\n"
-	.string "challenge other GYM LEADERS.\p"
-	.string "By battling many TRAINERS, you should\n"
-	.string "learn many things.$"
+	.string "Te recomendaría visitar otros\n"
+	.string "Gimnasios, y ganar.\p"
+	.string "Con tu poder, lograrás todo.$"
 
 RustboroCity_Gym_Text_GymStatue:
-	.string "RUSTBORO CITY POKéMON GYM$"
+	.string "Gimnasio Pokémon Rustboro$"
+	.string "Vencedores del Gimnasio:\n"
+	.string "{RIVAL}\n"
+	.string "Leaf$"
 
 RustboroCity_Gym_Text_GymStatueCertified:
-	.string "RUSTBORO CITY POKéMON GYM\p"
-	.string "ROXANNE'S CERTIFIED TRAINERS:\n"
+	.string "Gimnasio Pokémon Rustboro$"
+	.string "Vencedores del Gimnasio:\n"
+	.string "{RIVAL}\n"
+	.string "Leaf\l"
 	.string "{PLAYER}$"
 
 RustboroCity_Gym_Text_RoxanneRegisterCall:
 	.string "… … … … … …\n"
-	.string "… … … … … Beep!\p"
-	.string "ROXANNE: Oh, hello, {PLAYER}?\n"
-	.string "This is ROXANNE of RUSTBORO CITY.\p"
-	.string "I heard from BRAWLY that you're\n"
-	.string "moving up through the ranks of\l"
-	.string "TRAINERS at an incredible clip.\p"
-	.string "Well, I'd rather not think that\n"
-	.string "I can't beat you.\p"
-	.string "I promise, I will shape up my GYM\n"
-	.string "so that you may challenge us again.\p"
-	.string "I hope you'll be looking forward to\n"
-	.string "that occasion as much as me!\p"
+	.string "… … … … … ¡BIP!\p"
+	.string "Ah, hola, ¿{PLAYER}?\n"
+	.string "Soy Roxanne, del Gimnasio Rustboro.\p"
+	.string "Escuché de Brawly que eres más fuerte.\p"
+	.string "Te prometo que mejoraré mi Gimnasio,\n"
+	.string "para que puedas volver a enfrentame.\p"
+	.string "¡Espero te emocione como a mí!\p"
 	.string "… … … … … …\n"
-	.string "… … … … … Click!$"
+	.string "… … … … … ¡Click!$"
 
 RustboroCity_Gym_Text_RegisteredRoxanne:
-	.string "Registered GYM LEADER ROXANNE\n"
-	.string "in the POKéNAV.$"
+	.string "Roxanne registrada.$"
 
 RustboroCity_Gym_Text_RoxannePreRematch:
 	.string "ROXANNE: I'm so glad to see you again.\n"

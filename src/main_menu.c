@@ -105,7 +105,7 @@
  *    printing, and then wait for A or B to be pressed.
  * - Then advance to Task_HandleMainMenuBPressed.
  *
- * Task_NewGameBirchSpeechInit
+ * Task_NewGameBirchSpeech_Init
  *  - Load the sprites for the intro speech, start playing music
  * Task_NewGameBirchSpeech_WaitToShowBirch
  *  - Spawn Task_NewGameBirchSpeech_FadeInTarget1OutTarget2
@@ -403,8 +403,8 @@ static const struct WindowTemplate gNewGameBirchSpeechTextWindows[] =
     DUMMY_WIN_TEMPLATE
 };
 
-static const u16 sMainMenuBgPal[] = INCBIN_U16("graphics/misc/main_menu_bg.gbapal");
-static const u16 sMainMenuTextPal[] = INCBIN_U16("graphics/misc/main_menu_text.gbapal");
+static const u16 sMainMenuBgPal[] = INCBIN_U16("graphics/interface/main_menu_bg.gbapal");
+static const u16 sMainMenuTextPal[] = INCBIN_U16("graphics/interface/main_menu_text.gbapal");
 
 static const u8 sTextColor_Headers[] = {TEXT_DYNAMIC_COLOR_1, TEXT_DYNAMIC_COLOR_2, TEXT_DYNAMIC_COLOR_3};
 static const u8 sTextColor_MenuInfo[] = {TEXT_DYNAMIC_COLOR_1, TEXT_COLOR_WHITE, TEXT_DYNAMIC_COLOR_3};
@@ -838,7 +838,7 @@ static void Task_DisplayMainMenu(u8 taskId)
                 FillWindowPixelBuffer(6, PIXEL_FILL(0xA));
                 AddTextPrinterParameterized3(2, FONT_NORMAL, 0, 1, sTextColor_Headers, TEXT_SKIP_DRAW, gText_MainMenuContinue);
                 AddTextPrinterParameterized3(3, FONT_NORMAL, 0, 1, sTextColor_Headers, TEXT_SKIP_DRAW, gText_MainMenuNewGame);
-                AddTextPrinterParameterized3(4, FONT_NORMAL, 0, 1, sTextColor_Headers, TEXT_SKIP_DRAW, gText_MainMenuMysteryGift2);
+                AddTextPrinterParameterized3(4, FONT_NORMAL, 0, 1, sTextColor_Headers, TEXT_SKIP_DRAW, gText_MainMenuMysteryGift);
                 AddTextPrinterParameterized3(5, FONT_NORMAL, 0, 1, sTextColor_Headers, TEXT_SKIP_DRAW, gText_MainMenuMysteryEvents);
                 AddTextPrinterParameterized3(6, FONT_NORMAL, 0, 1, sTextColor_Headers, TEXT_SKIP_DRAW, gText_MainMenuOption);
                 MainMenu_FormatSavegameText();
@@ -1082,7 +1082,7 @@ static void Task_HandleMainMenuAPressed(u8 taskId)
                 DestroyTask(taskId);
                 break;
             case ACTION_INVALID:
-                gTasks[taskId].tCurrItem = 0;
+				gTasks[taskId].tCurrItem = 0;
                 gTasks[taskId].func = Task_DisplayMainMenuInvalidActionError;
                 gPlttBufferUnfaded[0xF1] = RGB_WHITE;
                 gPlttBufferFaded[0xF1] = RGB_WHITE;
@@ -1121,6 +1121,12 @@ static void Task_DisplayMainMenuInvalidActionError(u8 taskId)
     switch (gTasks[taskId].tCurrItem)
     {
         case 0:
+		    /*if (JOY_NEW(A_BUTTON | B_BUTTON))
+            {
+                PlaySE(SE_SELECT);
+                BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+                gTasks[taskId].func = Task_HandleMainMenuBPressed;
+            }*/
             FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 30, 20);
             switch (gTasks[taskId].tMenuType)
             {
@@ -2090,7 +2096,7 @@ static void NewGameBirchSpeech_ShowGenderMenu(void)
     DrawMainMenuWindowBorder(&gNewGameBirchSpeechTextWindows[1], 0xF3);
     FillWindowPixelBuffer(1, PIXEL_FILL(1));
     PrintMenuTable(1, ARRAY_COUNT(sMenuActions_Gender), sMenuActions_Gender);
-    InitMenuInUpperLeftCornerNormal(1, 2, 0);
+    InitMenuInUpperLeftCornerNormal(1, ARRAY_COUNT(sMenuActions_Gender), 0);
     PutWindowTilemap(1);
     CopyWindowToVram(1, COPYWIN_FULL);
 }
