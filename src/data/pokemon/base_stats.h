@@ -4300,6 +4300,7 @@ const struct BaseStats gBaseStats[] =
         .baseSpDefense = 55,
 		.type1 = TYPE_FAIRY,
 		.type2 = TYPE_FAIRY,
+
         .catchRate = 150,
         .expYield = 44,
         .evYield_SpDefense = 1,
@@ -4323,7 +4324,7 @@ const struct BaseStats gBaseStats[] =
         .baseSpeed     = 15,
         .baseSpAttack  = 40,
         .baseSpDefense = 20,
-        		.type1 = TYPE_NORMAL,
+        .type1 = TYPE_NORMAL,
 		.type2 = TYPE_FAIRY,
         .catchRate = 170,
         .expYield = 42,
@@ -4349,6 +4350,7 @@ const struct BaseStats gBaseStats[] =
         .baseSpDefense = 65,
 		.type1 = TYPE_FAIRY,
 		.type2 = TYPE_FAIRY,
+
         .catchRate = 190,
         .expYield = 49,
         .evYield_SpDefense = 1,
@@ -5172,6 +5174,7 @@ const struct BaseStats gBaseStats[] =
         .baseSpDefense = 40,
 		.type1 = TYPE_FAIRY,
 		.type2 = TYPE_FAIRY,
+
         .catchRate = 190,
         .expYield = 60,
         .evYield_Attack    = 1,
@@ -5196,6 +5199,7 @@ const struct BaseStats gBaseStats[] =
         .baseSpDefense = 60,
 		.type1 = TYPE_FAIRY,
 		.type2 = TYPE_FAIRY,
+
         .catchRate = 75,
         .expYield = 158,
         .evYield_Attack    = 2,

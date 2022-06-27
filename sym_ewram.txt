@@ -129,6 +129,7 @@
 	.include "src/recorded_battle.o"
 	.include "src/trainer_pokemon_sprites.o"
 	.include "src/lilycove_lady.o"
+	.include "src/check_fossils.o"
 	.include "src/battle_dome.o"
 	.include "src/match_call.o"
 	.include "src/menu.o"

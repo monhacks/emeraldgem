@@ -381,6 +381,7 @@ gSpecials::
 	def_special BufferFavorLadyItemName
 	def_special BufferFavorLadyPlayerName
 	def_special DidFavorLadyLikeItem
+	//def_special FossilOpenBagMenu
 	def_special Script_FavorLadyOpenBagMenu
 	def_special Script_DoesFavorLadyLikeItem
 	def_special IsFavorLadyThresholdMet
@@ -542,3 +543,5 @@ gSpecials::
 	def_special GetCaughtMon
 	def_special SetSeenMon
 	def_special SetCaughtMon
+	def_special FossilOpenBagMenu
+	def_special FossilsListSelect

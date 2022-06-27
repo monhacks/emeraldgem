@@ -1,5 +1,4 @@
 #define LEVEL_UP_MOVE(lvl, moveLearned) {.move = moveLearned, .level = lvl}
-#define LEVEL_UP_END (0xffff)
 
 static const struct LevelUpMove sBulbasaurLevelUpLearnset[] = {
     LEVEL_UP_MOVE( 1, MOVE_TACKLE),
@@ -5151,7 +5150,7 @@ static const struct LevelUpMove sSpecies276LevelUpLearnset[] = {
 static const struct LevelUpMove sTreeckoLevelUpLearnset[] = {
     LEVEL_UP_MOVE( 1, MOVE_POUND),
     LEVEL_UP_MOVE( 1, MOVE_LEER),
-    LEVEL_UP_MOVE( 6, MOVE_ABSORB),
+    LEVEL_UP_MOVE( 5, MOVE_ABSORB),
     LEVEL_UP_MOVE( 9, MOVE_QUICK_ATTACK),
     LEVEL_UP_MOVE(13, MOVE_MEGA_DRAIN),
     LEVEL_UP_MOVE(17, MOVE_PURSUIT),
@@ -5218,7 +5217,7 @@ static const struct LevelUpMove sSceptileLevelUpLearnset[] = {
 static const struct LevelUpMove sTorchicLevelUpLearnset[] = {
     LEVEL_UP_MOVE( 1, MOVE_SCRATCH),
     LEVEL_UP_MOVE( 1, MOVE_GROWL),
-    LEVEL_UP_MOVE( 6, MOVE_EMBER),
+    LEVEL_UP_MOVE( 5, MOVE_EMBER),
     LEVEL_UP_MOVE(10, MOVE_SAND_ATTACK),
     LEVEL_UP_MOVE(14, MOVE_PECK),
     LEVEL_UP_MOVE(19, MOVE_FIRE_SPIN),
@@ -5280,7 +5279,7 @@ static const struct LevelUpMove sBlazikenLevelUpLearnset[] = {
 static const struct LevelUpMove sMudkipLevelUpLearnset[] = {
     LEVEL_UP_MOVE( 1, MOVE_TACKLE),
     LEVEL_UP_MOVE( 1, MOVE_GROWL),
-    LEVEL_UP_MOVE( 6, MOVE_WATER_GUN),
+    LEVEL_UP_MOVE( 4, MOVE_WATER_GUN),
     LEVEL_UP_MOVE( 9, MOVE_MUD_SLAP),
     LEVEL_UP_MOVE(12, MOVE_FORESIGHT),
     LEVEL_UP_MOVE(17, MOVE_BIDE),
@@ -5316,7 +5315,6 @@ static const struct LevelUpMove sMarshtompLevelUpLearnset[] = {
 };
 
 static const struct LevelUpMove sSwampertLevelUpLearnset[] = {
-    LEVEL_UP_MOVE( 0, MOVE_EARTHQUAKE),
     LEVEL_UP_MOVE( 1, MOVE_MUD_SHOT),
     LEVEL_UP_MOVE( 1, MOVE_HAMMER_ARM),
     LEVEL_UP_MOVE( 1, MOVE_TACKLE),
@@ -5340,7 +5338,7 @@ static const struct LevelUpMove sSwampertLevelUpLearnset[] = {
 
 static const struct LevelUpMove sPoochyenaLevelUpLearnset[] = {
     LEVEL_UP_MOVE( 1, MOVE_TACKLE),
-    LEVEL_UP_MOVE( 2, MOVE_HOWL),
+    LEVEL_UP_MOVE( 4, MOVE_HOWL),
     LEVEL_UP_MOVE( 7, MOVE_SAND_ATTACK),
     LEVEL_UP_MOVE(10, MOVE_BITE),
     LEVEL_UP_MOVE(13, MOVE_ODOR_SLEUTH),

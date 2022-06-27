@@ -112,6 +112,7 @@ void InitLilycoveLadyRandomly(void)
     }
 }
 
+
 void Script_GetLilycoveLadyId(void)
 {
     gSpecialVar_Result = GetLilycoveLadyId();

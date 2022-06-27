@@ -92,6 +92,7 @@ enum {
     ACTION_CONFIRM,
     ACTION_SHOW,
     ACTION_GIVE_FAVOR_LADY,
+    ACTION_GIVE_FOSSIL,
     ACTION_CONFIRM_QUIZ_LADY,
     ACTION_BY_NAME,
     ACTION_BY_TYPE,
@@ -220,6 +221,7 @@ static void ItemMenu_UseInBattle(u8);
 static void ItemMenu_CheckTag(u8);
 static void ItemMenu_Show(u8);
 static void ItemMenu_GiveFavorLady(u8);
+static void ItemMenu_GiveFossil(u8);
 static void ItemMenu_ConfirmQuizLady(u8);
 static void Task_ItemContext_Normal(u8);
 static void Task_ItemContext_GiveToParty(u8);
@@ -319,12 +321,13 @@ static const struct MenuAction sItemMenuActions[] = {
     [ACTION_CONFIRM]           = {gMenuText_Confirm,  Task_FadeAndCloseBagMenu},
     [ACTION_SHOW]              = {gMenuText_Show,     ItemMenu_Show},
     [ACTION_GIVE_FAVOR_LADY]   = {gMenuText_Give2,    ItemMenu_GiveFavorLady},
+    [ACTION_GIVE_FOSSIL]       = {gMenuText_Give2,    ItemMenu_GiveFossil},
     [ACTION_CONFIRM_QUIZ_LADY] = {gMenuText_Confirm,  ItemMenu_ConfirmQuizLady},
     [ACTION_BY_NAME]           = {sMenuText_ByName,   ItemMenu_SortByName},
     [ACTION_BY_TYPE]           = {sMenuText_ByType,   ItemMenu_SortByType},
     [ACTION_BY_AMOUNT]         = {sMenuText_ByAmount, ItemMenu_SortByAmount},
-    [ACTION_SELECT_BUTTON] ={sMenuText_Select, ItemMenu_RegisterSelect},
-    [ACTION_L_BUTTON] =     {sMenuText_L, ItemMenu_RegisterList},
+    [ACTION_SELECT_BUTTON]     = {sMenuText_Select,   ItemMenu_RegisterSelect},
+    [ACTION_L_BUTTON]          = {sMenuText_L,        ItemMenu_RegisterList},
     [ACTION_DUMMY]             = {gText_EmptyString2, NULL}
 };
 
@@ -385,6 +388,10 @@ static const u8 sContextMenuItems_FavorLady[] = {
     ACTION_GIVE_FAVOR_LADY, ACTION_CANCEL
 };
 
+static const u8 sContextMenuItems_CheckFossils[] = {
+    ACTION_GIVE_FOSSIL, ACTION_CANCEL
+};
+
 static const u8 sContextMenuItems_QuizLady[] = {
     ACTION_CONFIRM_QUIZ_LADY, ACTION_CANCEL
 };
@@ -398,6 +405,7 @@ static const TaskFunc sContextMenuFuncs[] = {
     [ITEMMENULOCATION_BERRY_BLENDER_CRUSH] =    Task_ItemContext_Normal,
     [ITEMMENULOCATION_ITEMPC] =                 Task_ItemContext_Deposit,
     [ITEMMENULOCATION_FAVOR_LADY] =             Task_ItemContext_Normal,
+    [ITEMMENULOCATION_CHECK_FOSSIL] =           Task_ItemContext_Normal,
     [ITEMMENULOCATION_QUIZ_LADY] =              Task_ItemContext_Normal,
     [ITEMMENULOCATION_APPRENTICE] =             Task_ItemContext_Normal,
     [ITEMMENULOCATION_WALLY] =                  NULL,
@@ -664,9 +672,17 @@ void FavorLadyOpenBagMenu(void)
     gSpecialVar_Result = FALSE;
 }
 
+void CheckFossilOpenBagMenu(void)
+{
+    GoToBagMenu(ITEMMENULOCATION_CHECK_FOSSIL, POCKETS_COUNT, CB2_FavorLadyExitBagMenu);
+	gSpecialVar_0x8005 = ITEM_NONE;
+    gSpecialVar_Result = FALSE;
+}
+
 void QuizLadyOpenBagMenu(void)
 {
     GoToBagMenu(ITEMMENULOCATION_QUIZ_LADY, POCKETS_COUNT, CB2_QuizLadyExitBagMenu);
+	gSpecialVar_0x8005 = ITEM_NONE;
     gSpecialVar_Result = FALSE;
 }
 
@@ -1704,6 +1720,18 @@ static void OpenContextMenu(u8 taskId)
             gBagMenu->contextMenuNumItems = ARRAY_COUNT(sContextMenuItems_Cancel);
         }
         break;
+		case ITEMMENULOCATION_CHECK_FOSSIL:
+        if (!ItemId_GetImportance(gSpecialVar_ItemId) && gSpecialVar_ItemId != ITEM_ENIGMA_BERRY_E_READER)
+        {
+            gBagMenu->contextMenuItemsPtr = sContextMenuItems_CheckFossils;
+            gBagMenu->contextMenuNumItems = ARRAY_COUNT(sContextMenuItems_CheckFossils);
+        }
+        else
+        {
+            gBagMenu->contextMenuItemsPtr = sContextMenuItems_Cancel;
+            gBagMenu->contextMenuNumItems = ARRAY_COUNT(sContextMenuItems_Cancel);
+        }
+        break;
     case ITEMMENULOCATION_QUIZ_LADY:
         if (!ItemId_GetImportance(gSpecialVar_ItemId) && gSpecialVar_ItemId != ITEM_ENIGMA_BERRY_E_READER)
         {
@@ -2495,6 +2523,14 @@ static void CB2_ApprenticeExitBagMenu(void)
 static void ItemMenu_GiveFavorLady(u8 taskId)
 {
     RemoveBagItem(gSpecialVar_ItemId, 1);
+    gSpecialVar_Result = TRUE;
+    RemoveContextWindow();
+    Task_FadeAndCloseBagMenu(taskId);
+}
+
+static void ItemMenu_GiveFossil(u8 taskId)
+{
+    gSpecialVar_0x8005 = gSpecialVar_ItemId;
     gSpecialVar_Result = TRUE;
     RemoveContextWindow();
     Task_FadeAndCloseBagMenu(taskId);

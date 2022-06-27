@@ -2435,4 +2435,3 @@ bool8 ScrCmd_checkpartytype(struct ScriptContext *ctx)
     return FALSE;
 }
 
-

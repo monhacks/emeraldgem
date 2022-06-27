@@ -13,6 +13,7 @@ enum {
     ITEMMENULOCATION_BERRY_BLENDER_CRUSH,
     ITEMMENULOCATION_ITEMPC,
     ITEMMENULOCATION_FAVOR_LADY,
+    ITEMMENULOCATION_CHECK_FOSSIL,
     ITEMMENULOCATION_QUIZ_LADY,
     ITEMMENULOCATION_APPRENTICE,
     ITEMMENULOCATION_WALLY,
@@ -87,6 +88,7 @@ extern u16 gSpecialVar_ItemId;
 
 void CB2_GoToItemDepositMenu(void);
 void FavorLadyOpenBagMenu(void);
+void CheckFossilOpenBagMenu(void);
 void QuizLadyOpenBagMenu(void);
 void ApprenticeOpenBagMenu(void);
 void CB2_BagMenuFromBattle(void);
