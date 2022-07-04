@@ -133,6 +133,9 @@ DewfordTown_Gym_EventScript_StopCountingTrainers::
 	return
 
 DewfordTown_Gym_EventScript_Brawly::
+	setflag FLAG_STARTED_BOSS
+	special SavePlayerParty
+	deletepokemon 1
 	trainerbattle_single TRAINER_BRAWLY_1, DewfordTown_Gym_Text_BrawlyIntro, DewfordTown_Gym_Text_BrawlyDefeat, DewfordTown_Gym_EventScript_BrawlyDefeated, NO_MUSIC
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, DewfordTown_Gym_EventScript_BrawlyRematch
@@ -142,6 +145,10 @@ DewfordTown_Gym_EventScript_Brawly::
 	end
 
 DewfordTown_Gym_EventScript_BrawlyDefeated::
+	savepartofteam
+	special LoadPlayerParty
+	loadpartofteam
+	clearflag FLAG_STARTED_BOSS
 	call DewfordTown_Gym_EventScript_AnimateFlashFullBrightness
 	message DewfordTown_Gym_Text_ReceivedKnuckleBadge
 	waitmessage
@@ -250,12 +257,8 @@ DewfordTown_Gym_EventScript_LilithBrightenRoom::
 DewfordTown_Gym_EventScript_GymGuide::
 	lock
 	faceplayer
-	goto_if_set FLAG_DEFEATED_DEWFORD_GYM, DewfordTown_Gym_EventScript_GymGuidePostVictory
 	msgbox DewfordTown_Gym_Text_GymGuideAdvice, MSGBOX_DEFAULT
-	release
-	end
-
-DewfordTown_Gym_EventScript_GymGuidePostVictory::
+	call Common_EventScript_OutOfCenterPartyHeal
 	msgbox DewfordTown_Gym_Text_GymGuidePostVictory, MSGBOX_DEFAULT
 	release
 	end
@@ -283,24 +286,12 @@ DewfordTown_Gym_EventScript_GymStatue::
 	end
 
 DewfordTown_Gym_Text_GymGuideAdvice:
-	.string "Hey, how's it going, CHAMPION-\n"
-	.string "bound {PLAYER}?\p"
-	.string "DEWFORD's GYM LEADER BRAWLY commands\n"
-	.string "FIGHTING-type POKéMON.\p"
-	.string "Going against him with NORMAL-type\n"
-	.string "POKéMON is asking for trouble.\p"
-	.string "FIGHTING POKéMON will lay a serious\n"
-	.string "smack down on NORMAL POKéMON,\l"
-	.string "so be careful!\p"
-	.string "What's worse, the GYM is as dark as\n"
-	.string "the ocean floor.\p"
-	.string "But it will get brighter after defeating\n"
-	.string "the TRAINERS in your way.\p"
-	.string "Hey, okay, go for it!$"
+	.string "¡Hola, {PLAYER}!\pComo sabrás, cada Gimnasio tiene un\nrequisito o condición para\lpoder ser enfrentado.\p"
+	.string "Este no es la excepción.\pLa condición que has de cumplir\naquí es simple:\l{COLOR BLUE}Derrota al Líder del Gimnasio usando\lsólo el primer Pokémon de tu Equipo{COLOR DARK_GRAY}.\p"
+	.string "No hay otra restricción, se te permite\nusar cuantos objetos quieras.\lIncluso, ¡Curaré a tus Pokémon ahora\lpara que no te preocupes por eso!$"
 
 DewfordTown_Gym_Text_GymGuidePostVictory:
-	.string "Whoah! It's turned too bright in here!\p"
-	.string "Your future is bright, too!$"
+	.string "¡Buena suerte, Joven Promesa!$"
 
 DewfordTown_Gym_Text_TakaoIntro:
 	.string "Might is right!\n"
@@ -380,80 +371,52 @@ DewfordTown_Gym_Text_CristianPostBattle:
 	.string "Go after that BADGE!$"
 
 DewfordTown_Gym_Text_BrawlyIntro:
-	.string "I'm BRAWLY!\n"
-	.string "DEWFORD's GYM LEADER!\p"
-	.string "I've been churned in the rough waves\n"
-	.string "of these parts, and I've grown tough\l"
-	.string "in the pitch-black cave!\p"
-	.string "So you wanted to challenge me?\n"
-	.string "Let me see what you're made of!$"
+	.string "¡Soy Brawly!\n"
+	.string "¡El Líder surfista de Dewford!\p"
+	.string "En estos lares, cientos de olas\n"
+	.string "han fortalecido mi cuerpo y mente,\l"
+	.string "¡Hasta niveles inimaginables!\p"
+	.string "Así que si quieres vencerme, ¡Tendrás\n"
+	.string "que vencerme usando sólo a tu\lcompañero más querido,\ligual que Makuhita y yo en las olas!$"
 
 DewfordTown_Gym_Text_BrawlyDefeat:
-	.string "Whoah, wow! You made a much bigger\n"
-	.string "splash than I expected!\p"
-	.string "You swamped me!\p"
-	.string "Okay, you've got me.\n"
-	.string "Take this GYM BADGE!$"
+	.string "¡Yeah! ¡No me esperaba un poder\n"
+	.string "de salpicadura tan abrumador!\p"
+	.string "¡Hell yeah!\p"
+	.string "¡Mereces esta Medalla!$"
 
 DewfordTown_Gym_Text_ReceivedKnuckleBadge:
-	.string "{PLAYER} received the KNUCKLE BADGE\n"
-	.string "from BRAWLY.$"
+	.string "{PLAYER} recibió la Medalla Puño.$"
 
 DewfordTown_Gym_Text_KnuckleBadgeInfoTakeThis:
-	.string "The KNUCKLE BADGE makes all POKéMON\n"
-	.string "up to Level 30, even those you get in\l"
-	.string "trades, obey without question.\p"
-	.string "And, you'll be able to use the HM move\n"
-	.string "FLASH outside of battle.\p"
-	.string "If you'd like, use this TECHNICAL\n"
-	.string "MACHINE, too.$"
+	.string "La Medalla Puño te permitirá entrenar\na Pokémon de hasta nivel 30.\pAdemás, déjame darte esta MT.$"
 
 DewfordTown_Gym_Text_ExplainBulkUp:
-	.string "That TM08 contains BULK UP.\p"
-	.string "It's a move that raises both ATTACK\n"
-	.string "and DEFENSE stats.\p"
+	.string "Esa MT contiene el movimiento\nCorpulencia, que sube Ataque y Defensa.\p"
 	.string "… … … … … …$"
 
 DewfordTown_Gym_Text_RegisteredBrawly:
-	.string "Registered GYM LEADER BRAWLY\n"
-	.string "in the POKéNAV.$"
+	.string "¡Brawly se registró en el PokéNav!$"
 
 DewfordTown_Gym_Text_BrawlyPostBattle:
-	.string "I can see your talent becoming a giant\n"
-	.string "wave to cause a storm of astonishment\l"
-	.string "among TRAINERS one day!$"
+	.string "¡Puedo verte convirtiéndote\nen lo más grande!\p¡No habrá ola que no puedas montar!$"
 
 DewfordTown_Gym_Text_GymStatue:
-	.string "DEWFORD TOWN POKéMON GYM$"
+	.string "GIMNASIO DE CIUDAD DEWFORD\pEntrenadores reconocidos:\nLeaf\l{RIVAL}$"
 
 DewfordTown_Gym_Text_GymStatueCertified:
-	.string "DEWFORD TOWN POKéMON GYM\p"
-	.string "BRAWLY'S CERTIFIED TRAINERS:\n"
-	.string "{PLAYER}$"
+	.string "GIMNASIO DE CIUDAD DEWFORD\pEntrenadores reconocidos:\nLeaf\l{RIVAL}\l{PLAYER}$"
 
 DewfordTown_Gym_Text_BrawlyPreRematch:
-	.string "BRAWLY: A wave may draw back, but it\n"
-	.string "always returns to the shore.\p"
-	.string "A giant wave of a talent like you…\n"
-	.string "I knew you would return!\p"
-	.string "Show me how much higher\n"
-	.string "you've gone!$"
+	.string "Una nueva era de olas se avecina,\n¡Hora de demostrarme qué\ntan buen{OA} surfista eres!$"
 
 DewfordTown_Gym_Text_BrawlyRematchDefeat:
-	.string "Wow!\n"
-	.string "Swamped again!$"
+	.string "¡Hell yeah!\n"
+	.string "¡Sigues mejorando!$"
 
 DewfordTown_Gym_Text_BrawlyPostRematch:
-	.string "BRAWLY: Battling is vast and it's deep.\n"
-	.string "You can't see the bottom.\l"
-	.string "It's just like the sea of HOENN!$"
+	.string "Las batallas son complicadas,\ny profundas, ¡Tanto como el mar!\p¡Amaría ver el fondo del océano\ny entender a los Pokémon de allí!$"
 
 DewfordTown_Gym_Text_BrawlyRematchNeedTwoMons:
-	.string "BRAWLY: A wave may draw back, but it\n"
-	.string "always returns to the shore.\p"
-	.string "A giant wave of a talent like you…\n"
-	.string "I knew you would return!\p"
-	.string "Oh? You only have one POKéMON\n"
-	.string "that can battle.\p"
-	.string "I'm sorry, but I'd like you to come back\n"
-	.string "with at least two POKéMON.$"
+	.string "Una ola se lleva la arena, pero,\nal final, siempre vuelve a la orilla.\p"
+	.string "Una realidad que el mar me enseñó,\npero una batalla 2vs1 es injusta,\l¡Vuelve con dos compañeros,\ly surfearemos juntos el mar\lde la vida, yeah!$"

@@ -544,4 +544,7 @@ gSpecials::
 	def_special SetSeenMon
 	def_special SetCaughtMon
 	def_special FossilOpenBagMenu
-	def_special FossilsListSelect
+	def_special ChooseItemFromBag
+	def_special TakeAwayItemsAndBerries
+	def_special GiveBackItemsAndBerries
+

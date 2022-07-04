@@ -445,11 +445,11 @@ const u32 gItemIconPalette_SailFossil[] = INCBIN_U32("graphics/items/icon_palett
 const u32 gItemIcon_FossilizedBird[] = INCBIN_U32("graphics/items/icons/fossilized_bird.4bpp.lz");
 const u32 gItemIconPalette_FossilizedBird[] = INCBIN_U32("graphics/items/icon_palettes/fossilized_bird.gbapal.lz");
 
-const u32 gItemIcon_FossilizedFish[] = INCBIN_U32("graphics/items/icons/fossilized_fish.4bpp.lz");
-const u32 gItemIconPalette_FossilizedFish[] = INCBIN_U32("graphics/items/icon_palettes/fossilized_fish.gbapal.lz");
+const u32 gItemIcon_FossilizedFish[] = INCBIN_U32("graphics/items/icons/fossilized_drake.4bpp.lz");
+const u32 gItemIconPalette_FossilizedFish[] = INCBIN_U32("graphics/items/icon_palettes/fossilized_drake.gbapal.lz");
 
-const u32 gItemIcon_FossilizedDrake[] = INCBIN_U32("graphics/items/icons/fossilized_drake.4bpp.lz");
-const u32 gItemIconPalette_FossilizedDrake[] = INCBIN_U32("graphics/items/icon_palettes/fossilized_drake.gbapal.lz");
+const u32 gItemIcon_FossilizedDrake[] = INCBIN_U32("graphics/items/icons/fossilized_fish.4bpp.lz");
+const u32 gItemIconPalette_FossilizedDrake[] = INCBIN_U32("graphics/items/icon_palettes/fossilized_fish.gbapal.lz");
 
 const u32 gItemIcon_FossilizedDino[] = INCBIN_U32("graphics/items/icons/fossilized_dino.4bpp.lz");
 const u32 gItemIconPalette_FossilizedDino[] = INCBIN_U32("graphics/items/icon_palettes/fossilized_dino.gbapal.lz");

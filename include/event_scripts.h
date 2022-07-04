@@ -532,6 +532,7 @@ extern const u8 EventScript_BookShelf[];
 extern const u8 EventScript_PokemonCenterBookShelf[];
 extern const u8 EventScript_Vase[];
 extern const u8 EventScript_EmptyTrashCan[];
+extern const u8 EventScript_FindItemInTrash[];
 extern const u8 EventScript_ShopShelf[];
 extern const u8 EventScript_Blueprint[];
 extern const u8 EventScript_WirelessBoxResults[];
@@ -615,5 +616,7 @@ extern const u8 EventScript_ConfirmLeaveCableClubRoom[];
 extern const u8 EventScript_TerminateLink[];
 
 extern const u8 EventScript_CancelMessageBox[];
+
+extern const u8 EventScript_ObjectApproachPlayer[];
 
 #endif // GUARD_EVENT_SCRIPTS_H

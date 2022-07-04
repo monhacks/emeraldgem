@@ -6,6 +6,7 @@
 #include "constants/event_objects.h"
 #include "field_message_box.h"
 #include "constants/map_scripts.h"
+#include "trainer_see.h"
 
 #define RAM_SCRIPT_MAGIC 51
 
@@ -482,3 +483,10 @@ bool32 CanWalkAwayToCancelMsgBox(void)
 {
     return sMsgBoxIsCancelable;
 }
+
+bool8 LoadTrainerObjectScript(void)
+{
+    sScriptContext1.scriptPtr = gApproachingTrainers[gNoOfApproachingTrainers - 1].trainerScriptPtr;
+    return TRUE;
+}
+

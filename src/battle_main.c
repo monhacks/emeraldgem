@@ -5370,9 +5370,12 @@ void SetTypeBeforeUsingMove(u16 move, u8 battlerAtk)
 
         // Subtract 4 instead of 1 below because 3 types are excluded (TYPE_NORMAL and TYPE_MYSTERY and TYPE_FAIRY)
         // The final + 1 skips past Normal, and the following conditional skips TYPE_MYSTERY
-        gBattleStruct->dynamicMoveType = ((NUMBER_OF_MON_TYPES - 2) * typeBits) / 63 + 1;
-        if (gBattleStruct->dynamicMoveType == TYPE_MYSTERY)
-            gBattleStruct->dynamicMoveType = TYPE_FAIRY;
+        gBattleStruct->dynamicMoveType = ((NUMBER_OF_MON_TYPES - 4) * typeBits) / 63 + 1;
+        if (gBattleStruct->dynamicMoveType >= TYPE_MYSTERY)
+            gBattleStruct->dynamicMoveType++;
+		if (gBattleMons[battlerAtk].hpIV == 31 && gBattleMons[battlerAtk].attackIV == 30 && gBattleMons[battlerAtk].defenseIV == 31 && gBattleMons[battlerAtk].spDefenseIV == 31
+			&& gBattleMons[battlerAtk].spAttackIV == 30 && gBattleMons[battlerAtk].speedIV == 31)
+			gBattleStruct->dynamicMoveType = TYPE_FAIRY;
         gBattleStruct->dynamicMoveType |= F_DYNAMIC_TYPE_1 | F_DYNAMIC_TYPE_2;
     }
     else if (gBattleMoves[move].effect == EFFECT_CHANGE_TYPE_ON_ITEM)

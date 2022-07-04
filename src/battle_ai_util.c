@@ -2760,7 +2760,8 @@ bool32 AI_CanBeConfused(u8 battler, u16 ability)
 {
     if ((gBattleMons[battler].status2 & STATUS2_CONFUSION)
       || (ability == ABILITY_OWN_TEMPO)
-      || (IsBattlerGrounded(battler) && (gFieldStatuses & STATUS_FIELD_MISTY_TERRAIN)))
+      || (IsBattlerGrounded(battler) && (gFieldStatuses & STATUS_FIELD_MISTY_TERRAIN))
+	  || IS_BATTLER_OF_TYPE(battler, TYPE_BUG))
         return FALSE;
     return TRUE;
 }
@@ -2771,7 +2772,8 @@ bool32 AI_CanConfuse(u8 battlerAtk, u8 battlerDef, u16 defAbility, u8 battlerAtk
       || AI_GetMoveEffectiveness(move, battlerAtk, battlerDef) == AI_EFFECTIVENESS_x0
       || gSideStatuses[GetBattlerSide(battlerDef)] & SIDE_STATUS_SAFEGUARD
       || DoesSubstituteBlockMove(battlerAtk, battlerDef, move)
-      || DoesPartnerHaveSameMoveEffect(battlerAtkPartner, battlerDef, move, partnerMove))
+      || DoesPartnerHaveSameMoveEffect(battlerAtkPartner, battlerDef, move, partnerMove)
+	  || IS_BATTLER_OF_TYPE(battlerDef, TYPE_BUG))
     {
         return FALSE;
     }

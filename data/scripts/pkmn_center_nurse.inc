@@ -121,6 +121,26 @@ EventScript_PkmnCenterNurse_PlayerTurn::
     release
     end
 
+EventScript_PkmnCenter_Clerk_1::
+	lock
+	faceplayer
+	message gText_HowMayIServeYou
+	waitmessage
+	pokemart 0
+	closemessage
+	end
+
+EventScript_PkmnCenter_Clerk_2::
+	lock
+	faceplayer
+	setflag FLAG_SECONDMART
+	message gText_HowMayIServeYou
+	waitmessage
+	pokemart 0
+	closemessage
+	clearflag FLAG_SECONDMART
+	end
+
 
 Movement_PkmnCenterNurse_Bow:
 	nurse_joy_bow

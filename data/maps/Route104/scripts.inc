@@ -135,9 +135,8 @@ Route104_Movement_PlayerFaceRival:
 	step_end
 
 Route104_EventScript_MayAskToBattle::
-	msgbox Route104_Text_MayLetsBattle, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, YES, Route104_EventScript_BattleMay
-	msgbox Route104_Text_MayHaventRaisedPokemon, MSGBOX_DEFAULT
+	msgbox Route104_Text_MayLetsBattle, MSGBOX_NPC
+	goto Route104_EventScript_BattleMay
 	releaseall
 	end
 
@@ -206,8 +205,7 @@ Route104_EventScript_BrendanEncounter::
 
 Route104_EventScript_BrendanAskToBattle::
 	msgbox Route104_Text_MayLetsBattle, MSGBOX_DEFAULT
-	goto_if_eq VAR_RESULT, YES, Route104_EventScript_BattleBrendan
-	msgbox Route104_Text_BrendanNoConfidence, MSGBOX_DEFAULT
+	goto Route104_EventScript_BattleBrendan
 	releaseall
 	end
 
@@ -330,11 +328,11 @@ Route104_EventScript_Woman::
 Route104_EventScript_Boy2::
 	lock
 	faceplayer
-	goto_if_set FLAG_RECEIVED_TM09, Route104_EventScript_ReceivedBulletSeed
+	checkitem ITEM_TM09
+	goto_if_eq VAR_RESULT, TRUE, Route104_EventScript_ReceivedBulletSeed
 	msgbox Route104_Text_LikeFillingMouthWithSeedsTakeThis, MSGBOX_DEFAULT
 	giveitem ITEM_TM09
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
-	setflag FLAG_RECEIVED_TM09
 	release
 	end
 
@@ -1000,10 +998,7 @@ Route104_EventScript_Darian::
 	end
 
 Route104_Text_BrineyLivesInSeasideCottage:
-	.string "That seaside cottage is where\n"
-	.string "MR. BRINEY lives.\p"
-	.string "He was once a mighty sailor who never\n"
-	.string "feared the sea, however stormy.$"
+	.string "El Sr. Briney solía ser un\nmarinero sin miedo al mar.\lNi la peor tormenta lo asustaba.$"
 
 Route104_Text_WhatsItLikeAtBottomOfSea:
 	.string "El mar, ¿eh?\p"
@@ -1015,15 +1010,15 @@ Route104_Text_ThrowBallAtWeakenedPokemon:
 	.string "que {COLOR BLUE}los Pokémon sin género no podían\l"
 	.string "usar Atracción{COLOR DARK_GRAY}?\p"
 	.string "Ahora parece tonto creer eso, pero\n"
-	.string "{COLOR BLUE}aparentemente pueden enamorar a\l"
+	.string "{COLOR BLUE}pueden enamorar a\l"
 	.string "cualquier Pokémon{COLOR DARK_GRAY}.\p"
 	.string "Me pregunto… ¿Qué otros\n"
 	.string "descubrimientos con respecto a los\l"
 	.string "{COLOR BLUE}estados{COLOR DARK_GRAY} se habrá hecho…?$"
 
 Route104_Text_OnlyThrowBallAtWildPokemon:
-	.string "Siempre que puedas, usa {COLOR RED}Ladrón{COLOR DARK_GRAY} contra\n"
-	.string "sus Pokémon para {COLOR RED}robar sus objetos\l"
+	.string "Siempre que puedas, usa {COLOR BLUE}Ladrón{COLOR DARK_GRAY} contra\n"
+	.string "sus Pokémon para {COLOR BLUE}robar sus objetos\l"
 	.string "equipados{COLOR DARK_GRAY}, pues nunca sabes cuándo\l"
 	.string "tendrán objetos raros o muy valiosos.$"
 
@@ -1053,7 +1048,7 @@ Route104_Text_TMsAreOneTimeUse:
 Route104_Text_DontNeedThisTakeIt:
 	.string "¡La Floristería tiene una nueva Tienda\n"
 	.string "que te vende diferentes tipos de Baya\l"
-	.string "cada día!\p"
+	.string "dependieno de tus Medallas!\p"
 	.string "¡Muy útil sobretodo si te gustan los\n"
 	.string "concursos, o quieres ganar con\l"
 	.string "desventaja de tipos!\p"
@@ -1061,26 +1056,25 @@ Route104_Text_DontNeedThisTakeIt:
 	.string "¡Toma estas!$"
 
 
-
 Route104_Text_FlowerShopSellingSaplings:
 	.string "¡La Floristería tiene una nueva Tienda\n"
 	.string "que te vende diferentes tipos de Baya\l"
-	.string "cada día!\p"
+	.string "dependieno de tus Medallas!\p"
 	.string "¡Muy útil!$"
 
 Route104_Text_MrBrineysCottage:
-	.string "MR. BRINEY'S COTTAGE$"
+	.string "CASA DEL SR. BRINEY$"
 
 Route104_Text_RouteSignPetalburg:
-	.string "ROUTE 1O4\n"
-	.string "{RIGHT_ARROW} PETALBURG CITY$"
+	.string "RUTA 1O4\n"
+	.string "{RIGHT_ARROW} CIUDAD PETALBURG$"
 
 Route104_Text_RouteSignRustboro:
-	.string "ROUTE 1O4\n"
-	.string "{UP_ARROW} RUSTBORO CITY$"
+	.string "RUTA 1O4\n"
+	.string "{UP_ARROW} CIUDAD RUSTBORO$"
 
 Route104_Text_PrettyPetalFlowShop:
-	.string "PRETTY PETAL FLOWER SHOP$"
+	.string "FLORISTERÍA$"
 
 Route104_Text_TrainerTipsDoubleBattles:
 	.string "¡PISTAS PARA ENTRENADORES!\p"
@@ -1121,12 +1115,6 @@ Route104_Text_MayMinesDecentLetsBattle:
 	.string "Si me ganas en una Batalla Pokémon, voy\n"
 	.string "a intercambiarte los datos.$"
 
-
-Route104_Text_MayHaventRaisedPokemon:
-	.string "MAY: Oh, what's the matter?\p"
-	.string "Haven't you caught or raised your\n"
-	.string "POKéMON very much?\p"
-	.string "That's not very good for a TRAINER!$"
 
 Route104_Text_MayLetsBattle:
 	.string "¡PELEA!$"
@@ -1175,13 +1163,6 @@ Route104_Text_BrendanDoingGreatLetsBattle:
 	.string "Si me ganas en una Batalla Pokémon, voy\n"
 	.string "a intercambiarte los datos.$"
 
-Route104_Text_BrendanNoConfidence:
-	.string "BRENDAN: What's the matter? Don't have\n"
-	.string "any confidence in your POKéMON?$"
-
-Route104_Text_BrendanLetsBattle:
-	.string "BRENDAN: What's up?\n"
-	.string "Want to have a battle with me?$"
 
 Route104_Text_BrendanIntro:
 	.string "¡Perderás!$"

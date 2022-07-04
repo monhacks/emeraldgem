@@ -57,16 +57,24 @@ OldaleTown_Mart_EventScript_Boy::
 	end
 
 OldaleTown_Mart_Text_PokeBallsAreSoldOut:
-	.string "The clerk says they're all sold out.\n"
-	.string "I can't buy any POKé BALLS.$"
+	.string "La mayoría de las Tiendas Pokémon\n"
+	.string "eran parejas de casados que habían\l"
+	.string "abierto el establecimiento con sus\l"
+	.string "propias manos. Este es el último.\p"
+	.string "Uno vende objetos como Pokéballs y\n"
+	.string "objetos curativos, mientras que otro\l"
+	.string "vende objetos que sirven para\l"
+	.string "atrapar y entrenar a tus Pokémon.\l"
+	.string "¡Ahora están en el Centro Pokémon!$"
 
 OldaleTown_Mart_Text_ImGoingToBuyPokeBalls:
-	.string "I'm going to buy a bunch of POKé BALLS\n"
-	.string "and catch a bunch of POKéMON!$"
+	.string "¿Sabías que esta es la última\ntienda de Hoenn, sin contar el\lCentro Comercial?\p"
+	.string "Esto es debido a que las Tiendas\ny los Centros Pokémon se han\lcombinado en uno solo.$"
 
 OldaleTown_Mart_Text_RestoreHPWithPotion:
-	.string "If a POKéMON gets hurt and loses its HP\n"
-	.string "and faints, it won't be able to battle.\p"
-	.string "To prevent your POKéMON from fainting,\n"
-	.string "restore its HP with a POTION.$"
+	.string "Los objetos que encuentres en una\n"
+	.string "Centro o Tienda cambiarán por la\l"
+	.string "cantidad de Medallas que poseas, ¡Pero\l"
+	.string "escuché que hay una Floristería con\l"
+	.string "bayas, y cambian sus reservas también!$"
 

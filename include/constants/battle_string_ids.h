@@ -615,8 +615,10 @@
 #define STRINGID_PLAYERLOSTAGAINSTENEMYTRAINER        611
 #define STRINGID_PKMNSITEMREVIVED 					  612
 #define STRINGID_STATNOTROSE	 					  613
+#define STRINGID_PKMNSXPREVENTSFREEZE	 			  614
+#define STRINGID_FREEZEDMG 				 			  615
 
-#define BATTLESTRINGS_COUNT                           614
+#define BATTLESTRINGS_COUNT                           616
 #define BATTLESTRINGS_TABLE_START  STRINGID_TRAINER1LOSETEXT
 
 // The below IDs are all indexes into battle message tables,

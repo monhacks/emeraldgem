@@ -172,27 +172,29 @@ u32 BattlePalace_TryEscapeStatus(u8 battlerId)
             }
             gBattleCommunication[MULTIUSE_STATE]++;
             break;
-        case 1:
-            if (gBattleMons[battlerId].status1 & STATUS1_FREEZE)
-            {
-                if (Random() % 5 != 0)
-                {
-                    // Still frozen
-                    gBattlescriptCurrInstr = BattleScript_MoveUsedIsFrozen;
-                }
-                else
-                {
-                    // Unfreeze
-                    gBattleMons[battlerId].status1 &= ~(STATUS1_FREEZE);
-                    BattleScriptPushCursor();
-                    gBattlescriptCurrInstr = BattleScript_MoveUsedUnfroze;
-                    gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_DEFROSTED;
-                }
-                effect = 2;
-            }
-            gBattleCommunication[MULTIUSE_STATE]++;
-            break;
+        //case 1:
+            // if (gBattleMons[battlerId].status1 & STATUS1_FREEZE)
+            // {
+                // if (Random() % 100 <= 90)
+                // {
+                    // // Still frozen
+                    // gBattlescriptCurrInstr = BattleScript_MoveUsedIsFrozen;
+                // }
+                // else
+                // {
+                    // // Unfreeze
+                    // gBattleMons[battlerId].status1 &= ~(STATUS1_FREEZE);
+                    // BattleScriptPushCursor();
+                    // gBattlescriptCurrInstr = BattleScript_MoveUsedUnfroze;
+                    // gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_DEFROSTED;
+                // }
+                // effect = 2;
+            // }
+           //gBattleCommunication[MULTIUSE_STATE]++;
+           // break;
+		case 1:
         case 2:
+		default:
             break;
         }
         // Loop until reaching the final state, or stop early if Pokémon was Asleep/Frozen

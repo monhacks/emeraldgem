@@ -51,6 +51,9 @@ Route116_EventScript_DevonEmployee::
 	faceplayer
 	goto_if_set FLAG_MET_DEVON_EMPLOYEE, Route116_EventScript_TryGiveRepeatBallAgain
 	msgbox Route116_Text_ThankYouTokenOfAppreciation, MSGBOX_DEFAULT
+	namebox Stern
+	msgbox Route116_Text_ThankYouTokenOfAppreciation2, MSGBOX_DEFAULT
+	hidenamebox
 	goto Route116_EventScript_GiveRepeatBall
 	end
 
@@ -58,14 +61,15 @@ Route116_EventScript_GiveRepeatBall::
 	setflag FLAG_MET_DEVON_EMPLOYEE
 	giveitem ITEM_REPEAT_BALL
 	goto_if_eq VAR_RESULT, FALSE, Route116_EventScript_NoRoomForRepeatBall
+	namebox Stern
 	msgbox Route116_Text_NewBallAvailableAtMart, MSGBOX_DEFAULT
 	closemessage
+	hidenamebox
 	call_if_eq VAR_FACING, DIR_NORTH, Route116_EventScript_DevonEmployeeExit
 	call_if_eq VAR_FACING, DIR_SOUTH, Route116_EventScript_DevonEmployeeExit
 	call_if_eq VAR_FACING, DIR_WEST, Route116_EventScript_DevonEmployeeExit
 	call_if_eq VAR_FACING, DIR_EAST, Route116_EventScript_DevonEmployeeExitEast
 	removeobject VAR_LAST_TALKED
-	clearflag FLAG_HIDE_RUSTBORO_CITY_DEVON_CORP_3F_EMPLOYEE
 	setflag FLAG_RECEIVED_REPEAT_BALL
 	release
 	end
@@ -155,36 +159,39 @@ Route116_EventScript_BrineyTrigger::
 Route116_EventScript_GlassesMan::
 	lock
 	faceplayer
+	goto_if_set FLAG_WISH_1, Route116_EventScript_GlassesManDone
 	checkitem ITEM_BLACK_GLASSES
-	goto_if_eq VAR_RESULT, TRUE, Route116_EventScript_PlayerHasGlasses
-	specialvar VAR_RESULT, FoundBlackGlasses
-	goto_if_eq VAR_RESULT, TRUE, Route116_EventScript_FoundGlassesNotOnPlayer
+	goto_if_eq VAR_RESULT, TRUE, Route116_EventScript_PlayerHasThem
 	msgbox Route116_Text_CanYouHelpMeFindGlasses, MSGBOX_DEFAULT
 	release
 	end
-
-Route116_EventScript_FoundGlassesNotOnPlayer::
-	msgbox Route116_Text_CantFindGlassesNotHere, MSGBOX_DEFAULT
-	closemessage
-	goto Route116_EventScript_GlassesManExit
+Route116_EventScript_GlassesManDone::
+	msgbox Route116_Text_GlassesThanks
+	release
 	end
-
-Route116_EventScript_PlayerHasGlasses::
-	msgbox Route116_Text_CanYouHelpMeFindGlasses, MSGBOX_DEFAULT
-	msgbox Route116_Text_MayISeeThoseGlasses, MSGBOX_DEFAULT
-	specialvar VAR_RESULT, FoundBlackGlasses
-	goto_if_eq VAR_RESULT, TRUE, Route116_EventScript_FoundGlassesOnPlayer
-	msgbox Route116_Text_NotWhatImLookingFor, MSGBOX_DEFAULT
+Route116_EventScript_PlayerHasThem::
+	removeitem ITEM_BLACK_GLASSES
+	playse SE_PIN
+	applymovement VAR_LAST_TALKED, Common_Movement_ExclamationMark
+	waitmovement 0
+	msgbox Route116_Text_HasThem
+	addvar VAR_WISHES_FUFILLED, 1
+	applymovement VAR_LAST_TALKED, Common_Movement_FaceAwayPlayer
+	waitmovement 0
+	pike_flashscreen
+	waitstate
+	call Script_Wishes
+	goto Route116_EventScript_GlassesManExit
 	release
 	end
 
-Route116_EventScript_FoundGlassesOnPlayer::
-	msgbox Route116_Text_NotWhatImLookingForMaybeTheyArentHere, MSGBOX_DEFAULT
-	closemessage
-	goto Route116_EventScript_GlassesManExit
-	end
+
+Route116_Text_HasThem:
+	.string "¡L-l-los!\n¡Los tienes!\p¡Gracias!$"
+
 
 Route116_EventScript_GlassesManExit::
+	setflag FLAG_HIDE_ROUTE_116_DROPPED_GLASSES_MAN
 	delay 20
 	call_if_eq VAR_FACING, DIR_NORTH, Route116_EventScript_GlassesManExitNormal
 	call_if_eq VAR_FACING, DIR_SOUTH, Route116_EventScript_GlassesManExitNormal
@@ -352,122 +359,69 @@ Route116_EventScript_Johnson::
 	end
 
 Route116_Text_ScoundrelMadeOffWithPeeko:
-	.string "Ohhh, what am I to do?\p"
-	.string "We were on our walk, PEEKO and I, when\n"
-	.string "we were jumped by an odd thug…\p"
-	.string "The scoundrel made off with my\n"
-	.string "darling PEEKO!\p"
-	.string "Wrrrooooooaaaar! PEEKO!$"
+	.string "¿Qué voy a hacer ahora?\n¡Se llevaron a mi Peeko!\p"
+	.string "¡BUUUAAAAAA! ¡PEEEEEKOOOOOO!$"
 
 Route116_Text_WantToDigTunnel:
-	.string "Nnn… Roar!\p"
-	.string "I want to dig that tunnel!$"
+	.string "Nnn… ¡Roar!\p"
+	.string "¡Quiero cavar! ¡AAAARRGGHH!$"
 
 Route116_Text_DiggingTunnelWhenGoonOrderedMeOut:
-	.string "Nnn… Roar!\n"
-	.string "What's going on?\p"
-	.string "I was digging the tunnel without any\n"
-	.string "tools when some goon ordered me out!\p"
-	.string "That tunnel's filled with POKéMON\n"
-	.string "that react badly to loud noises.\l"
-	.string "They could cause an uproar.\p"
-	.string "That's why we stopped using heavy\n"
-	.string "equipment for tunneling…\p"
-	.string "I'm worried that the goon will do\n"
-	.string "something stupid and startle the\l"
-	.string "POKéMON into an uproar.$"
+	.string "Nnn… ¡Roar!\n"
+	.string "¿Y ahora qué?\p"
+	.string "Estaba cavando en ese túnel\ncon nada más que mis grandes\lmúsculos cuando un estúpido me\ldijo que me fuera y me llevara\lmis músculos conmigo.\p"
+	.string "¡GROOAAARRR!\n¡Odio a ese idiota!$"
 
 Route116_Text_GoonHightailedItOutOfTunnel:
-	.string "Nnn… Roar!\p"
-	.string "That goofy goon hightailed it out of\n"
-	.string "the tunnel! I can go back to digging!$"
+	.string "Nnn… ¡Roar!\p"
+	.string "¡Ese idiota dijo que si tenía\ncuidado podía usar mis\lhermosos músculos para cavar!\p"
+	.string "¡Nadie había reconocido lo\nmucho que me esforcé en tener\lmis músculos así de tonificados!\p"
+	.string "¡Me hizo sentir cosas!\n¡Debo habarle a mi novia de\llo mucho que me gusta él!\p¡GROOOAARRR!$"
 
 Route116_Text_ThankYouTokenOfAppreciation:
-	.string "Oh! It's you!\p"
-	.string "You're that person who not only helped\n"
-	.string "me in PETALBURG WOODS, but also got\l"
-	.string "back my stolen package and then even\l"
-	.string "graciously delivered it to SLATEPORT!\p"
-	.string "CAPT. STERN informed us that the\n"
-	.string "package arrived, too!\p"
-	.string "I thank you very, very much!\p"
-	.string "Why, if I were a rain cloud, I would\n"
-	.string "shower you with gratitude and hail\l"
-	.string "you as a hero!\p"
-	.string "For you, the most wonderful TRAINER,\n"
-	.string "I bear good news!\p"
-	.string "Recently, our company developed\n"
-	.string "a new kind of POKé BALL.\p"
-	.string "As a token of our appreciation, this\n"
-	.string "is our gift to our wonderful TRAINER!$"
+	.string "¡Ah, me ayudaste de nuevo!\n¡Déjame entonces presentarme!\p¡Soy {COLOR BLUE}El Capitán Stern{COLOR DARK_GRAY}, aunque\nnadie sabe esto aparte de tí ahora.$"
+	
+Route116_Text_ThankYouTokenOfAppreciation2:
+	.string "Te pedirán que me lleves un paquete a\nSlaterport luego, porque yo\lusualmente estoy allí.\pEsto es porque quiero asegurarme\nde que el paquete que me entregarán\les el que yo encargué.\p"
+	.string "Pero bueno, toma esto:$"
+
+
+Route116_Text_GlassesThanks:
+	.string "¡Muchísimas gracias!$"
+
 
 Route116_Text_NewBallAvailableAtMart:
-	.string "Our new POKé BALL will be available\n"
-	.string "at the POKéMON MART in RUSTBORO.\p"
-	.string "Please do try it out!\n"
-	.string "Thank you and bye-bye!$"
+	.string "¡Hasta luego!$"
 
 Route116_Text_BagIsJamPacked:
-	.string "Your BAG is jam-packed.\n"
-	.string "I can't give you this REPEAT BALL.$"
+	.string "Oh, no hay espacio.$"
 
 Route116_Text_TokenOfAppreciation:
-	.string "As a token of our appreciation for\n"
-	.string "your delivering our package, I have\l"
-	.string "a gift of a new kind of POKé BALL\l"
-	.string "for our most wonderful TRAINER!$"
+	.string "Esto es porque quiero asegurarme\nde que el paquete que me entregarán\les el que yo encargué.\p"
+	.string "Pero bueno, toma esto:$"
 
 Route116_Text_CanYouHelpMeFindGlasses:
-	.string "I dropped my glasses…\n"
-	.string "Can you help me find them?$"
-
-Route116_Text_MayISeeThoseGlasses:
-	.string "Those glasses!\n"
-	.string "May I see them for a second?$"
-
-Route116_Text_NotWhatImLookingForMaybeTheyArentHere:
-	.string "Hmm…\n"
-	.string "These are BLACKGLASSES.\l"
-	.string "They're not what I'm looking for…\p"
-	.string "Maybe my glasses aren't around\n"
-	.string "here…$"
-
-Route116_Text_CantFindGlassesNotHere:
-	.string "Hmm…\n"
-	.string "I can't find my glasses anywhere…\l"
-	.string "Maybe they're not around here…$"
-
-Route116_Text_NotWhatImLookingFor:
-	.string "Hmm…\n"
-	.string "These are BLACKGLASSES.\l"
-	.string "They're not what I'm looking for…$"
+	.string "Mis lentes…\n"
+	.string "¿Me ayudas a buscarlos?$"
 
 Route116_Text_RouteSignRustboro:
-	.string "ROUTE 116\n"
-	.string "{LEFT_ARROW} RUSTBORO CITY$"
+	.string "RUTA 116\n"
+	.string "{LEFT_ARROW} CIUDAD RUSTBORO$"
 
 Route116_Text_RusturfTunnelSign:
-	.string "RUSTURF TUNNEL\n"
-	.string "“Linking RUSTBORO and VERDANTURF\p"
-	.string "“The tunnel project has been\n"
-	.string "canceled.”$"
+	.string "TÚNEL RUSTURF\n"
+	.string "“Uniendo a Rustboro y Verdanturf.\p"
+	.string "El proyecto fue cancelado.”$"
 
 Route116_Text_TunnelersRestHouse:
-	.string "TUNNELER'S REST HOUSE$"
+	.string "LA CASA DEL CREA-TÚNELES$"
 
 Route116_Text_TrainerTipsBToStopEvolution:
-	.string "TRAINER TIPS\p"
-	.string "If you want to stop a POKéMON from\n"
-	.string "evolving, press the B Button while it\l"
-	.string "is trying to evolve.\l"
-	.string "The startled POKéMON will stop.\p"
-	.string "This is called an evolution cancel.$"
+	.string "PISTAS PARA ENTRENADORES\p"
+	.string "Las Máquinas Ocultas, o MOs,\nahora sólo requieren que tengas\luna medalla específica.\p"
+	.string "¡No a los Escalvos MO!$"
 
 Route116_Text_TrainerTipsBagHasPockets:
-	.string "TRAINER TIPS\p"
-	.string "Your BAG has several POCKETS.\p"
-	.string "Items you obtain are automatically\n"
-	.string "placed in the appropriate POCKETS.\p"
-	.string "No TRAINER can afford to be without\n"
-	.string "a BAG of their own.$"
+	.string "PISTAS PARA ENTRENADORES\p"
+	.string "Puedes ver quiénes aprenden\ncada MT o MO en el Estuche MT.$"
 

@@ -5,10 +5,6 @@ Route104_PrettyPetalFlowerShop_MapScripts::
 	.byte 0
 
 Route104_PrettyPetalFlowerShop_OnTransition:
-	setflag FLAG_LANDMARK_FLOWER_SHOP
-	goto_if_unset FLAG_MET_PRETTY_PETAL_SHOP_OWNER, Route104_PrettyPetalFlowerShop_EventScript_MoveShopOwner
-	goto_if_unset FLAG_BADGE03_GET, Route104_PrettyPetalFlowerShop_EventScript_MoveShopOwner
-	setflag FLAG_TEMP_1
 	end
 
 Route104_PrettyPetalFlowerShop_EventScript_MoveShopOwner::
@@ -18,30 +14,21 @@ Route104_PrettyPetalFlowerShop_EventScript_MoveShopOwner::
 Route104_PrettyPetalFlowerShop_EventScript_ShopOwner::
 	lock
 	faceplayer
-	goto_if_set FLAG_TEMP_1, Route104_PrettyPetalFlowerShop_EventScript_SellDecorations
-	msgbox Route104_PrettyPetalFlowerShop_Text_ThisIsPrettyPetalFlowerShop, MSGBOX_DEFAULT
-	goto_if_set FLAG_MET_PRETTY_PETAL_SHOP_OWNER, Route104_PrettyPetalFlowerShop_EventScript_AlreadyMet
-	setflag FLAG_MET_PRETTY_PETAL_SHOP_OWNER
-	msgbox Route104_PrettyPetalFlowerShop_Text_IntroLearnAboutBerries, MSGBOX_YESNO
-	call_if_eq VAR_RESULT, YES, Route104_PrettyPetalFlowerShop_EventScript_ExplainBerries
-	call_if_eq VAR_RESULT, NO, Route104_PrettyPetalFlowerShop_EventScript_DontExplainBerries
+	msgbox Route104_PrettyPetalFlowerShop_Text_ShopOwner_Decorations, MSGBOX_YESNO
+	call_if_eq VAR_RESULT, YES, Route104_PrettyPetalFlowerShop_EventScript_SellDecorations
+	setflag FLAG_BAYASMART
+	msgbox Route104_PrettyPetalFlowerShop_Text_ShopOwner_Berries, MSGBOX_YESNO
+	call_if_eq VAR_RESULT, NO, Route104_PrettyPetalFlowerShop_Script_ShopOwner_ComeBack
+	message gText_PlayerWhatCanIDoForYou
 	release
 	end
 
-Route104_PrettyPetalFlowerShop_EventScript_AlreadyMet::
-	msgbox Route104_PrettyPetalFlowerShop_Text_LearnAboutBerries, MSGBOX_YESNO
-	call_if_eq VAR_RESULT, YES, Route104_PrettyPetalFlowerShop_EventScript_ExplainBerries
-	call_if_eq VAR_RESULT, NO, Route104_PrettyPetalFlowerShop_EventScript_DontExplainBerries
+Route104_PrettyPetalFlowerShop_Script_ShopOwner_ComeBack::
+	lock
+	faceplayer
+	msgbox Route104_PrettyPetalFlowerShop_Text_ShopOwner_ComeBackSoon
 	release
 	end
-
-Route104_PrettyPetalFlowerShop_EventScript_ExplainBerries::
-	msgbox Route104_PrettyPetalFlowerShop_Text_BerriesExplanation, MSGBOX_DEFAULT
-	return
-
-Route104_PrettyPetalFlowerShop_EventScript_DontExplainBerries::
-	msgbox Route104_PrettyPetalFlowerShop_Text_FlowersBringHappiness, MSGBOX_DEFAULT
-	return
 
 Route104_PrettyPetalFlowerShop_EventScript_SellDecorations::
 	message gText_PlayerWhatCanIDoForYou
@@ -53,12 +40,19 @@ Route104_PrettyPetalFlowerShop_EventScript_SellDecorations::
 
 	.align 2
 Route104_PrettyPetalFlowerShop_Pokemart_Plants:
+	.2byte DECOR_CAMP_DESK
+	.2byte DECOR_PRETTY_DESK
+	.2byte DECOR_CAMP_CHAIR
+	.2byte DECOR_PRETTY_CHAIR
 	.2byte DECOR_RED_PLANT
 	.2byte DECOR_TROPICAL_PLANT
 	.2byte DECOR_PRETTY_FLOWERS
 	.2byte DECOR_COLORFUL_PLANT
 	.2byte DECOR_BIG_PLANT
 	.2byte DECOR_GORGEOUS_PLANT
+	.2byte DECOR_FENCE_LENGTH
+	.2byte DECOR_FENCE_WIDTH
+	.2byte DECOR_FENCE_WIDTH
 	.2byte DECOR_NONE
 	release
 	end
@@ -98,3 +92,12 @@ Route104_PrettyPetalFlowerShop_EventScript_AlreadyReceivedBerry::
 	msgbox Route104_PrettyPetalFlowerShop_Text_MachineMixesBerries, MSGBOX_DEFAULT
 	release
 	end
+
+Route104_PrettyPetalFlowerShop_Text_ShopOwner_Decorations:
+	.string "¡Bienvenid{OA} seas a la Floristería!\p¿Te gustaría comprar decoraciones?$"
+	
+Route104_PrettyPetalFlowerShop_Text_ShopOwner_Berries:
+	.string "Entonces, ¿Quieres comprar Bayas?$"
+
+Route104_PrettyPetalFlowerShop_Text_ShopOwner_ComeBackSoon:
+	.string "¡Vuelve pronto!$"

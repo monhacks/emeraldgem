@@ -1045,6 +1045,9 @@ struct SaveBlock1
                 u8 registeredItemLastSelected:4; //max 16 items
                 u8 registeredItemListCount:4;
                 struct RegisteredItemSlot registeredItems[REGISTERED_ITEMS_MAX];
+				struct Pokemon Empty;
+				struct Pokemon BossTeam[PARTY_SIZE - 1];
+
     // sizeof: 0x3???
 };
 

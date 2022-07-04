@@ -177,7 +177,16 @@ RustboroCity_EventScript_Twin::
 	end
 
 RustboroCity_EventScript_NinjaBoy::
+	checkitem ITEM_TM70
+	goto_if_eq VAR_RESULT, TRUE, RustboroCity_EventScript_NinjaBoy2
 	msgbox RustboroCity_Text_CatchRarePokemonIfIGoToSchool, MSGBOX_SIGN
+	giveitem ITEM_TM70
+	msgbox RustboroCity_Text_NinjaSubstitueAtSchool, MSGBOX_SIGN
+	end
+
+RustboroCity_EventScript_NinjaBoy2::
+	msgbox RustboroCity_Text_NinjaLeaveMeAlone, MSGBOX_SIGN
+	release
 	end
 
 RustboroCity_EventScript_TunnelSign::
@@ -190,11 +199,6 @@ RustboroCity_EventScript_DevonCorpSign::
 
 RustboroCity_EventScript_GymSign::
 	msgbox RustboroCity_Text_GymSign, MSGBOX_SIGN
-	end
-
-@ Unused
-RustboroCity_EventScript_DevonCorpBranchOfficeSign::
-	msgbox RustboroCity_Text_DevonCorpBranchOfficeSign, MSGBOX_SIGN
 	end
 
 RustboroCity_EventScript_CitySign::
@@ -1099,9 +1103,14 @@ RustboroCity_Text_WowYouHavePokemon:
 	.string "sedé un Entdenadod podedosisímo!$"
 
 RustboroCity_Text_CatchRarePokemonIfIGoToSchool:
-	.string "¡Escuela para Entrenadores!\n"
-	.string "Si voy ahí… ¿Me haré fuerte?\l"
-	.string "¿Atraparé Pokémon raros?$"
+	.string "¡Ah, me encontraste!\n¡Toma esto y déjame solo!$"
+
+RustboroCity_Text_NinjaSubstitueAtSchool:
+	.string "Puedes usarla como yo para saltarte\nclases, dejando un sustituto ahí.$"
+
+RustboroCity_Text_NinjaLeaveMeAlone:
+	.string "Ahora déjame solo.$"
+
 
 RustboroCity_Text_PokemonCanChangeLookFromExp:
 	.string "La evolución es un misterio.\n"
@@ -1231,9 +1240,6 @@ RustboroCity_Text_GymSign:
 	.string "Líder: Roxxane\l"
 	.string "“La chica que ama las rocas.”$"
 
-RustboroCity_Text_DevonCorpBranchOfficeSign:
-	.string "Acceso sólo a personal autorizado.$"
-
 RustboroCity_Text_CitySign:
 	.string "CIUDAD RUSTBORO\p"
 	.string "“La ciudad que integra\n"
@@ -1247,7 +1253,7 @@ RustboroCity_Text_CuttersHouse:
 
 RustboroCity_Text_DevelopedNewPokenavFeature:
 	.string "Ey, ¡tú!\n"
-	.string "El Presidente quería darte las\n"
+	.string "El Presidente quería darte las\l"
 	.string "gracias con esto.$"
 
 RustboroCity_Text_AddedMatchCallPleaseCallMrStone:

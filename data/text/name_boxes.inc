@@ -28,14 +28,14 @@ Juan:
 	.string "{COLOR BLUE}Juan$"
 
 Archie:
-	.string "{COLOR BLUE}{SHADOW LIGHT_RED}Archie$"
+	.string "{COLOR LIGHT_BLUE}{SHADOW BLUE}Archie$"
 	
 Aqua:
-	.string "{SHADOW BLUE}Soldado Aqua$"
+	.string "{COLOR LIGHT_BLUE}{SHADOW BLUE}Soldado Aqua$"
 Magma:
-	.string "{SHADOW BLUE}Soldado Magma$"
+	.string "{COLOR LIGHT_RED}{SHADOW RED}Soldado Magma$"
 Maxie:
-	.string "{COLOR RED}{SHADOW BLUE}Maxie$"
+	.string "{COLOR LIGHT_RED}{SHADOW RED}Maxie$"
 Shelly:
 	.string "{COLOR LIGHT_RED}{SHADOW RED}Shelly$"
 Matt:
@@ -88,3 +88,18 @@ NoDeberiasVerlo:
 	.string "desarrollador y dile cómo y porqué\l"
 	.string "este evento se muestra cuando\l"
 	.string "no tendría que pasar.$"
+
+Riley:
+	.string "{COLOR BLUE}Riley$"
+
+Wanda:
+	.string "{COLOR RED}Wanda$"
+
+Camilo:
+	.string "{COLOR BLUE}Camilo$"
+
+Stern:
+	.string "{COLOR BLUE}Stern$"
+
+Briney:
+	.string "{COLOR BLUE}Briney$"

@@ -41,49 +41,49 @@
 #define FLAG_TEMP_1F     (TEMP_FLAGS_START + 0x1F)
 #define TEMP_FLAGS_END   FLAG_TEMP_1F
 
-#define FLAG_SHINY_TREECKO    0x20 // Unused Flag
-#define FLAG_SHINY_MUDKIP    0x21 // Unused Flag
-#define FLAG_SHINY_TORCHIC    0x22 // Unused Flag
-#define FLAG_SHINY_STARTER    0x23 // Unused Flag
-#define FLAG_SHINY_CREATION    0x24 // Unused Flag
-#define FLAG_POKEMONPCMENU    0x25 // Unused Flag
-#define FLAG_PARTY_MOVES  	  0x26 // Unused Flag
-#define FLAG_JUST_ONE_HM    0x27 // Unused Flag
-#define FLAG_SYS_NO_COLLISION    0x28 // Unused Flag
-#define FLAG_SYS_NO_ENCOUNTER    0x29 // Unused Flag
-#define FLAG_SYS_NO_TRAINER_SEE    0x2A // Unused Flag
-#define FLAG_SYS_NO_BAG_USE    0x2B // Unused Flag
-#define FLAG_SYS_NO_CATCHING    0x2C // Unused Flag
-#define FLAG_REMOVE_WARP_FADE    0x2D // Unused Flag
-#define FLAG_OMNIJUMP_UPGRADE    0x2E // Unused Flag
-#define FLAG_ALEX  				0x2F // Unused Flag
-#define FLAG_DAIANA   		 0x30 // Unused Flag
-#define FLAG_CARLOS      	 0x31 // Unused Flag
-#define FLAG_RTC_ENABLED  	 0x32 // Unused Flag
-#define FLAG_DEFEATED_LEAF    0x33 // Unused Flag
-#define FLAG_BAYASMART       0x34 // Unused Flag
-#define FLAG_DEFEATED_WALLY_DEWFORD_TOWN    0x35 // Unused Flag
-#define FLAG_DONT_GET_MUCH_EXP_TRAINER    0x36 // Unused Flag
-#define FLAG_MENU_DEXRELATED    0x37 // Unused Flag
-#define FLAG_ENABLED_PC    0x38 // Unused Flag
-#define FLAG_MAY_YA_HISO    0x39 // Unused Flag
-#define FLAG_HIDDEN_ITEM_GYM_1    0x3A // Unused Flag
-#define FLAG_BAGLESS    0x3B // Unused Flag
-#define FLAG_EVENTOMISTERIOSO1    0x3C // Unused Flag
-#define FLAG_HIDE_RALTS_102  0x3D // Unused Flag
-#define FLAG_HIDE_ZIGZA_102	 0x3E // Unused Flag
-#define FLAG_HIDE_BALL_102    0x3F // Unused Flag
-#define FLAG_UNUSED_0x040    0x40 // Unused Flag
-#define FLAG_UNUSED_0x041    0x41 // Unused Flag
-#define FLAG_UNUSED_0x042    0x42 // Unused Flag
-#define FLAG_UNUSED_0x043    0x43 // Unused Flag
-#define FLAG_UNUSED_0x044    0x44 // Unused Flag
-#define FLAG_UNUSED_0x045    0x45 // Unused Flag
-#define FLAG_UNUSED_0x046    0x46 // Unused Flag
-#define FLAG_UNUSED_0x047    0x47 // Unused Flag
-#define FLAG_UNUSED_0x048    0x48 // Unused Flag
-#define FLAG_UNUSED_0x049    0x49 // Unused Flag
-#define FLAG_UNUSED_0x04A    0x4A // Unused Flag
+#define FLAG_SHINY_TREECKO    0x20
+#define FLAG_SHINY_MUDKIP    0x21
+#define FLAG_SHINY_TORCHIC    0x22
+#define FLAG_SHINY_STARTER    0x23
+#define FLAG_SHINY_CREATION    0x24
+#define FLAG_POKEMONPCMENU    0x25
+#define FLAG_PARTY_MOVES  	  0x26
+#define FLAG_JUST_ONE_HM    0x27
+#define FLAG_SYS_NO_COLLISION    0x28
+#define FLAG_SYS_NO_ENCOUNTER    0x29
+#define FLAG_SYS_NO_TRAINER_SEE    0x2A
+#define FLAG_SYS_NO_BAG_USE    0x2B
+#define FLAG_SYS_NO_CATCHING    0x2C
+#define FLAG_REMOVE_WARP_FADE    0x2D
+#define FLAG_OMNIJUMP_UPGRADE    0x2E
+#define FLAG_ALEX  				0x2F
+#define FLAG_DAIANA   		 0x30
+#define FLAG_CARLOS      	 0x31
+#define FLAG_RTC_ENABLED  	 0x32
+#define FLAG_DEFEATED_LEAF    0x33
+#define FLAG_BAYASMART       0x34
+#define FLAG_DEFEATED_WALLY_DEWFORD_TOWN    0x35
+#define FLAG_DONT_GET_MUCH_EXP_TRAINER    0x36
+#define FLAG_MENU_DEXRELATED    0x37
+#define FLAG_ENABLED_PC    0x38
+#define FLAG_MAY_YA_HISO    0x39
+#define FLAG_HIDDEN_ITEM_GYM_1    0x3A
+#define FLAG_BAGLESS    0x3B
+#define FLAG_EVENTOMISTERIOSO1    0x3C
+#define FLAG_HIDE_RALTS_102  0x3D
+#define FLAG_HIDE_ZIGZA_102	 0x3E
+#define FLAG_HIDE_BALL_102    0x3F
+#define FLAG_SECONDMART    0x40
+#define FLAG_WISH_1    0x41
+#define FLAG_WISH_2    0x42
+#define FLAG_WISH_3    0x43
+#define FLAG_WISH_4    0x44
+#define FLAG_WISH_5    0x45
+#define FLAG_WISH_6    0x46
+#define FLAG_WISH_7    0x47
+#define FLAG_HIDE_JIRACHI    0x48
+#define FLAG_STARTED_BOSS    0x49
+#define FLAG_DEWFORD_GRUNT    0x4A
 #define FLAG_UNUSED_0x04B    0x4B // Unused Flag
 #define FLAG_UNUSED_0x04C    0x4C // Unused Flag
 #define FLAG_UNUSED_0x04D    0x4D // Unused Flag
@@ -114,9 +114,9 @@
 #define FLAG_TV_EXPLAINED                    0x62
 #define FLAG_MAUVILLE_GYM_BARRIERS_STATE     0x63
 #define FLAG_MOSSDEEP_GYM_SWITCH_1           0x64 // Leftover from the RS version of Mossdeep Gym, functionally unused
-#define FLAG_MOSSDEEP_GYM_SWITCH_2           0x65 //
-#define FLAG_MOSSDEEP_GYM_SWITCH_3           0x66 //
-#define FLAG_MOSSDEEP_GYM_SWITCH_4           0x67 //
+#define FLAG_MOSSDEEP_GYM_SWITCH_2           0x65 // unused flag
+#define FLAG_MOSSDEEP_GYM_SWITCH_3           0x66 // unused flag
+#define FLAG_MOSSDEEP_GYM_SWITCH_4           0x67 // unused flag
 
 #define FLAG_UNUSED_0x068                    0x68  // Unused Flag
 
@@ -212,10 +212,10 @@
 #define FLAG_RECEIVED_SUN_STONE_MOSSDEEP     0xC0
 #define FLAG_WALLY_SPEECH                    0xC1
 #define FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_1   0xC2 // Leftover from the RS version of Puzzle Room 7, functionally unused
-#define FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_2   0xC3 //
-#define FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_3   0xC4 //
-#define FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_4   0xC5 //
-#define FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_5   0xC6 //
+#define FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_2   0xC3 // unused flag
+#define FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_3   0xC4 // unused flag
+#define FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_4   0xC5 // unused flag
+#define FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_5   0xC6 // unused flag
 #define FLAG_RUSTURF_TUNNEL_OPENED           0xC7
 #define FLAG_RECEIVED_RED_SCARF              0xC8
 #define FLAG_RECEIVED_BLUE_SCARF             0xC9

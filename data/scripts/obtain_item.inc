@@ -190,3 +190,127 @@ EventScript_NoRoomForHiddenItem::
 	setvar VAR_RESULT, 0
 	releaseall
 	end
+
+EventScript_FindItemInTrash::
+	lockall
+	random 3
+	goto_if_set FLAG_TEMP_1, EventScript_FindItemInTrash_6
+	setflag FLAG_TEMP_1
+	compare VAR_RESULT, 1
+	goto_if_eq EventScript_FindItemInTrash_2
+	msgbox EventScript_FindItemInTrash_Text_9
+	goto EventScript_FindItemInTrash_5
+EventScript_FindItemInTrash_5:
+	releaseall
+	return
+
+EventScript_FindItemInTrash_2:
+	random 8
+	switch VAR_RESULT
+	case 0, EventScript_FindItemInTrash_9
+	case 1, EventScript_FindItemInTrash_10
+	case 2, EventScript_FindItemInTrash_11
+	case 3, EventScript_FindItemInTrash_12
+	case 4, EventScript_FindItemInTrash_13
+	case 5, EventScript_FindItemInTrash_14
+	case 6, EventScript_FindItemInTrash_15
+	case 7, EventScript_FindItemInTrash_16
+	msgbox EventScript_FindItemInTrash_Text_8
+	
+
+EventScript_FindItemInTrash_6:
+	msgbox EventScript_FindItemInTrash_Text_9
+	goto EventScript_FindItemInTrash_5
+
+EventScript_FindItemInTrash_9:
+	msgbox EventScript_FindItemInTrash_Text_0
+	giveitem ITEM_POTION, 1
+	goto EventScript_FindItemInTrash_6
+	
+
+EventScript_FindItemInTrash_10:
+	msgbox EventScript_FindItemInTrash_Text_1
+	giveitem ITEM_POKE_BALL, 1
+	goto EventScript_FindItemInTrash_6
+	
+
+EventScript_FindItemInTrash_11:
+	msgbox EventScript_FindItemInTrash_Text_2
+	giveitem ITEM_PREMIER_BALL, 1
+	goto EventScript_FindItemInTrash_6
+	
+
+EventScript_FindItemInTrash_12:
+	msgbox EventScript_FindItemInTrash_Text_3
+	giveitem ITEM_ORAN_BERRY, 1
+	goto EventScript_FindItemInTrash_6
+	
+
+EventScript_FindItemInTrash_13:
+	msgbox EventScript_FindItemInTrash_Text_4
+	giveitem ITEM_PECHA_BERRY, 1
+	goto EventScript_FindItemInTrash_6
+	
+
+EventScript_FindItemInTrash_14:
+	msgbox EventScript_FindItemInTrash_Text_5
+	giveitem ITEM_LEFTOVERS, 1
+	goto EventScript_FindItemInTrash_6
+	
+
+EventScript_FindItemInTrash_15:
+	msgbox EventScript_FindItemInTrash_Text_6
+	giveitem ITEM_BLUE_SHARD, 1
+	giveitem ITEM_GREEN_SHARD, 1
+	giveitem ITEM_RED_SHARD, 1
+	giveitem ITEM_YELLOW_SHARD, 1
+	goto EventScript_FindItemInTrash_6
+
+EventScript_FindItemInTrash_16:
+	msgbox EventScript_FindItemInTrash_Text_7
+	addmoney 5000
+	goto EventScript_FindItemInTrash_6
+	
+
+
+EventScript_FindItemInTrash_Text_0:
+	.string "¡Ey! ¡Hay una Poción\n"
+	.string "en la basura!$"
+
+EventScript_FindItemInTrash_Text_1:
+	.string "¡Ey! ¡Hay una Pokéball\n"
+	.string "en la basura!$"
+
+EventScript_FindItemInTrash_Text_2:
+	.string "¡Ey! ¡Hay una Premier\n"
+	.string "Ball en la basura!$"
+
+EventScript_FindItemInTrash_Text_3:
+	.string "¡Ey! ¡Hay una Baya Aranja\n"
+	.string "en la basura!$"
+
+EventScript_FindItemInTrash_Text_4:
+	.string "¡Ey! ¡Hay una Baya Meloc\n"
+	.string "en la basura!$"
+
+EventScript_FindItemInTrash_Text_5:
+	.string "¡Ey! ¡Hay unos Restos\n"
+	.string "en la basura!$"
+
+EventScript_FindItemInTrash_Text_6:
+	.string "¡Ey! ¡Hay muchas Partes\n"
+	.string "en la basura!$"
+
+EventScript_FindItemInTrash_Text_7:
+	.string "¡Ey! ¡Hay ¥5.000\n"
+	.string "en la basura!$"
+
+EventScript_FindItemInTrash_Text_8:
+	.string "¡No tendrías porqué ver esto!$"
+
+EventScript_FindItemInTrash_Text_9:
+	.string "La basura está vacía.\p"
+	.string "Aunque algo me dice que debería\n"
+	.string "volver luego…$"
+
+	

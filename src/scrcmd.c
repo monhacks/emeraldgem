@@ -2435,3 +2435,35 @@ bool8 ScrCmd_checkpartytype(struct ScriptContext *ctx)
     return FALSE;
 }
 
+void ScrCmd_getemptyslot(void)
+{
+	gSaveBlock1Ptr->Empty = gPlayerParty[1];
+}
+
+void ScrCmd_deletepokemon(void)
+{
+	u8 NumberDelete = gSpecialVar_0x8004;
+	u8 i;
+	for(i = 5; i >= NumberDelete; i--)
+	{
+		if(GetMonData(&gPlayerParty[i], MON_DATA_SPECIES, NULL))
+			gPlayerParty[i] = gSaveBlock1Ptr->Empty;
+	}
+}
+
+void ScrCmd_savepartofteam(void)
+{
+	u8 i;
+	for (i = 0; i < PARTY_SIZE; i++)
+        gSaveBlock1Ptr->BossTeam[i] = gPlayerParty[i];
+}
+
+void ScrCmd_loadpartofteam(void)
+{
+	u8 i;
+	for(i = 0; !GetMonData(gSaveBlock1Ptr->BossTeam[i], MON_DATA_SPECIES, NULL); i++)
+		gPlayerParty[i] = gSaveBlock1Ptr->BossTeam[i];
+}
+
+
+

@@ -21,9 +21,10 @@ extern u16 gUnknown_0203CF30[];
 // this file's functions
 static bool8 CheckPyramidBagHasItem(u16 itemId, u16 count);
 static bool8 CheckPyramidBagHasSpace(u16 itemId, u16 count);
-
 // EWRAM variables
 EWRAM_DATA struct BagPocket gBagPockets[POCKETS_COUNT] = {0};
+EWRAM_DATA u16 Items[BAG_ITEMS_COUNT][2] = {0};
+EWRAM_DATA u16 Berries[BAG_BERRIES_COUNT][2] = {0};
 
 // rodata
 #include "data/text/item_descriptions.h"
@@ -983,3 +984,56 @@ u8 ItemId_GetFlingPower(u16 itemId)
 {
     return gItems[SanitizeItemId(itemId)].flingPower;
 }
+
+void TakeAwayItemsAndBerries(void)
+{
+	if(IsBagPocketNonEmpty(ITEMS_POCKET))
+	{
+		u16 i;
+		for(i = 0; i < gBagPockets[ITEMS_POCKET].capacity; i++)
+		{
+			if(gBagPockets[ITEMS_POCKET].itemSlots[i].itemId != ITEM_NONE)
+			{
+				Items[i][0] = gBagPockets[ITEMS_POCKET].itemSlots[i].itemId;
+				Items[i][1] = GetBagItemQuantity(&gBagPockets[ITEMS_POCKET].itemSlots[i].quantity);
+			}
+		}
+		ClearItemSlots(gBagPockets[ITEMS_POCKET].itemSlots, gBagPockets[ITEMS_POCKET].capacity);
+	}
+	if(IsBagPocketNonEmpty(BERRIES_POCKET))
+	{
+		u16 j;
+		for(j = 0; j < gBagPockets[BERRIES_POCKET].capacity; j++)
+		{
+			if(gBagPockets[BERRIES_POCKET].itemSlots[j].itemId != ITEM_NONE)
+			{
+				Berries[j][0] = gBagPockets[BERRIES_POCKET].itemSlots[j].itemId;
+				Berries[j][1] = GetBagItemQuantity(&gBagPockets[BERRIES_POCKET].itemSlots[j].quantity);
+			}
+		}
+		ClearItemSlots(gBagPockets[BERRIES_POCKET].itemSlots, gBagPockets[BERRIES_POCKET].capacity);
+	}
+}
+
+void GiveBackItemsAndBerries(void)
+{
+	u16 i = 0;
+	while(Items[i][0])
+	{
+		gBagPockets[ITEMS_POCKET].itemSlots[i].itemId = Items[i][0];
+		SetBagItemQuantity(&gBagPockets[ITEMS_POCKET].itemSlots[i].quantity, Items[i][1]);
+		Items[i][0], Items[i][1] = 0;
+		i++;
+	}
+	
+	i = 0;
+	
+	while(Berries[i][0])
+	{
+		gBagPockets[BERRIES_POCKET].itemSlots[i].itemId = Berries[i][0];
+		SetBagItemQuantity(&gBagPockets[BERRIES_POCKET].itemSlots[i].quantity, Items[i][1]);
+		Berries[i][0], Berries[i][1] = 0;
+		i++;
+	}
+}
+

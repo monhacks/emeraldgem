@@ -70,11 +70,11 @@ static const struct MenuAction MultichoiceList_Bike[] =
 
 static const struct MenuAction MultichoiceList_StatusInfo[] =
 {
-    {gText_Psn},
-    {gText_Par},
-    {gText_Slp},
-    {gText_Brn},
-    {gText_Frz},
+    {gText_Poisoned},
+    {gText_Frostbitten},
+    {gText_Confused},
+    {gText_Infatuated},
+    {gText_Trapped},
     {gText_Exit},
 };
 

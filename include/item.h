@@ -80,5 +80,10 @@ ItemUseFunc ItemId_GetBattleFunc(u16 itemId);
 u8 ItemId_GetSecondaryId(u16 itemId);
 bool32 IsPinchBerryItemEffect(u16 holdEffect);
 u8 ItemId_GetFlingPower(u16 itemId);
+extern u16 Items[][];
+extern u16 Berries[][];
+void GiveBackItemsAndBerries(void);
+
+
 
 #endif // GUARD_ITEM_H

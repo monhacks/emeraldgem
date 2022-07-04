@@ -443,6 +443,7 @@ BattleScript_SkyDropFlyingType:
 	printstring STRINGID_ITDOESNTAFFECT
 	waitmessage B_WAIT_TIME_LONG
 	makevisible BS_ATTACKER
+	jumpiftype BS_TARGET, TYPE_BUG, BattleScript_MoveEnd
 	jumpifstatus2 BS_TARGET, STATUS2_CONFUSION, BattleScript_SkyDropFlyingAlreadyConfused
 	jumpifstatus2 BS_TARGET, STATUS2_LOCK_CONFUSE, BattleScript_SkyDropFlyingConfuseLock
 	goto BattleScript_MoveEnd
@@ -455,11 +456,14 @@ BattleScript_SkyDropChangedTarget:
 	goto BattleScript_MoveEnd
 
 BattleScript_SkyDropFlyingConfuseLock:
+	jumpiftype BS_TARGET, TYPE_BUG, BattleScript_MoveEnd
 	setmoveeffect MOVE_EFFECT_CONFUSION
 	seteffectprimary
 BattleScript_SkyDropFlyingAlreadyConfused:
+	jumpiftype BS_TARGET, TYPE_BUG, BattleScript_MoveEnd
 	setmoveeffect MOVE_EFFECT_THRASH
 	clearstatusfromeffect BS_TARGET
+	jumpiftype BS_TARGET, TYPE_BUG, BattleScript_MoveEnd
 	jumpifstatus2 BS_TARGET, STATUS2_CONFUSION, BattleScript_MoveEnd
 	setbyte BS_ATTACKER, BS_TARGET
 	goto BattleScript_ThrashConfuses
@@ -3589,6 +3593,7 @@ BattleScript_EffectConfuse:
 	attackcanceler
 	attackstring
 	ppreduce
+	jumpiftype BS_TARGET, TYPE_BUG, BattleScript_NotAffected
 	jumpifability BS_TARGET, ABILITY_OWN_TEMPO, BattleScript_OwnTempoPrevents
 	jumpifsubstituteblocks BattleScript_ButItFailed
 	jumpifstatus2 BS_TARGET, STATUS2_CONFUSION, BattleScript_AlreadyConfused
@@ -3874,6 +3879,7 @@ BattleScript_GeomancyEnd::
 	goto BattleScript_MoveEnd
 
 BattleScript_EffectConfuseHit::
+	jumpiftype BS_TARGET, TYPE_BUG, BattleScript_NotAffected
 	setmoveeffect MOVE_EFFECT_CONFUSION
 	goto BattleScript_EffectHit
 
@@ -4501,6 +4507,7 @@ BattleScript_EffectSwagger::
 	printfromtable gStatUpStringIds
 	waitmessage B_WAIT_TIME_LONG
 BattleScript_SwaggerTryConfuse:
+	jumpiftype BS_TARGET, TYPE_BUG, BattleScript_NotAffected
 	jumpifability BS_TARGET, ABILITY_OWN_TEMPO, BattleScript_OwnTempoPrevents
 	jumpifsafeguard BattleScript_SafeguardProtected
 	setmoveeffect MOVE_EFFECT_CONFUSION
@@ -4877,6 +4884,7 @@ BattleScript_EffectThunder:
 	goto BattleScript_EffectHit
 
 BattleScript_EffectHurricane:
+	jumpiftype BS_TARGET, TYPE_BUG, BattleScript_MoveEnd
 	setmoveeffect MOVE_EFFECT_CONFUSION
 	goto BattleScript_EffectHit
 
@@ -5156,6 +5164,7 @@ BattleScript_EffectFlatter::
 	printfromtable gStatUpStringIds
 	waitmessage B_WAIT_TIME_LONG
 BattleScript_FlatterTryConfuse::
+	jumpiftype BS_TARGET, TYPE_BUG, BattleScript_MoveEnd
 	jumpifability BS_TARGET, ABILITY_OWN_TEMPO, BattleScript_OwnTempoPrevents
 	jumpifsafeguard BattleScript_SafeguardProtected
 	setmoveeffect MOVE_EFFECT_CONFUSION
@@ -5604,6 +5613,7 @@ BattleScript_EffectTeeterDance::
 	setbyte gBattlerTarget, 0
 BattleScript_TeeterDanceLoop::
 	movevaluescleanup
+	jumpiftype BS_TARGET, TYPE_BUG, BattleScript_NotAffected
 	setmoveeffect MOVE_EFFECT_CONFUSION
 	jumpifbyteequal gBattlerAttacker, gBattlerTarget, BattleScript_TeeterDanceLoopIncrement
 	jumpifability BS_TARGET, ABILITY_OWN_TEMPO, BattleScript_TeeterDanceOwnTempoPrevents
@@ -7380,6 +7390,9 @@ BattleScript_PoisonTurnDmg::
 	waitmessage B_WAIT_TIME_LONG
 BattleScript_DoStatusTurnDmg::
 	statusanimation BS_ATTACKER
+	effectivenesssound
+	hitanimation BS_ATTACKER
+	waitstate
 BattleScript_DoTurnDmg:
 	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_PASSIVE_DAMAGE
 	healthbarupdate BS_ATTACKER
@@ -7405,10 +7418,12 @@ BattleScript_BurnTurnDmg::
 	goto BattleScript_DoStatusTurnDmg
 
 BattleScript_MoveUsedIsFrozen::
-	printstring STRINGID_PKMNISFROZEN
+	return
+
+BattleScript_FreezeTurnDmg::
+	printstring STRINGID_FREEZEDMG
 	waitmessage B_WAIT_TIME_LONG
-	statusanimation BS_ATTACKER
-	goto BattleScript_MoveEnd
+	goto BattleScript_DoStatusTurnDmg
 
 BattleScript_MoveUsedUnfroze::
 	printfromtable gGotDefrostedStringIds
@@ -7473,6 +7488,7 @@ BattleScript_PrintUproarOverTurns::
 	end2
 
 BattleScript_ThrashConfuses::
+	jumpiftype BS_TARGET, TYPE_BUG, BattleScript_MoveEnd
 	chosenstatus2animation BS_ATTACKER, STATUS2_CONFUSION
 	printstring STRINGID_PKMNFATIGUECONFUSION
 	waitmessage B_WAIT_TIME_LONG
@@ -8207,6 +8223,11 @@ BattleScript_BRNPrevention::
 	printfromtable gBRNPreventionStringIds
 	waitmessage B_WAIT_TIME_LONG
 	return
+BattleScript_FRNPrevention::
+	pause B_WAIT_TIME_SHORT
+	printfromtable gFRNPreventionStringIds
+	waitmessage B_WAIT_TIME_LONG
+	return
 
 BattleScript_PRLZPrevention::
 	pause B_WAIT_TIME_SHORT
@@ -8925,6 +8946,7 @@ BattleScript_BerryConfuseHealEnd2_Anim:
 	datahpupdate BS_SCRIPTING
 	printstring STRINGID_FORXCOMMAYZ
 	waitmessage B_WAIT_TIME_LONG
+	jumpiftype BS_SCRIPTING, TYPE_BUG, BattleScript_MoveEnd
 	setmoveeffect MOVE_EFFECT_CONFUSION | MOVE_EFFECT_AFFECTS_USER
 	seteffectprimary
 	removeitem BS_SCRIPTING
@@ -8944,6 +8966,7 @@ BattleScript_BerryConfuseHealRet_Anim:
 	datahpupdate BS_SCRIPTING
 	printstring STRINGID_FORXCOMMAYZ
 	waitmessage B_WAIT_TIME_LONG
+	jumpiftype BS_SCRIPTING, TYPE_BUG, BattleScript_MoveEnd
 	setmoveeffect MOVE_EFFECT_CONFUSION | MOVE_EFFECT_CERTAIN
 	seteffectprimary
 	removeitem BS_TARGET

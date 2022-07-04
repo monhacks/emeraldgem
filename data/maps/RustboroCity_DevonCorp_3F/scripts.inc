@@ -162,7 +162,7 @@ RustboroCity_DevonCorp_3F_EventScript_MrStone::
 
 RustboroCity_DevonCorp_3F_EventScript_GiveExpShare::
 	msgbox RustboroCity_DevonCorp_3F_Text_ThankYouForDeliveringLetter, MSGBOX_DEFAULT
-	giveitem ITEM_EXP_SHARE
+	giveitem ITEM_EXP_SHARE, 12
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_EXP_SHARE
 	msgbox RustboroCity_DevonCorp_3F_Text_ExplainExpShare, MSGBOX_DEFAULT
@@ -198,111 +198,59 @@ RustboroCity_DevonCorp_3F_EventScript_RareRocksDisplay::
 	end
 
 RustboroCity_DevonCorp_3F_Text_MrStoneIHaveFavor:
-	.string "I'm MR. STONE, the PRESIDENT of\n"
-	.string "the DEVON CORPORATION.\p"
-	.string "I'd just got word about you!\p"
-	.string "You saved our staff not just once,\n"
-	.string "but twice!\p"
-	.string "I have a favor to ask of an amazing\n"
-	.string "person like you.\p"
-	.string "I understand that you're delivering\n"
-	.string "a package to SLATEPORT's SHIPYARD.\p"
-	.string "Well, on the way, could you stop off in\n"
-	.string "DEWFORD TOWN?\p"
-	.string "I was hoping that you'd deliver a\n"
-	.string "LETTER to STEVEN in DEWFORD.$"
+	.string "Soy el Señor Stone, Presidente\nde la Corporación Devon.\p¡He escuchado mucho de ti!\nSalvaste la compañía no una,\l¡Si no que dos veces!\p"
+	.string "Necesitaba pedirte un favor,\nsi serías tan amable.\pMi hijo, Steven, está en la Ciudad\nDewford, cruzando el mar.\p"
+	.string "Y ya que estás tomando el\ndesafío de los Gimnasios,\lpensé que podrías llevarle esta carta.$"
 
 RustboroCity_DevonCorp_3F_Text_MrStoneWantYouToHaveThis:
-	.string "MR. STONE: Now, you should know that\n"
-	.string "I am a great PRESIDENT.\p"
-	.string "So, I'd never be so cheap as to ask\n"
-	.string "a favor for nothing in return.\p"
-	.string "That's why I want you to have this!$"
+	.string "Dentro de la carta, hay un\nregalo para Steven, por su\lincreíble investigación sobre\lla geología de Hoenn.\p"
+	.string "Además, cuando lo hagas,\n¡Ven y te recompensaré enormemente!\pPor ahora, toma esto.$"
 
 RustboroCity_DevonCorp_3F_Text_ReceivedPokenav:
-	.string "{PLAYER} received a POKéNAV.$"
+	.string "{PLAYER} recibió un PokéNav.$"
 
 RustboroCity_DevonCorp_3F_Text_MrStoneExplainPokenavRestUp:
-	.string "MR. STONE: That device…\p"
-	.string "It's a POKéMON NAVIGATOR, or POKéNAV\n"
-	.string "for short.\p"
-	.string "It's an indispensable tool for any\n"
-	.string "TRAINER on an adventure.\p"
-	.string "It has a map of the HOENN region.\p"
-	.string "You can check the locations of\n"
-	.string "DEWFORD and SLATEPORT easily!\p"
-	.string "By the way, I've heard that sinister\n"
-	.string "criminals--MAGMA and AQUA, I believe--\l"
-	.string "have been making trouble far and wide.\p"
-	.string "I think it would be best if you rested\n"
-	.string "up before you go on your way.$"
+	.string "Ese dispositivo…\p"
+	.string "Es un Navegador Pokémon, o PokéNav,\n"
+	.string "para abreviar.\p"
+	.string "Es indispensable para cada entrenador.\pAdemás, escuché que unos criminales,\nque andan en grupos llamados\lAqua y Magma, siguen andando sueltos.\p"
+	.string "He visto y prescenciado de lo que\nson capaces. Te recomendaría tener cuidado\lcon ellos y los suyos.$"
 
 RustboroCity_DevonCorp_3F_Text_MrStoneGoWithCautionAndCare:
-	.string "MR. STONE: Well, then, {PLAYER}{KUN},\n"
-	.string "go with caution and care!$"
+	.string "¡Bueno, {PLAYER}, cuídate!$"
 
 RustboroCity_DevonCorp_3F_Text_CountingOnYou:
-	.string "MR. STONE: I'm counting on you!$"
+	.string "¡Cuento contigo!$"
 
 RustboroCity_DevonCorp_3F_Text_ThankYouForDeliveringLetter:
-	.string "MR. STONE: You delivered my LETTER?\n"
-	.string "Thank you kindly!\p"
-	.string "This is my way of thanking you.\n"
-	.string "It should help you, a TRAINER.$"
+	.string "¿Le diste la carta?\p¡Espléndido!\pEn ese caso, ¡Toma esto!$"
 
 RustboroCity_DevonCorp_3F_Text_ExplainExpShare:
-	.string "MR. STONE: A POKéMON holding that\n"
-	.string "EXP. SHARE will be given some of the\l"
-	.string "EXP Points from battle.\p"
-	.string "It will get EXP Points even if it didn't\n"
-	.string "actually battle.\p"
-	.string "I would say EXP. SHARE is quite useful\n"
-	.string "for raising weak POKéMON.$"
+	.string "Un Pokémon que sostenga el\n{COLOR GREEN}Repartir Experiencia{COLOR DARK_GRAY}, ganará,\lcomo su nombre lo indica,\l{COLOR GREEN}Puntos de Experiencia aún\lsi no ha combatido{COLOR DARK_GRAY}.\p"
+	.string "Y lo que es más,\n{COLOR GREEN}ganará el doble de Puntos de lo usual{COLOR DARK_GRAY},\lgracias a una reciente mejora.\p"
+	.string "El efecto se apila con otros\nmodificadores, por lo que,\lbajo el {COLOR GREEN}Modo de Entrenamiento{COLOR DARK_GRAY},\lganarán 4 veces más Exp.\p"
+	.string "¡Buena suerte con todo!$"
 
 RustboroCity_DevonCorp_3F_Text_NotFamiliarWithTrends:
-	.string "MR. STONE: Since my youth, I've immersed\n"
-	.string "myself in work.\p"
-	.string "Consequently, I'm not familiar with\n"
-	.string "trends and that sort of thing.\p"
-	.string "But do young people all want to be\n"
-	.string "TRAINERS in the POKéMON LEAGUE?$"
+	.string "La verdad, me he rodeado de\ntantas oportunidades laborales,\lque conceptos comunes y vagos como\l{COLOR GREEN}la moral en la ciencia{COLOR DARK_GRAY}\lhan perdido su significado.\p"
+	.string "Honestamente, pienso que si nos\ndejáramos llevar por “lo que está bien,”\lperderíamos de vista el progreso.\pEs mejor incomodar a un grupo\nmenor molesto, que lidiar con\lla opresión y discomfort de muchos.$"
 
 RustboroCity_DevonCorp_3F_Text_ThisIs3rdFloorWaitHere:
-	.string "This is the DEVON CORPORATION's\n"
-	.string "third floor.\p"
-	.string "Our PRESIDENT's OFFICE is on\n"
-	.string "this floor.\p"
-	.string "Anyway, I can't tell you how much I'm\n"
-	.string "grateful for what you've done.\p"
-	.string "Um… By the way, that parcel\n"
-	.string "you got back for us…\p"
-	.string "Could I get you to deliver that to\n"
-	.string "the SHIPYARD in SLATEPORT?\p"
-	.string "It would be awful if those robbers\n"
-	.string "tried to take it again.\p"
-	.string "Uh… Hehehe, so, uh, could I count\n"
-	.string "on you to do that for me?\p"
-	.string "Oh, that's right.\n"
-	.string "Could you wait here a second?$"
+	.string "Este es el piso más importante\n de la Corporación.\pEl {COLOR BLUE}Presidente{COLOR DARK_GRAY} está en esta\lsala. Déjame decirte que el hombre es\lmuy decidido y eso ha llevado\la nuestro éxito actual.\p"
+	.string "Por eso mismo, no puedo dejar\nque cualquiera se le acerque, primero\ltendrá que aprobarlo él.$"
 
 RustboroCity_DevonCorp_3F_Text_WordWithPresidentComeWithMe:
-	.string "Our PRESIDENT would like to have\n"
-	.string "a word with you.\p"
-	.string "Please come with me.$"
+	.string "El Presidente ha aceptado\ntu prescencia. Por favor, sígueme.$"
 
 RustboroCity_DevonCorp_3F_Text_PleaseGoAhead:
-	.string "Please, go ahead.$"
+	.string "Por favor, pase.$"
 
 RustboroCity_DevonCorp_3F_Text_VisitCaptSternShipyard:
-	.string "If you visit the SHIPYARD in SLATEPORT,\n"
-	.string "you should go see CAPT. STERN.$"
+	.string "El Capitán Stern es un gran hombre.\pOjalá él hubiese sido mi padre.$"
 
 RustboroCity_DevonCorp_3F_Text_RepeatAndTimerHugelyPopular:
-	.string "DEVON's new products, the REPEAT BALL\n"
-	.string "and TIMER BALL, have become hugely\l"
-	.string "popular among TRAINERS.$"
+	.string "Cuando era chico solía besar a\nmis Barbies y Kens.\l¡Y mírame ahora, trabajando en Devon\ny besando a mi esposa y esposo!$"
 
 RustboroCity_DevonCorp_3F_Text_RareRocksDisplay:
-	.string "It's a collection of rare rocks and\n"
-	.string "stones assembled by the PRESIDENT.$"
+	.string "Es una colección de rocas raras.\nUna inscripción dice:\l“No te las comas, Fer.” y tiene\luna cara triste dibujada.$"
 

@@ -63,8 +63,17 @@ RustboroCity_PokemonSchool_EventScript_RichBoy::
 	end
 
 RustboroCity_PokemonSchool_EventScript_Lass::
+	checkitem ITEM_TM69
+	goto_if_eq VAR_RESULT, TRUE, RustboroCity_PokemonSchool_EventScript_LassHasTM69
 	msgbox RustboroCity_PokemonSchool_Text_ConfusedPokemonAttacksItself, MSGBOX_NPC
+	giveitem ITEM_TM69
+	msgbox RustboroCity_PokemonSchool_Text_UTurnExplain, MSGBOX_NPC
 	end
+
+RustboroCity_PokemonSchool_EventScript_LassHasTM69::
+	msgbox RustboroCity_PokemonSchool_Text_UTurnExplain, MSGBOX_NPC
+	end
+	
 
 RustboroCity_PokemonSchool_EventScript_SchoolKidM::
 	msgbox RustboroCity_PokemonSchool_Text_PokemonHealItselfWithBerry, MSGBOX_NPC
@@ -200,152 +209,74 @@ RustboroCity_PokemonSchool_EventScript_ScottWatchStudents::
 	end
 
 RustboroCity_PokemonSchool_Text_BlackboardListsStatusChanges:
-	.string "The blackboard lists status changes\n"
-	.string "that may affect POKéMON in battle.$"
+	.string "El pizarrón tiene información\nsobre los diferentes estados\ly lo diferentes que son ahora.$"
 
 RustboroCity_PokemonSchool_Text_ReadWhichTopic:
-	.string "Which topic do you want to read?$"
+	.string "¿Cuál leerás?$"
 
 RustboroCity_PokemonSchool_Text_ExplainPoison:
-	.string "If a POKéMON is poisoned, it will\n"
-	.string "steadily lose HP.\p"
-	.string "The effects of poison remain after\n"
-	.string "a battle.\p"
-	.string "A poisoned POKéMON's HP will drop\n"
-	.string "while it is traveling.\p"
-	.string "Heal a poisoning using an ANTIDOTE.$"
+	.string "Si un Pokémon está envenenado,\nperderá PS gradualmente mientras esté\len el campo de batalla.\pAdemás, su Defensa Especial se\nverá reducida en un 15%.$"
 
 RustboroCity_PokemonSchool_Text_ExplainParalysis:
-	.string "If a POKéMON becomes paralyzed,\n"
-	.string "its SPEED drops.\p"
-	.string "It may also not be able to move while\n"
-	.string "it is in battle.\p"
-	.string "Paralysis remains after battle.\n"
-	.string "Cure it using a PARLYZ HEAL.$"
+	.string "Antes, los Pokémon tipo Hielo\npodían congelar a sus rivales, pero,\lpor culpa del cambio climático,\lahora sólo pueden helarlos.\p"
+	.string "Cuando un Pokémon está helado, perderá\n1/16 de sus PS totales cada turno,\ly se reducirá su Ataque Especial\la la mitad.$"
 
 RustboroCity_PokemonSchool_Text_ExplainSleep:
-	.string "If a POKéMON falls asleep, it will be\n"
-	.string "unable to attack.\p"
-	.string "A POKéMON may wake up on its own,\n"
-	.string "but if a battle ends while it is\l"
-	.string "sleeping, it will stay asleep.\p"
-	.string "Wake it up using an AWAKENING.$"
+	.string "Si un Pokémon se confunde,\npuede llegar a atacarse a sí mismo.\lEl efecto desaparece al ser\lreemplazado, y los Pokémon tipo Bicho\lson inmunes a dicho estado.$"
+
 
 RustboroCity_PokemonSchool_Text_ExplainBurn:
-	.string "A burn reduces ATTACK power, and it\n"
-	.string "steadily reduces the victim's HP.\p"
-	.string "A burn lingers after battle.\n"
-	.string "Cure a burn using a BURN HEAL.$"
+	.string "Un Pokémon enamorado tendrá\nreducidos ambos de sus ataques en\lun 10%, y no podrán atacar un\l50% de las veces.\p"
+	.string "Además, se ha descubierto que\nno hay restricción de género para\lenamorar a un Pokémon.\pEs decir, un Pokémon macho puede\nenamorar a otro Pokémon macho.$"
 
 RustboroCity_PokemonSchool_Text_ExplainFreeze:
-	.string "If a POKéMON is frozen, it becomes\n"
-	.string "completely helpless.\p"
-	.string "It will remain frozen after battle.\n"
-	.string "Thaw it out using an ICE HEAL.$"
+	.string "Un Pokémon atrapado, perderá 1/8\nde sus PS en cada turno.\pAdemás, no podrá ser intercambiado.\nLos Pokémon fantasma no se\lverán afectados por dicho efecto.$"
 
 RustboroCity_PokemonSchool_Text_StudentsWhoDontStudyGetQuickClaw:
-	.string "Students who don't study get a little\n"
-	.string "taste of my QUICK CLAW.\p"
-	.string "Whether or not you are a good student \n"
-	.string "will be evident from the way you use\l"
-	.string "this item.$"
+	.string "Estábamos estudiando este objeto.$"
 
 RustboroCity_PokemonSchool_Text_ExplainQuickClaw:
-	.string "A POKéMON holding the QUICK CLAW will\n"
-	.string "occasionally speed up and get to move\l"
-	.string "before its opponent.\p"
-	.string "There are many other items that are\n"
-	.string "meant to be held by POKéMON.\p"
-	.string "Just those alone will give you many\n"
-	.string "topics to study!$"
+	.string "La Garra Rápida hace que\nel Pokémon pueda atacar primero,\lindependientemente de su velocidad.\p"
+	.string "¡Recuerda leer el pizarrón!\n¡Puede que haya algo que\lno sepas!$"
 
 RustboroCity_PokemonSchool_Text_TradingRightNow:
-	.string "I'm trading POKéMON with my friend\n"
-	.string "right now.$"
+	.string "Estoy intercambiando Pokémon\nen Pokémon Rubí.\p¿No es raro que yo aparezca\nhaciendo lo mismo ahí?$"
 
 RustboroCity_PokemonSchool_Text_AlwaysWantedSeedot:
-	.string "I always wanted a SEEDOT, and\n"
-	.string "I'm finally getting one!$"
+	.string "¡Siempre quise un Seedot!$"
 
 RustboroCity_PokemonSchool_Text_PokemontCantUseManMadeItems:
-	.string "POKéMON can hold items, but they\n"
-	.string "don't know what to do with man-made\l"
-	.string "items like POTION and ANTIDOTE.$"
+	.string "Siempre les enseño el movimiento\nAtracción a mis Pokémon.\p¡Hace que rivales de cualquier\ngénero dejen de atacar!$"
 
 RustboroCity_PokemonSchool_Text_ConfusedPokemonAttacksItself:
-	.string "You know how some POKéMON moves can\n"
-	.string "confuse a POKéMON?\p"
-	.string "A confused POKéMON will sometimes\n"
-	.string "attack itself without meaning to.\p"
-	.string "But once it leaves battle, it will\n"
-	.string "return to normal.$"
+	.string "La confusión puede costarte\nun combate.\pEsto podría ayudarte.$"
+
+RustboroCity_PokemonSchool_Text_UTurnExplain:
+	.string "Ida y Vuelta es un movimiento\ntipo Bicho que ataca, y luego\lregresa al usuario a su Pokéball.\pMuy útil para librarse de\nciertos cambios de estado.$"
 
 RustboroCity_PokemonSchool_Text_PokemonHealItselfWithBerry:
-	.string "A POKéMON holding a BERRY will heal\n"
-	.string "itself…\p"
-	.string "There are many kinds of items that\n"
-	.string "POKéMON can hold…\p"
-	.string "Boy, it sure is hard taking notes\n"
-	.string "down…$"
+	.string "……………………………\n……………………\pDéjame, tengo que prestar atención.$"
 
 RustboroCity_PokemonSchool_Text_StudentsNotes:
-	.string "It's this student's notebook…\p"
-	.string "POKéMON are to be caught using\n"
-	.string "POKé BALLS.\p"
-	.string "Up to six POKéMON can accompany\n"
-	.string "a TRAINER.\p"
-	.string "A TRAINER is someone who catches\n"
-	.string "POKéMON, raises them, and battles\l"
-	.string "with them.\p"
-	.string "A TRAINER's mission is to defeat\n"
-	.string "the strong TRAINERS who await\l"
-	.string "challengers in POKéMON GYMS.$"
+	.string "Lleno de dibujos sobre\nPokémon de Hoenn, con algunas notas\lsobre sus tipos y habilidades.$"
 
 RustboroCity_PokemonSchool_Text_ScottMetAlreadyCut:
-	.string "Hello? Didn't we meet before?\n"
-	.string "I think back in PETALBURG CITY.\p"
-	.string "Let me introduce myself.\n"
-	.string "My name's SCOTT.\p"
-	.string "I've been traveling everywhere in\n"
-	.string "search of outstanding TRAINERS.\p"
-	.string "More specifically, I'm looking for\n"
-	.string "POKéMON battle experts.\p"
-	.string "So, what brings you to this SCHOOL?\n"
-	.string "Are you a TRAINER, too?\p"
-	.string "The first thing you should do is to\n"
-	.string "have a POKéMON learn the move CUT.\p"
-	.string "If I remember correctly, someone in\n"
-	.string "this town has CUT.$"
+	.string "¿Hola? ¿Te conosco?\pAh, ¡Sí!\n¡Eres {ELLA} Entrenador{A} que\lconocí en Petalburg!\p"
+	.string "Si no te molesta, te diré\nunos consejos para entrenar\lmejor a tus Pokémon.\p"
+	.string "Si entrenas lo suficiente,\nverás que aparece un nuevo menú\lque te deja seleccionar los\lmovimientos que pueden aprender\llos Pokémon.\p"
+	.string "Siempre recuerda revisar qué\nmovimientos pueden aprender tus\lPokémon luego de evolucionarlos.$"
 
 RustboroCity_PokemonSchool_Text_StudentTalentLevelUnknown:
-	.string "SCOTT: Hmm…\p"
-	.string "The talent levels of the students here\n"
-	.string "are unknown. The potential's there.$"
+	.string "Esos niños carecen de potencial.$"
 
 RustboroCity_PokemonSchool_Text_ScottStoneBadge:
-	.string "SCOTT: Oh, what's that?\p"
-	.string "It's a STONE BADGE, isn't it?\n"
-	.string "That's pretty impressive, I'd say.\p"
-	.string "But, you know, I would've loved to see\n"
-	.string "you in battle.\p"
-	.string "It's hard to tell what you're like as\n"
-	.string "a TRAINER from a LEAGUE BADGE.$"
+	.string "Esa medalla… No es nada especial.$"
 
 RustboroCity_PokemonSchool_Text_ScottMetAlreadyStoneBadge:
-	.string "Hello? Didn't we meet before?\n"
-	.string "I think back in PETALBURG CITY.\p"
-	.string "Let me introduce myself.\n"
-	.string "My name's SCOTT.\p"
-	.string "I've been traveling everywhere in\n"
-	.string "search of outstanding TRAINERS.\p"
-	.string "More specifically, I'm looking for\n"
-	.string "POKéMON battle experts.\p"
-	.string "Oh, what's that?\n"
-	.string "It's a STONE BADGE, isn't it?\p"
-	.string "That's pretty impressive, I'd say, for\n"
-	.string "a starting TRAINER like yourself.\p"
-	.string "But, you know, I would've loved to see\n"
-	.string "you in battle.\p"
-	.string "It's hard to tell what you're like as\n"
-	.string "a TRAINER from a LEAGUE BADGE.$"
+	.string "¿Hola? ¿Te conosco?\pAh, ¡Sí!\n¡Eres {ELLA} Entrenador{A} que\lconocí en Petalburg!\p"
+	.string "Si no te molesta, te diré\nunos consejos para entrenar\lmejor a tus Pokémon.\p"
+	.string "Si entrenas lo suficiente,\nverás que aparece un nuevo menú\lque te deja seleccionar los\lmovimientos que pueden aprender\llos Pokémon.\p"
+	.string "Siempre recuerda revisar qué\nmovimientos pueden aprender tus\lPokémon luego de evolucionarlos.\p"
+	.string "Deberías intentar hacerlo\nantes de cada Batalla de Gimnasio.$"
+
 

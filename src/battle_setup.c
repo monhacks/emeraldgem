@@ -46,6 +46,8 @@
 #include "constants/trainers.h"
 #include "constants/trainer_hill.h"
 #include "constants/weather.h"
+#include "item.h"
+#include "load_save.h"
 
 enum {
     TRANSITION_TYPE_NORMAL,
@@ -1387,7 +1389,15 @@ static void CB2_EndTrainerBattle(void)
         if (InBattlePyramid() || InTrainerHillChallenge())
             SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
         else
+		{
+			if(FlagGet(FLAG_STARTED_BOSS))
+			{
+				FlagClear(FLAG_STARTED_BOSS);
+				LoadPlayerParty();
+				GiveBackItemsAndBerries();
+			}
             SetMainCallback2(CB2_WhiteOut);
+		}
     }
     else
     {
@@ -1399,6 +1409,7 @@ static void CB2_EndTrainerBattle(void)
         }
     }
 }
+
 
 static void CB2_EndRematchBattle(void)
 {
