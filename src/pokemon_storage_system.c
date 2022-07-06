@@ -5145,9 +5145,8 @@ static u16 TryLoadMonIconTiles(u16 species, u32 personality)
     sStorage->iconSpeciesList[i] = species;
     sStorage->numIconsPerSpecies[i]++;
     offset = 16 * i;
-    //species &= GENDER_MASK;
-   // CpuCopy32(GetMonIconTiles(species, personality), (void*)(OBJ_VRAM0) + offset * 32, 0x200);
-    CpuCopy32(GetMonIconTiles(species, TRUE), (void*)(OBJ_VRAM0) + offset * TILE_SIZE_4BPP, 0x200);
+    species &= GENDER_MASK;
+    CpuCopy32(GetMonIconTiles(species, personality), (void*)(OBJ_VRAM0) + offset * TILE_SIZE_4BPP, 0x200);
 
     return offset;
 }

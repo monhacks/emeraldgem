@@ -1,11 +1,9 @@
 #ifndef GUARD_CONSTANTS_BATTLE_STRING_IDS_H
 #define GUARD_CONSTANTS_BATTLE_STRING_IDS_H
 
-// <<<<<<< HEAD
+
 // #define BATTLESTRINGS_ID_ADDER  12 // all battlestrings have its ID + 12, because first 5 are reserved
 
-// =======
-// >>>>>>> ead52e0b48a333aec595818a268b4c58297645e9
 #define STRINGID_INTROMSG       0
 #define STRINGID_INTROSENDOUT   1
 #define STRINGID_RETURNMON      2
@@ -624,7 +622,7 @@
 #define STRINGID_METEORBEAMCHARGING                   617
 #define STRINGID_HEATUPBEAK                           618
 #define STRINGID_COURTCHANGE                          619
-#define STRINGID_PLAYERLOSTTOENEMYTRAINER             
+#define STRINGID_PLAYERLOSTTOENEMYTRAINER             620
 
 #define BATTLESTRINGS_COUNT                           621
 

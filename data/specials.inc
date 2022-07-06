@@ -547,4 +547,4 @@ gSpecials::
 	def_special ChooseItemFromBag
 	def_special TakeAwayItemsAndBerries
 	def_special GiveBackItemsAndBerries
-
+	def_special TrySpecialOverworldEvo
