@@ -263,17 +263,19 @@
 #define VAR_ROXANNE_CALL_STEP_COUNTER        0x40F4
 #define VAR_SCOTT_BF_CALL_STEP_COUNTER       0x40F5
 #define VAR_RIVAL_RAYQUAZA_CALL_STEP_COUNTER 0x40F6
-#define VAR_HIDDEN_MOVE_1                    0x40F7 // Unused Var
-#define VAR_HIDDEN_MOVE_2                    0x40F8 // Unused Var
-#define VAR_HIDDEN_MOVE_3                    0x40F9 // Unused Var
-#define VAR_HIDDEN_MOVE_4                    0x40FA // Unused Var
+#define VAR_ROXANNE_REMATCH                    0x40F7 // Unused Var
+#define VAR_BRAWLY_REMATCH                    0x40F8 // Unused Var
+#define VAR_WATTSON_REMATCH                    0x40F9 // Unused Var
+#define VAR_FLANNERY_REMATCH                    0x40FA // Unused Var
 #define VAR_DAYNIGHT     		             0x40FB // Unused Var
 #define VAR_CHAIN                    0x40FC // Unused Var
 #define VAR_SPECIESCHAINED                    0x40FD // Unused Var
-#define VAR_UNUSED_0x40FE                    0x40FE // Unused Var
-#define VAR_UNUSED_0x40FF                    0x40FF // Unused Var
+#define VAR_NORMAN_REMATCH                    0x40FE // Unused Var
+#define VAR_WINONA_REMATCH                    0x40FF // Unused Var
+#define VAR_TATELIZA_REMATCH                    0x4100 // Unused Var
+#define VAR_JUAN_REMATCH                    0x4101 // Unused Var
 
-#define VARS_END                             0x40FF
+#define VARS_END                             0x4101
 #define VARS_COUNT                           (VARS_END - VARS_START + 1)
 
 #define SPECIAL_VARS_START            0x8000

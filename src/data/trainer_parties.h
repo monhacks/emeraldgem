@@ -10990,22 +10990,28 @@ static const struct TrainerMon sParty_Brawly2[] = {
     {
     .iv = 255,
     .lvl = 33,
+	.build = TRAINER_MON_SPEED_PHYS,
+	.difficulty = TRAINER_HARDER,
     .species = SPECIES_MACHAMP,
     .heldItem = ITEM_SITRUS_BERRY,
 	.ability = ABILITY_SLOT_1,
-    .moves = {MOVE_KARATE_CHOP, MOVE_ROCK_SLIDE, MOVE_FOCUS_PUNCH, MOVE_BULK_UP}
+    .moves = {MOVE_KARATE_CHOP, MOVE_ROCK_SLIDE, MOVE_THROAT_CHOP, MOVE_BULK_UP}
     },
     {
     .iv = 255,
     .lvl = 33,
+	.build = TRAINER_MON_SPEED_SPEC,
+	.difficulty = TRAINER_HARDER,
     .species = SPECIES_MEDITITE,
 	.ability = ABILITY_SLOT_1,
     .heldItem = ITEM_NONE,
-    .moves = {MOVE_PSYCHIC, MOVE_LIGHT_SCREEN, MOVE_REFLECT, MOVE_FOCUS_PUNCH}
+    .moves = {MOVE_PSYCHIC, MOVE_LIGHT_SCREEN, MOVE_REFLECT, MOVE_THROAT_CHOP}
     },
     {
     .iv = 255,
     .lvl = 35,
+	.build = TRAINER_MON_SPEED_PHYS,
+	.difficulty = TRAINER_HARDER,
     .species = SPECIES_HITMONTOP,
 	.ability = ABILITY_SLOT_1,
     .heldItem = ITEM_NONE,
@@ -11014,139 +11020,254 @@ static const struct TrainerMon sParty_Brawly2[] = {
     {
     .iv = 255,
     .lvl = 37,
+	.build = TRAINER_MON_HP_DEF,
+	.difficulty = TRAINER_HARDEST,
     .species = SPECIES_HARIYAMA,
     .heldItem = ITEM_SITRUS_BERRY,
 	.ability = ABILITY_SLOT_1,
-    .moves = {MOVE_FAKE_OUT, MOVE_FOCUS_PUNCH, MOVE_BELLY_DRUM, MOVE_EARTHQUAKE}
+    .moves = {MOVE_FAKE_OUT, MOVE_HAMMER_ARM, MOVE_BELLY_DRUM, MOVE_EARTHQUAKE}
     }
 };
 
 static const struct TrainerMon sParty_Brawly3[] = {
     {
     .iv = 255,
-    .lvl = 38,
+    .lvl = 45,
+	.build = TRAINER_MON_SPEED_PHYS,
+	.difficulty = TRAINER_HARDER,
     .species = SPECIES_MACHAMP,
     .heldItem = ITEM_SITRUS_BERRY,
 	.ability = ABILITY_SLOT_1,
-    .moves = {MOVE_KARATE_CHOP, MOVE_ROCK_SLIDE, MOVE_FOCUS_PUNCH, MOVE_BULK_UP}
+    .moves = {MOVE_KARATE_CHOP, MOVE_ROCK_SLIDE, MOVE_THROAT_CHOP, MOVE_BULK_UP}
     },
     {
     .iv = 255,
-    .lvl = 38,
-    .species = SPECIES_MEDICHAM,
-	.ability = ABILITY_SLOT_1,
-    .heldItem = ITEM_NONE,
-    .moves = {MOVE_PSYCHIC, MOVE_LIGHT_SCREEN, MOVE_REFLECT, MOVE_FOCUS_PUNCH}
+    .lvl = 45,
+	.build = TRAINER_MON_SPEED_PHYS,
+	.difficulty = TRAINER_HARDER,
+    .species = SPECIES_SCRAFTY,
+	.ability = ABILITY_SLOT_2,
+    .heldItem = ITEM_LEFTOVERS,
+    .moves = {MOVE_BULK_UP, MOVE_DRAIN_PUNCH, MOVE_DRAGON_TAIL, MOVE_AMNESIA}
     },
     {
     .iv = 255,
-    .lvl = 40,
+    .lvl = 47,
+	.build = TRAINER_MON_SPEED_PHYS,
+	.difficulty = TRAINER_HARDEST,
     .species = SPECIES_HITMONTOP,
 	.ability = ABILITY_SLOT_1,
-    .heldItem = ITEM_NONE,
+    .heldItem = ITEM_LEFTOVERS,
     .moves = {MOVE_PURSUIT, MOVE_COUNTER, MOVE_PROTECT, MOVE_TRIPLE_KICK}
     },
     {
     .iv = 255,
-    .lvl = 42,
+    .lvl = 47,
+	.build = TRAINER_MON_SPEED_PHYS,
+	.difficulty = TRAINER_HARDEST,
+    .species = SPECIES_HAWLUCHA,
+	.ability = ABILITY_SLOT_2,
+    .heldItem = ITEM_FLYING_GEM,
+    .moves = {MOVE_FLYING_PRESS, MOVE_ROOST, MOVE_SWORDS_DANCE, MOVE_ACROBATICS}
+    },
+    {
+    .iv = 255,
+    .lvl = 47,
+	.build = TRAINER_MON_HP_DEF,
+	.difficulty = TRAINER_MAX,
     .species = SPECIES_HARIYAMA,
     .heldItem = ITEM_SITRUS_BERRY,
 	.ability = ABILITY_SLOT_1,
-    .moves = {MOVE_FAKE_OUT, MOVE_FOCUS_PUNCH, MOVE_BELLY_DRUM, MOVE_EARTHQUAKE}
+    .moves = {MOVE_FAKE_OUT, MOVE_HAMMER_ARM, MOVE_BELLY_DRUM, MOVE_EARTHQUAKE}
     }
 };
 
 static const struct TrainerMon sParty_Brawly4[] = {
     {
     .iv = 255,
-    .lvl = 40,
-    .species = SPECIES_HITMONCHAN,
-	.ability = ABILITY_SLOT_1,
-    .heldItem = ITEM_NONE,
-    .moves = {MOVE_SKY_UPPERCUT, MOVE_PROTECT, MOVE_FIRE_PUNCH, MOVE_ICE_PUNCH}
-    },
-    {
-    .iv = 255,
-    .lvl = 43,
+    .lvl = 50,
+	.build = TRAINER_MON_SPEED_PHYS,
+	.difficulty = TRAINER_HARDER,
     .species = SPECIES_MACHAMP,
     .heldItem = ITEM_SITRUS_BERRY,
 	.ability = ABILITY_SLOT_1,
-    .moves = {MOVE_KARATE_CHOP, MOVE_ROCK_SLIDE, MOVE_FOCUS_PUNCH, MOVE_BULK_UP}
+    .moves = {MOVE_KARATE_CHOP, MOVE_ROCK_SLIDE, MOVE_THROAT_CHOP, MOVE_BULK_UP}
     },
     {
     .iv = 255,
-    .lvl = 43,
-    .species = SPECIES_MEDICHAM,
+    .lvl = 50,
+	.build = TRAINER_MON_SPEED_PHYS,
+	.difficulty = TRAINER_HARDER,
+    .species = SPECIES_SCRAFTY,
+	.ability = ABILITY_SLOT_2,
+    .heldItem = ITEM_LEFTOVERS,
+    .moves = {MOVE_BULK_UP, MOVE_DRAIN_PUNCH, MOVE_DRAGON_TAIL, MOVE_AMNESIA}
+    },
+    {
+    .iv = 255,
+    .lvl = 50,
+	.build = TRAINER_MON_SPEED_PHYS,
+	.difficulty = TRAINER_HARDEST,
+    .species = SPECIES_BRELOOM,
 	.ability = ABILITY_SLOT_1,
-    .heldItem = ITEM_NONE,
-    .moves = {MOVE_FOCUS_PUNCH, MOVE_LIGHT_SCREEN, MOVE_REFLECT, MOVE_PSYCHIC}
+    .heldItem = ITEM_FOCUS_SASH,
+    .moves = {MOVE_SPORE, MOVE_SEED_BOMB, MOVE_STONE_EDGE, MOVE_MACH_PUNCH}
     },
     {
     .iv = 255,
-    .lvl = 45,
-    .species = SPECIES_HITMONTOP,
-	.ability = ABILITY_SLOT_1,
-    .heldItem = ITEM_NONE,
-    .moves = {MOVE_PURSUIT, MOVE_COUNTER, MOVE_PROTECT, MOVE_TRIPLE_KICK}
+    .lvl = 50,
+	.build = TRAINER_MON_SPEED_PHYS,
+	.difficulty = TRAINER_HARDEST,
+    .species = SPECIES_HAWLUCHA,
+	.ability = ABILITY_SLOT_2,
+    .heldItem = ITEM_FLYING_GEM,
+    .moves = {MOVE_FLYING_PRESS, MOVE_ROOST, MOVE_SWORDS_DANCE, MOVE_ACROBATICS}
     },
     {
     .iv = 255,
-    .lvl = 47,
+    .lvl = 50,
+	.build = TRAINER_MON_SPEED_PHYS,
+	.difficulty = TRAINER_HARDEST,
+    .species = SPECIES_HERACROSS,
+	.ability = ABILITY_SLOT_2,
+    .heldItem = ITEM_HERACRONITE,
+    .moves = {MOVE_MEGAHORN, MOVE_CLOSE_COMBAT, MOVE_STONE_EDGE, MOVE_AERIAL_ACE}
+    },
+    {
+    .iv = 255,
+    .lvl = 55,
+	.build = TRAINER_MON_HP_DEF,
+	.difficulty = TRAINER_MAX,
     .species = SPECIES_HARIYAMA,
-    .heldItem = ITEM_SITRUS_BERRY,
+    .heldItem = ITEM_FIGHTINIUM_Z,
 	.ability = ABILITY_SLOT_1,
-    .moves = {MOVE_FAKE_OUT, MOVE_FOCUS_PUNCH, MOVE_BELLY_DRUM, MOVE_EARTHQUAKE}
+    .moves = {MOVE_FAKE_OUT, MOVE_HAMMER_ARM, MOVE_BELLY_DRUM, MOVE_EARTHQUAKE}
     }
 };
 
 static const struct TrainerMon sParty_Brawly5[] = {
     {
     .iv = 255,
-    .lvl = 46,
-    .species = SPECIES_HITMONLEE,
-	.ability = ABILITY_SLOT_1,
-    .heldItem = ITEM_NONE,
-    .moves = {MOVE_MEGA_KICK, MOVE_FOCUS_PUNCH, MOVE_EARTHQUAKE, MOVE_BULK_UP}
-    },
-    {
-    .iv = 255,
-    .lvl = 46,
-    .species = SPECIES_HITMONCHAN,
-	.ability = ABILITY_SLOT_1,
-    .heldItem = ITEM_NONE,
-    .moves = {MOVE_SKY_UPPERCUT, MOVE_PROTECT, MOVE_FIRE_PUNCH, MOVE_ICE_PUNCH}
-    },
-    {
-    .iv = 255,
-    .lvl = 48,
+    .lvl = 80,
+	.build = TRAINER_MON_SPEED_PHYS,
+	.difficulty = TRAINER_HARDER,
     .species = SPECIES_MACHAMP,
     .heldItem = ITEM_SITRUS_BERRY,
 	.ability = ABILITY_SLOT_1,
-    .moves = {MOVE_CROSS_CHOP, MOVE_ROCK_SLIDE, MOVE_FOCUS_PUNCH, MOVE_BULK_UP}
+    .moves = {MOVE_KARATE_CHOP, MOVE_ROCK_SLIDE, MOVE_THROAT_CHOP, MOVE_BULK_UP}
     },
     {
     .iv = 255,
-    .lvl = 48,
-    .species = SPECIES_MEDICHAM,
+    .lvl = 80,
+	.build = TRAINER_MON_SPEED_PHYS,
+	.difficulty = TRAINER_HARDER,
+    .species = SPECIES_SCRAFTY,
+	.ability = ABILITY_SLOT_2,
+    .heldItem = ITEM_LEFTOVERS,
+    .moves = {MOVE_BULK_UP, MOVE_DRAIN_PUNCH, MOVE_DRAGON_TAIL, MOVE_AMNESIA}
+    },
+    {
+    .iv = 255,
+    .lvl = 80,
+	.build = TRAINER_MON_SPEED_PHYS,
+	.difficulty = TRAINER_HARDEST,
+    .species = SPECIES_BRELOOM,
 	.ability = ABILITY_SLOT_1,
-    .heldItem = ITEM_NONE,
-    .moves = {MOVE_FOCUS_PUNCH, MOVE_LIGHT_SCREEN, MOVE_REFLECT, MOVE_PSYCHIC}
+    .heldItem = ITEM_FOCUS_SASH,
+    .moves = {MOVE_SPORE, MOVE_SEED_BOMB, MOVE_STONE_EDGE, MOVE_MACH_PUNCH}
     },
     {
     .iv = 255,
-    .lvl = 50,
-    .species = SPECIES_HITMONTOP,
-	.ability = ABILITY_SLOT_1,
-    .heldItem = ITEM_NONE,
-    .moves = {MOVE_PURSUIT, MOVE_COUNTER, MOVE_PROTECT, MOVE_TRIPLE_KICK}
+    .lvl = 80,
+	.build = TRAINER_MON_SPEED_PHYS,
+	.difficulty = TRAINER_HARDEST,
+    .species = SPECIES_HAWLUCHA,
+	.ability = ABILITY_SLOT_2,
+    .heldItem = ITEM_FLYING_GEM,
+    .moves = {MOVE_FLYING_PRESS, MOVE_ROOST, MOVE_SWORDS_DANCE, MOVE_ACROBATICS}
     },
     {
     .iv = 255,
-    .lvl = 52,
+    .lvl = 80,
+	.build = TRAINER_MON_SPEED_PHYS,
+	.difficulty = TRAINER_HARDEST,
+    .species = SPECIES_HERACROSS,
+	.ability = ABILITY_SLOT_2,
+    .heldItem = ITEM_HERACRONITE,
+    .moves = {MOVE_MEGAHORN, MOVE_CLOSE_COMBAT, MOVE_STONE_EDGE, MOVE_AERIAL_ACE}
+    },
+    {
+    .iv = 255,
+    .lvl = 80,
+	.build = TRAINER_MON_HP_DEF,
+	.difficulty = TRAINER_MAX,
     .species = SPECIES_HARIYAMA,
-    .heldItem = ITEM_SITRUS_BERRY,
+    .heldItem = ITEM_FIGHTINIUM_Z,
 	.ability = ABILITY_SLOT_1,
-    .moves = {MOVE_FAKE_OUT, MOVE_FOCUS_PUNCH, MOVE_BELLY_DRUM, MOVE_EARTHQUAKE}
+    .moves = {MOVE_FAKE_OUT, MOVE_HAMMER_ARM, MOVE_BELLY_DRUM, MOVE_EARTHQUAKE}
+    }
+};
+
+static const struct TrainerMon sParty_Brawly6[] = {
+    {
+    .iv = 255,
+    .lvl = 100,
+	.build = TRAINER_MON_SPEED_PHYS,
+	.difficulty = TRAINER_HARDER,
+    .species = SPECIES_KOMMO_O,
+    .heldItem = ITEM_KOMMONIUM_Z,
+	.ability = ABILITY_SLOT_1,
+    .moves = {MOVE_CLANGING_SCALES, MOVE_DRAGON_DANCE, MOVE_THROAT_CHOP, MOVE_CLOSE_COMBAT}
+    },
+    {
+    .iv = 255,
+    .lvl = 100,
+	.build = TRAINER_MON_SPEED_PHYS,
+	.difficulty = TRAINER_HARDER,
+    .species = SPECIES_SCRAFTY,
+	.ability = ABILITY_SLOT_2,
+    .heldItem = ITEM_LEFTOVERS,
+    .moves = {MOVE_BULK_UP, MOVE_DRAIN_PUNCH, MOVE_DRAGON_TAIL, MOVE_AMNESIA}
+    },
+    {
+    .iv = 255,
+    .lvl = 100,
+	.build = TRAINER_MON_SPEED_PHYS,
+	.difficulty = TRAINER_HARDEST,
+    .species = SPECIES_BRELOOM,
+	.ability = ABILITY_SLOT_1,
+    .heldItem = ITEM_FOCUS_SASH,
+    .moves = {MOVE_SPORE, MOVE_SEED_BOMB, MOVE_STONE_EDGE, MOVE_MACH_PUNCH}
+    },
+    {
+    .iv = 255,
+    .lvl = 100,
+	.build = TRAINER_MON_SPEED_PHYS,
+	.difficulty = TRAINER_HARDEST,
+    .species = SPECIES_HAWLUCHA,
+	.ability = ABILITY_SLOT_2,
+    .heldItem = ITEM_FLYING_GEM,
+    .moves = {MOVE_FLYING_PRESS, MOVE_ROOST, MOVE_SWORDS_DANCE, MOVE_ACROBATICS}
+    },
+    {
+    .iv = 255,
+    .lvl = 100,
+	.build = TRAINER_MON_SPEED_PHYS,
+	.difficulty = TRAINER_HARDEST,
+    .species = SPECIES_HERACROSS,
+	.ability = ABILITY_SLOT_2,
+    .heldItem = ITEM_HERACRONITE,
+    .moves = {MOVE_MEGAHORN, MOVE_CLOSE_COMBAT, MOVE_STONE_EDGE, MOVE_SWORDS_DANCE}
+    },
+    {
+    .iv = 255,
+    .lvl = 100,
+	.build = TRAINER_MON_HP_DEF,
+	.difficulty = TRAINER_MAX,
+    .species = SPECIES_HARIYAMA,
+    .heldItem = ITEM_FIGHTINIUM_Z,
+	.ability = ABILITY_SLOT_1,
+    .moves = {MOVE_FAKE_OUT, MOVE_HAMMER_ARM, MOVE_BELLY_DRUM, MOVE_EARTHQUAKE}
     }
 };
 

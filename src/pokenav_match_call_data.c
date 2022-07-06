@@ -368,7 +368,7 @@ static const match_call_text_data_t sRoxanneTextScripts[] = {
     { MatchCall_Text_Roxanne1, 0xFFFE,              0xFFFF },
     { MatchCall_Text_Roxanne2, 0xFFFF,              0xFFFF },
     { MatchCall_Text_Roxanne3, 0xFFFF,              0xFFFF },
-    { MatchCall_Text_Roxanne4, FLAG_SYS_GAME_CLEAR, 0xFFFF },
+    { MatchCall_Text_Roxanne4, 0xFFFF,              0xFFFF },
     { NULL,                    0xFFFF,              0xFFFF }
 };
 
@@ -387,7 +387,7 @@ static const match_call_text_data_t sBrawlyTextScripts[] = {
     { MatchCall_Text_Brawly1, 0xFFFE,              0xFFFF },
     { MatchCall_Text_Brawly2, 0xFFFF,              0xFFFF },
     { MatchCall_Text_Brawly3, 0xFFFF,              0xFFFF },
-    { MatchCall_Text_Brawly4, FLAG_SYS_GAME_CLEAR, 0xFFFF },
+    { MatchCall_Text_Brawly4, 0xFFFF,			   0xFFFF },
     { NULL,                   0xFFFF,              0xFFFF }
 };
 
@@ -406,7 +406,7 @@ static const match_call_text_data_t sWattsonTextScripts[] = {
     { MatchCall_Text_Wattson1, 0xFFFE,              0xFFFF },
     { MatchCall_Text_Wattson2, 0xFFFF,              0xFFFF },
     { MatchCall_Text_Wattson3, 0xFFFF,              0xFFFF },
-    { MatchCall_Text_Wattson4, FLAG_SYS_GAME_CLEAR, 0xFFFF },
+    { MatchCall_Text_Wattson4, 0xFFFF,              0xFFFF },
     { NULL,                    0xFFFF,              0xFFFF }
 };
 
@@ -425,7 +425,7 @@ static const match_call_text_data_t sFlanneryTextScripts[] = {
     { MatchCall_Text_Flannery1, 0xFFFE,              0xFFFF },
     { MatchCall_Text_Flannery2, 0xFFFF,              0xFFFF },
     { MatchCall_Text_Flannery3, 0xFFFF,              0xFFFF },
-    { MatchCall_Text_Flannery4, FLAG_SYS_GAME_CLEAR, 0xFFFF },
+    { MatchCall_Text_Flannery4, 0xFFFF,              0xFFFF },
     { NULL,                     0xFFFF,              0xFFFF }
 };
 
@@ -444,7 +444,7 @@ static const match_call_text_data_t sWinonaTextScripts[] = {
     { MatchCall_Text_Winona1, 0xFFFE,              0xFFFF },
     { MatchCall_Text_Winona2, 0xFFFF,              0xFFFF },
     { MatchCall_Text_Winona3, 0xFFFF,              0xFFFF },
-    { MatchCall_Text_Winona4, FLAG_SYS_GAME_CLEAR, 0xFFFF },
+    { MatchCall_Text_Winona4, 0xFFFF,              0xFFFF },
     { NULL,                   0xFFFF,              0xFFFF }
 };
 
@@ -463,7 +463,7 @@ static const match_call_text_data_t sTateLizaTextScripts[] = {
     { MatchCall_Text_TateLiza1, 0xFFFE,              0xFFFF },
     { MatchCall_Text_TateLiza2, 0xFFFF,              0xFFFF },
     { MatchCall_Text_TateLiza3, 0xFFFF,              0xFFFF },
-    { MatchCall_Text_TateLiza4, FLAG_SYS_GAME_CLEAR, 0xFFFF },
+    { MatchCall_Text_TateLiza4, 0xFFFF,              0xFFFF },
     { NULL,                     0xFFFF,              0xFFFF }
 };
 
@@ -482,7 +482,7 @@ static const match_call_text_data_t sJuanTextScripts[] = {
     { MatchCall_Text_Juan1, 0xFFFE,              0xFFFF },
     { MatchCall_Text_Juan2, 0xFFFF,              0xFFFF },
     { MatchCall_Text_Juan3, 0xFFFF,              0xFFFF },
-    { MatchCall_Text_Juan4, FLAG_SYS_GAME_CLEAR, 0xFFFF },
+    { MatchCall_Text_Juan4, 0xFFFF,              0xFFFF },
     { NULL,                 0xFFFF,              0xFFFF }
 };
 
@@ -1022,8 +1022,6 @@ static void MatchCall_BufferCallMessageTextByRematchTeam(const match_call_text_d
     }
     else
     {
-        if (FlagGet(FLAG_SYS_GAME_CLEAR))
-        {
             do
             {
                 if (gSaveBlock1Ptr->trainerRematches[idx])
@@ -1033,7 +1031,6 @@ static void MatchCall_BufferCallMessageTextByRematchTeam(const match_call_text_d
                 else
                     i++;
             } while (0);
-        }
 
         StringExpandPlaceholders(dest, textData[i].text);
     }

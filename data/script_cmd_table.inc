@@ -232,6 +232,8 @@ gScriptCmdTable::
 	.4byte ScrCmd_hidenamebox               @ 0xe5
 	.4byte ScrCmd_changeframe				@ 0xe6
 	.4byte ScrCmd_checkpartytype			@ 0xe7
+	.4byte ScrCmd_showitemdesc              @ 0xe8
+	.4byte ScrCmd_hideitemdesc              @ 0xe9
 
 gScriptCmdTableEnd::
 	.4byte ScrCmd_nop

@@ -13,12 +13,12 @@
 
 
 DewfordTown_EventScript_Trigger::
-	goto_if_neq VAR_DEWFORD_TOWN_STATE, 0, DewfordTown_EventScript_TriggerNada
+	goto_if_ne VAR_DEWFORD_TOWN_STATE, 0, DewfordTown_EventScript_TriggerNada
 	lockall
 	playse SE_BALL_TRADE
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_QuestionMark
 	waitmovement 0
-	playse SE_PING
+	playse SE_PIN
 	applymovement LOCALID_GRUNT, Common_Movement_ExclamationMark
 	applymovement LOCALID_GRUNT, Common_Movement_FacePlayer
 	waitmovement 0
@@ -44,7 +44,7 @@ DewfordTown_EventScript_TriggerNada::
 	end
 
 DewfordTown_Movement_PlayerApproach1:
-	walk_slower_left
+	walk_slow_left
 	step_end
 
 DewfordTown_Movement_GruntEscapes:
@@ -54,11 +54,11 @@ DewfordTown_Movement_GruntEscapes:
 	delay_16
 	delay_16
 	lock_facing_direction
-	walk_slower_up
-	walk_slower_up
+	walk_slow_up
 	walk_slow_up
 	walk_slow_up
 	unlock_facing_direction
+	walk_faster_up
 	walk_faster_up
 	walk_faster_up
 	walk_faster_up

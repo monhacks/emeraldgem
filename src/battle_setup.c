@@ -1008,13 +1008,13 @@ static void CB2_EndFirstBattle(void)
 
 static void TryUpdateGymLeaderRematchFromWild(void)
 {
-    if (GetGameStat(GAME_STAT_WILD_BATTLES) % 60 == 0)
+    if (GetGameStat(GAME_STAT_WILD_BATTLES) % 2 == 0)
         UpdateGymLeaderRematch();
 }
 
 static void TryUpdateGymLeaderRematchFromTrainer(void)
 {
-    if (GetGameStat(GAME_STAT_TRAINER_BATTLES) % 20 == 0)
+    if (GetGameStat(GAME_STAT_TRAINER_BATTLES) % 2 == 0)
         UpdateGymLeaderRematch();
 }
 
@@ -1679,8 +1679,7 @@ static bool32 UpdateRandomTrainerRematches(const struct RematchTrainer *table, u
                 // Trainer already wants a rematch. Don't bother updating it.
                 ret = TRUE;
             }
-            else if (FlagGet(FLAG_MATCH_CALL_REGISTERED + i)
-             && (Random() % 100) <= 64)  // 65% chance of getting a rematch.
+            else if (FlagGet(FLAG_MATCH_CALL_REGISTERED + i))
             {
                 SetRematchIdForTrainer(table, i);
                 ret = TRUE;
@@ -1852,7 +1851,7 @@ static bool32 HasAtLeastFiveBadges(void)
     return FALSE;
 }
 
-#define STEP_COUNTER_MAX 255
+#define STEP_COUNTER_MAX 1
 
 void IncrementRematchStepCounter(void)
 {

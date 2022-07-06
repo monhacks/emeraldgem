@@ -103,3 +103,13 @@ Stern:
 
 Briney:
 	.string "{COLOR BLUE}Briney$"
+
+RecoveredItems:
+	.string "¡Has recuperado tus objetos!$"
+
+RecoveredPokemon:
+	.string "¡Has recuperado tus Pokémon!$"
+
+RecoveredPokemonAndItems:
+	.string "¡Has recuperado tus Pokémon y objetos!$"
+

@@ -133,14 +133,168 @@ DewfordTown_Gym_EventScript_StopCountingTrainers::
 	return
 
 DewfordTown_Gym_EventScript_Brawly::
+	goto_if_set FLAG_BADGE02_GET, DewfordTown_Gym_EventScript_Brawly_Rematch
 	setflag FLAG_STARTED_BOSS
 	special SavePlayerParty
 	deletepokemon 1
 	trainerbattle_single TRAINER_BRAWLY_1, DewfordTown_Gym_Text_BrawlyIntro, DewfordTown_Gym_Text_BrawlyDefeat, DewfordTown_Gym_EventScript_BrawlyDefeated, NO_MUSIC
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	goto_if_eq VAR_RESULT, TRUE, DewfordTown_Gym_EventScript_BrawlyRematch
 	goto_if_unset FLAG_RECEIVED_TM08, DewfordTown_Gym_EventScript_GiveBulkUp2
 	msgbox DewfordTown_Gym_Text_BrawlyPostBattle, MSGBOX_DEFAULT
+	release
+	end
+
+DewfordTown_Gym_EventScript_Brawly_Rematch::
+	lockall
+	goto_if_set FLAG_DEFEATED_DEWFORD_GYM, DewfordTown_Gym_EventScript_Brawly_Rematch_2
+	switch VAR_BRAWLY_REMATCH
+	case 0, DewfordTown_Gym_EventScript_Brawly_Rematch_2
+	case 1, DewfordTown_Gym_EventScript_Brawly_Rematch_3
+	case 2, DewfordTown_Gym_EventScript_Brawly_Rematch_4
+	case 3, DewfordTown_Gym_EventScript_Brawly_Rematch_5
+	case 4, DewfordTown_Gym_EventScript_Brawly_Rematch_6
+	case 5, DewfordTown_Gym_EventScript_Brawly_Rematch_7
+	msgbox DewfordTown_Gym_Text_BrawlyPostBattle, MSGBOX_DEFAULT
+	setvar VAR_BRAWLY_REMATCH, 1
+	release
+	end
+
+
+DewfordTown_Gym_EventScript_Brawly_Rematch_2:
+	msgbox DewfordTown_Gym_Text_BrawlyPostBattle, MSGBOX_DEFAULT
+	release
+	end
+
+DewfordTown_Gym_EventScript_Brawly_Rematch_3:
+	setflag FLAG_STARTED_BOSS
+	special SavePlayerParty
+	deletepokemon 4
+	trainerbattle_double TRAINER_BRAWLY_2, DewfordTown_Gym_Text_BrawlyIntro2, DewfordTown_Gym_Text_BrawlyDefeat2, DewfordTown_Gym_EventScript_BrawlyNotEnough , DewfordTown_Gym_EventScript_BrawlyDefeated2
+	goto DewfordTown_Gym_EventScript_Brawly_Rematch_2
+	return
+
+DewfordTown_Gym_EventScript_Brawly_Rematch_4:
+	setflag FLAG_STARTED_BOSS
+	special SavePlayerParty
+	deletepokemon 4
+	trainerbattle_double TRAINER_BRAWLY_3, DewfordTown_Gym_Text_BrawlyIntro3, DewfordTown_Gym_Text_BrawlyDefeat2, DewfordTown_Gym_EventScript_BrawlyNotEnough, DewfordTown_Gym_EventScript_BrawlyDefeated2
+	goto DewfordTown_Gym_EventScript_Brawly_Rematch_2
+	return
+
+DewfordTown_Gym_EventScript_Brawly_Rematch_5:
+	setflag FLAG_STARTED_BOSS
+	special SavePlayerParty
+	deletepokemon 3
+	trainerbattle_double TRAINER_BRAWLY_4, DewfordTown_Gym_Text_BrawlyIntro4, DewfordTown_Gym_Text_BrawlyDefeat2, DewfordTown_Gym_EventScript_BrawlyNotEnough, DewfordTown_Gym_EventScript_BrawlyDefeated3
+	goto DewfordTown_Gym_EventScript_Brawly_Rematch_2
+	return
+
+DewfordTown_Gym_EventScript_Brawly_Rematch_6:
+	setflag FLAG_STARTED_BOSS
+	special SavePlayerParty
+	deletepokemon 2
+	trainerbattle_double TRAINER_BRAWLY_5, DewfordTown_Gym_Text_BrawlyIntro5, DewfordTown_Gym_Text_BrawlyDefeat2, DewfordTown_Gym_EventScript_BrawlyNotEnough, DewfordTown_Gym_EventScript_BrawlyDefeated3
+	goto DewfordTown_Gym_EventScript_Brawly_Rematch_2
+	return
+
+DewfordTown_Gym_EventScript_Brawly_Rematch_7:
+	setflag FLAG_STARTED_BOSS
+	special TakeAwayItemsAndBerries
+	trainerbattle_double TRAINER_BRAWLY_6, DewfordTown_Gym_Text_BrawlyIntro6, DewfordTown_Gym_Text_BrawlyDefeat3, DewfordTown_Gym_EventScript_BrawlyNotEnough, DewfordTown_Gym_EventScript_BrawlyDefeated4
+	goto DewfordTown_Gym_EventScript_Brawly_Rematch_2
+	return
+
+DewfordTown_Gym_Text_BrawlyIntro2:
+	.string "¡Hell yes!\n¡He estado entrenando\larduamente para este momento!\p¡Luchemos 4vs4!\p¡Ahora presenciarás el poder\nabrumador del Líder surfista!$"
+
+DewfordTown_Gym_Text_BrawlyIntro3:
+	.string "¡Hell yes!\n¡He ido al fondo del océano,\la prepararme para este momento!\p¡Four versus Four let's go!\p¡Ahora presenciarás el poder abrumador\nde quien ha visto el océano!$"
+
+DewfordTown_Gym_Text_BrawlyIntro4:
+	.string "¡Wooohhh!\n¡Let's go, bro, three versus four!\p¡Luchemos con el poder abismal\nque mi cuerpo posee!$"
+
+DewfordTown_Gym_Text_BrawlyIntro5:
+	.string "¡Wooohhh!\n¡Luchar junto a tí sigue\lsiendo el mejor entrenamiento\lque haya tenido!\p¡La fuerza de mis Pokémon\nte hará naufragar!$"
+
+DewfordTown_Gym_Text_BrawlyIntro6:
+	.string "¡Fuck yeah!\p¡Arrasemos con todo lo\nque exista con una ola\labismal de poder Tipo Lucha!\p¡Batallemos, seis contra seis,\nsin objetos, nada!\p¡Verás el tsunami que causa mi poder!$"
+
+DewfordTown_Gym_Text_BrawlyDefeat2:
+	.string "¡Aún después de tan duro\nentrenamiento, mi poder sigue sin\lcompararse al tuyo!$"
+
+DewfordTown_Gym_Text_BrawlyDefeat3:
+	.string "¡Yeah!\n¡Fuck yeah!\p¡Tal poder me ha empapado!\n¡Luchar contigo es lo mejor!"
+
+DewfordTown_Gym_Text_BrawlyPostBattle2:
+	.string "¡Tu poder no parece tener límites,\namig{OA}, eres increíble!\p¡Para la próxima no me contendré!$"
+
+DewfordTown_Gym_Text_BrawlyPostBattle3:
+	.string "¡Incluso con tales limitaciones,\nme ganaste de nuevo!\p¡You rock, dude, you really do!$"
+
+DewfordTown_Gym_Text_BrawlyPostBattle4:
+	.string "¡Nunca he tenido tal batalla!\p¡You fucking rule, dude!\nDéjame darte algo a cambio de\ltal batalla.$"
+
+DewfordTown_Gym_Text_BrawlyPostBattle5:
+	.string "¡Son puntos de batalla!\p¡Cámbialos por genialidades en\nel Frente Batalla.\p¡Ojalá nos veamos de nuevo!$"
+
+
+DewfordTown_Gym_EventScript_BrawlyDefeated2::
+	savepartofteam
+	special LoadPlayerParty
+	loadpartofteam
+	addvar VAR_BRAWLY_REMATCH, 1
+	clearflag FLAG_DEFEATED_DEWFORD_GYM
+	clearflag FLAG_STARTED_BOSS
+	message RecoveredPokemon
+	waitmessage
+	delay 32
+	msgbox DewfordTown_Gym_Text_BrawlyPostBattle2
+	release
+	end
+
+DewfordTown_Gym_EventScript_BrawlyDefeated3::
+	savepartofteam
+	special LoadPlayerParty
+	loadpartofteam
+	addvar VAR_BRAWLY_REMATCH, 1
+	message RecoveredPokemon
+	waitmessage
+	delay 32
+	clearflag FLAG_DEFEATED_DEWFORD_GYM
+	clearflag FLAG_STARTED_BOSS
+	msgbox DewfordTown_Gym_Text_BrawlyPostBattle3
+	release
+	end
+
+DewfordTown_Gym_EventScript_BrawlyDefeated4::
+	setvar VAR_BRAWLY_REMATCH, 10
+	special GiveBackItemsAndBerries
+	clearflag FLAG_DEFEATED_DEWFORD_GYM
+	clearflag FLAG_STARTED_BOSS
+	message RecoveredItems
+	waitmessage
+	delay 32
+	msgbox DewfordTown_Gym_Text_BrawlyPostBattle4
+	special ShowBattlePointsWindow
+	delay 16
+	setvar VAR_0x8004, 2000
+	special GiveFrontierBattlePoints
+	special UpdateBattlePointsWindow
+	playse SE_SHOP
+	waitse
+	delay 32
+	special CloseBattlePointsWindow
+	msgbox DewfordTown_Gym_Text_BrawlyPostBattle5
+	release
+	end
+
+DewfordTown_Gym_EventScript_BrawlyNotEnough::
+	savepartofteam
+	special LoadPlayerParty
+	loadpartofteam
+	special GiveBackItemsAndBerries
+	clearflag FLAG_DEFEATED_DEWFORD_GYM
+	clearflag FLAG_STARTED_BOSS
+	msgbox DewfordTown_Gym_Text_BrawlyRematchNeedTwoMons
 	release
 	end
 
@@ -408,7 +562,7 @@ DewfordTown_Gym_Text_GymStatueCertified:
 	.string "GIMNASIO DE CIUDAD DEWFORD\pEntrenadores reconocidos:\nLeaf\l{RIVAL}\l{PLAYER}$"
 
 DewfordTown_Gym_Text_BrawlyPreRematch:
-	.string "Una nueva era de olas se avecina,\n¡Hora de demostrarme qué\ntan buen{OA} surfista eres!$"
+	.string "Una nueva era de olas se avecina,\n¡Hora de demostrarme qué\ntan buen{A} surfista eres!$"
 
 DewfordTown_Gym_Text_BrawlyRematchDefeat:
 	.string "¡Hell yeah!\n"
