@@ -1,8 +1,11 @@
 #ifndef GUARD_CONSTANTS_BATTLE_STRING_IDS_H
 #define GUARD_CONSTANTS_BATTLE_STRING_IDS_H
 
-#define BATTLESTRINGS_ID_ADDER  12 // all battlestrings have its ID + 12, because first 5 are reserved
+// <<<<<<< HEAD
+// #define BATTLESTRINGS_ID_ADDER  12 // all battlestrings have its ID + 12, because first 5 are reserved
 
+// =======
+// >>>>>>> ead52e0b48a333aec595818a268b4c58297645e9
 #define STRINGID_INTROMSG       0
 #define STRINGID_INTROSENDOUT   1
 #define STRINGID_RETURNMON      2
@@ -617,8 +620,17 @@
 #define STRINGID_STATNOTROSE	 					  613
 #define STRINGID_PKMNSXPREVENTSFREEZE	 			  614
 #define STRINGID_FREEZEDMG 				 			  615
+#define STRINGID_PKMNINSNAPTRAP                       616
+#define STRINGID_METEORBEAMCHARGING                   617
+#define STRINGID_HEATUPBEAK                           618
+#define STRINGID_COURTCHANGE                          619
+#define STRINGID_PLAYERLOSTTOENEMYTRAINER             
 
-#define BATTLESTRINGS_COUNT                           616
+#define BATTLESTRINGS_COUNT                           621
+
+// This is the string id that gBattleStringsTable starts with.
+// String ids before this (e.g. STRINGID_INTROMSG) are not in the table,
+// and are instead handled explicitly by BufferStringBattle.
 #define BATTLESTRINGS_TABLE_START  STRINGID_TRAINER1LOSETEXT
 
 // The below IDs are all indexes into battle message tables,
@@ -671,6 +683,7 @@
 #define B_MSG_TURN1_GEOMANCY       9
 #define B_MSG_TURN1_FREEZE_SHOCK   10
 #define B_MSG_TURN1_SKY_DROP       11
+#define B_MSG_TURN1_METEOR_BEAM    12
 
 // gMoveWeatherChangeStringIds
 #define B_MSG_STARTED_RAIN      0
@@ -871,5 +884,17 @@
 #define B_MSG_TERRAINPREVENTS_ELECTRIC  1
 #define B_MSG_TERRAINPREVENTS_PSYCHIC   2
 
+
+// gWrappedStringIds
+#define B_MSG_WRAPPED_BIND        0
+#define B_MSG_WRAPPED_WRAP        1
+#define B_MSG_WRAPPED_FIRE_SPIN   2
+#define B_MSG_WRAPPED_CLAMP       3
+#define B_MSG_WRAPPED_WHIRLPOOL   4
+#define B_MSG_WRAPPED_SAND_TOMB   5
+#define B_MSG_WRAPPED_MAGMA_STORM 6
+#define B_MSG_WRAPPED_INFESTATION 7
+#define B_MSG_WRAPPED_SNAP_TRAP   8
+#define TRAPPING_MOVES_COUNT      9
 
 #endif // GUARD_CONSTANTS_BATTLE_STRING_IDS_H

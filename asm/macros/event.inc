@@ -2035,6 +2035,14 @@
 	closebraillemessage
 	.endm
 
+	@ Creates an "event legal" Pokémon for an encounter
+	.macro seteventmon species:req, level:req, item=ITEM_NONE
+	setvar VAR_0x8004, \species
+	setvar VAR_0x8005, \level
+	setvar VAR_0x8006, \item
+	special CreateEventLegalEnemyMon
+	.endm
+
 	@ Set up a totem boost for the next battle.
 	@ 'battler' is the position of the mon you want to gain a boost. see B_POSITION_xx in include/constants/battle.h.
 	@ The rest of the arguments are the stat change values to each stat.
@@ -2095,14 +2103,7 @@
 	.macro totemboost_evas2 battler:req
 	settotemboost \battler, 0, 0, 0, 0, 0, 0, 2
 	.endm
-	@ Creates an "event legal" Pokémon for an encounter
-	.macro seteventmon species:req, level:req, item=ITEM_NONE
-	setvar VAR_0x8004, \species
-	setvar VAR_0x8005, \level
-	setvar VAR_0x8006, \item
-	special CreateEventLegalEnemyMon
-	.endm
-
+	
 	@ Opens the bag in the specified pocket and lets the Player choose an item.
 	@ This item can be used for scripting purposes and it's stored in VAR_ITEM_ID.
 	.macro chooseitem pocket:req

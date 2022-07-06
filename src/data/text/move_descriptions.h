@@ -79,7 +79,11 @@ static const u8 sFlyDescription[] = _(
 
 static const u8 sBindDescription[] = _(
     "Binds and squeezes the foe\n"
+#if B_BINDING_TURNS >= GEN_5
+    "for 4 or 5 turns.");
+#else
     "for 2 to 5 turns.");
+#endif
 
 static const u8 sSlamDescription[] = _(
     "Slams the foe with a long\n"
@@ -139,7 +143,11 @@ static const u8 sBodySlamDescription[] = _(
 
 static const u8 sWrapDescription[] = _(
     "Wraps and squeezes the foe\n"
+#if B_BINDING_TURNS >= GEN_5
+    "4 or 5 times with vines, etc.");
+#else
     "2 to 5 times with vines, etc.");
+#endif
 
 static const u8 sTakeDownDescription[] = _(
     "A reckless charge attack\n"
@@ -331,7 +339,11 @@ static const u8 sDragonRageDescription[] = _(
 
 static const u8 sFireSpinDescription[] = _(
     "Traps the foe in a ring of\n"
+#if B_BINDING_TURNS >= GEN_5
+    "fire for 4 or 5 turns.");
+#else
     "fire for 2 to 5 turns.");
+#endif
 
 static const u8 sThunderShockDescription[] = _(
     "An electrical attack that\n"
@@ -511,7 +523,11 @@ static const u8 sWaterfallDescription[] = _(
 
 static const u8 sClampDescription[] = _(
     "Traps and squeezes the\n"
+#if B_BINDING_TURNS >= GEN_5
+    "foe for 4 or 5 turns.");
+#else
     "foe for 2 to 5 turns.");
+#endif
 
 static const u8 sSwiftDescription[] = _(
     "Sprays star-shaped rays\n"
@@ -999,7 +1015,11 @@ static const u8 sRockSmashDescription[] = _(
 
 static const u8 sWhirlpoolDescription[] = _(
     "Traps and hurts the foe in\n"
+#if B_BINDING_TURNS >= GEN_5
+    "a whirlpool for 4 or 5 turns.");
+#else
     "a whirlpool for 2 to 5 turns.");
+#endif
 
 static const u8 sBeatUpDescription[] = _(
     "Summons party Pokémon to\n"
@@ -1311,7 +1331,11 @@ static const u8 sSkyUppercutDescription[] = _(
 
 static const u8 sSandTombDescription[] = _(
     "Traps and hurts the foe in\n"
+#if B_BINDING_TURNS >= GEN_5
+    "quicksand for 4 or 5 turns.");
+#else
     "quicksand for 2 to 5 turns.");
+#endif
 
 static const u8 sSheerColdDescription[] = _(
     "A chilling attack that\n"
@@ -1778,7 +1802,7 @@ static const u8 sChargeBeamDescription[] = _(
     "May raise Sp. Atk.");
 
 static const u8 sWoodHammerDescription[] = _(
-    "Slams the body into a foe\n"
+    "Slams the body into a foe.\n"
     "The user gets hurt too.");
 
 static const u8 sAquaJetDescription[] = _(
@@ -1815,7 +1839,11 @@ static const u8 sSpacialRendDescription[] = _(
 
 static const u8 sMagmaStormDescription[] = _(
     "Traps the foe in a vortex\n"
+#if B_BINDING_TURNS >= GEN_5
+    "of fire for 4 or 5 turns.");
+#else
     "of fire for 2 to 5 turns.");
+#endif
 
 static const u8 sDarkVoidDescription[] = _(
     "Drags the foe into total\n"
@@ -2307,7 +2335,7 @@ static const u8 sWaterShurikenDescription[] = _(
 
 static const u8 sMysticalFireDescription[] = _(
     "Breathes a special, hot\n"
-    "fire. May lower Sp. Atk.");
+    "fire. Lowers Sp. Atk.");
 
 static const u8 sSpikyShieldDescription[] = _(
     "Evades attack, and damages\n"
@@ -2367,7 +2395,11 @@ static const u8 sNuzzleDescription[] = _(
 
 static const u8 sInfestationDescription[] = _(
     "The foe is infested and\n"
+#if B_BINDING_TURNS >= GEN_5
+    "attacked for 4 or 5 turns.");
+#else
     "attacked for 2 to 5 turns.");
+#endif
 
 static const u8 sPowerUpPunchDescription[] = _(
     "A hard punch that raises\n"
@@ -2763,7 +2795,7 @@ static const u8 sBehemothBladeDescription[] = _(
     "2x damage to Dynamaxed foes.");
     
 static const u8 sBehemothBashDescription[] = _(
-    "Attacks as a sheild. Deals\n"
+    "Attacks as a shield. Deals\n"
     "2x damage to Dynamaxed foes.");
     
 static const u8 sAuraWheelDescription[] = _(
@@ -2912,7 +2944,11 @@ static const u8 sSurgingStrikesDescription[] = _(
 
 static const u8 sThunderCageDescription[] = _(
     "Traps the foe in a cage of\n"
+#if B_BINDING_TURNS >= GEN_5
+    "electricity for 4 or 5 turns.");
+#else
     "electricity for 2 to 5 turns.");
+#endif
 
 static const u8 sDragonEnergyDescription[] = _(
     "The higher the user's HP\n"
@@ -2932,11 +2968,11 @@ static const u8 sThunderousKickDescription[] = _(
 
 static const u8 sGlacialLanceDescription[] = _(
     "Strikes by hurling a blizzard-\n"
-    "cloaked icicle lance at a foe.");
+    "cloaked icicle lance at foes.");
 
 static const u8 sAstralBarrageDescription[] = _(
     "Strikes by sending a frightful\n"
-    "amount of ghosts at a foe.");
+    "amount of ghosts at foes.");
 
 static const u8 sEerieSpellDescription[] = _(
     "Attacks with psychic power.\n"
@@ -3356,7 +3392,7 @@ const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] =
     [MOVE_DRAGON_PULSE - 1] = sDragonPulseDescription,
     [MOVE_DRAGON_RUSH - 1] = sDragonRushDescription,
     [MOVE_POWER_GEM - 1] = sPowerGemDescription,
-    [MOVE_DRAIN_PUNCH - 1] = sDrainingKissDescription,
+    [MOVE_DRAIN_PUNCH - 1] = sMegaDrainDescription,
     [MOVE_VACUUM_WAVE - 1] = sVacuumWaveDescription,
     [MOVE_FOCUS_BLAST - 1] = sFocusBlastDescription,
     [MOVE_ENERGY_BALL - 1] = sEnergyBallDescription,
