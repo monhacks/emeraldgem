@@ -20,6 +20,7 @@ DewfordTown_EventScript_Trigger::
 	waitmovement 0
 	playse SE_PIN
 	applymovement LOCALID_GRUNT, Common_Movement_ExclamationMark
+	waitmovement 0
 	applymovement LOCALID_GRUNT, Common_Movement_FacePlayer
 	waitmovement 0
 	delay 32
@@ -32,13 +33,30 @@ DewfordTown_EventScript_Trigger::
 	setflag FLAG_DEWFORD_GRUNT
 	applymovement OBJ_EVENT_ID_PLAYER, DewfordTown_Movement_PlayerApproach2
 	waitmovement 0
-	namebox Player
 	msgbox DewfordTown_EventScript_Trigger_Text_0
 	setvar VAR_DEWFORD_TOWN_STATE, 1
 	releaseall
 	return
 	end
 
+DewfordTown_EventScript_Trigger2::
+	lockall
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceUp
+	msgbox DewfordTown_EventScript_Trigger_Text_2
+	closemessage
+	applymovement OBJ_EVENT_ID_PLAYER, DewfordTown_Movement_PlayerBackDown
+	waitmovement 0
+	releaseall
+	end
+
+DewfordTown_Movement_PlayerBackDown:
+	lock_facing_direction
+	walk_down
+	unlock_facing_direction
+	step_end
+
+DewfordTown_EventScript_Trigger_Text_2:
+	.string "El Gimnasio está cerrado.$"
 DewfordTown_EventScript_TriggerNada::
 	releaseall
 	end

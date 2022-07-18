@@ -16,6 +16,9 @@
 #include "constants/map_groups.h"
 #include "constants/weather.h"
 #include "field_weather.h"
+#include "constants/region_map_sections.h"
+
+
 
 static u32 GetEnigmaBerryChecksum(struct EnigmaBerry *enigmaBerry);
 static bool32 BerryTreeGrow(struct BerryTree *tree);

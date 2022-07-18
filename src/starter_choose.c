@@ -496,7 +496,6 @@ static void Task_HandleStarterChooseInput(u8 taskId)
 		u32 value;
 		u32 personality;
         ClearStarterLabel();
-		FlagSet(FLAG_SHINY_STARTER);
 
         // Create white circle background
         spriteId = CreateSprite(&sSpriteTemplate_StarterCircle, sPokeballCoords[selection][0], sPokeballCoords[selection][1], 1);

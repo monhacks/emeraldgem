@@ -1344,7 +1344,6 @@
 #define SPECIES_EGG SPECIES_CALYREX_SHADOW_RIDER + 1
 #define NUM_SPECIES SPECIES_EGG
 
-// <<<<<<< HEAD
 // // National Dex Index Defines
 
 // #define NATIONAL_DEX_NONE 0
@@ -2473,22 +2472,28 @@
 // #define HOENN_DEX_GIBLE 213
 // #define HOENN_DEX_GABITE 214
 // #define HOENN_DEX_GARCHOMP 215
-// #define HOENN_DEX_REGIROCK 216
-// #define HOENN_DEX_REGICE 217
-// #define HOENN_DEX_REGISTEEL 218
-// #define HOENN_DEX_REGIGIGAS 219
-// #define HOENN_DEX_REGIDRAGO 220
-// #define HOENN_DEX_REGIELEKI 221
-// #define HOENN_DEX_KYOGRE 222
-// #define HOENN_DEX_GROUDON 223
-// #define HOENN_DEX_RAYQUAZA 224
-// #define HOENN_DEX_JIRACHI 225
-// #define HOENN_DEX_DEOXYS 226
-// #define HOENN_DEX_LATIAS 227
-// #define HOENN_DEX_LATIOS 228
+// #define HOENN_DEX_JANGMO_O 216
+// #define HOENN_DEX_HAKAMO_O 217
+// #define HOENN_DEX_KOMMO_O 218
+// #define HOENN_DEX_DREEPY 219
+// #define HOENN_DEX_DRAKLOAK 220
+// #define HOENN_DEX_DRAGAPULT 221
+// #define HOENN_DEX_REGIROCK 222
+// #define HOENN_DEX_REGICE 223
+// #define HOENN_DEX_REGISTEEL 224
+// #define HOENN_DEX_REGIGIGAS 225
+// #define HOENN_DEX_REGIDRAGO 226
+// #define HOENN_DEX_REGIELEKI 227
+// #define HOENN_DEX_KYOGRE 228
+// #define HOENN_DEX_GROUDON 229
+// #define HOENN_DEX_RAYQUAZA 230
+// #define HOENN_DEX_JIRACHI 231
+// #define HOENN_DEX_DEOXYS 232
+// #define HOENN_DEX_LATIAS 233
+// #define HOENN_DEX_LATIOS 234
 
 
-// #define HOENN_DEX_COUNT 229
+// #define HOENN_DEX_COUNT 234
 
 // // species flags
 // #define FLAG_ULTRA_BEAST        (1 << 0)
@@ -2496,6 +2501,4 @@
 // #define FLAG_GALARIAN_FORM      (1 << 2)
 // #define FLAG_GENDER_DIFFERENCE  (1 << 3)
 
-// =======
-// >>>>>>> ade935f6cfedcc109f61251dfcf1fa423c07f91e
 #endif  // GUARD_CONSTANTS_SPECIES_H

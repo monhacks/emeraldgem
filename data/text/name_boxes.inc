@@ -8,8 +8,6 @@ Marta:
 	.string "{COLOR LIGHT_RED}{SHADOW RED}Marta$"
 Rival:
 	.string "{COLOR_RIVAL}{RIVAL}$"
-Player:
-	.string "{COLOR_PLAYER}{PLAYER}$"
 Roxanne:
 	.string "{COLOR RED}Roxanne$"
 Brawly:

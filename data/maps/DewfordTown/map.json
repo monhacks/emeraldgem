@@ -150,6 +150,15 @@
       "var": "VAR_DEWFORD_TOWN_STATE",
       "var_value": "0",
       "script": "DewfordTown_EventScript_Trigger"
+    },
+    {
+      "type": "trigger",
+      "x": 8,
+      "y": 18,
+      "elevation": 0,
+      "var": "VAR_DEWFORD_TOWN_STATE",
+      "var_value": "1",
+      "script": "DewfordTown_EventScript_Trigger2"
     }
   ],
   "bg_events": [

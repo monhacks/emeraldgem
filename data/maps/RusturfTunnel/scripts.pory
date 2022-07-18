@@ -17,6 +17,8 @@ mapscripts RusturfTunnel_MapScripts {
      ]
 }
 
+
+
 script RusturfTunnel_EventScript_Wanda {
 	lock
 	faceplayer

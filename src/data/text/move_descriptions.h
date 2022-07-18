@@ -2,44 +2,42 @@ static const u8 sNullDescription[] = _(
     "");
 
 static const u8 sPoundDescription[] = _(
-    "Pounds the foe with\n"
-    "forelegs or tail.");
+    "Golpea al rival\n"
+    "con sus extremidades.");
 
 static const u8 sKarateChopDescription[] = _(
-    "A chopping attack with a\n"
-    "high critical-hit ratio.");
+    "Un golpe que tiene un\n"
+    "alto índice de crítico.");
 
 static const u8 sDoubleSlapDescription[] = _(
-    "Repeatedly slaps the foe\n"
-    "2 to 5 times.");
+    "Golpea de dos a cinco\n"
+    "veces con las manos.");
 
 static const u8 sCometPunchDescription[] = _(
-    "Repeatedly punches the foe\n"
-    "2 to 5 times.");
+    "Golpea de dos a cinco\n"
+    "veces con los puños.");
 
 static const u8 sMegaPunchDescription[] = _(
-    "A strong punch thrown with\n"
-    "incredible power.");
+    "Un golpe super fuerte.");
 
 static const u8 sPayDayDescription[] = _(
-    "Throws coins at the foe.\n"
-    "Money is recovered after.");
+    "Tira moneditas al rival.\n"
+    "Aumenta el dinero ganado.");
 
 static const u8 sFirePunchDescription[] = _(
-    "A fiery punch that may burn\n"
-    "the foe.");
+    "Un puño ígneo que puede\n"
+    "llegar a quemar.");
 
 static const u8 sIcePunchDescription[] = _(
-    "An icy punch that may\n"
-    "freeze the foe.");
+    "Un puño frío que puede\n"
+    "llegar a helar.");
 
 static const u8 sThunderPunchDescription[] = _(
-    "An electrified punch that\n"
-    "may paralyze the foe.");
+    "Un puño eléctico que\n"
+    "puede paralizar.");
 
 static const u8 sScratchDescription[] = _(
-    "Scratches the foe with\n"
-    "sharp claws.");
+    "Araña al rival.");
 
 static const u8 sViseGripDescription[] = _(
     "Grips the foe with large and\n"
@@ -58,8 +56,7 @@ static const u8 sSwordsDanceDescription[] = _(
     "sharply raises Attack.");
 
 static const u8 sCutDescription[] = _(
-    "Cuts the foe with sharp\n"
-    "scythes, claws, etc.");
+    "Siempre causa un\ngolpe crítico.");
 
 static const u8 sGustDescription[] = _(
     "Strikes the foe with a gust\n"
@@ -74,8 +71,7 @@ static const u8 sWhirlwindDescription[] = _(
     "wind and ends the battle.");
 
 static const u8 sFlyDescription[] = _(
-    "Flies up on the first turn,\n"
-    "then strikes the next turn.");
+    "Vuela alto y ataca.");
 
 static const u8 sBindDescription[] = _(
     "Binds and squeezes the foe\n"
@@ -1898,8 +1894,8 @@ static const u8 sAutotomizeDescription[] = _(
     "sharply boost Speed.");
 
 static const u8 sRagePowderDescription[] = _(
-    "Scatters powder to make\n"
-    "foes attack only the user.");
+    "Ataca sin piedad por unos\n"
+    "turnos. Confunde al final.");
 
 static const u8 sTelekinesisDescription[] = _(
     "Makes the foe float. It is\n"

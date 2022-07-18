@@ -4063,7 +4063,7 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
         if (isDoubleBattle
           && move != MOVE_SPOTLIGHT
           && !IsBattlerIncapacitated(battlerDef, AI_DATA->abilities[battlerDef])
-          && (move != MOVE_RAGE_POWDER || IsAffectedByPowder(battlerDef, AI_DATA->abilities[battlerDef], AI_DATA->holdEffects[battlerDef])) // Rage Powder doesn't affect powder immunities
+          && (/*move != MOVE_RAGE_POWDER || */IsAffectedByPowder(battlerDef, AI_DATA->abilities[battlerDef], AI_DATA->holdEffects[battlerDef])) // Rage Powder doesn't affect powder immunities
           && IsBattlerAlive(BATTLE_PARTNER(battlerAtk)))
         {
             u16 predictedMoveOnPartner = gLastMoves[BATTLE_PARTNER(battlerAtk)];
@@ -5131,15 +5131,28 @@ static s16 AI_Roaming(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
 {
     if (IsBattlerTrapped(battlerAtk, FALSE))
         return score;
-    
-    AI_Flee();
+    if (gBattleMons[battlerAtk].status1 & STATUS1_SLEEP)
+		return score;
+	if (gBattleMons[battlerAtk].status1 & STATUS1_FREEZE)
+		return score;
+	if (gBattleMons[battlerDef].ability == ABILITY_SHADOW_TAG)
+        return score;
+	if (IsMonShiny(&gEnemyParty[0]) == TRUE)
+		return score;
+	
+	if ((Random() % 100) <= 80)
+		AI_Flee();
     return score;
 }
 
 // Safari pokemon logic
 static s16 AI_Safari(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
 {
-    u8 safariFleeRate = gBattleStruct->safariEscapeFactor * 5; // Safari flee rate, from 0-20.
+    u8 safariFleeRate = gBattleStruct->safariEscapeFactor / 2; // Safari flee rate, from 0-20.
+	if (IsMonShiny(&gEnemyParty[0])) {
+		AI_Watch();
+		return score;
+	}
 
     if ((Random() % 100) < safariFleeRate)
         AI_Flee();

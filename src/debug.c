@@ -100,6 +100,7 @@ enum { // Flags
     DEBUG_FLAG_MENU_ITEM_ENCOUNTER_ONOFF,
     DEBUG_FLAG_MENU_ITEM_TRAINER_SEE_ONOFF,
     DEBUG_FLAG_MENU_ITEM_BAG_USE_ONOFF,
+    DEBUG_FLAG_SHINY_CREATION,
     DEBUG_FLAG_MENU_ITEM_CATCHING_ONOFF,
 };
 enum { // Vars
@@ -228,6 +229,7 @@ static void DebugAction_Flags_CollisionOnOff(u8);
 static void DebugAction_Flags_EncounterOnOff(u8);
 static void DebugAction_Flags_TrainerSeeOnOff(u8);
 static void DebugAction_Flags_BagUseOnOff(u8);
+static void DebugAction_Flags_ShinyCreation(u8);
 static void DebugAction_Flags_CatchingOnOff(u8);
 
 static void DebugAction_Vars_Vars(u8 taskId);
@@ -293,7 +295,7 @@ static const u8 gDebugText_Give[] =             _("Give X");
 static const u8 gDebugText_Sound[] =            _("Sound");
 static const u8 gDebugText_Cancel[] =           _("Cancel");
 // Script menu
-static const u8 gDebugText_Util_Script_1[] =               _("Script 1");
+static const u8 gDebugText_Util_Script_1[] =               _("Contraseñas");
 static const u8 gDebugText_Util_Script_2[] =               _("Script 2");
 static const u8 gDebugText_Util_Script_3[] =               _("Script 3");
 static const u8 gDebugText_Util_Script_4[] =               _("Script 4");
@@ -331,6 +333,7 @@ static const u8 gDebugText_Flags_SwitchCollision[] =        _("Collision ON/OFF"
 static const u8 gDebugText_Flags_SwitchEncounter[] =        _("Encounter ON/OFF");
 static const u8 gDebugText_Flags_SwitchTrainerSee[] =       _("TrainerSee ON/OFF");
 static const u8 gDebugText_Flags_SwitchBagUse[] =           _("BagUse ON/OFF");
+static const u8 gDebugText_Flags_SwitchShinyCreation[] =           _("Shiny ON/OFF");
 static const u8 gDebugText_Flags_SwitchCatching[] =         _("Catching ON/OFF");
 static const u8 gDebugText_Flags_Flag[] =                   _("Flag: {STR_VAR_1}   \n{STR_VAR_2}                   \n{STR_VAR_3}");
 static const u8 gDebugText_Flags_FlagHex[] =                _("{STR_VAR_1}           \n0x{STR_VAR_2}             ");
@@ -462,6 +465,7 @@ static const struct ListMenuItem sDebugMenu_Items_Flags[] =
     [DEBUG_FLAG_MENU_ITEM_ENCOUNTER_ONOFF]  = {gDebugText_Flags_SwitchEncounter,     DEBUG_FLAG_MENU_ITEM_ENCOUNTER_ONOFF},
     [DEBUG_FLAG_MENU_ITEM_TRAINER_SEE_ONOFF]= {gDebugText_Flags_SwitchTrainerSee,    DEBUG_FLAG_MENU_ITEM_TRAINER_SEE_ONOFF},
     [DEBUG_FLAG_MENU_ITEM_BAG_USE_ONOFF]    = {gDebugText_Flags_SwitchBagUse,        DEBUG_FLAG_MENU_ITEM_BAG_USE_ONOFF},
+    [DEBUG_FLAG_SHINY_CREATION]    			= {gDebugText_Flags_SwitchShinyCreation, DEBUG_FLAG_SHINY_CREATION},
     [DEBUG_FLAG_MENU_ITEM_CATCHING_ONOFF]   = {gDebugText_Flags_SwitchCatching,      DEBUG_FLAG_MENU_ITEM_CATCHING_ONOFF},
 };
 static const struct ListMenuItem sDebugMenu_Items_Vars[] =
@@ -539,6 +543,7 @@ static void (*const sDebugMenu_Actions_Flags[])(u8) =
     [DEBUG_FLAG_MENU_ITEM_ENCOUNTER_ONOFF]  = DebugAction_Flags_EncounterOnOff,
     [DEBUG_FLAG_MENU_ITEM_TRAINER_SEE_ONOFF]= DebugAction_Flags_TrainerSeeOnOff,
     [DEBUG_FLAG_MENU_ITEM_BAG_USE_ONOFF]    = DebugAction_Flags_BagUseOnOff,
+    [DEBUG_FLAG_SHINY_CREATION]    			= DebugAction_Flags_ShinyCreation,
     [DEBUG_FLAG_MENU_ITEM_CATCHING_ONOFF]   = DebugAction_Flags_CatchingOnOff,
 };
 static void (*const sDebugMenu_Actions_Vars[])(u8) =
@@ -1458,6 +1463,17 @@ static void DebugAction_Flags_BagUseOnOff(u8 taskId)
         PlaySE(SE_PC_OFF);
     }else{
         FlagSet(FLAG_SYS_NO_BAG_USE);
+        PlaySE(SE_PC_LOGIN);
+    }
+}
+static void DebugAction_Flags_ShinyCreation(u8 taskId)
+{
+    if(FlagGet(FLAG_SHINY_CREATION))
+    {
+        FlagClear(FLAG_SHINY_CREATION);
+        PlaySE(SE_PC_OFF);
+    }else{
+        FlagSet(FLAG_SHINY_CREATION);
         PlaySE(SE_PC_LOGIN);
     }
 }

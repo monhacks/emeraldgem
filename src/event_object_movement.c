@@ -437,6 +437,8 @@ const u8 gInitialMovementTypeFacingDirections[] = {
 #define OBJ_EVENT_PAL_TAG_RS_MAY                  0x1123
 #define OBJ_EVENT_PAL_TAG_CHIMECHO                0x1124
 #define OBJ_EVENT_PAL_TAG_RALTS                   0x1125
+#define OBJ_EVENT_PAL_TAG_BRAWLY                  0x1126
+#define OBJ_EVENT_PAL_TAG_TEAM_AQUA               0x1127
 #define OBJ_EVENT_PAL_TAG_NONE                    0x11FF
 
 #include "data/field_effects/field_effect_object_template_pointers.h"
@@ -489,6 +491,8 @@ static const struct SpritePalette sObjectEventSpritePalettes[] = {
     {gObjectEventPal_Vigoroth,              OBJ_EVENT_PAL_TAG_VIGOROTH},
     {gObjectEventPal_EnemyZigzagoon,        OBJ_EVENT_PAL_TAG_ZIGZAGOON},
     {gObjectEventPal_Chimecho,       		OBJ_EVENT_PAL_TAG_CHIMECHO},
+    {gObjectEventPal_Brawly,       			OBJ_EVENT_PAL_TAG_BRAWLY},
+    {gObjectEventPal_TeamAqua,       		OBJ_EVENT_PAL_TAG_TEAM_AQUA},
     {gObjectEventPal_Ralts,        			OBJ_EVENT_PAL_TAG_RALTS},
     {gObjectEventPal_MayReflection,         OBJ_EVENT_PAL_TAG_MAY_REFLECTION},
     {gObjectEventPal_MovingBox,             OBJ_EVENT_PAL_TAG_MOVING_BOX},

@@ -65,6 +65,7 @@
 #include "constants/songs.h"
 #include "constants/trainers.h"
 #include "cable_club.h"
+#include "constants/region_map_sections.h"
 
 extern struct Evolution gEvolutionTable[][EVOS_PER_MON];
 
@@ -5427,8 +5428,14 @@ void SetTypeBeforeUsingMove(u16 move, u8 battlerAtk)
         gBattleStruct->dynamicMoveType = ((NUMBER_OF_MON_TYPES - 4) * typeBits) / 63 + 1;
         if (gBattleStruct->dynamicMoveType >= TYPE_MYSTERY)
             gBattleStruct->dynamicMoveType++;
-		if (gBattleMons[battlerAtk].hpIV == 31 && gBattleMons[battlerAtk].attackIV == 30 && gBattleMons[battlerAtk].defenseIV == 31 && gBattleMons[battlerAtk].spDefenseIV == 31
-			&& gBattleMons[battlerAtk].spAttackIV == 30 && gBattleMons[battlerAtk].speedIV == 31)
+		if (gBattleMons[battlerAtk].hpIV == 1 && gBattleMons[battlerAtk].attackIV == 1 && gBattleMons[battlerAtk].defenseIV == 1
+			 && gBattleMons[battlerAtk].spDefenseIV == 0  && gBattleMons[battlerAtk].spAttackIV == 3 && gBattleMons[battlerAtk].speedIV == 1)
+			gBattleStruct->dynamicMoveType = TYPE_FAIRY;
+		if (gBattleMons[battlerAtk].hpIV == 15&& gBattleMons[battlerAtk].attackIV == 15 && gBattleMons[battlerAtk].defenseIV == 15
+			  && gBattleMons[battlerAtk].spDefenseIV == 18  && gBattleMons[battlerAtk].spAttackIV == 15 && gBattleMons[battlerAtk].speedIV ==  15)
+			gBattleStruct->dynamicMoveType = TYPE_FAIRY;
+		if (gBattleMons[battlerAtk].hpIV == 31 && gBattleMons[battlerAtk].attackIV == 30 && gBattleMons[battlerAtk].defenseIV == 31
+			  && gBattleMons[battlerAtk].spDefenseIV == 31 && gBattleMons[battlerAtk].spAttackIV == 30 && gBattleMons[battlerAtk].speedIV == 31)
 			gBattleStruct->dynamicMoveType = TYPE_FAIRY;
         gBattleStruct->dynamicMoveType |= F_DYNAMIC_TYPE_1 | F_DYNAMIC_TYPE_2;
     }

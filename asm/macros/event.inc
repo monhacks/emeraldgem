@@ -2128,6 +2128,7 @@
 		
 	.macro loadpartofteam
 	callnative ScrCmd_loadpartofteam
+	.endm
 
 
 	@ Attempts to trigger a special evolution method in the overworld.

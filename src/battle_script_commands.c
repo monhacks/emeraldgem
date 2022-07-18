@@ -13684,10 +13684,11 @@ static void Cmd_handleballthrow(void)
 
         switch (gLastUsedItem)
         {
+		case ITEM_SAFARI_BALL:
+			ballMultiplier = 30;
         case ITEM_ULTRA_BALL:
             ballMultiplier = 20;
         case ITEM_GREAT_BALL:
-        case ITEM_SAFARI_BALL:
         #ifdef ITEM_EXPANSION
         case ITEM_SPORT_BALL:
         #endif
@@ -13742,10 +13743,23 @@ static void Cmd_handleballthrow(void)
             #else
                 ballMultiplier = gBattleResults.battleTurnCounter + 10;
             #endif
-            if (ballMultiplier > 40)
-                ballMultiplier = 40;
+            if (ballMultiplier > 50)
+                ballMultiplier = 50;
             break;
         #ifdef ITEM_EXPANSION
+		case ITEM_CHERISH_BALL:
+			if (catchRate <= 3)
+			{
+				ballMultiplier = 60;
+			}
+			else if (catchRate > 3 && catchRate <= 20)
+			{
+				ballMultiplier = 40;
+			}
+			else {
+				ballAddition = -15;
+			}
+			break;
         case ITEM_DUSK_BALL:
             	RtcCalcLocalTime();
 	if (FlagGet(FLAG_RTC_ENABLED)) {
@@ -13753,16 +13767,12 @@ static void Cmd_handleballthrow(void)
 		gLocalTime.minutes = Rtc_GetCurrentMinute();
 	}
             if ((gLocalTime.hours >= 20 && gLocalTime.hours <= 3) || gMapHeader.cave || gMapHeader.mapType == MAP_TYPE_UNDERGROUND)
-                #if B_DUSK_BALL_MODIFIER >= GEN_7
-                    ballMultiplier = 30;
-                #else
-                    ballMultiplier = 35;
-                #endif
+				ballMultiplier = 35;
             break;
         case ITEM_QUICK_BALL:
             if (gBattleResults.battleTurnCounter == 0)
                 #if B_QUICK_BALL_MODIFIER >= GEN_5
-                    ballMultiplier = 50;
+                    ballMultiplier = 55;
                 #else
                     ballMultiplier = 40;
                 #endif
@@ -13788,7 +13798,7 @@ static void Cmd_handleballthrow(void)
             {
                 if (gEvolutionTable[gBattleMons[gBattlerTarget].species][i].method == EVO_ITEM
                     && gEvolutionTable[gBattleMons[gBattlerTarget].species][i].param == ITEM_MOON_STONE)
-                    ballMultiplier = 40;
+                    ballMultiplier = 50;
             }
             break;
         case ITEM_LOVE_BALL:
@@ -13797,9 +13807,12 @@ static void Cmd_handleballthrow(void)
                 u8 gender1 = GetMonGender(&gEnemyParty[gBattlerPartyIndexes[gBattlerTarget]]);
                 u8 gender2 = GetMonGender(&gPlayerParty[gBattlerPartyIndexes[gBattlerAttacker]]);
 
-                if (gender1 != gender2 && gender1 != MON_GENDERLESS && gender2 != MON_GENDERLESS)
+                if ((gender1 != gender2) || (gender1 == MON_GENDERLESS && gender2 == MON_GENDERLESS))
                     ballMultiplier = 80;
-            }
+				else if (gender1 == gender2) {
+					ballMultiplier = 60;
+				}
+			}
             break;
         case ITEM_FAST_BALL:
             if (gBaseStats[gBattleMons[gBattlerTarget].species].baseSpeed >= 100)
@@ -13815,7 +13828,7 @@ static void Cmd_handleballthrow(void)
                 else if (i < 3000)
                     ballAddition = 20;
                 else
-                    ballAddition = 30;
+                    ballAddition = 40;
             #elif B_HEAVY_BALL_MODIFIER >= GEN_4
                 if (i < 2048)
                     ballAddition = -20;
@@ -13866,7 +13879,7 @@ static void Cmd_handleballthrow(void)
             * (gBattleMons[gBattlerTarget].maxHP * 3 - gBattleMons[gBattlerTarget].hp * 2)
             / (3 * gBattleMons[gBattlerTarget].maxHP);
 
-        if (gBattleMons[gBattlerTarget].status1 & (STATUS1_SLEEP))
+        if (gBattleMons[gBattlerTarget].status1 & (STATUS1_SLEEP | STATUS1_FREEZE))
             odds *= 2;
         if (gBattleMons[gBattlerTarget].status1 & (STATUS1_POISON | STATUS1_BURN | STATUS1_PARALYSIS | STATUS1_TOXIC_POISON))
             odds = (odds * 15) / 10;

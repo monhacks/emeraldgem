@@ -310,10 +310,10 @@ static void BuildStartMenuActions(void)
 		{
 			BuildUnionRoomStartMenu();
 		}
-		else if (GetSafariZoneFlag() == TRUE)
-		{
-			BuildSafariZoneStartMenu();
-		}
+		// else if (GetSafariZoneFlag() == TRUE)
+		// {
+			// BuildNormalStartMenu();
+		// }
 		else if (InBattlePike())
 		{
 			BuildBattlePikeStartMenu();
@@ -366,23 +366,35 @@ static void BuildDexRelatedStartMenu(void) {
 
 static void BuildNormalStartMenu(void)
 {
-	if (FlagGet(FLAG_SYS_POKEMON_GET) == TRUE)
-		{
-			AddStartMenuAction(MENU_ACTION_POKEMON);
-			if (!FlagGet(FLAG_SYS_POKEDEX_GET)) {
-				if (FlagGet(FLAG_ENABLED_PC))
-					AddStartMenuAction(MENU_ACTION_PC);
-			}
-		}
+	if (GetSafariZoneFlag() == TRUE) {
+		AddStartMenuAction(MENU_ACTION_RETIRE_SAFARI);
+		AddStartMenuAction(MENU_ACTION_POKEDEX);
+		AddStartMenuAction(MENU_ACTION_POKEMON);
 		AddStartMenuAction(MENU_ACTION_BAG);
-		
+		AddStartMenuAction(MENU_ACTION_PC);
 		AddStartMenuAction(MENU_ACTION_PLAYER);
-		
-		AddStartMenuAction(MENU_ACTION_SAVE);
 		AddStartMenuAction(MENU_ACTION_OPTION);
 		AddStartMenuAction(MENU_ACTION_EXIT);
-		if (FlagGet(FLAG_SET_WALL_CLOCK))
-			ShowStartMenuExtraWindow();
+	}
+	else {
+		if (FlagGet(FLAG_SYS_POKEMON_GET) == TRUE)
+			{
+				AddStartMenuAction(MENU_ACTION_POKEMON);
+				if (!FlagGet(FLAG_SYS_POKEDEX_GET)) {
+					if (FlagGet(FLAG_ENABLED_PC))
+						AddStartMenuAction(MENU_ACTION_PC);
+				}
+			}
+			AddStartMenuAction(MENU_ACTION_BAG);
+			
+			AddStartMenuAction(MENU_ACTION_PLAYER);
+			
+			AddStartMenuAction(MENU_ACTION_SAVE);
+			AddStartMenuAction(MENU_ACTION_OPTION);
+			AddStartMenuAction(MENU_ACTION_EXIT);
+			if (FlagGet(FLAG_SET_WALL_CLOCK))
+				ShowStartMenuExtraWindow();
+	}
 }
 static void BuildDebugStartMenu(void)
 {    
@@ -543,7 +555,6 @@ static void RemoveExtraStartMenuWindows(void) //Modificado el 23/1/2019
 	else if (FlagGet(FLAG_SET_WALL_CLOCK)){ //Borra de la pantalla la venta auxiliar de la hora
         ClearStdWindowAndFrameToTransparent(sSafariBallsWindowId, FALSE);
         RemoveWindow(sSafariBallsWindowId);	
-		
 	}
 }
 //
@@ -733,7 +744,7 @@ static bool8 HandleStartMenuInput(void)
 
         return FALSE;
     }
-	if (JOY_NEW(DPAD_RIGHT) && !FlagGet(FLAG_MENU_DEXRELATED) && FlagGet(FLAG_SYS_POKEDEX_GET))
+	if (JOY_NEW(DPAD_RIGHT) && !FlagGet(FLAG_MENU_DEXRELATED) && FlagGet(FLAG_SYS_POKEDEX_GET) && (GetSafariZoneFlag() != TRUE))
 	{
 		PlayerFreeze();
 		FlagSet(FLAG_MENU_DEXRELATED);
@@ -741,7 +752,7 @@ static bool8 HandleStartMenuInput(void)
 		ShowStartMenu();
 		return TRUE;
 	}
-	if (JOY_NEW(DPAD_LEFT) && FlagGet(FLAG_MENU_DEXRELATED))
+	else if (JOY_NEW(DPAD_LEFT) && FlagGet(FLAG_MENU_DEXRELATED) && (GetSafariZoneFlag() != TRUE))
 	{
 		PlayerFreeze();
 		HideStartMenu();
@@ -749,20 +760,11 @@ static bool8 HandleStartMenuInput(void)
 		ShowStartMenu();
 		return TRUE;
 	}
-    if (JOY_NEW(START_BUTTON | B_BUTTON))
+    else if (JOY_NEW(START_BUTTON | B_BUTTON))
     {
-		if (FlagGet(FLAG_MENU_DEXRELATED)){
-			FlagClear(FLAG_MENU_DEXRELATED);
-			RemoveExtraStartMenuWindows();
-			HideStartMenu();
-			return TRUE;
-		}
-		else 
-		{
-			RemoveExtraStartMenuWindows();
-			HideStartMenu();
-			return TRUE;
-		}
+		RemoveExtraStartMenuWindows();
+		HideStartMenu();
+		return TRUE;
     }
 
     return FALSE;
@@ -1646,15 +1648,17 @@ static bool8 PasswordCallback(void)
 //rtc, borrar si no anda
 static void ShowStartMenuExtraWindow(void) // Función que carga una ventana auxiliar en el menú de pausa.
 {	
-    sSafariBallsWindowId = AddWindow(&sStartMenuWindowTemplate);
-    PutWindowTilemap(sSafariBallsWindowId);
-    DrawStdWindowFrame(sSafariBallsWindowId, FALSE);
-	if (!FlagGet(FLAG_RTC_ENABLED))
-		FormatDecimalTimeWOSeconds(gStringVar4, gLocalTime.hours, gLocalTime.minutes);
-	else 
-		FormatDecimalTimeWOSeconds(gStringVar4, Rtc_GetCurrentHour(), Rtc_GetCurrentMinute());
-    AddTextPrinterParameterized(sSafariBallsWindowId, 1, gStringVar4, 0, 1, TEXT_SKIP_DRAW, NULL);
-    CopyWindowToVram(sSafariBallsWindowId, COPYWIN_GFX);
+	if (!GetSafariZoneFlag()) {
+		sSafariBallsWindowId = AddWindow(&sStartMenuWindowTemplate);
+		PutWindowTilemap(sSafariBallsWindowId);
+		DrawStdWindowFrame(sSafariBallsWindowId, FALSE);
+		if (!FlagGet(FLAG_RTC_ENABLED))
+			FormatDecimalTimeWOSeconds(gStringVar4, gLocalTime.hours, gLocalTime.minutes);
+		else 
+			FormatDecimalTimeWOSeconds(gStringVar4, Rtc_GetCurrentHour(), Rtc_GetCurrentMinute());
+		AddTextPrinterParameterized(sSafariBallsWindowId, 1, gStringVar4, 0, 1, TEXT_SKIP_DRAW, NULL);
+		CopyWindowToVram(sSafariBallsWindowId, COPYWIN_GFX);
+	}
 }
 //
 

@@ -40,11 +40,11 @@
 #define FLAG_TEMP_1E     (TEMP_FLAGS_START + 0x1E)
 #define FLAG_TEMP_1F     (TEMP_FLAGS_START + 0x1F)
 #define TEMP_FLAGS_END   FLAG_TEMP_1F
-
-#define FLAG_SHINY_TREECKO    0x20
-#define FLAG_SHINY_MUDKIP    0x21
-#define FLAG_SHINY_TORCHIC    0x22
-#define FLAG_SHINY_STARTER    0x23
+ 
+#define FLAG_UNUSED_0x20    0x20 // unused flag
+#define FLAG_UNUSED_0x21    0x21 // unused flag
+#define FLAG_UNUSED_0x22    0x22 // unused flag
+#define FLAG_UNUSED_0x23    0x23 // unused flag
 #define FLAG_SHINY_CREATION    0x24
 #define FLAG_POKEMONPCMENU    0x25
 #define FLAG_PARTY_MOVES  	  0x26
@@ -84,7 +84,7 @@
 #define FLAG_HIDE_JIRACHI    0x48
 #define FLAG_STARTED_BOSS    0x49
 #define FLAG_DEWFORD_GRUNT    0x4A
-#define FLAG_UNUSED_0x04B    0x4B // Unused Flag
+#define FLAG_GRANITE_GRUNTS    0x4B
 #define FLAG_UNUSED_0x04C    0x4C // Unused Flag
 #define FLAG_UNUSED_0x04D    0x4D // Unused Flag
 #define FLAG_UNUSED_0x04E    0x4E // Unused Flag
@@ -238,7 +238,7 @@
 #define FLAG_MET_WAILMER_TRAINER             0xDA
 #define FLAG_EVIL_LEADER_PLEASE_STOP         0xDB
 
-#define FLAG_NEVER_SET_0x0DC                 0xDC // This flag is read, but never written to
+#define FLAG_UNUSED_0x0DC                 0xDC // unused flag
 
 #define FLAG_RECEIVED_GO_GOGGLES             0xDD
 #define FLAG_WINGULL_SENT_ON_ERRAND          0xDE
@@ -292,7 +292,7 @@
 #define FLAG_SECRET_BASE_REGISTRY_ENABLED    0x10C
 #define FLAG_RECEIVED_TM46                   0x10D
 #define FLAG_CONTEST_SKETCH_CREATED          0x10E  // Set but never read
-#define FLAG_EVIL_TEAM_ESCAPED_STERN_SPOKE   0x10F
+#define FLAG_EVIL_TEAM_ESCAPED_STERN_SPOKE   0x10F // unused now
 #define FLAG_RECEIVED_EXP_SHARE              0x110
 #define FLAG_POKERUS_EXPLAINED               0x111
 #define FLAG_RECEIVED_RUNNING_SHOES          0x112

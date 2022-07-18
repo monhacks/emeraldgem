@@ -64,7 +64,6 @@ static void DecryptBoxMon(struct BoxPokemon *boxMon);
 static void Task_PlayMapChosenOrBattleBGM(u8 taskId);
 static u16 GiveMoveToBoxMon(struct BoxPokemon *boxMon, u16 move);
 static bool8 ShouldSkipFriendshipChange(void);
-static u8 SendMonToPC(struct Pokemon* mon);
 static void RemoveIVIndexFromList(u8 *ivs, u8 selectedIv);
 void TrySpecialOverworldEvo();
 
@@ -1610,7 +1609,7 @@ static const u16 sSpeciesToNationalPokedexNum[NUM_SPECIES - 1] =
     [SPECIES_CALYREX_SHADOW_RIDER - 1] = NATIONAL_DEX_CALYREX,
 };
 
-// Assigns all Hoenn Dex Indexes to a National Dex Index
+ // Assigns all Hoenn Dex Indexes to a National Dex Index
 static const u16 sHoennToNationalOrder[HOENN_DEX_COUNT - 1] =
 {
     HOENN_TO_NATIONAL(TREECKO),
@@ -3224,9 +3223,6 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
     u32 personality;
     u32 value;
     u16 checksum;
-    u8 i;
-    u8 availableIVs[NUM_STATS];
-    u8 selectedIvs[LEGENDARY_PERFECT_IV_COUNT];
 
     ZeroBoxMonData(boxMon);
 
@@ -3234,15 +3230,6 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
         personality = fixedPersonality;
     else
         personality = Random32();
-
-	if (FlagGet(FLAG_SHINY_CREATION) || FlagGet(FLAG_SHINY_STARTER))
-        {
-            u8 nature = personality % NUM_NATURES;  // keep current nature
-            do {
-                personality = Random32();
-                personality = ((((Random() % SHINY_ODDS) ^ (HIHALF(value) ^ LOHALF(value))) ^ LOHALF(personality)) << 16) | LOHALF(personality);
-            } while (nature != GetNatureFromPersonality(personality));
-        }
 
     switch (otIdType)
     {
@@ -3324,6 +3311,15 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
                 rolls++;
             } while (shinyValue >= SHINY_ODDS && rolls < shinyRerolls);
         }
+		if (FlagGet(FLAG_SHINY_CREATION))
+        {
+            u8 nature = personality % NUM_NATURES;  // keep current nature
+            do {
+                personality = Random32();
+                personality = ((((Random() % SHINY_ODDS) ^ (HIHALF(value) ^ LOHALF(value))) ^ LOHALF(personality)) << 16) | LOHALF(personality);
+            } while (nature != GetNatureFromPersonality(personality));
+        }
+
     }
 	}
 
@@ -3358,27 +3354,101 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
         SetBoxMonData(boxMon, MON_DATA_SPDEF_IV, &fixedIV);
     }
     else {
-		if (VarGet(VAR_CHAIN) >=10 && VarGet(VAR_CHAIN) <=29 )
+		  if (Random() % 18 == 1) {  //forces a pokemon to have fairy type hidden power
+			  u32 fairyNumber = Random() % 3;
+			 
+			  if (fairyNumber <= 0) {
+				  u32 iv1 = 0;
+				  u32 iv2 = 1;
+				  u32 iv3 = 3;
+				  SetBoxMonData(boxMon, MON_DATA_HP_IV, &iv2);
+				  SetBoxMonData(boxMon, MON_DATA_ATK_IV, &iv2);
+				  SetBoxMonData(boxMon, MON_DATA_DEF_IV, &iv2);
+				  SetBoxMonData(boxMon, MON_DATA_SPEED_IV, &iv2);
+				  SetBoxMonData(boxMon, MON_DATA_SPATK_IV, &iv3);
+				  SetBoxMonData(boxMon, MON_DATA_SPDEF_IV, &iv1);
+			  }
+			  else if (fairyNumber == 1) {
+				  u32 iv1 = 15;
+				  u32 iv2 = 18;
+				  SetBoxMonData(boxMon, MON_DATA_HP_IV, &iv1);
+				  SetBoxMonData(boxMon, MON_DATA_ATK_IV, &iv1);
+				  SetBoxMonData(boxMon, MON_DATA_DEF_IV, &iv1);
+				  SetBoxMonData(boxMon, MON_DATA_SPEED_IV, &iv1);
+				  SetBoxMonData(boxMon, MON_DATA_SPATK_IV, &iv1);
+				  SetBoxMonData(boxMon, MON_DATA_SPDEF_IV, &iv2);
+			  }
+			  else {
+				  u32 iv1 = 30;
+				  u32 iv2 = 31;
+				  SetBoxMonData(boxMon, MON_DATA_HP_IV, &iv2);
+				  SetBoxMonData(boxMon, MON_DATA_ATK_IV, &iv1);
+				  SetBoxMonData(boxMon, MON_DATA_DEF_IV, &iv2);
+				  SetBoxMonData(boxMon, MON_DATA_SPEED_IV, &iv2);
+				  SetBoxMonData(boxMon, MON_DATA_SPATK_IV, &iv1);
+				  SetBoxMonData(boxMon, MON_DATA_SPDEF_IV, &iv2);
+			  }
+		  }
+		  else 
+			if (VarGet(VAR_CHAIN) >=10 && VarGet(VAR_CHAIN) <=29 )
         {
-            u32 iv;
-            iv = VarGet(VAR_CHAIN);
-            SetBoxMonData(boxMon, MON_DATA_HP_IV, &iv);
-            SetBoxMonData(boxMon, MON_DATA_ATK_IV, &iv);
-            SetBoxMonData(boxMon, MON_DATA_DEF_IV, &iv);
-            SetBoxMonData(boxMon, MON_DATA_SPEED_IV, &iv);
-            SetBoxMonData(boxMon, MON_DATA_SPATK_IV, &iv);
-            SetBoxMonData(boxMon, MON_DATA_SPDEF_IV, &iv);
+			if (Random() % 18 == 1) {  //forces a pokemon to have fairy type hidden power, based on the chain level
+			      if (VarGet(VAR_CHAIN) <=14) {
+					  u32 iv1 = 0;
+					  u32 iv2 = 1;
+					  u32 iv3 = 3;
+					  SetBoxMonData(boxMon, MON_DATA_HP_IV, &iv2);
+					  SetBoxMonData(boxMon, MON_DATA_ATK_IV, &iv2);
+					  SetBoxMonData(boxMon, MON_DATA_DEF_IV, &iv2);
+					  SetBoxMonData(boxMon, MON_DATA_SPEED_IV, &iv2);
+					  SetBoxMonData(boxMon, MON_DATA_SPATK_IV, &iv3);
+					  SetBoxMonData(boxMon, MON_DATA_SPDEF_IV, &iv1);
+				  }
+				  else {
+					  u32 iv1 = 15;
+					  u32 iv2 = 18;
+					  SetBoxMonData(boxMon, MON_DATA_HP_IV, &iv1);
+					  SetBoxMonData(boxMon, MON_DATA_ATK_IV, &iv1);
+					  SetBoxMonData(boxMon, MON_DATA_DEF_IV, &iv1);
+					  SetBoxMonData(boxMon, MON_DATA_SPEED_IV, &iv1);
+					  SetBoxMonData(boxMon, MON_DATA_SPATK_IV, &iv1);
+					  SetBoxMonData(boxMon, MON_DATA_SPDEF_IV, &iv2);
+				  }
+			}
+			else
+				{
+				u32 iv;
+				iv = VarGet(VAR_CHAIN);
+				SetBoxMonData(boxMon, MON_DATA_HP_IV, &iv);
+				SetBoxMonData(boxMon, MON_DATA_ATK_IV, &iv);
+				SetBoxMonData(boxMon, MON_DATA_DEF_IV, &iv);
+				SetBoxMonData(boxMon, MON_DATA_SPEED_IV, &iv);
+				SetBoxMonData(boxMon, MON_DATA_SPATK_IV, &iv);
+				SetBoxMonData(boxMon, MON_DATA_SPDEF_IV, &iv);
+			}
         }
         else if (VarGet(VAR_CHAIN) >=30)
         {
-            u32 iv;
-            iv = 31;
-            SetBoxMonData(boxMon, MON_DATA_HP_IV, &iv);
-            SetBoxMonData(boxMon, MON_DATA_ATK_IV, &iv);
-            SetBoxMonData(boxMon, MON_DATA_DEF_IV, &iv);
-            SetBoxMonData(boxMon, MON_DATA_SPEED_IV, &iv);
-            SetBoxMonData(boxMon, MON_DATA_SPATK_IV, &iv);
-            SetBoxMonData(boxMon, MON_DATA_SPDEF_IV, &iv);
+			if (Random() % 18 == 1) {
+				  u32 iv1 = 30;
+				  u32 iv2 = 31;
+				  SetBoxMonData(boxMon, MON_DATA_HP_IV, &iv2);
+				  SetBoxMonData(boxMon, MON_DATA_ATK_IV, &iv1);
+				  SetBoxMonData(boxMon, MON_DATA_DEF_IV, &iv2);
+				  SetBoxMonData(boxMon, MON_DATA_SPEED_IV, &iv2);
+				  SetBoxMonData(boxMon, MON_DATA_SPATK_IV, &iv1);
+				  SetBoxMonData(boxMon, MON_DATA_SPDEF_IV, &iv2);
+			  }
+			else {
+				u32 iv;
+				iv = 31;
+				SetBoxMonData(boxMon, MON_DATA_HP_IV, &iv);
+				SetBoxMonData(boxMon, MON_DATA_ATK_IV, &iv);
+				SetBoxMonData(boxMon, MON_DATA_DEF_IV, &iv);
+				SetBoxMonData(boxMon, MON_DATA_SPEED_IV, &iv);
+				SetBoxMonData(boxMon, MON_DATA_SPATK_IV, &iv);
+				SetBoxMonData(boxMon, MON_DATA_SPDEF_IV, &iv);
+			}
         }
         else
 		{
@@ -3392,60 +3462,16 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
 			iv = (value & (MAX_IV_MASK << 10)) >> 10;
 			SetBoxMonData(boxMon, MON_DATA_DEF_IV, &iv);
 
-        value = Random();
+			value = Random();
 
-        iv = value & MAX_IV_MASK;
-        SetBoxMonData(boxMon, MON_DATA_SPEED_IV, &iv);
-        iv = (value & (MAX_IV_MASK << 5)) >> 5;
-        SetBoxMonData(boxMon, MON_DATA_SPATK_IV, &iv);
-        iv = (value & (MAX_IV_MASK << 10)) >> 10;
-        SetBoxMonData(boxMon, MON_DATA_SPDEF_IV, &iv);
-
-        #if P_LEGENDARY_PERFECT_IVS >= GEN_6
-            if (gBaseStats[species].flags & (FLAG_LEGENDARY | FLAG_MYTHICAL | FLAG_ULTRA_BEAST))
-            {
-                iv = MAX_PER_STAT_IVS;
-                // Initialize a list of IV indices.
-                for (i = 0; i < NUM_STATS; i++)
-                {
-                    availableIVs[i] = i;
-                }
-
-                // Select the 3 IVs that will be perfected.
-                for (i = 0; i < LEGENDARY_PERFECT_IV_COUNT; i++)
-                {
-                    u8 index = Random() % (NUM_STATS - i);
-                    selectedIvs[i] = availableIVs[index];
-                    RemoveIVIndexFromList(availableIVs, index);
-                }
-                for (i = 0; i < LEGENDARY_PERFECT_IV_COUNT; i++)
-                {
-                    switch (selectedIvs[i])
-                    {
-                        case STAT_HP:
-                            SetBoxMonData(boxMon, MON_DATA_HP_IV, &iv);
-                            break;
-                        case STAT_ATK:
-                            SetBoxMonData(boxMon, MON_DATA_ATK_IV, &iv);
-                            break;
-                        case STAT_DEF:
-                            SetBoxMonData(boxMon, MON_DATA_DEF_IV, &iv);
-                            break;
-                        case STAT_SPEED:
-                            SetBoxMonData(boxMon, MON_DATA_SPEED_IV, &iv);
-                            break;
-                        case STAT_SPATK:
-                            SetBoxMonData(boxMon, MON_DATA_SPATK_IV, &iv);
-                            break;
-                        case STAT_SPDEF:
-                            SetBoxMonData(boxMon, MON_DATA_SPDEF_IV, &iv);
-                            break;
-                    }
-                }
-            }
-        #endif
-        
-    }
+			iv = value & MAX_IV_MASK;
+			SetBoxMonData(boxMon, MON_DATA_SPEED_IV, &iv);
+			iv = (value & (MAX_IV_MASK << 5)) >> 5;
+			SetBoxMonData(boxMon, MON_DATA_SPATK_IV, &iv);
+			iv = (value & (MAX_IV_MASK << 10)) >> 10;
+			SetBoxMonData(boxMon, MON_DATA_SPDEF_IV, &iv);
+		}
+	}
 
     if (gBaseStats[species].abilities[1])
     {
@@ -4696,7 +4722,7 @@ u32 GetBoxMonData(struct BoxPokemon *boxMon, s32 field, u8 *data)
         retVal = substruct3->metGame;
         break;
     case MON_DATA_POKEBALL:
-        retVal = substruct0->pokeball;
+        retVal = substruct3->pokeball;
         break;
     case MON_DATA_OT_GENDER:
         retVal = substruct3->otGender;
@@ -5075,7 +5101,7 @@ void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg)
     case MON_DATA_POKEBALL:
     {
         u8 pokeball = *data;
-        substruct0->pokeball = pokeball;
+        substruct3->pokeball = pokeball;
         break;
     }
     case MON_DATA_OT_GENDER:
@@ -6075,7 +6101,7 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
 
                     case 7: // ITEM4_EVO_STONE
                         {
-                            u16 targetSpecies = GetEvolutionTargetSpecies(mon, EVO_MODE_ITEM_USE, item, NULL);
+                            u16 targetSpecies = GetEvolutionTargetSpecies(mon, EVO_MODE_ITEM_USE, item, SPECIES_NONE);
 
                             if (targetSpecies != SPECIES_NONE)
                             {
@@ -6485,7 +6511,7 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, s
         partnerHoldEffect = HOLD_EFFECT_NONE;
     }
 
-    if (heldItem == ITEM_ENIGMA_BERRY_E_READER)
+    if (heldItem == ITEM_ENIGMA_BERRY)
         holdEffect = gSaveBlock1Ptr->enigmaBerry.holdEffect;
     else
         holdEffect = ItemId_GetHoldEffect(heldItem);
@@ -6511,48 +6537,28 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, s
                     targetSpecies = gEvolutionTable[species][i].targetSpecies;
                 break;
             case EVO_FRIENDSHIP_DAY:
-                	RtcCalcLocalTime();
-	if (FlagGet(FLAG_RTC_ENABLED)) {
-		gLocalTime.hours = Rtc_GetCurrentHour();
-		gLocalTime.minutes = Rtc_GetCurrentMinute();
-	}
-                if (gLocalTime.hours >= 8 && gLocalTime.hours < 17 && friendship >= 220)
+                RtcCalcLocalTime();
+                if (gLocalTime.hours >= 12 && gLocalTime.hours < 24 && friendship >= 220)
                     targetSpecies = gEvolutionTable[species][i].targetSpecies;
                 break;
             case EVO_LEVEL_DAY:
-                	RtcCalcLocalTime();
-	if (FlagGet(FLAG_RTC_ENABLED)) {
-		gLocalTime.hours = Rtc_GetCurrentHour();
-		gLocalTime.minutes = Rtc_GetCurrentMinute();
-	}
-                if (gLocalTime.hours >= 8 && gLocalTime.hours < 17 && gEvolutionTable[species][i].param <= level)
+                RtcCalcLocalTime();
+                if (gLocalTime.hours >= 12 && gLocalTime.hours < 24 && gEvolutionTable[species][i].param <= level)
                     targetSpecies = gEvolutionTable[species][i].targetSpecies;
                 break;
             case EVO_FRIENDSHIP_NIGHT:
-                	RtcCalcLocalTime();
-	if (FlagGet(FLAG_RTC_ENABLED)) {
-		gLocalTime.hours = Rtc_GetCurrentHour();
-		gLocalTime.minutes = Rtc_GetCurrentMinute();
-	}
-                if ((gLocalTime.hours >= 20 || gLocalTime.hours < 8) && friendship >= 220)
+                RtcCalcLocalTime();
+                if (gLocalTime.hours >= 0 && gLocalTime.hours < 12 && friendship >= 220)
                     targetSpecies = gEvolutionTable[species][i].targetSpecies;
                 break;
             case EVO_LEVEL_NIGHT:
-                	RtcCalcLocalTime();
-	if (FlagGet(FLAG_RTC_ENABLED)) {
-		gLocalTime.hours = Rtc_GetCurrentHour();
-		gLocalTime.minutes = Rtc_GetCurrentMinute();
-	}
-                if ((gLocalTime.hours >= 20 || gLocalTime.hours < 8) && gEvolutionTable[species][i].param <= level)
+                RtcCalcLocalTime();
+                if (gLocalTime.hours >= 0 && gLocalTime.hours < 12 && gEvolutionTable[species][i].param <= level)
                     targetSpecies = gEvolutionTable[species][i].targetSpecies;
                 break;
             case EVO_ITEM_HOLD_NIGHT:
-                	RtcCalcLocalTime();
-	if (FlagGet(FLAG_RTC_ENABLED)) {
-		gLocalTime.hours = Rtc_GetCurrentHour();
-		gLocalTime.minutes = Rtc_GetCurrentMinute();
-	}
-                if ((gLocalTime.hours >= 20 || gLocalTime.hours < 8) && heldItem == gEvolutionTable[species][i].param)
+                RtcCalcLocalTime();
+                if (gLocalTime.hours >= 0 && gLocalTime.hours < 12 && heldItem == gEvolutionTable[species][i].param)
                 {
                     heldItem = 0;
                     SetMonData(mon, MON_DATA_HELD_ITEM, &heldItem);
@@ -6560,12 +6566,8 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, s
                 }
                 break;
             case EVO_ITEM_HOLD_DAY:
-                	RtcCalcLocalTime();
-	if (FlagGet(FLAG_RTC_ENABLED)) {
-		gLocalTime.hours = Rtc_GetCurrentHour();
-		gLocalTime.minutes = Rtc_GetCurrentMinute();
-	}
-                if (gLocalTime.hours >= 8 && gLocalTime.hours < 17 && heldItem == gEvolutionTable[species][i].param)
+                RtcCalcLocalTime();
+                if (gLocalTime.hours >= 12 && gLocalTime.hours < 24 && heldItem == gEvolutionTable[species][i].param)
                 {
                     heldItem = 0;
                     SetMonData(mon, MON_DATA_HELD_ITEM, &heldItem);
@@ -6573,12 +6575,8 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, s
                 }
                 break;
             case EVO_LEVEL_DUSK:
-                	RtcCalcLocalTime();
-	if (FlagGet(FLAG_RTC_ENABLED)) {
-		gLocalTime.hours = Rtc_GetCurrentHour();
-		gLocalTime.minutes = Rtc_GetCurrentMinute();
-	}
-                if (gLocalTime.hours >= 17 && gLocalTime.hours < 20 && gEvolutionTable[species][i].param <= level)
+                RtcCalcLocalTime();
+                if (gLocalTime.hours >= 17 && gLocalTime.hours < 18 && gEvolutionTable[species][i].param <= level)
                     targetSpecies = gEvolutionTable[species][i].targetSpecies;
                 break;
             case EVO_LEVEL:
@@ -6817,6 +6815,7 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, s
 
     return targetSpecies;
 }
+
 
 u16 HoennPokedexNumToSpecies(u16 hoennNum)
 {
@@ -7449,26 +7448,16 @@ u32 CanMonLearnTMHM(struct Pokemon *mon, u8 tm)
     {
         return 0;
     }
-    else if (tm < 31)
+    else if (tm < 32)
     {
         u32 mask = 1 << tm;
         return gTMHMLearnsets[species][0] & mask;
     }
-    else if (tm < 64)
+    else
     {
         u32 mask = 1 << (tm - 32);
         return gTMHMLearnsets[species][1] & mask;
     }
-	else if (tm < 96)
-	{
-		u32 mask = 1 << (tm - 63);
-        return gTMHMLearnsets[species][2] & mask;
-	}
-	else
-	{
-		u32 mask = 1 << (tm - 95);
-        return gTMHMLearnsets[species][3] & mask;
-	}
 }
 
 u32 CanSpeciesLearnTMHM(u16 species, u8 tm)
@@ -7477,29 +7466,17 @@ u32 CanSpeciesLearnTMHM(u16 species, u8 tm)
     {
         return 0;
     }
-    else if (tm < 31)
+    else if (tm < 32)
     {
         u32 mask = 1 << tm;
         return gTMHMLearnsets[species][0] & mask;
     }
-    else if (tm < 64)
+    else
     {
         u32 mask = 1 << (tm - 32);
         return gTMHMLearnsets[species][1] & mask;
     }
-	else if (tm < 96)
-	{
-		u32 mask = 1 << (tm - 63);
-        return gTMHMLearnsets[species][2] & mask;
-	}
-	else
-	{
-		u32 mask = 1 << (tm - 95);
-        return gTMHMLearnsets[species][3] & mask;
-	}
 }
-
-
 
 u8 GetMoveRelearnerMoves(struct Pokemon *mon, u16 *moves)
 {
@@ -7909,9 +7886,6 @@ void SetWildMonHeldItem(void)
 
         for (i = 0; i < count; i++)
         {
-            if (GetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, NULL) != ITEM_NONE)
-                continue; // prevent ovewriting previously set item
-            
             rnd = Random() % 100;
             species = GetMonData(&gEnemyParty[i], MON_DATA_SPECIES, 0);
             if (gMapHeader.mapLayoutId == LAYOUT_ALTERING_CAVE)
@@ -8216,10 +8190,7 @@ bool8 HasTwoFramesAnimation(u16 species)
     return (species != SPECIES_CASTFORM
          && species != SPECIES_SPINDA
          && species != SPECIES_UNOWN
-         && species != SPECIES_CHERRIM
-         && species != SPECIES_CASTFORM_SUNNY
-         && species != SPECIES_CASTFORM_RAINY
-         && species != SPECIES_CASTFORM_SNOWY);
+         && species != SPECIES_CHERRIM);
 }
 
 static bool8 ShouldSkipFriendshipChange(void)
@@ -8555,7 +8526,7 @@ static void RemoveIVIndexFromList(u8 *ivs, u8 selectedIv)
     }
 }
 
-// Attempts to perform non-level/item related overworld evolutions; called by tryspecialevo command.
+
 void TrySpecialOverworldEvo(void)
 {
     u8 i;
