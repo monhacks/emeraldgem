@@ -225,87 +225,70 @@ SlateportCity_OceanicMuseum_1F_Movement_FamiliarGruntExitNorth:
 	step_end
 
 SlateportCity_OceanicMuseum_1F_Text_WouldYouLikeToEnter:
-	.string "Welcome to the OCEANIC MUSEUM.\p"
-	.string "The entrance fee is ¥50.\n"
-	.string "Would you like to enter?$"
+	.string "¡Sea bienvenid{OA} al Museo Oceánico!\p"
+	.string "La entrada cuesta ¥50.\n"
+	.string "¿Quisiera entrar?$"
 
 SlateportCity_OceanicMuseum_1F_Text_PleaseEnjoyYourself:
-	.string "Please enjoy yourself.$"
+	.string "¡Disfrute!$"
 
 SlateportCity_OceanicMuseum_1F_Text_NotEnoughMoney:
-	.string "Oh? I'm sorry, but you don't seem to\n"
-	.string "have enough money.$"
+	.string "¿Eh? Lo siento mucho, pero parece que\n"
+	.string "no tiene suficiente dinero.$"
 
 SlateportCity_OceanicMuseum_1F_Text_CatchUpWithYourGroup:
-	.string "Oh? You're with that group that\n"
-	.string "went in earlier?\p"
-	.string "You're the only one who's late.\n"
-	.string "You'd better go catch up to them!$"
+	.string "¡Ah! Usted debe estar con el\pgrupo que pasó antes, ¿no?"
+	.string "Su Jefe pagó las entradas para todos.\n"
+	.string "¡Apúrese que llega tarde!$"
 
 SlateportCity_OceanicMuseum_1F_Text_AquaExistForGoodOfAll:
-	.string "We, TEAM AQUA, exist for the good\n"
-	.string "of all!$"
+	.string "¡Ayudaremos a las criaturas océanicas!$"
 
 SlateportCity_OceanicMuseum_1F_Text_OurBossIsntHere:
-	.string "We were told to assemble here,\n"
-	.string "so we did, but…\p"
-	.string "Our BOSS, the linchpin, isn't here.$"
+	.string "Ya sé que el Jefe dijo que tardaría\nen venir, pero…\p"
+	.string "Me preocupa que tarde demasiado.$"
 
 SlateportCity_OceanicMuseum_1F_Text_WouldStuffHereMakeMeRich:
-	.string "If I ripped off the stuff here,\n"
-	.string "would it make me rich?$"
+	.string "La biología marina es una de\n"
+	.string "mis pasiones.\p¿Crees que llegue algún día\na trabajar de eso?$"
 
 SlateportCity_OceanicMuseum_1F_Text_CanLearnForNefariousDeeds:
-	.string "What I learn here, I can put to use on\n"
-	.string "nefarious deeds…$"
+	.string "Con lo que aprenda aquí…\n¡Podré abrir mi restaurante temático!$"
 
 SlateportCity_OceanicMuseum_1F_Text_RustboroBungled:
-	.string "If our goons didn't bungle things\n"
-	.string "in RUSTBORO, we wouldn't be here!$"
+	.string "¡Estamos aquí por cosas secretas!\n¡Muaja ja ja ja!$"
 
 SlateportCity_OceanicMuseum_1F_Text_DidntHaveMoney:
-	.string "I didn't have ¥50, so it took a long\n"
-	.string "time getting by the receptionist.$"
+	.string "Soy pobre, así que me alegra que\nnuestro Jefecito sea tan generoso,\l¡Siempre había soñado entrar aquí!$"
 
 SlateportCity_OceanicMuseum_1F_Text_LearnAboutSeaForBattling:
-	.string "I want to learn about the sea and\n"
-	.string "use that knowledge for battling.$"
+	.string "Quiero aprender del mar y su\n"
+	.string "historia para hacerme más fuerte.$"
 
 SlateportCity_OceanicMuseum_1F_Text_SternIsRoleModel:
-	.string "I get all giddy and gooey when\n"
-	.string "I see the sea!\p"
-	.string "For me, CAPT. STERN is the number\n"
-	.string "one role model!$"
+	.string "¡El Capitán Stern es el mejor!$"
 
 SlateportCity_OceanicMuseum_1F_Text_MustBePokemonWeDontKnow:
-	.string "The sea is vast without end, and\n"
-	.string "infinitely deep…\p"
-	.string "There must be many POKéMON that\n"
-	.string "we don't know about.$"
+	.string "El océano es tan, tan vasto…\p"
+	.string "Deben haber tantos Pokémon ahí.$"
 
 SlateportCity_OceanicMuseum_1F_Text_WantSeaPokemon:
-	.string "I want a sea POKéMON.\p"
-	.string "I think it would feel cool and nice\n"
-	.string "to hug.$"
+	.string "...$"
 
 SlateportCity_OceanicMuseum_1F_Text_RememberMeTakeThis:
-	.string "Aiyeeeh!\n"
-	.string "What are you doing here?\p"
-	.string "Me? I'm the TEAM AQUA member\n"
-	.string "you thumped before, remember?\l"
-	.string "Back in RUSTURF TUNNEL?\p"
-	.string "Here, take this!\n"
-	.string "You have to forgive me!$"
+	.string "¡Ey ey ey!\n"
+	.string "¡¿Qué haces aquí?!\pSoy el Recluta que derrotaste en el\nTúnel Rusturf. ¡Gracias a tí,\lmi vida ha mejorado!\p"
+	.string "Volví a hablar con ese hombre al\nque molesté, y le dije que podía cavar ahí\lsi tenía mucho ciudado.\p"
+	.string "Luego, me dijo que quería conocerme\nmejor, y le dije que nos viéramos\lpronto. Decidí trabajar aquí otro mes,\lpara comprarle algo lindo.\p"
+	.string "¡Toma esto como agradecimiento!$"
 
 SlateportCity_OceanicMuseum_1F_Text_HopeINeverSeeYouAgain:
-	.string "That TM, it suits you more than it\n"
-	.string "does me.\p"
-	.string "Hope I never see you again!\n"
-	.string "Wahahaha!$"
+	.string "¡Esa MT te permitirá quitarle\nlos objetos equipados a tus rivales!\pTe aconsejo que lo uses contra Niños\n"
+	.string "Bien y Chicas Parasol, que suelen\ldarles Pepitas en sus Pokémon.\p¡Hasta pronto!$"
 
 SlateportCity_OceanicMuseum_1F_Text_YouHaveToTakeThis:
-	.string "Awww, come on!\n"
-	.string "You have to take this and let me go!$"
+	.string "¿Pero cómo?\n"
+	.string "¡No me iré hasta que la aceptes!$"
 
 SlateportCity_OceanicMuseum_1F_Text_WhirlpoolExperiment:
 	.string "A blue fluid is spiraling inside\n"

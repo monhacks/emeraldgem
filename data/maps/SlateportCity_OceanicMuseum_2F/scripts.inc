@@ -9,8 +9,14 @@ SlateportCity_OceanicMuseum_2F_MapScripts::
 SlateportCity_OceanicMuseum_2F_EventScript_CaptStern::
 	lock
 	faceplayer
+	namebox Stern
 	msgbox SlateportCity_OceanicMuseum_2F_Text_ThankYouForTheParts, MSGBOX_DEFAULT
 	closemessage
+	hidenamebox
+	playse SE_BALL_TRADE
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_QuestionMark
+	waitmovement 0
+	delay 16
 	playbgm MUS_ENCOUNTER_AQUA, TRUE
 	addobject LOCALID_GRUNT_1
 	applymovement LOCALID_GRUNT_1, SlateportCity_OceanicMuseum_2F_Movement_FirstGruntEnter
@@ -23,22 +29,29 @@ SlateportCity_OceanicMuseum_2F_EventScript_CaptStern::
 	waitmovement 0
 	call_if_eq VAR_FACING, DIR_SOUTH, SlateportCity_OceanicMuseum_2F_EventScript_PlayerFaceGrunts
 	call_if_eq VAR_FACING, DIR_EAST, SlateportCity_OceanicMuseum_2F_EventScript_PlayerFaceGrunts
+	namebox Aqua
 	msgbox SlateportCity_OceanicMuseum_2F_Text_WellTakeThoseParts, MSGBOX_DEFAULT
 	call_if_ne VAR_FACING, DIR_EAST, SlateportCity_OceanicMuseum_2F_EventScript_SternFaceGrunts
+	namebox Stern
 	msgbox SlateportCity_OceanicMuseum_2F_Text_SternWhoAreYou, MSGBOX_DEFAULT
+	namebox Aqua
 	msgbox SlateportCity_OceanicMuseum_2F_Text_WereTeamAqua, MSGBOX_DEFAULT
 	closemessage
+	hidenamebox
 	applymovement LOCALID_GRUNT_2, SlateportCity_OceanicMuseum_2F_Movement_GruntApproachToBattle
 	waitmovement 0
 	call_if_eq VAR_FACING, DIR_SOUTH, SlateportCity_OceanicMuseum_2F_EventScript_PlayerApproachGruntSouth
 	call_if_eq VAR_FACING, DIR_WEST, SlateportCity_OceanicMuseum_2F_EventScript_PlayerApproachGruntWest
 	trainerbattle_no_intro TRAINER_GRUNT_MUSEUM_1, SlateportCity_OceanicMuseum_2F_Text_Grunt1Defeat
+	namebox Aqua
 	msgbox SlateportCity_OceanicMuseum_2F_Text_BossGoingToBeFurious, MSGBOX_DEFAULT
 	closemessage
+	hidenamebox
 	applymovement LOCALID_GRUNT_2, SlateportCity_OceanicMuseum_2F_Movement_GruntDefeated
 	waitmovement 0
 	applymovement LOCALID_GRUNT_1, SlateportCity_OceanicMuseum_2F_Movement_GruntApproachToBattle
 	waitmovement 0
+	namebox Aqua
 	msgbox SlateportCity_OceanicMuseum_2F_Text_LetMeTakeCareOfThis, MSGBOX_DEFAULT
 	trainerbattle_no_intro TRAINER_GRUNT_MUSEUM_2, SlateportCity_OceanicMuseum_2F_Text_Grunt2Defeat
 	applymovement LOCALID_GRUNT_1, SlateportCity_OceanicMuseum_2F_Movement_GruntDefeated
@@ -46,19 +59,33 @@ SlateportCity_OceanicMuseum_2F_EventScript_CaptStern::
 	applymovement LOCALID_GRUNT_1, Common_Movement_WalkInPlaceFasterDown
 	applymovement LOCALID_GRUNT_2, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
+	namebox Aqua
 	msgbox SlateportCity_OceanicMuseum_2F_Text_MeddlingKid, MSGBOX_DEFAULT
+	hidenamebox
 	closemessage
 	delay 35
 	addobject LOCALID_ARCHIE
 	applymovement LOCALID_ARCHIE, SlateportCity_OceanicMuseum_2F_Movement_ArchieEnter
 	applymovement LOCALID_GRUNT_2, SlateportCity_OceanicMuseum_2F_Movement_GruntMoveForArchie
 	waitmovement 0
+	namebox Unknown
 	msgbox SlateportCity_OceanicMuseum_2F_Text_CameToSeeWhatsTakingSoLong, MSGBOX_DEFAULT
+	hidenamebox
 	closemessage
 	applymovement LOCALID_ARCHIE, SlateportCity_OceanicMuseum_2F_Movement_ArchieApproachPlayer
 	waitmovement 0
+	namebox Unknown
 	msgbox SlateportCity_OceanicMuseum_2F_Text_ArchieWarning, MSGBOX_DEFAULT
+	namebox Archie
+	msgbox SlateportCity_OceanicMuseum_2F_Text_ArchieWarning2, MSGBOX_DEFAULT
 	closemessage
+	hidenamebox
+	applymovement LOCALID_ARCHIE, Common_Movement_FaceAwayPlayer
+	waitmovement 0
+	namebox Archie
+	msgbox SlateportCity_OceanicMuseum_2F_Text_ArchieWereLeaving, MSGBOX_DEFAULT
+	closemessage
+	hidenamebox
 	savebgm MUS_DUMMY
 	fadedefaultbgm
 	fadescreen FADE_TO_BLACK
@@ -273,79 +300,60 @@ SlateportCity_OceanicMuseum_2F_EventScript_MuseumPatron3::
 	end
 
 SlateportCity_OceanicMuseum_2F_Text_ThankYouForTheParts:
-	.string "Yes? If you're looking for STERN,\n"
-	.string "that would be me.\p"
-	.string "Ah! Those must be the parts I ordered\n"
-	.string "from MR. STONE of DEVON.\p"
-	.string "Thank you! That's great!\n"
-	.string "We can prepare for our expedition now.$"
+	.string "Ah, ¡Pero si es {PLAYER}!\n"
+	.string "¿Traes las {COLOR BLUE}Partes{COLOR DARK_GRAY} que pedí?\p"
+	.string "Ahora te recomendaría que\nte fueras inmediatamente.$"
 
 SlateportCity_OceanicMuseum_2F_Text_WellTakeThoseParts:
-	.string "Hehehe, hold it!\n"
-	.string "We'll take those parts!$"
+	.string "¡Alto ahí, señores!\n"
+	.string "¡Nos llevaremos esas Partes!$"
 
 SlateportCity_OceanicMuseum_2F_Text_SternWhoAreYou:
-	.string "CAPT. STERN: Wh-what?\n"
-	.string "Who are you people?$"
+	.string "¡Oh! ¡Eh! ¿Qué?\n"
+	.string "¿Q-quiénes son?$"
 
 SlateportCity_OceanicMuseum_2F_Text_WereTeamAqua:
-	.string "We're TEAM AQUA!\p"
-	.string "Our BOSS wants those parts!\n"
-	.string "Shut your yap and fork them over!$"
+	.string "¡Somos el Equipo Aqua!\p"
+	.string "¡Y nuestro Jefecito nos envió\na buscar esas Partes!$"
 
 SlateportCity_OceanicMuseum_2F_Text_Grunt1Defeat:
-	.string "Awaaaah!\n"
-	.string "A kid beat me!$"
+	.string "¡Aaaahh!\n"
+	.string "¡Me ganó un{A} niñ{OA}!$"
 
 SlateportCity_OceanicMuseum_2F_Text_BossGoingToBeFurious:
-	.string "Oh, man, what a disaster…\n"
-	.string "The BOSS is going to be furious…$"
+	.string "¿Porqué tenía que pasar esto…?\n"
+	.string "El Jefecito no estará complacido…$"
 
 SlateportCity_OceanicMuseum_2F_Text_LetMeTakeCareOfThis:
-	.string "Humph, sniveling wimp!\n"
-	.string "Let me take care of this!$"
+	.string "¡Pedazo de inútil!\n"
+	.string "¡Déjame que yo me encargo!$"
 
 SlateportCity_OceanicMuseum_2F_Text_Grunt2Defeat:
-	.string "What?!\n"
-	.string "I lost, too!$"
+	.string "¡¿QUÉ?!\n"
+	.string "¡También perdí!$"
 
 SlateportCity_OceanicMuseum_2F_Text_MeddlingKid:
-	.string "Now what? If we don't get the parts,\n"
-	.string "we're in for it!\p"
-	.string "Arrgh, I didn't count on being meddled\n"
-	.string "with by some meddling kid!$"
+	.string "¿Ahora qué? Se supone que las Partes\n"
+	.string "son nuestras, ¡Esto es injusto!$"
 
 SlateportCity_OceanicMuseum_2F_Text_CameToSeeWhatsTakingSoLong:
-	.string "I came to see what was taking so\n"
-	.string "long to snatch some parts, and you\l"
-	.string "simps are held up by a mere child?$"
+	.string "Sabía que alguien terminaría\nentrometiéndose en nuestros planes,\ly por ende, vine aquí.\p¡Pero no me imaginé que\nsería un{A} niñ{OA}!$"
 
 SlateportCity_OceanicMuseum_2F_Text_ArchieWarning:
-	.string "We are TEAM AQUA,\n"
-	.string "and we love the sea!\p"
-	.string "And I am TEAM AQUA's leader,\n"
-	.string "ARCHIE!\p"
-	.string "What makes you interfere with us?\p"
-	.string "…No! You can't be!\n"
-	.string "You're not one of TEAM MAGMA?\p"
-	.string "Wait, that can't be right.\n"
-	.string "You're not dressed for the part.\p"
-	.string "… … … … … …\n"
+	.string "¡Somos el {COLOR BLUE}Equipo Aqua{COLOR DARK_GRAY},\ny vamos a cambiar el mundo!\p"
+	.string "¡Y yo, {COLOR BLUE}soy el Líder del Equipo{COLOR DARK_GRAY},\n"
+	.string "{COLOR BLUE}el Grandioso Archie{COLOR DARK_GRAY}!$"
+SlateportCity_OceanicMuseum_2F_Text_ArchieWarning2:
+	.string "La gente, y los Pokémon…\n¡Merecen un mundo mejor!\p¡Pero nosotros, los humanos,\nhemos contaminado el mundo!\p"
 	.string "… … … … … …\p"
-	.string "POKéMON, people… All life depends on\n"
-	.string "the sea.\p"
-	.string "So, TEAM AQUA is dedicated to\n"
-	.string "the expansion of the sea.\p"
-	.string "Don't you agree? What we are doing\n"
-	.string "is a magnificent undertaking.\p"
-	.string "Ah, fine…\n"
-	.string "You're still too young to understand\l"
-	.string "our noble objective.\p"
-	.string "But, I warn you, don't even consider\n"
-	.string "interfering with our plans again.\p"
-	.string "The consequences will cost you\n"
-	.string "dearly!\p"
-	.string "And don't you forget it!$"
+	.string "En pocos años, llegaremos {COLOR RED}a un punto\nsin retorno{COLOR DARK_GRAY}, uno donde nuestras\lacciones dejarán este mundo inhabitable.\p"
+	.string "El Equipo Aqua, mi maravillosa\norganización… ¡Nos salvará a todos!\p"
+	.string "Y si te metes en mi camino\nde nuevo…\p¡Te destruiré por completo!$"
+SlateportCity_OceanicMuseum_2F_Text_ArchieWereLeaving:
+	.string "¡Ahora, ustedes dos!\n¡Nos vamos!\p"
+	.string "Díganle a todos en el museo que nos\nvamos a las aguas termales, lo merecen.\p"
+	.string "Tengo mis métodos para\nobtener esas {COLOR BLUE}Partes{COLOR DARK_GRAY}.$"
+
 
 SlateportCity_OceanicMuseum_2F_Text_SternThankYouForSavingUs:
 	.string "CAPT. STERN: You're…\n"

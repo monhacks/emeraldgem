@@ -2154,7 +2154,7 @@ static const struct NamingScreenTemplate sWaldaWordsScreenTemplate =
 
 static const struct NamingScreenTemplate sPasswordScreenTemplate =
 {
-    .copyExistingString = TRUE,
+    .copyExistingString = FALSE,
     .maxChars = 15,
     .iconFunction = 2,
     .addGenderIcon = FALSE,
@@ -2603,6 +2603,7 @@ static const struct SpritePalette sSpritePalettes[] =
 
 
 //contraseñas
+static const u8 gText_TextoInicialContra[] = _("");
 static const u8 gText_Recompensa1[] = _("WORLDOFPOKEMON");
 static const u8 gText_Recompensa2[] = _("PASSWORD");
 static const u8 gText_Recompensa3[] = _("RECIEVEPOKEMON");
@@ -2611,10 +2612,18 @@ static const u8 gText_Recompensa5[] = _("POKEMON");
 static const u8 gText_Recompensa6[] = _("A");
 static const u8 gText_Recompensa7[] = _("B");
 static const u8 gText_Recompensa8[] = _("CODE");
+static const u8 gText_EquipoDeAsh1[] = _("ASHKANTO116");
+static const u8 gText_EquipoDeAsh2[] = _("ASHJOHTO158");
+static const u8 gText_EquipoDeAsh3[] = _("ASHADVANCE192");
+static const u8 gText_EquipoDeAsh4[] = _("ASHDIAPEA191");
+static const u8 gText_EquipoDeAsh5[] = _("ASHBEWI142");
+static const u8 gText_EquipoDeAsh6[] = _("ASHXYZ140");
+static const u8 gText_EquipoDeAsh7[] = _("ASHSUMO147");
+static const u8 gText_EquipoDeAsh8[] = _("ASHMASTERS8");
 
 void DoPasswordNamingScreen(void)
 {
-    StringCopy(gStringVar2, GetWaldaPhrasePtr());
+    // StringCopy(gStringVar2, gText_TextoInicialContra);
     DoNamingScreen(NAMING_SCREEN_PASSWORD, gStringVar2, 0, 0, 0, CB2_HandleGivenPassword);
 }
 
@@ -2626,7 +2635,6 @@ static void CB2_HandleGivenPassword(void)
 		GetSpeciesName(gStringVar1, SPECIES_MEW);
 		CopyItemName(ITEM_MASTER_BALL, gStringVar2);
 		ScriptContext1_SetupScript(Password2);
-		
     }
 	else if (StringCompare(gStringVar2, gText_Recompensa2) == 0) {
 		ScriptGiveMon(SPECIES_ARCEUS, 100, ITEM_MASTER_BALL, 0, 0, 0);
@@ -2661,7 +2669,7 @@ static void CB2_HandleGivenPassword(void)
 		GetSpeciesName(gStringVar1, SPECIES_DITTO);
 		ScriptContext1_SetupScript(Password1);
     }
-	if (StringCompare(gStringVar2, gText_Recompensa8) == 0) {
+	else if (StringCompare(gStringVar2, gText_Recompensa8) == 0) {
 		ScriptContext1_SetupScript(PasswordEvento1);
     }
 	else

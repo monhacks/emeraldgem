@@ -560,7 +560,32 @@ void BattleSetup_StartLegendaryBattle(void)
         CreateBattleStartTask(B_TRANSITION_BLUR, MUS_RG_VS_LEGEND);
         break;
     case SPECIES_MEW:
+	case SPECIES_MELTAN:
+	case SPECIES_MELMETAL:
         CreateBattleStartTask(B_TRANSITION_GRID_SQUARES, MUS_VS_MEW);
+        break;
+	case SPECIES_DIALGA:
+	case SPECIES_PALKIA:
+	case SPECIES_GIRATINA:
+	case SPECIES_ARCEUS:
+		CreateBattleStartTask(B_TRANSITION_SHRED_SPLIT, MUS_RG_VS_LEGEND);
+        break;
+	case SPECIES_SOLGALEO:
+	case SPECIES_LUNALA:
+	case SPECIES_NIHILEGO:
+	case SPECIES_BUZZWOLE:
+	case SPECIES_PHEROMOSA:
+	case SPECIES_XURKITREE:
+	case SPECIES_CELESTEELA:
+	case SPECIES_KARTANA:
+	case SPECIES_GUZZLORD:
+	case SPECIES_NECROZMA:
+	case SPECIES_POIPOLE:
+	case SPECIES_NAGANADEL:
+	case SPECIES_STAKATAKA:
+	case SPECIES_BLACEPHALON:
+	case SPECIES_ZERAORA:
+		CreateBattleStartTask(B_TRANSITION_BLACKHOLE, MUS_RG_VS_DEOXYS);
         break;
     }
 

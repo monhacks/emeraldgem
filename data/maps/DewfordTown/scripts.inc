@@ -95,7 +95,7 @@ DewfordTown_Movement_PlayerApproach2:
 	step_end
 
 DewfordTown_EventScript_Trigger_Text_0:
-	.string "¿Q-qué fue eso...?$"
+	.string "(¿Q-qué fue eso...?)$"
 
 
 DewfordTown_MapScripts::
