@@ -578,6 +578,10 @@ extern const u8 BattlePyramid_WarpToNextFloor[];
 extern const u8 BattlePyramid_TrainerBattle[];
 extern const u8 BattlePyramid_FindItemBall[];
 
+extern const u8 EventScript_OpenRegidragoDoor[];
+extern const u8 EventScript_ActuallyOpenRegidragoDoor[];
+extern const u8 EventScript_FreeRegidrago[];
+
 // fldeff misc
 extern const u8 SecretBase_EventScript_CaveUseSecretPower[];
 extern const u8 SecretBase_EventScript_TreeUseSecretPower[];

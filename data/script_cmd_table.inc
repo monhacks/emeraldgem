@@ -234,6 +234,7 @@ gScriptCmdTable::
 	.4byte ScrCmd_checkpartytype			@ 0xe7
 	.4byte ScrCmd_showitemdesc              @ 0xe8
 	.4byte ScrCmd_hideitemdesc              @ 0xe9
+	.4byte ScrCmd_multichoice2      		@ 0xea
 
 gScriptCmdTableEnd::
 	.4byte ScrCmd_nop

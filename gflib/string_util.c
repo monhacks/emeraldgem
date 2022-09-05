@@ -291,8 +291,16 @@ u16 StringLengthMinusColor(const u8 *str)
 {
     u16 length = 0;
 	u16 i = 0;
-	while (str[length] != EOS)
-       length++;   
+	while (str[i] != EOS/* && str[i] != '{' && str[i] != '}'*/){
+		if (str[i] != '{' || str[i] != '}') {
+			i++;
+			length--;
+		}
+		else {
+			i++;
+			length++;   
+		}
+	}
 	return length;
 }
 

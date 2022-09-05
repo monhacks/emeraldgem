@@ -8013,8 +8013,10 @@ static const union AnimCmd sAnim_RILLABOOM_1[] =
 
 static const union AnimCmd sAnim_SCORBUNNY_1[] =
 {
-    ANIMCMD_FRAME(0, 1),
-    ANIMCMD_END,
+    ANIMCMD_FRAME(1, 15),
+    ANIMCMD_FRAME(1, 10),
+    ANIMCMD_FRAME(0, 10),
+	ANIMCMD_END,
 };
 
 static const union AnimCmd sAnim_RABOOT_1[] =

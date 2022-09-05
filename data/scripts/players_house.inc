@@ -63,13 +63,7 @@ LittlerootTown_MaysHouse_2F_EventScript_WallClock::
 
 PlayersHouse_2F_EventScript_WallClock::
 	goto_if_set FLAG_SET_WALL_CLOCK, PlayersHouse_2F_EventScript_CheckWallClock
-	playse SE_PIN
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_ExclamationMark
-	msgbox PlayersHouse_1F_Text_ChooseTimeThing, MSGBOX_DEFAULT
-	multichoice 22, 8, MULTI_CLOCK_OR_RTC, FALSE
-	switch VAR_RESULT
-	case 0, PlayersHouse_2F_EventScript_ChoseClock
-	case 1, PlayersHouse_2F_EventScript_ChoseRTC
+	goto PlayersHouse_2F_EventScript_ChoseClock
 	end
 PlayersHouse_1F_Text_ChooseTimeThing:
 	.string "¡AVISO! LEE ESTO CON ATENCIÓN.\n"
@@ -89,9 +83,6 @@ PlayersHouse_1F_Text_ChooseRTC:
 	.string "usar el reloj real de\l"
 	.string "su dispositivo?$"
 PlayersHouse_2F_EventScript_ChoseClock::
-	msgbox PlayersHouse_1F_Text_ChooseClock, MSGBOX_YESNO
-	compare VAR_RESULT, 1
-	goto_if_ne PlayersHouse_2F_EventScript_WallClock
 	msgbox PlayersHouse_2F_Text_ClockIsStopped, MSGBOX_DEFAULT
 	call PlayersHouse_2F_EventScript_SetWallClock
 	delay 30
@@ -166,6 +157,7 @@ PlayersHouse_2F_EventScript_CheckWallClock::
 
 PlayersHouse_2F_EventScript_SetWallClock::
 	fadescreen FADE_TO_BLACK
+	special SetHourMinutes
 	special StartWallClock
 	waitstate
 	return

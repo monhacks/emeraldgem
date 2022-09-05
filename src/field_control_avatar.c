@@ -37,6 +37,9 @@
 #include "constants/songs.h"
 #include "constants/trainer_hill.h"
 #include "registered_items_menu.h"
+#include "event_object_movement.h"
+#include "constants/metatile_labels.h"
+#include "field_camera.h"
 
 static EWRAM_DATA u8 sWildEncounterImmunitySteps = 0;
 static EWRAM_DATA u16 sPreviousPlayerMetatileBehavior = 0;
@@ -188,6 +191,9 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
     struct MapPosition position;
     u8 playerDirection;
     u16 metatileBehavior;
+	s8 x1;
+	s8 y1;
+	u8 objectEventId;
 
     gSpecialVar_LastTalked = 0;
     gSelectedObjectEvent = 0;
@@ -237,6 +243,7 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
 
     GetInFrontOfPlayerPosition(&position);
     metatileBehavior = MapGridGetMetatileBehaviorAt(position.x, position.y);
+	objectEventId = GetObjectEventIdByXY(position.x, position.y);
     
     if (input->heldDirection && input->dpadDirection == playerDirection)
     {
@@ -267,6 +274,77 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
         TxRegItemsMenu_OpenMenu();
         return TRUE;
     }
+	if (input->pressedRButton && FlagGet(FLAG_REGICE_INFLUENCE) && FlagGet(FLAG_HAS_FIRE_POKEMON)) {
+		x1 = position.x;
+		y1 = position.y;
+		PlaySE(SE_M_FLAME_WHEEL);
+		if (objectEventId != OBJECT_EVENTS_COUNT && gObjectEvents[objectEventId].graphicsId == OBJ_EVENT_GFX_REGISTEEL && !FlagGet(FLAG_REGIDRAGO_DEFEATED)) {
+			ScriptContext1_SetupScript(EventScript_ActuallyOpenRegidragoDoor);
+		}
+		if (MetatileBehavior_IsSpecialDoor(MapGridGetMetatileBehaviorAt(position.x, position.y)) && VarGet(VAR_TEMP_1) >= 3 && FlagGet(FLAG_REGIDRAGO_ALMOST_UNLOCKED) && !FlagGet(FLAG_REGIDRAGO_DEFEATED)) {
+			if (!FlagGet(FLAG_REGIDRAGO_DOOR_UNLOCKED))
+				ScriptContext1_SetupScript(EventScript_ActuallyOpenRegidragoDoor);
+			else
+				ScriptContext1_SetupScript(EventScript_ActuallyOpenRegidragoDoor);
+		}
+		else {
+			if (MetatileBehavior_IsIce(metatileBehavior))
+				MapGridSetMetatileIdAt(x1, y1, METATILE_Cave_IceCaveFloor);
+			if (MetatileBehavior_IsIce(MapGridGetMetatileBehaviorAt(x1 + 1, y1)))
+				MapGridSetMetatileIdAt(x1 + 1, y1, METATILE_Cave_IceCaveFloor);
+			if (MetatileBehavior_IsIce(MapGridGetMetatileBehaviorAt(x1 - 1, y1)))
+				MapGridSetMetatileIdAt(x1 - 1, y1, METATILE_Cave_IceCaveFloor);
+			if (MetatileBehavior_IsIce(MapGridGetMetatileBehaviorAt(x1, y1 + 1)))
+				MapGridSetMetatileIdAt(x1, y1 + 1, METATILE_Cave_IceCaveFloor);
+			if (MetatileBehavior_IsIce(MapGridGetMetatileBehaviorAt(x1, y1 - 1)))
+				MapGridSetMetatileIdAt(x1, y1 - 1, METATILE_Cave_IceCaveFloor);
+			if (MetatileBehavior_IsIce(MapGridGetMetatileBehaviorAt(x1 + 1, y1 + 1)))
+				MapGridSetMetatileIdAt(x1 + 1, y1 + 1, METATILE_Cave_IceCaveFloor);
+			if (MetatileBehavior_IsIce(MapGridGetMetatileBehaviorAt(x1 + 1, y1 - 1)))
+				MapGridSetMetatileIdAt(x1 + 1, y1 - 1, METATILE_Cave_IceCaveFloor);
+			if (MetatileBehavior_IsIce(MapGridGetMetatileBehaviorAt(x1 - 1, y1 + 1)))
+				MapGridSetMetatileIdAt(x1 - 1, y1 + 1, METATILE_Cave_IceCaveFloor);
+			if (MetatileBehavior_IsIce(MapGridGetMetatileBehaviorAt(x1 - 1, y1 - 1)))
+				MapGridSetMetatileIdAt(x1 - 1, y1 - 1, METATILE_Cave_IceCaveFloor);
+			if (MetatileBehavior_IsIce_2(metatileBehavior))
+				MapGridSetMetatileIdAt(x1, y1, METATILE_Cave_IceCaveFloor);
+			if (MetatileBehavior_IsIce_2(MapGridGetMetatileBehaviorAt(x1 + 1, y1)))
+				MapGridSetMetatileIdAt(x1 + 1, y1, METATILE_Cave_IceCaveFloor);
+			if (MetatileBehavior_IsIce_2(MapGridGetMetatileBehaviorAt(x1 - 1, y1)))
+				MapGridSetMetatileIdAt(x1 - 1, y1, METATILE_Cave_IceCaveFloor);
+			if (MetatileBehavior_IsIce_2(MapGridGetMetatileBehaviorAt(x1, y1 + 1)))
+				MapGridSetMetatileIdAt(x1, y1 + 1, METATILE_Cave_IceCaveFloor);
+			if (MetatileBehavior_IsIce_2(MapGridGetMetatileBehaviorAt(x1, y1 - 1)))
+				MapGridSetMetatileIdAt(x1, y1 - 1, METATILE_Cave_IceCaveFloor);
+			if (MetatileBehavior_IsIce_2(MapGridGetMetatileBehaviorAt(x1 + 1, y1 + 1)))
+				MapGridSetMetatileIdAt(x1 + 1, y1 + 1, METATILE_Cave_IceCaveFloor);
+			if (MetatileBehavior_IsIce_2(MapGridGetMetatileBehaviorAt(x1 + 1, y1 - 1)))
+				MapGridSetMetatileIdAt(x1 + 1, y1 - 1, METATILE_Cave_IceCaveFloor);
+			if (MetatileBehavior_IsIce_2(MapGridGetMetatileBehaviorAt(x1 - 1, y1 + 1)))
+				MapGridSetMetatileIdAt(x1 - 1, y1 + 1, METATILE_Cave_IceCaveFloor);
+			if (MetatileBehavior_IsIce_2(MapGridGetMetatileBehaviorAt(x1 - 1, y1 - 1)))
+				MapGridSetMetatileIdAt(x1 - 1, y1 - 1, METATILE_Cave_IceCaveFloor);
+			if (MetatileBehavior_IsIce_3(metatileBehavior))
+				MapGridSetMetatileIdAt(x1, y1, METATILE_Cave_SwitchIceNotPressed);
+			if (MetatileBehavior_IsIce_3(MapGridGetMetatileBehaviorAt(x1 + 1, y1)))
+				MapGridSetMetatileIdAt(x1 + 1, y1, METATILE_Cave_SwitchIceNotPressed);
+			if (MetatileBehavior_IsIce_3(MapGridGetMetatileBehaviorAt(x1 - 1, y1)))
+				MapGridSetMetatileIdAt(x1 - 1, y1, METATILE_Cave_SwitchIceNotPressed);
+			if (MetatileBehavior_IsIce_3(MapGridGetMetatileBehaviorAt(x1, y1 + 1)))
+				MapGridSetMetatileIdAt(x1, y1 + 1, METATILE_Cave_SwitchIceNotPressed);
+			if (MetatileBehavior_IsIce_3(MapGridGetMetatileBehaviorAt(x1, y1 - 1)))
+				MapGridSetMetatileIdAt(x1, y1 - 1, METATILE_Cave_SwitchIceNotPressed);
+			if (MetatileBehavior_IsIce_3(MapGridGetMetatileBehaviorAt(x1 + 1, y1 + 1)))
+				MapGridSetMetatileIdAt(x1 + 1, y1 + 1, METATILE_Cave_SwitchIceNotPressed);
+			if (MetatileBehavior_IsIce_3(MapGridGetMetatileBehaviorAt(x1 + 1, y1 - 1)))
+				MapGridSetMetatileIdAt(x1 + 1, y1 - 1, METATILE_Cave_SwitchIceNotPressed);
+			if (MetatileBehavior_IsIce_3(MapGridGetMetatileBehaviorAt(x1 - 1, y1 + 1)))
+				MapGridSetMetatileIdAt(x1 - 1, y1 + 1, METATILE_Cave_SwitchIceNotPressed);
+			if (MetatileBehavior_IsIce_3(MapGridGetMetatileBehaviorAt(x1 - 1, y1 - 1)))
+				MapGridSetMetatileIdAt(x1 - 1, y1 - 1, METATILE_Cave_SwitchIceNotPressed);
+			DrawWholeMapView();
+		}
+	}
 	if (input->pressedRButton && TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_MACH_BIKE | PLAYER_AVATAR_FLAG_ACRO_BIKE))
     {
 		ObjectEventClearHeldMovementIfActive(&gObjectEvents[gPlayerAvatar.objectEventId]);
@@ -622,7 +700,10 @@ static bool8 TryStartCoordEventScript(struct MapPosition *position)
 static bool8 TryStartMiscWalkingScripts(u16 metatileBehavior)
 {
     s16 x, y;
-
+	
+	VarSet(VAR_0x8005, x);
+	VarSet(VAR_0x8006, y);
+	
     if (MetatileBehavior_IsCrackedFloorHole(metatileBehavior))
     {
         ScriptContext1_SetupScript(EventScript_FallDownHole);

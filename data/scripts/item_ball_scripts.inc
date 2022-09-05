@@ -3,19 +3,19 @@ Route102_EventScript_ItemPotion::
 	end
 
 Route103_EventScript_ItemGuardSpec::
-	finditem ITEM_GUARD_SPEC
+	finditem ITEM_X_SP_DEF
 	end
 
 Route103_EventScript_ItemPPUp::
-	finditem ITEM_PP_UP
+	finditem ITEM_PP_MAX
 	end
 
 Route104_EventScript_ItemPPUp::
-	finditem ITEM_PP_UP
+	finditem ITEM_PP_MAX
 	end
 
 Route104_EventScript_ItemPokeBall::
-	finditem ITEM_POKE_BALL
+	finditem ITEM_GREAT_BALL
 	end
 
 Route104_EventScript_ItemXAccuracy::
@@ -27,23 +27,33 @@ Route104_EventScript_ItemPotion::
 	end
 
 Route105_EventScript_ItemIron::
-	finditem ITEM_IRON
+	finditem ITEM_IRON, 2
 	end
 
 Route106_EventScript_ItemProtein::
-	finditem ITEM_PROTEIN
+	finditem ITEM_PROTEIN, 2
 	end
 
 Route108_EventScript_ItemStarPiece::
-	finditem ITEM_STAR_PIECE
+	finditem ITEM_STAR_PIECE, 3
+	message FoundItem_Text_Triple
+	closemessage
+	finditem ITEM_STARDUST
+	finditem ITEM_RELAXED_MINT
 	end
 
+FoundItem_Text_Triple::
+	.string "¡Oh, wow!\n¡Habían tres cosas!$"
+
+FoundItem_Text_Multiple::
+	.string "¡Oh, wow!\n¡Habían muchas cosas!$"
+
 Route109_EventScript_ItemPPUp::
-	finditem ITEM_PP_UP
+	finditem ITEM_PP_MAX
 	end
 
 Route109_EventScript_ItemPotion::
-	finditem ITEM_POTION
+	finditem ITEM_SUPER_POTION
 	end
 
 Route110_EventScript_ItemRareCandy::
@@ -51,7 +61,12 @@ Route110_EventScript_ItemRareCandy::
 	end
 
 Route110_EventScript_ItemDireHit::
-	finditem ITEM_DIRE_HIT
+	finditem ITEM_X_SP_ATK
+	message FoundItem_Text_Multiple
+	closemessage
+	finditem ITEM_X_ATTACK
+	finditem ITEM_X_DEFENSE
+	finditem ITEM_X_SP_DEF
 	end
 
 Route110_EventScript_ItemElixir::
@@ -76,6 +91,9 @@ Route111_EventScript_ItemElixir::
 
 Route112_EventScript_ItemNugget::
 	finditem ITEM_NUGGET
+	message FoundItem_Text_Double
+	closemessage
+	finditem ITEM_RARE_CANDY
 	end
 
 Route113_EventScript_ItemMaxEther::
@@ -91,7 +109,7 @@ Route113_EventScript_ItemHyperPotion::
 	end
 
 Route114_EventScript_ItemRareCandy::
-	finditem ITEM_RARE_CANDY
+	finditem ITEM_RARE_CANDY, 3
 	end
 
 Route114_EventScript_ItemProtein::
@@ -123,7 +141,7 @@ Route115_EventScript_ItemHealPowder::
 	end
 
 Route115_EventScript_ItemPPUp::
-	finditem ITEM_PP_UP
+	finditem ITEM_PP_MAX
 	end
 
 Route116_EventScript_ItemXSpecial::
@@ -135,7 +153,7 @@ Route116_EventScript_ItemEther::
 	end
 
 Route116_EventScript_ItemRepel::
-	finditem ITEM_REPEL
+	finditem ITEM_SUPER_REPEL
 	end
 
 Route116_EventScript_ItemHPUp::
@@ -143,7 +161,12 @@ Route116_EventScript_ItemHPUp::
 	end
 
 Route116_EventScript_ItemPotion::
-	finditem ITEM_POTION
+	finditem ITEM_LONELY_MINT
+	message FoundItem_Text_Multiple
+	closemessage
+	finditem ITEM_ABILITY_CAPSULE
+	finditem ITEM_ABILITY_PATCH
+	finditem ITEM_MUSCLE_FEATHER
 	end
 
 Route117_EventScript_ItemGreatBall::
@@ -155,7 +178,7 @@ Route117_EventScript_ItemRevive::
 	end
 
 Route118_EventScript_ItemHyperPotion::
-	finditem ITEM_HYPER_POTION
+	finditem ITEM_HYPER_POTION, 2
 	end
 
 Route119_EventScript_ItemSuperRepel::
@@ -180,6 +203,15 @@ Route119_EventScript_ItemRareCandy::
 
 Route119_EventScript_ItemHyperPotion::
 	finditem ITEM_HYPER_POTION
+	message FoundItem_Text_Multiple
+	closemessage
+	finditem ITEM_LONELY_MINT 
+	finditem ITEM_ADAMANT_MINT 
+	finditem ITEM_NAUGHTY_MINT 
+	finditem ITEM_BRAVE_MINT 
+	finditem ITEM_BOLD_MINT 
+	finditem ITEM_IMPISH_MINT 
+	finditem ITEM_LAX_MINT 
 	end
 
 Route119_EventScript_ItemHyperPotion2::
@@ -235,7 +267,7 @@ Route123_EventScript_ItemElixir::
 	end
 
 Route123_EventScript_ItemPPUp::
-	finditem ITEM_PP_UP
+	finditem ITEM_PP_MAX
 	end
 
 Route123_EventScript_ItemRevivalHerb::
@@ -243,15 +275,15 @@ Route123_EventScript_ItemRevivalHerb::
 	end
 
 Route124_EventScript_ItemRedShard::
-	finditem ITEM_RED_SHARD
+	finditem ITEM_RED_SHARD, 2
 	end
 
 Route124_EventScript_ItemBlueShard::
-	finditem ITEM_BLUE_SHARD
+	finditem ITEM_BLUE_SHARD, 2
 	end
 
 Route124_EventScript_ItemYellowShard::
-	finditem ITEM_YELLOW_SHARD
+	finditem ITEM_YELLOW_SHARD, 2
 	end
 
 Route125_EventScript_ItemBigPearl::
@@ -259,7 +291,7 @@ Route125_EventScript_ItemBigPearl::
 	end
 
 Route126_EventScript_ItemGreenShard::
-	finditem ITEM_GREEN_SHARD
+	finditem ITEM_GREEN_SHARD, 2
 	end
 
 Route127_EventScript_ItemZinc::
@@ -275,7 +307,7 @@ Route127_EventScript_ItemRareCandy::
 	end
 
 Route132_EventScript_ItemRareCandy::
-	finditem ITEM_RARE_CANDY
+	finditem ITEM_RARE_CANDY, 5
 	end
 
 Route132_EventScript_ItemProtein::
@@ -339,11 +371,14 @@ PetalburgWoods_EventScript_ItemEther::
 	end
 
 PetalburgWoods_EventScript_ItemParalyzeHeal::
-	finditem ITEM_PARALYZE_HEAL
+	finditem ITEM_FULL_HEAL
 	end
 
 RusturfTunnel_EventScript_ItemPokeBall::
-	finditem ITEM_POKE_BALL
+	finditem ITEM_DUSK_BALL
+	message FoundItem_Text_Double
+	closemessage
+	finditem ITEM_TIMER_BALL
 	end
 
 RusturfTunnel_EventScript_ItemMaxEther::
@@ -351,7 +386,7 @@ RusturfTunnel_EventScript_ItemMaxEther::
 	end
 
 GraniteCave_1F_EventScript_ItemEscapeRope::
-	finditem ITEM_ESCAPE_ROPE
+	finditem ITEM_ESCAPE_ROPE, 2
 	end
 
 GraniteCave_B1F_EventScript_ItemPokeBall::
@@ -359,15 +394,21 @@ GraniteCave_B1F_EventScript_ItemPokeBall::
 	end
 
 GraniteCave_B2F_EventScript_ItemRepel::
-	finditem ITEM_REPEL
+	finditem ITEM_OVAL_STONE
 	end
 
 GraniteCave_B2F_EventScript_ItemRareCandy::
 	finditem ITEM_RARE_CANDY
+	message FoundItem_Text_Double
+	closemessage
+	finditem ITEM_BIG_NUGGET
 	end
 
+FoundItem_Text_Double::
+	.string "¡Oh, habían dos cosas!$"
+
 JaggedPass_EventScript_ItemBurnHeal::
-	finditem ITEM_BURN_HEAL
+	finditem ITEM_FULL_HEAL
 	end
 
 FieryPath_EventScript_ItemFireStone::
@@ -391,7 +432,7 @@ MeteorFalls_1F_1R_EventScript_ItemMoonStone::
 	end
 
 MeteorFalls_1F_1R_EventScript_ItemPPUP::
-	finditem ITEM_PP_UP
+	finditem ITEM_PP_MAX
 	end
 
 MeteorFalls_B1F_2R_EventScript_ItemTM02::
@@ -415,7 +456,7 @@ NewMauville_Inside_EventScript_ItemFullHeal::
 	end
 
 NewMauville_Inside_EventScript_ItemParalyzeHeal::
-	finditem ITEM_PARALYZE_HEAL
+	finditem ITEM_FULL_HEAL
 	end
 
 AbandonedShip_Rooms_1F_EventScript_ItemHarborMail::
@@ -551,7 +592,7 @@ ShoalCave_LowTideInnerRoom_EventScript_ItemRareCandy::
 	end
 
 ShoalCave_LowTideStairsRoom_EventScript_ItemIceHeal::
-	finditem ITEM_ICE_HEAL
+	finditem ITEM_FULL_HEAL, 3
 	end
 
 ShoalCave_LowTideIceRoom_EventScript_ItemTM07::
@@ -567,39 +608,39 @@ SeafloorCavern_Room9_EventScript_ItemTM26::
 	end
 
 Route110_TrickHousePuzzle1_EventScript_ItemOrangeMail::
-	finditem ITEM_ORANGE_MAIL
+	finditem ITEM_DREAM_BALL, 2
 	end
 
 Route110_TrickHousePuzzle2_EventScript_ItemHarborMail::
-	finditem ITEM_HARBOR_MAIL
+	finditem ITEM_DUSK_BALL, 2
 	end
 
 Route110_TrickHousePuzzle2_EventScript_ItemWaveMail::
-	finditem ITEM_WAVE_MAIL
+	finditem ITEM_BIG_NUGGET, 3
 	end
 
 Route110_TrickHousePuzzle3_EventScript_ItemShadowMail::
-	finditem ITEM_SHADOW_MAIL
+	finditem ITEM_QUICK_BALL, 3
 	end
 
 Route110_TrickHousePuzzle3_EventScript_ItemWoodMail::
-	finditem ITEM_WOOD_MAIL
+	finditem ITEM_PARK_BALL, 3
 	end
 
 Route110_TrickHousePuzzle4_EventScript_ItemMechMail::
-	finditem ITEM_MECH_MAIL
+	finditem ITEM_RED_SHARD, 3
 	end
 
 Route110_TrickHousePuzzle6_EventScript_ItemGlitterMail::
-	finditem ITEM_GLITTER_MAIL
+	finditem ITEM_BLUE_SHARD, 3
 	end
 
 Route110_TrickHousePuzzle7_EventScript_ItemTropicMail::
-	finditem ITEM_TROPIC_MAIL
+	finditem ITEM_GREEN_SHARD, 3
 	end
 
 Route110_TrickHousePuzzle8_EventScript_ItemBeadMail::
-	finditem ITEM_BEAD_MAIL
+	finditem ITEM_YELLOW_SHARD, 3
 	end
 
 VictoryRoad_1F_EventScript_ItemMaxElixir::
@@ -607,7 +648,7 @@ VictoryRoad_1F_EventScript_ItemMaxElixir::
 	end
 
 VictoryRoad_1F_EventScript_ItemPPUp::
-	finditem ITEM_PP_UP
+	finditem ITEM_PP_MAX
 	end
 
 VictoryRoad_B1F_EventScript_ItemTM29::
@@ -631,7 +672,7 @@ ArtisanCave_1F_EventScript_ItemCarbos::
 	end
 
 MagmaHideout_1F_EventScript_ItemRareCandy::
-	finditem ITEM_RARE_CANDY
+	finditem ITEM_RARE_CANDY, 5
 	end
 
 MagmaHideout_2F_2R_EventScript_ItemMaxElixir::
@@ -643,7 +684,7 @@ MagmaHideout_2F_2R_EventScript_ItemFullRestore::
 	end
 
 MagmaHideout_3F_1R_EventScript_ItemNugget::
-	finditem ITEM_NUGGET
+	finditem ITEM_NUGGET, 2
 	end
 
 MagmaHideout_3F_2R_EventScript_ItemPPMax::
@@ -655,5 +696,5 @@ MagmaHideout_4F_EventScript_ItemMaxRevive::
 	end
 
 MagmaHideout_3F_3R_EventScript_ItemEscapeRope::
-	finditem ITEM_ESCAPE_ROPE
+	finditem ITEM_ESCAPE_ROPE, 3
 	end

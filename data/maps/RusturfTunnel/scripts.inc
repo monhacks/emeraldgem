@@ -599,7 +599,7 @@ RusturfTunnel_EventScript_Wanda_Text_0:
 	.string "cavando.$"
 
 RusturfTunnel_EventScript_WandasBoyfriend_Text_0:
-	.string "¡ARGH! ¡ROAR!\p"
+	.string "¡ARGH! {PAUSE 2}¡ROAR!\p"
 	.string "¡Ese lindo hombre me detuvo cuando\n"
 	.string "estaba tan cerca………!\p"
 	.string "Y ahora, un derrumbe me lastimó las\n"
@@ -609,9 +609,9 @@ RusturfTunnel_EventScript_WandasBoyfriend_Text_0:
 
 RusturfTunnel_EventScript_ClearTunnelScene_Text_0:
 	.string "¡ROAR!\n"
-	.string "E-eh, quiero decir, ¡wow!\p"
+	.string "E-eh, quiero decir, {PAUSE 2}¡wow!\p"
 	.string "¡Destruíste esa roca que bloqueaba el\n"
-	.string "camino! ¡Ni mis enormes músculos de\l"
+	.string "camino! {PAUSE 2}¡Ni mis enormes músculos de\l"
 	.string "constructor podían destruírla!\p"
 	.string "Como agradecimiento de crear un atajo\n"
 	.string "para ver a mi novia, ten esto.$"
@@ -624,8 +624,8 @@ RusturfTunnel_EventScript_ClearTunnelScene_Text_1:
 	.string "novia cuando quiera!$"
 
 RusturfTunnel_EventScript_ClearTunnelScene_Text_2:
-	.string "¡Amor! ¡Hola!\n"
-	.string "Nnn… ¡ROOOAARR! ¡Estoy tan feliz!$"
+	.string "¡Amor! {PAUSE 2}¡Hola!\n"
+	.string "Nnn… {PAUSE 2}¡ROOOAARR! {PAUSE 2}¡Estoy tan feliz!$"
 
 RusturfTunnel_EventScript_ClearTunnelScene_Text_3:
 	.string "¡Oh, Riley, amor mío!\n"
@@ -658,13 +658,13 @@ RusturfTunnel_EventScript_Grunt_Text_0:
 	.string "músculos.\p"
 	.string "………\p"
 	.string "¿Sigues aquí?\n"
-	.string "Entonces, ¡Peleemos!$"
+	.string "Entonces, {PAUSE 2}¡Peleemos!$"
 
 RusturfTunnel_EventScript_Grunt_Text_1:
 	.string "No comprendo.\p"
 	.string "El {COLOR BLUE}Jefecito{COLOR DARK_GRAY} me dijo que sería tarea\n"
-	.string "fácil, ¡Pero no lo es!\p"
-	.string "¡ARGH! ¡ROAR!\p"
+	.string "fácil, {PAUSE 2}¡Pero no lo es!\p"
+	.string "¡ARGH! {PAUSE 2}¡ROAR!\p"
 	.string "¡Tendré que hacer esto con trucos\n"
 	.string "sucios!$"
 
@@ -690,16 +690,16 @@ RusturfTunnel_EventScript_Grunt_Text_6:
 RusturfTunnel_EventScript_Grunt_Text_7:
 	.string "¡N-NO!\n"
 	.string "¡No puede ser!\l"
-	.string "¡ARGH! ¡Aquí tienes denuevo tus\l"
+	.string "¡ARGH! {PAUSE 2}¡Aquí tienes denuevo tus\l"
 	.string "inútiles Pokémon!$"
 
 RusturfTunnel_EventScript_Grunt_Text_8:
 	.string "¡Te han devuelto la mochila!$"
 
 RusturfTunnel_EventScript_Grunt_Text_9:
-	.string "¡A-ARGH! ¡ROAR! ¡NOO!\p"
+	.string "¡A-ARGH! {PAUSE 2}¡ROAR! {PAUSE 2}¡NOO!\p"
 	.string "¡Tch, aquí tienen las partes!\n"
-	.string "De todas formas, ¡Nuestro plan es\l"
+	.string "De todas formas, {PAUSE 2}¡Nuestro plan es\l"
 	.string "infalible, mua ja ja!$"
 
 RusturfTunnel_EventScript_Grunt_Text_10:
@@ -738,13 +738,13 @@ RusturfTunnel_EventScript_Mike_Text_0:
 	.string "¡Esta cueva es muy pequeña!$"
 
 RusturfTunnel_Text_GruntDefeat2::
-	.string "¡ARGH! ¡ROAR!\p¡DÉJAME GANARTE!$"
+	.string "¡ARGH! {PAUSE 2}¡ROAR!\p¡DÉJAME GANARTE!$"
 
 RusturfTunnel_Text_GruntDefeat::
-	.string "¡ARGH! ¡ROAR!\p¿Porqué no pueden dejarme\nterminar esta misión?$"
+	.string "¡ARGH! {PAUSE 2}¡ROAR!\p¿Porqué no pueden dejarme\nterminar esta misión?$"
 
 RusturfTunnel_Text_MikeIntro::
-	.string "Si un hombre que está en las montañas se llama montañero, ¿Porqué los Pokémon de montañas no se llaman montañokes?$"
+	.string "Si un hombre que está en las montañas se llama montañero, {PAUSE 2}¿Porqué los Pokémon de montañas no se llaman montañokes?$"
 
 RusturfTunnel_Text_MikeDefeat::
 	.string "Mis montañokes………$"

@@ -31,5 +31,11 @@ bool8 UsedPokemonCenterWarp(void);
 void ResetFanClub(void);
 bool8 ShouldShowBoxWasFullMessage(void);
 void SetPCBoxToSendMon(u8 boxId);
+u16 CheckObjectAtXY(void);
+void GetObjectPosition(void);
+u16 GetMetatileIdAt(void);
+u16 CheckForMetatiles(u16 x, u16 y, u16 metatileA);
+bool8 CheckForRegielekiPuzzle(void);
+void CheckSpecies(void);
 
 #endif // GUARD_FIELD_SPECIALS_H

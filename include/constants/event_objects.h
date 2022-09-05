@@ -242,8 +242,9 @@
 #define OBJ_EVENT_GFX_HOOH                       238
 #define OBJ_EVENT_GFX_RALTS                      239
 #define OBJ_EVENT_GFX_CHIMECHO                   240
+#define OBJ_EVENT_GFX_PUSHABLE_BOULDER_2         241
 
-#define NUM_OBJ_EVENT_GFX                        241
+#define NUM_OBJ_EVENT_GFX                        242
 
 
 // These are dynamic object gfx ids.

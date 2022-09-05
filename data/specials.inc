@@ -548,3 +548,11 @@ gSpecials::
 	def_special TakeAwayItemsAndBerries
 	def_special GiveBackItemsAndBerries
 	def_special TrySpecialOverworldEvo
+	def_special CheckSpecies
+	def_special GetObjectPosition
+	def_special CheckObjectAtXY
+	def_special GetMetatileIdAt
+	def_special CheckForRegielekiPuzzle
+	def_special CheckForMetatiles
+	def_special SetHourMinutes
+	

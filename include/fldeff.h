@@ -35,6 +35,9 @@ bool8 FldEff_UseStrength(void);
 // sweet scent
 bool8 SetUpFieldMove_SweetScent(void);
 bool8 FldEff_SweetScent(void);
+// fire punch/flamethrower
+// bool8 SetUpFieldMove_FireMoves(void);
+// bool8 FldEff_FireMoves(void);
 
 // teleport
 bool8 SetUpFieldMove_Teleport(void);

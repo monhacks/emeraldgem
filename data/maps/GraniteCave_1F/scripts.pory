@@ -5,20 +5,109 @@ const  LOCALID_BRAWLY = 6
 
 mapscripts GraniteCave_1F_MapScripts {}
 
+script GraniteCave_1F_EventScript_BlueRock1 {
+	if (!flag(FLAG_BLUE_STONES_1)) {
+		msgbox(format("... ¿Oh?\n¡Mira, hay una piedra evolutiva aquí!"))
+		delay (16)
+		msgbox(format(".... ¡MMMMGGGGHHH!"))
+		setvar (VAR_0x8004, 0) 
+		setvar (VAR_0x8005, 2) 
+		setvar (VAR_0x8006, 2)
+		setvar (VAR_0x8007, 3)
+		special (ShakeCamera)
+		waitstate
+		closemessage
+		delay (30)
+		playse (SE_PIN)
+		applymovement (OBJ_EVENT_ID_PLAYER, Common_Movement_ExclamationMark)
+		random (4)
+		switch (var(VAR_RESULT)) {
+		case 0:
+			giveitem (ITEM_WATER_STONE, 1)
+			break
+		case 1:
+			giveitem (ITEM_LEAF_STONE, 1)
+			break
+		case 2:
+			giveitem (ITEM_MOON_STONE, 1)
+			break
+		case 3:
+			giveitem (ITEM_DUSK_STONE, 1)
+			break
+		case 4:
+			giveitem (ITEM_ICE_STONE, 1)
+			break
+		default:
+			giveitem (ITEM_WATER_STONE, 1)
+			break
+		}
+		delay (16)
+		msgbox(format("Parece que otra piedra evolutiva se está formando debajo muy lentamente...\p¡Habrá que volver mañana!"))
+		setflag(FLAG_BLUE_STONES_1)
+		release
+		end
+	}
+	else {
+		msgbox(format("Parece que otra piedra evolutiva se está formando debajo muy lentamente...\p¡Habrá que volver mañana!"))
+		release
+		end
+	}
+}
+
+script GraniteCave_1F_EventScript_RedRock1 {
+	if (!flag(FLAG_RED_STONES_1)) {
+		msgbox(format("... ¿Oh?\n¡Mira, hay una piedra evolutiva aquí!"))
+		delay (16)
+		msgbox(format(".... ¡MMMMGGGGHHH!"))
+		setvar (VAR_0x8004, 0) 
+		setvar (VAR_0x8005, 2) 
+		setvar (VAR_0x8006, 2)
+		setvar (VAR_0x8007, 3)
+		special (ShakeCamera)
+		closemessage
+		waitstate
+		delay (30)
+		playse (SE_PIN)
+		applymovement (OBJ_EVENT_ID_PLAYER, Common_Movement_ExclamationMark)
+		random (4)
+		switch (var(VAR_RESULT)) {
+		case 0:
+			giveitem (ITEM_FIRE_STONE, 1)
+			break
+		case 1:
+			giveitem (ITEM_THUNDER_STONE, 1)
+			break
+		case 2:
+			giveitem (ITEM_SUN_STONE, 1)
+			break
+		case 3:
+			giveitem (ITEM_SHINY_STONE, 1)
+			break
+		case 4:
+			giveitem (ITEM_DAWN_STONE, 1)
+			break
+		default:
+			giveitem (ITEM_FIRE_STONE, 1)
+			break
+		}
+		delay (16)
+		msgbox(format("Parece que otra piedra evolutiva se está formando debajo muy lentamente...\p¡Habrá que volver mañana!"))
+		setflag(FLAG_RED_STONES_1)
+		release
+		end
+	}
+	else {
+		msgbox(format("Parece que otra piedra evolutiva se está formando debajo muy lentamente...\p¡Habrá que volver mañana!"))
+		release
+		end
+	}
+}
+
 script GraniteCave_1F_EventScript_Hiker {
 	lock
 	faceplayer	
-	checkitem (ITEM_HM05)
-	if (var(VAR_RESULT) == TRUE) {
-		msgbox(format("Flash es un Movimiento Oculto que puede ser usado fuera de combate. Aunque, honestamente, ya no es de tanta utilidad.\p"
-		"Verás, unos terremotos abrieron unos hoyos naturales en las plantas bajas y ahora la luz natural pasa tranquilamente."))
-		release
-		end
-	} 
-	msgbox(format("Antes, solía darles a los nuevos la MO05 Flash para que navegaran por este lugar. Ahora, lo hago por formalidades."))
-	giveitem (ITEM_HM05)
-	msgbox(format("Flash es un Movimiento Oculto que puede ser usado fuera de combate. Aunque, honestamente, ya no es de tanta utilidad.\p"
-	"Verás, unos terremotos abrieron unos hoyos naturales en las plantas bajas y ahora la luz natural pasa tranquilamente."))
+	msgbox(format("Este lugar ha cambiado mucho con el tiempo, por ejemplo, {COLOR BLUE}ahora el fondo de la cueva es más claro{COLOR DARK_GRAY},"
+	"y también se formaron unas {COLOR RED}Rocas Rojas{COLOR DARK_GRAY} y {COLOR BLUE}Rocas Azules{COLOR DARK_GRAY}, ¡Que forman {COLOR BLUE}Piedras Evolutivas diariamente!{COLOR DARK_GRAY}"))
 	release
 	end
 	}
@@ -73,6 +162,7 @@ script GraniteCave_1F_EventScript_Grunts {
 	applymovement (LOCALID_GRUNT_2, Common_Movement_WalkInPlaceRight)
 	applymovement (LOCALID_GRUNT_3, Common_Movement_WalkInPlaceRight)
 	waitmovement (0)
+	playbgm (MUS_ENCOUNTER_AQUA, TRUE)
 	namebox (Aqua)
 	msgbox(format("¡Ay, chicas, tenemos visitas!"))
 	hidenamebox
@@ -84,7 +174,9 @@ script GraniteCave_1F_EventScript_Grunts {
 	playse (SE_PIN)
 	applymovement (OBJ_EVENT_ID_PLAYER, Common_Movement_ExclamationMark)
 	waitmovement (0)
-	msgbox(format("{PLAYER}: {COLOR BLUE}(¡Mejor me voy!)"))
+	namebox (Player)
+	msgbox(format("{COLOR BLUE}(¡Mejor me voy!)"))
+	hidenamebox
 	closemessage
 	applymovement (OBJ_EVENT_ID_PLAYER, GraniteCave_1F_Movement_PlayerEscapes)
 	applymovement (LOCALID_GRUNT_2, GraniteCave_1F_Movement_Grunt2_BlockExit_Top)
@@ -111,7 +203,8 @@ script GraniteCave_1F_EventScript_Grunts {
 		default:
 			call (GraniteCave_1F_EventScript_PlayerNoWayOut1)
 	}
-	msgbox(format("{PLAYER}: {COLOR BLUE}(D-demonios...)"))
+	namebox (Player)
+	msgbox(format("{COLOR BLUE}(D-demonios...)"))
 	hidenamebox
 	closemessage
 	namebox(Aqua)
@@ -142,7 +235,7 @@ script GraniteCave_1F_EventScript_Grunts {
 	trainerbattle_no_intro (TRAINER_ANDRES_2, GraniteCave_1F_Text_Grunt1_Defeat)
 	closemessage
 	playse (SE_PIN)
-	applymovement (LOCALID_GRUNT_2, Common_Movement_ExclamationMark)
+	applymovement (LOCALID_GRUNT_3, Common_Movement_ExclamationMark)
 	waitmovement (0)
 	namebox(Aqua)
 	msgbox(format("¿¡C-cómo!?"))
@@ -155,7 +248,7 @@ script GraniteCave_1F_EventScript_Grunts {
 	msgbox (GraniteCave_1F_Text_Grunt2_Intro)
 	trainerbattle_no_intro (TRAINER_ANDRES_3, GraniteCave_1F_Text_Grunt2_Defeat)
 	playse (SE_PIN)
-	applymovement (LOCALID_GRUNT_3, Common_Movement_ExclamationMark)
+	applymovement (LOCALID_GRUNT_2, Common_Movement_ExclamationMark)
 	waitmovement (0)
 	namebox(Aqua)
 	msgbox(format("¡No puede ser!"))
@@ -163,6 +256,7 @@ script GraniteCave_1F_EventScript_Grunts {
 	closemessage
 	delay (16)
 	applymovement (OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceDown)
+	waitmovement (0)
 	waitmovement (0)
 	delay(12)
 	namebox(Aqua)
@@ -232,6 +326,8 @@ script GraniteCave_1F_EventScript_Grunts {
 	hidenamebox
 	closemessage
 	delay (20)
+	savebgm (MUS_DUMMY)
+	fadedefaultbgm
 	applymovement (LOCALID_GRUNT_3, Common_Movement_WalkInPlaceDown)
 	waitmovement (0)
 	namebox (Aqua)
@@ -330,7 +426,7 @@ script GraniteCave_1F_EventScript_Grunts {
 	msgbox(format("¿Estás bien, amig{OA}?\n¿Esas locas no te hicieron nada, no?"))
 	hidenamebox
 	closemessage
-	msgbox(format("{PLAYER}: N-no, señor."))
+	delay (8)
 	namebox(Brawly)
 	msgbox(format("¡Hell yeah, eso significa que llegué justo a tiempo!\pAunque, estoy seguro que las habrías derrotado"
 	"eventualmente si ellas no hubieran intentado atacarte con todos sus Pokémon al mismo tiempo, después de todo,"
@@ -344,7 +440,7 @@ script GraniteCave_1F_EventScript_Grunts {
 	applymovement(LOCALID_BRAWLY, Common_Movement_FacePlayer)
 	waitmovement (0)
 	namebox(Brawly)
-	msgbox(format("Anyway, ¡Te estaré esperando en el Gimnasio, dude!\p¡No puedo esperar a batallar contra tí, yeah!"))
+	msgbox(format("Anyway, ¡Te estaré esperando en el Gimnasio, dude!\p¡No puedo esperar a batallar contra tí!"))
 	hidenamebox
 	closemessage
 	applymovement (LOCALID_BRAWLY, GraniteCave_1F_Movement_BrawlyOut)
@@ -451,6 +547,7 @@ movement GraniteCave_1F_Movement_PlayerEscapes {
 	walk_right
 	unlock_facing_direction
 	walk_fast_right * 2
+	walk_fast_down
 }
 
 movement GraniteCave_1F_Movement_PlayerBacksDown {
@@ -459,6 +556,8 @@ movement GraniteCave_1F_Movement_PlayerBacksDown {
 }
 
 movement GraniteCave_1F_Movement_PlayerNoWayOut {
+	lock_facing_direction
+	walk_slow_up
 	walk_in_place_slow_up
 	delay_16
 	walk_in_place_slow_down
@@ -466,7 +565,7 @@ movement GraniteCave_1F_Movement_PlayerNoWayOut {
 
 movement GraniteCave_1F_Movement_PlayerNoWayOut2 {
 	lock_facing_direction
-	walk_slow_up
+	walk_slow_up * 2
 	walk_in_place_slow_down
 	walk_in_place_slow_up
 	delay_16
@@ -475,7 +574,7 @@ movement GraniteCave_1F_Movement_PlayerNoWayOut2 {
 
 movement GraniteCave_1F_Movement_PlayerNoWayOut3 {
 	lock_facing_direction
-	walk_slow_up * 2
+	walk_slow_up * 3
 	walk_in_place_slow_down
 	walk_in_place_slow_up
 	delay_16
@@ -516,9 +615,5 @@ movement GraniteCave_1F_Movement_Grunt3_BlockExit_Top {
 	walk_faster_down * 2
 	walk_faster_right * 3
 	face_up
-}
-
-text GraniteCave_1F_Player {
-	"{COLOR_PLAYER}{PLAYER}"
 }
 

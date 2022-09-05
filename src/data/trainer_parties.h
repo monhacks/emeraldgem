@@ -7371,18 +7371,33 @@ static const struct TrainerMon sParty_BrendanRoute103Treecko[] = {
 static const struct TrainerMon sParty_BrendanRoute110Treecko[] = {
     {
     .iv = 50,
-    .lvl = 18,
+    .lvl = 22,
+	.build = TRAINER_MON_HP_SPDEF,
+	.difficulty = TRAINER_HARD,
     .species = SPECIES_WINGULL,
+	.heldItem = ITEM_FLYING_GEM,
+	.ability = ABILITY_SLOT_1,
+	.moves = {MOVE_ROOST, MOVE_GROWL, MOVE_SCALD, MOVE_ACROBATICS}
     },
     {
     .iv = 50,
-    .lvl = 18,
+    .lvl = 22,
+	.build = TRAINER_MON_SPEED_SPEC,
+	.difficulty = TRAINER_HARD,
     .species = SPECIES_LOMBRE,
+	.heldItem = ITEM_ORAN_BERRY,
+	.ability = ABILITY_SLOT_1,
+	.moves = {MOVE_LEECH_SEED, MOVE_GIGA_DRAIN, MOVE_SCALD, MOVE_ICE_BEAM}
     },
     {
     .iv = 100,
-    .lvl = 20,
+    .lvl = 24,
+	.build = TRAINER_MON_SPEED_PHYS,
+	.difficulty = TRAINER_HARD,
     .species = SPECIES_COMBUSKEN,
+	.ability = ABILITY_HIDDEN,
+	.heldItem = ITEM_CHARCOAL,
+	.moves = {MOVE_DOUBLE_KICK, MOVE_PECK, MOVE_FIRE_PUNCH, MOVE_QUICK_ATTACK}
     }
 };
 

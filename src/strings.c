@@ -87,8 +87,8 @@ ALIGNED(4) const u8 gText_NextBack[] = _("{A_BUTTON}NEXT {B_BUTTON}BACK"); // Un
 ALIGNED(4) const u8 gText_PickNextCancel[] = _("{DPAD_UPDOWN}PICK {A_BUTTON}NEXT {B_BUTTON}Salir");
 ALIGNED(4) const u8 gText_PickCancel[] = _("{DPAD_UPDOWN}PICK {A_BUTTON}{B_BUTTON}Salir");
 ALIGNED(4) const u8 gText_AButtonExit[] = _("{A_BUTTON}Salir");
-const u8 gText_BirchBoy[] = _("Chico");
-const u8 gText_BirchGirl[] = _("Chica");
+const u8 gText_BirchBoy[] = _("Brendan");
+const u8 gText_BirchGirl[] = _("May");
 const u8 gText_DefaultNameStu[] = _("Hugo");
 const u8 gText_DefaultNameMilton[] = _("Paco");
 const u8 gText_DefaultNameTom[] = _("Luis");
@@ -96,37 +96,37 @@ const u8 gText_DefaultNameKenny[] = _("Finn");
 const u8 gText_DefaultNameReid[] = _("Jake");
 const u8 gText_DefaultNameJude[] = _("Steven");
 const u8 gText_DefaultNameJaxson[] = _("Kaio");
-const u8 gText_DefaultNameEaston[] = _("Marcos");
-const u8 gText_DefaultNameWalker[] = _("Walter");
-const u8 gText_DefaultNameTeru[] = _("Miyamoto");
-const u8 gText_DefaultNameJohnny[] = _("Naruhodo");
+const u8 gText_DefaultNameEaston[] = _("Brendan");
+const u8 gText_DefaultNameWalker[] = _("Pedro");
+const u8 gText_DefaultNameTeru[] = _("Diego");
+const u8 gText_DefaultNameJohnny[] = _("Ryuu");
 const u8 gText_DefaultNameBrett[] = _("Asogi");
 const u8 gText_DefaultNameSeth[] = _("Apollo");
-const u8 gText_DefaultNameTerry[] = _("Stanford");
+const u8 gText_DefaultNameTerry[] = _("Camilo");
 const u8 gText_DefaultNameCasey[] = _("Gumshoe");
 const u8 gText_DefaultNameDarren[] = _("Darrell");
 const u8 gText_DefaultNameLandon[] = _("Raymond");
 const u8 gText_DefaultNameCollin[] = _("Jethro");
-const u8 gText_DefaultNameStanley[] = _("Stanley");
+const u8 gText_DefaultNameStanley[] = _("Javier");
 const u8 gText_DefaultNameQuincy[] = _("Nombre");
 const u8 gText_DefaultNameKimmy[] = _("Player");
 const u8 gText_DefaultNameTiara[] = _("Bonnie");
-const u8 gText_DefaultNameBella[] = _("Marceline");
+const u8 gText_DefaultNameBella[] = _("Marcy");
 const u8 gText_DefaultNameJayla[] = _("Rayfa");
 const u8 gText_DefaultNameAllie[] = _("Carmen");
-const u8 gText_DefaultNameLianna[] = _("Ellise");
+const u8 gText_DefaultNameLianna[] = _("Liliana");
 const u8 gText_DefaultNameSara[] = _("Sara");
 const u8 gText_DefaultNameMonica[] = _("Uma");
 const u8 gText_DefaultNameCamila[] = _("Camila");
 const u8 gText_DefaultNameAubree[] = _("Adhara");
-const u8 gText_DefaultNameRuthie[] = _("Mailén");
+const u8 gText_DefaultNameRuthie[] = _("Marcela");
 const u8 gText_DefaultNameHazel[] = _("Hazel");
 const u8 gText_DefaultNameNadine[] = _("Athena");
-const u8 gText_DefaultNameTanja[] = _("Webby");
+const u8 gText_DefaultNameTanja[] = _("Tulip");
 const u8 gText_DefaultNameYasmin[] = _("Enid");
 const u8 gText_DefaultNameNicola[] = _("Carol");
 const u8 gText_DefaultNameLillie[] = _("Sadie");
-const u8 gText_DefaultNameTerra[] = _("Sandiego");
+const u8 gText_DefaultNameTerra[] = _("Tamara");
 const u8 gText_DefaultNameLucy[] = _("Lisa");
 const u8 gText_DefaultNameHalie[] = _("Jaiden");
 const u8 gText_ThisIsAPokemon[] = _("Los Monstruos de Bolsillo, “Pocket\nMonsters”, o para abreviar, Pokémon,\lllenan nuestro mundo.\pY este, es mi “Pokémon” favorito…{PAUSE 96}\p");
@@ -550,14 +550,37 @@ const u8 gText_EggWillTakeSomeTime[] = _("What will hatch from this?\nIt will ta
 const u8 gText_EggWillHatchSoon[] = _("It moves occasionally.\nIt should hatch soon.");
 const u8 gText_EggAboutToHatch[] = _("It's making sounds.\nIt's about to hatch!");
 const u8 gText_HMMovesCantBeForgotten2[] = _("HM moves can't be\nforgotten now.");
-const u8 gText_XNatureMetAtYZ[] = _("{DYNAMIC 0}{DYNAMIC 2}{DYNAMIC 1}{DYNAMIC 5} nature,\nmet at {LV_2}{DYNAMIC 0}{DYNAMIC 3}{DYNAMIC 1},\n{DYNAMIC 0}{DYNAMIC 4}{DYNAMIC 1}.");
-const u8 gText_XNatureHatchedAtYZ[] = _("{DYNAMIC 0}{DYNAMIC 2}{DYNAMIC 1}{DYNAMIC 5} nature,\nhatched at {LV_2}{DYNAMIC 0}{DYNAMIC 3}{DYNAMIC 1},\n{DYNAMIC 0}{DYNAMIC 4}{DYNAMIC 1}.");
-const u8 gText_XNatureObtainedInTrade[] = _("{DYNAMIC 0}{DYNAMIC 2}{DYNAMIC 1}{DYNAMIC 5} nature,\nobtained in a trade.");
-const u8 gText_XNatureFatefulEncounter[] = _("{DYNAMIC 0}{DYNAMIC 2}{DYNAMIC 1}{DYNAMIC 5} nature,\nobtained in a fateful\nencounter at {LV_2}{DYNAMIC 0}{DYNAMIC 3}{DYNAMIC 1}.");
-const u8 gText_XNatureProbablyMetAt[] = _("{DYNAMIC 0}{DYNAMIC 2}{DYNAMIC 1}{DYNAMIC 5} nature,\nprobably met at {LV_2}{DYNAMIC 0}{DYNAMIC 3}{DYNAMIC 1},\n{DYNAMIC 0}{DYNAMIC 4}{DYNAMIC 1}.");
-const u8 gText_XNature[] = _("{DYNAMIC 0}{DYNAMIC 2}{DYNAMIC 1}{DYNAMIC 5} nature");
-const u8 gText_XNatureMetSomewhereAt[] = _("{DYNAMIC 0}{DYNAMIC 2}{DYNAMIC 1}{DYNAMIC 5} nature,\nmet somewhere at {LV_2}{DYNAMIC 0}{DYNAMIC 3}{DYNAMIC 1}.");
-const u8 gText_XNatureHatchedSomewhereAt[] = _("{DYNAMIC 0}{DYNAMIC 2}{DYNAMIC 1}{DYNAMIC 5} nature,\nhatched somewhere at {LV_2}{DYNAMIC 0}{DYNAMIC 3}{DYNAMIC 1}.");
+
+const u8 gText_XNatureMetAtYZ[] = _(
+    "{DYNAMIC 0x00}{DYNAMIC 0x02}{DYNAMIC 0x01}{DYNAMIC 0x05}{DYNAMIC 0x06}{DYNAMIC 0x07} nature,\n"
+    "met at {LV_2}{DYNAMIC 0x00}{DYNAMIC 0x03}{DYNAMIC 0x01},\n{DYNAMIC 0x00}{DYNAMIC 0x04}{DYNAMIC 0x01}.");
+
+const u8 gText_XNatureHatchedAtYZ[] = _(
+    "{DYNAMIC 0x00}{DYNAMIC 0x02}{DYNAMIC 0x01}{DYNAMIC 0x05}{DYNAMIC 0x06}{DYNAMIC 0x07} nature,\n"
+    "hatched at {LV_2}{DYNAMIC 0x00}{DYNAMIC 0x03}{DYNAMIC 0x01},\n{DYNAMIC 0x00}{DYNAMIC 0x04}{DYNAMIC 0x01}.");
+
+const u8 gText_XNatureObtainedInTrade[] = _(
+    "{DYNAMIC 0x00}{DYNAMIC 0x02}{DYNAMIC 0x01}{DYNAMIC 0x05}{DYNAMIC 0x06}{DYNAMIC 0x07} nature,\n"
+    "obtained in a trade.");
+
+const u8 gText_XNatureFatefulEncounter[] = _(
+    "{DYNAMIC 0x00}{DYNAMIC 0x02}{DYNAMIC 0x01}{DYNAMIC 0x05}{DYNAMIC 0x06}{DYNAMIC 0x07} nature,\n"
+    "obtained in a fateful\nencounter at {LV_2}{DYNAMIC 0x00}{DYNAMIC 0x03}{DYNAMIC 0x01}.");
+
+const u8 gText_XNatureProbablyMetAt[] = _(
+    "{DYNAMIC 0x00}{DYNAMIC 0x02}{DYNAMIC 0x01}{DYNAMIC 0x05}{DYNAMIC 0x06}{DYNAMIC 0x07} nature,\n"
+    "probably met at {LV_2}{DYNAMIC 0x00}{DYNAMIC 0x03}{DYNAMIC 0x01},\n{DYNAMIC 0x00}{DYNAMIC 0x04}{DYNAMIC 0x01}.");
+
+const u8 gText_XNature[] = _("{DYNAMIC 0x00}{DYNAMIC 0x02}{DYNAMIC 0x01}{DYNAMIC 0x05}{DYNAMIC 0x06}{DYNAMIC 0x07} nature");
+
+const u8 gText_XNatureMetSomewhereAt[] = _(
+    "{DYNAMIC 0x00}{DYNAMIC 0x02}{DYNAMIC 0x01}{DYNAMIC 0x05}{DYNAMIC 0x06}{DYNAMIC 0x07} nature,\n"
+    "met somewhere at {LV_2}{DYNAMIC 0x00}{DYNAMIC 0x03}{DYNAMIC 0x01}.");
+
+const u8 gText_XNatureHatchedSomewhereAt[] = _(
+    "{DYNAMIC 0x00}{DYNAMIC 0x02}{DYNAMIC 0x01}{DYNAMIC 0x05}{DYNAMIC 0x06}{DYNAMIC 0x07} nature,\n"
+    "hatched somewhere at {LV_2}{DYNAMIC 0x00}{DYNAMIC 0x03}{DYNAMIC 0x01}.");
+
 const u8 gText_OddEggFoundByCouple[] = _("An odd POKéMON EGG found\nby the DAY CARE couple.");
 const u8 gText_PeculiarEggNicePlace[] = _("A peculiar POKéMON EGG\nobtained at the nice place.");
 const u8 gText_PeculiarEggTrade[] = _("A peculiar POKéMON EGG\nobtained in a trade.");

@@ -684,13 +684,17 @@ void CB2_StartWallClock(void)
 {
     u8 taskId;
     u8 spriteId;
+	u16 hour, minute;
+	RtcCalcLocalTime();
+	hour = Rtc_GetCurrentHour();
+	minute = Rtc_GetCurrentMinute();
 
     LoadWallClockGraphics();
     LZ77UnCompVram(gWallClockStart_Tilemap, (u16 *)BG_SCREEN_ADDR(7));
 
     taskId = CreateTask(Task_SetClock_WaitFadeIn, 0);
-    gTasks[taskId].tHours = 10;
-    gTasks[taskId].tMinutes = 0;
+    gTasks[taskId].tHours = gSpecialVar_0x8005;
+    gTasks[taskId].tMinutes = gSpecialVar_0x8006;
     gTasks[taskId].tMoveDir = 0;
     gTasks[taskId].tPeriod = 0;
     gTasks[taskId].tMoveSpeed = 0;
@@ -1003,11 +1007,7 @@ static void UpdateClockPeriod(u8 taskId, u8 direction)
 
 static void InitClockWithRtc(u8 taskId)
 {
-    	RtcCalcLocalTime();
-	if (FlagGet(FLAG_RTC_ENABLED)) {
-		gLocalTime.hours = Rtc_GetCurrentHour();
-		gLocalTime.minutes = Rtc_GetCurrentMinute();
-	}
+    RtcCalcLocalTime();
     gTasks[taskId].tHours = gLocalTime.hours;
     gTasks[taskId].tMinutes = gLocalTime.minutes;
     gTasks[taskId].tMinuteHandAngle = gTasks[taskId].tMinutes * 6;

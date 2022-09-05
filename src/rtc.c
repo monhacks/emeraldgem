@@ -302,14 +302,8 @@ void RtcInitLocalTimeOffset(s32 hour, s32 minute)
 void RtcCalcLocalTimeOffset(s32 days, s32 hours, s32 minutes, s32 seconds)
 {
     gLocalTime.days = days;
-	if (FlagGet(FLAG_RTC_ENABLED)) {
-		gLocalTime.hours = Rtc_GetCurrentHour();
-		gLocalTime.minutes = Rtc_GetCurrentMinute();
-	}
-	else {
-		gLocalTime.hours = hours;
-		gLocalTime.minutes = minutes;
-	}
+	gLocalTime.hours = hours;
+	gLocalTime.minutes = minutes;
     gLocalTime.seconds = seconds;
     RtcGetInfo(&sRtc);
     RtcCalcTimeDifference(&sRtc, &gSaveBlock2Ptr->localTimeOffset, &gLocalTime);

@@ -6,10 +6,12 @@ MLMHouse_EventScript_FatMan::
 	questmenu QUEST_MENU_CHECK_UNLOCKED SIDE_QUEST_3
 	lockall
 	faceplayer
+	namebox Alex
 	compare VAR_RESULT, TRUE
 	goto_if_eq MLMHouse_EventScript_FatMan_2
 	msgbox MLMHouse_EventScript_FatMan_Text_5
 MLMHouse_EventScript_FatMan_1:
+	hidenamebox
 	releaseall
 	return
 
@@ -50,7 +52,9 @@ MLMHouse_EventScript_FatMan_14:
 MLMHouse_EventScript_Daughter::
 	lockall
 	faceplayer
+	namebox Esmeralda
 	msgbox MLMHouse_EventScript_Daughter_Text_0
+	hidenamebox
 	releaseall
 	return
 
@@ -65,14 +69,14 @@ MLMHouse_EventScript_Chimecho::
 
 
 MLMHouse_EventScript_FatMan_Text_0:
-	.string "Alex: ¡Hola, {PLAYER}!\p"
+	.string "¡Hola, {PLAYER}!\p"
 	.string "Entonces… ¿Era un {COLOR RED}Zoroark{COLOR DARK_GRAY}?\p"
 	.string "Nunca había escuchado hablar de ese\n"
 	.string "Pokémon…$"
 
 MLMHouse_EventScript_FatMan_Text_1:
-	.string "Alex: ¡Hola, {PLAYER}! ¿Cómo está\n"
-	.string "todo el tema de la…?\p"
+	.string "¡Hola, {PLAYER}! ¿Cómo está todo el\n"
+	.string "tema de la…?\p"
 	.string "… … … … … … … …\p"
 	.string "Ya veo… Encontraste un libro que habla\n"
 	.string "de aquel día…\p"
@@ -92,21 +96,21 @@ MLMHouse_EventScript_FatMan_Text_1:
 	.string "podrán darte más información.$"
 
 MLMHouse_EventScript_FatMan_Text_2:
-	.string "Alex: Creo… Que es hora que hables con\n"
-	.string "el Profesor Birch sobre esto…\p"
+	.string "Creo… Que es hora que hables con el\n"
+	.string "Profesor Birch sobre esto…\p"
 	.string "Porque puedo ver que tú serás capaz de\n"
 	.string "resolver este miterio…$"
 
 MLMHouse_EventScript_FatMan_Text_3:
-	.string "Alex: … … … … … … … … … … … …\p"
+	.string "… … … … … … … … … … … …\p"
 	.string "Mucho yo… No sé sobre Pokémon de otras\n"
 	.string "regiones, pero sí que se… Que si le\l"
 	.string "preguntas a otra gente sobre esto,\l"
 	.string "podrán darte más información.$"
 
 MLMHouse_EventScript_FatMan_Text_4:
-	.string "Alex: ¡Hola, {PLAYER}! ¿Cómo está\n"
-	.string "todo el tema de la…?\p"
+	.string "¡Hola, {PLAYER}! ¿Cómo está todo el\n"
+	.string "tema de la…?\p"
 	.string "… … … … … … … …\p"
 	.string "Ya veo… Encontraste un libro que habla\n"
 	.string "de aquel día…\p"
@@ -122,8 +126,8 @@ MLMHouse_EventScript_FatMan_Text_4:
 	.string "podrán darte más información.$"
 
 MLMHouse_EventScript_FatMan_Text_5:
-	.string "Alex: ¡Hola, {PLAYER}! ¿Cómo está\n"
-	.string "todo el tema de la mudanza?\p"
+	.string "¡Hola, {PLAYER}! ¿Cómo está todo el\n"
+	.string "tema de la mudanza?\p"
 	.string "Es bueno ver a tu Madre de vuelta en\n"
 	.string "Hoenn, tus padres, mi marido y yo hemos\l"
 	.string "tenido muchos felices momentos\l"
@@ -133,7 +137,7 @@ MLMHouse_EventScript_FatMan_Text_5:
 	.string "pregunto si aún lo tiene ella…$"
 
 MLMHouse_EventScript_Daughter_Text_0:
-	.string "Esmeralda: ¡Hola! ¡Encantada!\p"
+	.string "¡Hola! ¡Encantada!\p"
 	.string "¿Ya has conocido a los Chimecho de mis\n"
 	.string "papás? ¡Los han tenido desde que eran\l"
 	.string "Chingling!\p"

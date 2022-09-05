@@ -124,7 +124,6 @@ static void ApplyLevitateMovement(u8);
 static bool8 MovementType_Disguise_Callback(struct ObjectEvent *, struct Sprite *);
 static bool8 MovementType_Buried_Callback(struct ObjectEvent *, struct Sprite *);
 static void CreateReflectionEffectSprites(void);
-static u8 GetObjectEventIdByLocalId(u8);
 static u8 GetObjectEventIdByLocalIdAndMapInternal(u8, u8, u8);
 static bool8 GetAvailableObjectEventId(u16, u8, u8, u8 *);
 static void SetObjectEventDynamicGraphicsId(struct ObjectEvent *);
@@ -146,7 +145,6 @@ static void SpriteCB_CameraObject(struct Sprite *);
 static void CameraObject_0(struct Sprite *);
 static void CameraObject_1(struct Sprite *);
 static void CameraObject_2(struct Sprite *);
-static struct ObjectEventTemplate *FindObjectEventTemplateByLocalId(u8, struct ObjectEventTemplate *, u8);
 static void ClearObjectEventMovement(struct ObjectEvent *, struct Sprite *);
 static void ObjectEventSetSingleMovement(struct ObjectEvent *, struct Sprite *, u8);
 static void SetSpriteDataForNormalStep(struct Sprite *, u8, u8);
@@ -1083,7 +1081,7 @@ static u8 GetObjectEventIdByLocalIdAndMapInternal(u8 localId, u8 mapNum, u8 mapG
     return OBJECT_EVENTS_COUNT;
 }
 
-static u8 GetObjectEventIdByLocalId(u8 localId)
+u8 GetObjectEventIdByLocalId(u8 localId)
 {
     u8 i;
     for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
@@ -1191,7 +1189,7 @@ static bool8 GetAvailableObjectEventId(u16 localId, u8 mapNum, u8 mapGroup, u8 *
     return FALSE;
 }
 
-static void RemoveObjectEvent(struct ObjectEvent *objectEvent)
+void RemoveObjectEvent(struct ObjectEvent *objectEvent)
 {
     objectEvent->active = FALSE;
     RemoveObjectEventInternal(objectEvent);
@@ -2203,7 +2201,7 @@ static struct ObjectEventTemplate *GetObjectEventTemplateByLocalIdAndMap(u8 loca
     return FindObjectEventTemplateByLocalId(localId, templates, count);
 }
 
-static struct ObjectEventTemplate *FindObjectEventTemplateByLocalId(u8 localId, struct ObjectEventTemplate *templates, u8 count)
+struct ObjectEventTemplate *FindObjectEventTemplateByLocalId(u8 localId, struct ObjectEventTemplate *templates, u8 count)
 {
     u8 i;
 
@@ -7087,28 +7085,31 @@ static void UpdateObjectEventOffscreen(struct ObjectEvent *objectEvent, struct S
     const struct ObjectEventGraphicsInfo *graphicsInfo;
 
     objectEvent->offScreen = FALSE;
+	if (FlagGet(FLAG_FORCE_LOAD_OFFSCREEN_OBJEV))
+        objectEvent->offScreen = FALSE;
+	else {
+		graphicsInfo = GetObjectEventGraphicsInfo(objectEvent->graphicsId);
+		if (sprite->coordOffsetEnabled)
+		{
+			x = sprite->x + sprite->x2 + sprite->centerToCornerVecX + gSpriteCoordOffsetX;
+			y = sprite->y + sprite->y2 + sprite->centerToCornerVecY + gSpriteCoordOffsetY;
+		}
+		else
+		{
+			x = sprite->x + sprite->x2 + sprite->centerToCornerVecX;
+			y = sprite->y + sprite->y2 + sprite->centerToCornerVecY;
+		}
+		x2 = graphicsInfo->width;
+		x2 += x;
+		y2 = y;
+		y2 += graphicsInfo->height;
+		
 
-    graphicsInfo = GetObjectEventGraphicsInfo(objectEvent->graphicsId);
-    if (sprite->coordOffsetEnabled)
-    {
-        x = sprite->x + sprite->x2 + sprite->centerToCornerVecX + gSpriteCoordOffsetX;
-        y = sprite->y + sprite->y2 + sprite->centerToCornerVecY + gSpriteCoordOffsetY;
-    }
-    else
-    {
-        x = sprite->x + sprite->x2 + sprite->centerToCornerVecX;
-        y = sprite->y + sprite->y2 + sprite->centerToCornerVecY;
-    }
-    x2 = graphicsInfo->width;
-    x2 += x;
-    y2 = y;
-    y2 += graphicsInfo->height;
-
-    if ((s16)x >= DISPLAY_WIDTH + 16 || (s16)x2 < -16)
-        objectEvent->offScreen = TRUE;
-
-    if ((s16)y >= DISPLAY_HEIGHT + 16 || (s16)y2 < -16)
-        objectEvent->offScreen = TRUE;
+		if ((s16)x >= DISPLAY_WIDTH + 16 || (s16)x2 < -16)
+			objectEvent->offScreen = TRUE;
+		if ((s16)y >= DISPLAY_HEIGHT + 16 || (s16)y2 < -16)
+			objectEvent->offScreen = TRUE;
+	}
 }
 
 static void UpdateObjectEventSpriteVisibility(struct ObjectEvent *objectEvent, struct Sprite *sprite)
@@ -7385,7 +7386,7 @@ static u8 ObjectEventGetNearbyReflectionType(struct ObjectEvent *objEvent)
 
 static u8 GetReflectionTypeByMetatileBehavior(u32 behavior)
 {
-    if (MetatileBehavior_IsIce(behavior))
+    if (MetatileBehavior_IsIce(behavior) || MetatileBehavior_IsIce_3(behavior))
         return REFL_TYPE_ICE;
     else if (MetatileBehavior_IsReflective(behavior))
         return REFL_TYPE_WATER;

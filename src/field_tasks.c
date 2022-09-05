@@ -13,6 +13,7 @@
 #include "metatile_behavior.h"
 #include "overworld.h"
 #include "script.h"
+#include "event_scripts.h"
 #include "secret_base.h"
 #include "sound.h"
 #include "task.h"
@@ -20,6 +21,7 @@
 #include "constants/items.h"
 #include "constants/songs.h"
 #include "constants/metatile_labels.h"
+
 
 /*  This file handles some persistent tasks that run in the overworld.
  *  - Task_RunTimeBasedEvents: Periodically updates local time and RTC events. Also triggers ambient cries.
@@ -54,6 +56,7 @@ static void FortreeBridgePerStepCallback(u8);
 static void PacifidlogBridgePerStepCallback(u8);
 static void SootopolisGymIcePerStepCallback(u8);
 static void CrackedFloorPerStepCallback(u8);
+static void IceSwitchPerStepCallback(u8);
 static void Task_MuddySlope(u8);
 
 static const TaskFunc sPerStepCallbacks[] =
@@ -65,7 +68,8 @@ static const TaskFunc sPerStepCallbacks[] =
     [STEP_CB_SOOTOPOLIS_ICE]    = SootopolisGymIcePerStepCallback,
     [STEP_CB_TRUCK]             = EndTruckSequence,
     [STEP_CB_SECRET_BASE]       = SecretBasePerStepCallback,
-    [STEP_CB_CRACKED_FLOOR]     = CrackedFloorPerStepCallback
+    [STEP_CB_CRACKED_FLOOR]     = CrackedFloorPerStepCallback,
+    [STEP_CB_ICE_SWITCH]    	= IceSwitchPerStepCallback
 };
 
 // Each array has 4 pairs of data, each pair representing two metatiles of a log and their relative position.
@@ -795,6 +799,25 @@ static void SetCrackedFloorHoleMetatile(s16 x, s16 y)
 #define tFloor2X     data[8]
 #define tFloor2Y     data[9]
 
+static void IceSwitchPerStepCallback(u8 taskId)
+{
+    s16 x, y;
+    u16 behavior;
+    s16 *data = gTasks[taskId].data;
+    PlayerGetDestCoords(&x, &y);
+    behavior = MapGridGetMetatileBehaviorAt(x, y);
+	if (MetatileBehavior_IsIce_Switch(behavior)) {
+		VarSet(VAR_TEMP_1, VarGet(VAR_TEMP_1) + 1);
+		PlaySE(SE_PIN);
+		MapGridSetMetatileIdAt(x, y, METATILE_Cave_SwitchIcePressed);
+		CurrentMapDrawMetatileAt(x, y);
+		if (VarGet(VAR_TEMP_1) >= 3 && FlagGet(FLAG_REGIDRAGO_ALMOST_UNLOCKED) && !FlagGet(FLAG_REGIDRAGO_DEFEATED)) {
+			ScriptContext1_SetupScript(EventScript_OpenRegidragoDoor);
+		}
+		return;
+	}
+	return;
+}
 static void CrackedFloorPerStepCallback(u8 taskId)
 {
     s16 x, y;

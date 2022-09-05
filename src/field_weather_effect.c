@@ -13,6 +13,7 @@
 #include "task.h"
 #include "trig.h"
 #include "gpu_regs.h"
+#include "field_camera.h"
 
 // EWRAM
 EWRAM_DATA static u8 gCurrentAbnormalWeather = 0;
@@ -947,7 +948,7 @@ static void InitSnowflakeSpriteMovement(struct Sprite *sprite)
 static void WaitSnowflakeSprite(struct Sprite *sprite)
 {
     // Timer is never incremented
-    if (gWeatherPtr->snowflakeTimer > 18)
+    if (++gWeatherPtr->snowflakeTimer > 18)
     {
         sprite->invisible = FALSE;
         sprite->callback = UpdateSnowflakeSprite;

@@ -136,10 +136,10 @@ void GetDayOrNight(void)
 {
 	u8 nightorday;
 		RtcCalcLocalTime();
-	if (FlagGet(FLAG_RTC_ENABLED)) {
-		gLocalTime.hours = Rtc_GetCurrentHour();
-		gLocalTime.minutes = Rtc_GetCurrentMinute();
-	}
+	// if (FlagGet(FLAG_RTC_ENABLED)) {
+		// gLocalTime.hours = Rtc_GetCurrentHour();
+		// gLocalTime.minutes = Rtc_GetCurrentMinute();
+	// }
 	if (gLocalTime.hours >= 8 && gLocalTime.hours <=19)
 	{
 		nightorday = 0; //Day
@@ -1249,7 +1249,7 @@ void RemoveCameraObject(void)
 
 u8 GetPokeblockNameByMonNature(void)
 {
-    return CopyMonFavoritePokeblockName(GetNature(&gPlayerParty[GetLeadMonIndex()]), gStringVar1);
+    return CopyMonFavoritePokeblockName(GetNature(&gPlayerParty[GetLeadMonIndex()], FALSE), gStringVar1);
 }
 
 void GetSecretBaseNearbyMapName(void)
@@ -2761,7 +2761,7 @@ void ShowNatureGirlMessage(void)
     if (gSpecialVar_0x8004 >= PARTY_SIZE)
         gSpecialVar_0x8004 = 0;
 
-    nature = GetNature(&gPlayerParty[gSpecialVar_0x8004]);
+    nature = GetNature(&gPlayerParty[gSpecialVar_0x8004], FALSE);
     ShowFieldMessage(sNatureGirlMessages[nature]);
 }
 
@@ -4257,4 +4257,112 @@ void ChooseItemFromBag(void)
     default:
         break;
     }
+}
+
+void CheckSpecies(void)
+{
+    u8 i;
+    u16 species;
+    struct Pokemon *pokemon;
+    for (i = 0; i < CalculatePlayerPartyCount(); i++)
+    {
+        pokemon = &gPlayerParty[i];
+        if (GetMonData(pokemon, MON_DATA_SANITY_HAS_SPECIES) && !GetMonData(pokemon, MON_DATA_IS_EGG))
+        {
+            species = GetMonData(pokemon, MON_DATA_SPECIES);
+            if (species == gSpecialVar_0x8005)
+            {
+                gSpecialVar_Result = TRUE;
+                return;
+            }
+            else
+            {
+                gSpecialVar_Result = FALSE;
+            }
+        }
+    }
+}
+
+// get position (0 for current, 1 for map) of object event, return to VAR_0x8007, VAR_0x8008
+void GetObjectPosition(void)
+{
+    u16 localId      = gSpecialVar_0x8000;
+    u16 useTemplate  = gSpecialVar_0x8001;
+
+    u16 *x = &gSpecialVar_0x8007;
+    u16 *y = &gSpecialVar_0x8008;
+
+    if (!useTemplate)
+    {
+        /* current position */
+        const u16 objId = GetObjectEventIdByLocalId(localId);
+        const struct ObjectEvent *objEvent = &gObjectEvents[objId];
+        *x = objEvent->currentCoords.x - 7; // subtract out camera size
+        *y = objEvent->currentCoords.y - 7;
+    }
+    else
+    {
+        const struct ObjectEventTemplate *objTemplate =
+            FindObjectEventTemplateByLocalId(localId,
+                    gSaveBlock1Ptr->objectEventTemplates,
+                    gMapHeader.events->objectEventCount);
+        *x = objTemplate->x;
+        *y = objTemplate->y;
+    }
+}
+
+u16 CheckObjectAtXY(void)
+{
+    u16 x = gSpecialVar_0x8005 + 7;
+    u16 y = gSpecialVar_0x8006 + 7;
+    u32 i;
+    
+    for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
+    {        
+        if (gObjectEvents[i].active && gObjectEvents[i].currentCoords.x == x && gObjectEvents[i].currentCoords.y == y)
+            return TRUE;
+    }
+    return FALSE;
+}
+
+u16 GetMetatileIdAt(void) {
+	u16 x = gSpecialVar_0x8005;
+    u16 y = gSpecialVar_0x8006;
+	u16 metatileA = gSpecialVar_0x8007;
+	// gSpecialVar_Result = MapGridGetMetatileIdAt(gSpecialVar_0x8005, gSpecialVar_0x8006);
+	if (metatileA == MapGridGetMetatileIdAt(gSpecialVar_0x8005, gSpecialVar_0x8006)) {
+		return TRUE;
+	}
+	return FALSE;
+}
+
+u16 CheckForMetatiles(u16 x, u16 y, u16 metatileA) {
+	if (metatileA == MapGridGetMetatileIdAt(x, y)) {
+		return TRUE;
+	}
+	return FALSE;
+}
+
+u16 SetHourMinutes(void) {
+	RtcCalcLocalTime();
+	gSpecialVar_0x8005 = Rtc_GetCurrentHour();
+	gSpecialVar_0x8006 = Rtc_GetCurrentMinute();
+}
+
+bool8 CheckForRegielekiPuzzle(void) {
+	if ((MapGridGetMetatileIdAt(5, 11) == METATILE_MirageTower_CoveredTile)  && (MapGridGetMetatileIdAt(5, 12) == METATILE_MirageTower_CoveredTile) && 
+	(MapGridGetMetatileIdAt(9, 11) == METATILE_MirageTower_CoveredTile) && (MapGridGetMetatileIdAt(11, 12) == METATILE_MirageTower_CoveredTile) &&
+	(MapGridGetMetatileIdAt(11, 13) == METATILE_MirageTower_CoveredTile)) {
+		if ((MapGridGetMetatileIdAt(6, 12) == METATILE_MirageTower_CoveredTile) || (MapGridGetMetatileIdAt(6, 13) == METATILE_MirageTower_CoveredTile) || (MapGridGetMetatileIdAt(8, 11) == METATILE_MirageTower_CoveredTile) ||
+		(MapGridGetMetatileIdAt(8, 12) == METATILE_MirageTower_CoveredTile) ||  (MapGridGetMetatileIdAt(8, 13) == METATILE_MirageTower_CoveredTile) || (MapGridGetMetatileIdAt(9, 12) == METATILE_MirageTower_CoveredTile) ||  (MapGridGetMetatileIdAt(9, 13) == METATILE_MirageTower_CoveredTile)
+		||  (MapGridGetMetatileIdAt(12, 11) == METATILE_MirageTower_CoveredTile) || (MapGridGetMetatileIdAt(12, 13) == METATILE_MirageTower_CoveredTile) ||  (MapGridGetMetatileIdAt(14, 12) == METATILE_MirageTower_CoveredTile) ||  (MapGridGetMetatileIdAt(14, 11) == METATILE_MirageTower_CoveredTile)
+		|| (MapGridGetMetatileIdAt(14, 13) == METATILE_MirageTower_CoveredTile) ||  (MapGridGetMetatileIdAt(15, 12) == METATILE_MirageTower_CoveredTile) ||  (MapGridGetMetatileIdAt(15, 13) == METATILE_MirageTower_CoveredTile)) {
+			gSpecialVar_Result = FALSE;
+			return gSpecialVar_Result;
+		}
+			gSpecialVar_Result = TRUE;
+			return gSpecialVar_Result;
+	}
+		gSpecialVar_Result = FALSE;
+		return gSpecialVar_Result;
 }

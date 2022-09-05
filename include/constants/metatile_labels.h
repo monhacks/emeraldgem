@@ -122,6 +122,14 @@
 #define METATILE_Cave_CrackedFloor                       0x22F
 #define METATILE_Cave_CrackedFloor_Hole                  0x206
 #define METATILE_Cave_EntranceCover                      0x229
+#define METATILE_Cave_IceCaveFloor                       0x385
+#define METATILE_Cave_IceCaveLadder                      0x38B
+#define METATILE_Cave_IceSwitch                          0x397
+#define METATILE_Cave_Mountain_BottomMid                 0x219
+#define METATILE_Cave_NearSlipperyIceEast                0x38C
+#define METATILE_Cave_NearSlipperyIceNorth               0x38F
+#define METATILE_Cave_NearSlipperyIceSouth               0x387
+#define METATILE_Cave_NearSlipperyIceWest                0x38E
 #define METATILE_Cave_SealedChamberBraille_Mid           0x235
 #define METATILE_Cave_SealedChamberEntrance_BottomLeft   0x232
 #define METATILE_Cave_SealedChamberEntrance_BottomMid    0x233
@@ -133,6 +141,10 @@
 #define METATILE_Cave_ShoalCave_BlueStone_Small          0x35B
 #define METATILE_Cave_ShoalCave_DirtPile_Large           0x358
 #define METATILE_Cave_ShoalCave_DirtPile_Small           0x35A
+#define METATILE_Cave_SlipperyIce                        0x38D
+#define METATILE_Cave_SpecialIceBraille                  0x3A3
+#define METATILE_Cave_SwitchIceNotPressed                0x39A
+#define METATILE_Cave_SwitchIcePressed                   0x3A2
 
 // gTileset_Contest
 #define METATILE_Contest_CounterFlap_Bottom  0x2D9
@@ -357,6 +369,9 @@
 #define METATILE_MeteorFalls_CaveEntrance_Left    0x24D
 #define METATILE_MeteorFalls_CaveEntrance_Right   0x24F
 #define METATILE_MeteorFalls_CaveEntrance_Top     0x246
+
+// gTileset_MirageTower
+#define METATILE_MirageTower_CoveredTile  0x279
 
 // gTileset_MossdeepGameCorner
 #define METATILE_MossdeepGameCorner_CounterClosed_Bottom  0x232

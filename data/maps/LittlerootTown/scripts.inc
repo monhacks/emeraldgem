@@ -258,14 +258,12 @@ LittlerootTown_EventScript_FatMan::
 	faceplayer
 	compare VAR_RESULT, TRUE
 	goto_if_eq LittlerootTown_EventScript_FatMan_2
-	changeframe 1
 	msgbox LittlerootTown_EventScript_FatMan_Text_5
 LittlerootTown_EventScript_FatMan_1:
+	hidenamebox
+	closemessage
 	releaseall
 	return
-
-Carlos:
-	.string "Carlos$"
 
 LittlerootTown_EventScript_FatMan_2:
 	compare VAR_MISTERIO, 3
@@ -305,19 +303,19 @@ LittlerootTown_EventScript_FatMan_14:
 LittlerootTown_EventScript_FatMan_Text_0:
 	.string "Mi esposo me dice siempre que\n"
 	.string "paso demasiado tiempo afuera…\p"
-	.string "… … … … … … … …\p"
-	.string "Entonces… Sabes sobre… … …\n"
-	.string "… … … Aquel día…\p"
-	.string "-inhala- UUFFF… Bueno, no sé tanto\n"
+	.string "… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}…\p"
+	.string "Entonces… {PAUSE 5}Sabes sobre… {PAUSE 5}… {PAUSE 5}…\n"
+	.string "… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}Aquel día…\p"
+	.string "-inhala- {PAUSE 2}UUFFF… {PAUSE 5}Bueno, no sé tanto\n"
 	.string "sobre {COLOR RED}Pokémon que cambian su forma{COLOR DARK_GRAY},\l"
 	.string "pero sí sospecho que es mejor\l"
 	.string "dejarlo así. Ya le derrotamos.\p"
-	.string "… … … … … … … … … … … …\p"
+	.string "… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}…\p"
 	.string "Tal vez, y sólo tal vez,\n"
 	.string "otra gente sepa más.$"
 
 LittlerootTown_EventScript_FatMan_Text_1:
-	.string "Quizá… Ya sea el momento de\n"
+	.string "Quizá… {PAUSE 5}Ya sea el momento de\n"
 	.string "hablar con Birch sobre esto. Ha estado\l"
 	.string "evitando hacerlo desde entonces, pero\l"
 	.string "pasa que él dedicó mucho a resolver\l"
@@ -325,33 +323,33 @@ LittlerootTown_EventScript_FatMan_Text_1:
 	.string "capaz de resolver esto.$"
 
 LittlerootTown_EventScript_FatMan_Text_2:
-	.string "… … … … … … … … … … … …\p"
+	.string "… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}…\p"
 	.string "Tal vez, y sólo tal vez,\n"
 	.string "otra gente sepa más.$"
 
 LittlerootTown_EventScript_FatMan_Text_3:
 	.string "Mi esposo me dice siempre que\n"
 	.string "paso demasiado tiempo afuera…\p"
-	.string "… … … … … … … …\p"
-	.string "Entonces… Sabes sobre… … …\n"
-	.string "… … … Aquel día…\p"
-	.string "-inhala- UUFFF… Bueno, no sé tanto\n"
+	.string "… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}…\p"
+	.string "Entonces… {PAUSE 5}Sabes sobre… {PAUSE 5}… {PAUSE 5}…\n"
+	.string "… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}Aquel día…\p"
+	.string "-inhala- {PAUSE 2}UUFFF… {PAUSE 5}Bueno, no sé tanto\n"
 	.string "sobre {COLOR RED}Pokémon que cambian su forma{COLOR DARK_GRAY},\l"
 	.string "pero sí sospecho que es mejor\l"
 	.string "dejarlo así. Ya le derrotamos.\p"
-	.string "… … … … … … … … … … … …\p"
+	.string "… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}…\p"
 	.string "Aunque tal vez, y sólo tal vez, tenga\n"
 	.string "una idea. Hay un Pokémon de una lejana\l"
 	.string "región que es capaz de cambiar su\l"
 	.string "forma, pero no sé cómo funciona.\l"
 	.string "Quizás…\p"
-	.string "… … … … … … … … … … … …\n"
+	.string "… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}…\n"
 	.string "No, no podría haber causado tanto daño\l"
 	.string "de ser así…$"
 
 LittlerootTown_EventScript_FatMan_Text_4:
 	.string "¡Hola, {PLAYER}!\p"
-	.string "Entonces… ¿Era un {COLOR RED}Zoroark{COLOR DARK_GRAY}?\p"
+	.string "Entonces… {PAUSE 2}¿Era un {COLOR RED}Zoroark{COLOR DARK_GRAY}?\p"
 	.string "Eso significa que mis teorías\n"
 	.string "eran correctas…\l"
 	.string "Entonces las ilusiones de\l"
@@ -1042,8 +1040,8 @@ LittlerootTown_Text_OurNewHomeLetsGoInside:
 	.string "viajes en un auto separado…\p"
 	.string "¡Pero bueno, esto es Villa Littleroot!\n"
 	.string "¿Te gusta? Se me hace que es un lugar\l"
-	.string "tranquilo para vivir, además, hay {COLOR_RIVAL} un{ARIVAL}\l"
-	.string "chic{AO} {COLOR DARK_GRAY} de tu edad con quien podrías\l"
+	.string "tranquilo para vivir, además, hay{COLOR_RIVAL} un{ARIVAL}\l"
+	.string "chic{AO} {COLOR DARK_GRAY}de tu edad con quien podrías\l"
 	.string "llevarte bien…\p"
 	.string "¡Entremos!$"
 
@@ -1051,14 +1049,14 @@ LittlerootTown_Text_WaitPlayer:
 	.string "¡Alto, {PLAYER}!$"
 
 LittlerootTown_Text_WearTheseRunningShoes:
-	.string "¡Cariño! ¿Ya le hablaste al Profe?\p"
+	.string "¡Cariño! {PAUSE 2}¿Ya le hablaste al Profe?\p"
 	.string "¡Ah, ya veo que te dio un Pokémon!\p"
 	.string "Y es el mismo que tu padre eligió…\n"
-	.string "-sniff sniff- … … …\l"
-	.string "Perdón por llorar pero… Estoy tan\l"
+	.string "-sniff sniff- …{PAUSE 5} …{PAUSE 5} …{PAUSE 5}\l"
+	.string "Perdón por llorar pero… {PAUSE 5}Estoy tan\l"
 	.string "orgullosa de ti, mi pequeñ{ITOITA}…\p"
-	.string "Pero bueno… No puedo evitar que\n"
-	.string "crezcas, así que… Toma esto, mi amor.$"
+	.string "Pero bueno… {PAUSE 5}No puedo evitar que\n"
+	.string "crezcas, así que… {PAUSE 5}Toma esto, mi amor.$"
 
 LittlerootTown_Text_SwitchShoesWithRunningShoes:
 	.string "{PLAYER} switched shoes with the\n"
@@ -1071,10 +1069,10 @@ LittlerootTown_Text_ExplainRunningShoes:
 	.string "por toda la región Hoenn.$"
 
 LittlerootTown_Text_ComeHomeIfAnythingHappens:
-	.string "… … … … … … … …\n"
-	.string "… … … … … … … …\p"
+	.string "… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}…\n"
+	.string "… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}…\p"
 	.string "Ya tienes un Pokémon…\n"
-	.string "Estoy tan, tan orgullosa de ti, mi\n"
+	.string "Estoy tan, tan orgullosa de ti, mi\l"
 	.string "pequeñ{OA}…\p"
 	.string "Si pasa algo, acá está mami para darte\n"
 	.string "amor y cariño.\p"
@@ -1132,10 +1130,7 @@ LittlerootTown_Text_ProfBirchsHouse:
 LittlerootTown_Text_BirchSomethingToShowYouAtLab:
 	.string "¡Bueno, bueno, {PLAYER}, sabía que\n"
 	.string "eras especial!\p"
-	.string "La capacidad que tienes de poder saber\n"
-	.string "los {COLOR BLUE}movimientos{COLOR DARK_GRAY} que posee un Pokémon\l"
-	.string "sin ver la Pokédex…\p"
-	.string "Nos ha servido bastante…\p"
+	.string "Tu gran poder…\p"
+	.string "¡Te ha llevado a lograr tanto!\p"
 	.string "Gracias a eso, voy a darte algo…\p"
 	.string "Ven a mi Laboratorio…$"
-

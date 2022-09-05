@@ -72,16 +72,20 @@ MauvilleCity_EventScript_WallysUncle::
 	lock
 	faceplayer
 	goto_if_set FLAG_DECLINED_WALLY_BATTLE_MAUVILLE, MauvilleCity_EventScript_UncleAskPlayerToBattleWally
+	namebox TioWally
 	msgbox MauvilleCity_Text_UncleHesTooPeppy, MSGBOX_DEFAULT
 	closemessage
+	hidenamebox
 	applymovement LOCALID_WALLYS_UNCLE, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
 
 MauvilleCity_EventScript_UncleAskPlayerToBattleWally::
+	namebox TioWally
 	msgbox MauvilleCity_Text_UncleCanYouBattleWally, MSGBOX_DEFAULT
 	closemessage
+	hidenamebox
 	applymovement LOCALID_WALLYS_UNCLE, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
@@ -92,9 +96,14 @@ MauvilleCity_EventScript_Wally::
 	goto_if_set FLAG_DECLINED_WALLY_BATTLE_MAUVILLE, MauvilleCity_EventScript_WallyRequestBattleAgain
 	applymovement LOCALID_WALLY, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
+	namebox Wally
 	msgbox MauvilleCity_Text_WallyWantToChallengeGym, MSGBOX_DEFAULT
+	namebox TioWally
 	msgbox MauvilleCity_Text_UncleYourePushingIt, MSGBOX_DEFAULT
+	namebox Wally
 	msgbox MauvilleCity_Text_WallyWeCanBeatAnyone, MSGBOX_DEFAULT
+	closemessage
+	hidenamebox
 	applymovement LOCALID_WALLY, Common_Movement_FacePlayer
 	waitmovement 0
 	playse SE_PIN
@@ -102,6 +111,7 @@ MauvilleCity_EventScript_Wally::
 	waitmovement 0
 	applymovement LOCALID_WALLY, Common_Movement_Delay48
 	waitmovement 0
+	namebox Wally
 	msgbox MauvilleCity_Text_WallyWillYouBattleMe, MSGBOX_YESNO
 	goto MauvilleCity_EventScript_BattleWallyPrompt
 	end
@@ -110,6 +120,7 @@ MauvilleCity_EventScript_BattleWallyPrompt::
 	call_if_eq VAR_RESULT, YES, MauvilleCity_EventScript_BattleWally
 	goto_if_eq VAR_RESULT, NO, MauvilleCity_EventScript_DeclineWallyBattle
 	closemessage
+	hidenamebox
 	switch VAR_FACING
 	case DIR_NORTH, MauvilleCity_EventScript_WallyAndUncleExitNorth
 	case DIR_EAST, MauvilleCity_EventScript_WallyAndUncleExitEast
@@ -123,15 +134,25 @@ MauvilleCity_EventScript_WallyAndUncleExitNorth::
 	applymovement LOCALID_WALLY, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	delay 30
+	namebox Wally
+	msgbox MauvilleCity_Text_WallyNoNeedTo, MSGBOX_DEFAULT
+	closemessage
+	namebox TioWally
+	msgbox MauvilleCity_Text_WallysUncleItsOkay, MSGBOX_DEFAULT
+	closemessage
+	hidenamebox
+	applymovement LOCALID_WALLY, MauvilleCity_Movement_WallyExitNorth2
+	waitmovement 0
+	delay 36
 	applymovement OBJ_EVENT_ID_PLAYER, MauvilleCity_Movement_PlayerFaceUncleNorth
 	applymovement LOCALID_WALLYS_UNCLE, MauvilleCity_Movement_WallysUncleApproachPlayerNorth
 	waitmovement 0
+	namebox TioWally
 	msgbox MauvilleCity_Text_UncleVisitUsSometime, MSGBOX_DEFAULT
 	closemessage
+	hidenamebox
 	applymovement OBJ_EVENT_ID_PLAYER, MauvilleCity_Movement_PlayerWatchWallyExitNorth2
 	applymovement LOCALID_WALLYS_UNCLE, MauvilleCity_Movement_WallysUncleExitNorth2
-	applymovement LOCALID_WALLY, MauvilleCity_Movement_WallyExitNorth2
-	waitmovement 0
 	goto MauvilleCity_EventScript_DefeatedWally
 	end
 
@@ -143,14 +164,24 @@ MauvilleCity_EventScript_WallyAndUncleExitEast::
 	applymovement LOCALID_WALLY, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	delay 30
-	applymovement LOCALID_WALLYS_UNCLE, MauvilleCity_Movement_WallysUncleApproachPlayerEast
-	waitmovement 0
-	msgbox MauvilleCity_Text_UncleVisitUsSometime, MSGBOX_DEFAULT
+	namebox Wally
+	msgbox MauvilleCity_Text_WallyNoNeedTo, MSGBOX_DEFAULT
 	closemessage
-	applymovement OBJ_EVENT_ID_PLAYER, MauvilleCity_Movement_PlayerWatchWallyExitEast2
-	applymovement LOCALID_WALLYS_UNCLE, MauvilleCity_Movement_WallysUncleExitEast2
+	namebox TioWally
+	msgbox MauvilleCity_Text_WallysUncleItsOkay, MSGBOX_DEFAULT
+	closemessage
+	hidenamebox
 	applymovement LOCALID_WALLY, MauvilleCity_Movement_WallyExitEast2
 	waitmovement 0
+	delay 36
+	applymovement LOCALID_WALLYS_UNCLE, MauvilleCity_Movement_WallysUncleApproachPlayerEast
+	waitmovement 0
+	namebox TioWally
+	msgbox MauvilleCity_Text_UncleVisitUsSometime, MSGBOX_DEFAULT
+	closemessage
+	hidenamebox
+	applymovement OBJ_EVENT_ID_PLAYER, MauvilleCity_Movement_PlayerWatchWallyExitEast2
+	applymovement LOCALID_WALLYS_UNCLE, MauvilleCity_Movement_WallysUncleExitEast2
 	goto MauvilleCity_EventScript_DefeatedWally
 	end
 
@@ -166,8 +197,10 @@ MauvilleCity_EventScript_DefeatedWally::
 	call_if_eq VAR_FACING, DIR_EAST, MauvilleCity_EventScript_ScottApproachPlayerEast
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
+	namebox Scott
 	msgbox MauvilleCity_Text_ScottYouDidntHoldBack, MSGBOX_DEFAULT
 	closemessage
+	hidenamebox
 	addvar VAR_SCOTT_STATE, 1
 	call_if_eq VAR_FACING, DIR_NORTH, MauvilleCity_EventScript_ScottExitNorth
 	call_if_eq VAR_FACING, DIR_EAST, MauvilleCity_EventScript_ScottExitEast
@@ -205,18 +238,23 @@ MauvilleCity_EventScript_BattleWally::
 	trainerbattle_no_intro TRAINER_WALLY_MAUVILLE, MauvilleCity_Text_WallyDefeat
 	applymovement LOCALID_WALLY, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
+	namebox Wally
 	msgbox MauvilleCity_Text_WallyIllGoBackToVerdanturf, MSGBOX_DEFAULT
 	applymovement LOCALID_WALLY, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox MauvilleCity_Text_ThankYouNotEnoughToBattle, MSGBOX_DEFAULT
 	applymovement LOCALID_WALLY, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
+	namebox TioWally
 	msgbox MauvilleCity_Text_UncleNoNeedToBeDown, MSGBOX_DEFAULT
 	return
 
 MauvilleCity_EventScript_DeclineWallyBattle::
 	setflag FLAG_DECLINED_WALLY_BATTLE_MAUVILLE
+	namebox Wally
 	msgbox MauvilleCity_Text_WallyMyUncleWontKnowImStrong, MSGBOX_DEFAULT
+	hidenamebox
+	closemessage
 	release
 	end
 
@@ -418,7 +456,8 @@ MauvilleCity_Movement_ScottExitEast:
 MauvilleCity_EventScript_Wattson::
 	lock
 	faceplayer
-	goto_if_set FLAG_GOT_TM24_FROM_WATTSON, MauvilleCity_EventScript_ReceivedThunderbolt
+	checkitem ITEM_TM55
+	goto_if_eq VAR_RESULT, TRUE, MauvilleCity_EventScript_ReceivedThunderbolt
 	goto_if_eq VAR_NEW_MAUVILLE_STATE, 2, MauvilleCity_EventScript_CompletedNewMauville
 	goto_if_set FLAG_GOT_BASEMENT_KEY_FROM_WATTSON, MauvilleCity_EventScript_BegunNewMauville
 	msgbox MauvilleCity_Text_WattsonNeedFavorTakeKey, MSGBOX_DEFAULT
@@ -435,9 +474,8 @@ MauvilleCity_EventScript_BegunNewMauville::
 
 MauvilleCity_EventScript_CompletedNewMauville::
 	msgbox MauvilleCity_Text_WattsonThanksTakeTM, MSGBOX_DEFAULT
-	giveitem ITEM_TM24
+	giveitem ITEM_TM55
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
-	setflag FLAG_GOT_TM24_FROM_WATTSON
 	msgbox MauvilleCity_Text_WattsonYoungTakeCharge, MSGBOX_DEFAULT
 	release
 	end
@@ -463,154 +501,185 @@ MauvilleCity_EventScript_RegisterWallyCall::
 	end
 
 MauvilleCity_Text_UncleHesTooPeppy:
-	.string "UNCLE: It's because of POKéMON that\n"
-	.string "this boy's got more pep, I suppose…\l"
-	.string "But he's become a bit too peppy…$"
+	.string "Mi Wally se emociona mucho, gracias a\n"
+	.string "los Pokémon.\p"
+	.string "Me parece que es mucha emoción…$"
 
 MauvilleCity_Text_WallyWantToChallengeGym:
-	.string "WALLY: Aww, UNCLE, please?\p"
-	.string "I want to challenge this GYM and see\n"
-	.string "how much better I've become.\p"
-	.string "Please? May I, please?$"
+	.string "¡Ay, porfa, Tío, déjame tomar el {COLOR BLUE}Desafío\n"
+	.string "de los Gimnasios{COLOR DARK_GRAY}, ya soy muy fuerte!\p"
+	.string "¡Ralts y yo aprendimos técnicas súper\n"
+	.string "fuertes!$"
 
 MauvilleCity_Text_UncleYourePushingIt:
-	.string "UNCLE: Now hold on, WALLY.\p"
-	.string "Since you started living with POKéMON,\n"
-	.string "you have grown quite a lot stronger.\p"
-	.string "But don't you think you're pushing it\n"
-	.string "to suddenly challenge a GYM?$"
+	.string "Wally, Wally, tranquilo.\p"
+	.string "¿No te estás precipitando?{PAUSE 2} Entiendo\n"
+	.string "que se hayan fortalecido, pero los\l"
+	.string "{COLOR BLUE}Líderes de Gimnasio{COLOR DARK_GRAY} son MUY fuertes…$"
 
 MauvilleCity_Text_WallyWeCanBeatAnyone:
-	.string "WALLY: I'm not pushing it.\p"
-	.string "If I combine forces with RALTS,\n"
-	.string "we can beat anyone!$"
+	.string "¡No me estoy precipitando, Tío!\p"
+	.string "Si Ralts me ayuda, {PAUSE 5}¡Podré vencer a\n"
+	.string "cualquier rival!$"
 
 MauvilleCity_Text_WallyWillYouBattleMe:
-	.string "WALLY: Oh! Hi, {PLAYER}!\p"
-	.string "I've gotten a lot stronger since\n"
-	.string "we met.\p"
-	.string "{PLAYER}, I want you and my UNCLE to\n"
-	.string "understand that.\p"
-	.string "{PLAYER}, please, will you have\n"
-	.string "a battle with me?$"
+	.string "Ah, {PAUSE 2}¡{PLAYER}, {PLAYER}!\p"
+	.string "¡Hace tanto que no te veo, amig{OA}!\p"
+	.string "¡{PLAYER}, {PLAYER}, quiero\n"
+	.string "mostrarte lo fuerte que me he vuelto!\l"
+	.string "Mi Ralts hasta ha aprendido muchos\l"
+	.string "ataques nuevos, {PLAYER}.\p"
+	.string "¿Te gustaría combatir conmigo,\n"
+	.string "{PLAYER}, por favor?$"
 
 MauvilleCity_Text_WallyMyUncleWontKnowImStrong:
-	.string "WALLY: Oh… If you won't battle me,\n"
-	.string "{PLAYER}, my UNCLE won't know that I've\l"
-	.string "become really strong.$"
+	.string "Pero… {PAUSE 5}Pero si no combatimos, mi Tío no\n"
+	.string "me dejará combatir en los Gimnasios…$"
 
 MauvilleCity_Text_UncleCanYouBattleWally:
-	.string "UNCLE: {PLAYER}{KUN}, was it?\n"
-	.string "On WALLY's behalf, can I ask you to\l"
-	.string "battle with him just this once?\p"
-	.string "I don't think he's going to listen to\n"
-	.string "any reason the way he is now.$"
+	.string "{PLAYER}, {PAUSE 2}¿Verdad?\p"
+	.string "Wally te admira muchísimo, y no querrá\n"
+	.string "irse de aquí hasta que tengan una\l"
+	.string "batalla, así que, por favor, por su bien\l"
+	.string "y por el mío, {PAUSE 2}¿Podrías hacerlo?$"
 
 MauvilleCity_Text_WallyPleaseBattleMe:
-	.string "WALLY: {PLAYER}, please!\n"
-	.string "Battle with me, please.$"
+	.string "¡Porfa, {PLAYER}cit{OA}, porfa!$"
 
 MauvilleCity_Text_WallyHereICome:
-	.string "WALLY: {PLAYER}, thank you.\p"
-	.string "Okay… Here I come!$"
+	.string "Gracias, muchas gracias.\p"
+	.string "-inhala-, -suspira-… Entonces…\p"
+	.string "¡{PLAYER}, t-{PAUSE 1}te desafío a una Batalla\n"
+	.string "Pokémon!$"
 
 MauvilleCity_Text_WallyDefeat:
-	.string "WALLY: … … … … … … …\p"
-	.string "… … … … … … … …\p"
-	.string "I lost…$"
+	.string "Wally: … {PAUSE 5}… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}…\p"
+	.string "… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}…\p"
+	.string "Perdí…\pY en frente de {PLAYER}…$"
 
 MauvilleCity_Text_WallyIllGoBackToVerdanturf:
-	.string "WALLY: UNCLE…\n"
-	.string "I'll go back to VERDANTURF…$"
+	.string "T-{PAUSE 2}tío… {PAUSE 5}Q-{PAUSE 2}quiero… Ir a Verdanturf…\p"
+	.string "… … … … …$"
 
 MauvilleCity_Text_ThankYouNotEnoughToBattle:
-	.string "{PLAYER}, thank you.\n"
-	.string "Being a TRAINER is tough, isn't it?\p"
-	.string "It's not enough just to have POKéMON\n"
-	.string "and make them battle. That isn't what\l"
-	.string "being a real TRAINER is about.$"
+	.string "… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}…\p"
+	.string "G-{PAUSE 2}gr…{PAUSE 2}gra…{PAUSE 2}gracias, {PLAYER}…\p"
+	.string "Y-{PAUSE 2}yo… {PAUSE 5}R-{PAUSE 2}realme… {PAUSE 5}Realmente… {PAUSE 5}Aprecio\n"
+	.string "que… {PAUSE 5}Te hayas tomado el tiempo de\l"
+	.string "enseñarme que ser Entrenador se trata\l"
+	.string "de mucho más que subir unos niveles…\p"
+	.string "Necesito…\n"
+	.string "… {PAUSE 5}…\l"
+	.string "… {PAUSE 5}Talento, {PAUSE 2}¿No es así?$"
 
 MauvilleCity_Text_UncleNoNeedToBeDown:
-	.string "UNCLE: WALLY, there's no need to be so\n"
-	.string "down on yourself.\p"
-	.string "Why, what's keeping you from becoming\n"
-	.string "stronger and stronger?\p"
-	.string "Come on, let's go home.\n"
-	.string "Everyone's waiting for you.$"
+	.string "No, Wally. Estás equivocándote.\p"
+	.string "No seas tan duro contigo mismo, eso no\n"
+	.string "te llevará a ningun lado, creéme.\p"
+	.string "Lo que necesitas no es talento, es\n"
+	.string "esfuerzo; confianza en tus Pokémon.\p"
+	.string "Sigue esforzándote, con cuidado para\n"
+	.string "no agitarte, despacio para no\l"
+	.string "sobrepasarte, y llegarás a ser incluso\l"
+	.string "más fuerte que {PLAYER}.$"
+	
+MauvilleCity_Text_WallyNoNeedTo:
+	.string "Iré solo a Verdanturf.\pNecesito pensar, Tío.$"
+
+MauvilleCity_Text_WallysUncleItsOkay:
+	.string "Está bien, Wally.\nCuídate mucho.$"
 
 MauvilleCity_Text_UncleVisitUsSometime:
-	.string "UNCLE: {PLAYER}{KUN}, it just dawned on me\n"
-	.string "that you must be the TRAINER who kept\l"
-	.string "an eye out for WALLY when he caught\l"
-	.string "his POKéMON.\p"
-	.string "Why don't you visit us in VERDANTURF\n"
-	.string "sometime?\l"
-	.string "I'm sure WALLY would enjoy it.$"
-
+	.string "… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}…\p"
+	.string "… {PAUSE 5}Creo… {PAUSE 5}Que eso fue demasiado,\n"
+	.string "{PLAYER}, realmente has aplastado su\l"
+	.string "espíritu totalmente…\p"
+	.string "… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}…\n"
+	.string "… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}…\p"
+	.string "No.\n"
+	.string "Lo que hiciste estuvo bien.\p"
+	.string "Si ganaba contra tí, o estaba muy cerca\n"
+	.string "de vencerte, pero perdía con\l"
+	.string "Entrenadores del montón de las Rutas\l"
+	.string "cercanas… {PAUSE 5}Su espíritu se habría roto\l"
+	.string "aún más.\p"
+	.string "Gracias por ser honest{OA}, {PLAYER},\n"
+	.string "realmente le has ayudado.$"
 
 MauvilleCity_Text_WallyPokenavCall:
 	.string "… … … … … …\n"
-	.string "… … … … … Beep!\p"
-	.string "WALLY: Oh, hello, {PLAYER}!\p"
-	.string "I just wanted to tell you that\n"
-	.string "my uncle bought me a POKéNAV!\p"
-	.string "Now I can get in touch with you\n"
-	.string "anytime, {PLAYER}!\p"
+	.string "… … … … … {PAUSE 2}¡Biip!\p"
+	.string "Wally: ¡H-{PAUSE 2}hola, {PLAYER}!\p"
+	.string "Q-{PAUSE 2}quería decirte que mi Tío me compró\n"
+	.string "un PokéNav.\p"
+	.string "Ahora podré hablar contigo un poco más\n"
+	.string "seguido.\p"
+	.string "C-{PAUSE 2}c-{PAUSE 2}c-{PAUSE 2}c-{PAUSE 2}claro, s-{PAUSE 2}si eso n-{PAUSE 2}no te parece\n"
+	.string "m-{PAUSE 2}molesto…\p"
+	.string "…\p"
+	.string "¿Te parece bien?\n"
+	.string "¡Genial!\p"
+	.string "¡Hablamos luego, {PLAYER}cit{OA}!\p"
 	.string "… … … … … …\n"
-	.string "… … … … … Click!$"
+	.string "… … … … … {PAUSE 2}¡Click!$"
 
 MauvilleCity_Text_RegisteredWally:
 	.string "Registered WALLY\n"
 	.string "in the POKéNAV.$"
 
 MauvilleCity_Text_ScottYouDidntHoldBack:
-	.string "SCOTT: Hehe…\n"
-	.string "I was watching that match!\p"
-	.string "You're friends with that boy WALLY,\n"
-	.string "aren't you?\p"
-	.string "But you didn't hold anything back\n"
-	.string "and beat him impressively.\p"
-	.string "Yeah! That's what a real POKéMON\n"
-	.string "battle is all about!\p"
-	.string "I idolize TRAINERS like that!\p"
-	.string "… … … … … …\n"
-	.string "I'll be cheering for you!$"
+	.string "Batallas como esa que acabo de ver,\n"
+	.string "donde ambos Entrenadores dejan\l"
+	.string "sentimentalismos de lado y no se\l"
+	.string "contienen… {PAUSE 2}¡Sí! {PAUSE 2}¡Esas son verdaderas\l"
+	.string "Batallas Pokémon!\p"
+	.string "Ese que se fue recién, {PAUSE 2}¿Son amigos, no?\p"
+	.string "Me alegra que no te hayas contenido,\n"
+	.string "para poder ver tal demostración de\l"
+	.string "poder, tal diferencia de fuerzas,\p"
+	.string "¡Eso le ayudará a convertirse en\n"
+	.string "alguien capaz de vencer a cualquier\l"
+	.string "rival!$"
 
 MauvilleCity_Text_WattsonNeedFavorTakeKey:
-	.string "WATTSON: Oh, {PLAYER}{KUN}!\n"
-	.string "You look like you have a lot of zip!\l"
-	.string "That's a good thing, wahahahaha!\p"
-	.string "Fine! I've decided!\n"
-	.string "I need a favor, {PLAYER}{KUN}!\p"
-	.string "MAUVILLE CITY has an underground\n"
-	.string "sector called NEW MAUVILLE.\p"
-	.string "{PLAYER}{KUN}, I'd like you to go there and\n"
-	.string "switch off the GENERATOR.\p"
-	.string "The GENERATOR has been running a bit\n"
-	.string "haywire. It's getting unsafe.\p"
-	.string "Here, this is the KEY to get into\n"
-	.string "NEW MAUVILLE.$"
+	.string "Ah, {PAUSE 2}¡{PLAYER}!\p"
+	.string "¡Que alegría verte aquí!\n"
+	.string "¡Hasta se ve que estás hechando\l"
+	.string "chispas, BUAJAJAJAJA!\p"
+	.string "¡Mira, mira, {PLAYER}, necesito que me\n"
+	.string "hagas un favor.\p"
+	.string "Hace tiempo, creé un lugar llamado\n"
+	.string "Nueva Mauville, pero por alguna razón,\l"
+	.string "el generador ha vuelto a encenderse…\l"
+	.string "¡Y eso molesta a los Pokémon salvajes,\l"
+	.string "podría sobrecargarlos y causar\l"
+	.string "aprietos!\p"
+	.string "Necesito que vayas ahí y apagues el\n"
+	.string "generador. No puedo hacerlo yo porque\l"
+	.string "mis piernas ya no son lo que eran…\l"
+	.string "Así que toma estas Llaves, y apaga ese\l"
+	.string "generador por mí,{PAUSE 2} ¿Okay?$"
 
 MauvilleCity_Text_WattsonWontBeChallenge:
-	.string "WATTSON: Don't you worry about it.\n"
-	.string "It won't be a challenge to you.\p"
-	.string "The entrance to NEW MAUVILLE is just\n"
-	.string "a short SURF away from ROUTE 110.\p"
-	.string "That's it, then, you have my trust!\n"
-	.string "Wahahahaha!$"
+	.string "¡Ah, y no te preocupes!\n"
+	.string "Ese lugar es inseguro, pero no mortal.\l"
+	.string "Estarás bien, {PAUSE 2}¡No es como si un humano\l"
+	.string "pudiera sobrecargarse de electricidad\l"
+	.string "como un Voltorb, BUAJAJAJAJA!$"
 
 MauvilleCity_Text_WattsonThanksTakeTM:
-	.string "WATTSON: Wahahahaha!\p"
-	.string "I knew it, {PLAYER}{KUN}! I knew I'd made\n"
-	.string "the right choice asking you!\p"
-	.string "This is my thanks--a TM containing\n"
-	.string "THUNDERBOLT!\p"
-	.string "Go on, you've earned it!$"
+	.string "¡BUAJAJAJAJA!\p"
+	.string "¡Sabía que podrías!\p"
+	.string "¡Ahora, ten esta MT.\n"
+	.string "Contiene el movimiento Rayo Carga, que\l"
+	.string "subirá tu Ataque Especial en un nivel\l"
+	.string "después de usarse, {PAUSE 2}¿Muy útil, no?\p"
+	.string "¡Se podría decir que cargas con un arma\n"
+	.string "ahora, BUAJAJAJAJAJA!$"
 
 MauvilleCity_Text_WattsonYoungTakeCharge:
-	.string "WATTSON: Wahahahaha!\p"
-	.string "It pleases me to no end to see\n"
-	.string "the young step up and take charge!$"
+	.string "¡Se podría decir que cargas con un arma\n"
+	.string "ahora, BUAJAJAJAJAJA!$"
 
 MauvilleCity_Text_NurseHurtMonBackToHealth:
 	.string "You know, it's cool to have POKéMON\n"

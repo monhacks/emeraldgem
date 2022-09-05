@@ -1652,10 +1652,7 @@ static void ShowStartMenuExtraWindow(void) // Función que carga una ventana aux
 		sSafariBallsWindowId = AddWindow(&sStartMenuWindowTemplate);
 		PutWindowTilemap(sSafariBallsWindowId);
 		DrawStdWindowFrame(sSafariBallsWindowId, FALSE);
-		if (!FlagGet(FLAG_RTC_ENABLED))
-			FormatDecimalTimeWOSeconds(gStringVar4, gLocalTime.hours, gLocalTime.minutes);
-		else 
-			FormatDecimalTimeWOSeconds(gStringVar4, Rtc_GetCurrentHour(), Rtc_GetCurrentMinute());
+		FormatDecimalTimeWOSeconds(gStringVar4, gLocalTime.hours, gLocalTime.minutes);
 		AddTextPrinterParameterized(sSafariBallsWindowId, 1, gStringVar4, 0, 1, TEXT_SKIP_DRAW, NULL);
 		CopyWindowToVram(sSafariBallsWindowId, COPYWIN_GFX);
 	}

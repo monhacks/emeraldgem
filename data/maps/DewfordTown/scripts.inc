@@ -33,7 +33,9 @@ DewfordTown_EventScript_Trigger::
 	setflag FLAG_DEWFORD_GRUNT
 	applymovement OBJ_EVENT_ID_PLAYER, DewfordTown_Movement_PlayerApproach2
 	waitmovement 0
+	namebox Player
 	msgbox DewfordTown_EventScript_Trigger_Text_0
+	hidenamebox
 	setvar VAR_DEWFORD_TOWN_STATE, 1
 	releaseall
 	return

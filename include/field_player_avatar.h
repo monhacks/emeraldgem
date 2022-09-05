@@ -13,6 +13,7 @@ u8 GetPlayerMovementDirection(void);
 u8 PlayerGetCopyableMovement(void);
 void PlayerWalkNormal(u8);
 void PlayerWalkFast(u8);
+void PlayerWalkSlow(u8);
 void PlayerRideWaterCurrent(u8);
 void PlayerWalkFaster(u8);
 void PlayerOnBikeCollide(u8);

@@ -306,11 +306,7 @@ static u16 GetCurrentMapWildMonHeaderId(void)
 {
     u16 i;
 	u16 nightorday;
-		RtcCalcLocalTime();
-	if (FlagGet(FLAG_RTC_ENABLED)) {
-		gLocalTime.hours = Rtc_GetCurrentHour();
-		gLocalTime.minutes = Rtc_GetCurrentMinute();
-	}
+	RtcCalcLocalTime();
 	if (gLocalTime.hours < 8 || gLocalTime.hours >19)
 	{
 		nightorday = 1; //Day

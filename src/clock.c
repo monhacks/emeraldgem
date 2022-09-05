@@ -18,11 +18,11 @@ static void UpdatePerMinute(struct Time *localTime);
 static void InitTimeBasedEvents(void)
 {
     FlagSet(FLAG_SYS_CLOCK_SET);
-    	RtcCalcLocalTime();
-	if (FlagGet(FLAG_RTC_ENABLED)) {
-		gLocalTime.hours = Rtc_GetCurrentHour();
-		gLocalTime.minutes = Rtc_GetCurrentMinute();
-	}
+    	// RtcCalcLocalTime();
+	// if (FlagGet(FLAG_RTC_ENABLED)) {
+		// gLocalTime.hours = Rtc_GetCurrentHour();
+		// gLocalTime.minutes = Rtc_GetCurrentMinute();
+	// }
     gSaveBlock2Ptr->lastBerryTreeUpdate = gLocalTime;
     VarSet(VAR_DAYS, gLocalTime.days);
 }
@@ -32,10 +32,10 @@ void DoTimeBasedEvents(void)
     if (FlagGet(FLAG_SYS_CLOCK_SET) && !InPokemonCenter())
     {
         	RtcCalcLocalTime();
-	if (FlagGet(FLAG_RTC_ENABLED)) {
-		gLocalTime.hours = Rtc_GetCurrentHour();
-		gLocalTime.minutes = Rtc_GetCurrentMinute();
-	}
+	// if (FlagGet(FLAG_RTC_ENABLED)) {
+		// gLocalTime.hours = Rtc_GetCurrentHour();
+		// gLocalTime.minutes = Rtc_GetCurrentMinute();
+	// }
         UpdatePerDay(&gLocalTime);
         UpdatePerMinute(&gLocalTime);
     }

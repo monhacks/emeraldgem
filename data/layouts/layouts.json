@@ -2874,8 +2874,8 @@
     {
       "id": "LAYOUT_GRANITE_CAVE_STEVENS_ROOM",
       "name": "GraniteCave_StevensRoom_Layout",
-      "width": 15,
-      "height": 14,
+      "width": 23,
+      "height": 23,
       "primary_tileset": "gTileset_General",
       "secondary_tileset": "gTileset_Cave",
       "border_filepath": "data/layouts/GraniteCave_StevensRoom/border.bin",
@@ -3274,7 +3274,7 @@
     {
       "id": "LAYOUT_SHOAL_CAVE_LOW_TIDE_ICE_ROOM",
       "name": "ShoalCave_LowTideIceRoom_Layout",
-      "width": 20,
+      "width": 30,
       "height": 30,
       "primary_tileset": "gTileset_General",
       "secondary_tileset": "gTileset_Cave",
@@ -4430,6 +4430,46 @@
       "secondary_tileset": "gTileset_Petalburg",
       "border_filepath": "data/layouts/Ciudaddeprueba/border.bin",
       "blockdata_filepath": "data/layouts/Ciudaddeprueba/map.bin"
+    },
+    {
+      "id": "LAYOUT_GRANITE_CAVE_SECRET_ROOM1",
+      "name": "GraniteCave_SecretRoom1_Layout",
+      "width": 27,
+      "height": 28,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Cave",
+      "border_filepath": "data/layouts/GraniteCave_SecretRoom1/border.bin",
+      "blockdata_filepath": "data/layouts/GraniteCave_SecretRoom1/map.bin"
+    },
+    {
+      "id": "LAYOUT_MIRAGE_TOWER_SECRET_ROOM",
+      "name": "MirageTower_SecretRoom_Layout",
+      "width": 21,
+      "height": 17,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_MirageTower",
+      "border_filepath": "data/layouts/MirageTower_SecretRoom/border.bin",
+      "blockdata_filepath": "data/layouts/MirageTower_SecretRoom/map.bin"
+    },
+    {
+      "id": "LAYOUT_MIRAGE_TOWER_SECRET_ROOM_REGIELEKI",
+      "name": "MirageTower_SecretRoomRegieleki_Layout",
+      "width": 21,
+      "height": 29,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_MirageTower",
+      "border_filepath": "data/layouts/MirageTower_SecretRoomRegieleki/border.bin",
+      "blockdata_filepath": "data/layouts/MirageTower_SecretRoomRegieleki/map.bin"
+    },
+    {
+      "id": "LAYOUT_SHOAL_CAVE_LOW_TIDE_ICE_ROOM_DRAGO_TOMB",
+      "name": "ShoalCave_LowTideIceRoom_DragoTomb_Layout",
+      "width": 18,
+      "height": 19,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Cave",
+      "border_filepath": "data/layouts/ShoalCave_LowTideIceRoom_DragoTomb/border.bin",
+      "blockdata_filepath": "data/layouts/ShoalCave_LowTideIceRoom_DragoTomb/map.bin"
     }
   ]
 }

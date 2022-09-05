@@ -432,7 +432,11 @@
     "TerraCave_Entrance",
     "TerraCave_End",
     "AlteringCave",
-    "MeteorFalls_StevensCave"
+    "MeteorFalls_StevensCave",
+    "GraniteCave_SecretRoom1",
+    "MirageTower_SecretRoom",
+    "MirageTower_SecretRoomRegieleki",
+    "ShoalCave_LowTideIceRoom_DragoTomb"
   ],
   "gMapGroup_IndoorDynamic": [
     "SecretBase_RedCave1",

@@ -1,7 +1,7 @@
 Unknown:
 	.string "{COLOR LIGHT_GRAY}{SHADOW DARK_GRAY}???$"
 Birch:
-	.string "{COLOR LIGHT_GREEN}{SHADOW GREEN}Profe$"
+	.string "{COLOR LIGHT_BLUE}{SHADOW BLUE}Profesor Birch$"
 Norman:
 	.string "{COLOR LIGHT_BLUE}{SHADOW BLUE}Papá$"
 Marta:
@@ -24,14 +24,16 @@ Liza:
 	.string "{COLOR RED}Liza$"
 Juan:
 	.string "{COLOR BLUE}Juan$"
+Player:
+	.string "{COLOR_PLAYER}{PLAYER}$"
 
 Archie:
 	.string "{COLOR LIGHT_BLUE}{SHADOW BLUE}Archie$"
 	
 Aqua:
-	.string "{COLOR LIGHT_BLUE}{SHADOW BLUE}Soldado Aqua$"
+	.string "{SHADOW BLUE}Recluta Aqua$"
 Magma:
-	.string "{COLOR LIGHT_RED}{SHADOW RED}Soldado Magma$"
+	.string "{SHADOW RED}Recluta Magma$"
 Maxie:
 	.string "{COLOR LIGHT_RED}{SHADOW RED}Maxie$"
 Shelly:
@@ -52,13 +54,13 @@ Wallace:
 Wally:
 	.string "{COLOR LIGHT_GREEN}{SHADOW GREEN}Wally$"
 Phoebe:
-	.string "{COLOR RED}{SHADOW DARK_GRAY}Phoebe$"
+	.string "{COLOR RED}{SHADOW LIGHT_RED}Phoebe$"
 Glacia:
-	.string "{COLOR RED}{SHADOW LIGHT_BLUE}Glacia$"
+	.string "{COLOR RED}{SHADOW LIGHT_RED}Glacia$"
 Drake:
-	.string "{COLOR BLUE}{SHADOW LIGHT_RED}Drake$"
+	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}Drake$"
 Sidney:
-	.string "{COLOR BLUE}{SHADOW LIGHT_GRAY}Sidney$"
+	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}Sidney$"
 	
 CampeonaLeaf:
 	.string "{COLOR LIGHT_RED}{SHADOW RED}Campeona Leaf$"
@@ -68,8 +70,14 @@ Leaf:
 PapaWally:
 	.string "{COLOR BLUE}Papá de Wally$"
 
+TioWally:
+	.string "{COLOR BLUE}Tío de Wally$"
+
 MamaWally:
 	.string "{COLOR RED}Mamá de Wally$"
+
+TiaWally:
+	.string "{COLOR RED}Tía de Wally$"
 
 Cientifico:
 	.string "{COLOR BLUE}Cientifico$"
@@ -78,7 +86,7 @@ Alex:
 	.string "{COLOR BLUE}Alex$"
 	
 Esmeralda:
-	.string "{COLOR RED}Esmerada$"
+	.string "{COLOR RED}Esmeralda$"
 
 NoDeberiasVerlo:
 	.string "No tendrías que poder ver esto.\n"
@@ -101,6 +109,12 @@ Stern:
 
 Briney:
 	.string "{COLOR BLUE}Briney$"
+
+Scott:
+	.string "{COLOR GREEN}Scott$"
+
+Carlos:
+	.string "{COLOR BLUE}Carlos$"
 
 RecoveredItems:
 	.string "¡Has recuperado tus objetos!$"

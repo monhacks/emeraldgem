@@ -1233,6 +1233,17 @@ const struct SpriteTemplate gFieldEffectObjectTemplate_Bubbles = {
     .callback = UpdateBubblesFieldEffect,
 };
 
+// const struct SpriteTemplate gFieldEffectObjectTemplate_Flames = {
+    // .tileTag = TAG_NONE,
+    // .paletteTag = FLDEFF_PAL_TAG_FIRE,
+    // .oam = &gObjectEventBaseOam_32x32,
+    // .anims = sAnimTable_Bubbles,
+    // .images = sPicTable_Bubbles,
+    // .affineAnims = gDummySpriteAffineAnimTable,
+    // .callback = UpdateBubblesFieldEffect,
+// };
+
+
 static const struct SpriteFrameImage sPicTable_SmallSparkle[] = {
     overworld_frame(gFieldEffectObjectPic_SmallSparkle, 2, 2, 0),
     overworld_frame(gFieldEffectObjectPic_SmallSparkle, 2, 2, 1),

@@ -33,7 +33,7 @@ script RusturfTunnel_EventScript_Wanda {
 script RusturfTunnel_EventScript_WandasBoyfriend {
 	lock
 	faceplayer
-	msgbox (format("¡ARGH! ¡ROAR!\p¡Ese lindo hombre me detuvo cuando estaba tan cerca………!\pY ahora, un derrumbe me lastimó las manos.\pQuiero llegar con mi novia para hablarle de él."))
+	msgbox (format("¡ARGH! {PAUSE 2}¡ROAR!\p¡Ese lindo hombre me detuvo cuando estaba tan cerca………!\pY ahora, un derrumbe me lastimó las manos.\pQuiero llegar con mi novia para hablarle de él."))
 	closemessage
 	applymovement (VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection)
 	waitmovement (0)
@@ -53,7 +53,7 @@ script RusturfTunnel_EventScript_ClearTunnelScene {
         }
     call (RusturfTunnel_EventScript_WandasBoyfriendNotice)
     namebox (Riley)
-    msgbox(format("¡ROAR!\nE-eh, quiero decir, ¡wow!\p¡Destruíste esa roca que bloqueaba el camino! ¡Ni mis enormes músculos de constructor podían destruírla!\pComo agradecimiento de crear un atajo para ver a mi novia, ten esto."))
+    msgbox(format("¡ROAR!\nE-eh, quiero decir, {PAUSE 2}¡wow!\p¡Destruíste esa roca que bloqueaba el camino! {PAUSE 2}¡Ni mis enormes músculos de constructor podían destruírla!\pComo agradecimiento de crear un atajo para ver a mi novia, ten esto."))
     hidenamebox
     switch (var(VAR_TEMP_1)) {
         case 2:
@@ -77,7 +77,7 @@ script RusturfTunnel_EventScript_ClearTunnelScene {
             call (RusturfTunnel_EventScript_BoyfriendApproachWanda3)
     }
     namebox(Riley)
-    msgbox(format("¡Amor! ¡Hola!\nNnn… ¡ROOOAARR! ¡Estoy tan feliz!"))
+    msgbox(format("¡Amor! {PAUSE 2}¡Hola!\nNnn… {PAUSE 2}¡ROOOAARR! {PAUSE 2}¡Estoy tan feliz!"))
     hidenamebox
     namebox(Wanda)
     msgbox(format("¡Oh, Riley, amor mío!\nAl fin nos vemos otra vez."))
@@ -272,11 +272,11 @@ script RusturfTunnel_EventScript_Grunt {
 	faceplayer
 	playbgm (MUS_ENCOUNTER_AQUA, FALSE)
     namebox(Aqua)
-	msgbox(format("¡Argh, este Peeko resultó ser una molestia!\pMe ordenaron robar las {COLOR BLUE}Partes{COLOR DARK_GRAY}, detener la construcción y escapar, pero ese tipo excavador me persiguió hasta que robé este Peeko y me burlé de sus músculos.\p………\p¿Sigues aquí?\nEntonces, ¡Peleemos!"))
+	msgbox(format("¡Argh, este Peeko resultó ser una molestia!\pMe ordenaron robar las {COLOR BLUE}Partes{COLOR DARK_GRAY}, detener la construcción y escapar, pero ese tipo excavador me persiguió hasta que robé este Peeko y me burlé de sus músculos.\p………\p¿Sigues aquí?\nEntonces, {PAUSE 2}¡Peleemos!"))
 	hidenamebox
     trainerbattle_no_intro (TRAINER_GRUNT_RUSTURF_TUNNEL, RusturfTunnel_Text_GruntDefeat)
 	namebox(Aqua)
-    msgbox (format("No comprendo.\pEl {COLOR BLUE}Jefecito{COLOR DARK_GRAY} me dijo que sería tarea fácil, ¡Pero no lo es!\p¡ARGH! ¡ROAR!\p¡Tendré que hacer esto con trucos sucios!"))
+    msgbox (format("No comprendo.\pEl {COLOR BLUE}Jefecito{COLOR DARK_GRAY} me dijo que sería tarea fácil, {PAUSE 2}¡Pero no lo es!\p¡ARGH! {PAUSE 2}¡ROAR!\p¡Tendré que hacer esto con trucos sucios!"))
     hidenamebox
     closemessage
     playse (SE_PIN)
@@ -322,11 +322,11 @@ script RusturfTunnel_EventScript_Grunt {
 	special (GiveBackItemsAndBerries)
 	clearflag (FLAG_STARTED_BOSS)
     namebox(Aqua)
-    msgbox(format("¡N-NO!\n¡No puede ser!\l¡ARGH! ¡Aquí tienes denuevo tus inútiles Pokémon!"))
+    msgbox(format("¡N-NO!\n¡No puede ser!\l¡ARGH! {PAUSE 2}¡Aquí tienes denuevo tus inútiles Pokémon!"))
     hidenamebox
     message (format("¡Te han devuelto la mochila!"))
     namebox(Aqua)
-    msgbox(format("¡A-ARGH! ¡ROAR! ¡NOO!\p¡Tch, aquí tienen las partes!\nDe todas formas, ¡Nuestro plan es infalible, mua ja ja!"))
+    msgbox(format("¡A-ARGH! {PAUSE 2}¡ROAR! {PAUSE 2}¡NOO!\p¡Tch, aquí tienen las partes!\nDe todas formas, {PAUSE 2}¡Nuestro plan es infalible, mua ja ja!"))
     hidenamebox
 	giveitem (ITEM_DEVON_PARTS, 1)
 	closemessage
@@ -405,7 +405,7 @@ script RusturfTunnel_EventScript_Grunt {
 }
 
 text RusturfTunnel_Text_GruntDefeat2 {
-    "¡ARGH! ¡ROAR!\p¡DÉJAME GANARTE!"
+    "¡ARGH! {PAUSE 2}¡ROAR!\p¡DÉJAME GANARTE!"
 }
 
 movement RusturfTunnel_Movement_ApproachPeeko1 {
@@ -491,13 +491,13 @@ script RusturfTunnel_EventScript_Mike {
 
 
 text RusturfTunnel_Text_GruntDefeat {
-    "¡ARGH! ¡ROAR!\p¿Porqué no pueden dejarme\nterminar esta misión?"
+    "¡ARGH! {PAUSE 2}¡ROAR!\p¿Porqué no pueden dejarme\nterminar esta misión?"
 }
 
 
 
 text RusturfTunnel_Text_MikeIntro {
-    "Si un hombre que está en las montañas se llama montañero, ¿Porqué los Pokémon de montañas no se llaman montañokes?"}
+    "Si un hombre que está en las montañas se llama montañero, {PAUSE 2}¿Porqué los Pokémon de montañas no se llaman montañokes?"}
 
 text RusturfTunnel_Text_MikeDefeat {
     "Mis montañokes………"}

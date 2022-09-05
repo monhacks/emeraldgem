@@ -1,7 +1,117 @@
 .set LOCALID_STEVEN, 1
 
 GraniteCave_StevensRoom_MapScripts::
+	 map_script MAP_SCRIPT_ON_LOAD, GraniteCave_StevensRoom_CoverItAll 
 	.byte 0
+
+GraniteCave_StevensRoom_CoverItAll::
+	goto_if_set FLAG_REGIGIGAS_UNLOCKED, GraniteCave_StevensRoom_UnCoverItAll
+	setmetatile 14, 9, METATILE_Cave_Mountain_BottomMid, TRUE
+	setmetatile 15, 9, METATILE_Cave_Mountain_BottomMid, TRUE
+	setmetatile 16, 9, METATILE_Cave_Mountain_BottomMid, TRUE
+	setmetatile 14, 10, METATILE_Cave_SealedChamberBraille_Mid, TRUE
+	setmetatile 15, 10, METATILE_Cave_SealedChamberBraille_Mid, TRUE
+	setmetatile 16, 10, METATILE_Cave_SealedChamberBraille_Mid, TRUE
+	special DrawWholeMapView
+	release
+	end
+
+GraniteCave_StevensRoom_UnCoverItAll::
+	setmetatile 14, 9, METATILE_Cave_SealedChamberEntrance_TopLeft, TRUE
+	setmetatile 15, 9, METATILE_Cave_SealedChamberEntrance_TopMid, TRUE
+	setmetatile 16, 9, METATILE_Cave_SealedChamberEntrance_TopRight, TRUE
+	setmetatile 14, 10, METATILE_Cave_SealedChamberEntrance_BottomLeft, TRUE
+	setmetatile 15, 10, METATILE_Cave_SealedChamberEntrance_BottomMid, FALSE
+	setmetatile 16, 10, METATILE_Cave_SealedChamberEntrance_BottomRight, TRUE
+	special DrawWholeMapView
+	release
+	end
+
+GraniteCave_Braille_1::
+	goto_if_set FLAG_REGIGIGAS_UNLOCKED, GraniteCave_Braille_1_Done
+	braillemsgbox GraniteCave_Braille_1Text
+	goto GraniteCave_Braille_Check
+	release
+	end
+
+GraniteCave_Braille_2::
+	goto_if_set FLAG_REGIGIGAS_UNLOCKED, GraniteCave_Braille_1_Done
+	braillemsgbox GraniteCave_Braille_2Text
+	goto GraniteCave_Braille_Check
+	release
+	end
+
+GraniteCave_Braille_Check::
+	setvar 0x8005, SPECIES_REGICE
+	special CheckSpecies
+	compare VAR_RESULT, 0
+	goto_if_eq GraniteCave_Braille_None
+	setvar 0x8005, SPECIES_REGIROCK
+	special CheckSpecies
+	compare VAR_RESULT, 0
+	goto_if_eq GraniteCave_Braille_None
+	setvar 0x8005, SPECIES_REGISTEEL
+	special CheckSpecies
+	compare VAR_RESULT, 0
+	goto_if_eq GraniteCave_Braille_None
+	setvar 0x8005, SPECIES_REGIDRAGO
+	special CheckSpecies
+	compare VAR_RESULT, 0
+	goto_if_eq GraniteCave_Braille_None
+	setvar 0x8005, SPECIES_REGIELEKI
+	special CheckSpecies
+	compare VAR_RESULT, 0
+	goto_if_eq GraniteCave_Braille_None
+	setvar VAR_0x8004, 2 
+	setvar VAR_0x8005, 2 
+	setvar VAR_0x8006, 4
+	setvar VAR_0x8007, 4
+	special ShakeCamera
+	waitstate
+	playse SE_PIN
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_ExclamationMark
+	waitmovement 0
+	delay 30
+	setvar VAR_0x8004, 4
+	setvar VAR_0x8005, 4
+	setvar VAR_0x8006, 6
+	setvar VAR_0x8007, 3
+	special ShakeCamera
+	waitstate
+	delay 30
+	setvar VAR_0x8004, 6
+	setvar VAR_0x8005, 6
+	setvar VAR_0x8006, 8
+	setvar VAR_0x8007, 2
+	special ShakeCamera
+	waitstate
+	delay 30
+	playse SE_DOOR
+	setmetatile 14, 9, METATILE_Cave_SealedChamberEntrance_TopLeft, TRUE
+	setmetatile 15, 9, METATILE_Cave_SealedChamberEntrance_TopMid, TRUE
+	setmetatile 16, 9, METATILE_Cave_SealedChamberEntrance_TopRight, TRUE
+	setmetatile 14, 10, METATILE_Cave_SealedChamberEntrance_BottomLeft, TRUE
+	setmetatile 15, 10, METATILE_Cave_SealedChamberEntrance_BottomMid, FALSE
+	setmetatile 16, 10, METATILE_Cave_SealedChamberEntrance_BottomRight, TRUE
+	special DrawWholeMapView
+	setflag FLAG_REGIGIGAS_UNLOCKED
+	message GraniteCave_StevensRoom_Text_Done
+	delay 35
+	closemessage
+	release
+	end
+
+GraniteCave_Braille_1_Done::
+	msgbox GraniteCave_StevensRoom_Text_Done
+	release
+	end
+
+GraniteCave_StevensRoom_Text_Done:
+	.string "¡Una puerta se abrió!$"
+
+GraniteCave_Braille_None::
+	release
+	end
 
 GraniteCave_StevensRoom_EventScript_Steven::
 	lock

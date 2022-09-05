@@ -1577,6 +1577,20 @@ void PrepareStringBattle(u16 stringId, u8 battler)
         else
             SET_STATCHANGER(STAT_SPATK, 2, FALSE);
     }
+     // else if ((stringId == STRINGID_DEFENDERSSTATFELL)
+               // && (battlerAbility == ABILITY_DEFENSE_BREAKER /*&& CompareStat(gBattlerTarget, STAT_DEF, MIN_STAT_STAGE, CMP_MORE_THAN) || CompareStat(gBattlerTarget, STAT_SPDEF, MIN_STAT_STAGE, CMP_MORE_THAN)*/)
+               // && ((gSpecialStatuses[gBattlerTarget].changedStatsBattlerId != gBattlerTarget) || gBattleScripting.stickyWebStatDrop == 1)
+               // && !(gBattleScripting.stickyWebStatDrop == 1 && gSideTimers[targetSide].stickyWebBattlerSide == targetSide)) // Sticky Web must have been set by the foe
+     // {
+         // gBattleScripting.stickyWebStatDrop = 0;
+         // gBattlerAbility = gBattlerTarget;
+         // BattleScriptPushCursor();
+         // gBattlescriptCurrInstr = BattleScript_AbilityRaisesDefenderStat;
+         // if (targetAbility == ABILITY_DEFIANT)
+             // SET_STATCHANGER(STAT_ATK, 2, FALSE);
+         // else
+             // SET_STATCHANGER(STAT_SPATK, 2, FALSE);
+     // }
 #if  B_UPDATED_INTIMIDATE >= GEN_8
     else if (stringId == STRINGID_PKMNCUTSATTACKWITH && targetAbility == ABILITY_RATTLED
             && CompareStat(gBattlerTarget, STAT_SPEED, MAX_STAT_STAGE, CMP_LESS_THAN))
@@ -4217,6 +4231,15 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
                     {
                         gBattleWeather = (B_WEATHER_SUN_PERMANENT | B_WEATHER_SUN_TEMPORARY);
                         gBattleScripting.animArg1 = B_ANIM_SUN_CONTINUES;
+                        effect++;
+                    }
+                    break;
+				case WEATHER_SNOW:
+                    if (!(gBattleWeather & B_WEATHER_HAIL))
+                    {
+                        gBattleWeather = B_WEATHER_HAIL;
+                        gBattleScripting.animArg1 = B_ANIM_HAIL_CONTINUES;
+                        gBattleScripting.battler = battler;
                         effect++;
                     }
                     break;
@@ -8079,6 +8102,10 @@ static u16 CalcMoveBasePower(u16 move, u8 battlerAtk, u8 battlerDef)
         break;
     case EFFECT_NATURAL_GIFT:
         basePower = gNaturalGiftTable[ITEM_TO_BERRY(gBattleMons[battlerAtk].item)].power;
+        break;
+	case EFFECT_LOVE_DUPLICATES_POWER:
+		if (gBattleMons[battlerDef].status2 & STATUS2_INFATUATED_WITH(gBattlerAttacker))
+            basePower *= 2;
         break;
     case EFFECT_WAKE_UP_SLAP:
         if (gBattleMons[battlerDef].status1 & STATUS1_SLEEP || GetBattlerAbility(battlerDef) == ABILITY_COMATOSE)

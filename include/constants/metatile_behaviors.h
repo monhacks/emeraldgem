@@ -5,7 +5,7 @@
 #define MB_SECRET_BASE_WALL 0x01
 #define MB_TALL_GRASS 0x02
 #define MB_LONG_GRASS 0x03
-#define MB_UNUSED_04 0x04
+#define MB_SPECIAL_DOOR 0x04
 #define MB_UNUSED_05 0x05
 #define MB_DEEP_SAND 0x06
 #define MB_SHORT_GRASS 0x07
@@ -36,7 +36,7 @@
 #define MB_ICE 0x20
 #define MB_SAND 0x21
 #define MB_SEAWEED 0x22
-#define MB_UNUSED_23 0x23
+#define MB_ICE_2 0x23
 #define MB_ASHGRASS 0x24
 #define MB_FOOTPRINTS 0x25
 #define MB_THIN_ICE 0x26
@@ -45,7 +45,7 @@
 #define MB_LAVARIDGE_GYM_B1F_WARP 0x29
 #define MB_SEAWEED_NO_SURFACING 0x2A
 #define MB_REFLECTION_UNDER_BRIDGE 0x2B
-#define MB_UNUSED_2C 0x2C
+#define MB_ICE_SWITCH 0x2C
 #define MB_UNUSED_2D 0x2D
 #define MB_UNUSED_2E 0x2E
 #define MB_UNUSED_2F 0x2F
@@ -74,7 +74,7 @@
 #define MB_SLIDE_NORTH 0x46
 #define MB_SLIDE_SOUTH 0x47
 #define MB_TRICK_HOUSE_PUZZLE_8_FLOOR 0x48
-#define MB_UNUSED_49 0x49
+#define MB_ICE_3 0x49
 #define MB_UNUSED_4A 0x4A
 #define MB_UNUSED_4B 0x4B
 #define MB_UNUSED_4C 0x4C

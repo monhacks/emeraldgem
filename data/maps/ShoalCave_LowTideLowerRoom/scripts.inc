@@ -4,6 +4,14 @@ ShoalCave_LowTideLowerRoom_MapScripts::
 
 ShoalCave_LowTideLowerRoom_OnLoad:
 	call ShoalCave_LowTideLowerRoom_EventScript_SetShoalItemMetatiles
+	goto_if_set FLAG_REGICE_INFLUENCE, ShoalCave_LowTideLowerRoom_RestoreThingsToNormal
+	end
+
+ShoalCave_LowTideLowerRoom_RestoreThingsToNormal:
+	clearflag FLAG_REGICE_INFLUENCE
+	clearflag FLAG_HAS_FIRE_POKEMON
+	setflag FLAG_ENABLED_PC
+	releaseall
 	end
 
 ShoalCave_LowTideLowerRoom_EventScript_SetShoalItemMetatiles::

@@ -106,8 +106,10 @@
 #define FLDEFFOBJ_BUBBLES               34
 #define FLDEFFOBJ_SMALL_SPARKLE         35
 #define FLDEFFOBJ_RAYQUAZA              36
+// #define FLDEFFOBJ_FLAMES              37
 
 #define FLDEFF_PAL_TAG_CUT_GRASS          0x1000
+#define FLDEFF_PAL_TAG_FIRE          0x1001
 #define FLDEFF_PAL_TAG_SECRET_POWER_TREE  0x1003
 #define FLDEFF_PAL_TAG_GENERAL_0          0x1004
 #define FLDEFF_PAL_TAG_GENERAL_1          0x1005

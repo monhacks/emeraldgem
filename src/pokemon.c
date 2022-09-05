@@ -3478,6 +3478,9 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
         value = personality & 1;
         SetBoxMonData(boxMon, MON_DATA_ABILITY_NUM, &value);
     }
+    
+    value = HIDDEN_NATURE_NONE;
+    SetBoxMonData(boxMon, MON_DATA_HIDDEN_NATURE, &value);
 
     GiveBoxMonInitialMoveset(boxMon);
 }
@@ -3876,6 +3879,54 @@ bool8 ShouldIgnoreDeoxysForm(u8 caseId, u8 battlerId)
     return TRUE;
 }
 
+// <<<<<<< HEAD
+// =======
+// static u16 GetDeoxysStat(struct Pokemon *mon, s32 statId)
+// {
+    // s32 ivVal, evVal;
+    // u16 statValue = 0;
+    // u8 nature;
+
+    // if (gBattleTypeFlags & BATTLE_TYPE_LINK_IN_BATTLE || GetMonData(mon, MON_DATA_SPECIES, NULL) != SPECIES_DEOXYS)
+        // return 0;
+
+    // ivVal = GetMonData(mon, MON_DATA_HP_IV + statId, NULL);
+    // evVal = GetMonData(mon, MON_DATA_HP_EV + statId, NULL);
+    // statValue = ((sDeoxysBaseStats[statId] * 2 + ivVal + evVal / 4) * mon->level) / 100 + 5;
+    // nature = GetNature(mon, TRUE);
+    // statValue = ModifyStatByNature(nature, statValue, (u8)statId);
+    // return statValue;
+// }
+
+// void SetDeoxysStats(void)
+// {
+    // s32 i, value;
+
+    // for (i = 0; i < PARTY_SIZE; i++)
+    // {
+        // struct Pokemon *mon = &gPlayerParty[i];
+
+        // if (GetMonData(mon, MON_DATA_SPECIES, NULL) != SPECIES_DEOXYS)
+            // continue;
+
+        // value = GetMonData(mon, MON_DATA_ATK, NULL);
+        // SetMonData(mon, MON_DATA_ATK, &value);
+
+        // value = GetMonData(mon, MON_DATA_DEF, NULL);
+        // SetMonData(mon, MON_DATA_DEF, &value);
+
+        // value = GetMonData(mon, MON_DATA_SPEED, NULL);
+        // SetMonData(mon, MON_DATA_SPEED, &value);
+
+        // value = GetMonData(mon, MON_DATA_SPATK, NULL);
+        // SetMonData(mon, MON_DATA_SPATK, &value);
+
+        // value = GetMonData(mon, MON_DATA_SPDEF, NULL);
+        // SetMonData(mon, MON_DATA_SPDEF, &value);
+    // }
+// }
+
+// >>>>>>> e3b999705448cb6122b64da8f4c8829b761ca226
 u16 GetUnionRoomTrainerPic(void)
 {
     u8 linkId;
@@ -3951,7 +4002,7 @@ static u16 CalculateBoxMonChecksum(struct BoxPokemon *boxMon)
 {                                                               \
     u8 baseStat = gBaseStats[species].base;                     \
     s32 n = (((2 * baseStat + iv + ev / 4) * level) / 100) + 5; \
-    u8 nature = GetNature(mon);                                 \
+    u8 nature = GetNature(mon, TRUE);                           \
     n = ModifyStatByNature(nature, n, statIndex);               \
     SetMonData(mon, field, &n);                                 \
 }
@@ -4885,6 +4936,9 @@ u32 GetBoxMonData(struct BoxPokemon *boxMon, s32 field, u8 *data)
                 | (substruct3->worldRibbon << 26);
         }
         break;
+    case MON_DATA_HIDDEN_NATURE:
+        retVal = substruct0->hiddenNature;
+        break;
     default:
         break;
     }
@@ -5203,6 +5257,9 @@ void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg)
         substruct3->spDefenseIV = (ivs >> 25) & MAX_IV_MASK;
         break;
     }
+    case MON_DATA_HIDDEN_NATURE:
+        SET8(substruct0->hiddenNature);
+        break;
     default:
         break;
     }
@@ -6467,9 +6524,12 @@ u8 *UseStatIncreaseItem(u16 itemId)
     return gDisplayedStringBattle;
 }
 
-u8 GetNature(struct Pokemon *mon)
+u8 GetNature(struct Pokemon *mon, bool32 checkHidden)
 {
-    return GetMonData(mon, MON_DATA_PERSONALITY, 0) % NUM_NATURES;
+    if (!checkHidden || GetMonData(mon, MON_DATA_HIDDEN_NATURE, 0) == HIDDEN_NATURE_NONE)
+        return GetNatureFromPersonality(GetMonData(mon, MON_DATA_PERSONALITY, 0));
+    else
+        return GetMonData(mon, MON_DATA_HIDDEN_NATURE, 0);
 }
 
 u8 GetNatureFromPersonality(u32 personality)
@@ -6679,7 +6739,7 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, s
             case EVO_LEVEL_NATURE_AMPED:
                 if (gEvolutionTable[species][i].param <= level)
                 {
-                    u8 nature = GetNature(mon);
+                    u8 nature = GetNature(mon, FALSE);
                     switch (nature)
                     {
                     case NATURE_HARDY:
@@ -6703,7 +6763,7 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, s
             case EVO_LEVEL_NATURE_LOW_KEY:
                 if (gEvolutionTable[species][i].param <= level)
                 {
-                    u8 nature = GetNature(mon);
+                    u8 nature = GetNature(mon, FALSE);
                     switch (nature)
                     {
                     case NATURE_LONELY:
@@ -7779,7 +7839,7 @@ bool8 IsMonSpriteNotFlipped(u16 species)
 
 s8 GetMonFlavorRelation(struct Pokemon *mon, u8 flavor)
 {
-    u8 nature = GetNature(mon);
+    u8 nature = GetNature(mon, FALSE);
     return gPokeblockFlavorCompatibilityTable[nature * FLAVOR_COUNT + flavor];
 }
 
@@ -8454,10 +8514,10 @@ u16 GetFormChangeTargetSpeciesBoxMon(struct BoxPokemon *mon, u16 method, u32 arg
                     break;
                 case FORM_ITEM_USE_TIME:
                     	RtcCalcLocalTime();
-	if (FlagGet(FLAG_RTC_ENABLED)) {
-		gLocalTime.hours = Rtc_GetCurrentHour();
-		gLocalTime.minutes = Rtc_GetCurrentMinute();
-	}
+	// if (FlagGet(FLAG_RTC_ENABLED)) {
+		// gLocalTime.hours = Rtc_GetCurrentHour();
+		// gLocalTime.minutes = Rtc_GetCurrentMinute();
+	// }
                     if (arg == formChanges[i].param1)
                     {
                         switch (formChanges[i].param2)

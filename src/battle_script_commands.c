@@ -12310,7 +12310,6 @@ static void Cmd_recoverbasedonsunlight(void)
         }
         else if (gCurrentMove == MOVE_MOONLIGHT)
 		{
-			gLocalTime.hours = Rtc_GetCurrentHour();
 			if ((!(gBattleWeather & B_WEATHER_ANY) || !WEATHER_HAS_EFFECT || GetBattlerHoldEffect(gBattlerAttacker, TRUE) == HOLD_EFFECT_UTILITY_UMBRELLA) && (gLocalTime.hours >= 20 || gLocalTime.hours < 8))
                 gBattleMoveDamage = 20 * gBattleMons[gBattlerAttacker].maxHP / 30;
             else if ((gBattleWeather & B_WEATHER_ANY) && WEATHER_HAS_EFFECT && GetBattlerHoldEffect(gBattlerAttacker, TRUE) != HOLD_EFFECT_UTILITY_UMBRELLA && (gLocalTime.hours >= 20 || gLocalTime.hours < 8))
@@ -13761,11 +13760,7 @@ static void Cmd_handleballthrow(void)
 			}
 			break;
         case ITEM_DUSK_BALL:
-            	RtcCalcLocalTime();
-	if (FlagGet(FLAG_RTC_ENABLED)) {
-		gLocalTime.hours = Rtc_GetCurrentHour();
-		gLocalTime.minutes = Rtc_GetCurrentMinute();
-	}
+            RtcCalcLocalTime();
             if ((gLocalTime.hours >= 20 && gLocalTime.hours <= 3) || gMapHeader.cave || gMapHeader.mapType == MAP_TYPE_UNDERGROUND)
 				ballMultiplier = 35;
             break;

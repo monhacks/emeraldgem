@@ -86,6 +86,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RooftopSaleWoman;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Teala;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BreakableRock;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PushableBoulder;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PushableBoulder2;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_MrBrineysBoat;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_MayNormal;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_MayMachBike;
@@ -490,6 +491,7 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_HOOH] =                     &gObjectEventGraphicsInfo_HoOh,
     [OBJ_EVENT_GFX_RALTS] =                    &gObjectEventGraphicsInfo_Ralts,
     [OBJ_EVENT_GFX_CHIMECHO] =                 &gObjectEventGraphicsInfo_Chimecho,
+	[OBJ_EVENT_GFX_PUSHABLE_BOULDER_2] =         &gObjectEventGraphicsInfo_PushableBoulder2,
 };
 
 const struct ObjectEventGraphicsInfo *const gMauvilleOldManGraphicsInfoPointers[] = {

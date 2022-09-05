@@ -853,6 +853,8 @@ enum
     FIELD_MOVE_MILK_DRINK,
     FIELD_MOVE_SOFT_BOILED,
     FIELD_MOVE_SWEET_SCENT,
+    // FIELD_MOVE_FLAMETHROWER, TODO
+    // FIELD_MOVE_FIRE_PUNCH,
 };
 
 // What a weird choice of table termination;
@@ -900,6 +902,8 @@ struct
     [MENU_FIELD_MOVES + FIELD_MOVE_MILK_DRINK] = {gLongMoveNames[MOVE_MILK_DRINK], CursorCb_FieldMove},
     [MENU_FIELD_MOVES + FIELD_MOVE_SOFT_BOILED] = {gLongMoveNames[MOVE_SOFT_BOILED], CursorCb_FieldMove},
     [MENU_FIELD_MOVES + FIELD_MOVE_SWEET_SCENT] = {gLongMoveNames[MOVE_SWEET_SCENT], CursorCb_FieldMove},
+    // [MENU_FIELD_MOVES + FIELD_MOVE_FLAMETHROWER] = {gLongMoveNames[MOVE_FLAMETHROWER], CursorCb_FieldMove}, TODO
+    // [MENU_FIELD_MOVES + FIELD_MOVE_FIRE_PUNCH] = {gLongMoveNames[MOVE_FIRE_PUNCH], CursorCb_FieldMove}, TODO
 };
 
 static const u8 sPartyMenuAction_SummarySwitchCancel[] = {MENU_SUMMARY, MENU_SWITCH, MENU_CANCEL1};
@@ -1007,6 +1011,8 @@ struct
     [FIELD_MOVE_MILK_DRINK]   = {SetUpFieldMove_SoftBoiled,  PARTY_MSG_NOT_ENOUGH_HP},
     [FIELD_MOVE_SOFT_BOILED]  = {SetUpFieldMove_SoftBoiled,  PARTY_MSG_NOT_ENOUGH_HP},
     [FIELD_MOVE_SWEET_SCENT]  = {SetUpFieldMove_SweetScent,  PARTY_MSG_CANT_USE_HERE},
+    // [FIELD_MOVE_FLAMETHROWER]  = {SetUpFieldMove_FireMoves,  PARTY_MSG_CANT_USE_HERE}, TODO
+    // [FIELD_MOVE_FIRE_PUNCH]  = {SetUpFieldMove_FireMoves,  PARTY_MSG_CANT_USE_HERE}, TODO
 };
 
 static const u8 *const sUnionRoomTradeMessages[] =
@@ -1376,7 +1382,7 @@ static const u16 sTMHMMoves[] =
     [ITEM_TM45 - ITEM_TM01] = MOVE_ATTRACT,
     [ITEM_TM46 - ITEM_TM01] = MOVE_THIEF,
     [ITEM_TM47 - ITEM_TM01] = MOVE_STEEL_WING,
-    [ITEM_TM48 - ITEM_TM01] = MOVE_SKILL_SWAP,
+    [ITEM_TM48 - ITEM_TM01] = MOVE_DISARMING_VOICE,
     [ITEM_TM49 - ITEM_TM01] = MOVE_SNATCH,
     [ITEM_TM50 - ITEM_TM01] = MOVE_OVERHEAT,
     [ITEM_TM51 - ITEM_TM01] = MOVE_ROOST, // finished

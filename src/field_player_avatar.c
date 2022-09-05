@@ -29,8 +29,10 @@
 #include "constants/moves.h"
 #include "constants/songs.h"
 #include "constants/trainer_types.h"
+#include "constants/map_types.h"
+#include "field_specials.h"
 
-#define NUM_FORCED_MOVEMENTS 18
+#define NUM_FORCED_MOVEMENTS 19
 #define NUM_ACRO_BIKE_COLLISIONS 5
 
 static EWRAM_DATA u8 sSpinStartFacingDir = 0;
@@ -145,7 +147,8 @@ static u8 TrySpinPlayerForWarp(struct ObjectEvent *object, s16 *a1);
 static bool8 (*const sForcedMovementTestFuncs[NUM_FORCED_MOVEMENTS])(u8) =
 {
     MetatileBehavior_IsTrickHouseSlipperyFloor,
-    MetatileBehavior_IsIce_2,
+    MetatileBehavior_IsIce,
+    MetatileBehavior_IsIce_3,
     MetatileBehavior_IsWalkSouth,
     MetatileBehavior_IsWalkNorth,
     MetatileBehavior_IsWalkWest,
@@ -168,6 +171,7 @@ static bool8 (*const sForcedMovementTestFuncs[NUM_FORCED_MOVEMENTS])(u8) =
 static bool8 (*const sForcedMovementFuncs[NUM_FORCED_MOVEMENTS + 1])(void) =
 {
     ForcedMovement_None,
+    ForcedMovement_Slip,
     ForcedMovement_Slip,
     ForcedMovement_Slip,
     ForcedMovement_WalkSouth,
@@ -517,10 +521,15 @@ static bool8 ForcedMovement_None(void)
 
 static bool8 DoForcedMovement(u8 direction, void (*moveFunc)(u8))
 {
+	// else {
     struct PlayerAvatar *playerAvatar = &gPlayerAvatar;
     u8 collision = CheckForPlayerAvatarCollision(direction);
 
     playerAvatar->flags |= PLAYER_AVATAR_FLAG_FORCED_MOVE;
+	if (FlagGet(FLAG_REGICE_INFLUENCE)) {
+		ForcedMovement_None();
+		return FALSE;
+	 }
     if (collision)
     {
         ForcedMovement_None();
@@ -543,6 +552,7 @@ static bool8 DoForcedMovement(u8 direction, void (*moveFunc)(u8))
         moveFunc(direction);
         return TRUE;
     }
+	// }
 }
 
 static bool8 DoForcedMovementInCurrentDirection(void (*moveFunc)(u8))
@@ -555,6 +565,7 @@ static bool8 DoForcedMovementInCurrentDirection(void (*moveFunc)(u8))
 
 static bool8 ForcedMovement_Slip(void)
 {
+	
     return DoForcedMovementInCurrentDirection(PlayerWalkFast);
 }
 
@@ -712,7 +723,23 @@ static void PlayerNotOnBikeMoving(u8 direction, u16 heldKeys)
         return;
     }
 
-    if (!(gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_UNDERWATER) && (heldKeys & B_BUTTON)
+	if (FlagGet(FLAG_REGIELEKI_ALMOST_UNLOCKED) && (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MIRAGE_TOWER_SECRET_ROOM_REGIELEKI) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(MIRAGE_TOWER_SECRET_ROOM_REGIELEKI))) {
+		if (heldKeys & DPAD_UP) {
+			PlayerWalkSlow(direction);
+			return;
+		}
+		else if (heldKeys & DPAD_LEFT || heldKeys & DPAD_RIGHT) {
+			PlayerWalkNormal(direction);
+			return;
+		}
+		else if (heldKeys & DPAD_DOWN) {
+			PlayerWalkFast(direction);
+			return;
+		}
+		
+	}
+
+    else if (!(gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_UNDERWATER) && (heldKeys & B_BUTTON)
      && IsRunningDisallowed(gObjectEvents[gPlayerAvatar.objectEventId].currentMetatileBehavior) == 0)
     {
         PlayerRun(direction);
@@ -811,7 +838,7 @@ static bool8 TryPushBoulder(s16 x, s16 y, u8 direction)
     if (FlagGet(FLAG_SYS_USE_STRENGTH))
     {
         u8 objectEventId = GetObjectEventIdByXY(x, y);
-
+		u8 objectEventId2;
         if (objectEventId != OBJECT_EVENTS_COUNT && gObjectEvents[objectEventId].graphicsId == OBJ_EVENT_GFX_PUSHABLE_BOULDER)
         {
             x = gObjectEvents[objectEventId].currentCoords.x;
@@ -819,9 +846,9 @@ static bool8 TryPushBoulder(s16 x, s16 y, u8 direction)
             MoveCoords(direction, &x, &y);
             if (GetCollisionAtCoords(&gObjectEvents[objectEventId], x, y, direction) == COLLISION_NONE
              && MetatileBehavior_IsNonAnimDoor(MapGridGetMetatileBehaviorAt(x, y)) == FALSE)
-            {
-                StartStrengthAnim(objectEventId, direction);
-                return TRUE;
+            { 
+					StartStrengthAnim(objectEventId, direction);
+					return TRUE;
             }
         }
     }
@@ -1032,6 +1059,11 @@ void PlayerSetAnimId(u8 movementActionId, u8 copyableMovement)
 void PlayerWalkNormal(u8 direction)
 {
     PlayerSetAnimId(GetWalkNormalMovementAction(direction), COPY_MOVE_WALK);
+}
+
+void PlayerWalkSlow(u8 direction)
+{
+    PlayerSetAnimId(GetWalkSlowMovementAction(direction), COPY_MOVE_WALK);
 }
 
 void PlayerWalkFast(u8 direction)

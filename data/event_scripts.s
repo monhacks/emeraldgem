@@ -1073,3 +1073,11 @@ Common_EventScript_LegendaryFlewAway::
 	.include "data/maps/LittlerootTown_MLMHouse/scripts.inc"
 
 	.include "data/maps/Ciudaddeprueba/scripts.inc"
+
+	.include "data/maps/GraniteCave_SecretRoom1/scripts.inc"
+
+	.include "data/maps/MirageTower_SecretRoom/scripts.inc"
+
+	.include "data/maps/MirageTower_SecretRoomRegieleki/scripts.inc"
+
+	.include "data/maps/ShoalCave_LowTideIceRoom_DragoTomb/scripts.inc"

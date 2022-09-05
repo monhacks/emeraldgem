@@ -759,7 +759,7 @@ Petalburg_Leaf::
 	lockall
 	faceplayer
 	goto_if_unset FLAG_DEFEATED_LEAF, Petalburg_Leaf_2
-	namebox Leaf
+	namebox CampeonaLeaf
 	msgbox Petalburg_Leaf_Text_3
 	fadescreen FADE_TO_BLACK
 	hidenamebox
@@ -775,7 +775,7 @@ Petalburg_Leaf_2:
 	namebox Unknown
 	msgbox Petalburg_Leaf_Text_0
 	hidenamebox
-	namebox Leaf
+	namebox CampeonaLeaf
 	msgbox Petalburg_Leaf_Text_02
 	hidenamebox
 	trainerbattle_no_intro TRAINER_LEAF, Leaf_Defeated_Message

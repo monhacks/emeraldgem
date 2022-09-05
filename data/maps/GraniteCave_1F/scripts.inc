@@ -2,19 +2,121 @@ GraniteCave_1F_MapScripts::
 	.byte 0
 
 
-GraniteCave_1F_EventScript_Hiker::
-	lock
-	faceplayer
-	checkitem ITEM_HM05
-	compare VAR_RESULT, TRUE
-	goto_if_eq GraniteCave_1F_EventScript_Hiker_2
-	msgbox GraniteCave_1F_EventScript_Hiker_Text_1
-	giveitem ITEM_HM05
-	msgbox GraniteCave_1F_EventScript_Hiker_Text_0
+GraniteCave_1F_EventScript_BlueRock1::
+	goto_if_unset FLAG_BLUE_STONES_1, GraniteCave_1F_EventScript_BlueRock1_1
+	msgbox GraniteCave_1F_EventScript_BlueRock1_Text_2
 	release
 	end
 
-GraniteCave_1F_EventScript_Hiker_2:
+GraniteCave_1F_EventScript_BlueRock1_1:
+	msgbox GraniteCave_1F_EventScript_BlueRock1_Text_0
+	delay 16
+	msgbox GraniteCave_1F_EventScript_BlueRock1_Text_1
+	setvar VAR_0x8004, 0
+	setvar VAR_0x8005, 2
+	setvar VAR_0x8006, 2
+	setvar VAR_0x8007, 3
+	special ShakeCamera
+	waitstate
+	closemessage
+	delay 30
+	playse SE_PIN
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_ExclamationMark
+	random 4
+	switch VAR_RESULT
+	case 0, GraniteCave_1F_EventScript_BlueRock1_6
+	case 1, GraniteCave_1F_EventScript_BlueRock1_7
+	case 2, GraniteCave_1F_EventScript_BlueRock1_8
+	case 3, GraniteCave_1F_EventScript_BlueRock1_9
+	case 4, GraniteCave_1F_EventScript_BlueRock1_10
+	giveitem ITEM_WATER_STONE, 1
+GraniteCave_1F_EventScript_BlueRock1_4:
+	delay 16
+	msgbox GraniteCave_1F_EventScript_BlueRock1_Text_2
+	setflag FLAG_BLUE_STONES_1
+	release
+	end
+
+GraniteCave_1F_EventScript_BlueRock1_6:
+	giveitem ITEM_WATER_STONE, 1
+	goto GraniteCave_1F_EventScript_BlueRock1_4
+
+GraniteCave_1F_EventScript_BlueRock1_7:
+	giveitem ITEM_LEAF_STONE, 1
+	goto GraniteCave_1F_EventScript_BlueRock1_4
+
+GraniteCave_1F_EventScript_BlueRock1_8:
+	giveitem ITEM_MOON_STONE, 1
+	goto GraniteCave_1F_EventScript_BlueRock1_4
+
+GraniteCave_1F_EventScript_BlueRock1_9:
+	giveitem ITEM_DUSK_STONE, 1
+	goto GraniteCave_1F_EventScript_BlueRock1_4
+
+GraniteCave_1F_EventScript_BlueRock1_10:
+	giveitem ITEM_ICE_STONE, 1
+	goto GraniteCave_1F_EventScript_BlueRock1_4
+
+
+GraniteCave_1F_EventScript_RedRock1::
+	goto_if_unset FLAG_RED_STONES_1, GraniteCave_1F_EventScript_RedRock1_1
+	msgbox GraniteCave_1F_EventScript_BlueRock1_Text_2
+	release
+	end
+
+GraniteCave_1F_EventScript_RedRock1_1:
+	msgbox GraniteCave_1F_EventScript_BlueRock1_Text_0
+	delay 16
+	msgbox GraniteCave_1F_EventScript_BlueRock1_Text_1
+	setvar VAR_0x8004, 0
+	setvar VAR_0x8005, 2
+	setvar VAR_0x8006, 2
+	setvar VAR_0x8007, 3
+	special ShakeCamera
+	closemessage
+	waitstate
+	delay 30
+	playse SE_PIN
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_ExclamationMark
+	random 4
+	switch VAR_RESULT
+	case 0, GraniteCave_1F_EventScript_RedRock1_6
+	case 1, GraniteCave_1F_EventScript_RedRock1_7
+	case 2, GraniteCave_1F_EventScript_RedRock1_8
+	case 3, GraniteCave_1F_EventScript_RedRock1_9
+	case 4, GraniteCave_1F_EventScript_RedRock1_10
+	giveitem ITEM_FIRE_STONE, 1
+GraniteCave_1F_EventScript_RedRock1_4:
+	delay 16
+	msgbox GraniteCave_1F_EventScript_BlueRock1_Text_2
+	setflag FLAG_RED_STONES_1
+	release
+	end
+
+GraniteCave_1F_EventScript_RedRock1_6:
+	giveitem ITEM_FIRE_STONE, 1
+	goto GraniteCave_1F_EventScript_RedRock1_4
+
+GraniteCave_1F_EventScript_RedRock1_7:
+	giveitem ITEM_THUNDER_STONE, 1
+	goto GraniteCave_1F_EventScript_RedRock1_4
+
+GraniteCave_1F_EventScript_RedRock1_8:
+	giveitem ITEM_SUN_STONE, 1
+	goto GraniteCave_1F_EventScript_RedRock1_4
+
+GraniteCave_1F_EventScript_RedRock1_9:
+	giveitem ITEM_SHINY_STONE, 1
+	goto GraniteCave_1F_EventScript_RedRock1_4
+
+GraniteCave_1F_EventScript_RedRock1_10:
+	giveitem ITEM_DAWN_STONE, 1
+	goto GraniteCave_1F_EventScript_RedRock1_4
+
+
+GraniteCave_1F_EventScript_Hiker::
+	lock
+	faceplayer
 	msgbox GraniteCave_1F_EventScript_Hiker_Text_0
 	release
 	end
@@ -73,6 +175,7 @@ GraniteCave_1F_EventScript_Grunts::
 	applymovement 4, Common_Movement_WalkInPlaceRight
 	applymovement 5, Common_Movement_WalkInPlaceRight
 	waitmovement 0
+	playbgm MUS_ENCOUNTER_AQUA, TRUE
 	namebox Aqua
 	msgbox GraniteCave_1F_EventScript_Grunts_Text_4
 	hidenamebox
@@ -84,7 +187,9 @@ GraniteCave_1F_EventScript_Grunts::
 	playse SE_PIN
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_ExclamationMark
 	waitmovement 0
+	namebox Player
 	msgbox GraniteCave_1F_EventScript_Grunts_Text_6
+	hidenamebox
 	closemessage
 	applymovement OBJ_EVENT_ID_PLAYER, GraniteCave_1F_Movement_PlayerEscapes
 	applymovement 4, GraniteCave_1F_Movement_Grunt2_BlockExit_Top
@@ -107,6 +212,7 @@ GraniteCave_1F_EventScript_Grunts::
 	case 7, GraniteCave_1F_EventScript_Grunts_5
 	call GraniteCave_1F_EventScript_PlayerNoWayOut1
 GraniteCave_1F_EventScript_Grunts_1:
+	namebox Player
 	msgbox GraniteCave_1F_EventScript_Grunts_Text_8
 	hidenamebox
 	closemessage
@@ -138,7 +244,7 @@ GraniteCave_1F_EventScript_Grunts_1:
 	trainerbattle_no_intro TRAINER_ANDRES_2, GraniteCave_1F_Text_Grunt1_Defeat
 	closemessage
 	playse SE_PIN
-	applymovement 4, Common_Movement_ExclamationMark
+	applymovement 5, Common_Movement_ExclamationMark
 	waitmovement 0
 	namebox Aqua
 	msgbox GraniteCave_1F_EventScript_Grunts_Text_11
@@ -151,7 +257,7 @@ GraniteCave_1F_EventScript_Grunts_1:
 	msgbox GraniteCave_1F_Text_Grunt2_Intro
 	trainerbattle_no_intro TRAINER_ANDRES_3, GraniteCave_1F_Text_Grunt2_Defeat
 	playse SE_PIN
-	applymovement 5, Common_Movement_ExclamationMark
+	applymovement 4, Common_Movement_ExclamationMark
 	waitmovement 0
 	namebox Aqua
 	msgbox GraniteCave_1F_EventScript_Grunts_Text_12
@@ -159,6 +265,7 @@ GraniteCave_1F_EventScript_Grunts_1:
 	closemessage
 	delay 16
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceDown
+	waitmovement 0
 	waitmovement 0
 	delay 12
 	namebox Aqua
@@ -228,6 +335,8 @@ GraniteCave_1F_EventScript_Grunts_1:
 	hidenamebox
 	closemessage
 	delay 20
+	savebgm MUS_DUMMY
+	fadedefaultbgm
 	applymovement 5, Common_Movement_WalkInPlaceDown
 	waitmovement 0
 	namebox Aqua
@@ -326,9 +435,9 @@ GraniteCave_1F_EventScript_Grunts_1:
 	msgbox GraniteCave_1F_EventScript_Grunts_Text_31
 	hidenamebox
 	closemessage
-	msgbox GraniteCave_1F_EventScript_Grunts_Text_32
+	delay 8
 	namebox Brawly
-	msgbox GraniteCave_1F_EventScript_Grunts_Text_33
+	msgbox GraniteCave_1F_EventScript_Grunts_Text_32
 	hidenamebox
 	closemessage
 	delay 16
@@ -338,7 +447,7 @@ GraniteCave_1F_EventScript_Grunts_1:
 	applymovement 6, Common_Movement_FacePlayer
 	waitmovement 0
 	namebox Brawly
-	msgbox GraniteCave_1F_EventScript_Grunts_Text_34
+	msgbox GraniteCave_1F_EventScript_Grunts_Text_33
 	hidenamebox
 	closemessage
 	applymovement 6, GraniteCave_1F_Movement_BrawlyOut
@@ -443,6 +552,7 @@ GraniteCave_1F_Movement_PlayerEscapes:
 	unlock_facing_direction
 	walk_fast_right
 	walk_fast_right
+	walk_fast_down
 	step_end
 
 GraniteCave_1F_Movement_PlayerBacksDown:
@@ -451,6 +561,8 @@ GraniteCave_1F_Movement_PlayerBacksDown:
 	step_end
 
 GraniteCave_1F_Movement_PlayerNoWayOut:
+	lock_facing_direction
+	walk_slow_up
 	walk_in_place_slow_up
 	delay_16
 	walk_in_place_slow_down
@@ -458,6 +570,7 @@ GraniteCave_1F_Movement_PlayerNoWayOut:
 
 GraniteCave_1F_Movement_PlayerNoWayOut2:
 	lock_facing_direction
+	walk_slow_up
 	walk_slow_up
 	walk_in_place_slow_down
 	walk_in_place_slow_up
@@ -467,6 +580,7 @@ GraniteCave_1F_Movement_PlayerNoWayOut2:
 
 GraniteCave_1F_Movement_PlayerNoWayOut3:
 	lock_facing_direction
+	walk_slow_up
 	walk_slow_up
 	walk_slow_up
 	walk_in_place_slow_down
@@ -536,20 +650,25 @@ GraniteCave_1F_Movement_Grunt3_BlockExit_Top:
 	face_up
 	step_end
 
-GraniteCave_1F_EventScript_Hiker_Text_0:
-	.string "Flash es un Movimiento Oculto que puede\n"
-	.string "ser usado fuera de combate. Aunque,\l"
-	.string "honestamente, ya no es de tanta\l"
-	.string "utilidad.\p"
-	.string "Verás, unos terremotos abrieron unos\n"
-	.string "hoyos naturales en las plantas bajas y\l"
-	.string "ahora la luz natural pasa\l"
-	.string "tranquilamente.$"
+GraniteCave_1F_EventScript_BlueRock1_Text_0:
+	.string "... ¿Oh?\n"
+	.string "¡Mira, hay una piedra evolutiva aquí!$"
 
-GraniteCave_1F_EventScript_Hiker_Text_1:
-	.string "Antes, solía darles a los nuevos la MO05\n"
-	.string "Flash para que navegaran por este\l"
-	.string "lugar. Ahora, lo hago por formalidades.$"
+GraniteCave_1F_EventScript_BlueRock1_Text_1:
+	.string ".... ¡MMMMGGGGHHH!$"
+
+GraniteCave_1F_EventScript_BlueRock1_Text_2:
+	.string "Parece que otra piedra evolutiva se\n"
+	.string "está formando debajo muy lentamente...\p"
+	.string "¡Habrá que volver mañana!$"
+
+GraniteCave_1F_EventScript_Hiker_Text_0:
+	.string "Este lugar ha cambiado mucho con el\n"
+	.string "tiempo, por ejemplo, {COLOR BLUE}ahora el fondo de\l"
+	.string "la cueva es más claro{COLOR DARK_GRAY}, y también se\l"
+	.string "formaron unas {COLOR RED}Rocas Rojas{COLOR DARK_GRAY} y {COLOR BLUE}Rocas\l"
+	.string "Azules{COLOR DARK_GRAY}, ¡Que forman {COLOR BLUE}Piedras Evolutivas\l"
+	.string "diariamente!{COLOR DARK_GRAY}$"
 
 GraniteCave_1F_EventScript_Grunts_Text_0:
 	.string "¿Entendieron?\p"
@@ -576,13 +695,13 @@ GraniteCave_1F_EventScript_Grunts_Text_5:
 	.string "cascote en el medio de la frente.$"
 
 GraniteCave_1F_EventScript_Grunts_Text_6:
-	.string "{PLAYER}: {COLOR BLUE}(¡Mejor me voy!)$"
+	.string "{COLOR BLUE}(¡Mejor me voy!)$"
 
 GraniteCave_1F_EventScript_Grunts_Text_7:
 	.string "¿A dónde crees que vas?$"
 
 GraniteCave_1F_EventScript_Grunts_Text_8:
-	.string "{PLAYER}: {COLOR BLUE}(D-demonios...)$"
+	.string "{COLOR BLUE}(D-demonios...)$"
 
 GraniteCave_1F_EventScript_Grunts_Text_9:
 	.string "Ahora, ni amordaza ni cascote en la\n"
@@ -680,9 +799,6 @@ GraniteCave_1F_EventScript_Grunts_Text_31:
 	.string "¿Esas locas no te hicieron nada, no?$"
 
 GraniteCave_1F_EventScript_Grunts_Text_32:
-	.string "{PLAYER}: N-no, señor.$"
-
-GraniteCave_1F_EventScript_Grunts_Text_33:
 	.string "¡Hell yeah, eso significa que llegué\n"
 	.string "justo a tiempo!\p"
 	.string "Aunque, estoy seguro que las habrías\n"
@@ -692,11 +808,10 @@ GraniteCave_1F_EventScript_Grunts_Text_33:
 	.string "de todo, tú solit{OA} derrotaste a sus\l"
 	.string "Pokémon principales, ¿Me equivoco?$"
 
-GraniteCave_1F_EventScript_Grunts_Text_34:
+GraniteCave_1F_EventScript_Grunts_Text_33:
 	.string "Anyway, ¡Te estaré esperando en el\n"
 	.string "Gimnasio, dude!\p"
-	.string "¡No puedo esperar a batallar contra tí,\n"
-	.string "yeah!$"
+	.string "¡No puedo esperar a batallar contra tí!$"
 
 GraniteCave_1F_Text_Grunt1_Intro::
 	.string "¡Vas a caer!$"
@@ -715,6 +830,3 @@ GraniteCave_1F_Text_Grunt2_Defeat::
 
 GraniteCave_1F_Text_Grunt3_Defeat::
 	.string "Entendería que derrotes a esas\ndos tontas, ¿¡Pero a mí!?$"
-
-GraniteCave_1F_Player::
-	.string "{COLOR_PLAYER}{PLAYER}$"
