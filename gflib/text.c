@@ -334,8 +334,8 @@ void RunTextPrinters(void)
                 case RENDER_PRINT:
                     //CopyWindowToVram(sTextPrinters[i].printerTemplate.windowId, COPYWIN_GFX);
                 case RENDER_UPDATE:
-                    if (sTextPrinters[i].callback != 0)
-                        sTextPrinters[i].callback(&sTextPrinters[i].printerTemplate, temp);
+                    if (sTextPrinters[i].callback != NULL)
+                        sTextPrinters[i].callback(&sTextPrinters[i].printerTemplate, renderCmd);
                     break;
                 case RENDER_FINISH:
                     sTextPrinters[i].active = FALSE;

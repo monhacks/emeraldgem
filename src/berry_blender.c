@@ -2233,7 +2233,7 @@ static void CB2_PlayBlender(void)
     UpdatePaletteFade();
 }
 
-static void Blender_DummiedOutFunc(s16 a0, s16 a1)
+static void Blender_DummiedOutFunc(s16 bgX, s16 bgY)
 {
 
 }
