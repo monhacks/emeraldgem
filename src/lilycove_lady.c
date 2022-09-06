@@ -295,7 +295,7 @@ void SetFavorLadyState_Complete(void)
 
 void FieldCallback_FavorLadyEnableScriptContexts(void)
 {
-    EnableBothScriptContexts();
+    ScriptContext_Enable();
 }
 
 static void QuizLadyPickQuestion(void)
@@ -572,7 +572,7 @@ void BufferQuizCorrectAnswer(void)
 
 void FieldCallback_QuizLadyEnableScriptContexts(void)
 {
-    EnableBothScriptContexts();
+    ScriptContext_Enable();
 }
 
 void QuizLadyClearQuestionForRecordMix(const LilycoveLady *lilycoveLady)

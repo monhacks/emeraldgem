@@ -305,7 +305,7 @@ const struct SpriteTemplate gPersistHitSplatSpriteTemplate =
     .callback = AnimHitSplatPersistent,
 };
 
-static void AnimMovePowerSwapGuardSwapWait(struct Sprite* sprite)
+static void AnimMovePowerSwapGuardSwapWait(struct Sprite *sprite)
 {
     if (TranslateAnimHorizontalArc(sprite))
         DestroyAnimSprite(sprite);
@@ -317,7 +317,7 @@ static void AnimMovePowerSwapGuardSwapWait(struct Sprite* sprite)
 // arg 3: from user to target / target to user
 // arg 4: wave period
 // arg 5: wave amplitude
-static void AnimMovePowerSwapGuardSwap(struct Sprite* sprite)
+static void AnimMovePowerSwapGuardSwap(struct Sprite *sprite)
 {
     StartSpriteAnim(sprite, gBattleAnimArgs[2]);
     if(gBattleAnimArgs[3] == 0)
@@ -804,7 +804,7 @@ void AnimTask_InvertScreenColor(u8 taskId)
     u32 selectedPalettes = 0;
 
     if (gBattleAnimArgs[0] & 0x1)
-        selectedPalettes = GetBattleBgPalettesMask(1, 0, 0, 0, 0, 0, 0);
+        selectedPalettes = GetBattlePalettesMask(TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE);
     if (gBattleAnimArgs[0] & 0x2)
         selectedPalettes |= (0x10000 << gBattleAnimAttacker);
     if (gBattleAnimArgs[0] & 0x4)
@@ -1030,7 +1030,7 @@ void AnimHitSplatBasic(struct Sprite *sprite)
 {
     StartSpriteAffineAnim(sprite, gBattleAnimArgs[3]);
     if (gBattleAnimArgs[2] == ANIM_ATTACKER)
-        InitSpritePosToAnimAttacker(sprite, 1);
+        InitSpritePosToAnimAttacker(sprite, TRUE);
     else
         InitSpritePosToAnimTarget(sprite, TRUE);
 
@@ -1043,7 +1043,7 @@ static void AnimHitSplatPersistent(struct Sprite *sprite)
 {
     StartSpriteAffineAnim(sprite, gBattleAnimArgs[3]);
     if (gBattleAnimArgs[2] == ANIM_ATTACKER)
-        InitSpritePosToAnimAttacker(sprite, 1);
+        InitSpritePosToAnimAttacker(sprite, TRUE);
     else
         InitSpritePosToAnimTarget(sprite, TRUE);
 
@@ -1093,7 +1093,7 @@ void AnimHitSplatOnMonEdge(struct Sprite *sprite)
 void AnimCrossImpact(struct Sprite *sprite)
 {
     if (gBattleAnimArgs[2] == ANIM_ATTACKER)
-        InitSpritePosToAnimAttacker(sprite, 1);
+        InitSpritePosToAnimAttacker(sprite, TRUE);
     else
         InitSpritePosToAnimTarget(sprite, TRUE);
 
@@ -1106,7 +1106,7 @@ void AnimFlashingHitSplat(struct Sprite *sprite)
 {
     StartSpriteAffineAnim(sprite, gBattleAnimArgs[3]);
     if (gBattleAnimArgs[2] == ANIM_ATTACKER)
-        InitSpritePosToAnimAttacker(sprite, 1);
+        InitSpritePosToAnimAttacker(sprite, TRUE);
     else
         InitSpritePosToAnimTarget(sprite, TRUE);
 

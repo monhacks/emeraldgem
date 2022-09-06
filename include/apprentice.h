@@ -16,10 +16,11 @@ struct ApprenticeTrainer
 extern const struct ApprenticeTrainer gApprentices[];
 
 void BufferApprenticeChallengeText(u8 saveApprenticeId);
-void Apprentice_EnableBothScriptContexts(void);
+void Apprentice_ScriptContext_Enable(void);
 void ResetApprenticeStruct(struct Apprentice *apprentice);
 void ResetAllApprenticeData(void);
 void CallApprenticeFunction(void);
 const u8 *GetApprenticeNameInLanguage(u32 apprenticeId, s32 language);
+void Apprentice_EnableBothScriptContexts(void);
 
 #endif // GUARD_APPRENTICE_H

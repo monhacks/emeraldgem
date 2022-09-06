@@ -974,6 +974,7 @@ u8 ItemId_GetSecondaryId(u16 itemId)
     return gItems[SanitizeItemId(itemId)].secondaryId;
 }
 
+// <<<<<<< HEAD
 bool32 IsPinchBerryItemEffect(u16 holdEffect)
 {
     switch (holdEffect)
@@ -992,27 +993,29 @@ bool32 IsPinchBerryItemEffect(u16 holdEffect)
 
     return FALSE;
 }
-// Item Description Header
-bool8 GetSetItemObtained(u16 item, u8 caseId)
-{
-    u8 index;
-    u8 bit;
-    u8 mask;
+// // Item Description Header
+ bool8 GetSetItemObtained(u16 item, u8 caseId)
+ {
+     u8 index;
+     u8 bit;
+     u8 mask;
 
-    index = item / 8;
-    bit = item % 8;
-    mask = 1 << bit;
-    switch (caseId)
-    {
-    case FLAG_GET_OBTAINED:
-        return gSaveBlock2Ptr->itemFlags[index] & mask;
-    case FLAG_SET_OBTAINED:
-        gSaveBlock2Ptr->itemFlags[index] |= mask;
-        return TRUE;
-    }
+     index = item / 8;
+     bit = item % 8;
+     mask = 1 << bit;
+     switch (caseId)
+     {
+     case FLAG_GET_OBTAINED:
+         return gSaveBlock2Ptr->itemFlags[index] & mask;
+     case FLAG_SET_OBTAINED:
+         gSaveBlock2Ptr->itemFlags[index] |= mask;
+         return TRUE;
+     }
 
-    return FALSE;
-}
+     return FALSE;
+ }
+// =======
+// >>>>>>> 75c4e7dc136d1629d4087f3bc893bb0ff119fd1e
 u8 ItemId_GetFlingPower(u16 itemId)
 {
     return gItems[SanitizeItemId(itemId)].flingPower;

@@ -42,6 +42,7 @@ const u8 gText_ExpandedPlaceholder_EL2[] = _("él");
 const u8 gText_ExpandedPlaceholder_ELLA[] = _("ella");
 const u8 gText_ExpandedPlaceholder_El2[] = _("Él");
 const u8 gText_ExpandedPlaceholder_Ella[] = _("Ella");
+const u8 gText_PkmnGainedExp[] = _("¡{STR_VAR_1} ganó experiencia!{PAUSE_UNTIL_PRESS}");
 //contraseñas
 /*const u8 gText_Recompensa1[] = _("WORLDOFPOKEMON");
 const u8 gText_Recompensa2[] = _("PASSWORD");
@@ -1250,7 +1251,7 @@ const u8 gText_PsychUp48BP[] = _("PSYCH UP{CLEAR_TO 0x4E}48BP");
 const u8 gText_IcePunch48BP[] = _("ICE PUNCH{CLEAR_TO 0x4E}48BP");
 const u8 gText_ThunderPunch48BP[] = _("THUNDERPUNCH{CLEAR_TO 0x4E}48BP");
 const u8 gText_FirePunch48BP[] = _("FIRE PUNCH{CLEAR_TO 0x4E}48BP");
-const u8 gText_PkmnFainted3[] = _("{STR_VAR_1} fainted…\p\n");
+const u8 gText_PkmnFainted_FldPsn[] = _("{STR_VAR_1} fainted…\p\n");
 const u8 gText_Marco[] = _("MARCO");
 const u8 gText_TrainerCardName[] = _("NAME: ");
 const u8 gText_TrainerCardIDNo[] = _("IDNo.");

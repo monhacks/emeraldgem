@@ -39,8 +39,17 @@ bool8 ScriptContext1_IsScriptSetUp(void);
 bool8 ScriptContext2_RunScript(void);
 void ScriptContext1_SetupScript(const u8 *ptr);
 void ScriptContext1_Stop(void);
+void LockPlayerFieldControls(void);
+void UnlockPlayerFieldControls(void);
+bool8 ArePlayerFieldControlsLocked(void);
+void ScriptContext_Init(void);
+bool8 ScriptContext_IsEnabled(void);
+bool8 ScriptContext_RunScript(void);
+void ScriptContext_SetupScript(const u8 *ptr);
+void ScriptContext_Stop(void);
+void ScriptContext_Enable(void);
+void RunScriptImmediately(const u8 *ptr);
 void EnableBothScriptContexts(void);
-void ScriptContext2_RunNewScript(const u8 *ptr);
 u8 *MapHeaderGetScriptTable(u8 tag);
 void MapHeaderRunScriptType(u8 tag);
 u8 *MapHeaderCheckScriptTable(u8 tag);
@@ -69,5 +78,7 @@ void ResetFacingNpcOrSignPostVars(void);
 bool32 IsMsgSignPost(void);
 bool32 CanWalkAwayToCancelMsgBox(void);
 void ClearMsgBoxCancelableState(void);
+void ScriptContext2_RunNewScript(const u8 *ptr);
+
 
 #endif // GUARD_SCRIPT_H
