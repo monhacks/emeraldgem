@@ -198,7 +198,7 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
     gSpecialVar_LastTalked = 0;
     gSelectedObjectEvent = 0;
     
-    ResetFacingNpcOrSignPostVars();
+    // ResetFacingNpcOrSignPostVars();
     playerDirection = GetPlayerFacingDirection();
     GetPlayerPosition(&position);
     metatileBehavior = MapGridGetMetatileBehaviorAt(position.x, position.y);
@@ -223,15 +223,15 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
     if (input->checkStandardWildEncounter)
     {
         if (input->dpadDirection == 0 || input->dpadDirection == playerDirection)
-        {
+         {
             GetInFrontOfPlayerPosition(&position);
             metatileBehavior = MapGridGetMetatileBehaviorAt(position.x, position.y);
             if (TrySetUpWalkIntoSignpostScript(&position, metatileBehavior, playerDirection) == TRUE)
-                return TRUE;
-            GetPlayerPosition(&position);
-            metatileBehavior = MapGridGetMetatileBehaviorAt(position.x, position.y);
+                 return TRUE;
+             GetPlayerPosition(&position);
+             metatileBehavior = MapGridGetMetatileBehaviorAt(position.x, position.y);
         }
-    }
+     }
     
     if (input->checkStandardWildEncounter && CheckStandardWildEncounter(metatileBehavior) == TRUE)
         return TRUE;
@@ -1208,86 +1208,87 @@ int SetCableClubWarp(void)
 // signposts
 static bool8 TrySetUpWalkIntoSignpostScript(struct MapPosition *position, u16 metatileBehavior, u8 playerDirection)
 {
-    u8 signpostType;
-    const u8 *script;
+    // u8 signpostType;
+    // const u8 *script;
 
-    if (JOY_HELD(DPAD_LEFT | DPAD_RIGHT))
-        return FALSE;
-    if (playerDirection != DIR_NORTH)
-        return FALSE;
+    // if (JOY_HELD(DPAD_LEFT | DPAD_RIGHT))
+        // return FALSE;
+    // if (playerDirection != DIR_NORTH)
+        // return FALSE;
 
-    switch (GetFacingSignpostType(metatileBehavior, playerDirection))
-    {
-    /* leaving this commented out for examples of custom signpost types
-    case SIGNPOST_POKECENTER:
-        SetUpWalkIntoSignScript(EventScript_PokecenterSign, playerDirection);
-        return TRUE;
-    case SIGNPOST_POKEMART:
-        SetUpWalkIntoSignScript(EventScript_PokemartSign, playerDirection);
-        return TRUE;*/
-    case SIGNPOST_SCRIPTED:
-        script = GetSignpostScriptAtMapPosition(position);
-        if (script == NULL)
-            return FALSE;
-        SetUpWalkIntoSignScript(script, playerDirection);
-        return TRUE;
-    default:
-        return FALSE;
-    }
+    // switch (GetFacingSignpostType(metatileBehavior, playerDirection))
+    // {
+    // /* leaving this commented out for examples of custom signpost types
+    // case SIGNPOST_POKECENTER:
+        // SetUpWalkIntoSignScript(EventScript_PokecenterSign, playerDirection);
+        // return TRUE;
+    // case SIGNPOST_POKEMART:
+        // SetUpWalkIntoSignScript(EventScript_PokemartSign, playerDirection);
+        // return TRUE;*/
+    // case SIGNPOST_SCRIPTED:
+        // script = GetSignpostScriptAtMapPosition(position);
+        // if (script == NULL)
+            // return FALSE;
+        // SetUpWalkIntoSignScript(script, playerDirection);
+        // return TRUE;
+    // default:
+        // return FALSE;
+    // }
+	return FALSE;
 }
 
 static u8 GetFacingSignpostType(u16 metatileBehavior, u8 playerDirection)
 {
     /*if (MetatileBehavior_IsPlayerFacingPokemonCenterSign(metatileBehavior, playerDirection) == TRUE)
         return SIGNPOST_POKECENTER;
-    if (MetatileBehavior_IsPlayerFacingPokeMartSign(metatileBehavior, playerDirection) == TRUE)
-        return SIGNPOST_POKEMART;*/
+    // if (MetatileBehavior_IsPlayerFacingPokeMartSign(metatileBehavior, playerDirection) == TRUE)
+        // return SIGNPOST_POKEMART;*/
 
-    if (MetatileBehavior_IsSignpost(metatileBehavior) == TRUE)
-        return SIGNPOST_SCRIPTED;
+    // if (MetatileBehavior_IsSignpost(metatileBehavior) == TRUE)
+        // return SIGNPOST_SCRIPTED;
 
     return SIGNPOST_NA;
 }
 
 static void SetUpWalkIntoSignScript(const u8 *script, u8 playerDirection)
 {
-    gSpecialVar_Facing = playerDirection;
-    ScriptContext1_SetupScript(script);
-    SetWalkingIntoSignVars();
-    MsgSetSignPost();
+    // gSpecialVar_Facing = playerDirection;
+    // ScriptContext1_SetupScript(script);
+    // SetWalkingIntoSignVars();
+    // MsgSetSignPost();
 }
 
 static const u8 *GetSignpostScriptAtMapPosition(struct MapPosition *position)
 {
-    const struct BgEvent *event = GetBackgroundEventAtPosition(&gMapHeader, position->x - 7, position->y - 7, position->elevation);
-    if (event == NULL)
-        return NULL;
-    if (event->bgUnion.script != NULL)
-        return event->bgUnion.script;
-    return EventScript_TestSignpostMsg;
+    // const struct BgEvent *event = GetBackgroundEventAtPosition(&gMapHeader, position->x - 7, position->y - 7, position->elevation);
+    // if (event == NULL)
+        // return NULL;
+    // if (event->bgUnion.script != NULL)
+        // return event->bgUnion.script;
+    // return EventScript_TestSignpostMsg;
 }
 
 void FieldInput_HandleCancelSignpost(struct FieldInput *input)
 {
-    if (ScriptContext1_IsScriptSetUp() == TRUE)
-    {
-        if (gWalkAwayFromSignInhibitTimer != 0)
-        {
-            gWalkAwayFromSignInhibitTimer--;
-        }
-        else if (CanWalkAwayToCancelMsgBox() == TRUE)
-        {
-            //ClearMsgBoxCancelableState();
-            if (input->dpadDirection != 0 && GetPlayerFacingDirection() != input->dpadDirection)
-            {
-                ScriptContext1_SetupScript(EventScript_CancelMessageBox);
-                ScriptContext2_Enable();
-            }
-            else if (input->pressedStartButton)
-            {
-                ScriptContext1_SetupScript(EventScript_CancelMessageBox);
-                ScriptContext2_Enable();
-            }
-        }
-    }
+    // if (ScriptContext1_IsScriptSetUp() == TRUE)
+    // {
+        // if (gWalkAwayFromSignInhibitTimer != 0)
+        // {
+            // gWalkAwayFromSignInhibitTimer--;
+        // }
+        // else if (CanWalkAwayToCancelMsgBox() == TRUE)
+        // {
+            // //ClearMsgBoxCancelableState();
+            // if (input->dpadDirection != 0 && GetPlayerFacingDirection() != input->dpadDirection)
+            // {
+                // ScriptContext1_SetupScript(EventScript_CancelMessageBox);
+                // ScriptContext2_Enable();
+            // }
+            // else if (input->pressedStartButton)
+            // {
+                // ScriptContext1_SetupScript(EventScript_CancelMessageBox);
+                // ScriptContext2_Enable();
+            // }
+        // }
+    // }
 }

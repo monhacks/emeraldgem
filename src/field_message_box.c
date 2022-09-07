@@ -34,12 +34,14 @@ static void Task_DrawFieldMessage(u8 taskId)
     switch (task->tState)
     {
         case 0:
-           if (IsMsgSignPost())
-                LoadSignPostWindowFrameGfx();
-            else
-                LoadMessageBoxAndBorderGfx();
-            task->tState++;
-            break;
+           // if (IsMsgSignPost())
+                // LoadSignPostWindowFrameGfx();
+            // else
+                // LoadMessageBoxAndBorderGfx();
+			
+            // task->tState++;
+            // break;
+		   LoadMessageBoxAndBorderGfx();
            task->tState++;
            break;
         case 1:

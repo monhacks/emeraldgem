@@ -43,6 +43,7 @@
 #include "strings.h"
 #include "string_util.h"
 #include "task.h"
+#include "event_object_lock.h"
 #include "pokemon_summary_screen.h"
 #include "constants/abilities.h"
 #include "constants/flags.h"
@@ -716,6 +717,8 @@ static void DebugAction_DestroyExtraWindow(u8 taskId)
 
     DestroyTask(taskId);
     EnableBothScriptContexts();
+	ScriptUnfreezeObjectEvents();
+    UnlockPlayerFieldControls();
 }
 
 
@@ -737,6 +740,8 @@ static void DebugTask_HandleMenuInput_Main(u8 taskId)
         PlaySE(SE_SELECT);
         Debug_DestroyMenu(taskId);
         EnableBothScriptContexts();
+		ScriptUnfreezeObjectEvents();
+		UnlockPlayerFieldControls();
     }
 }
 static void DebugTask_HandleMenuInput_Utilities(u8 taskId)

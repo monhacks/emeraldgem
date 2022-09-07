@@ -360,7 +360,10 @@ static void (*const sMovementStatusHandler[])(struct LinkPlayerObjectEvent *, st
 // code
 void DoWhiteOut(void)
 {
-    ScriptContext2_RunNewScript(EventScript_WhiteOut);
+    RunScriptImmediately(EventScript_WhiteOut);
+    #if B_WHITEOUT_MONEY == GEN_3
+    SetMoney(&gSaveBlock1Ptr->money, GetMoney(&gSaveBlock1Ptr->money) / 2);
+    #endif
     HealPlayerParty();
     Overworld_ResetStateAfterWhiteOut();
     SetWarpDestinationToLastHealLocation();
@@ -406,9 +409,9 @@ static void Overworld_ResetStateAfterWhiteOut(void)
     FlagClear(FLAG_SYS_SAFARI_MODE);
     FlagClear(FLAG_SYS_USE_STRENGTH);
     FlagClear(FLAG_SYS_USE_FLASH);
-    #if VAR_TERRAIN != 0
-        VarSet(VAR_TERRAIN, 0);
-    #endif
+#if VAR_TERRAIN != 0
+    VarSet(VAR_TERRAIN, 0);
+#endif
     // If you were defeated by Kyogre/Groudon and the step counter has
     // maxed out, end the abnormal weather.
     if (VarGet(VAR_SHOULD_END_ABNORMAL_WEATHER) == 1)
@@ -1434,8 +1437,7 @@ static void DoCB1_Overworld(u16 newKeys, u16 heldKeys)
     UpdatePlayerAvatarTransitionState();
     FieldClearPlayerInput(&inputStruct);
     FieldGetPlayerInput(&inputStruct, newKeys, heldKeys);
-    FieldInput_HandleCancelSignpost(&inputStruct);
-    if (!ScriptContext2_IsEnabled())
+    if (!ArePlayerFieldControlsLocked())
     {
         if (ProcessPlayerFieldInput(&inputStruct) == 1)
         {
@@ -1546,8 +1548,6 @@ void CB2_WhiteOut(void)
 
     if (++gMain.state >= 120)
     {
-		VarSet(VAR_CHAIN,0);
-        VarSet(VAR_SPECIESCHAINED,0);
         FieldClearVBlankHBlankCallbacks();
         StopMapMusic();
         ResetSafariZoneFlag_();
@@ -2132,7 +2132,10 @@ static void ResumeMap(bool32 a1)
     ResetAllPicSprites();
     ResetCameraUpdateInfo();
     InstallCameraPanAheadCallback();
-    FreeAllSpritePalettes();
+    if (!a1)
+        InitObjectEventPalettes(0);
+    else
+        InitObjectEventPalettes(1);
 
     FieldEffectActiveListClear();
     StartWeather();

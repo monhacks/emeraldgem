@@ -22,18 +22,40 @@ struct MonIconSpriteTemplate
 };
 
 static u8 CreateMonIconSprite(struct MonIconSpriteTemplate *, s16, s16, u8);
-static const u8* GetMonIconTilesCustom(u16 species, bool8 isFemale);
+// static const u8 *GetMonIconPtrCustom(u16 species, u32 personality, bool8 isFemale);
+// static const u8* GetMonIconTilesCustom(u16 species, bool8 isFemale);
 static void FreeAndDestroyMonIconSprite_(struct Sprite *sprite);
 
-// static const u8* GetMonIconTilesCustom(u16 species, bool8 isFemale)
+// u8 CreateMonIconCustom(u16 species, void (*callback)(struct Sprite *), s16 x, s16 y, u8 subpriority, u32 personality, bool8 isFemale, bool8 isShiny)
 // {
-    // const u8* iconSprite = gMonIconTable[species];
-    // if ((gBaseStats[species].flags & FLAG_GENDER_DIFFERENCE) && isFemale)
+    // u8 spriteId;
+    // struct MonIconSpriteTemplate iconTemplate =
     // {
-        // iconSprite = gMonIconTableFemale[species];
-    // }
-    // return iconSprite;
+        // .oam = &sMonIconOamData,
+        // .image = GetMonIconPtrCustom(species, personality, isFemale),
+        // .anims = sMonIconAnims,
+        // .affineAnims = sMonIconAffineAnims,
+        // .callback = callback,
+        // .paletteTag = POKE_ICON_BASE_PAL_TAG + gMonIconPaletteIndices[species],
+    // };
+
+    // if (species > NUM_SPECIES)
+        // iconTemplate.paletteTag = POKE_ICON_BASE_PAL_TAG;
+    // else if ((gBaseStats[species].flags & FLAG_GENDER_DIFFERENCE) && isFemale)
+        // iconTemplate.paletteTag = POKE_ICON_BASE_PAL_TAG + gMonIconPaletteIndicesFemale[species];
+
+    // spriteId = CreateMonIconSprite(&iconTemplate, x, y, subpriority);
+
+    // UpdateMonIconFrame(&gSprites[spriteId]);
+
+    // return spriteId;
 // }
+
+// static const u8 *GetMonIconPtrCustom(u16 species, u32 personality, bool8 isFemale)
+// {
+    // return GetMonIconTilesCustom(GetIconSpecies(species, personality), isFemale);
+// }
+
 
 const u8 *const gMonIconTable[] =
 {
@@ -2916,3 +2938,14 @@ void SetPartyHPBarSprite(struct Sprite *sprite, u8 animNum)
     sprite->animDelayCounter = 0;
     sprite->animCmdIndex = 0;
 }
+
+// static const u8* GetMonIconTilesCustom(u16 species, bool8 isFemale)
+// {
+    // const u8* iconSprite = gMonIconTable[species];
+    // if ((gBaseStats[species].flags & FLAG_GENDER_DIFFERENCE) && isFemale)
+    // {
+        // iconSprite = gMonIconTableFemale[species];
+    // }
+    // return iconSprite;
+// }
+
