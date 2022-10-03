@@ -683,7 +683,7 @@ static void CB2_EndWildBattle(void)
             }
             else if ((species == VarGet(VAR_SPECIESCHAINED)) && VarGet(VAR_CHAIN) >=60) {
 				GetSpeciesName(gStringVar2 ,VarGet(VAR_SPECIESCHAINED));
-                ScriptContext1_SetupScript(ChainNumber);
+                ScriptContext_SetupScript(ChainNumber);
                 VarSet(VAR_CHAIN,60);
 			}
             else if ((species == VarGet(VAR_SPECIESCHAINED)) && VarGet(VAR_CHAIN) >=3)
@@ -693,7 +693,7 @@ static void CB2_EndWildBattle(void)
 				else
 					VarSet(VAR_CHAIN, VarGet(VAR_CHAIN) + 1);
                 GetSpeciesName(gStringVar2 ,VarGet(VAR_SPECIESCHAINED));
-                ScriptContext1_SetupScript(ChainNumber);
+                ScriptContext_SetupScript(ChainNumber);
             }
             else if ((species == VarGet(VAR_SPECIESCHAINED)) && (VarGet(VAR_CHAIN) <=2)){
 				if (gBattleOutcome == B_OUTCOME_CAUGHT)
@@ -705,7 +705,7 @@ static void CB2_EndWildBattle(void)
                 VarSet(VAR_CHAIN,0);
                 VarSet(VAR_SPECIESCHAINED,0);
 				GetSpeciesName(gStringVar2 ,VarGet(species));
-                ScriptContext1_SetupScript(ChainBroke);
+                ScriptContext_SetupScript(ChainBroke);
 			}
         }
         SetMainCallback2(CB2_ReturnToField);

@@ -7467,6 +7467,7 @@ static const struct TrainerMon sParty_MayRoute103Mudkip[] = {
     {
     .iv = 0,
     .lvl = 5,
+	.ball = ITEM_FRIEND_BALL,
     .species = SPECIES_TREECKO,
     }
 };
@@ -7475,16 +7476,19 @@ static const struct TrainerMon sParty_MayRoute110Mudkip[] = {
     {
     .iv = 50,
     .lvl = 18,
+	.ball = ITEM_FRIEND_BALL,
     .species = SPECIES_WINGULL,
     },
     {
     .iv = 50,
     .lvl = 18,
+	.ball = ITEM_FRIEND_BALL,
     .species = SPECIES_SLUGMA,
     },
     {
     .iv = 100,
     .lvl = 20,
+	.ball = ITEM_FRIEND_BALL,
     .species = SPECIES_GROVYLE,
     }
 };
@@ -7493,16 +7497,19 @@ static const struct TrainerMon sParty_MayRoute119Mudkip[] = {
     {
     .iv = 100,
     .lvl = 29,
+	.ball = ITEM_FRIEND_BALL,
     .species = SPECIES_SLUGMA,
     },
     {
     .iv = 100,
     .lvl = 29,
+	.ball = ITEM_FRIEND_BALL,
     .species = SPECIES_LOMBRE,
     },
     {
     .iv = 150,
     .lvl = 31,
+	.ball = ITEM_FRIEND_BALL,
     .species = SPECIES_GROVYLE,
     }
 };
@@ -7511,6 +7518,7 @@ static const struct TrainerMon sParty_MayRoute103Treecko[] = {
     {
     .iv = 0,
     .lvl = 5,
+	.ball = ITEM_FRIEND_BALL,
     .species = SPECIES_TORCHIC,
     }
 };
@@ -7519,16 +7527,19 @@ static const struct TrainerMon sParty_MayRoute110Treecko[] = {
     {
     .iv = 50,
     .lvl = 18,
+	.ball = ITEM_FRIEND_BALL,
     .species = SPECIES_WINGULL,
     },
     {
     .iv = 50,
     .lvl = 18,
+	.ball = ITEM_FRIEND_BALL,
     .species = SPECIES_LOMBRE,
     },
     {
     .iv = 100,
     .lvl = 20,
+	.ball = ITEM_FRIEND_BALL,
     .species = SPECIES_COMBUSKEN,
     }
 };
@@ -7537,16 +7548,19 @@ static const struct TrainerMon sParty_MayRoute119Treecko[] = {
     {
     .iv = 100,
     .lvl = 29,
+	.ball = ITEM_FRIEND_BALL,
     .species = SPECIES_PELIPPER,
     },
     {
     .iv = 100,
     .lvl = 29,
+	.ball = ITEM_FRIEND_BALL,
     .species = SPECIES_LOMBRE,
     },
     {
     .iv = 150,
     .lvl = 31,
+	.ball = ITEM_FRIEND_BALL,
     .species = SPECIES_COMBUSKEN,
     }
 };
@@ -7555,6 +7569,7 @@ static const struct TrainerMon sParty_MayRoute103Torchic[] = {
     {
     .iv = 0,
     .lvl = 5,
+	.ball = ITEM_FRIEND_BALL,
     .species = SPECIES_MUDKIP,
     }
 };
@@ -7563,16 +7578,19 @@ static const struct TrainerMon sParty_MayRoute110Torchic[] = {
     {
     .iv = 50,
     .lvl = 18,
+	.ball = ITEM_FRIEND_BALL,
     .species = SPECIES_LOMBRE,
     },
     {
     .iv = 50,
     .lvl = 18,
+	.ball = ITEM_FRIEND_BALL,
     .species = SPECIES_SLUGMA,
     },
     {
     .iv = 100,
     .lvl = 20,
+	.ball = ITEM_FRIEND_BALL,
     .species = SPECIES_MARSHTOMP,
     }
 };
@@ -7581,16 +7599,19 @@ static const struct TrainerMon sParty_MayRoute119Torchic[] = {
     {
     .iv = 100,
     .lvl = 29,
+	.ball = ITEM_FRIEND_BALL,
     .species = SPECIES_LOMBRE,
     },
     {
     .iv = 100,
     .lvl = 29,
+	.ball = ITEM_FRIEND_BALL,
     .species = SPECIES_SLUGMA,
     },
     {
     .iv = 150,
     .lvl = 31,
+	.ball = ITEM_FRIEND_BALL,
     .species = SPECIES_MARSHTOMP,
     }
 };

@@ -27829,5 +27829,22 @@ const u32 gTMHMLearnsets[][4] =
                                             | TMHM(TM12_TAUNT)
 											,
 											0),
+	[SPECIES_ROWLET]      = TMHM_LEARNSET(TMHM(TM45_ATTRACT)
+                                            | TMHM(TM32_DOUBLE_TEAM)
+                                            | TMHM(TM42_FACADE)
+                                            | TMHM(TM21_FRUSTRATION)
+                                            | TMHM(TM19_GIGA_DRAIN)
+                                            | TMHM(TM10_HIDDEN_POWER)
+                                            | TMHM(TM16_LIGHT_SCREEN)
+                                            | TMHM(TM17_PROTECT)
+                                            | TMHM(TM44_REST)
+                                            | TMHM(TM27_RETURN)
+                                            | TMHM(TM20_SAFEGUARD)
+                                            | TMHM(TM22_SOLAR_BEAM)
+                                            | TMHM(TM47_STEEL_WING)
+                                            | TMHM(TM11_SUNNY_DAY)
+                                            | TMHM(TM06_TOXIC)
+											,
+											0),
 
 };

@@ -618,9 +618,9 @@ static const struct WindowTemplate sItemGiveTakeWindowTemplate =
 {
     .bg = 2,
     .tilemapLeft = 23,
-    .tilemapTop = 13,
+    .tilemapTop = 11,
     .width = 6,
-    .height = 6,
+    .height = 8,
     .paletteNum = 14,
     .baseBlock = 0x39D,
 };
@@ -777,6 +777,7 @@ static const u8 *const sActionStringTable[] =
     [PARTY_MSG_WHICH_ONE_USE]      	   = gText_WhichOneUse,
     [PARTY_MSG_DO_WHAT_WITH_MAIL]      = gText_DoWhatWithMail,
     [PARTY_MSG_ALREADY_HOLDING_ONE]    = gText_AlreadyHoldingOne,
+	[PARTY_MSG_MOVE_ITEM_WHERE]        = gText_MoveItemWhere,
 };
 
 static const u8 *const sDescriptionStringTable[] =
@@ -815,6 +816,7 @@ static const u16 sUnusedData[] =
 	 MENU_HMS,
      MENU_GIVE,
      MENU_TAKE_ITEM,
+     MENU_MOVE_ITEM,
      MENU_MAIL,
      MENU_TAKE_MAIL,
      MENU_READ,
@@ -868,6 +870,7 @@ struct
     [MENU_ITEM] = {gText_Item, CursorCb_Item},
     [MENU_GIVE] = {gMenuText_Give, CursorCb_Give},
     [MENU_TAKE_ITEM] = {gText_Take, CursorCb_TakeItem},
+	[MENU_MOVE_ITEM] = {gMenuText_Move, CursorCb_MoveItem},
     [MENU_MAIL] = {gText_Mail, CursorCb_Mail},
     [MENU_TAKE_MAIL] = {gText_Take2, CursorCb_TakeMail},
     [MENU_READ] = {gText_Read2, CursorCb_Read},
@@ -906,7 +909,7 @@ static const u8 sPartyMenuAction_SummaryCancel[] = {MENU_SUMMARY, MENU_CANCEL1};
 static const u8 sPartyMenuAction_EnterSummaryCancel[] = {MENU_ENTER, MENU_SUMMARY, MENU_CANCEL1};
 static const u8 sPartyMenuAction_NoEntrySummaryCancel[] = {MENU_NO_ENTRY, MENU_SUMMARY, MENU_CANCEL1};
 static const u8 sPartyMenuAction_StoreSummaryCancel[] = {MENU_STORE, MENU_SUMMARY, MENU_CANCEL1};
-static const u8 sPartyMenuAction_GiveTakeItemCancel[] = {MENU_GIVE, MENU_TAKE_ITEM, MENU_CANCEL2};
+static const u8 sPartyMenuAction_GiveTakeItemCancel[] = {MENU_GIVE, MENU_TAKE_ITEM, MENU_MOVE_ITEM, MENU_CANCEL2};
 static const u8 sPartyMenuAction_HiddenMovesCancel[] = {MENU_HMS, MENU_CANCEL2};
 static const u8 sPartyMenuAction_ReadTakeMailCancel[] = {MENU_READ, MENU_TAKE_MAIL, MENU_CANCEL2};
 static const u8 sPartyMenuAction_RegisterSummaryCancel[] = {MENU_REGISTER, MENU_SUMMARY, MENU_CANCEL1};
@@ -1393,35 +1396,35 @@ static const u16 sTMHMMoves[] =
     [ITEM_TM48 - ITEM_TM01] = MOVE_DISARMING_VOICE,
     [ITEM_TM49 - ITEM_TM01] = MOVE_SNATCH,
     [ITEM_TM50 - ITEM_TM01] = MOVE_OVERHEAT,
-    [ITEM_TM51 - ITEM_TM01] = MOVE_ROOST, // finished
-    [ITEM_TM52 - ITEM_TM01] = MOVE_ENERGY_BALL, // finished
-    [ITEM_TM53 - ITEM_TM01] = MOVE_FALSE_SWIPE, // finished
-    [ITEM_TM54 - ITEM_TM01] = MOVE_BRINE, // finished
-    [ITEM_TM55 - ITEM_TM01] = MOVE_CHARGE_BEAM, // finished
-    [ITEM_TM56 - ITEM_TM01] = MOVE_DRAGON_PULSE, // finished
-    [ITEM_TM57 - ITEM_TM01] = MOVE_WILL_O_WISP, // finished
-    [ITEM_TM58 - ITEM_TM01] = MOVE_SHADOW_CLAW, // finished
+    [ITEM_TM51 - ITEM_TM01] = MOVE_ROOST, // Todo
+    [ITEM_TM52 - ITEM_TM01] = MOVE_ENERGY_BALL, // Todo
+    [ITEM_TM53 - ITEM_TM01] = MOVE_FALSE_SWIPE, // Todo
+    [ITEM_TM54 - ITEM_TM01] = MOVE_BRINE, // Todo
+    [ITEM_TM55 - ITEM_TM01] = MOVE_CHARGE_BEAM, // Todo
+    [ITEM_TM56 - ITEM_TM01] = MOVE_DRAGON_PULSE, // Todo
+    [ITEM_TM57 - ITEM_TM01] = MOVE_WILL_O_WISP, // Todo
+    [ITEM_TM58 - ITEM_TM01] = MOVE_SHADOW_CLAW, // Todo
     [ITEM_TM59 - ITEM_TM01] = MOVE_ROCK_POLISH, // Todo
-    [ITEM_TM60 - ITEM_TM01] = MOVE_STONE_EDGE, // finished
+    [ITEM_TM60 - ITEM_TM01] = MOVE_STONE_EDGE, // Todo
     [ITEM_TM61 - ITEM_TM01] = MOVE_DARK_PULSE, // Todo
-    [ITEM_TM62 - ITEM_TM01] = MOVE_ROCK_SLIDE, // finished
-    [ITEM_TM63 - ITEM_TM01] = MOVE_X_SCISSOR, // almost done
-    [ITEM_TM64 - ITEM_TM01] = MOVE_SLEEP_TALK, // finished
-    [ITEM_TM65 - ITEM_TM01] = MOVE_POISON_JAB, // almost done
+    [ITEM_TM62 - ITEM_TM01] = MOVE_ROCK_SLIDE, // Todo
+    [ITEM_TM63 - ITEM_TM01] = MOVE_X_SCISSOR, // Todo
+    [ITEM_TM64 - ITEM_TM01] = MOVE_SLEEP_TALK, // Todo
+    [ITEM_TM65 - ITEM_TM01] = MOVE_POISON_JAB, // Todo
     [ITEM_TM66 - ITEM_TM01] = MOVE_GRASS_KNOT, // Todo
     [ITEM_TM67 - ITEM_TM01] = MOVE_SWAGGER, // Todo
     [ITEM_TM68 - ITEM_TM01] = MOVE_PLUCK, // Todo
     [ITEM_TM69 - ITEM_TM01] = MOVE_U_TURN, // Todo
-    [ITEM_TM70 - ITEM_TM01] = MOVE_SUBSTITUTE, // finished
+    [ITEM_TM70 - ITEM_TM01] = MOVE_SUBSTITUTE, // Todo
     [ITEM_TM71 - ITEM_TM01] = MOVE_FLASH_CANNON, // Todo
-    [ITEM_TM72 - ITEM_TM01] = MOVE_RETALIATE, // finished
+    [ITEM_TM72 - ITEM_TM01] = MOVE_RETALIATE, // Todo
     [ITEM_TM73 - ITEM_TM01] = MOVE_VOLT_SWITCH, // Todo
-    [ITEM_TM74 - ITEM_TM01] = MOVE_BULLDOZE, // finished
+    [ITEM_TM74 - ITEM_TM01] = MOVE_BULLDOZE, // Todo
     [ITEM_TM75 - ITEM_TM01] = MOVE_FROST_BREATH, // Todo
     [ITEM_TM76 - ITEM_TM01] = MOVE_DRAGON_TAIL, // Todo
     [ITEM_TM77 - ITEM_TM01] = MOVE_WORK_UP, // Todo
     [ITEM_TM78 - ITEM_TM01] = MOVE_WILD_CHARGE, // Todo
-    [ITEM_TM79 - ITEM_TM01] = MOVE_ACROBATICS, // almost done
+    [ITEM_TM79 - ITEM_TM01] = MOVE_ACROBATICS, // Todo
     [ITEM_TM80 - ITEM_TM01] = MOVE_STRUGGLE_BUG, // Todo
     [ITEM_TM81 - ITEM_TM01] = MOVE_TRICK_ROOM, // Todo
     [ITEM_TM82 - ITEM_TM01] = MOVE_DAZZLING_GLEAM, // Todo
@@ -1431,7 +1434,7 @@ static const u16 sTMHMMoves[] =
     [ITEM_TM86 - ITEM_TM01] = MOVE_GRASSY_TERRAIN, // Todo
     [ITEM_TM87 - ITEM_TM01] = MOVE_ELECTRIC_TERRAIN, // Todo
     [ITEM_TM88 - ITEM_TM01] = MOVE_PSYCHIC_TERRAIN, // Todo
-    [ITEM_TM89 - ITEM_TM01] = MOVE_AIR_SLASH, // almost done
+    [ITEM_TM89 - ITEM_TM01] = MOVE_AIR_SLASH, // Todo
     [ITEM_TM90 - ITEM_TM01] = MOVE_BRUTAL_SWING, // Todo
     [ITEM_TM91 - ITEM_TM01] = MOVE_STOMPING_TANTRUM, // Todo	
     [ITEM_TM92 - ITEM_TM01] = MOVE_PSYCHO_CUT, // Todo
@@ -1441,7 +1444,7 @@ static const u16 sTMHMMoves[] =
     [ITEM_TM96 - ITEM_TM01] = MOVE_THUNDER_FANG, // Todo
     [ITEM_TM97 - ITEM_TM01] = MOVE_SCREECH, // Todo
     [ITEM_TM98 - ITEM_TM01] = MOVE_BREAKING_SWIPE, // Todo
-    [ITEM_TM99 - ITEM_TM01] = MOVE_SPIRIT_BREAK, // finished
+    [ITEM_TM99 - ITEM_TM01] = MOVE_SPIRIT_BREAK, // Todo
     [ITEM_TM100 - ITEM_TM01] = MOVE_MISTY_EXPLOSION, // Todo
     [ITEM_HM01 - ITEM_TM01] = MOVE_CUT,
     [ITEM_HM02 - ITEM_TM01] = MOVE_FLY,

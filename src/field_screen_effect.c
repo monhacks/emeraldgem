@@ -495,7 +495,8 @@ void DoWarp(void)
     TryFadeOutOldMapMusic();
     WarpFadeOutScreen();
     PlayRainStoppingSoundEffect();
-    PlaySE(SE_EXIT);
+	if (!FlagGet(FLAG_SPAWN_INVISIBLE))
+		PlaySE(SE_EXIT);
     gFieldCallback = FieldCB_DefaultWarpExit;
     CreateTask(Task_WarpAndLoadMap, 10);
 }

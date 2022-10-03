@@ -22,6 +22,13 @@ struct MultiPartnerMenuPokemon
     /*0x1D*/ u8 language;
 };
 
+struct TrainerBall
+{
+    u8 classId;
+    u32 Ball; // make this a u16 if needed
+};
+
+
 #define TYPE_NAME_LENGTH 6
 
 #if B_EXPANDED_ABILITY_NAMES
@@ -74,6 +81,8 @@ bool8 TryRunFromBattle(u8 battlerId);
 void SpecialStatusesClear(void);
 void SetTypeBeforeUsingMove(u16 move, u8 battlerAtk);
 bool32 IsWildMonSmart(void);
+void SpriteCB_MoveWildMonToRight(struct Sprite *sprite);
+void SpriteCB_WildMonShowHealthbox(struct Sprite *sprite);
 
 extern struct MultiPartnerMenuPokemon gMultiPartnerParty[MULTI_PARTY_SIZE];
 

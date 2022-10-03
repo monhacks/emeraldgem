@@ -724,6 +724,7 @@ const u8 *const gMonFootprintTable[] =
     [SPECIES_HOOPA] = gMonFootprint_Hoopa,
     [SPECIES_VOLCANION] = gMonFootprint_Volcanion,
     [SPECIES_ROWLET] = gMonFootprint_Rowlet,
+    [SPECIES_ROWLET_ASH] = gMonFootprint_Rowlet,
     [SPECIES_DARTRIX] = gMonFootprint_Dartrix,
     [SPECIES_DECIDUEYE] = gMonFootprint_Decidueye,
     [SPECIES_LITTEN] = gMonFootprint_Litten,

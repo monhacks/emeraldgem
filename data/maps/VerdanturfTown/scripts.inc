@@ -1,13 +1,135 @@
 .set LOCALID_TWIN, 2
+.set LOCALID_BULLY_1, 3
+.set LOCALID_BULLY_2, 4
+.set LOCALID_WALLY, 5
 
 VerdanturfTown_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, VerdanturfTown_OnTransition
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, VerdanturfTown_OnFrame
 	.byte 0
 
 VerdanturfTown_OnTransition:
 	setflag FLAG_VISITED_VERDANTURF_TOWN
 	setvar VAR_CONTEST_HALL_STATE, 0
 	end
+
+VerdanturfTown_OnFrame:
+	map_script_2 VAR_VERDANTURF_TOWN_STATE, 1, VerdanturfTown_EventScript_WallysMemory
+	.2byte 0
+
+VerdanturfTown_EventScript_WallysMemory:
+	lockall
+	special SpawnCameraObject
+	setobjectxy LOCALID_BULLY_1, 13, 7
+	setobjectxy LOCALID_BULLY_2, 12, 8
+	applymovement LOCALID_BULLY_1, Common_Movement_FaceDown
+	applymovement LOCALID_BULLY_2, Common_Movement_FaceRight
+	waitmovement 0
+	delay 16
+	opendoor 10, 14
+	waitdooranim
+	addobject LOCALID_WALLY
+	applymovement LOCALID_WALLY, VerdanturfTown_Movement_WallyShopping1
+	waitmovement 0
+	closedoor 10, 14
+	waitdooranim
+	applymovement LOCALID_WALLY, VerdanturfTown_Movement_WallyShopping2
+	applymovement OBJ_EVENT_ID_CAMERA, VerdanturfTown_Movement_WallyShopping2
+	namebox Wally
+	msgbox VerdanturfTown_Text_WallyExplains1, MSGBOX_DEFAULT
+	hidenamebox
+	closemessage
+	waitmovement 0
+	applymovement LOCALID_BULLY_1, VerdanturfTown_Movement_AttackWally
+	applymovement LOCALID_WALLY, VerdanturfTown_Movement_WallyPushed
+	applymovement OBJ_EVENT_ID_CAMERA, VerdanturfTown_Movement_CameraDown
+	waitmovement 0
+	setvar VAR_VERDANTURF_TOWN_STATE, 2
+	special RemoveCameraObject
+	setflag FLAG_HIDE_WALLY_VERDANTURF
+	switch VAR_0x8004
+	case DIR_EAST, VerdanturfTown_EventScript_WallysMemoryEast
+	case DIR_NORTH, VerdanturfTown_EventScript_WallysMemoryNorth
+	case DIR_WEST, VerdanturfTown_EventScript_WallysMemoryWest
+	case DIR_SOUTH, VerdanturfTown_EventScript_WallysMemorySouth
+	release
+	end
+
+VerdanturfTown_EventScript_WallysMemoryEast::
+	warp MAP_DEWFORD_TOWN, 5, 18
+	release
+	end
+
+VerdanturfTown_EventScript_WallysMemoryNorth::
+	warp MAP_DEWFORD_TOWN, 6, 19
+	release
+	end
+
+VerdanturfTown_EventScript_WallysMemoryWest::
+	warp MAP_DEWFORD_TOWN, 7, 18
+	release
+	end
+
+VerdanturfTown_EventScript_WallysMemorySouth::
+	warp MAP_DEWFORD_TOWN, 6, 17
+	release
+	end
+
+VerdanturfTown_Movement_WallyShopping1:
+	walk_down
+	delay_16
+	walk_in_place_up
+	step_end
+
+VerdanturfTown_Movement_WallyShopping2:
+	walk_down
+	walk_right
+	walk_right
+	walk_right
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	delay_16
+	walk_in_place_left
+	delay_16
+	walk_in_place_up
+	step_end
+
+VerdanturfTown_Movement_AttackWally:
+	walk_fast_down
+	delay_16
+	delay_8
+	walk_fast_down
+	step_end
+
+VerdanturfTown_Movement_WallyPushed:
+	lock_facing_direction
+	delay_8
+	jump_down
+	delay_16
+	jump_down
+	step_end
+
+VerdanturfTown_Movement_CameraDown:
+	delay_8
+	walk_down
+	delay_16
+	walk_down
+	step_end
+
+VerdanturfTown_Text_WallyExplains1:
+	.string "Y cuando vivía en Verdanturf, las cosas\n"
+	.string "no eran nada diferentes.\p"
+	.string "Recuerdo que varias veces, al querer ir\n"
+	.string "a comprar cosas en el Centro Pokémon,\l"
+	.string "me molestaban unos de mis vecinos,\l"
+	.string "diciéndome cosas horribles y no\l"
+	.string "dejándome continuar...$"
 
 VerdanturfTown_EventScript_Twin::
 	lock

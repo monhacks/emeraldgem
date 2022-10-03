@@ -186,6 +186,7 @@ static const u8 gText_MenuDexRelated[] = _("Dex y Otros");
 static const u8 gText_LeftArrow[] = _("{LEFT_ARROW}");
 static const u8 sText_Passwords[] = _("Claves");
 static const u8 gText_MenuExit2[] = _("Salir {DPAD_LEFT}");
+static const u8 gText_MenuExit3[] = _("Salir");
 static const struct MenuAction sStartMenuItems[] =
 {
 	
@@ -198,9 +199,9 @@ static const struct MenuAction sStartMenuItems[] =
     [MENU_ACTION_PLAYER]            = {gText_MenuPlayer, {.u8_void = StartMenuPlayerNameCallback}},
     [MENU_ACTION_SAVE]              = {gText_MenuSave, {.u8_void = StartMenuSaveCallback}},
     [MENU_ACTION_OPTION]            = {gText_MenuOption, {.u8_void = StartMenuOptionCallback}},
-    [MENU_ACTION_EXIT]              = {gText_MenuExit, {.u8_void = StartMenuExitCallback}},
+    [MENU_ACTION_EXIT]              = {gText_MenuExit3, {.u8_void = StartMenuExitCallback}},
     [MENU_ACTION_EXIT2]              = {gText_MenuExit2, {.u8_void = StartMenuExitCallback}},
-    [MENU_ACTION_RIGHT]              = {gText_RightArrow, {.u8_void = StartMenuRightCallback}},
+    [MENU_ACTION_RIGHT]              = {gText_MenuExit, {.u8_void = StartMenuRightCallback}},
     [MENU_ACTION_LEFT]              = {gText_LeftArrow, {.u8_void = StartMenuLeftCallback}},
     [MENU_ACTION_RETIRE_SAFARI]     = {gText_MenuRetire, {.u8_void = StartMenuSafariZoneRetireCallback}},
     [MENU_ACTION_PLAYER_LINK]       = {gText_MenuPlayer, {.u8_void = StartMenuLinkModePlayerNameCallback}},
@@ -356,7 +357,7 @@ static void BuildDexRelatedStartMenu(void) {
         AddStartMenuAction(MENU_ACTION_POKEDEX);
 	if (FlagGet(FLAG_SYS_POKENAV_GET))
 		AddStartMenuAction(MENU_ACTION_POKENAV);
-	if (FlagGet(FLAG_QUEST_MENU_ACTIVE))
+	if (FlagGet(FLAG_SYS_QUEST_MENU_GET))
 		AddStartMenuAction(MENU_ACTION_QUEST_MENU);
 	if (FlagGet(FLAG_ENABLED_PC))
 		AddStartMenuAction(MENU_ACTION_PC);
@@ -388,11 +389,23 @@ static void BuildNormalStartMenu(void)
 			}
 			AddStartMenuAction(MENU_ACTION_BAG);
 			
+			if (!FlagGet(FLAG_SYS_POKEDEX_GET)) {
+				if (FlagGet(FLAG_SYS_QUEST_MENU_GET))
+					AddStartMenuAction(MENU_ACTION_QUEST_MENU);
+			}
+			
 			AddStartMenuAction(MENU_ACTION_PLAYER);
 			
 			AddStartMenuAction(MENU_ACTION_SAVE);
 			AddStartMenuAction(MENU_ACTION_OPTION);
-			AddStartMenuAction(MENU_ACTION_EXIT);
+			if (!FlagGet(FLAG_SYS_POKEDEX_GET)) {
+				if (FlagGet(FLAG_SYS_QUEST_MENU_GET))
+					AddStartMenuAction(MENU_ACTION_QUEST_MENU);
+				AddStartMenuAction(MENU_ACTION_EXIT);
+			}
+			else {
+				AddStartMenuAction(MENU_ACTION_RIGHT);
+			}
 			if (FlagGet(FLAG_SET_WALL_CLOCK))
 				ShowStartMenuExtraWindow();
 	}

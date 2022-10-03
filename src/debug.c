@@ -1146,26 +1146,26 @@ static void DebugAction_Util_CheckSaveBlock(u8 taskId)
 
     Debug_DestroyMenu(taskId);
     ScriptContext2_Enable();
-    ScriptContext1_SetupScript(Debug_ShowFieldMessageStringVar4);
+    ScriptContext_SetupScript(Debug_ShowFieldMessageStringVar4);
 }
 static void DebugAction_Util_CheckWallClock(u8 taskId)
 {
     Debug_DestroyMenu(taskId);
     ScriptContext2_Enable();
-    ScriptContext1_SetupScript(PlayersHouse_2F_EventScript_CheckWallClock);
+    ScriptContext_SetupScript(PlayersHouse_2F_EventScript_CheckWallClock);
 }
 static void DebugAction_Util_SetWallClock(u8 taskId)
 {
     Debug_DestroyMenu(taskId);
     ScriptContext2_Enable();
-    ScriptContext1_SetupScript(PlayersHouse_2F_EventScript_SetWallClock);
+    ScriptContext_SetupScript(PlayersHouse_2F_EventScript_SetWallClock);
 }
 static void DebugAction_Util_CheckWeekDay(u8 taskId)
 {
     //StringCopy(gStringVar4, GetDayOfWeekString(gLocalTime.dayOfWeek));
     Debug_DestroyMenu(taskId);
     //ScriptContext2_Enable();
-    //ScriptContext1_SetupScript(Debug_ShowFieldMessageStringVar4);
+    //ScriptContext_SetupScript(Debug_ShowFieldMessageStringVar4);
     EnableBothScriptContexts();
 }
 static void DebugAction_Util_WatchCredits(u8 taskId)
@@ -1202,49 +1202,49 @@ static void DebugAction_Util_Script_1(u8 taskId)
 {
     Debug_DestroyMenu(taskId);
     ScriptContext2_Enable();
-    ScriptContext1_SetupScript(Debug_Script_1);
+    ScriptContext_SetupScript(Debug_Script_1);
 }
 static void DebugAction_Util_Script_2(u8 taskId)
 {
     Debug_DestroyMenu(taskId);
     ScriptContext2_Enable();
-    ScriptContext1_SetupScript(Debug_Script_2);
+    ScriptContext_SetupScript(Debug_Script_2);
 }
 static void DebugAction_Util_Script_3(u8 taskId)
 {
     Debug_DestroyMenu(taskId);
     ScriptContext2_Enable();
-    ScriptContext1_SetupScript(Debug_Script_3);
+    ScriptContext_SetupScript(Debug_Script_3);
 }
 static void DebugAction_Util_Script_4(u8 taskId)
 {
     Debug_DestroyMenu(taskId);
     ScriptContext2_Enable();
-    ScriptContext1_SetupScript(Debug_Script_4);
+    ScriptContext_SetupScript(Debug_Script_4);
 }
 static void DebugAction_Util_Script_5(u8 taskId)
 {
     Debug_DestroyMenu(taskId);
     ScriptContext2_Enable();
-    ScriptContext1_SetupScript(Debug_Script_5);
+    ScriptContext_SetupScript(Debug_Script_5);
 }
 static void DebugAction_Util_Script_6(u8 taskId)
 {
     Debug_DestroyMenu(taskId);
     ScriptContext2_Enable();
-    ScriptContext1_SetupScript(Debug_Script_6);
+    ScriptContext_SetupScript(Debug_Script_6);
 }
 static void DebugAction_Util_Script_7(u8 taskId)
 {
     Debug_DestroyMenu(taskId);
     ScriptContext2_Enable();
-    ScriptContext1_SetupScript(Debug_Script_7);
+    ScriptContext_SetupScript(Debug_Script_7);
 }
 static void DebugAction_Util_Script_8(u8 taskId)
 {
     Debug_DestroyMenu(taskId);
     ScriptContext2_Enable();
-    ScriptContext1_SetupScript(Debug_Script_8);
+    ScriptContext_SetupScript(Debug_Script_8);
 }
 
 // *******************************
@@ -2703,14 +2703,14 @@ static void DebugAction_Give_CHEAT(u8 taskId)
 {
     Debug_DestroyMenu(taskId);
     ScriptContext2_Enable();
-    ScriptContext1_SetupScript(Debug_CheatStart);
+    ScriptContext_SetupScript(Debug_CheatStart);
 }
 
 // static void DebugAction_AccessPC(u8 taskId)
 // {
 //     Debug_DestroyMenu(taskId);
 //     PlaySE(SE_PC_ON);
-//     ScriptContext1_SetupScript(EventScript_PC);
+//     ScriptContext_SetupScript(EventScript_PC);
 // }
 
 

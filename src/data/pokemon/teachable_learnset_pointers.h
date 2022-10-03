@@ -1303,5 +1303,6 @@ const u16 *const gTeachableLearnsets[NUM_SPECIES] =
     // Calyrex
     [SPECIES_CALYREX_ICE_RIDER] = sCalyrexIceRiderTeachableLearnset,
     [SPECIES_CALYREX_SHADOW_RIDER] = sCalyrexShadowRiderTeachableLearnset,
+	[SPECIES_ROWLET_ASH] = sRowletAshTeachableLearnset,
 #endif
 };

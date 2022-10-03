@@ -673,10 +673,10 @@ static void DoMoveRelearnerMain(void)
         if (!gPaletteFade.active)
         {
             FreeMoveRelearnerResources();
-			if (FlagGet(FLAG_PARTY_MOVES))
+			if (FlagGet(FLAG_TEMP_1))
 			{
 				CB2_ReturnToPartyMenuFromSummaryScreen();
-				FlagClear(FLAG_PARTY_MOVES);
+				FlagClear(FLAG_TEMP_1);
 			}
 			else
 			{

@@ -1480,7 +1480,7 @@ static void DebugQuestMenu(void)
 
 void SetQuestMenuActive(void)
 {
-    FlagSet(FLAG_QUEST_MENU_ACTIVE);
+    FlagSet(FLAG_SYS_QUEST_MENU_GET);
 }
 
 void CopyQuestName(u8 *dst, u8 questId)

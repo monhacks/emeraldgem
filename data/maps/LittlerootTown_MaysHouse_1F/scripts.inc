@@ -99,10 +99,13 @@ LittlerootTown_MaysHouse_1F_EventScript_YoureNewNeighbor::
 	waitmovement 0
 	special GetRivalSonDaughterString
 	checkplayergender
+	namebox Marta
 	goto_if_eq VAR_RESULT, FEMALE, LittlerootTown_MaysHouse_1F_EventScript_YoureNewNeighbor_1
 	msgbox LittlerootTown_MaysHouse_1F_EventScript_YoureNewNeighbor_Text_1
 	setflag FLAG_MET_RIVAL_MOM
 	setvar VAR_LITTLEROOT_HOUSES_STATE_BRENDAN, 2
+	closemessage
+	hidenamebox
 	releaseall
 	end
 
@@ -110,27 +113,27 @@ LittlerootTown_MaysHouse_1F_EventScript_YoureNewNeighbor_1:
 	msgbox LittlerootTown_MaysHouse_1F_EventScript_YoureNewNeighbor_Text_0
 	setflag FLAG_MET_RIVAL_MOM
 	setvar VAR_LITTLEROOT_HOUSES_STATE_BRENDAN, 2
+	hidenamebox
+	closemessage
 	releaseall
 	end
 
 
 LittlerootTown_MaysHouse_1F_EventScript_YoureNewNeighbor_Text_0:
-	.string "Marta: ¡AH! ¿QUIÉN ERES?\p"
+	.string "¡AH! ¿QUIÉN ERES?\p"
 	.string "… … … … … … … … …\n"
 	.string "… … … … … … … … …\p"
 	.string "Ah, ya veo, eres {PLAYER}, {ELLA} hij{OA} de\n"
-	.string "Norman y Daiana…\p"
+	.string "Norman y Silvana…\p"
 	.string "Pues, nuestro hijo vive arriba, ¡Ve a\n"
 	.string "presentarte!$"
-RivalsHouse_1F_Text_OhYoureTheNewNeighbor:
-	.string "ASDDSAASDDSAASDDSAASD$"
 
 LittlerootTown_MaysHouse_1F_EventScript_YoureNewNeighbor_Text_1:
-	.string "Marta: ¡AH! ¿QUIÉN ERES?\p"
+	.string "¡AH! ¿QUIÉN ERES?\p"
 	.string "… … … … … … … … …\n"
 	.string "… … … … … … … … …\p"
 	.string "Ah, ya veo, eres {PLAYER}, {ELLA} hij{OA} de\n"
-	.string "Norman y Daiana…\p"
+	.string "Norman y Silvana…\p"
 	.string "Pues, nuestra hija vive arriba, ¡Ve a\n"
 	.string "presentarte!$"
 
@@ -146,26 +149,31 @@ LittlerootTown_MaysHouse_1F_Movement_RivalMomApproach:
 RivalsHouse_1F_EventScript_RivalMom::
 	lock
 	faceplayer
+	namebox Marta
 	goto_if_set FLAG_DEFEATED_RIVAL_ROUTE103, RivalsHouse_1F_EventScript_GoHomeEverySoOften
 	goto_if_set FLAG_SYS_POKEMON_GET, RivalsHouse_1F_EventScript_RivalIsOnRoute103
 	goto_if_eq VAR_LITTLEROOT_RIVAL_STATE, 3, RivalsHouse_1F_EventScript_RivalTooBusy
 	special GetRivalSonDaughterString
 	msgbox RivalsHouse_1F_Text_LikeChildLikeFather, MSGBOX_DEFAULT
+	hidenamebox
 	release
 	end
 
 RivalsHouse_1F_EventScript_RivalTooBusy::
 	msgbox RivalsHouse_1F_Text_TooBusyToNoticeVisit, MSGBOX_DEFAULT
+	hidenamebox
 	release
 	end
 
 RivalsHouse_1F_EventScript_RivalIsOnRoute103::
 	msgbox RivalsHouse_1F_Text_WentOutToRoute103, MSGBOX_DEFAULT
+	hidenamebox
 	release
 	end
 
 RivalsHouse_1F_EventScript_GoHomeEverySoOften::
 	msgbox RivalsHouse_1F_Text_ShouldGoHomeEverySoOften, MSGBOX_DEFAULT
+	hidenamebox
 	release
 	end
 
@@ -219,8 +227,10 @@ LittlerootTown_MaysHouse_1F_EventScript_MeetRival::
 	call_if_eq VAR_0x8008, 0, LittlerootTown_MaysHouse_1F_EventScript_MayApproachPlayer0
 	call_if_eq VAR_0x8008, 1, LittlerootTown_MaysHouse_1F_EventScript_MayApproachPlayer1
 	call_if_eq VAR_0x8008, 2, LittlerootTown_MaysHouse_1F_EventScript_MayApproachPlayer2
+	namebox Rival
 	msgbox RivalsHouse_1F_Text_MayWhoAreYou, MSGBOX_DEFAULT
 	closemessage
+	hidenamebox
 	call_if_eq VAR_0x8008, 0, LittlerootTown_MaysHouse_1F_EventScript_MayGoUpstairs0
 	call_if_eq VAR_0x8008, 1, LittlerootTown_MaysHouse_1F_EventScript_MayGoUpstairs1
 	call_if_eq VAR_0x8008, 2, LittlerootTown_MaysHouse_1F_EventScript_MayGoUpstairs2
@@ -353,7 +363,7 @@ LittlerootTown_MaysHouse_1F_Movement_MayGoUpstairs2:
 
 
 RivalsHouse_1F_Text_LikeChildLikeFather:
-	.string "Marta: De tal palo, tal astilla…\n"
+	.string "De tal palo, tal astilla…\n"
 	.string "Tanto mi esposo como mi retoño están\l"
 	.string "siempre hablando de Pokémon, aunque\l"
 	.string "{RIVAL} ha estado actuando raro\l"
@@ -363,32 +373,32 @@ RivalsHouse_1F_Text_LikeChildLikeFather:
 	.string "Probablemente esté en el campo\l"
 	.string "estudiando una {COLOR BLUE}“extraña migración de\l"
 	.string "Pokémon a Hoenn,”{COLOR DARK_GRAY} o eso dice él…\p"
-	.string "Marta: Pero bueno…$"
+	.string "Pero bueno…$"
 
 RivalsHouse_1F_Text_TooBusyToNoticeVisit:
-	.string "Marta: Ah, mi {RIVAL}, creo que está\n"
+	.string "Ah, mi {RIVAL}, creo que está\n"
 	.string "usando toda su concentración en su\l"
 	.string "investigación como para notar tu\l"
 	.string "llegada, {PLAYER}. Ve a buscarle.$"
 
 RivalsHouse_1F_Text_WentOutToRoute103:
-	.string "Marta: Ah, mi {RIVAL}, creo que está\n"
+	.string "Ah, mi {RIVAL}, creo que está\n"
 	.string "en la Ruta 103 estudiando Pokémon,\l"
 	.string "así que deberías buscarle, {PLAYER}.\l"
 	.string "No quiero que le gane el cansancio.$"
 
 RivalsHouse_1F_Text_ShouldGoHomeEverySoOften:
-	.string "Marta: Es INCREÍBLE que la gente viaje\n"
+	.string "Es INCREÍBLE que la gente viaje\n"
 	.string "con Pokémon, pero JAMÁS deberían\l"
 	.string "olvidarse de sus familias, {PLAYER}.\l"
 	.string "Tu padre y mi esposo lo hicieron cuando\l"
 	.string "salieron de viaje, y ahora APENAS\l"
 	.string "pueden concentrarse en sus esposas e\l"
 	.string "hijos…\p"
-	.string "Marta: Pero bueno…$"
+	.string "Pero bueno…$"
 
 RivalsHouse_1F_Text_MayWhoAreYou:
-	.string "{RIVAL}: Oh, tú eres… {PLAYER},\n"
+	.string "Oh, tú eres… {PLAYER},\n"
 	.string "¿no?\p"
 	.string "¡Encantada! ¡Yo soy {RIVAL}!\n"
 	.string "… … … … … … … … … … … …\p"
@@ -398,21 +408,24 @@ RivalsHouse_1F_Text_MayWhoAreYou:
 	.string "Honestamente, {PLAYER}, no tengo\l"
 	.string "tiempo para amistades, tengo una\l"
 	.string "misión, y no quiero que te interpongas.\l"
-	.string "¡Hasta luego, inútil!$"
+	.string "¡Hasta luego, desquiciad{OA}!$"
+
+RivalsHouse_1F_Text_OhYoureTheNewNeighbor:
+	.string "$"
 
 RivalsHouse_1F_Text_BrendanWhoAreYou:
-	.string "{RIVAL}: ¡Oh! Tú eres esa tal\n"
+	.string "¡Oh! Tú eres esa tal\n"
 	.string "{PLAYER}, ¿no?\p"
 	.string "¡Es un placer! ¡Yo soy {RIVAL}!\n"
 	.string "Hey… Mi padre me dijo algo…\p"
 	.string "… … … … … … … …\p"
 	.string "¡AJÁ!\n"
 	.string "… … … … … … … … … … … …\l"
-	.string "¡UUUGGGHHHH…! Dijo que sea tu amigo.\l"
+	.string "Dijo que sea tu amigo.\l"
 	.string "Pero, {PLAYER}, no tengo tiempo para\l"
 	.string "tener amigas, tengo una misión, y no\l"
 	.string "quiero que te interpongas. ¡Hasta\l"
-	.string "luego, inútil!$"
+	.string "luego, desquiciad{OA}!$"
 
 RivalsHouse_1F_Text_DoYouHavePokemon:
 	.string "¡Hoda, veshin{OA}!\p"

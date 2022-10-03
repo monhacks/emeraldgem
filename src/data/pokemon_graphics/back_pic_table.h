@@ -1069,7 +1069,7 @@ const struct CompressedSpriteSheet gMonBackPicTable[] =
     SPECIES_SPRITE(DEOXYS_ATTACK, gMonBackPic_DeoxysAttack),
     SPECIES_SPRITE(DEOXYS_DEFENSE, gMonBackPic_DeoxysDefense),
     SPECIES_SPRITE(DEOXYS_SPEED, gMonBackPic_DeoxysSpeed),
-#if P_NEW_POKEMON == TRUE
+	
     SPECIES_SPRITE(BURMY_SANDY_CLOAK, gMonBackPic_BurmySandyCloak),
     SPECIES_SPRITE(BURMY_TRASH_CLOAK, gMonBackPic_BurmyTrashCloak),
 
@@ -1300,14 +1300,14 @@ const struct CompressedSpriteSheet gMonBackPicTable[] =
 
     SPECIES_SPRITE(CALYREX_ICE_RIDER, gMonBackPic_CalyrexIceRider),
     SPECIES_SPRITE(CALYREX_SHADOW_RIDER, gMonBackPic_CalyrexShadowRider),
-#endif
+	SPECIES_SPRITE(ROWLET_ASH, gMonBackPic_RowletAsh),
+
     SPECIES_SPRITE(EGG, gMonFrontPic_Egg),
 };
 
 const struct CompressedSpriteSheet gMonBackPicTableFemale[] =
 {
     SPECIES_SPRITE(EEVEE, gMonBackPic_EeveeF),
-#if P_NEW_POKEMON == TRUE
     SPECIES_SPRITE(STARLY, gMonBackPic_StarlyF),
     SPECIES_SPRITE(STARAVIA, gMonBackPic_StaraviaF),
     SPECIES_SPRITE(STARAPTOR, gMonBackPic_Staraptor),
@@ -1323,5 +1323,5 @@ const struct CompressedSpriteSheet gMonBackPicTableFemale[] =
     SPECIES_SPRITE(JELLICENT, gMonBackPic_JellicentF),
     SPECIES_SPRITE(PYROAR, gMonBackPic_PyroarF),
     SPECIES_SPRITE(BASCULEGION, gMonBackPic_CircledQuestionMark), //gMonBackPic_BasculegionF),
-#endif
+
 };

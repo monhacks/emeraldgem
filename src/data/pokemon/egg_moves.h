@@ -3815,6 +3815,13 @@ const u16 gEggMoves[] = {
         MOVE_HAZE,
         MOVE_BATON_PASS,
         MOVE_DEFOG),
+    egg_moves(ROWLET_ASH,
+        MOVE_CURSE,
+        MOVE_CONFUSE_RAY,
+        MOVE_OMINOUS_WIND,
+        MOVE_HAZE,
+        MOVE_BATON_PASS,
+        MOVE_DEFOG),
 
     egg_moves(LITTEN,
         MOVE_NASTY_PLOT,

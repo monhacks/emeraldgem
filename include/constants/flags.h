@@ -41,14 +41,14 @@
 #define FLAG_TEMP_1F     (TEMP_FLAGS_START + 0x1F)
 #define TEMP_FLAGS_END   FLAG_TEMP_1F
  
-#define FLAG_FORCE_LOAD_OFFSCREEN_OBJEV    0x20 // unused flag
-#define FLAG_UNUSED_0x21    0x21 // unused flag
-#define FLAG_UNUSED_0x22    0x22 // unused flag
-#define FLAG_UNUSED_0x23    0x23 // unused flag
+#define FLAG_FORCE_LOAD_OFFSCREEN_OBJEV    0x20
+#define FLAG_ASHS_POKEMON    0x21 
+#define FLAG_SPAWN_INVISIBLE    0x22 
+#define FLAG_HIDE_WALLY_VERDANTURF    0x23  
 #define FLAG_SHINY_CREATION    0x24
 #define FLAG_POKEMONPCMENU    0x25
-#define FLAG_PARTY_MOVES  	  0x26
-#define FLAG_JUST_ONE_HM    0x27
+#define FLAG_UNUSED_0x26  	  0x26// unused flag
+#define FLAG_UNUSED_0x27    0x27// unused flag
 #define FLAG_SYS_NO_COLLISION    0x28
 #define FLAG_SYS_NO_ENCOUNTER    0x29
 #define FLAG_SYS_NO_TRAINER_SEE    0x2A
@@ -62,7 +62,7 @@
 #define FLAG_RTC_ENABLED  	 0x32
 #define FLAG_DEFEATED_LEAF    0x33
 #define FLAG_BAYASMART       0x34
-#define FLAG_DEFEATED_WALLY_DEWFORD_TOWN    0x35
+#define FLAG_HIDE_WALLY_DEWFORD_TOWN    0x35
 #define FLAG_DONT_GET_MUCH_EXP_TRAINER    0x36
 #define FLAG_MENU_DEXRELATED    0x37
 #define FLAG_ENABLED_PC    0x38
@@ -85,8 +85,8 @@
 #define FLAG_STARTED_BOSS    0x49
 #define FLAG_DEWFORD_GRUNT    0x4A
 #define FLAG_GRANITE_GRUNTS    0x4B
-#define FLAG_REGICE_INFLUENCE    0x4C // Unused Flag
-#define FLAG_HAS_FIRE_POKEMON    0x4D // Unused Flag
+#define FLAG_REGICE_INFLUENCE    0x4C 
+#define FLAG_HAS_FIRE_POKEMON    0x4D 
 #define FLAG_UNUSED_0x04E    0x4E // Unused Flag
 #define FLAG_UNUSED_0x04F    0x4F // Unused Flag
 

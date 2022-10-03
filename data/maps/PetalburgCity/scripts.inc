@@ -14,6 +14,7 @@ PetalburgCity_OnTransition:
 	call_if_eq VAR_PETALBURG_CITY_STATE, 0, PetalburgCity_EventScript_MoveGymBoyToWestEntrance
 	call_if_eq VAR_PETALBURG_CITY_STATE, 2, PetalburgCity_EventScript_DisableMapNameAndMusic
 	call_if_eq VAR_PETALBURG_CITY_STATE, 4, PetalburgCity_EventScript_DisableMapNameAndMusic
+	call_if_eq VAR_PETALBURG_CITY_STATE, 6, PetalburgCity_EventScript_SetTintForMemory
 	call_if_eq VAR_PETALBURG_GYM_STATE, 8, PetalburgCity_EventScript_SetGymDoorsUnlocked
 	end
 
@@ -26,6 +27,16 @@ PetalburgCity_EventScript_DisableMapNameAndMusic::
 	savebgm MUS_FOLLOW_ME
 	return
 
+PetalburgCity_EventScript_SetTintForMemory::
+	setflag FLAG_HIDE_MAP_NAME_POPUP
+	call Script_SetSepiaTint
+	addobject LOCALID_WALLY
+	addobject LOCALID_WALLYS_DAD
+	setobjectxy LOCALID_WALLY, 15, 17
+	setobjectxy LOCALID_WALLYS_DAD, 14, 17
+	savebgm MUS_END
+	return
+
 PetalburgCity_EventScript_SetGymDoorsUnlocked::
 	setvar VAR_PETALBURG_GYM_STATE, 7
 	return
@@ -33,7 +44,144 @@ PetalburgCity_EventScript_SetGymDoorsUnlocked::
 PetalburgCity_OnFrame:
 	map_script_2 VAR_PETALBURG_CITY_STATE, 2, PetalburgCity_EventScript_WallyTutorial
 	map_script_2 VAR_PETALBURG_CITY_STATE, 4, PetalburgCity_EventScript_WalkToWallyHouse
+	map_script_2 VAR_PETALBURG_CITY_STATE, 6, PetalburgCity_EventScript_WallysFlashback
 	.2byte 0
+	
+PetalburgCity_EventScript_WallysFlashback::
+	lockall
+	
+	setobjectxyperm LOCALID_GYM_BOY, 12, 11
+	special SpawnCameraObject
+	applymovement LOCALID_WALLY, Common_Movement_FaceUp
+	waitmovement 0
+	applymovement LOCALID_WALLYS_DAD, Common_Movement_FaceUp
+	waitmovement 0
+	applymovement LOCALID_BOY, Common_Movement_FaceRight
+	waitmovement 0
+	applymovement LOCALID_GYM_BOY, Common_Movement_FaceDown
+	waitmovement 0
+	applymovement LOCALID_WALLY, PetalburgCity_Movement_WallyMemory
+	applymovement LOCALID_WALLYS_DAD, PetalburgCity_Movement_WallyDadMemory
+	applymovement OBJ_EVENT_ID_CAMERA, PetalburgCity_Movement_WallyMemoryCamera
+	msgbox PetalburgCity_Text_WallysMemory1, MSGBOX_DEFAULT
+	namebox PapaWally
+	msgbox PetalburgCity_Text_WallysMemory2, MSGBOX_DEFAULT
+	closemessage
+	hidenamebox
+	delay 16
+	namebox Wally
+	msgbox PetalburgCity_Text_WallysMemory3, MSGBOX_DEFAULT
+	closemessage
+	hidenamebox
+	waitmovement 0
+	applymovement LOCALID_WALLY, PetalburgCity_Movement_WallyMemory2
+	waitmovement 0
+	opendoor 7, 5
+	waitdooranim
+	delay 8
+	applymovement LOCALID_WALLY, PetalburgCity_Movement_WallyMemory3
+	waitmovement 0
+	applymovement LOCALID_WALLYS_DAD, PetalburgCity_Movement_WallyDadMemory2
+	waitmovement 0
+	delay 16
+	closedoor 7, 5
+	waitdooranim
+	setvar VAR_DEWFORD_TOWN_STATE, 3
+	setvar VAR_VERDANTURF_TOWN_STATE, 1
+	setvar VAR_PETALBURG_CITY_STATE, 7
+	setflag FLAG_HIDE_WALLY_VERDANTURF
+	special RemoveCameraObject
+	setflag FLAG_SPAWN_INVISIBLE
+	warp MAP_VERDANTURF_TOWN, 10, 15
+	release
+	end
+
+PetalburgCity_Movement_WallyMemory:
+	walk_slow_up
+	walk_slow_up
+	walk_slow_up
+	walk_slow_up
+	walk_slow_up
+	walk_slow_left
+	walk_slow_left
+	walk_slow_left
+	walk_slow_left
+	walk_slow_left
+	walk_slow_left
+	walk_slow_left
+	walk_slow_left
+	walk_slow_up
+	walk_slow_up
+	walk_slow_up
+	walk_slow_up
+	walk_slow_up
+	walk_slow_up
+	step_end
+
+PetalburgCity_Movement_WallyMemoryCamera:
+	delay_8
+	walk_slow_up
+	walk_slow_up
+	walk_slow_up
+	walk_slow_up
+	walk_slow_up
+	walk_slow_left
+	walk_slow_left
+	walk_slow_left
+	walk_slow_left
+	walk_slow_left
+	walk_slow_left
+	walk_slow_left
+	walk_slow_left
+	walk_slow_up
+	walk_slow_up
+	walk_slow_up
+	walk_slow_up
+	walk_slow_up
+	walk_slow_up
+	step_end
+
+PetalburgCity_Movement_WallyDadMemory:
+	walk_slow_up
+	walk_slow_up
+	walk_slow_up
+	walk_slow_up
+	delay_16
+	delay_8
+	delay_4
+	walk_in_place_slow_left
+	walk_slow_left
+	walk_slow_left
+	walk_slow_left
+	walk_slow_left
+	walk_slow_left
+	walk_slow_left
+	walk_slow_left
+	walk_slow_left
+	walk_slow_up
+	walk_slow_up
+	walk_slow_up
+	walk_slow_up
+	walk_slow_up
+	walk_slow_up
+	walk_slow_up
+	walk_in_place_slow_right
+	step_end
+
+PetalburgCity_Movement_WallyMemory2:
+	walk_in_place_slow_up
+	step_end
+
+PetalburgCity_Movement_WallyMemory3:
+	walk_slow_up
+	set_invisible
+	step_end
+
+PetalburgCity_Movement_WallyDadMemory2:
+	walk_slow_right
+	walk_slow_up
+	set_invisible
+	step_end
 
 PetalburgCity_EventScript_WallyTutorial::
 	lockall
@@ -934,3 +1082,32 @@ PetalburgCity_Text_ImLookingForTalentedTrainers:
 	.string "poderosos para {COLOR BLUE}un proyecto especial{COLOR DARK_GRAY}\l"
 	.string "en el que estoy trabajando…$"
 	
+PetalburgCity_Text_WallysMemory1:
+	.string "Chico 1: ¡Hey, Wally! ¿Qué pasa? ¿No\n"
+	.string "puedes volver a tu casa solito sin que\l"
+	.string "tu papito te lleve de la mano?\p"
+	.string "Chico 2: ¡Ja! Y pensaba que verte correr\n"
+	.string "de los Poochyena salvajes y\l"
+	.string "desmayarte era patético...$"
+
+PetalburgCity_Text_WallysMemory2:
+	.string "Tranquilo, Wally, no les hagas caso.\p"
+	.string "Sólo te dicen esas cosas porque no\n"
+	.string "pueden ni atravesar el Bosque\l"
+	.string "Petalburg.\p"
+	.string "Te hacen sentir mal para ellos sentirse\n"
+	.string "mejor.$"
+
+PetalburgCity_Text_WallysMemory3:
+	.string "Allá en Petalburg, todos me trataban\n"
+	.string "muy mal...\p"
+	.string "Mi papá intentaba ayudarme, pero... Sólo\n"
+	.string "me hacía sentir peor...\p"
+	.string "Sin un Pokémon que me protegiera, y\n"
+	.string "estando siempre débil por mis\l"
+	.string "enfermedades, siempre se aprovechaban\l"
+	.string "de mí para burlarse y hacer cosas como\l"
+	.string "empujarme hacia la hierba alta y\l"
+	.string "escapar...$"
+
+

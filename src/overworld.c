@@ -66,6 +66,7 @@
 #include "constants/songs.h"
 #include "constants/trainer_hill.h"
 #include "constants/weather.h"
+#include "constants/rgb.h"
 
 struct CableClubPlayer
 {
@@ -528,9 +529,12 @@ void SetObjEventTemplateMovementType(u8 localId, u8 movementType)
     }
 }
 
-static void InitMapView(void)
+void InitMapView(void)
 {
+	s32 paletteIndex;
     ResetFieldCamera();
+	for (paletteIndex = 0; paletteIndex < 15; paletteIndex++)
+        ApplyGlobalFieldPaletteTint(paletteIndex);
     CopyMapTilesetsToVram(gMapHeader.mapLayout);
     LoadMapTilesetPalettes(gMapHeader.mapLayout);
     DrawWholeMapView();
@@ -2132,10 +2136,7 @@ static void ResumeMap(bool32 a1)
     ResetAllPicSprites();
     ResetCameraUpdateInfo();
     InstallCameraPanAheadCallback();
-    if (!a1)
-        InitObjectEventPalettes(0);
-    else
-        InitObjectEventPalettes(1);
+    FreeAllSpritePalettes();
 
     FieldEffectActiveListClear();
     StartWeather();

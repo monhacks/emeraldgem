@@ -65,7 +65,6 @@ static void DecryptBoxMon(struct BoxPokemon *boxMon);
 static void Task_PlayMapChosenOrBattleBGM(u8 taskId);
 static u16 GiveMoveToBoxMon(struct BoxPokemon *boxMon, u16 move);
 static bool8 ShouldSkipFriendshipChange(void);
-u8 SendMonToPC(struct Pokemon *mon);
 static void RemoveIVIndexFromList(u8 *ivs, u8 selectedIv);
 void TrySpecialOverworldEvo();
 
@@ -2673,6 +2672,7 @@ static const u8 sMonFrontAnimIdsTable[NUM_SPECIES - 1] =
 
     // Gen 7
     [SPECIES_ROWLET - 1]        = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_ROWLET_ASH - 1]        = ANIM_V_SQUISH_AND_BOUNCE,
     [SPECIES_DARTRIX - 1]       = ANIM_H_STRETCH,
     [SPECIES_DECIDUEYE - 1]     = ANIM_H_VIBRATE,
     [SPECIES_LITTEN - 1]        = ANIM_H_STRETCH,
@@ -5644,7 +5644,7 @@ bool8 ExecuteTableBasedItemEffect(struct Pokemon *mon, u16 item, u8 partyIndex, 
 #endif
 
 // EXP candies store an index for this table in their holdEffectParam.
-static const u32 sExpCandyExperienceTable[] = {
+const u32 sExpCandyExperienceTable[] = {
     [EXP_100 - 1] = 100,
     [EXP_800 - 1] = 800,
     [EXP_3000 - 1] = 3000,
@@ -5833,20 +5833,24 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
              && GetMonData(mon, MON_DATA_LEVEL, NULL) != MAX_LEVEL)
             {
                 u8 param = ItemId_GetHoldEffectParam(item);
+				dataUnsigned = 0;
                 if (param == 0) // Rare Candy
                 {
                     dataUnsigned = gExperienceTables[gBaseStats[GetMonData(mon, MON_DATA_SPECIES, NULL)].growthRate][GetMonData(mon, MON_DATA_LEVEL, NULL) + 1];
                 }
-                else if (param < ARRAY_COUNT(sExpCandyExperienceTable)) // EXP Candies
+                else if (param - 1 < ARRAY_COUNT(sExpCandyExperienceTable)) // EXP Candies
                 {
                     u16 species = GetMonData(mon, MON_DATA_SPECIES, NULL);
                     dataUnsigned = sExpCandyExperienceTable[param - 1] + GetMonData(mon, MON_DATA_EXP, NULL);
                     if (dataUnsigned > gExperienceTables[gBaseStats[species].growthRate][MAX_LEVEL])
                         dataUnsigned = gExperienceTables[gBaseStats[species].growthRate][MAX_LEVEL];
                 }
-                SetMonData(mon, MON_DATA_EXP, &dataUnsigned);
-                CalculateMonStats(mon);
-                retVal = FALSE;
+                if (dataUnsigned != 0) // Failsafe
+                {
+                    SetMonData(mon, MON_DATA_EXP, &dataUnsigned);
+                    CalculateMonStats(mon);
+                    retVal = FALSE;
+                }
             }
 
             // Cure status
@@ -8510,4 +8514,22 @@ void TrySpecialOverworldEvo(void)
 bool32 ShouldShowFemaleDifferences(u16 species, u32 personality)
 {
     return (gBaseStats[species].flags & FLAG_GENDER_DIFFERENCE) && GetGenderFromSpeciesAndPersonality(species, personality) == MON_FEMALE;
+}
+
+
+void CreateShinyMonWithNature(struct Pokemon *mon, u16 species, u8 level, u8 nature)
+{
+    u32 personality;
+    u32 otid = gSaveBlock2Ptr->playerTrainerId[0]
+              | (gSaveBlock2Ptr->playerTrainerId[1] << 8)
+              | (gSaveBlock2Ptr->playerTrainerId[2] << 16)
+              | (gSaveBlock2Ptr->playerTrainerId[3] << 24);
+
+    do
+    {
+        personality = Random32();
+        personality = ((((Random() % 8) ^ (HIHALF(otid) ^ LOHALF(otid))) ^ LOHALF(personality)) << 16) | LOHALF(personality);
+    } while (nature != GetNatureFromPersonality(personality));
+
+    CreateMon(mon, species, level, 32, 1, personality, OT_ID_PRESET, otid);
 }

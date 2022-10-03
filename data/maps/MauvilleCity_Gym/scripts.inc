@@ -10,6 +10,7 @@ MauvilleCity_Gym_OnLoad:
 	case 2, MauvilleCity_Gym_EventScript_Switch2Pressed
 	case 3, MauvilleCity_Gym_EventScript_Switch3Pressed
 	case 4, MauvilleCity_Gym_EventScript_Switch4Pressed
+	case 5, MauvilleCity_Gym_EventScript_Switch5Pressed
 	end
 
 MauvilleCity_Gym_EventScript_UpdateBarriers::
@@ -17,25 +18,32 @@ MauvilleCity_Gym_EventScript_UpdateBarriers::
 	end
 
 MauvilleCity_Gym_EventScript_SetAltBarriers::
-	setmetatile 3, 11, METATILE_MauvilleGym_RedBeamV1_On, TRUE
-	setmetatile 3, 12, METATILE_MauvilleGym_RedBeamV2_On, TRUE
-	setmetatile 3, 13, METATILE_MauvilleGym_PoleTop_On, TRUE
-	setmetatile 4, 10, METATILE_MauvilleGym_RedBeamH1_On, FALSE
-	setmetatile 5, 10, METATILE_MauvilleGym_RedBeamH2_On, FALSE
-	setmetatile 4, 11, METATILE_MauvilleGym_RedBeamH3_On, TRUE
-	setmetatile 5, 11, METATILE_MauvilleGym_RedBeamH4_On, TRUE
-	setmetatile 7, 10, METATILE_MauvilleGym_RedBeamH1_On, FALSE
-	setmetatile 8, 10, METATILE_MauvilleGym_RedBeamH2_On, FALSE
-	setmetatile 7, 11, METATILE_MauvilleGym_RedBeamH3_On, TRUE
-	setmetatile 8, 11, METATILE_MauvilleGym_RedBeamH4_On, TRUE
-	setmetatile 4, 13, METATILE_MauvilleGym_GreenBeamH1_Off, FALSE
-	setmetatile 5, 13, METATILE_MauvilleGym_GreenBeamH2_Off, FALSE
-	setmetatile 4, 14, METATILE_MauvilleGym_GreenBeamH3_Off, FALSE
-	setmetatile 5, 14, METATILE_MauvilleGym_GreenBeamH4_Off, FALSE
-	setmetatile 1, 10, METATILE_MauvilleGym_GreenBeamH1_Off, FALSE
-	setmetatile 2, 10, METATILE_MauvilleGym_GreenBeamH2_Off, FALSE
-	setmetatile 1, 11, METATILE_MauvilleGym_GreenBeamH3_Off, FALSE
-	setmetatile 2, 11, METATILE_MauvilleGym_GreenBeamH4_Off, FALSE
+	special MauvilleGymPressSwitch
+	end
+MauvilleCity_Gym_EventScript_SetAltBarriers2::
+	setmetatile 4, 12, METATILE_MauvilleGym_RedBeamV1_On, TRUE
+	setmetatile 4, 13, METATILE_MauvilleGym_RedBeamV2_On, TRUE
+	setmetatile 4, 14, METATILE_MauvilleGym_PoleTop_On, TRUE
+	setmetatile 5, 11, METATILE_MauvilleGym_RedBeamH1_On, FALSE
+	setmetatile 6, 11, METATILE_MauvilleGym_RedBeamH2_On, FALSE
+	setmetatile 5, 12, METATILE_MauvilleGym_RedBeamH3_On, TRUE
+	setmetatile 6, 12, METATILE_MauvilleGym_RedBeamH4_On, TRUE
+	setmetatile 8, 11, METATILE_MauvilleGym_RedBeamH1_On, FALSE
+	setmetatile 9, 11, METATILE_MauvilleGym_RedBeamH2_On, FALSE
+	setmetatile 8, 12, METATILE_MauvilleGym_RedBeamH3_On, TRUE
+	setmetatile 9, 12, METATILE_MauvilleGym_RedBeamH4_On, TRUE
+	setmetatile 5, 14, METATILE_MauvilleGym_GreenBeamH1_Off, FALSE
+	setmetatile 6, 14, METATILE_MauvilleGym_GreenBeamH2_Off, FALSE
+	setmetatile 5, 15, METATILE_MauvilleGym_GreenBeamH3_Off, FALSE
+	setmetatile 6, 15, METATILE_MauvilleGym_GreenBeamH4_Off, FALSE
+	setmetatile 5, 20, METATILE_MauvilleGym_GreenBeamH1_Off, FALSE
+	setmetatile 6, 20, METATILE_MauvilleGym_GreenBeamH2_Off, FALSE
+	setmetatile 5, 21, METATILE_MauvilleGym_GreenBeamH3_Off, FALSE
+	setmetatile 6, 21, METATILE_MauvilleGym_GreenBeamH4_Off, FALSE
+	setmetatile 8, 17, METATILE_MauvilleGym_GreenBeamH1_Off, FALSE
+	setmetatile 9, 17, METATILE_MauvilleGym_GreenBeamH2_Off, FALSE
+	setmetatile 8, 18, METATILE_MauvilleGym_GreenBeamH3_Off, FALSE
+	setmetatile 9, 18, METATILE_MauvilleGym_GreenBeamH4_Off, FALSE
 	setmetatile 6, 8, METATILE_MauvilleGym_PoleBottom_On, TRUE
 	setmetatile 6, 9, METATILE_MauvilleGym_FloorTile, FALSE
 	setmetatile 6, 10, METATILE_MauvilleGym_PoleTop_Off, FALSE
@@ -65,6 +73,12 @@ MauvilleCity_Gym_EventScript_Switch3Pressed::
 
 MauvilleCity_Gym_EventScript_Switch4Pressed::
 	setvar VAR_0x8004, 3
+	special MauvilleGymPressSwitch
+	goto MauvilleCity_Gym_EventScript_UpdateBarriers
+	end
+
+MauvilleCity_Gym_EventScript_Switch5Pressed::
+	setvar VAR_0x8004, 4
 	special MauvilleGymPressSwitch
 	goto MauvilleCity_Gym_EventScript_UpdateBarriers
 	end
@@ -169,6 +183,15 @@ MauvilleCity_Gym_EventScript_Switch4::
 	goto_if_eq VAR_MAUVILLE_GYM_STATE, 4, MauvilleCity_Gym_EventScript_SwitchDoNothing
 	setvar VAR_MAUVILLE_GYM_STATE, 4
 	setvar VAR_0x8004, 3
+	goto MauvilleCity_Gym_EventScript_PressFloorSwitch
+	end
+
+MauvilleCity_Gym_EventScript_Switch5::
+	lockall
+	goto_if_set FLAG_DEFEATED_MAUVILLE_GYM, MauvilleCity_Gym_EventScript_SwitchDoNothing
+	goto_if_eq VAR_MAUVILLE_GYM_STATE, 5, MauvilleCity_Gym_EventScript_SwitchDoNothing
+	setvar VAR_MAUVILLE_GYM_STATE, 5
+	setvar VAR_0x8004, 4
 	goto MauvilleCity_Gym_EventScript_PressFloorSwitch
 	end
 

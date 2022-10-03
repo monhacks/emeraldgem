@@ -494,7 +494,7 @@ static void _TriggerPendingDaycareEgg(struct DayCare *daycare)
 
         daycare->offspringPersonality = personality;
     }
-
+	
     FlagSet(FLAG_PENDING_DAYCARE_EGG);
 }
 
@@ -1009,7 +1009,7 @@ static bool8 TryProduceOrHatchEgg(struct DayCare *daycare)
             if (GetMonData(&gPlayerParty[i], MON_DATA_SANITY_IS_BAD_EGG))
                 continue;
 
-            eggCycles = GetMonData(&gPlayerParty[i], MON_DATA_FRIENDSHIP);
+            eggCycles = GetMonData(&gPlayerParty[i], MON_DATA_FRIENDSHIP) - 1;
             if (eggCycles != 0)
             {
                 if (eggCycles >= toSub)

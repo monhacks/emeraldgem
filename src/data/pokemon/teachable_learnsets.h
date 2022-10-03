@@ -33553,4 +33553,28 @@ static const u16 sCalyrexShadowRiderTeachableLearnset[] = {
     MOVE_UNAVAILABLE,
 };
 
+static const u16 sRowletAshTeachableLearnset[] = {
+    MOVE_ATTRACT,
+    MOVE_DOUBLE_TEAM,
+    MOVE_FACADE,
+    MOVE_FRUSTRATION,
+    MOVE_GIGA_DRAIN,
+    MOVE_HIDDEN_POWER,
+    MOVE_LIGHT_SCREEN,
+    MOVE_PROTECT,
+    MOVE_REST,
+    MOVE_RETURN,
+    MOVE_SAFEGUARD,
+    MOVE_SOLAR_BEAM,
+    MOVE_STEEL_WING,
+    MOVE_SUNNY_DAY,
+    MOVE_TOXIC,
+    MOVE_SLEEP_TALK,
+    MOVE_SNORE,
+    MOVE_SUBSTITUTE,
+    MOVE_SWAGGER,
+    MOVE_SWORDS_DANCE,
+    MOVE_UNAVAILABLE,
+};
+
 #endif

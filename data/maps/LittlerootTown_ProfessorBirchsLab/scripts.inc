@@ -136,7 +136,6 @@ LittlerootTown_ProfessorBirchsLab_EventScript_GoSeeRival::
 	playfanfare MUS_OBTAIN_ITEM
 	questmenu QUEST_MENU_SET_ACTIVE SIDE_QUEST_1
 	questmenu QUEST_MENU_BUFFER_QUEST_NAME SIDE_QUEST_1
-	setflag FLAG_OMNIJUMP_UPGRADE
 	message MisionObtenida
 	waitfanfare
 	namebox Birch
@@ -590,6 +589,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_GivePokedex::
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	checkplayergender
+	namebox Rival
 	call_if_eq VAR_RESULT, MALE, LittlerootTown_ProfessorBirchsLab_EventScript_MayGivePokeBalls
 	call_if_eq VAR_RESULT, FEMALE, LittlerootTown_ProfessorBirchsLab_EventScript_BrendanGivePokeBalls
 	setvar VAR_BIRCH_LAB_STATE, 5
@@ -610,17 +610,23 @@ TeHeDadoMas:
 
 LittlerootTown_ProfessorBirchsLab_EventScript_MayGivePokeBalls::
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_MayGotPokedexTooTakeThese, MSGBOX_DEFAULT
+	hidenamebox
 	giveitem ITEM_POKE_BALL, 30
 	call_if_eq VAR_RESULT, FALSE, LittlerootTown_ProfessorBirchsLab_EventScript_MayNoRoomForPokeBalls
+	namebox Rival
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_CatchCutePokemonWithPokeBalls, MSGBOX_DEFAULT
+	hidenamebox
 	setvar VAR_RESULT, 0
 	return
 
 LittlerootTown_ProfessorBirchsLab_EventScript_BrendanGivePokeBalls::
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_BrendanGotPokedexTooTakeThese, MSGBOX_DEFAULT
-	giveitem ITEM_POKE_BALL, 5
+	hidenamebox
+	giveitem ITEM_POKE_BALL, 30
+	namebox Rival
 	call_if_eq VAR_RESULT, FALSE, LittlerootTown_ProfessorBirchsLab_EventScript_BrendanNoRoomForPokeBalls
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_CatchCoolPokemonWithPokeBalls, MSGBOX_DEFAULT
+	hidenamebox
 	setvar VAR_RESULT, 1
 	return
 
@@ -851,14 +857,14 @@ LittlerootTown_ProfessorBirchsLab_Text_CountlessPokemonAwait:
 	.string "¡A la aventura!$"
 
 LittlerootTown_ProfessorBirchsLab_Text_MayGotPokedexTooTakeThese:
-	.string "{RIVAL}: ..........\n"
+	.string "………\n"
 	.string "¡Eh!\p"
-	.string "{PLAYER}... Bien- ¡bien hecho!\p"
-	.string "Creo que deberías tener esto para...\n"
+	.string "{PLAYER}… Bien- ¡bien hecho!\p"
+	.string "Creo que deberías tener esto para…\n"
 	.string "ayudar en la investigación.$"
 
 LittlerootTown_ProfessorBirchsLab_Text_CatchCutePokemonWithPokeBalls:
-	.string "{RIVAL}: Ayudar a mi padre es algo\n"
+	.string "Ayudar a mi padre es algo\n"
 	.string "muy importante para mi… No quiero que\l"
 	.string "te-\l"
 	.string "… Lastimes… Sí, eso.$"
@@ -870,11 +876,11 @@ LittlerootTown_ProfessorBirchsLab_Text_MayWhereShouldIGoNext:
 	.string "¿No tienes nada mejor que hacer?$"
 
 LittlerootTown_ProfessorBirchsLab_Text_BrendanGotPokedexTooTakeThese:
-	.string "{RIVAL}: ..........\n"
+	.string "………\n"
 	.string "¡Ah, si!\p"
-	.string "... Em... Buen... ¿traba...jo?\p"
-	.string "Creo que deberías tener esto para...\n"
-	.string "ayudar...me... en la investigación.$"
+	.string "… Em… Buen… ¿traba…jo?\p"
+	.string "Creo que deberías tener esto para…\n"
+	.string "ayudar…me… en la investigación.$"
 
 LittlerootTown_ProfessorBirchsLab_Text_CatchCoolPokemonWithPokeBalls:
 	.string "{RIVAL}: Ayudar a mi padre es algo\n"

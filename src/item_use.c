@@ -1015,17 +1015,15 @@ bool32 CanThrowBall(void)
     return (GetBallThrowableState() == BALL_THROW_ABLE);
 }
 
-static const u8 sText_CantThrowPokeBall_TwoMons[] = _("Cannot throw a ball!\nThere are two Pokémon out there!\p");
-static const u8 sText_CantThrowPokeBall_SemiInvulnerable[] = _("Cannot throw a ball!\nThere's no Pokémon in sight!\p");
+static const u8 sText_CantThrowPokeBall_TwoMons[] = _("¡No puedes apuntarles!\n¡Hay dos Pokémon ahí!\p");
+static const u8 sText_CantThrowPokeBall_SemiInvulnerable[] = _("¡No puedes apuntarle!\n¡No puedes ver al Pokémon!\p");
 void ItemUseInBattle_PokeBall(u8 taskId)
 {
-    #ifdef TX_DEBUGGING
     if (FlagGet(FLAG_SYS_NO_CATCHING)){ //DEBUG
-        static const u8 sText_BallsCannotBeUsed[] = _("Poké Balls cannot be used\nright now!\p");
+        static const u8 sText_BallsCannotBeUsed[] = _("¡Las Pokéballs no\nse pueden usar ahora!\p");
         DisplayItemMessage(taskId, 1, sText_BallsCannotBeUsed, CloseItemMessage);
         return;
     }
-    #endif
     switch (GetBallThrowableState()) {
     case BALL_THROW_ABLE:
     default:

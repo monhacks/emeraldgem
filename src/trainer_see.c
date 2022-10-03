@@ -198,6 +198,11 @@ bool8 CheckForTrainersWantingBattle(void)
 {
     u8 i;
     u8 numTrainers;
+	
+	#ifdef TX_DEBUGGING //DEBUG
+        if (FlagGet(FLAG_SYS_NO_TRAINER_SEE))
+            return FALSE;
+    #endif //
 
     gNoOfApproachingTrainers = 0;
     gApproachingTrainerId = 0;
@@ -232,7 +237,7 @@ bool8 CheckForTrainersWantingBattle(void)
         
         gSelectedObjectEvent = objectEventId;
         gSpecialVar_LastTalked = gObjectEvents[objectEventId].localId;
-        ScriptContext1_SetupScript(EventScript_ObjectApproachPlayer);
+        ScriptContext_SetupScript(EventScript_ObjectApproachPlayer);
         ScriptContext2_Enable();
         return TRUE;
     }

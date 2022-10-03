@@ -252,6 +252,7 @@ OldaleTown_EventScript_RivalTrigger3::
 
 OldaleTown_EventScript_ShowRivalMessage::
 	checkplayergender
+	namebox Rival
 	goto_if_eq VAR_RESULT, MALE, OldaleTown_EventScript_ShowMayMessage
 	goto_if_eq VAR_RESULT, FEMALE, OldaleTown_EventScript_ShowBrendanMessage
 	end
@@ -268,6 +269,7 @@ OldaleTown_EventScript_ShowBrendanMessage::
 
 OldaleTown_EventScript_RivalFinish::
 	closemessage
+	hidenamebox
 	call_if_eq VAR_0x8009, 0, OldaleTown_EventScript_DoExitMovement1
 	call_if_eq VAR_0x8009, 1, OldaleTown_EventScript_DoExitMovement2
 	applymovement LOCALID_RIVAL, OldaleTown_Movement_RivalExit
@@ -337,23 +339,15 @@ OldaleTown_Movement_ReturnToOriginalPosition:
 	step_end
 
 OldaleTown_Text_SavingMyProgress:
-	.string "Quiero jugar sin la molestia de los\n"
-	.string "sonidos…\p"
-	.string "Estoy cambiando las opciones a “Sin\n"
-	.string "Sonidos”.$"
+	.string "Quiero entrenar a mis Pokémon\n"
+	.string "un poquito más rápido…\p"
+	.string "Estoy cambiando las opciones a\n"
+	.string "“Modo Entrenamiento”.$"
 
 
 OldaleTown_Text_IWorkAtPokemonMart:
 	.string "¡Hola! ¡Trabajo en una Tienda Pokémon, y\n"
 	.string "me gustaría darte esto!$"
-
-OldaleTown_Text_ThisIsAPokemonMart:
-	.string "This is a POKéMON MART.\n"
-	.string "Just look for our blue roof.\p"
-	.string "We sell a variety of goods including\n"
-	.string "POKé BALLS for catching POKéMON.\p"
-	.string "Here, I'd like you to have this as\n"
-	.string "a promotional item.$"
 
 OldaleTown_Text_PotionExplanation:
 	.string "¡Es una Poción de cortesía!\p"
@@ -374,13 +368,13 @@ OldaleTown_Text_FinishedSketchingFootprints:
 	.string "Pues… Sólo era un Ralts…$"
 
 OldaleTown_Text_MayLetsGoBack:
-	.string "MAY: ¡{PLAYER}{KUN}!\n"
+	.string "¡{PLAYER}{KUN}!\n"
 	.string "¡CUÁNTO TARDAS!\l"
 	.string "Volvamos a casa.$"
 
 OldaleTown_Text_BrendanLetsGoBack:
-	.string "BRENDAN: Estoy volviendo a mi casa,\n"
-	.string "{PLAYER}, no seas un{A} inútil\l"
+	.string "Estoy volviendo a mi casa,\n"
+	.string "{PLAYER}, no molestes\l"
 	.string "y sígueme.$"
 
 OldaleTown_Text_TownSign:

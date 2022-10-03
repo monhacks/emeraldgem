@@ -576,6 +576,9 @@ u16 MonTryLearningNewMoveEvolution(struct Pokemon *mon, bool8 firstMove);
 bool32 ShouldShowFemaleDifferences(u16 species, u32 personality);
 u32 CanSpeciesLearnTMHM(u16 species, u8 tm);
 u32 CanMonLearnTMHM(struct Pokemon *mon, u8 tm);
+extern const u32 sExpCandyExperienceTable[];
+void CreateShinyMonWithNature(struct Pokemon *mon, u16 species, u8 level, u8 nature);
+u8 SendMonToPC(struct Pokemon* mon);
 
 
 #endif // GUARD_POKEMON_H

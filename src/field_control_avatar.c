@@ -279,13 +279,13 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
 		y1 = position.y;
 		PlaySE(SE_M_FLAME_WHEEL);
 		if (objectEventId != OBJECT_EVENTS_COUNT && gObjectEvents[objectEventId].graphicsId == OBJ_EVENT_GFX_REGISTEEL && !FlagGet(FLAG_REGIDRAGO_DEFEATED)) {
-			ScriptContext1_SetupScript(EventScript_ActuallyOpenRegidragoDoor);
+			ScriptContext_SetupScript(EventScript_ActuallyOpenRegidragoDoor);
 		}
 		if (MetatileBehavior_IsSpecialDoor(MapGridGetMetatileBehaviorAt(position.x, position.y)) && VarGet(VAR_TEMP_1) >= 3 && FlagGet(FLAG_REGIDRAGO_ALMOST_UNLOCKED) && !FlagGet(FLAG_REGIDRAGO_DEFEATED)) {
 			if (!FlagGet(FLAG_REGIDRAGO_DOOR_UNLOCKED))
-				ScriptContext1_SetupScript(EventScript_ActuallyOpenRegidragoDoor);
+				ScriptContext_SetupScript(EventScript_ActuallyOpenRegidragoDoor);
 			else
-				ScriptContext1_SetupScript(EventScript_ActuallyOpenRegidragoDoor);
+				ScriptContext_SetupScript(EventScript_ActuallyOpenRegidragoDoor);
 		}
 		else {
 			if (MetatileBehavior_IsIce(metatileBehavior))
@@ -1253,7 +1253,7 @@ static u8 GetFacingSignpostType(u16 metatileBehavior, u8 playerDirection)
 static void SetUpWalkIntoSignScript(const u8 *script, u8 playerDirection)
 {
     // gSpecialVar_Facing = playerDirection;
-    // ScriptContext1_SetupScript(script);
+    // ScriptContext_SetupScript(script);
     // SetWalkingIntoSignVars();
     // MsgSetSignPost();
 }
@@ -1281,12 +1281,12 @@ void FieldInput_HandleCancelSignpost(struct FieldInput *input)
             // //ClearMsgBoxCancelableState();
             // if (input->dpadDirection != 0 && GetPlayerFacingDirection() != input->dpadDirection)
             // {
-                // ScriptContext1_SetupScript(EventScript_CancelMessageBox);
+                // ScriptContext_SetupScript(EventScript_CancelMessageBox);
                 // ScriptContext2_Enable();
             // }
             // else if (input->pressedStartButton)
             // {
-                // ScriptContext1_SetupScript(EventScript_CancelMessageBox);
+                // ScriptContext_SetupScript(EventScript_CancelMessageBox);
                 // ScriptContext2_Enable();
             // }
         // }

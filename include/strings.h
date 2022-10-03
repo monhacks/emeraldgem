@@ -3363,5 +3363,19 @@ extern const u8 gText_YourName[];
 extern const u8 gText_BoxName[];
 extern const u8 gText_PkmnsNickname[];
 extern const u8 gText_TellHimTheWords[];
+extern const u8 gText_AshsName[];
+extern const u8 gText_AshsPika[];
+extern const u8 gText_AshsRowlet[];
+extern const u8 gText_AshsIncineroar[];
+extern const u8 gText_AshsLycanroc[];
+extern const u8 gText_AshsNaganadel[];
+extern const u8 gText_AshsMelmetal[];
+// move items
+extern const u8 gMenuText_Move[];
+extern const u8 gText_MoveItemWhere[];
+extern const u8 gText_XsYAnd[];
+extern const u8 gText_XsYWereSwapped[];
+// exp candies
+extern const u8 gText_PkmnGainedExpAndElevatedToLvVar3[];
 
 #endif // GUARD_STRINGS_H

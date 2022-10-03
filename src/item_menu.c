@@ -3650,7 +3650,7 @@ bool8 UseRegisteredKeyItemOnField(u8 button)
         }
     }
 
-    ScriptContext1_SetupScript(EventScript_SelectWithoutRegisteredItem);
+    ScriptContext_SetupScript(EventScript_SelectWithoutRegisteredItem);
     return TRUE;
 }
 #undef tUsingRegisteredKeyItem

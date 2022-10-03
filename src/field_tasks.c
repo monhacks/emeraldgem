@@ -812,7 +812,7 @@ static void IceSwitchPerStepCallback(u8 taskId)
 		MapGridSetMetatileIdAt(x, y, METATILE_Cave_SwitchIcePressed);
 		CurrentMapDrawMetatileAt(x, y);
 		if (VarGet(VAR_TEMP_1) >= 3 && FlagGet(FLAG_REGIDRAGO_ALMOST_UNLOCKED) && !FlagGet(FLAG_REGIDRAGO_DEFEATED)) {
-			ScriptContext1_SetupScript(EventScript_OpenRegidragoDoor);
+			ScriptContext_SetupScript(EventScript_OpenRegidragoDoor);
 		}
 		return;
 	}

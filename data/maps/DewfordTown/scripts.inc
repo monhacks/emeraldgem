@@ -10,7 +10,96 @@
 .equ LOCALID_BOAT_R104, 7
 .equ LOCALID_BRINEY_R104, 8
 .equ LOCALID_GRUNT, 6
+.equ LOCALID_WALLY, 7
 
+DewfordTown_MapScripts::
+	map_script MAP_SCRIPT_ON_TRANSITION, DewfordTown_OnTransition
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, DewfordTown_OnFrame
+	.byte 0
+
+DewfordTown_OnTransition:
+	setflag FLAG_VISITED_DEWFORD_TOWN
+	end
+
+DewfordTown_OnFrame:
+	map_script_2 VAR_DEWFORD_TOWN_STATE, 3, DewfordTown_OnFrameWally
+	.2byte 0
+
+DewfordTown_EventScript_Wally::
+	lockall
+	faceplayer
+	namebox Wally
+	msgbox DewfordTown_EventScript_WallyHello, MSGBOX_DEFAULT
+	hidenamebox
+	closemessage
+	applymovement LOCALID_WALLY, Common_Movement_FaceRight
+	waitmovement 0
+	namebox Wally
+	msgbox DewfordTown_EventScript_WallyBeginSpeech, MSGBOX_DEFAULT
+	hidenamebox
+	closemessage
+	setflag FLAG_SPAWN_INVISIBLE
+	setvar VAR_PETALBURG_CITY_STATE, 6
+	specialvar VAR_RESULT, GetPlayerFacingDirection
+	setvar VAR_0x8004, VAR_RESULT
+    warp MAP_PETALBURG_CITY, 15, 16
+	release
+	end
+
+DewfordTown_OnFrameWally::
+	lockall
+	call Script_RemoveTint
+	call_if_eq VAR_0x8004, DIR_EAST, DewfordTown_OnFrameWallyEast
+	call_if_eq VAR_0x8004, DIR_WEST, DewfordTown_OnFrameWallyWest
+	call_if_eq VAR_0x8004, DIR_NORTH, DewfordTown_OnFrameWallyNorth
+	call_if_eq VAR_0x8004, DIR_SOUTH, DewfordTown_OnFrameWallySouth
+	msgbox DewfordTown_EventScript_WallyContinueSpeech, MSGBOX_DEFAULT
+	setvar VAR_DEWFORD_TOWN_STATE, 4
+	releaseall
+	end
+
+DewfordTown_OnFrameWallyEast::
+	applymovement OBJ_EVENT_ID_PLAYER, DewfordTown_Movement_VisiblePlayer
+	waitmovement 0
+	return
+
+DewfordTown_OnFrameWallyWest::
+	applymovement OBJ_EVENT_ID_PLAYER, DewfordTown_Movement_VisiblePlayerWest
+	waitmovement 0
+	return
+
+DewfordTown_OnFrameWallyNorth::
+	applymovement OBJ_EVENT_ID_PLAYER, DewfordTown_Movement_VisiblePlayerNorth
+	waitmovement 0
+	return
+
+DewfordTown_OnFrameWallySouth::
+	applymovement OBJ_EVENT_ID_PLAYER, DewfordTown_Movement_VisiblePlayerSouth
+	waitmovement 0
+	return
+
+DewfordTown_EventScript_WallyContinueSpeech::
+	.string ".$"
+
+DewfordTown_Movement_VisiblePlayer::
+	face_right
+	set_visible
+	step_end
+
+DewfordTown_Movement_VisiblePlayerWest::
+	face_left
+	set_visible
+	step_end
+
+DewfordTown_Movement_VisiblePlayerNorth::
+	face_up
+	set_visible
+	step_end
+
+DewfordTown_Movement_VisiblePlayerSouth::
+	face_down
+	set_visible
+	step_end
 
 DewfordTown_EventScript_Trigger::
 	goto_if_ne VAR_DEWFORD_TOWN_STATE, 0, DewfordTown_EventScript_TriggerNada
@@ -100,13 +189,6 @@ DewfordTown_EventScript_Trigger_Text_0:
 	.string "(¿Q-qué fue eso...?)$"
 
 
-DewfordTown_MapScripts::
-	map_script MAP_SCRIPT_ON_TRANSITION, DewfordTown_OnTransition
-	.byte 0
-
-DewfordTown_OnTransition:
-	setflag FLAG_VISITED_DEWFORD_TOWN
-	end
 
 DewfordTown_EventScript_Briney::
 	lock
@@ -826,3 +908,19 @@ DewfordTown_Text_YeahDefinitionOfInRightNow:
 	.string "¡Osea, obvio!\p"
 	.string "“{STR_VAR_1}” es la\n"
 	.string "definición de cool.$"
+
+DewfordTown_EventScript_WallyHello:
+	.string "¡O-oh!\n"
+	.string "-COF COF-\l"
+	.string "¡{PLAYER}!\p"
+	.string "N-no sabía que vendrías...\n"
+	.string "¡Pero que bien que estés aquí!$"
+
+DewfordTown_EventScript_WallyBeginSpeech:
+	.string "Sabes, tengo mucho miedo de comenzar mi\n"
+	.string "{COLOR BLUE}Desafío de los Gimnasios{COLOR DARK_GRAY}, y n-no sé si\l"
+	.string "sea algo en lo que pueda siquiera\l"
+	.string "aspirar a ser bueno...\p"
+	.string "Tengo miedo de fallar, y que todos se\n"
+	.string "burlen de mí denuevo...$"
+	
