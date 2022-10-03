@@ -3,49 +3,46 @@ static const u8 sDummyDesc[] = _(
 
 // Poké Balls
 static const u8 sPokeBallDesc[] = _(
-    "A tool used for\n"
-    "catching wild\n"
-    "Pokémon.");
+    "Sirve para\n"
+    "atrapar Pokémon\n"
+    "salvajes.");
 
 static const u8 sGreatBallDesc[] = _(
-    "A good Ball with a\n"
-    "higher catch rate\n"
-    "than a Poké Ball.");
+    "Funciona mejor\n"
+    "que una Poké Ball.");
 
 static const u8 sUltraBallDesc[] = _(
-    "A better Ball with\n"
-    "a higher catch rate\n"
-    "than a Great Ball.");
+    "Funciona mejor\n"
+    "que una Super Ball.");
 
 static const u8 sMasterBallDesc[] = _(
-    "The best Ball that\n"
-    "catches a Pokémon\n"
-    "without fail.");
+    "La Ball definitiva.\n"
+    "Atrapa Pokémon\n"
+    "sin fallar.");
 
 static const u8 sPremierBallDesc[] = _(
-    "A rare Ball made\n"
-    "in commemoration\n"
-    "of some event.");
+    "Hecha para celebrar,\n"
+    "es regalada a quien\n"
+    "va bien preparado.");
 
 static const u8 sHealBallDesc[] = _(
-    "A remedial Ball\n"
-    "that restores\n"
-    "caught Pokémon.");
+    "Cura totalmente\n"
+    "al Pokémon\n"
+    "capturado.");
 
 static const u8 sNetBallDesc[] = _(
-    "A Ball that works\n"
-    "well on Water- and\n"
-    "Bug-type Pokémon.");
+    "Funciona mejor\n"
+	"en Pokémon\n"
+	"Agua o Bicho.");
 
 static const u8 sNestBallDesc[] = _(
-    "A Ball that works\n"
-    "better on weaker\n"
-    "Pokémon.");
+    "Sirve contra\n"
+    "Pokémon de\n"
+    "nivel bajo.");
 
 static const u8 sDiveBallDesc[] = _(
-    "A Ball that works\n"
-    "better on Pokémon\n"
-    "on the ocean floor.");
+    "Sirve contra\n"
+    "Pokémon submarinos.");
 
 static const u8 sDuskBallDesc[] = _(
     "Works well if\n"
@@ -2385,9 +2382,9 @@ static const u8 sWhiteHerbDesc[] = _(
     "lowered stat.");
 
 static const u8 sExpShareDesc[] = _(
-    "A hold item that\n"
-    "gets Exp. points\n"
-    "from battles.");
+    "Enciéndelo, y todo\n"
+    "tu equipo ganará\n"
+    "experiencia.");
 
 static const u8 sQuickClawDesc[] = _(
     "A hold item that\n"
