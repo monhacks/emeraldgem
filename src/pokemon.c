@@ -3273,6 +3273,9 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
     u32 personality;
     u32 value;
     u16 checksum;
+	u32 shinyValue;
+	u32 rolls = 0;
+	u32 shinyRerolls = 0;
 
     ZeroBoxMonData(boxMon);
 
@@ -3314,53 +3317,16 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
                  | (gSaveBlock2Ptr->playerTrainerId[3] << 24);
 
 		if (CheckBagHasItem(ITEM_SHINY_CHARM, 1))
+			shinyRerolls = I_SHINY_CHARM_REROLLS;
+		if (VarGet(VAR_CHAIN) >= 10)
+			shinyRerolls += 1 + (VarGet(VAR_CHAIN) - 10);
+			
+        do
         {
-            u32 shinyValue;
-            u32 rolls = 0;
-			u32 shinyRerolls = I_SHINY_CHARM_REROLLS;
-			if (VarGet(VAR_CHAIN) >= 10 && VarGet(VAR_CHAIN) <= 19)
-				shinyRerolls += 2;
-			else if (VarGet(VAR_CHAIN) >= 20 && VarGet(VAR_CHAIN) <= 29)
-				shinyRerolls += 4;
-			else if (VarGet(VAR_CHAIN) >= 30 && VarGet(VAR_CHAIN) <= 39)
-				shinyRerolls += 6;
-			else if (VarGet(VAR_CHAIN) >= 40 && VarGet(VAR_CHAIN) <= 49)
-				shinyRerolls += 7;
-			else if (VarGet(VAR_CHAIN) >= 50 && VarGet(VAR_CHAIN) <= 59)
-				shinyRerolls += 8;
-			else if (VarGet(VAR_CHAIN) >= 60)
-				shinyRerolls += 12;
-            do
-            {
-                personality = Random32();
-                shinyValue = HIHALF(value) ^ LOHALF(value) ^ HIHALF(personality) ^ LOHALF(personality);
-                rolls++;
-            } while (shinyValue >= SHINY_ODDS && rolls < (shinyRerolls));
-		}
-		else
-        {
-            u32 shinyValue;
-            u32 rolls = 0;
-			u32 shinyRerolls = 0;
-			if (VarGet(VAR_CHAIN) >= 10 && VarGet(VAR_CHAIN) <= 19)
-				shinyRerolls += 2;
-			else if (VarGet(VAR_CHAIN) >= 20 && VarGet(VAR_CHAIN) <= 29)
-				shinyRerolls += 4;
-			else if (VarGet(VAR_CHAIN) >= 30 && VarGet(VAR_CHAIN) <= 39)
-				shinyRerolls += 6;
-			else if (VarGet(VAR_CHAIN) >= 40 && VarGet(VAR_CHAIN) <= 49)
-				shinyRerolls += 7;
-			else if (VarGet(VAR_CHAIN) >= 50 && VarGet(VAR_CHAIN) <= 59)
-				shinyRerolls += 8;
-			else if (VarGet(VAR_CHAIN) >= 60)
-				shinyRerolls += 12;
-            do
-            {
-                personality = Random32();
-                shinyValue = HIHALF(value) ^ LOHALF(value) ^ HIHALF(personality) ^ LOHALF(personality);
-                rolls++;
-            } while (shinyValue >= SHINY_ODDS && rolls < shinyRerolls);
-        }
+			personality = Random32();
+			shinyValue = HIHALF(value) ^ LOHALF(value) ^ HIHALF(personality) ^ LOHALF(personality);
+			rolls++;
+		} while (shinyValue >= SHINY_ODDS && rolls < (shinyRerolls));
 		if (FlagGet(FLAG_SHINY_CREATION))
         {
             u8 nature = personality % NUM_NATURES;  // keep current nature

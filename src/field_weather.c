@@ -157,7 +157,7 @@ void StartWeather(void)
     {
         u8 index = 15;
         CpuCopy32(gFogPalette, &gPlttBufferUnfaded[0x100 + index * 16], 32);
-		ApplyGlobalFieldPaletteTint(index);
+		// ApplyGlobalFieldPaletteTint(index);
         BuildGammaShiftTables();
         gWeatherPtr->altGammaSpritePalIndex = index;
         gWeatherPtr->rainSpriteCount = 0;

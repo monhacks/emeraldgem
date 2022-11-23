@@ -14,6 +14,7 @@
 #include "secret_base.h"
 #include "trainer_hill.h"
 #include "tv.h"
+#include "event_data.h"
 #include "constants/rgb.h"
 #include "constants/metatile_behaviors.h"
 #include "event_object_movement.h"
@@ -72,6 +73,8 @@ struct MapHeader const *const GetMapHeaderFromConnection(struct MapConnection *c
 
 void InitMap(void)
 {
+	VarSet(VAR_CHAIN, 0);
+	VarSet(VAR_SPECIESCHAINED, 0);
     InitMapLayoutData(&gMapHeader);
     SetOccupiedSecretBaseEntranceMetatiles(gMapHeader.events);
     RunOnLoadMapScript();
@@ -864,22 +867,22 @@ static void CopyTilesetToVramUsingHeap(struct Tileset const *tileset, u16 numTil
 
 static void ApplyGlobalTintToPaletteEntries(u16 offset, u16 size)
 {
-    switch (gGlobalFieldTintMode)
-    {
-        case GLOBAL_FIELD_TINT_NONE:
-            FreeAndReserveObjectSpritePalettes();
-            // InitObjectEventPalettes(1);
-            return;
-        case GLOBAL_FIELD_TINT_GRAYSCALE:
-            TintPalette_GrayScale(gPlttBufferUnfaded + offset, size);
-            break;
-        case GLOBAL_FIELD_TINT_SEPIA:
-            TintPalette_SepiaTone(gPlttBufferUnfaded + offset, size);
-            break;
-        default:
-            return;
-    }
-    CpuCopy16(gPlttBufferUnfaded + offset, gPlttBufferFaded + offset, size * sizeof(u16));
+    // switch (gGlobalFieldTintMode)
+    // {
+        // case GLOBAL_FIELD_TINT_NONE:
+            // FreeAndReserveObjectSpritePalettes();
+            // // InitObjectEventPalettes(1);
+            // return;
+        // case GLOBAL_FIELD_TINT_GRAYSCALE:
+            // TintPalette_GrayScale(gPlttBufferUnfaded + offset, size);
+            // break;
+        // case GLOBAL_FIELD_TINT_SEPIA:
+            // TintPalette_SepiaTone(gPlttBufferUnfaded + offset, size);
+            // break;
+        // default:
+            // return;
+    // }
+    // CpuCopy16(gPlttBufferUnfaded + offset, gPlttBufferFaded + offset, size * sizeof(u16));
 }
 
 void LoadTilesetPalette(struct Tileset const *tileset, u16 destOffset, u16 size)

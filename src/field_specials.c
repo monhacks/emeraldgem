@@ -3216,7 +3216,7 @@ static void ChangeDeoxysRockLevel(u8 rockLevel)
 {
     u8 objectEventId;
     LoadPalette(&sDeoxysRockPalettes[rockLevel], 0x1A0, 8);
-	ApplyGlobalFieldPaletteTint(10);
+	// // ApplyGlobalFieldPaletteTint(10);
     TryGetObjectEventIdByLocalIdAndMap(LOCALID_BIRTH_ISLAND_EXTERIOR_ROCK, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &objectEventId);
 
     if (rockLevel == 0)
@@ -3265,7 +3265,7 @@ void IncrementBirthIslandRockStepCount(void)
 void SetDeoxysRockPalette(void)
 {
     LoadPalette(&sDeoxysRockPalettes[(u8)VarGet(VAR_DEOXYS_ROCK_LEVEL)], 0x1A0, 8);
-    ApplyGlobalFieldPaletteTint(10);
+    // ApplyGlobalFieldPaletteTint(10);
 }
 
 void SetPCBoxToSendMon(u8 boxId)
