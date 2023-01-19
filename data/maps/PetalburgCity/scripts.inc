@@ -29,11 +29,11 @@ PetalburgCity_EventScript_DisableMapNameAndMusic::
 
 PetalburgCity_EventScript_SetTintForMemory::
 	setflag FLAG_HIDE_MAP_NAME_POPUP
+	call Script_SetSepiaTint
 	addobject LOCALID_WALLY
 	addobject LOCALID_WALLYS_DAD
-	setobjectxyperm LOCALID_WALLY, 15, 17
-	setobjectxyperm LOCALID_WALLYS_DAD, 14, 17
-	setobjectxyperm LOCALID_GYM_BOY, 12, 11
+	setobjectxy LOCALID_WALLY, 15, 17
+	setobjectxy LOCALID_WALLYS_DAD, 14, 17
 	savebgm MUS_END
 	return
 
@@ -49,11 +49,9 @@ PetalburgCity_OnFrame:
 	
 PetalburgCity_EventScript_WallysFlashback::
 	lockall
+	
+	setobjectxyperm LOCALID_GYM_BOY, 12, 11
 	special SpawnCameraObject
-	addobject LOCALID_WALLY
-	addobject LOCALID_WALLYS_DAD
-	setobjectxyperm LOCALID_WALLY, 15, 17
-	setobjectxyperm LOCALID_WALLYS_DAD, 14, 17
 	applymovement LOCALID_WALLY, Common_Movement_FaceUp
 	waitmovement 0
 	applymovement LOCALID_WALLYS_DAD, Common_Movement_FaceUp
@@ -1090,7 +1088,7 @@ PetalburgCity_Text_WallysMemory1:
 	.string "tu papito te lleve de la mano?\p"
 	.string "Chico 2: ¡Ja! Y pensaba que verte correr\n"
 	.string "de los Poochyena salvajes y\l"
-	.string "desmayarte era patético…$"
+	.string "desmayarte era patético...$"
 
 PetalburgCity_Text_WallysMemory2:
 	.string "Tranquilo, Wally, no les hagas caso.\p"
@@ -1102,14 +1100,14 @@ PetalburgCity_Text_WallysMemory2:
 
 PetalburgCity_Text_WallysMemory3:
 	.string "Allá en Petalburg, todos me trataban\n"
-	.string "muy mal…\p"
-	.string "Mi papá intentaba ayudarme, pero… Sólo\n"
-	.string "me hacía sentir peor…\p"
+	.string "muy mal...\p"
+	.string "Mi papá intentaba ayudarme, pero... Sólo\n"
+	.string "me hacía sentir peor...\p"
 	.string "Sin un Pokémon que me protegiera, y\n"
 	.string "estando siempre débil por mis\l"
 	.string "enfermedades, siempre se aprovechaban\l"
 	.string "de mí para burlarse y hacer cosas como\l"
 	.string "empujarme hacia la hierba alta y\l"
-	.string "escapar…$"
+	.string "escapar...$"
 
 

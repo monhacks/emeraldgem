@@ -774,8 +774,8 @@ void FieldEffectScript_LoadFadedPalette(u8 **script)
 {
     struct SpritePalette *palette = (struct SpritePalette *)FieldEffectScript_ReadWord(script);
     LoadSpritePalette(palette);
-	// if (IndexOfSpritePaletteTag(palette->tag == 0xFF))
-        // ApplyGlobalFieldPaletteTint(IndexOfSpritePaletteTag(palette->tag));
+	if (IndexOfSpritePaletteTag(palette->tag == 0xFF))
+        ApplyGlobalFieldPaletteTint(IndexOfSpritePaletteTag(palette->tag));
     UpdatePaletteGammaType(IndexOfSpritePaletteTag(palette->tag), GAMMA_NORMAL);
     UpdateSpritePaletteWithWeather(IndexOfSpritePaletteTag(palette->tag));
     (*script) += 4;
@@ -785,8 +785,8 @@ void FieldEffectScript_LoadPalette(u8 **script)
 {
     struct SpritePalette *palette = (struct SpritePalette *)FieldEffectScript_ReadWord(script);
     LoadSpritePalette(palette);
-	// if (IndexOfSpritePaletteTag(palette->tag != 0xFF))
-        // ApplyGlobalFieldPaletteTint(IndexOfSpritePaletteTag(palette->tag));
+	if (IndexOfSpritePaletteTag(palette->tag != 0xFF))
+        ApplyGlobalFieldPaletteTint(IndexOfSpritePaletteTag(palette->tag));
     (*script) += 4;
 }
 

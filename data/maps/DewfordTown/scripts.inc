@@ -40,6 +40,8 @@ DewfordTown_EventScript_Wally::
 	closemessage
 	setflag FLAG_SPAWN_INVISIBLE
 	setvar VAR_PETALBURG_CITY_STATE, 6
+	specialvar VAR_RESULT, GetPlayerFacingDirection
+	setvar VAR_0x8004, VAR_RESULT
     warp MAP_PETALBURG_CITY, 15, 16
 	release
 	end
@@ -47,37 +49,37 @@ DewfordTown_EventScript_Wally::
 DewfordTown_OnFrameWally::
 	lockall
 	call Script_RemoveTint
-	applymovement OBJ_EVENT_ID_PLAYER, DewfordTown_Movement_VisiblePlayer
-	waitmovement 0
-	namebox Wally
-	msgbox DewfordTown_Text_WallyContinueSpeech, MSGBOX_DEFAULT
-	applymovement LOCALID_WALLY, Common_Movement_FacePlayer
-	waitmovement 0
-	msgbox DewfordTown_Text_WallyEvenYou, MSGBOX_DEFAULT
-	closemessage
-	hidenamebox
-	applymovement LOCALID_WALLY, Common_Movement_FaceRight
-	waitmovement 0
-	namebox Wally
-	msgbox DewfordTown_Text_WallyThreeDots, MSGBOX_DEFAULT
-	msgbox DewfordTown_Text_WallyIWill, MSGBOX_DEFAULT
+	call_if_eq VAR_0x8004, DIR_EAST, DewfordTown_OnFrameWallyEast
+	call_if_eq VAR_0x8004, DIR_WEST, DewfordTown_OnFrameWallyWest
+	call_if_eq VAR_0x8004, DIR_NORTH, DewfordTown_OnFrameWallyNorth
+	call_if_eq VAR_0x8004, DIR_SOUTH, DewfordTown_OnFrameWallySouth
+	msgbox DewfordTown_EventScript_WallyContinueSpeech, MSGBOX_DEFAULT
 	setvar VAR_DEWFORD_TOWN_STATE, 4
 	releaseall
 	end
 
-DewfordTown_Text_WallyContinueSpeech:
-	.string "En esta región…\nNo tener un Pokémon supone que los\ldemás te mirarán como si fueras menos.\p"
-	.string "Eres menos que ellos, menos que\nquienes no pasan del primer Gimnasio,\lmenos de nadie que conocerás.\p"
-	.string "Sé que parece que exagero, pero,\nhace realmente difícil querer intentar\lalgo, el saber que no importa qué hagas,\lnunca será suficiente para alcanzar\lal resto.\p"
-	.string "Siempre quedo por detrás.$"
-DewfordTown_Text_WallyEvenYou:
-	.string "Incluso contigo, {PLAYER}.\nNo puedo llegarte ni a los talones.$"
-DewfordTown_Text_WallyThreeDots:
-	.string "…$"
-DewfordTown_Text_WallyIWill:
-	.string "Pero…\p"
-	.string "Ahora tengo un Pokémon.\nAhora tengo la oportunidad de crecer.\lDe hacerme más fuerte.\p"
-	.string "Y es justo lo que voy a hacer.\nN-no creo… Llegar lejos…\lPero no importa.\lLlegaré más lejos que todos\llos que me trataron tan mal…$"
+DewfordTown_OnFrameWallyEast::
+	applymovement OBJ_EVENT_ID_PLAYER, DewfordTown_Movement_VisiblePlayer
+	waitmovement 0
+	return
+
+DewfordTown_OnFrameWallyWest::
+	applymovement OBJ_EVENT_ID_PLAYER, DewfordTown_Movement_VisiblePlayerWest
+	waitmovement 0
+	return
+
+DewfordTown_OnFrameWallyNorth::
+	applymovement OBJ_EVENT_ID_PLAYER, DewfordTown_Movement_VisiblePlayerNorth
+	waitmovement 0
+	return
+
+DewfordTown_OnFrameWallySouth::
+	applymovement OBJ_EVENT_ID_PLAYER, DewfordTown_Movement_VisiblePlayerSouth
+	waitmovement 0
+	return
+
+DewfordTown_EventScript_WallyContinueSpeech::
+	.string ".$"
 
 DewfordTown_Movement_VisiblePlayer::
 	face_right
@@ -184,7 +186,7 @@ DewfordTown_Movement_PlayerApproach2:
 	step_end
 
 DewfordTown_EventScript_Trigger_Text_0:
-	.string "(¿Q-qué fue eso…?)$"
+	.string "(¿Q-qué fue eso...?)$"
 
 
 
@@ -911,14 +913,14 @@ DewfordTown_EventScript_WallyHello:
 	.string "¡O-oh!\n"
 	.string "-COF COF-\l"
 	.string "¡{PLAYER}!\p"
-	.string "N-no sabía que vendrías…\n"
+	.string "N-no sabía que vendrías...\n"
 	.string "¡Pero que bien que estés aquí!$"
 
 DewfordTown_EventScript_WallyBeginSpeech:
 	.string "Sabes, tengo mucho miedo de comenzar mi\n"
 	.string "{COLOR BLUE}Desafío de los Gimnasios{COLOR DARK_GRAY}, y n-no sé si\l"
 	.string "sea algo en lo que pueda siquiera\l"
-	.string "aspirar a ser bueno…\p"
+	.string "aspirar a ser bueno...\p"
 	.string "Tengo miedo de fallar, y que todos se\n"
-	.string "burlen de mí denuevo…$"
+	.string "burlen de mí denuevo...$"
 	

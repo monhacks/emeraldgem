@@ -4094,8 +4094,12 @@ static void Cmd_getexp(void)
                     // only give exp share bonus in later gens if the mon wasn't sent out
                     if (((holdEffect == HOLD_EFFECT_EXP_SHARE) || FlagGet(FLAG_SYS_EXP_SHARE)) && ((gBattleMoveDamage == 0) || (B_SPLIT_EXP < GEN_6)))
                         gBattleMoveDamage += gExpShareExp;
+                #else
+                    if (holdEffect == HOLD_EFFECT_EXP_SHARE && gBattleMoveDamage == 0)
+                        gBattleMoveDamage += gExpShareExp;
+                #endif
                     if (holdEffect == HOLD_EFFECT_LUCKY_EGG)
-                        gBattleMoveDamage = (gBattleMoveDamage * 250) / 100;
+                        gBattleMoveDamage = (gBattleMoveDamage * 200) / 100;
                     if (gBattleTypeFlags & BATTLE_TYPE_TRAINER && B_TRAINER_EXP_MULTIPLIER <= GEN_7)
                         gBattleMoveDamage = (gBattleMoveDamage * 150) / 100;
 					if (gSaveBlock2Ptr->optionsButtonMode == 1)
@@ -10552,46 +10556,6 @@ static u32 ChangeStatBuffs(s8 statValue, u32 statId, u32 flags, const u8 *BS_ptr
 				index++;
 			}
 			
-            /*if (statValue == -2)
-            {
-                gBattleTextBuff2[1] = B_BUFF_STRING;
-				index = 2;
-                gBattleTextBuff3[1] = STRINGID_STATSHARPLY;
-                gBattleTextBuff3[2] = STRINGID_STATSHARPLY >> 8;
-                index = 3;
-            }
-            else if (statValue <= -3)
-            {
-                gBattleTextBuff2[1] = B_BUFF_STRING;
-				index = 2;
-                gBattleTextBuff3[1] = STRINGID_SEVERELY & 0xFF;
-                gBattleTextBuff3[2] = STRINGID_SEVERELY >> 8;
-                index = 3;
-            }
-<<<<<<< HEAD
-			gBattleTextBuff2[index] = B_BUFF_STRING;
-				index++;
-			//if (statValue == -1) {
-				gBattleTextBuff2[index] = STRINGID_STATFELL;
-				index++;
-				gBattleTextBuff2[index] = STRINGID_STATFELL >> 8;
-				index++;
-				gBattleTextBuff2[index] = STRINGID_STATHARSHLY;
-				index++;
-				gBattleTextBuff2[index] = STRINGID_STATHARSHLY >> 8;
-				index++;
-				//PREPARE_STRING_BUFFER(gBattleTextBuff3, STRINGID_STATNOTROSE);
-			//}
-			else {
-				gBattleTextBuff2[index] = STRINGID_STATFELL;
-				index++;
-				gBattleTextBuff2[index] = STRINGID_STATFELL >> 8;
-				index++;
-				gBattleTextBuff2[index] = STRINGID_STATHARSHLY;
-				index++;
-				gBattleTextBuff2[index] = STRINGID_STATHARSHLY >> 8;
-				index++;
-			}*/
             gBattleTextBuff2[index] = B_BUFF_EOS;
 
             if (gBattleMons[gActiveBattler].statStages[statId] == MIN_STAT_STAGE)
@@ -14033,14 +13997,10 @@ static void Cmd_handleballthrow(void)
             catchRate = 1;
         else
             catchRate = catchRate + ballAddition;
-		if (gLastUsedItem == ITEM_SAFARI_BALL) {
-			odds = (catchRate * ballMultiplier / 10);
-		}
-		else {
-			odds = (catchRate * ballMultiplier / 10)
-				* (gBattleMons[gBattlerTarget].maxHP * 3 - gBattleMons[gBattlerTarget].hp * 2)
-				/ (3 * gBattleMons[gBattlerTarget].maxHP);
-		}
+
+        odds = (catchRate * ballMultiplier / 10)
+            * (gBattleMons[gBattlerTarget].maxHP * 3 - gBattleMons[gBattlerTarget].hp * 2)
+            / (3 * gBattleMons[gBattlerTarget].maxHP);
 
         if (gBattleMons[gBattlerTarget].status1 & (STATUS1_SLEEP | STATUS1_FREEZE))
             odds *= 2;
@@ -14566,25 +14526,25 @@ static bool32 CriticalCapture(u32 odds)
 #if B_CRITICAL_CAPTURE == TRUE
     u32 numCaught = GetNationalPokedexCount(FLAG_GET_CAUGHT);
 
-    if (numCaught <= (NATIONAL_DEX_COUNT * 30) / 600)
-        odds += odds / 4;
-    else if (numCaught <= (NATIONAL_DEX_COUNT * 100) / 600)
-        odds += odds / 3;
-    else if (numCaught <= (NATIONAL_DEX_COUNT * 150) / 600)
-        odds += odds / 2; 
-    else if (numCaught <= (NATIONAL_DEX_COUNT * 300) / 600)
+    if (numCaught <= (NATIONAL_DEX_COUNT * 30) / 650)
+        odds = 0;
+    else if (numCaught <= (NATIONAL_DEX_COUNT * 150) / 650)
+        odds /= 2;
+    else if (numCaught <= (NATIONAL_DEX_COUNT * 300) / 650)
+        ;   // odds = (odds * 100) / 100;
+    else if (numCaught <= (NATIONAL_DEX_COUNT * 450) / 650)
+        odds = (odds * 150) / 100;
+    else if (numCaught <= (NATIONAL_DEX_COUNT * 600) / 650)
         odds *= 2;
-    else if (numCaught <= (NATIONAL_DEX_COUNT * 500) / 600)
-        odds *= 3;
     else
-        odds *= 4;
+        odds = (odds * 250) / 100;
 
     #ifdef ITEM_CATCHING_CHARM
     if (CheckBagHasItem(ITEM_CATCHING_CHARM, 1))
         odds = (odds * (100 + B_CATCHING_CHARM_BOOST)) / 100;
     #endif
 
-    odds /= 3;
+    odds /= 6;
     if ((Random() % 255) < odds)
         return TRUE;
 

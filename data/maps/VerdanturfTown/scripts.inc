@@ -47,10 +47,31 @@ VerdanturfTown_EventScript_WallysMemory:
 	setvar VAR_VERDANTURF_TOWN_STATE, 2
 	special RemoveCameraObject
 	setflag FLAG_HIDE_WALLY_VERDANTURF
-	fadescreen FADE_TO_BLACK
-	setflag FLAG_REMOVE_WARP_FADE
-	msgbox VerdanturfTown_Text_WallyExplains2, MSGBOX_DEFAULT
+	switch VAR_0x8004
+	case DIR_EAST, VerdanturfTown_EventScript_WallysMemoryEast
+	case DIR_NORTH, VerdanturfTown_EventScript_WallysMemoryNorth
+	case DIR_WEST, VerdanturfTown_EventScript_WallysMemoryWest
+	case DIR_SOUTH, VerdanturfTown_EventScript_WallysMemorySouth
+	release
+	end
+
+VerdanturfTown_EventScript_WallysMemoryEast::
 	warp MAP_DEWFORD_TOWN, 5, 18
+	release
+	end
+
+VerdanturfTown_EventScript_WallysMemoryNorth::
+	warp MAP_DEWFORD_TOWN, 6, 19
+	release
+	end
+
+VerdanturfTown_EventScript_WallysMemoryWest::
+	warp MAP_DEWFORD_TOWN, 7, 18
+	release
+	end
+
+VerdanturfTown_EventScript_WallysMemorySouth::
+	warp MAP_DEWFORD_TOWN, 6, 17
 	release
 	end
 
@@ -108,10 +129,7 @@ VerdanturfTown_Text_WallyExplains1:
 	.string "a comprar cosas en el Centro Pokémon,\l"
 	.string "me molestaban unos de mis vecinos,\l"
 	.string "diciéndome cosas horribles y no\l"
-	.string "dejándome continuar…$"
-
-VerdanturfTown_Text_WallyExplains2:
-	.string "Odio vivir ahí…\nOdio vivir en Petalburg…$"
+	.string "dejándome continuar...$"
 
 VerdanturfTown_EventScript_Twin::
 	lock
