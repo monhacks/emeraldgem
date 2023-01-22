@@ -706,6 +706,8 @@ static void DebugAction_Cancel(u8 taskId)
 {
     Debug_DestroyMenu(taskId);
     EnableBothScriptContexts();
+	ScriptUnfreezeObjectEvents();
+    UnlockPlayerFieldControls();
 }
 static void DebugAction_DestroyExtraWindow(u8 taskId)
 {
@@ -717,8 +719,6 @@ static void DebugAction_DestroyExtraWindow(u8 taskId)
 
     DestroyTask(taskId);
     EnableBothScriptContexts();
-	ScriptUnfreezeObjectEvents();
-    UnlockPlayerFieldControls();
 }
 
 
@@ -895,6 +895,8 @@ static void DebugAction_Util_HealParty(u8 taskId)
     HealPlayerParty();
     EnableBothScriptContexts();
     Debug_DestroyMenu(taskId);
+	ScriptUnfreezeObjectEvents();
+    UnlockPlayerFieldControls();
 }
 static void DebugAction_Util_Fly(u8 taskId)
 {
@@ -1167,6 +1169,8 @@ static void DebugAction_Util_CheckWeekDay(u8 taskId)
     //ScriptContext2_Enable();
     //ScriptContext_SetupScript(Debug_ShowFieldMessageStringVar4);
     EnableBothScriptContexts();
+	ScriptUnfreezeObjectEvents();
+    UnlockPlayerFieldControls();
 }
 static void DebugAction_Util_WatchCredits(u8 taskId)
 {
@@ -1187,6 +1191,8 @@ static void DebugAction_Util_Trainer_Gender(u8 taskId)
         gSaveBlock2Ptr->playerGender = 0;
     EnableBothScriptContexts();
     Debug_DestroyMenu(taskId);
+	ScriptUnfreezeObjectEvents();
+    UnlockPlayerFieldControls();
 }
 static void DebugAction_Util_Trainer_Id(u8 taskId)
 {
@@ -1194,6 +1200,8 @@ static void DebugAction_Util_Trainer_Id(u8 taskId)
     SetTrainerId(trainerId, gSaveBlock2Ptr->playerTrainerId);
     Debug_DestroyMenu(taskId);
     EnableBothScriptContexts();
+	ScriptUnfreezeObjectEvents();
+    UnlockPlayerFieldControls();
 }
 
 // *******************************
@@ -1351,6 +1359,8 @@ static void DebugAction_Flags_SetPokedexFlags(u8 taskId)
     }
     Debug_DestroyMenu(taskId);
     EnableBothScriptContexts();
+	ScriptUnfreezeObjectEvents();
+    UnlockPlayerFieldControls();
 }
 static void DebugAction_Flags_SwitchDex(u8 taskId)
 {
@@ -1847,6 +1857,8 @@ static void DebugAction_Give_AllTMs(u8 taskId)
             AddBagItem(i, 1);
     Debug_DestroyMenu(taskId);
     EnableBothScriptContexts();
+	ScriptUnfreezeObjectEvents();
+    UnlockPlayerFieldControls();
 }
 
 //Pokemon

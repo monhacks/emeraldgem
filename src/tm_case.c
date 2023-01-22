@@ -125,7 +125,7 @@ static void InitSelectedTMSpriteData(u8 a0, u16 itemId);
 static void SpriteCB_MoveTMSpriteInCase(struct Sprite * sprite);
 static void LoadTMTypePalettes(void);
 static void DrawPartyMonIcons(void);
-static void TintPartyMonIcons(u8 tm);
+static void TintPartyMonIcons(u16 tm);
 static void DestroyPartyMonIcons(void);
 
 static const struct BgTemplate sBGTemplates[] = {
@@ -1181,15 +1181,15 @@ static void DrawPartyMonIcons(void)
     }
 }
 
-static void TintPartyMonIcons(u8 tm)
+static void TintPartyMonIcons(u16 tm)
 {
-    u8 i;
+    u16 i;
     u16 species;
 
     for (i = 0; i < gPlayerPartyCount; i++)
     {
         species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES);
-        if (!CanLearnTeachableMove(species, tm))
+        if (!CanLearnTeachableMove(species, ItemIdToBattleMoveId(tm + ITEM_TM01)))
         {
             gSprites[spriteIdData[i]].oam.paletteNum = spriteIdPalette[i] + 6;
         }
