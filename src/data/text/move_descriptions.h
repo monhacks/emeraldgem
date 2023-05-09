@@ -1,4 +1,4 @@
-
+﻿
 #if B_BINDING_TURNS >= GEN_5
 #define BINDING_TURNS "4 or 5"
 #else
@@ -47,16 +47,13 @@ static const u8 sScratchDescription[] = _(
     "Araña al rival.");
 
 static const u8 sViseGripDescription[] = _(
-    "Grips the foe with large and\n"
-    "powerful pincers.");
+    "Ataca con grandes pinsas.");
 
 static const u8 sGuillotineDescription[] = _(
-    "A powerful pincer attack\n"
-    "that may cause fainting.");
+    "Siempre acabará con el rival,\ndadas las condiciones correctas.");
 
 static const u8 sRazorWindDescription[] = _(
-    "A 2-turn move that strikes\n"
-    "the foe on the 2nd turn.");
+    "Tarda dos turnos en atacar.");
 
 static const u8 sSwordsDanceDescription[] = _(
     "A fighting dance that\n"
@@ -3045,6 +3042,10 @@ static const u8 sTakeHeartDescription[] = _(
     "The user lifts its spirits to\n"
     "heal and strengthen itself.");
 
+static const u8 sHyperDrillDescription[] = _(
+    "Ataca con su taladro, e ignora\n"
+    "la Protección del rival.");
+
 const u8 gNotDoneYetDescription[] = _(
     "This move can't be used. Its\n"
     "effect is in development.");
@@ -3834,4 +3835,5 @@ const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] =
     [MOVE_SANDSEAR_STORM - 1] = sSandsearStormDescription,
     [MOVE_LUNAR_BLESSING - 1] = sLunarBlessingDescription,
     [MOVE_TAKE_HEART - 1] = sTakeHeartDescription,
+    [MOVE_HYPERDRILL - 1] = sHyperDrillDescription,
 };

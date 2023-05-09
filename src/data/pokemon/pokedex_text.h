@@ -1,62 +1,59 @@
 const u8 gDummyPokedexText[] = _(
-    "This is a newly discovered Pokémon.\n"
-    "It is currently under investigation.\n"
-    "No detailed information is available\n"
-    "at this time.");
+    "No hay datos para esta especie.");
 
 const u8 gBulbasaurPokedexText[] = _(
-    "Bulbasaur can be seen napping in bright\n"
-    "sunlight. There is a seed on its back.\n"
-    "By soaking up the sun's rays, the seed\n"
-    "grows progressively larger.");
+    "A Bulbasaur le encanta echarse a\n"
+    "tomar el sol. Se dice que si muchos\n"
+    "se reúnen para hacerlo, se revitalizan\n"
+    "el uno al otro para fortalecer sus bulbos.");
 
 const u8 gIvysaurPokedexText[] = _(
-    "To support its bulb, Ivysaur's legs\n"
-    "grow sturdy. If it spends more time lying in\n"
-    "the sunlight, the bud will soon bloom into\n"
-    "a large flower.");
+    "Es capaz de pararse en sus patas traseras,\n"
+    "aunque esto puede lastimarle la espalda.\n"
+    "Se desconoce porqué su flor cambia más\n"
+    "que su cuerpo al evolucionar.");
 
 const u8 gVenusaurPokedexText[] = _(
-    "Venusaur's flower is said to take on vivid\n"
-    "colors if it gets plenty of nutrition and\n"
-    "sunlight. The flower's aroma soothes the\n"
-    "emotions of people.");
+    "La flor de Venasaur es similar a una flor\n"
+    "de horrible olor y sabor para evitar que\n"
+    "Pokémon voladores le ataquen.\n"
+    "Le gustan mucho las manzanas.");
 
 const u8 gCharmanderPokedexText[] = _(
-    "The flame that burns at the tip of its\n"
-    "tail is an indication of its emotions.\n"
-    "The flame wavers when Charmander is\n"
-    "happy, and blazes when it is enraged.");
+    "Este Pokémon muere si la llama de su\n"
+    "cola se apaga, sin embargo, es fuerte\n"
+    "y se adapta para poder arder en el fondo\n"
+    "océanico por un par de minutos.");
 
 const u8 gCharmeleonPokedexText[] = _(
-    "Without pity, its sharp claws destroy foes.\n"
-    "If it encounters a strong enemy, it\n"
-    "becomes agitated, and the flame on its\n"
-    "tail flares with a bluish white color.");
+    "Este sangriento Pokémon ama cortar a\n"
+    "sus enemigos. Su instinto de lucha le\n"
+    "lleva a dañarse a sí mismo en preparación\n"
+    "para peleas porvenir.");
 
 const u8 gCharizardPokedexText[] = _(
-    "A Charizard flies about in search of\n"
-    "strong opponents. It breathes intense\n"
-    "flames that can melt any material. However,\n"
-    "it will never torch a weaker foe.");
+    "Lo cierto es que Charizard es un Pokémon\n"
+    "que es capaz de adaptarse a todo combate.\n"
+    "Esto lo ha llevado a incluso desarrollar\n"
+    "una forma Gigantamax en la lejana Galar.");
 
 const u8 gSquirtlePokedexText[] = _(
-    "Its shell is not just for protection.\n"
-    "Its rounded shape and the grooves on its\n"
-    "surface minimize resistance in water,\n"
-    "enabling Squirtle to swim at high speeds.");
+    "Calmado y perezoso por naturaleza,\n"
+    "este Pokémon ama pasarse el día haciendo\n"
+    "nada, flotando en el agua sin preocupaciones.\n"
+    "Odia comer manzanas.");
 
 const u8 gWartortlePokedexText[] = _(
-    "Its large tail is covered with rich, thick\n"
-    "fur that deepens in color with age.\n"
-    "The scratches on its shell are evidence\n"
-    "of this Pokémon's toughness in battle.");
+    "La cola enrulada de Wartortle es\n"
+    "indicadora de su edad Recientes.\n"
+    "estudios demuestran que su longevidad\n"
+    "no es tan prolongada como se creía.");
 
 const u8 gBlastoisePokedexText[] = _(
-    "The waterspouts that protrude from its\n"
-    "shell are highly accurate. Their bullets of\n"
-    "water can precisely nail tin cans from\n"
-    "a distance of over 160 feet.");
+    "La cola enrulada se ha convertido en un\n"
+    "poderoso colchón interno, que protege\n"
+    "sus órganos de cualquier daño.\n"
+    "No puede sufrir contusiones.");
 
 const u8 gCaterpiePokedexText[] = _(
     "Its voracious appetite compels it to\n"
@@ -1235,16 +1232,22 @@ const u8 gForretressPokedexText[] = _(
     "inside cannot be seen.");
 
 const u8 gDunsparcePokedexText[] = _(
-    "Its drill-tipped tail is used to burrow into\n"
-    "the ground backwards. This Pokémon is\n"
-    "known to make its nest in complex shapes\n"
-    "deep under the ground.");
+    "La forma original de Dunsparce. Se dice\n"
+    "que posee una enorme civilización\n"
+    "subterránea, sin líderes o jerarquía,\n"
+    "aunque nadie la ha visto realmente.");
+
+const u8 gDudunsparcePokedexText[] = _(
+    "La forma original de Dudunsparce.\n"
+    "Se desconoce porqué este Pokémon\n"
+    "crece más panzas, pero una teoría\n"
+    "argumenta que ayuda con la digestión.");
 
 const u8 gGligarPokedexText[] = _(
-    "It glides without making a single sound.\n"
-    "It grasps the face of its foe using its\n"
-    "hind and large front claws, then stabs\n"
-    "with its poison barb.");
+    "Planea sin hacer ningún ruido.\n"
+    "Recientes estudios demuestran que\n"
+    "su ADN es 75% similar al de\n"
+    "Dunsparce, a pesar de no parecerse.");
 
 const u8 gSteelixPokedexText[] = _(
     "Steelix live even further underground\n"
@@ -2063,10 +2066,10 @@ const u8 gSwalotPokedexText[] = _(
     "its own stomach.");
 
 const u8 gTropiusPokedexText[] = _(
-    "It flies by flapping its broad leaves.\n"
-    "The bunch of fruit that grows around its\n"
-    "neck is deliciously sweet. In the spring,\n"
-    "it scatters pollen from its neck.");
+    "Se dice que quien rechaza una banana\n"
+    "ofrecida por un Tropius, morirá de\n"
+    "insuficiencia de potasio. Se\n"
+    "recomienda conseguirlas.");
 
 const u8 gWhismurPokedexText[] = _(
     "Its cries equal a jet plane in volume.\n"

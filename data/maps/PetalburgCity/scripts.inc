@@ -30,10 +30,13 @@ PetalburgCity_EventScript_DisableMapNameAndMusic::
 PetalburgCity_EventScript_SetTintForMemory::
 	setflag FLAG_HIDE_MAP_NAME_POPUP
 	call Script_SetSepiaTint
+	clearflag FLAG_HIDE_PETALBURG_CITY_WALLYS_DAD
+	clearflag FLAG_HIDE_PETALBURG_CITY_WALLY
 	addobject LOCALID_WALLY
 	addobject LOCALID_WALLYS_DAD
-	setobjectxy LOCALID_WALLY, 15, 17
-	setobjectxy LOCALID_WALLYS_DAD, 14, 17
+	setobjectxyperm LOCALID_WALLY, 15, 17
+	setobjectxyperm LOCALID_WALLYS_DAD, 14, 17
+	setobjectxyperm LOCALID_GYM_BOY, 12, 11
 	savebgm MUS_END
 	return
 
@@ -49,21 +52,22 @@ PetalburgCity_OnFrame:
 	
 PetalburgCity_EventScript_WallysFlashback::
 	lockall
-	
-	setobjectxyperm LOCALID_GYM_BOY, 12, 11
 	special SpawnCameraObject
+	applymovement LOCALID_GYM_BOY, Common_Movement_FaceDown
+	waitmovement 0
+	closemessage
+	hidenamebox
+	fadescreen FADE_FROM_BLACK
+	delay 20
 	applymovement LOCALID_WALLY, Common_Movement_FaceUp
 	waitmovement 0
 	applymovement LOCALID_WALLYS_DAD, Common_Movement_FaceUp
 	waitmovement 0
-	applymovement LOCALID_BOY, Common_Movement_FaceRight
-	waitmovement 0
-	applymovement LOCALID_GYM_BOY, Common_Movement_FaceDown
-	waitmovement 0
 	applymovement LOCALID_WALLY, PetalburgCity_Movement_WallyMemory
 	applymovement LOCALID_WALLYS_DAD, PetalburgCity_Movement_WallyDadMemory
 	applymovement OBJ_EVENT_ID_CAMERA, PetalburgCity_Movement_WallyMemoryCamera
-	msgbox PetalburgCity_Text_WallysMemory1, MSGBOX_DEFAULT
+	namebox Chico
+	msgbox PetalburgCity_Text_WallysMemoryKid, MSGBOX_DEFAULT
 	namebox PapaWally
 	msgbox PetalburgCity_Text_WallysMemory2, MSGBOX_DEFAULT
 	closemessage
@@ -90,8 +94,11 @@ PetalburgCity_EventScript_WallysFlashback::
 	setvar VAR_VERDANTURF_TOWN_STATE, 1
 	setvar VAR_PETALBURG_CITY_STATE, 7
 	setflag FLAG_HIDE_WALLY_VERDANTURF
+	clearflag FLAG_HIDE_PETALBURG_CITY_WALLYS_DAD
+	clearflag FLAG_HIDE_PETALBURG_CITY_WALLY
 	special RemoveCameraObject
 	setflag FLAG_SPAWN_INVISIBLE
+	setflag FLAG_REMOVE_WARP_FADE_OUT
 	warp MAP_VERDANTURF_TOWN, 10, 15
 	release
 	end
@@ -119,7 +126,6 @@ PetalburgCity_Movement_WallyMemory:
 	step_end
 
 PetalburgCity_Movement_WallyMemoryCamera:
-	delay_8
 	walk_slow_up
 	walk_slow_up
 	walk_slow_up
@@ -191,11 +197,12 @@ PetalburgCity_EventScript_WallyTutorial::
 	applymovement OBJ_EVENT_ID_PLAYER, PetalburgCity_Movement_WallyTutorialPlayer
 	waitmovement 0
 	msgbox Route102_Text_WatchMeCatchPokemon, MSGBOX_DEFAULT
-	fadescreen FADE_TO_BLACK
-	closemessage
-	delay 60
+	call Route102_EventScript_RaltsAppears
 	msgbox Route102_Text_UnRalts, MSGBOX_DEFAULT
 	closemessage
+	call Route102_EventScript_ZigzagoonAppears
+	applymovement LOCALID_WALLY, PetalburgCity_Movement_WallyJump
+	waitmovement 0
 	playmoncry SPECIES_ZIGZAGOON, CRY_MODE_NORMAL
 	msgbox Route102_Text_Sigsa, MSGBOX_DEFAULT
 	waitmoncry
@@ -254,11 +261,15 @@ Route102_Text_UnRalts:
 	.string "Estos son raros, leí en un libro.\l"
 	.string "Bueno, ahora es tiempo de atraparlo…\l"
 	.string "Eh… ¿Cómo…?\p"
-	.string "Em… Z-Zigzagon… ¡Tacleada!$"
+	.string "Em… Z-Zigzagon… ¡Sal de ahí!$"
 
 Route102_Text_PokeballVe:
 	.string "Wally: ¡Y-y-y-y ahora, eh…!\p"
 	.string "¡POKÉBALL, CAPTÚRALO!$"
+
+PetalburgCity_Movement_WallyJump:
+	jump_in_place_right
+	step_end
 
 PetalburgCity_EventScript_WalkToWallyHouse::
 	lockall
@@ -1082,11 +1093,11 @@ PetalburgCity_Text_ImLookingForTalentedTrainers:
 	.string "poderosos para {COLOR BLUE}un proyecto especial{COLOR DARK_GRAY}\l"
 	.string "en el que estoy trabajando…$"
 	
-PetalburgCity_Text_WallysMemory1:
-	.string "Chico 1: ¡Hey, Wally! ¿Qué pasa? ¿No\n"
-	.string "puedes volver a tu casa solito sin que\l"
+PetalburgCity_Text_WallysMemoryKid:
+	.string "¡Hey, Wally! ¿Qué pasa? ¿No puedes\n"
+	.string "volver a tu casa solito sin que\l"
 	.string "tu papito te lleve de la mano?\p"
-	.string "Chico 2: ¡Ja! Y pensaba que verte correr\n"
+	.string "¡Ja! Y pensaba que verte correr\n"
 	.string "de los Poochyena salvajes y\l"
 	.string "desmayarte era patético...$"
 

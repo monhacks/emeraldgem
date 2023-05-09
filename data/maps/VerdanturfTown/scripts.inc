@@ -11,11 +11,18 @@ VerdanturfTown_MapScripts::
 VerdanturfTown_OnTransition:
 	setflag FLAG_VISITED_VERDANTURF_TOWN
 	setvar VAR_CONTEST_HALL_STATE, 0
+	call_if_eq VAR_VERDANTURF_TOWN_STATE, 1, VerdanturfTown_OnTransition_SetTint
 	end
 
 VerdanturfTown_OnFrame:
 	map_script_2 VAR_VERDANTURF_TOWN_STATE, 1, VerdanturfTown_EventScript_WallysMemory
 	.2byte 0
+
+VerdanturfTown_OnTransition_SetTint:
+	setflag FLAG_HIDE_MAP_NAME_POPUP
+	call Script_SetSepiaTint
+	savebgm MUS_END
+	return
 
 VerdanturfTown_EventScript_WallysMemory:
 	lockall
@@ -25,6 +32,7 @@ VerdanturfTown_EventScript_WallysMemory:
 	applymovement LOCALID_BULLY_1, Common_Movement_FaceDown
 	applymovement LOCALID_BULLY_2, Common_Movement_FaceRight
 	waitmovement 0
+	fadescreen FADE_FROM_BLACK
 	delay 16
 	opendoor 10, 14
 	waitdooranim
@@ -47,6 +55,7 @@ VerdanturfTown_EventScript_WallysMemory:
 	setvar VAR_VERDANTURF_TOWN_STATE, 2
 	special RemoveCameraObject
 	setflag FLAG_HIDE_WALLY_VERDANTURF
+	setflag FLAG_REMOVE_WARP_FADE_OUT
 	switch VAR_0x8004
 	case DIR_EAST, VerdanturfTown_EventScript_WallysMemoryEast
 	case DIR_NORTH, VerdanturfTown_EventScript_WallysMemoryNorth

@@ -5,7 +5,9 @@ gText_WouldYouLikeToRestYourPkmn::
 	.string "tus Pokémon.$"
 
 gText_IllTakeYourPkmn::
-    .string "Los cuidaré muy bien.$"
+    .string "¡Bienvenid{OA} al\n"
+    .string "Centro Pokémon!\p"
+    .string "¡Curaré a tus Pokémon!$"
 
 gText_RestoredPkmnToFullHealth::
     .string "¡Tus Pokémon están\n"
@@ -17,7 +19,7 @@ gText_WeHopeToSeeYouAgain::
 gText_WelcomeCutShort::
     .string "¡Bienvenid{OA} al\n"
     .string "Centro Pokémon!\p"
-    .string "Restauraré la salud…$"
+    .string "¡Curaré a tus…!$"
 
 gText_NoticesGoldCard::
 	.string "Es-esa tarjeta…\n"
@@ -40,7 +42,8 @@ gText_IllTakeYourPkmn2::
     .string "No me tardo.$"
 
 gText_ThankYouForWaiting::
-    .string "¡Muchísimas gracia!$"
+    .string "¡Muchísimas gracias!$"
 
 gText_WeHopeToSeeYouAgain2::
     .string "¡Sigue siendo maravillos{OA}!$"
+

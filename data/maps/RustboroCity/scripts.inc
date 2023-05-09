@@ -4,6 +4,7 @@
 .set LOCALID_GRUNT, 10
 .set LOCALID_RIVAL, 14
 .set LOCALID_SCIENTIST, 15
+.set LOCALID_WALLY, 17
 
 RustboroCity_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, RustboroCity_OnTransition
@@ -94,6 +95,276 @@ RustboroCity_EventScript_MatchCallTutorial::
 	releaseall
 	end
 
+RustboroCity_EventScript_Wally::
+	lock
+	faceplayer
+	namebox Wally
+	msgbox RustboroCity_Text_WallyPokeCenter
+	closemessage
+	hidenamebox
+	specialvar VAR_0x8004, GetPlayerFacingDirection
+	call_if_eq VAR_0x8004, DIR_SOUTH, RustboroCity_EventScript_MovePlayerOutTheWay
+	applymovement LOCALID_WALLY, RustboroCity_Movement_WallyEnterCenter
+	waitmovement 0
+	opendoor 16, 45
+	waitdooranim
+	applymovement LOCALID_WALLY, RustboroCity_Movement_WallyEnterCenter2
+	waitmovement 0
+	delay 40
+	applymovement LOCALID_WALLY, RustboroCity_Movement_WallyOutCenter
+	waitmovement 0
+	closedoor 16, 45
+	waitdooranim
+	namebox Wally
+	msgbox RustboroCity_Text_WallyPrepared
+	closemessage
+	hidenamebox
+	specialvar VAR_0x8004, GetPlayerFacingDirection
+	call_if_eq VAR_0x8004, DIR_WEST, RustboroCity_EventScript_MovePlayerEast
+	call_if_eq VAR_0x8004, DIR_EAST, RustboroCity_EventScript_MovePlayerWest
+	applymovement LOCALID_WALLY, RustboroCity_Movement_WallyGoToGym1
+	goto_if_eq VAR_0x8004, DIR_WEST, RustboroCity_EventScript_MovePlayerEast2
+	delay 8
+	applymovement OBJ_EVENT_ID_PLAYER, RustboroCity_Movement_PlayerGoToGym
+	waitmovement 0
+	goto RustboroCity_EventScript_Wally2
+
+RustboroCity_EventScript_MovePlayerEast2::
+	applymovement OBJ_EVENT_ID_PLAYER, RustboroCity_Movement_PlayerGoToGym2
+	waitmovement 0
+	goto RustboroCity_EventScript_Wally2
+
+RustboroCity_EventScript_Wally2::
+	applymovement LOCALID_WALLY, Common_Movement_FacePlayer
+	waitmovement 0
+	namebox Wally
+	msgbox RustboroCity_Text_WallyReady
+	closemessage
+	hidenamebox
+	applymovement LOCALID_WALLY, RustboroCity_Movement_WallyEnterGym
+	waitmovement 0
+	opendoor 27, 19
+	waitdooranim
+	applymovement LOCALID_WALLY, RustboroCity_Movement_WallyEnterGym2
+	waitmovement 0
+	delay 8
+	closedoor 27, 19
+	waitdooranim
+	delay 16
+	fadescreen FADE_TO_BLACK
+	delay 16
+	namebox Wally
+	msgbox RustboroCity_Text_WallyBattle
+	closemessage
+	hidenamebox
+	delay 8
+	fadescreen FADE_FROM_BLACK
+	delay 16
+	opendoor 27, 19
+	waitdooranim
+	delay 16
+	namebox Wally
+	msgbox RustboroCity_Text_WallySilence
+	closemessage
+	hidenamebox
+	applymovement LOCALID_WALLY, RustboroCity_Movement_WallyOutGym
+	waitmovement 0
+	namebox Wally
+	msgbox RustboroCity_Text_WallySilence2
+	closemessage
+	hidenamebox
+	applymovement LOCALID_WALLY, Common_Movement_FaceAwayPlayer
+	waitmovement 0
+	delay 16
+	applymovement LOCALID_WALLY, Common_Movement_FacePlayer
+	waitmovement 0
+	namebox Wally
+	msgbox RustboroCity_Text_WallyExcited
+	hidenamebox
+	closemessage
+	fadescreen FADE_TO_BLACK
+	delay 16
+	removeobject LOCALID_WALLY
+	setflag FLAG_HIDE_WALLY_RUSTBORO
+	delay 8
+	fadescreen FADE_FROM_BLACK
+	delay 16
+	releaseall
+	end
+
+
+RustboroCity_EventScript_MovePlayerOutTheWay::
+	applymovement OBJ_EVENT_ID_PLAYER, RustboroCity_Movement_MovePlayerOutTheWay
+	waitmovement 0
+	return
+
+RustboroCity_EventScript_MovePlayerEast:
+	applymovement OBJ_EVENT_ID_PLAYER, RustboroCity_Movement_MovePlayerEast
+	waitmovement 0
+	return
+
+RustboroCity_EventScript_MovePlayerWest:
+	applymovement OBJ_EVENT_ID_PLAYER, RustboroCity_Movement_MovePlayerWest
+	waitmovement 0
+	return
+
+RustboroCity_Movement_MovePlayerEast:
+	walk_down
+	face_up
+	step_end
+
+RustboroCity_Movement_MovePlayerWest:
+	walk_down
+	walk_right
+	step_end
+
+RustboroCity_Movement_MovePlayerOutTheWay:
+	walk_right
+	walk_down
+	face_left
+	step_end
+	
+RustboroCity_Movement_WallyGoToGym1:
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	step_end
+
+RustboroCity_Movement_PlayerGoToGym:
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	step_end
+
+RustboroCity_Movement_PlayerGoToGym2:
+	face_up
+	delay_8
+	face_right
+	delay_8
+	walk_right
+	walk_right
+	walk_right
+	face_up
+	delay_8
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	face_right
+	delay_8
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	step_end
+
+RustboroCity_Movement_WallyEnterCenter:
+	walk_up
+	walk_in_place_up
+	step_end
+
+RustboroCity_Movement_WallyEnterCenter2:
+	walk_up
+	set_invisible
+	step_end
+
+RustboroCity_Movement_WallyOutCenter:
+	set_visible
+	walk_down
+	walk_down
+	face_player
+	step_end
+
 RustboroCity_Movement_ScientistWalkInPlaceDown:
 	walk_in_place_down
 	step_end
@@ -107,19 +378,33 @@ RustboroCity_Movement_ScientistApproachPlayer:
 	delay_16
 	step_end
 
-@ Unused
-RustboroCity_Movement_ScientistWalkAroundPlayer:
-	delay_16
-	walk_left
-	walk_down
-	walk_down
-	walk_right
-	walk_in_place_faster_up
-	delay_16
-	step_end
-
 RustboroCity_Movement_ScientistLeave:
 	walk_up
+	step_end
+
+RustboroCity_Movement_WallyEnterGym:
+	walk_right
+	delay_8
+	face_player
+	delay_16
+	face_up
+	delay_8
+	walk_up
+	step_end
+	
+RustboroCity_Movement_WallyEnterGym2:
+	walk_up
+	set_invisible
+	step_end
+
+RustboroCity_Movement_WallyOutGym:
+	set_visible
+	walk_down
+	walk_down
+	walk_down
+	delay_8
+	face_player
+	delay_8
 	step_end
 
 RustboroCity_EventScript_FatMan::
@@ -1044,6 +1329,24 @@ RustboroCity_EventScript_Boy1::
 	msgbox RustboroCity_Text_YouCanHave2On2Battle, MSGBOX_NPC
 	end
 
+RustboroCity_Text_WallyPokeCenter:
+	.string "¡Ah, hola {PLAYER}!\n"
+	.string "Estoy acá para comprar Pociones y\l"
+	.string "cosas así. Quiero enfrentarme al\l"
+	.string "siguiente Gimnasio, pero no sé si podré\l"
+	.string "sin Objetos Curativos...\p"
+	.string "He atrapado un Roselia, ¡Así que tendré\n"
+	.string "algo de ventaja de tipos aquí también!\p"
+	.string "Bueno, {PLAYER} te veo cuando\n"
+	.string "termine mis compras.$"
+
+RustboroCity_Text_WallyPrepared:
+	.string "¡Ahora ya estoy listo! Acompáñame,\n"
+	.string "{PLAYER}, así tendré a alguien\l"
+	.string "apoyándome y podré tener más\l"
+	.string "confianza.$"
+
+
 RustboroCity_Text_WeShortenItToDevon:
 	.string "La {COLOR BLUE}Corporación Devon{COLOR DARK_GRAY}, o simplemente Devon,\n"
 	.string "es una compañía que hace toda clase de cosas.\p"
@@ -1276,3 +1579,37 @@ RustboroCity_Text_YouCanHave2On2Battle:
 	.string "Además de eso, el cambio climático han\n"
 	.string "hecho a los tipo Hielo\l"
 	.string "resistentes a otros tipos.$"
+
+RustboroCity_Text_WallyReady:
+	.string "{PLAYER}… ¡Deséame suerte!$"
+
+RustboroCity_Text_WallyBattle:
+	.string "Muy bien, yo puedo con esto.$"
+
+RustboroCity_Text_WallySilence:
+	.string "…$"
+
+RustboroCity_Text_WallySilence2:
+	.string "………\n………\l………\p¡Eso fue -COF, COF- increíble!\n-COF, COF, COF-\p¡{PLAYER}!\n¡Vencí a todos sus Pokémon\lsólamente usando a Roselia!$"
+
+RustboroCity_Text_WallyExcited:
+	.string "¡Muchísimas gracias, -COF, COF-\n"
+	.string "{PLAYER}, por estar acá conmigo!\l"
+	.string "-COF-\p"
+	.string "En serio no podría estarte más\n"
+	.string "agradecido...\p"
+	.string "Desde que inicié este viaje, tuve\n"
+	.string "muchas dudas sobre lo que pasaría.\l"
+	.string "¿Qué clase de personas conocería?\l"
+	.string "¿Qué clase de Pokémon? ¿Podría estar\l"
+	.string "listo para enfrentarme a problemas?\p"
+	.string "Cuando comencé, las respuestas\n"
+	.string "parecían ser “A nadie,” “A ninguno,” y\l"
+	.string "“Ni en tus sueños.”\p"
+	.string "Pero, gracias a tu apoyo, y a mi\n"
+	.string "determinación, ¡Parece que estoy\l"
+	.string "siendo capaz de mejorar!\p"
+	.string "En serio, muchas, muchísimas gracias,\n"
+	.string "{PLAYER}.\n"
+	.string "¡La próxima vez que nos veamos, causaré\l"
+	.string "una Tormenta de Arena por donde vaya!$"

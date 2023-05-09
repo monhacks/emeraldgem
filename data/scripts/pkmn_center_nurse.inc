@@ -8,7 +8,7 @@ Common_EventScript_PkmnCenterNurse::
 	end
 
 EventScript_PkmnCenterNurse_Goodbye::
-	message gText_WeHopeToSeeYouAgain
+	msgbox gText_WeHopeToSeeYouAgain
 	return
 
 @ VAR_0x8004 is 1 when player has Gold Card; jumps are identical
@@ -38,6 +38,7 @@ EventScript_PkmnCenterNurse_TakeAndHealPkmn::
 	applymovement VAR_0x800B, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	special HealPlayerParty
+	closemessage
 	return
 
 EventScript_PkmnCenterNurse_CheckTrainerHillAndUnionRoom::
@@ -55,6 +56,7 @@ EventScript_PkmnCenterNurse_ReturnPkmn::
 	applymovement VAR_0x800B, Movement_PkmnCenterNurse_Bow
 	waitmovement 0
 	message gText_WeHopeToSeeYouAgain
+	delay 8
 	goto EventScript_PkmnCenterNurse_PlayerTurn
 	return
 
@@ -63,7 +65,8 @@ EventScript_PkmnCenterNurse_ReturnPkmn2::
 	waitmessage
 	applymovement VAR_0x800B, Movement_PkmnCenterNurse_Bow
 	waitmovement 0
-	message gText_WeHopeToSeeYouAgain2
+	msgbox gText_WeHopeToSeeYouAgain2
+	delay 8
 	goto EventScript_PkmnCenterNurse_PlayerTurn
 	return
 
@@ -75,7 +78,8 @@ EventScript_PkmnCenterNurse_PlayerWaitingInUnionRoom::
 	waitmessage
 	applymovement VAR_0x800B, Movement_PkmnCenterNurse_Bow
 	waitmovement 0
-	message gText_WeHopeToSeeYouAgain
+	msgbox gText_WeHopeToSeeYouAgain
+	waitmessage
 	return
 
 EventScript_PkmnCenterNurse_CheckPokerus::
@@ -101,12 +105,15 @@ EventScript_PkmnCenterNurse_GoldCard::
 	msgbox gText_NoticesGoldCard, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, YES, EventScript_PkmnCenterNurse_GoldCardHealPkmn
 	message gText_WeHopeToSeeYouAgain2
+	delay 16
+	waitmessage
 	return
 
 EventScript_PkmnCenterNurse_AskForUsual::
 	msgbox gText_YouWantTheUsual, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, YES, EventScript_PkmnCenterNurse_GoldCardHealPkmn
-	message gText_WeHopeToSeeYouAgain2
+	msgbox gText_WeHopeToSeeYouAgain2
+	waitmessage
 	return
 
 EventScript_PkmnCenterNurse_GoldCardHealPkmn::
@@ -115,9 +122,10 @@ EventScript_PkmnCenterNurse_GoldCardHealPkmn::
 	end
 
 EventScript_PkmnCenterNurse_PlayerTurn::
-    closemessage
+	delay 16
     applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceDown
     waitmovement 0
+	closemessage
     release
     end
 
@@ -146,3 +154,4 @@ Movement_PkmnCenterNurse_Bow:
 	nurse_joy_bow
 	delay_4
 	step_end
+

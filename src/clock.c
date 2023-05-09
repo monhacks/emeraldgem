@@ -32,10 +32,6 @@ void DoTimeBasedEvents(void)
     if (FlagGet(FLAG_SYS_CLOCK_SET) && !InPokemonCenter())
     {
         	RtcCalcLocalTime();
-	// if (FlagGet(FLAG_RTC_ENABLED)) {
-		// gLocalTime.hours = Rtc_GetCurrentHour();
-		// gLocalTime.minutes = Rtc_GetCurrentMinute();
-	// }
         UpdatePerDay(&gLocalTime);
         UpdatePerMinute(&gLocalTime);
     }

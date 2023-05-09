@@ -1154,11 +1154,7 @@ static void InitRouletteTableData(void)
             break;
         }
     }
-    	RtcCalcLocalTime();
-	// if (FlagGet(FLAG_RTC_ENABLED)) {
-		// gLocalTime.hours = Rtc_GetCurrentHour();
-		// gLocalTime.minutes = Rtc_GetCurrentMinute();
-	// }
+    RtcCalcLocalTime();
 }
 
 // Task data for the roulette game tasks, starting with Task_StartPlaying

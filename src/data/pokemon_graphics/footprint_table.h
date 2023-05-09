@@ -207,6 +207,7 @@ const u8 *const gMonFootprintTable[] =
     [SPECIES_PINECO] = gMonFootprint_Pineco,
     [SPECIES_FORRETRESS] = gMonFootprint_Forretress,
     [SPECIES_DUNSPARCE] = gMonFootprint_Dunsparce,
+    [SPECIES_DUDUNSPARCE] = gMonFootprint_Dunsparce,
     [SPECIES_GLIGAR] = gMonFootprint_Gligar,
     [SPECIES_STEELIX] = gMonFootprint_Steelix,
     [SPECIES_SNUBBULL] = gMonFootprint_Snubbull,

@@ -125,3 +125,5 @@ RecoveredPokemon:
 RecoveredPokemonAndItems:
 	.string "¡Has recuperado tus Pokémon y objetos!$"
 
+Chico:
+	.string "{COLOR BLUE}Bully$"

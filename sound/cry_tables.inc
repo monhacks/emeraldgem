@@ -905,6 +905,7 @@ gCryTable::
 	cry Cry_Bulbasaur //Cry_Sneasler
 	cry Cry_Bulbasaur //Cry_Overqwil
 	cry Cry_Bulbasaur //Cry_Enamorus
+	cry Cry_Dunsparce
 	@ Megas
 	cry Cry_VenusaurMega
 	cry Cry_CharizardMegaX
@@ -2206,6 +2207,7 @@ gCryTable_Reverse::
 	cry_reverse Cry_Bulbasaur //Cry_Sneasler
 	cry_reverse Cry_Bulbasaur //Cry_Overqwil
 	cry_reverse Cry_Bulbasaur //Cry_Enamorus
+	cry_reverse Cry_Dunsparce
 	@ Megas
 	cry_reverse Cry_VenusaurMega
 	cry_reverse Cry_CharizardMegaX

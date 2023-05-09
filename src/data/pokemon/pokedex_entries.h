@@ -2474,13 +2474,25 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_DUNSPARCE] =
     {
-        .categoryName = _("Land Snake"),
+        .categoryName = _("Serptierra"),
         .height = 15,
         .weight = 140,
         .description = gDunsparcePokedexText,
         .pokemonScale = 316,
         .pokemonOffset = 17,
         .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+	[NATIONAL_DEX_DUDUNSPARCE] =
+    {
+        .categoryName = _("Serptierra"),
+        .height = 45,
+        .weight = 474,
+        .description = gDudunsparcePokedexText,
+        .pokemonScale = 256,
+        .pokemonOffset = 9,
+        .trainerScale = 614,
         .trainerOffset = 0,
     },
 

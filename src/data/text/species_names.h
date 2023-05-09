@@ -70,7 +70,7 @@ const u8 gSpeciesNames[][POKEMON_NAME_LENGTH + 1] = {
     [SPECIES_MACHAMP] = _("Machamp"),
     [SPECIES_BELLSPROUT] = _("Bellsprout"),
     [SPECIES_WEEPINBELL] = _("Weepinbell"),
-    [SPECIES_VICTREEBEL] = _("Victreebel"),
+    [SPECIES_VICTREEBEL] = _("Victreebell"),
     [SPECIES_TENTACOOL] = _("Tentacool"),
     [SPECIES_TENTACRUEL] = _("Tentacruel"),
     [SPECIES_GEODUDE] = _("Geodude"),
@@ -159,7 +159,7 @@ const u8 gSpeciesNames[][POKEMON_NAME_LENGTH + 1] = {
     [SPECIES_TYPHLOSION] = _("Typhlosion"),
     [SPECIES_TOTODILE] = _("Totodile"),
     [SPECIES_CROCONAW] = _("Croconaw"),
-    [SPECIES_FERALIGATR] = _("Feraligatr"),
+    [SPECIES_FERALIGATR] = _("Feraligator"),
     [SPECIES_SENTRET] = _("Sentret"),
     [SPECIES_FURRET] = _("Furret"),
     [SPECIES_HOOTHOOT] = _("Hoothoot"),
@@ -905,6 +905,7 @@ const u8 gSpeciesNames[][POKEMON_NAME_LENGTH + 1] = {
     [SPECIES_SNEASLER] = _("Sneasler"),
     [SPECIES_OVERQWIL] = _("Overqwil"),
     [SPECIES_ENAMORUS] = _("Enamorus"),
+	[SPECIES_DUDUNSPARCE] = _("Dudunsparce"),
 
     // Megas
     [SPECIES_VENUSAUR_MEGA] = _("Venusaur"),

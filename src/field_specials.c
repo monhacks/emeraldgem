@@ -137,10 +137,6 @@ void GetDayOrNight(void)
 {
 	u8 nightorday;
 		RtcCalcLocalTime();
-	// if (FlagGet(FLAG_RTC_ENABLED)) {
-		// gLocalTime.hours = Rtc_GetCurrentHour();
-		// gLocalTime.minutes = Rtc_GetCurrentMinute();
-	// }
 	if (gLocalTime.hours >= 8 && gLocalTime.hours <=19)
 	{
 		nightorday = 0; //Day

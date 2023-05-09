@@ -781,6 +781,7 @@ const u8 gMoveNames[MOVES_COUNT][MOVE_NAME_LENGTH + 1] =
     [MOVE_SANDSEAR_STORM] = _("SndsearStorm"),
     [MOVE_LUNAR_BLESSING] = _("LunarBlessng"),
     [MOVE_TAKE_HEART] = _("Take Heart"),
+    [MOVE_HYPERDRILL] = _("Hípertaladro"),
 };
 
 static const u8 sText_Breakneck_Blitz[] = _("Breakneck Blitz");
@@ -1641,5 +1642,6 @@ const u8 gLongMoveNames[MOVES_COUNT][LONG_MOVE_NAME_LENGTH + 1] =
     [MOVE_SANDSEAR_STORM] = _("SndsearStorm"),
     [MOVE_LUNAR_BLESSING] = _("LunarBlessng"),
     [MOVE_TAKE_HEART] = _("Take Heart"),
+    [MOVE_HYPERDRILL] = _("Hípertaladro"),
 };
 

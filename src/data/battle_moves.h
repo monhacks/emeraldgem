@@ -13593,6 +13593,22 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
         .zMoveEffect = Z_EFFECT_NONE,
     },
 
+    [MOVE_HYPERDRILL] =
+    {
+        .effect = EFFECT_HIT, // EFFECT_TAKE_HEART,
+        .power = 100,
+        .type = TYPE_NORMAL,
+        .accuracy = 100,
+        .pp = 6,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_KINGS_ROCK_AFFECTED | FLAG_MAKES_CONTACT,
+        .split = SPLIT_PHYSICAL,
+        .zMovePower = 180,
+        .zMoveEffect = Z_EFFECT_ATK_UP_2,
+    },
+
     // Z-Moves
     [MOVE_BREAKNECK_BLITZ] =
     {

@@ -656,11 +656,7 @@ static void Task_ResetRtcScreen(u8 taskId)
             }
             else
             {
-                	RtcCalcLocalTime();
-	// if (FlagGet(FLAG_RTC_ENABLED)) {
-		// gLocalTime.hours = Rtc_GetCurrentHour();
-		// gLocalTime.minutes = Rtc_GetCurrentMinute();
-	// }
+                RtcCalcLocalTime();
                 tSubTaskId = CreateTask(Task_ShowResetRtcPrompt, 80);
                 tState = MAINSTATE_START_SET_TIME;
             }

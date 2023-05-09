@@ -47,7 +47,7 @@
 #define FLAG_HIDE_WALLY_VERDANTURF    0x23  
 #define FLAG_SHINY_CREATION    0x24
 #define FLAG_POKEMONPCMENU    0x25
-#define FLAG_UNUSED_0x26  	  0x26// unused flag
+#define FLAG_HIDE_WALLY_RUSTBORO  	  0x26// unused flag
 #define FLAG_UNUSED_0x27    0x27// unused flag
 #define FLAG_SYS_NO_COLLISION    0x28
 #define FLAG_SYS_NO_ENCOUNTER    0x29
@@ -59,7 +59,7 @@
 #define FLAG_ALEX  				0x2F
 #define FLAG_DAIANA   		 0x30
 #define FLAG_CARLOS      	 0x31
-#define FLAG_RTC_ENABLED  	 0x32
+#define FLAG_REMOVE_WARP_FADE_OUT  	 0x32 // unused
 #define FLAG_DEFEATED_LEAF    0x33
 #define FLAG_BAYASMART       0x34
 #define FLAG_HIDE_WALLY_DEWFORD_TOWN    0x35
@@ -113,10 +113,10 @@
 #define FLAG_MET_TEAM_AQUA_HARBOR            0x61
 #define FLAG_TV_EXPLAINED                    0x62
 #define FLAG_MAUVILLE_GYM_BARRIERS_STATE     0x63
-#define FLAG_MOSSDEEP_GYM_SWITCH_1           0x64 // Leftover from the RS version of Mossdeep Gym, functionally unused
-#define FLAG_MOSSDEEP_GYM_SWITCH_2           0x65 // unused flag
-#define FLAG_MOSSDEEP_GYM_SWITCH_3           0x66 // unused flag
-#define FLAG_MOSSDEEP_GYM_SWITCH_4           0x67 // unused flag
+#define FLAG_UNUSED_0x64           0x64 // Leftover from the RS version of Mossdeep Gym, functionally unused
+#define FLAG_UNUSED_0x65           0x65 // unused flag
+#define FLAG_UNUSED_0x66           0x66 // unused flag
+#define FLAG_UNUSED_0x67           0x67 // unused flag
 
 #define FLAG_UNUSED_0x068                    0x68  // Unused Flag
 

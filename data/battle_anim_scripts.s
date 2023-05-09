@@ -805,6 +805,7 @@ gBattleAnims_Moves::
 	.4byte Move_SANDSEAR_STORM
 	.4byte Move_LUNAR_BLESSING
 	.4byte Move_TAKE_HEART
+	.4byte Move_HYPERDRILL
 @@@@ Z MOVES
 	.4byte Move_BREAKNECK_BLITZ
 	.4byte Move_ALL_OUT_PUMMELING
@@ -6397,6 +6398,61 @@ ScreenFlash:
 	return
 
 Move_DRILL_RUN:
+	loadspritegfx ANIM_TAG_IMPACT
+	loadspritegfx ANIM_TAG_HORN_HIT
+	setalpha 12, 8
+	fadetobg BG_FISSURE
+	waitbgfadeout
+	launchtask AnimTask_PositionFissureBgOnBattler 0x5 0x3 0x1 0x5 0xffff
+	launchtemplate gBowMonSpriteTemplate 0x2 0x1 0x0
+	playsewithpan SE_M_HEADBUTT, SOUND_PAN_ATTACKER
+	waitforvisualfinish
+	delay 0x2
+	launchtemplate gBowMonSpriteTemplate 0x2 0x1 0x1
+	launchtemplate gHornHitSpriteTemplate 0x84 0x3 0x0 0x0 0xc
+	waitforvisualfinish
+	playse 0x14
+	launchtask AnimTask_ShakeMonInPlace 0x2 0x5 0x0 0x2 0x0 0x28 0x1
+	launchtask AnimTask_ShakeMonInPlace 0x2 0x5 0x1 0xa 0x0 0x28 0x1
+	launchtemplate gFlashingHitSplatSpriteTemplate 0x83 0x4 0x0 0x0 0x1 0x3
+	playsewithpan SE_M_HORN_ATTACK, SOUND_PAN_TARGET
+	delay 0x4
+	launchtemplate gFlashingHitSplatSpriteTemplate 0x83 0x4 0x0 0x2 0x1 0x3
+	playsewithpan SE_M_HORN_ATTACK, SOUND_PAN_TARGET
+	delay 0x4
+	launchtemplate gFlashingHitSplatSpriteTemplate 0x83 0x4 0xfffc 0x3 0x1 0x3
+	playsewithpan SE_M_HORN_ATTACK, SOUND_PAN_TARGET
+	delay 0x4
+	launchtemplate gFlashingHitSplatSpriteTemplate 0x83 0x4 0xfff8 0xfffb 0x1 0x3
+	playsewithpan SE_M_HORN_ATTACK, SOUND_PAN_TARGET
+	delay 0x4
+	launchtemplate gFlashingHitSplatSpriteTemplate 0x83 0x4 0x4 0xfff4 0x1 0x3
+	playsewithpan SE_M_HORN_ATTACK, SOUND_PAN_TARGET
+	delay 0x4
+	launchtemplate gFlashingHitSplatSpriteTemplate 0x83 0x4 0x10 0x0 0x1 0x3
+	playsewithpan SE_M_HORN_ATTACK, SOUND_PAN_TARGET
+	delay 0x4
+	launchtemplate gFlashingHitSplatSpriteTemplate 0x83 0x4 0x5 0x12 0x1 0x3
+	playsewithpan SE_M_HORN_ATTACK, SOUND_PAN_TARGET
+	delay 0x4
+	launchtemplate gFlashingHitSplatSpriteTemplate 0x83 0x4 0xffef 0xc 0x1 0x2
+	playsewithpan SE_M_HORN_ATTACK, SOUND_PAN_TARGET
+	delay 0x4
+	launchtemplate gFlashingHitSplatSpriteTemplate 0x83 0x4 0xffeb 0xfff1 0x1 0x2
+	playsewithpan SE_M_HORN_ATTACK, SOUND_PAN_TARGET
+	delay 0x4
+	launchtemplate gFlashingHitSplatSpriteTemplate 0x83 0x4 0x8 0xffe5 0x1 0x2
+	playsewithpan SE_M_HORN_ATTACK, SOUND_PAN_TARGET
+	delay 0x4
+	launchtemplate gFlashingHitSplatSpriteTemplate 0x83 0x4 0x20 0x0 0x1 0x2
+	playsewithpan SE_M_HORN_ATTACK, SOUND_PAN_TARGET
+	delay 0x4
+	launchtemplate gBowMonSpriteTemplate 0x2 0x1 0x2
+	waitforvisualfinish
+	call UnsetPsychicBg
+	end
+
+Move_HYPERDRILL:
 	loadspritegfx ANIM_TAG_IMPACT
 	loadspritegfx ANIM_TAG_HORN_HIT
 	setalpha 12, 8

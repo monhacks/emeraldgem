@@ -2429,6 +2429,22 @@ static const union AnimCmd sAnim_FORRETRESS_1[] =
     ANIMCMD_END,
 };
 
+static const union AnimCmd sAnim_DUDUNSPARCE_1[] =
+{
+    ANIMCMD_FRAME(0, 15),
+    ANIMCMD_FRAME(1, 2),
+    ANIMCMD_FRAME(0, 2),
+    ANIMCMD_FRAME(1, 2),
+    ANIMCMD_FRAME(0, 2),
+    ANIMCMD_FRAME(1, 2),
+    ANIMCMD_FRAME(0, 2),
+	ANIMCMD_FRAME(1, 2),
+    ANIMCMD_FRAME(0, 2),
+	ANIMCMD_FRAME(1, 2),
+    ANIMCMD_FRAME(0, 2),
+    ANIMCMD_END,
+};
+
 static const union AnimCmd sAnim_DUNSPARCE_1[] =
 {
     ANIMCMD_FRAME(1, 10),
@@ -10541,6 +10557,11 @@ static const union AnimCmd *const sAnims_DUNSPARCE[] ={
     sAnim_DUNSPARCE_1,
 };
 
+static const union AnimCmd *const sAnims_DUDUNSPARCE[] ={
+    sAnim_GeneralFrame0,
+    sAnim_DUNSPARCE_1,
+};
+
 static const union AnimCmd *const sAnims_GLIGAR[] ={
     sAnim_GeneralFrame0,
     sAnim_GLIGAR_1,
@@ -15180,6 +15201,7 @@ const union AnimCmd *const *const gMonFrontAnimsPtrTable[] =
     ANIM_CMD(PINECO),
     ANIM_CMD(FORRETRESS),
     ANIM_CMD(DUNSPARCE),
+    ANIM_CMD(DUDUNSPARCE),
     ANIM_CMD(GLIGAR),
     ANIM_CMD(STEELIX),
     ANIM_CMD(SNUBBULL),

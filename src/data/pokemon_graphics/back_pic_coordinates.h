@@ -1039,6 +1039,11 @@ const struct MonCoords gMonBackPicCoords[] =
         .size = MON_COORDS_SIZE(56, 32),
         .y_offset = 17,
     },
+    [SPECIES_DUDUNSPARCE] =
+    {
+        .size = MON_COORDS_SIZE(56, 32),
+        .y_offset = 9,
+    },
     [SPECIES_GLIGAR] =
     {
         .size = MON_COORDS_SIZE(64, 64),

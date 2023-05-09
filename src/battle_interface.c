@@ -159,6 +159,7 @@ enum
 
 static const u8 *GetHealthboxElementGfxPtr(u8);
 static u8 *AddTextPrinterAndCreateWindowOnHealthbox(const u8 *, u32, u32, u32, u32 *);
+static u8 *AddTextPrinterAndCreateWindowOnHealthboxGender(const u8 *, u32, u32, u32, u32 *,u32,u32);
 
 static void RemoveWindowOnHealthbox(u32 windowId);
 static void UpdateHpTextInHealthboxInDoubles(u32 healthboxSpriteId, u32 maxOrCurrent, s16 currHp, s16 maxHp);
@@ -1079,7 +1080,7 @@ void InitBattlerHealthboxCoords(u8 battler)
     UpdateSpritePos(gHealthboxSpriteIds[battler], x, y);
 }
 
-static void UpdateLvlInHealthbox(u8 healthboxSpriteId, u8 lvl)
+static void UpdateLvlInHealthbox(u8 healthboxSpriteId, u8 lvl, u8 gender)
 {
     u32 windowId, spriteTileNum;
     u8 *windowTileData;
@@ -1105,7 +1106,19 @@ static void UpdateLvlInHealthbox(u8 healthboxSpriteId, u8 lvl)
     }
 
     xPos = 5 * (3 - (objVram - (text + 2)));
-    windowTileData = AddTextPrinterAndCreateWindowOnHealthbox(text, xPos, 3, 2, &windowId);
+	switch (gender)
+	{
+	default:
+		windowTileData = AddTextPrinterAndCreateWindowOnHealthboxGender(text, xPos, 3, 2, &windowId, 1, 3); 
+		break;
+	case MON_MALE:
+		windowTileData = AddTextPrinterAndCreateWindowOnHealthboxGender(text, xPos, 3, 2, &windowId, 11, 15);
+		break;
+	case MON_FEMALE:
+		windowTileData = AddTextPrinterAndCreateWindowOnHealthboxGender(text, xPos, 3, 2, &windowId, 10, 14); 
+		break;
+	}
+    // windowTileData = AddTextPrinterAndCreateWindowOnHealthbox(text, xPos, 3, 2, &windowId);
     spriteTileNum = gSprites[healthboxSpriteId].oam.tileNum * TILE_SIZE_4BPP;
 
     if (GetBattlerSide(battler) == B_SIDE_PLAYER)
@@ -2095,10 +2108,15 @@ static void UpdateNickInHealthbox(u8 healthboxSpriteId, struct Pokemon *mon)
     u32 windowId, spriteTileNum, species;
     u8 *windowTileData;
     u8 gender;
+	bool8 isShiny;
+    u32 otId, personality;
+    u32 shinyValue;
     struct Pokemon *illusionMon = GetIllusionMonPtr(gSprites[healthboxSpriteId].hMain_Battler);
     if (illusionMon != NULL)
         mon = illusionMon;
 
+	otId = GetMonData(mon, MON_DATA_OT_ID);
+    personality = GetMonData(mon, MON_DATA_PERSONALITY);
     StringCopy(gDisplayedStringBattle, gText_HealthboxNickname);
     GetMonData(mon, MON_DATA_NICKNAME, nickname);
     StringGet_Nickname(nickname);
@@ -2112,21 +2130,30 @@ static void UpdateNickInHealthbox(u8 healthboxSpriteId, struct Pokemon *mon)
 
     // AddTextPrinterAndCreateWindowOnHealthbox's arguments are the same in all 3 cases.
     // It's possible they may have been different in early development phases.
-    switch (gender)
-    {
-    default:
-        StringCopy(ptr, gText_HealthboxGender_None);
-        windowTileData = AddTextPrinterAndCreateWindowOnHealthbox(gDisplayedStringBattle, 0, 3, 2, &windowId);
-        break;
-    case MON_MALE:
-        StringCopy(ptr, gText_HealthboxGender_Male);
-        windowTileData = AddTextPrinterAndCreateWindowOnHealthbox(gDisplayedStringBattle, 0, 3, 2, &windowId);
-        break;
-    case MON_FEMALE:
-        StringCopy(ptr, gText_HealthboxGender_Female);
-        windowTileData = AddTextPrinterAndCreateWindowOnHealthbox(gDisplayedStringBattle, 0, 3, 2, &windowId);
-        break;
-    }
+	isShiny = FALSE;
+	shinyValue = GET_SHINY_VALUE(otId, personality);
+        if (shinyValue < SHINY_ODDS)
+            isShiny = TRUE;
+	if (isShiny) {
+		windowTileData = AddTextPrinterAndCreateWindowOnHealthboxGender(gDisplayedStringBattle, 0, 3, 2, &windowId, 9, 4);
+	}
+	else {
+		switch (gender)
+		{
+		default:
+			// StringCopy(ptr, gText_HealthboxGender_None);
+			windowTileData = AddTextPrinterAndCreateWindowOnHealthboxGender(gDisplayedStringBattle, 0, 3, 2, &windowId, 1, 3); // 1, 3 (shiny 9, 4)
+			break;
+		case MON_MALE:
+			// StringCopy(ptr, gText_HealthboxGender_Male);
+			windowTileData = AddTextPrinterAndCreateWindowOnHealthboxGender(gDisplayedStringBattle, 0, 3, 2, &windowId, 11, 15); // 12, 11
+			break;
+		case MON_FEMALE:
+			// StringCopy(ptr, gText_HealthboxGender_Female);
+			windowTileData = AddTextPrinterAndCreateWindowOnHealthboxGender(gDisplayedStringBattle, 0, 3, 2, &windowId, 10, 14); // 14, 13
+			break;
+		}
+	}
 
     spriteTileNum = gSprites[healthboxSpriteId].oam.tileNum * TILE_SIZE_4BPP;
 
@@ -2352,7 +2379,7 @@ void UpdateHealthboxAttribute(u8 healthboxSpriteId, struct Pokemon *mon, u8 elem
         u8 isDoubles = WhichBattleCoords(battlerId);
 
         if (elementId == HEALTHBOX_LEVEL || elementId == HEALTHBOX_ALL)
-            UpdateLvlInHealthbox(healthboxSpriteId, GetMonData(mon, MON_DATA_LEVEL));
+            UpdateLvlInHealthbox(healthboxSpriteId, GetMonData(mon, MON_DATA_LEVEL), GetMonGender(mon));
 
         if (elementId == HEALTHBOX_ALL)
             UpdateHpTextInHealthbox(healthboxSpriteId, HP_BOTH, currHp, maxHp);
@@ -2397,7 +2424,7 @@ void UpdateHealthboxAttribute(u8 healthboxSpriteId, struct Pokemon *mon, u8 elem
     else
     {
         if (elementId == HEALTHBOX_LEVEL || elementId == HEALTHBOX_ALL)
-            UpdateLvlInHealthbox(healthboxSpriteId, GetMonData(mon, MON_DATA_LEVEL));
+            UpdateLvlInHealthbox(healthboxSpriteId, GetMonData(mon, MON_DATA_LEVEL), GetMonGender(mon));
         if (gBattleSpritesDataPtr->battlerData[battlerId].hpNumbersNoBars)
         {
             if (elementId == HEALTHBOX_ALL)
@@ -2712,6 +2739,25 @@ static u8 *AddTextPrinterAndCreateWindowOnHealthbox(const u8 *str, u32 x, u32 y,
     color[0] = bgColor;
     color[1] = 1;
     color[2] = 3;
+
+    AddTextPrinterParameterized4(winId, FONT_SMALL, x, y, 0, 0, color, TEXT_SKIP_DRAW, str);
+
+    *windowId = winId;
+    return (u8 *)(GetWindowAttribute(winId, WINDOW_TILE_DATA));
+}
+
+static u8 *AddTextPrinterAndCreateWindowOnHealthboxGender(const u8 *str, u32 x, u32 y, u32 bgColor, u32 *windowId, u32 fontColor, u32 shadowColor)
+{
+    u16 winId;
+    u8 color[3];
+    struct WindowTemplate winTemplate = sHealthboxWindowTemplate;
+
+    winId = AddWindow(&winTemplate);
+    FillWindowPixelBuffer(winId, PIXEL_FILL(bgColor));
+
+    color[0] = bgColor;
+    color[1] = fontColor;
+    color[2] = shadowColor;
 
     AddTextPrinterParameterized4(winId, FONT_SMALL, x, y, 0, 0, color, TEXT_SKIP_DRAW, str);
 

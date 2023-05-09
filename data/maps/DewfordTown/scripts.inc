@@ -26,8 +26,10 @@ DewfordTown_OnFrame:
 	.2byte 0
 
 DewfordTown_EventScript_Wally::
-	lockall
+	goto_if_set FLAG_TEMP_1, DewfordTown_EventScript_Wally2
+	lock
 	faceplayer
+	setflag FLAG_TEMP_1
 	namebox Wally
 	msgbox DewfordTown_EventScript_WallyHello, MSGBOX_DEFAULT
 	hidenamebox
@@ -36,14 +38,16 @@ DewfordTown_EventScript_Wally::
 	waitmovement 0
 	namebox Wally
 	msgbox DewfordTown_EventScript_WallyBeginSpeech, MSGBOX_DEFAULT
+	setflag FLAG_SPAWN_INVISIBLE
+	setflag FLAG_REMOVE_WARP_FADE_OUT
+	setvar VAR_PETALBURG_CITY_STATE, 6
+	specialvar VAR_0x8004, GetPlayerFacingDirection
+    warp MAP_PETALBURG_CITY, 15, 16
 	hidenamebox
 	closemessage
-	setflag FLAG_SPAWN_INVISIBLE
-	setvar VAR_PETALBURG_CITY_STATE, 6
-	specialvar VAR_RESULT, GetPlayerFacingDirection
-	setvar VAR_0x8004, VAR_RESULT
-    warp MAP_PETALBURG_CITY, 15, 16
-	release
+	end
+
+DewfordTown_EventScript_Wally2::
 	end
 
 DewfordTown_OnFrameWally::
@@ -53,10 +57,154 @@ DewfordTown_OnFrameWally::
 	call_if_eq VAR_0x8004, DIR_WEST, DewfordTown_OnFrameWallyWest
 	call_if_eq VAR_0x8004, DIR_NORTH, DewfordTown_OnFrameWallyNorth
 	call_if_eq VAR_0x8004, DIR_SOUTH, DewfordTown_OnFrameWallySouth
-	msgbox DewfordTown_EventScript_WallyContinueSpeech, MSGBOX_DEFAULT
+	delay 16
+	fadescreen FADE_FROM_BLACK
+	delay 8
+	namebox Wally
+	msgbox DewfordTown_Text_WallyContinueSpeech, MSGBOX_DEFAULT
+	applymovement LOCALID_WALLY, Common_Movement_FacePlayer
+	waitmovement 0
+	msgbox DewfordTown_Text_WallyContinueSpeech2
+	closemessage
+	hidenamebox
+	applymovement LOCALID_WALLY, Common_Movement_FaceRight
+	waitmovement 0
+	applymovement LOCALID_WALLY, Common_Movement_FaceUp
+	waitmovement 0
+	namebox Wally
+	msgbox DewfordTown_Text_WallyDetermined
+	applymovement LOCALID_WALLY, Common_Movement_FaceRight
+	waitmovement 0
+	msgbox DewfordTown_Text_WallyLetsGo
+	closemessage
+	hidenamebox
+	call_if_eq VAR_0x8004, DIR_WEST, DewfordTown_WallyGoToGymWest
+	applymovement LOCALID_WALLY, DewfordTown_Movement_WallyGoToGym
+	waitmovement 0
+	setvar VAR_0x8004, 8
+	setvar VAR_0x8005, 17
+	opendoor VAR_0x8004, VAR_0x8005
+	waitdooranim
+	applymovement LOCALID_WALLY, DewfordTown_Movement_WallyGoToGym2
+	waitmovement 0
+	closedoor VAR_0x8004, VAR_0x8005
+	waitdooranim
+	namebox Wally
+	msgbox DewfordTown_Text_WallyGym1
+	playmoncry SPECIES_MEDITITE, CRY_MODE_NORMAL
+	waitmoncry
+	closemessage
+	hidenamebox
+	delay 8
+	playse SE_NOT_EFFECTIVE
+	waitse
+	delay 12
+	namebox Wally
+	msgbox DewfordTown_Text_WallyGym2
+	hidenamebox
+	closemessage
+	playse SE_M_SUPERSONIC
+	waitse
+	playse SE_SUPER_EFFECTIVE
+	waitse
+	playmoncry SPECIES_MEDITITE, CRY_MODE_FAINT
+	waitmoncry
+	delay 8
+	playse SE_FAINT
+	waitse
+	namebox Wally
+	msgbox DewfordTown_Text_WallyGym3
+	hidenamebox
+	closemessage
+	fadescreen FADE_TO_BLACK
+	delay 50
+	fadescreen FADE_FROM_BLACK
+	delay 10
+	namebox Wally
+	msgbox DewfordTown_Text_WallyGymBattle
+	hidenamebox
+	closemessage
+	playmoncry SPECIES_RALTS, CRY_MODE_NORMAL
+	waitmoncry
+	delay 8
+	playse SE_M_DETECT
+	waitse
+	namebox Wally
+	msgbox DewfordTown_Text_WallyGymBattle2
+	hidenamebox
+	closemessage
+	playmoncry SPECIES_MAKUHITA, CRY_MODE_NORMAL
+	waitmoncry
+	namebox Wally
+	msgbox DewfordTown_Text_WallyGymBattle3
+	hidenamebox
+	closemessage
+	delay 10
+	playse SE_M_REFLECT
+	waitse
+	playse SE_M_BRICK_BREAK
+	waitse
+	delay 12
+	playse SE_NOT_EFFECTIVE
+	waitse
+	delay 16
+	playmoncry SPECIES_RALTS,CRY_MODE_NORMAL
+	waitmoncry
+	delay 30
+	playmoncry SPECIES_KIRLIA,CRY_MODE_GROWL_1
+	waitmoncry
+	delay 30
+	playfanfare MUS_EVOLVED
+	waitfanfare
+	delay 10
+	namebox Wally
+	msgbox DewfordTown_Text_WallyGymBattle4
+	hidenamebox
+	closemessage
+	playmoncry SPECIES_KIRLIA, CRY_MODE_NORMAL
+	waitmoncry
+	playse SE_M_SUPERSONIC
+	waitse
+	playse SE_SUPER_EFFECTIVE
+	waitse
+	playmoncry SPECIES_MAKUHITA, CRY_MODE_FAINT
+	waitmoncry
+	playse SE_FAINT
+	waitse
+	delay 20
+	opendoor VAR_0x8004, VAR_0x8005
+	waitdooranim
+	applymovement LOCALID_WALLY, DewfordTown_Movement_WallyComeOut
+	waitmovement 0
+	closedoor VAR_0x8004, VAR_0x8005
+	waitdooranim
+	namebox Wally
+	msgbox DewfordTown_Text_WallyAfter
+	closemessage
+	hidenamebox
+	fadescreen FADE_TO_BLACK
+	setflag FLAG_HIDE_WALLY_DEWFORD_TOWN
+	removeobject LOCALID_WALLY
+	delay 16
+	fadescreen FADE_FROM_BLACK
+	delay 8
 	setvar VAR_DEWFORD_TOWN_STATE, 4
 	releaseall
 	end
+
+DewfordTown_Movement_WallyComeOut::
+	face_down
+	set_visible
+	walk_down
+	walk_left
+	face_player
+	step_end
+
+DewfordTown_WallyGoToGymWest::
+	applymovement OBJ_EVENT_ID_PLAYER, DewfordTown_Movement_PlayerOutTheWay
+	waitmovement 0
+	return
+
 
 DewfordTown_OnFrameWallyEast::
 	applymovement OBJ_EVENT_ID_PLAYER, DewfordTown_Movement_VisiblePlayer
@@ -78,9 +226,99 @@ DewfordTown_OnFrameWallySouth::
 	waitmovement 0
 	return
 
-DewfordTown_EventScript_WallyContinueSpeech::
-	.string ".$"
+DewfordTown_Text_WallyContinueSpeech::
+	.string "Pero ahora.\nAhora voy a demostrarles que\lse equivocaban conmigo.\p"
+	.string "…\n…\pO…\n¿…Sabes qué?\p"
+	.string "¿A quién le importa lo\nque ellos piensan de mí?$"
 
+DewfordTown_Text_WallyContinueSpeech2::
+	.string "Claramente no les importa\nquién soy, o qué es lo que haga.\p"
+	.string "Quizá… Sea mejor hacer este viaje\npor mí mismo, y no por otros.\p¿Eso… Eso suena bien, ¿no?\p"
+	.string "Pero aún así… Me gustaría\nque estés aquí conmigo…$"
+
+DewfordTown_Text_WallyDetermined::
+	.string "…\p"
+	.string "El {COLOR BLUE}Gimnasio Dewford{COLOR DARK_GRAY}…\p"
+	.string "{COLOR GREEN}(Vamos Wally… ¡Tú puedes!){COLOR DARK_GRAY}\p"
+	.string "El tipo de este Gimnasio es Lucha…\p"
+	.string "Mi Ralts es tipo Psíquico Y Hada, así\n"
+	.string "que debería ser relativamente fácil\l"
+	.string "para él…$"
+
+DewfordTown_Text_WallyLetsGo::
+	.string "Bueno, Ralts… ¿Estás listo?\p"
+	.string "¡Entonces vamos!$"
+
+DewfordTown_Text_WallyGym1::
+	.string "¡Wow! ¡En serio no puede verse nada!\p"
+	.string "¿Cómo siquiera funcionan las luces en\n"
+	.string "este Gimnasio? ¿Los Entrenadores acá\l"
+	.string "pueden verme pero yo a ellos no?\p"
+	.string "Eh- ¡No importa, Wally!\n"
+	.string "¡Concéntrate!\p"
+	.string "…\p"
+	.string "¡AH!$"
+
+DewfordTown_Text_WallyGym2::
+	.string "G-gracias, Ralts, pensé que ese- COF,\n"
+	.string "COF- Em… Ese Meditite iba a\l"
+	.string "lastimarme…\p"
+	.string "¡Pero ahora, Ralts, usa {COLOR LIGHT_RED}Brillo Mágico{COLOR DARK_GRAY}!$"
+
+DewfordTown_Text_WallyGym3::
+	.string "¡Bien hecho, Ralts!\n"
+	.string "¡Eso fue increíble!\p"
+	.string "Ahora… Yo estudié la arquitectura de\n"
+	.string "este Gimnasio… El Líder debería\l"
+	.string "estar…\l"
+	.string "………\p"
+	.string "¡Acá!\n"
+	.string "¡Ja! ¡Lo sabía! ¡Vamos, Ralts!$"
+
+DewfordTown_Text_WallyGymBattle::
+	.string "Y ahora, Ralts… ¡¡Usa {COLOR LIGHT_RED}Campo Psíquico{COLOR DARK_GRAY}, y\n"
+	.string "luego usa {COLOR LIGHT_RED}Confusión{COLOR DARK_GRAY}!!$"
+DewfordTown_Text_WallyGymBattle2::
+	.string "{COLOR RED}D-detección{COLOR DARK_GRAY}…\n"
+	.string "Brawly leyó mi estrategia y reaccionó\l"
+	.string "acorde…$"
+DewfordTown_Text_WallyGymBattle3::
+	.string "¡Cuidado, Ralts, esquiva eso!\p"
+	.string "………\p"
+	.string "¿E-eh?$"
+DewfordTown_Text_WallyGymBattle4::
+	.string "¡R-Ralts! ¡Evolucionaste a Kirlia!\n"
+	.string "¡Estoy t-tan orgulloso de tí, Ra- Eh,\l"
+	.string "Kirlia!\p"
+	.string "-COF, COF, COF- Em… Ahora, ¡Usa {COLOR LIGHT_RED}Fuerza\n"
+	.string "Expansiva{COLOR DARK_GRAY}!$"
+DewfordTown_Text_WallyAfter::
+	.string "¡G-gané, {PLAYER}, gané!\n"
+	.string "¡Y Ralts evolucionó a Kirlia, también!\p"
+	.string "Muchas gracias por estar ahí,\n"
+	.string "{PLAYER}, sin tu apoyo, no habría\l"
+	.string "podido hacer nada...\p"
+	.string "Ahora, ¡Voy a continuar mejorando, y un\n"
+	.string "día, voy a derrotarte en un combate,\l"
+	.string "{PLAYER}!$"
+
+
+DewfordTown_Movement_WallyGoToGym::
+	walk_right
+	walk_right
+	face_up
+	walk_in_place_up
+	step_end
+
+DewfordTown_Movement_WallyGoToGym2::
+	walk_up
+	set_invisible
+	step_end
+
+DewfordTown_Movement_PlayerOutTheWay::
+	walk_down
+	face_up
+	step_end
 DewfordTown_Movement_VisiblePlayer::
 	face_right
 	set_visible
@@ -186,7 +424,7 @@ DewfordTown_Movement_PlayerApproach2:
 	step_end
 
 DewfordTown_EventScript_Trigger_Text_0:
-	.string "(¿Q-qué fue eso...?)$"
+	.string "(¿Q-qué fue eso…?)$"
 
 
 
@@ -913,14 +1151,14 @@ DewfordTown_EventScript_WallyHello:
 	.string "¡O-oh!\n"
 	.string "-COF COF-\l"
 	.string "¡{PLAYER}!\p"
-	.string "N-no sabía que vendrías...\n"
+	.string "N-no sabía que vendrías…\n"
 	.string "¡Pero que bien que estés aquí!$"
 
 DewfordTown_EventScript_WallyBeginSpeech:
 	.string "Sabes, tengo mucho miedo de comenzar mi\n"
 	.string "{COLOR BLUE}Desafío de los Gimnasios{COLOR DARK_GRAY}, y n-no sé si\l"
 	.string "sea algo en lo que pueda siquiera\l"
-	.string "aspirar a ser bueno...\p"
+	.string "aspirar a ser bueno…\p"
 	.string "Tengo miedo de fallar, y que todos se\n"
-	.string "burlen de mí denuevo...$"
+	.string "burlen de mí denuevo…$"
 	

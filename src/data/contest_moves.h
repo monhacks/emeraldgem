@@ -5966,6 +5966,7 @@ const struct ContestMove gContestMoves[MOVES_COUNT] =
     [MOVE_LUNAR_BLESSING] = {0}, // TODO
 
     [MOVE_TAKE_HEART] = {0}, // TODO
+    [MOVE_HYPERDRILL] = {0}, // TODO
 };
 
 const struct ContestEffect gContestEffects[] =

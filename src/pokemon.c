@@ -544,6 +544,7 @@ static const u16 sSpeciesToNationalPokedexNum[NUM_SPECIES - 1] =
     SPECIES_TO_NATIONAL(PINECO),
     SPECIES_TO_NATIONAL(FORRETRESS),
     SPECIES_TO_NATIONAL(DUNSPARCE),
+    SPECIES_TO_NATIONAL(DUDUNSPARCE),
     SPECIES_TO_NATIONAL(GLIGAR),
     SPECIES_TO_NATIONAL(STEELIX),
     SPECIES_TO_NATIONAL(SNUBBULL),
@@ -2147,6 +2148,7 @@ static const u8 sMonFrontAnimIdsTable[NUM_SPECIES - 1] =
     [SPECIES_PINECO - 1]        = ANIM_SWING_CONCAVE,
     [SPECIES_FORRETRESS - 1]    = ANIM_V_SHAKE,
     [SPECIES_DUNSPARCE - 1]     = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_DUDUNSPARCE - 1]     = ANIM_H_VIBRATE,
     [SPECIES_GLIGAR - 1]        = ANIM_SHRINK_GROW,
     [SPECIES_STEELIX - 1]       = ANIM_H_SHAKE,
     [SPECIES_SNUBBULL - 1]      = ANIM_V_STRETCH,
@@ -2923,6 +2925,7 @@ static const u8 sMonAnimationDelayTable[NUM_SPECIES - 1] =
     [SPECIES_AMPHAROS - 1]   = 10,
     [SPECIES_POLITOED - 1]   = 40,
     [SPECIES_DUNSPARCE - 1]  = 10,
+    [SPECIES_DUDUNSPARCE - 1]  = 10,
     [SPECIES_STEELIX - 1]    = 45,
     [SPECIES_QWILFISH - 1]   = 39,
     [SPECIES_SCIZOR - 1]     = 19,
@@ -7468,6 +7471,9 @@ u8 CanLearnTeachableMove(u16 species, u16 move)
     {
         return FALSE;
     }
+	else if ((species == SPECIES_MEW) || (species == SPECIES_ARCEUS)) {
+		return TRUE;
+	}
     else
     {
         u8 i;

@@ -258,7 +258,6 @@ Route101_EventScript_Boy::
 	end
 
 Route101_EventScript_RouteSign::
-	setflag FLAG_RTC_ENABLED
 	msgbox Route101_Text_RouteSign, MSGBOX_SIGN
 	end
 
@@ -337,17 +336,15 @@ Route101_Text_YouSavedMe2:
 
 
 Route101_Text_TakeTiredPokemonToPokeCenter:
-	.string "Si tus Pokémon se cansan,\n"
-	.string "llévalos al Centro Pokémon de\l"
-	.string "inmediato.$"
+	.string "¡Los Pokémon que aparecen en\nla noche son mucho más fuertes!\lTen cuidado con ellos.$"
 Route101_Text_TakeTiredPokemonToPokeCenter2:
 	.string "Ah, entonces veo que activaste el\n"
 	.string "evento misterioso. ¡Pues a ver si\l"
 	.string "puedes derrotar a este poderosísimo\l"
 	.string "Pokémon!$"
 Route101_Text_WildPokemonInTallGrass:
-	.string "Los Pokémon salvajes te atacarán a la\n"
-	.string "mínima que hagas.\p"
+	.string "Los Pokémon salvajes te atacarán\n"
+	.string "sin pensar en la hierba alta.\p"
 	.string "¡Ten cuidado en las Rutas!$"
 
 Route101_Text_RouteSign:

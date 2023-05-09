@@ -23,6 +23,35 @@ Error::
 	releaseall
 	end
 
+Route102_EventScript_RaltsAppears::
+	addobject 9
+	delay 8
+	playmoncry SPECIES_RALTS, CRY_MODE_NORMAL
+	msgbox Route102_Text_Ralts, MSGBOX_DEFAULT
+	waitmoncry
+	delay 8
+	playfanfare MUS_INTRO_BATTLE
+	waitfanfare
+	playbgm MUS_VS_WILD, FALSE
+	return
+
+Route102_EventScript_ZigzagoonAppears::
+	addobject 11
+	playse SE_BALL
+	delay 16
+	playse SE_BALL_OPEN
+	fadescreen FADE_TO_WHITE
+	removeobject 11
+	addobject 10
+	delay 8
+	fadescreen FADE_FROM_WHITE
+	delay 8
+	playmoncry SPECIES_ZIGZAGOON, CRY_MODE_NORMAL
+	msgbox Route102_Text_Sigsa, MSGBOX_DEFAULT
+	waitmoncry
+	delay 8
+	return
+
 Route102_EventScript_Calvin::
 	trainerbattle_single TRAINER_CALVIN_1, Route102_Text_CalvinIntro, Route102_Text_CalvinDefeated, Route102_EventScript_CalvinRegisterMatchCallAfterBattle
 	specialvar VAR_RESULT, ShouldTryRematchBattle

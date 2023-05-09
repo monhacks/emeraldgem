@@ -1786,6 +1786,7 @@ static void DebugAction_Give_Item_SelectId(u8 taskId)
 
         PlaySE(SE_SELECT);
         DebugAction_DestroyExtraWindow(taskId);
+		UnlockPlayerFieldControls();
     }
 }
 static void DebugAction_Give_Item_SelectQuantity(u8 taskId)
@@ -1834,6 +1835,7 @@ static void DebugAction_Give_Item_SelectQuantity(u8 taskId)
         PlaySE(MUS_OBTAIN_ITEM);
         AddBagItem(gTasks[taskId].data[5], gTasks[taskId].data[3]);
         DebugAction_DestroyExtraWindow(taskId);
+		UnlockPlayerFieldControls();
     }
     else if (gMain.newKeys & B_BUTTON)
     {
@@ -1844,6 +1846,7 @@ static void DebugAction_Give_Item_SelectQuantity(u8 taskId)
 
         PlaySE(SE_SELECT);
         DebugAction_DestroyExtraWindow(taskId);
+		UnlockPlayerFieldControls();
     }
 }
 
@@ -2037,6 +2040,7 @@ static void DebugAction_Give_Pokemon_SelectId(u8 taskId)
         FreeMonIconPalettes();
         FreeAndDestroyMonIconSprite(&gSprites[gTasks[taskId].data[6]]); //Destroy pokemon sprite
         DebugAction_DestroyExtraWindow(taskId);
+		UnlockPlayerFieldControls();
     }
 }
 static void DebugAction_Give_Pokemon_SelectLevel(u8 taskId)
@@ -2085,6 +2089,7 @@ static void DebugAction_Give_Pokemon_SelectLevel(u8 taskId)
             ScriptGiveMon(sDebugMonData->mon_speciesId, gTasks[taskId].data[3], ITEM_NONE, 0,0,0);
             Free(sDebugMonData); //Frees EWRAM of MonData Struct
             DebugAction_DestroyExtraWindow(taskId);
+			UnlockPlayerFieldControls();
         }
         else
         {
@@ -2665,16 +2670,19 @@ static void DebugAction_Give_Pokemon_ComplexCreateMon(u8 taskId) //https://githu
 
     Free(sDebugMonData); //Frees EWRAM of MonData Struct
     DebugAction_DestroyExtraWindow(taskId); //return sentToPc;
+	UnlockPlayerFieldControls();
 }
 
 static void DebugAction_Give_MaxMoney(u8 taskId)
 {
     SetMoney(&gSaveBlock1Ptr->money, 999999);
+	UnlockPlayerFieldControls();
 }
 
 static void DebugAction_Give_MaxCoins(u8 taskId)
 {
     SetCoins(9999);
+	UnlockPlayerFieldControls();
 }
 
 static void DebugAction_Give_DayCareEgg(u8 taskId)
@@ -2709,6 +2717,7 @@ static void DebugAction_Give_FillPC(u8 taskId) //Credit: Sierraffinity
             }
         }
     }
+	UnlockPlayerFieldControls();
 }
 
 static void DebugAction_Give_CHEAT(u8 taskId)
