@@ -16,6 +16,10 @@ InsideOfTruck_OnResume:
 InsideOfTruck_EventScript_SetIntroFlags::
 	lockall
 	setflag FLAG_HIDE_MAP_NAME_POPUP
+	setflag FLAG_HIDE_RALTS_102
+	setflag FLAG_HIDE_ZIGZA_102
+	setflag FLAG_HIDE_BALL_102
+	setflag FLAG_BALL_CATCH_102
 	checkplayergender
 	goto_if_eq VAR_RESULT, MALE, InsideOfTruck_EventScript_SetIntroFlagsMale
 	goto_if_eq VAR_RESULT, FEMALE, InsideOfTruck_EventScript_SetIntroFlagsFemale
@@ -52,7 +56,8 @@ InsideOfTruck_EventScript_MovingBox::
 	end
 
 InsideOfTruck_Text_BoxPrintedWithMonLogo:
-	.string "The box is printed with a POKéMON logo.\p"
-	.string "It's a POKéMON brand moving and\n"
-	.string "delivery service.$"
+	.string "Esta caja tiene un logo de una Pokéball\n"
+	.string "cúbica.\p"
+	.string "Es Pokémon Movers, la compañía de\n"
+	.string "mudanza más efectiva.$"
 

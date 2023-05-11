@@ -24,6 +24,8 @@ struct PokemonStorage
     /*0x83C2*/ u16	boxWallpapers[TOTAL_BOXES_COUNT];
 };
 
+void EnterPokeStorage(u8 boxOption);
+
 extern struct PokemonStorage *gPokemonStoragePtr;
 
 void DrawTextWindowAndBufferTiles(const u8 *string, void *dst, u8 arg2, u8 arg3, s32 bytesToBuffer);

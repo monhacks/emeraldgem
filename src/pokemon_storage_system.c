@@ -1675,14 +1675,13 @@ static void FieldTask_ReturnToPcMenu(void)
 		gTasks[taskId].tSelectedOption = sPreviousBoxOption;
 		Task_PCMainMenu(taskId);
 		SetVBlankCallback(vblankCb);
-		FadeInFromBlack();
 	}
 	else {
 		ScriptContext2_Disable();
 		EnableBothScriptContexts();
 		SetVBlankCallback(CB2_ReturnToField);
-		FadeInFromBlack();
 	}
+	FadeInFromBlack();
 }
 
 #undef tState

@@ -396,7 +396,6 @@ extern struct Pokemon gPlayerParty[PARTY_SIZE];
 extern u8 gEnemyPartyCount;
 extern struct Pokemon gEnemyParty[PARTY_SIZE];
 extern struct SpriteTemplate gMultiuseSpriteTemplate;
-u8 SendMonToPC(struct Pokemon* mon);
 extern const u16 *const gFormSpeciesIdTables[NUM_SPECIES];
 
 
@@ -436,10 +435,6 @@ void CreateMonWithEVSpreadNatureOTID(struct Pokemon *mon, u16 species, u8 level,
 void ConvertPokemonToBattleTowerPokemon(struct Pokemon *mon, struct BattleTowerPokemon *dest);
 void CreateEventLegalMon(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV, u8 hasFixedPersonality, u32 fixedPersonality, u8 otIdType, u32 fixedOtId);
 bool8 ShouldIgnoreDeoxysForm(u8 caseId, u8 battlerId);
-// <<<<<<< HEAD
-// void SetDeoxysStats(void);
-// =======
-// >>>>>>> 75c4e7dc136d1629d4087f3bc893bb0ff119fd1e
 u16 GetUnionRoomTrainerPic(void);
 u16 GetUnionRoomTrainerClass(void);
 void CreateEventLegalEnemyMon(void);

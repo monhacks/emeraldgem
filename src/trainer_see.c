@@ -199,7 +199,7 @@ bool8 CheckForTrainersWantingBattle(void)
     u8 i;
     u8 numTrainers;
 	
-	#ifdef TX_DEBUGGING //DEBUG
+	#if TX_DEBUG_SYSTEM_ENABLE == TRUE //DEBUG
         if (FlagGet(FLAG_SYS_NO_TRAINER_SEE))
             return FALSE;
     #endif //

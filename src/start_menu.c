@@ -3,7 +3,6 @@
 #include "battle_pyramid.h"
 #include "battle_pyramid_bag.h"
 #include "bg.h"
-#include "debug.h"
 #include "event_data.h"
 #include "event_object_movement.h"
 #include "event_object_lock.h"
@@ -52,6 +51,9 @@
 #include "rtc.h"
 #include "walda_phrase.h"
 #include "naming_screen.h"
+#include "debug.h"
+#include "debug_pokemon_creator.h"
+
 
 // Menu actions
 enum
@@ -328,21 +330,14 @@ static void BuildStartMenuActions(void)
 		{
 			BuildMultiPartnerRoomStartMenu();
 		}
-		#ifdef TX_DEBUGGING
-			if (TX_DEBUG_MENU_OPTION)
-			{
-				BuildDebugStartMenu();
-			}
-			else
-			{
-				BuildNormalStartMenu();
-			}
+		else
+		{
+		#if defined(TX_DEBUG_SYSTEM_ENABLE) && TX_DEBUG_SYSTEM_IN_MENU
+			BuildDebugStartMenu();
 		#else
-			else
-				{
-					BuildNormalStartMenu();
-				}
+			BuildNormalStartMenu();
 		#endif
+		}
 	}
 }
 
@@ -947,7 +942,7 @@ static bool8 StartMenuDebugCallback(void)
     RemoveExtraStartMenuWindows();
     HideStartMenuDebug(); // Hide start menu without enabling movement
 
-    #ifdef TX_DEBUGGING
+    #if TX_DEBUG_SYSTEM_ENABLE == TRUE
         Debug_ShowMainMenu();
     #endif
 

@@ -60,66 +60,6 @@ extern const u32 gBallGfx_Beast[];
 extern const u32 gBallPal_Beast[];
 extern const u32 gBallGfx_Cherish[];
 extern const u32 gBallPal_Cherish[];
-// <<<<<<< HEAD
-// extern const u32 gOpenPokeballGfx[];
-
-// // interface pokeballs
-// extern const u32 gInterfaceGfx_PokeBall[];
-// extern const u32 gInterfacePal_PokeBall[];
-// extern const u32 gInterfaceGfx_GreatBall[];
-// extern const u32 gInterfacePal_GreatBall[];
-// extern const u32 gInterfaceGfx_UltraBall[];
-// extern const u32 gInterfacePal_UltraBall[];
-// extern const u32 gInterfaceGfx_MasterBall[];
-// extern const u32 gInterfacePal_MasterBall[];
-// extern const u32 gInterfaceGfx_PremierBall[];
-// extern const u32 gInterfacePal_PremierBall[];
-// extern const u32 gInterfaceGfx_HealBall[];
-// extern const u32 gInterfacePal_HealBall[];
-// extern const u32 gInterfaceGfx_NetBall[];
-// extern const u32 gInterfacePal_NetBall[];
-// extern const u32 gInterfaceGfx_NestBall[];
-// extern const u32 gInterfacePal_NestBall[];
-// extern const u32 gInterfaceGfx_DiveBall[];
-// extern const u32 gInterfacePal_DiveBall[];
-// extern const u32 gInterfaceGfx_DuskBall[];
-// extern const u32 gInterfacePal_DuskBall[];
-// extern const u32 gInterfaceGfx_TimerBall[];
-// extern const u32 gInterfacePal_TimerBall[];
-// extern const u32 gInterfaceGfx_QuickBall[];
-// extern const u32 gInterfacePal_QuickBall[];
-// extern const u32 gInterfaceGfx_RepeatBall[];
-// extern const u32 gInterfacePal_RepeatBall[];
-// extern const u32 gInterfaceGfx_LuxuryBall[];
-// extern const u32 gInterfacePal_LuxuryBall[];
-// extern const u32 gInterfaceGfx_LevelBall[];
-// extern const u32 gInterfacePal_LevelBall[];
-// extern const u32 gInterfaceGfx_LureBall[];
-// extern const u32 gInterfacePal_LureBall[];
-// extern const u32 gInterfaceGfx_MoonBall[];
-// extern const u32 gInterfacePal_MoonBall[];
-// extern const u32 gInterfaceGfx_FriendBall[];
-// extern const u32 gInterfacePal_FriendBall[];
-// extern const u32 gInterfaceGfx_LoveBall[];
-// extern const u32 gInterfacePal_LoveBall[];
-// extern const u32 gInterfaceGfx_FastBall[];
-// extern const u32 gInterfacePal_FastBall[];
-// extern const u32 gInterfaceGfx_HeavyBall[];
-// extern const u32 gInterfacePal_HeavyBall[];
-// extern const u32 gInterfaceGfx_DreamBall[];
-// extern const u32 gInterfacePal_DreamBall[];
-// extern const u32 gInterfaceGfx_SafariBall[];
-// extern const u32 gInterfacePal_SafariBall[];
-// extern const u32 gInterfaceGfx_SportBall[];
-// extern const u32 gInterfacePal_SportBall[];
-// extern const u32 gInterfaceGfx_ParkBall[];
-// extern const u32 gInterfacePal_ParkBall[];
-// extern const u32 gInterfaceGfx_BeastBall[];
-// extern const u32 gInterfacePal_BeastBall[];
-// extern const u32 gInterfaceGfx_CherishBall[];
-// extern const u32 gInterfacePal_CherishBall[];
-// =======
-// >>>>>>> b5e75a536bb5389ee58b193cf171e23f37533fa3
 extern const u32 gOpenPokeballGfx[];
 
 // pokemon gfx

@@ -974,7 +974,6 @@ u8 ItemId_GetSecondaryId(u16 itemId)
     return gItems[SanitizeItemId(itemId)].secondaryId;
 }
 
-// <<<<<<< HEAD
 bool32 IsPinchBerryItemEffect(u16 holdEffect)
 {
     switch (holdEffect)
@@ -1014,8 +1013,6 @@ bool32 IsPinchBerryItemEffect(u16 holdEffect)
 
      return FALSE;
  }
-// =======
-// >>>>>>> 75c4e7dc136d1629d4087f3bc893bb0ff119fd1e
 u8 ItemId_GetFlingPower(u16 itemId)
 {
     return gItems[SanitizeItemId(itemId)].flingPower;
