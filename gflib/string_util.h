@@ -13,6 +13,8 @@ enum StringConvertMode
     STR_CONV_MODE_LEADING_ZEROS
 };
 
+
+u8 *StringFormat(u8 *dest, u8 num , const u8 *src);
 u8 *StringCopy_Nickname(u8 *dest, const u8 *src);
 u8 *StringGet_Nickname(u8 *str);
 u8 *StringCopy_PlayerName(u8 *dest, const u8 *src);

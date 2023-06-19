@@ -5290,7 +5290,7 @@ const struct Item gItems[] =
     {
         .name = _("Macho Brace"),
         .itemId = ITEM_MACHO_BRACE,
-        .price = 3000,
+        .price = 10000,
         .holdEffect = HOLD_EFFECT_MACHO_BRACE,
         .description = sMachoBraceDesc,
         .pocket = POCKET_ITEMS,

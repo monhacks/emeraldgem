@@ -3,6 +3,7 @@
 .set LOCALID_VIVI, 3
 .set LOCALID_VICKY, 4
 .set LOCALID_ROCK_SMASH_MAN, 46
+.set LOCALID_WALLY, 47
 
 @ Note: LOCALID_ROUTE111_PLAYER_FALLING is a local id for this map used elsewhere. It's defined in event_objects.h
 
@@ -111,6 +112,117 @@ Route111_EventScript_HidePlayerForMirageTower::
 Route111_OnFrame:
 	map_script_2 VAR_MIRAGE_TOWER_STATE, 1, Route111_EventScript_MirageTowerDisappear
 	.2byte 0
+
+Route111_EventScript_Wally::
+	lockall
+	faceplayer
+	applymovement LOCALID_WALLY, Common_Movement_ExclamationMark
+	playse SE_PIN
+	waitmovement 0
+	namebox Wally
+	msgbox Route111_EventScript_Wally_Text_0
+	specialvar VAR_0x8004, GetPlayerFacingDirection
+	compare VAR_0x8004, DIR_SOUTH
+	goto_if_eq Route111_EventScript_Wally_2
+Route111_EventScript_Wally_1:
+	applymovement LOCALID_WALLY, Common_Movement_WalkInPlaceUp
+	waitmovement 0
+	msgbox Route111_EventScript_Wally_Text_1
+	closemessage
+	hidenamebox
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_ExclamationMark
+	playse SE_PIN
+	waitmovement 0
+	faceplayer
+	namebox Wally
+	msgbox Route111_EventScript_Wally_Text_2
+	closemessage
+	hidenamebox
+	applymovement LOCALID_WALLY, Route111_Movement_Wally1
+	waitmovement 0
+	msgbox Route111_EventScript_Wally_Text_3
+	fadeoutbgm 1
+	closemessage
+	hidenamebox
+	playse SE_NOT_EFFECTIVE
+	waitse
+	setvar VAR_0x8004, 1
+	setvar VAR_0x8005, 1
+	setvar VAR_0x8006, 4
+	setvar VAR_0x8007, 2
+	special ShakeCamera
+	waitstate
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_ExclamationMark
+	playse SE_PIN
+	waitmovement 0
+	applymovement OBJ_EVENT_ID_PLAYER, Route111_Movement_PlayerHelp
+	delay 8
+	fadescreen FADE_TO_BLACK
+	waitmovement 0
+	msgbox Route111_EventScript_Wally_Text_4
+	setvar VAR_ROUTE111_STATE, VAR_LAVARIDGE_TOWN_STATE
+	setvar VAR_LAVARIDGE_TOWN_STATE, 5
+	setflag FLAG_HIDE_WALLY_111
+	removeobject LOCALID_WALLY
+	warp MAP_LAVARIDGE_TOWN_GYM_1F, 14, 10
+	waitstate
+	end
+
+Route111_EventScript_Wally_2:
+	applymovement OBJ_EVENT_ID_PLAYER, Route111_Movement_PlayerGetOut
+	waitmovement 0
+	goto Route111_EventScript_Wally_1
+
+
+Route111_Movement_PlayerGetOut:
+	walk_left
+	walk_down
+	delay_8
+	face_right
+	step_end
+
+Route111_Movement_Wally1:
+	walk_up
+	walk_up
+	walk_slow_up
+	walk_slow_up
+	delay_16
+	walk_in_place_up
+	step_end
+
+Route111_Movement_PlayerHelp:
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	step_end
+
+Route111_EventScript_Wally_Text_0:
+	.string "¡{PLAYER}!\n"
+	.string "No esperaba que entendieras donde\l"
+	.string "estaba... ¡Pero me alegra verte aquí!$"
+
+Route111_EventScript_Wally_Text_1:
+	.string "Q{PAUSE 8}uiero... Entrenar en esta misma Ruta,\n"
+	.string "porque -COF, COF-,{PAUSE 25} y{PAUSE 8}o{PAUSE 8} creo que puedo\l"
+	.string "sobreponerme a mi asma. Que puedo\l"
+	.string "vencer a mi enfermedad y lograrlo todo.\l"
+	.string "{PAUSE 25}-COF, COF, COF-\p"
+	.string "Mmmgghh{PAUSE 11}...\l"
+	.string "{PAUSE 11}...$"
+
+Route111_EventScript_Wally_Text_2:
+	.string "No te... {PAUSE 25}-COF-...pre{PAUSE 8}ocupes, {PLAYER}.\n"
+	.string "¡Soy más fuerte de lo que aparento!\l"
+	.string "-COF, COF, COF-...{PAUSE 20}¡Ah...!\p"
+	.string "Eh...{PAUSE 20} Est{PAUSE 11}oy bi{PAUSE 8}en... ¡ESTOY BIEN!$"
+
+Route111_EventScript_Wally_Text_3:
+	.string "¡ESTOY....! {PAUSE 20}Es{PAUSE 8}toy...\n"
+	.string "B-{PAUSE 8}bi-{PAUSE 25}e{PAUSE 5}n...................$"
+
+Route111_EventScript_Wally_Text_4:
+	.string ".{PAUSE 8}.{PAUSE 8}.{PAUSE 8} .{PAUSE 8}.{PAUSE 8}.{PAUSE 8} .{PAUSE 8}.{PAUSE 8}.{PAUSE 8} .{PAUSE 8}.{PAUSE 8}.{PAUSE 8} .{PAUSE 8}.{PAUSE 8}.{PAUSE 8} .{PAUSE 8}.{PAUSE 8}.{PAUSE 8}$"
+	
 
 Route111_EventScript_MirageTowerDisappear::
 	lockall

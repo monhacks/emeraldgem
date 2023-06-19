@@ -289,6 +289,10 @@ static const u8 sText_PkmnTraced[] = _("¡{B_SCR_ACTIVE_NAME_WITH_PREFIX} copió
 static const u8 sText_PkmnsXPreventsBurns[] = _("¡{B_EFF_NAME_WITH_PREFIX} evita la\nquemadura con {B_EFF_ABILITY}!");
 static const u8 sText_PkmnsXPreventsFreeze[] = _("¡{B_EFF_NAME_WITH_PREFIX} evita ser\nhelado con {B_EFF_ABILITY}!");
 static const u8 sText_FreezeDmg[] = _("¡{B_EFF_NAME_WITH_PREFIX} se\nresiente por estar helado!");
+static const u8 sText_ChillinglyBad[] = _("¡{B_ATK_NAME_WITH_PREFIX} se prepara para hacer\nuna mala broma!\p{PAUSE 15}… {PAUSE 5}… {PAUSE 5}… {PAUSE 15}\n{PAUSE 5}… {PAUSE 5}… {PAUSE 5}… {PAUSE 15}\p¡Pero a nadie le dio risa!");
+static const u8 sText_ColdReceptionSnow[] = _("¡Fue tan fríamente recibida,{PAUSE 5} que\ninvocó un granizo!{PAUSE 15}");
+static const u8 sText_ColdReceptionSnowFail[] = _("¡Fue muy fríamente recibida,{PAUSE 5} pero no\nlo suficiente como para invocar granizo!{PAUSE 15}");
+static const u8 sText_SwitchesInEmbarrassment[] = _("{B_ATK_NAME_WITH_PREFIX} vuelve con {B_PLAYER_NAME}\npor la vergüenza……{PAUSE 15}");
 static const u8 sText_PkmnsXBlocksY[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_DEF_ABILITY}\nblocks {B_CURRENT_MOVE}!");
 static const u8 sText_PkmnsXBlocksY2[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\nblocks {B_CURRENT_MOVE}!");
 static const u8 sText_PkmnsXRestoredHPALittle2[] = _("{B_ATK_NAME_WITH_PREFIX}'s {B_ATK_ABILITY}\nrestored its HP a little!");
@@ -1387,6 +1391,10 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
     [STRINGID_TARGETTOOHEAVY - BATTLESTRINGS_TABLE_START] = sText_TargetTooHeavy,
     [STRINGID_PKMNSXPREVENTSFREEZE - BATTLESTRINGS_TABLE_START] = sText_PkmnsXPreventsFreeze,
     [STRINGID_FREEZEDMG - BATTLESTRINGS_TABLE_START] = sText_FreezeDmg,
+    [STRINGID_PREPARINGCHILLINGJOKE - BATTLESTRINGS_TABLE_START] = sText_ChillinglyBad,
+    [STRINGID_THECOLDRECEPTIONMADEITSNOW - BATTLESTRINGS_TABLE_START] = sText_ColdReceptionSnow,
+    [STRINGID_BUTITFAILEDTOSNOW - BATTLESTRINGS_TABLE_START] = sText_ColdReceptionSnowFail,
+    [STRINGID_PKMNSWITCHESOUTINEMBARRASSMENT - BATTLESTRINGS_TABLE_START] = sText_SwitchesInEmbarrassment,
 	[STRINGID_PLAYERLOSTTOENEMYTRAINER - BATTLESTRINGS_TABLE_START] = sText_PlayerLostToEnemyTrainer,
 };
 
@@ -1490,6 +1498,16 @@ const u16 gMoveWeatherChangeStringIds[] =
     [B_MSG_STARTED_SANDSTORM] = STRINGID_SANDSTORMBREWED,
     [B_MSG_STARTED_SUNLIGHT]  = STRINGID_SUNLIGHTGOTBRIGHT,
     [B_MSG_STARTED_HAIL]      = STRINGID_STARTEDHAIL,
+};
+
+const u16 gMoveWeatherChangeChillyReceptionStringIds[] =
+{
+    [B_MSG_STARTED_RAIN]      = STRINGID_STARTEDTORAIN,
+    [B_MSG_STARTED_DOWNPOUR]  = STRINGID_DOWNPOURSTARTED, // Unused
+    [B_MSG_WEATHER_FAILED]    = STRINGID_BUTITFAILEDTOSNOW,
+    [B_MSG_STARTED_SANDSTORM] = STRINGID_SANDSTORMBREWED,
+    [B_MSG_STARTED_SUNLIGHT]  = STRINGID_SUNLIGHTGOTBRIGHT,
+    [B_MSG_STARTED_HAIL]      = STRINGID_THECOLDRECEPTIONMADEITSNOW,
 };
 
 const u16 gSandStormHailContinuesStringIds[] =

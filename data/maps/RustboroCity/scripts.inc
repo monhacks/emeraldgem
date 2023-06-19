@@ -182,10 +182,12 @@ RustboroCity_EventScript_Wally2::
 	msgbox RustboroCity_Text_WallyExcited
 	hidenamebox
 	closemessage
+	setvar VAR_ROUTE111_STATE, 3
 	fadescreen FADE_TO_BLACK
 	delay 16
 	removeobject LOCALID_WALLY
 	setflag FLAG_HIDE_WALLY_RUSTBORO
+	clearflag FLAG_HIDE_WALLY_111
 	delay 8
 	fadescreen FADE_FROM_BLACK
 	delay 16

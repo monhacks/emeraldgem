@@ -1961,13 +1961,22 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
                 personalityValue = 0x88;
                 gender = MON_FEMALE;
             }
-
-            if (partyData[i].nature > 0)
-                CreateMonWithGenderNatureLetter(&party[i], partyData[i].species, partyData[i].lvl, fixedIV, gender, partyData[i].nature, 0, partyData[i].shiny ? OT_ID_SHINY : OT_ID_RANDOM_NO_SHINY);
-            else
-            {
-                CreateMon(&party[i], partyData[i].species, partyData[i].lvl, fixedIV, TRUE, personalityValue, partyData[i].shiny ? OT_ID_SHINY : OT_ID_RANDOM_NO_SHINY, 0);
-            }
+			if (VarGet(VAR_LEVEL_FOR_TRAINING) >= 20){
+				if (partyData[i].nature > 0)
+					CreateMonWithGenderNatureLetter(&party[i], partyData[i].species, partyData[i].lvl + VarGet(VAR_LEVEL_FOR_TRAINING), fixedIV, gender, partyData[i].nature, 0, partyData[i].shiny ? OT_ID_SHINY : OT_ID_RANDOM_NO_SHINY);
+				else
+				{
+					CreateMon(&party[i], partyData[i].species, partyData[i].lvl + VarGet(VAR_LEVEL_FOR_TRAINING), fixedIV, TRUE, personalityValue, partyData[i].shiny ? OT_ID_SHINY : OT_ID_RANDOM_NO_SHINY, 0);
+				}
+			}
+			else {
+				if (partyData[i].nature > 0)
+					CreateMonWithGenderNatureLetter(&party[i], partyData[i].species, partyData[i].lvl, fixedIV, gender, partyData[i].nature, 0, partyData[i].shiny ? OT_ID_SHINY : OT_ID_RANDOM_NO_SHINY);
+				else
+				{
+					CreateMon(&party[i], partyData[i].species, partyData[i].lvl, fixedIV, TRUE, personalityValue, partyData[i].shiny ? OT_ID_SHINY : OT_ID_RANDOM_NO_SHINY, 0);
+				}
+			}
 
             if (partyData[i].friendship > 0)
             {

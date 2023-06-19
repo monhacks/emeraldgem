@@ -332,6 +332,7 @@ static const u16 sEncouragedEncoreEffects[] =
     EFFECT_SPIT_UP,
     EFFECT_SWALLOW,
     EFFECT_HAIL,
+	EFFECT_BADDY_BAD,
     EFFECT_TORMENT,
     EFFECT_WILL_O_WISP,
     EFFECT_FOLLOW_ME,

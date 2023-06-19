@@ -7,6 +7,12 @@
 
 #define MULTI_B_PRESSED  127
 
+// Dynamic Multichoice Callbacks
+
+#define DYN_MULTICHOICE_CB_DEBUG      0
+#define DYN_MULTICHOICE_CB_SHOW_ITEM  1
+#define DYN_MULTICHOICE_CB_NONE       255
+
 // Multichoice Ids
 #define MULTI_BRINEY_ON_DEWFORD            0
 #define MULTI_PC                           1 // Exit only, populated by CreatePCMultichoice

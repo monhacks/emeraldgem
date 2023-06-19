@@ -247,19 +247,6 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_SCHOOL_KID_M",
-      "x": 28,
-      "y": 8,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_UP",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NORMAL",
-      "trainer_sight_or_berry_tree_id": "4",
-      "script": "Route116_EventScript_Jerry",
-      "flag": "0"
-    },
-    {
       "graphics_id": "OBJ_EVENT_GFX_MAN_2",
       "x": 46,
       "y": 11,
@@ -396,35 +383,35 @@
       "y": 8,
       "elevation": 0,
       "dest_map": "MAP_RUSTURF_TUNNEL",
-      "dest_warp_id": "0"
+      "dest_warp_id": 0
     },
     {
       "x": 38,
       "y": 8,
       "elevation": 0,
       "dest_map": "MAP_ROUTE116_TUNNELERS_REST_HOUSE",
-      "dest_warp_id": "0"
+      "dest_warp_id": 0
     },
     {
       "x": 65,
       "y": 10,
       "elevation": 0,
       "dest_map": "MAP_RUSTURF_TUNNEL",
-      "dest_warp_id": "2"
+      "dest_warp_id": 2
     },
     {
       "x": 59,
       "y": 13,
       "elevation": 0,
       "dest_map": "MAP_TERRA_CAVE_ENTRANCE",
-      "dest_warp_id": "0"
+      "dest_warp_id": 0
     },
     {
       "x": 79,
       "y": 6,
       "elevation": 0,
       "dest_map": "MAP_TERRA_CAVE_ENTRANCE",
-      "dest_warp_id": "0"
+      "dest_warp_id": 0
     }
   ],
   "coord_events": [

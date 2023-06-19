@@ -806,6 +806,7 @@ gBattleAnims_Moves::
 	.4byte Move_LUNAR_BLESSING
 	.4byte Move_TAKE_HEART
 	.4byte Move_HYPERDRILL
+	.4byte Move_CHILLY_RECEPTION
 @@@@ Z MOVES
 	.4byte Move_BREAKNECK_BLITZ
 	.4byte Move_ALL_OUT_PUMMELING
@@ -6451,6 +6452,9 @@ Move_DRILL_RUN:
 	waitforvisualfinish
 	call UnsetPsychicBg
 	end
+
+Move_CHILLY_RECEPTION:
+	goto General_Hail
 
 Move_HYPERDRILL:
 	loadspritegfx ANIM_TAG_IMPACT

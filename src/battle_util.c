@@ -1944,19 +1944,19 @@ u8 TrySetCantSelectMoveBattleScript(void)
         }
     }
 
-    if (gBattleMoves[move].effect == EFFECT_PLACEHOLDER)
-    {
-        if (gBattleTypeFlags & BATTLE_TYPE_PALACE)
-        {
-            gPalaceSelectionBattleScripts[gActiveBattler] = BattleScript_SelectingNotAllowedPlaceholderInPalace;
-            gProtectStructs[gActiveBattler].palaceUnableToUseMove = TRUE;
-        }
-        else
-        {
-            gSelectionBattleScripts[gActiveBattler] = BattleScript_SelectingNotAllowedPlaceholder;
-            limitations++;
-        }
-    }
+    // if (gBattleMoves[move].effect == EFFECT_PLACEHOLDER)
+    // {
+        // if (gBattleTypeFlags & BATTLE_TYPE_PALACE)
+        // {
+            // gPalaceSelectionBattleScripts[gActiveBattler] = BattleScript_SelectingNotAllowedPlaceholderInPalace;
+            // gProtectStructs[gActiveBattler].palaceUnableToUseMove = TRUE;
+        // }
+        // else
+        // {
+            // gSelectionBattleScripts[gActiveBattler] = BattleScript_SelectingNotAllowedPlaceholder;
+            // limitations++;
+        // }
+    // }
 
     return limitations;
 }
@@ -8868,6 +8868,14 @@ static u32 CalcAttackStat(u16 move, u8 battlerAtk, u8 battlerDef, u8 moveType, b
                 RecordAbilityBattle(battlerDef, ABILITY_THICK_FAT);
         }
         break;
+	case ABILITY_MAGMA_ARMOR:
+		if (moveType == TYPE_WATER || moveType == TYPE_ICE)
+        {
+            MulModifier(&modifier, UQ_4_12(0.5));
+            if (updateFlags)
+                RecordAbilityBattle(battlerDef, ABILITY_MAGMA_ARMOR);
+        }
+        break;
     case ABILITY_ICE_SCALES:
         if (IS_MOVE_SPECIAL(move))
             MulModifier(&modifier, UQ_4_12(0.5));
@@ -8911,12 +8919,12 @@ static u32 CalcAttackStat(u16 move, u8 battlerAtk, u8 battlerDef, u8 moveType, b
         break;
     }
 
-    // The offensive stats of a Player's Pokémon are boosted by x1.1 (+10%) if they have the 1st badge and 7th badges.
-    // Having the 1st badge boosts physical attack while having the 7th badge boosts special attack.
-    if (ShouldGetStatBadgeBoost(FLAG_BADGE01_GET, battlerAtk) && IS_MOVE_PHYSICAL(move))
-        MulModifier(&modifier, UQ_4_12(1.1));
-    if (ShouldGetStatBadgeBoost(FLAG_BADGE07_GET, battlerAtk) && IS_MOVE_SPECIAL(move))
-        MulModifier(&modifier, UQ_4_12(1.1));
+    // // The offensive stats of a Player's Pokémon are boosted by x1.1 (+10%) if they have the 1st badge and 7th badges.
+    // // Having the 1st badge boosts physical attack while having the 7th badge boosts special attack.
+    // if (ShouldGetStatBadgeBoost(FLAG_BADGE01_GET, battlerAtk) && IS_MOVE_PHYSICAL(move))
+        // MulModifier(&modifier, UQ_4_12(1.1));
+    // if (ShouldGetStatBadgeBoost(FLAG_BADGE07_GET, battlerAtk) && IS_MOVE_SPECIAL(move))
+        // MulModifier(&modifier, UQ_4_12(1.1));
 
     return ApplyModifier(modifier, atkStat);
 }
@@ -9176,6 +9184,10 @@ static u32 CalcFinalDmg(u32 dmg, u16 move, u8 battlerAtk, u8 battlerDef, u8 move
     // target's abilities
     switch (abilityDef)
     {
+	case ABILITY_TRUANT:
+		if (gDisableStructs[gBattlerAttacker].truantCounter != 0){
+			MulModifier(&finalModifier, UQ_4_12(0.5));
+		}
     case ABILITY_MULTISCALE:
     case ABILITY_SHADOW_SHIELD:
         if (BATTLER_MAX_HP(battlerDef))

@@ -79,7 +79,7 @@ static EWRAM_DATA u8 sTutorMoveAndElevatorWindowId = 0;
 static EWRAM_DATA u16 sLilycoveDeptStore_NeverRead = 0;
 static EWRAM_DATA u16 sLilycoveDeptStore_DefaultFloorChoice = 0;
 static EWRAM_DATA struct ListMenuItem *sScrollableMultichoice_ListMenuItem = NULL;
-static EWRAM_DATA u16 sScrollableMultichoice_ScrollOffset = 0;
+// static EWRAM_DATA u16 gScrollableMultichoice_ScrollOffset = 0;
 static EWRAM_DATA u16 sFrontierExchangeCorner_NeverRead = 0;
 static EWRAM_DATA u8 sScrollableMultichoice_ItemSpriteId = 0;
 static EWRAM_DATA u8 sBattlePointsWindowId = 0;
@@ -88,6 +88,7 @@ static EWRAM_DATA u8 sPCBoxToSendMon = 0;
 static EWRAM_DATA u32 sBattleTowerMultiBattleTypeFlags = 0;
 
 struct ListMenuTemplate gScrollableMultichoice_ListMenuTemplate;
+EWRAM_DATA u16 gScrollableMultichoice_ScrollOffset = 0;
 
 void TryLoseFansFromPlayTime(void);
 void SetPlayerGotFirstFans(void);
@@ -2484,7 +2485,7 @@ static void Task_ShowScrollableMultichoice(u8 taskId)
     struct Task *task = &gTasks[taskId];
 
     LockPlayerFieldControls();
-    sScrollableMultichoice_ScrollOffset = 0;
+    gScrollableMultichoice_ScrollOffset = 0;
     sScrollableMultichoice_ItemSpriteId = MAX_SPRITES;
     FillFrontierExchangeCornerWindowAndItemIcon(task->tScrollMultiId, 0);
     ShowBattleFrontierTutorWindow(task->tScrollMultiId, 0);
@@ -2558,7 +2559,7 @@ static void ScrollableMultichoice_MoveCursor(s32 itemIndex, bool8 onInit, struct
         u16 selection;
         struct Task *task = &gTasks[taskId];
         ListMenuGetScrollAndRow(task->tListTaskId, &selection, NULL);
-        sScrollableMultichoice_ScrollOffset = selection;
+        gScrollableMultichoice_ScrollOffset = selection;
         ListMenuGetCurrentItemArrayId(task->tListTaskId, &selection);
         HideFrontierExchangeCornerItemIcon(task->tScrollMultiId, sFrontierExchangeCorner_NeverRead);
         FillFrontierExchangeCornerWindowAndItemIcon(task->tScrollMultiId, selection);
@@ -2679,7 +2680,7 @@ static void ScrollableMultichoice_UpdateScrollArrows(u8 taskId)
         template.secondY = task->tHeight * 8 + 10;
         template.fullyUpThreshold = 0;
         template.fullyDownThreshold = task->data[1] - task->tMaxItemsOnScreen;
-        task->tScrollArrowId = AddScrollIndicatorArrowPair(&template, &sScrollableMultichoice_ScrollOffset);
+        task->tScrollArrowId = AddScrollIndicatorArrowPair(&template, &gScrollableMultichoice_ScrollOffset);
     }
 }
 
@@ -4284,4 +4285,105 @@ bool8 CheckForRegielekiPuzzle(void) {
 	}
 		gSpecialVar_Result = FALSE;
 		return gSpecialVar_Result;
+}
+
+
+// Stores the chosen Pokémon's HP, DEF and SP. DEF IVs in the Buffers 1, 2 and 3.
+void RyuIvCheckerDef(void)
+{
+    u8 HpIv = 0;
+    u8 DefIv = 0;
+    u8 SpDefIv = 0;
+    HpIv = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_HP_IV);
+    DefIv = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_DEF_IV);
+    SpDefIv = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPDEF_IV);
+    ConvertIntToDecimalStringN(gStringVar1, HpIv, STR_CONV_MODE_LEADING_ZEROS, 2);
+    ConvertIntToDecimalStringN(gStringVar2, DefIv, STR_CONV_MODE_LEADING_ZEROS, 2);
+    ConvertIntToDecimalStringN(gStringVar3, SpDefIv, STR_CONV_MODE_LEADING_ZEROS, 2);
+}
+
+// Stores the chosen Pokémon's ATK, SPD and SP. ATK IVs in the Buffers 1, 2 and 3.
+void RyuIvCheckerOff(void)
+{
+    u8 AtkIv = 0;
+    u8 SpAtkIv = 0;
+    u8 SpeIv = 0;
+    AtkIv = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_ATK_IV);
+    SpAtkIv = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPATK_IV);
+    SpeIv = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPEED_IV);
+    ConvertIntToDecimalStringN(gStringVar1, AtkIv, STR_CONV_MODE_LEADING_ZEROS, 2);
+    ConvertIntToDecimalStringN(gStringVar2, SpAtkIv, STR_CONV_MODE_LEADING_ZEROS, 2);
+    ConvertIntToDecimalStringN(gStringVar3, SpeIv, STR_CONV_MODE_LEADING_ZEROS, 2);
+}
+
+// Stores the chosen Pokémon's HP, DEF and SP. DEF EVs in the Buffers 1, 2 and 3.
+void RyuEvCheckerDef(void)
+{
+    u8 HpEv = 0;
+    u8 DefEv = 0;
+    u8 SpDefEv = 0;
+    HpEv = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_HP_EV);
+    DefEv = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_DEF_EV);
+    SpDefEv = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPDEF_EV);
+    ConvertIntToDecimalStringN(gStringVar1, HpEv, STR_CONV_MODE_LEADING_ZEROS, 3);
+    ConvertIntToDecimalStringN(gStringVar2, DefEv, STR_CONV_MODE_LEADING_ZEROS, 3);
+    ConvertIntToDecimalStringN(gStringVar3, SpDefEv, STR_CONV_MODE_LEADING_ZEROS, 3);
+}
+
+// Stores the chosen Pokémon's ATK, SPD and SP. ATK EVs in the Buffers 1, 2 and 3.
+void RyuEvCheckerOff(void)
+{
+    u8 AtkEv = 0;
+    u8 SpAtkEv = 0;
+    u8 SpeEv = 0;
+    AtkEv = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_ATK_EV);
+    SpAtkEv = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPATK_EV);
+    SpeEv = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPEED_EV);
+    ConvertIntToDecimalStringN(gStringVar1, AtkEv, STR_CONV_MODE_LEADING_ZEROS, 3);
+    ConvertIntToDecimalStringN(gStringVar2, SpAtkEv, STR_CONV_MODE_LEADING_ZEROS, 3);
+    ConvertIntToDecimalStringN(gStringVar3, SpeEv, STR_CONV_MODE_LEADING_ZEROS, 3);
+}
+
+// Sets the EVs of a chosen Pokémon's 6 stats to 0.
+void RyuResetEvs(void)
+{
+    u8 ev = 0;
+    PlaySE(SE_EXP_MAX);
+    SetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_HP_EV, &ev);
+    SetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_ATK_EV, &ev);
+    SetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_DEF_EV, &ev);
+    SetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPATK_EV, &ev);
+    SetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPDEF_EV, &ev);
+    SetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPEED_EV, &ev);
+}
+
+void RyuSetIvsBad(void)
+{
+	u32 iv;
+	s32 j;
+    PlaySE(SE_EXP_MAX);
+	for (j = 0; j < NUM_STATS; j++){
+		iv = WORST_IV_SPREAD[gSpecialVar_0x8006][j];
+		SetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_HP_IV + j, &iv);
+	}
+}
+void RyuSetIvsMedium(void)
+{
+	u32 iv;
+	s32 j;	
+    PlaySE(SE_EXP_MAX);
+	for (j = 0; j < NUM_STATS; j++){
+		iv = PASSABLE_IV_SPREAD[gSpecialVar_0x8006][j];
+		SetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_HP_IV + j, &iv);
+	}
+}
+void RyuSetIvsPerfect(void)
+{
+	u32 iv;
+	s32 j;
+    PlaySE(SE_EXP_MAX);
+	for (j = 0; j < NUM_STATS; j++){
+		iv = BEST_IV_SPREAD[gSpecialVar_0x8006][j];
+		SetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_HP_IV + j, &iv);
+	}
 }

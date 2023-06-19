@@ -3609,19 +3609,14 @@ const struct Trainer gTrainers[] = {
 
     [TRAINER_JERRY_1] =
     {
-        .trainerClass = TRAINER_CLASS_SCHOOL_KID,
+        .trainerClass = TRAINER_CLASS_PKMN_TRAINER_1,
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MALE,
-        .trainerPic = TRAINER_PIC_SCHOOL_KID_M,
-        .trainerName = _("JERRY"),
+        .trainerPic = TRAINER_PIC_BLACK_BELT,
+        .trainerName = _("Ángel"),
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
-
-        ////.partySize = ARRAY_COUNT(sParty_Jerry1),
         .party = ITEM_CUSTOM_MOVES(sParty_Jerry1),
-
-        //.party = ITEM_CUSTOM_MOVES(sParty_Jerry1),
-
     },
 
     [TRAINER_TED] =
@@ -3660,69 +3655,50 @@ const struct Trainer gTrainers[] = {
 
     [TRAINER_JERRY_2] =
     {
-        .trainerClass = TRAINER_CLASS_SCHOOL_KID,
+        .trainerClass = TRAINER_CLASS_PKMN_TRAINER_1,
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MALE,
-        .trainerPic = TRAINER_PIC_SCHOOL_KID_M,
-        .trainerName = _("JERRY"),
+        .trainerPic = TRAINER_PIC_BLACK_BELT,
+        .trainerName = _("Ángel"),
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
-
-        ////.partySize = ARRAY_COUNT(sParty_Jerry2),
         .party = ITEM_CUSTOM_MOVES(sParty_Jerry2),
-
-        //.party = ITEM_CUSTOM_MOVES(sParty_Jerry2),
-
     },
 
     [TRAINER_JERRY_3] =
     {
-        .trainerClass = TRAINER_CLASS_SCHOOL_KID,
+		.trainerClass = TRAINER_CLASS_PKMN_TRAINER_1,
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MALE,
-        .trainerPic = TRAINER_PIC_SCHOOL_KID_M,
-        .trainerName = _("JERRY"),
+        .trainerPic = TRAINER_PIC_BLACK_BELT,
+        .trainerName = _("Ángel"),
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
-
-        ////.partySize = ARRAY_COUNT(sParty_Jerry3),
         .party = ITEM_CUSTOM_MOVES(sParty_Jerry3),
-
-        //.party = ITEM_CUSTOM_MOVES(sParty_Jerry3),
-
     },
 
     [TRAINER_JERRY_4] =
     {
-        .trainerClass = TRAINER_CLASS_SCHOOL_KID,
+		.trainerClass = TRAINER_CLASS_PKMN_TRAINER_1,
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MALE,
-        .trainerPic = TRAINER_PIC_SCHOOL_KID_M,
-        .trainerName = _("JERRY"),
+        .trainerPic = TRAINER_PIC_BLACK_BELT,
+        .trainerName = _("Ángel"),
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
-
-        ////.partySize = ARRAY_COUNT(sParty_Jerry4),
         .party = ITEM_CUSTOM_MOVES(sParty_Jerry4),
-
-        //.party = ITEM_CUSTOM_MOVES(sParty_Jerry4),
-
     },
 
     [TRAINER_JERRY_5] =
     {
-        .trainerClass = TRAINER_CLASS_SCHOOL_KID,
+		.trainerClass = TRAINER_CLASS_PKMN_TRAINER_1,
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MALE,
-        .trainerPic = TRAINER_PIC_SCHOOL_KID_M,
-        .trainerName = _("JERRY"),
+        .trainerPic = TRAINER_PIC_BLACK_BELT,
+        .trainerName = _("Ángel"),
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
-
-        ////.partySize = ARRAY_COUNT(sParty_Jerry5),
         .party = ITEM_CUSTOM_MOVES(sParty_Jerry5),
-
-        //.party = ITEM_CUSTOM_MOVES(sParty_Jerry5),
 
     },
 
@@ -9389,19 +9365,14 @@ const struct Trainer gTrainers[] = {
 
     [TRAINER_ANDREA] =
     {
-        .trainerClass = TRAINER_CLASS_LASS,
-        .encounterMusic_gender = F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE,
-        .trainerPic = TRAINER_PIC_LASS,
-        .trainerName = _("ANDREA"),
+        .trainerClass = TRAINER_CLASS_PKMN_TRAINER_1,
+        .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MALE,
+        .trainerPic = TRAINER_PIC_BLACK_BELT,
+        .trainerName = _("Ángel"),
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
-
-        ////.partySize = ARRAY_COUNT(sParty_Andrea},
         .party = ITEM_CUSTOM_MOVES(sParty_Andrea),
-
-        //.party = ITEM_CUSTOM_MOVES(sParty_Andrea),
-
     },
 
     [TRAINER_CRISSY] =

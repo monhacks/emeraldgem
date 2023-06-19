@@ -3043,8 +3043,12 @@ static const u8 sTakeHeartDescription[] = _(
     "heal and strengthen itself.");
 
 static const u8 sHyperDrillDescription[] = _(
-    "Ataca con su taladro, e ignora\n"
+    "Ataca con su taladro, y rompe\n"
     "la Protección del rival.");
+
+static const u8 sChillyReceptionDescription[] = _(
+    "No es bien recibido, por lo que\n"
+    "invoca el granizo y regresa.");
 
 const u8 gNotDoneYetDescription[] = _(
     "This move can't be used. Its\n"
@@ -3836,4 +3840,5 @@ const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] =
     [MOVE_LUNAR_BLESSING - 1] = sLunarBlessingDescription,
     [MOVE_TAKE_HEART - 1] = sTakeHeartDescription,
     [MOVE_HYPERDRILL - 1] = sHyperDrillDescription,
+    [MOVE_CHILLY_RECEPTION - 1] = sChillyReceptionDescription,
 };

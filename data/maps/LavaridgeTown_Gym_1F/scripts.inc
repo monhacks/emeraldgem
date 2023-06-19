@@ -110,10 +110,33 @@ LavaridgeTown_Gym_1F_EventScript_Cole::
 
 LavaridgeTown_Gym_EventScript_CheckTrainerScript::
 	call LavaridgeTown_Gym_1F_EventScript_SetTrainerTempVars
+	switch VAR_LAST_TALKED
+	case 4, LavaridgeTown_Gym_1F_EventScript_MoveUp4
+	case 5, LavaridgeTown_Gym_1F_EventScript_MoveUp5
+	goto LavaridgeTown_Gym_EventScript_CheckTrainerScript2
+	
+LavaridgeTown_Gym_EventScript_CheckTrainerScript2::
 	release
 	special ShouldTryGetTrainerScript
 	goto_if_eq VAR_RESULT, 1, EventScript_GotoTrainerScript
 	end
+
+LavaridgeTown_Gym_1F_EventScript_MoveUp4::
+	applymovement VAR_LAST_TALKED, LavaridgeTown_Gym_1F_Movement_Up
+	waitmovement 0
+	setobjectxyperm VAR_LAST_TALKED, 3, 9
+	goto LavaridgeTown_Gym_EventScript_CheckTrainerScript2
+
+LavaridgeTown_Gym_1F_EventScript_MoveUp5::
+	applymovement VAR_LAST_TALKED, LavaridgeTown_Gym_1F_Movement_Up
+	waitmovement 0
+	setobjectxyperm VAR_LAST_TALKED, 5, 1
+	goto LavaridgeTown_Gym_EventScript_CheckTrainerScript2
+
+LavaridgeTown_Gym_1F_Movement_Up::
+	walk_up
+	face_down
+	step_end
 
 LavaridgeTown_Gym_1F_EventScript_Axle::
 	trainerbattle TRAINER_BATTLE_CONTINUE_SCRIPT, TRAINER_AXLE, LOCALID_AXLE, LavaridgeTown_Gym_1F_Text_AxleIntro, LavaridgeTown_Gym_1F_Text_AxleDefeat, LavaridgeTown_Gym_EventScript_CheckTrainerScript

@@ -48,7 +48,7 @@
 #define FLAG_SHINY_CREATION    0x24
 #define FLAG_POKEMONPCMENU    0x25
 #define FLAG_HIDE_WALLY_RUSTBORO  	  0x26// unused flag
-#define FLAG_UNUSED_0x27    0x27// unused flag
+#define FLAG_HIDE_WALLY_111    0x27// unused flag
 #define FLAG_SYS_NO_COLLISION    0x28
 #define FLAG_SYS_NO_ENCOUNTER    0x29
 #define FLAG_SYS_NO_TRAINER_SEE    0x2A
@@ -76,9 +76,9 @@
 #define FLAG_SECONDMART    0x40
 #define FLAG_WISH_1    0x41
 #define FLAG_BALL_CATCH_102    0x42
-#define FLAG_UNUSED_0x43    0x43
-#define FLAG_UNUSED_0x44    0x44
-#define FLAG_UNUSED_0x45    0x45
+#define FLAG_TALKED_EVMAN    0x43
+#define FLAG_TALKED_TRAININGMAN    0x44
+#define FLAG_GOTTEN_EV_TRAINING    0x45
 #define FLAG_UNUSED_0x46    0x46
 #define FLAG_UNUSED_0x47    0x47
 #define FLAG_HIDE_JIRACHI    0x48

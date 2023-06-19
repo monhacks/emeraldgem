@@ -3754,7 +3754,7 @@ static const struct TrainerMon sParty_Wattson1[] = {
     },
     {
     .iv = 220,
-    .lvl = 25,
+    .lvl = 24,
     .species = SPECIES_MAGNETON,
 	.ability = ABILITY_SLOT_1,
     .heldItem = ITEM_STEEL_GEM,
@@ -3765,7 +3765,7 @@ static const struct TrainerMon sParty_Wattson1[] = {
     },
     {
     .iv = 250,
-    .lvl = 26,
+    .lvl = 25,
     .species = SPECIES_MANECTRIC,
     .heldItem = ITEM_ELECTRIC_GEM,
 	.ability = ABILITY_SLOT_1,
@@ -3779,25 +3779,25 @@ static const struct TrainerMon sParty_Wattson1[] = {
 static const struct TrainerMon sParty_Flannery1[] = {
     {
     .iv = 200,
-    .lvl = 27,
+    .lvl = 31,
     .species = SPECIES_LAMPENT,
 	.ability = ABILITY_SLOT_1,
     .heldItem = ITEM_FIRE_GEM,
 	.build = TRAINER_MON_SPEED_SPEC,
 	.difficulty = TRAINER_HARDER,
 	.ball = ITEM_ULTRA_BALL,
-    .moves = {MOVE_OVERHEAT, MOVE_SHADOW_BALL, MOVE_WILL_O_WISP, MOVE_HEX}
+    .moves = {MOVE_OVERHEAT, MOVE_ENERGY_BALL, MOVE_WILL_O_WISP, MOVE_HEX}
     },
     {
     .iv = 200,
-    .lvl = 27,
+    .lvl = 31,
     .species = SPECIES_MAGMORTAR,
 	.ability = ABILITY_SLOT_1,
     .heldItem = ITEM_FIRE_GEM,
 	.build = TRAINER_MON_SPEED_PHYS,
 	.difficulty = TRAINER_HARDER,
 	.ball = ITEM_ULTRA_BALL,
-    .moves = {MOVE_OVERHEAT, MOVE_SOLAR_BEAM, MOVE_EARTHQUAKE, MOVE_SUNNY_DAY}
+    .moves = {MOVE_OVERHEAT, MOVE_SOLAR_BEAM, MOVE_EARTH_POWER, MOVE_THUNDERBOLT}
     },
     {
     .iv = 250,
@@ -3808,58 +3808,58 @@ static const struct TrainerMon sParty_Flannery1[] = {
 	.build = TRAINER_MON_HP_SPDEF,
 	.difficulty = TRAINER_HARDER,
 	.ball = ITEM_ULTRA_BALL,
-    .moves = {MOVE_OVERHEAT, MOVE_SOLAR_BEAM, MOVE_PROTECT, MOVE_ATTRACT}
+    .moves = {MOVE_OVERHEAT, MOVE_SOLAR_BEAM, MOVE_PROTECT, MOVE_BODY_PRESS}
     },
     {
     .iv = 250,
-    .lvl = 32,
+    .lvl = 33,
     .species = SPECIES_CAMERUPT,
-	.ability = ABILITY_SLOT_2,
+	.ability = ABILITY_HIDDEN,
     .heldItem = ITEM_CAMERUPTITE,
 	.build = TRAINER_MON_HP_SPDEF,
 	.difficulty = TRAINER_HARDER,
 	.ball = ITEM_ULTRA_BALL,
-    .moves = {MOVE_OVERHEAT, MOVE_EARTHQUAKE, MOVE_SOLAR_BEAM, MOVE_ATTRACT}
+    .moves = {MOVE_OVERHEAT, MOVE_EARTH_POWER, MOVE_SOLAR_BEAM, MOVE_ATTRACT}
     },
 };
 
 static const struct TrainerMon sParty_Norman1[] = {
     {
     .iv = 200,
-    .lvl = 33,
-    .species = SPECIES_SPINDA,
+    .lvl = 39,
+    .species = SPECIES_DUNSPARCE,
 	.ability = ABILITY_SLOT_1,
-    .heldItem = ITEM_LEFTOVERS,
+    .heldItem = ITEM_EVIOLITE,
 	.build = TRAINER_MON_HP_DEF,
-	.difficulty = TRAINER_HARDER,
+	.difficulty = TRAINER_HARDEST,
 	.ball = ITEM_ULTRA_BALL,
-    .moves = {MOVE_TEETER_DANCE, MOVE_PSYCHIC, MOVE_FACADE, MOVE_ENCORE}
+    .moves = {MOVE_COIL, MOVE_HYPERDRILL, MOVE_FACADE, MOVE_ZEN_HEADBUTT}
     },
     {
     .iv = 200,
-    .lvl = 34,
-    .species = SPECIES_VIGOROTH,
+    .lvl = 39,
+    .species = SPECIES_DUDUNSPARCE,
 	.ability = ABILITY_SLOT_1,
     .heldItem = ITEM_SITRUS_BERRY,
 	.build = TRAINER_MON_SPEED_PHYS,
-	.difficulty = TRAINER_HARDER,
+	.difficulty = TRAINER_HARDEST,
 	.ball = ITEM_ULTRA_BALL,
-    .moves = {MOVE_SLASH, MOVE_FACADE, MOVE_ENCORE, MOVE_KNOCK_OFF}
+    .moves = {MOVE_HYPERDRILL, MOVE_FACADE, MOVE_COIL, MOVE_ROOST}
     },
     {
     .iv = 200,
-    .lvl = 35,
+    .lvl = 39,
     .species = SPECIES_STOUTLAND,
 	.ability = ABILITY_SLOT_1,
     .heldItem = ITEM_LEFTOVERS,
 	.build = TRAINER_MON_HP_DEF,
-	.difficulty = TRAINER_HARDER,
+	.difficulty = TRAINER_HARDEST,
 	.ball = ITEM_FRIEND_BALL,
     .moves = {MOVE_CRUNCH, MOVE_FACADE, MOVE_EARTHQUAKE, MOVE_BABY_DOLL_EYES}
     },
     {
     .iv = 200,
-    .lvl = 36,
+    .lvl = 39,
     .species = SPECIES_OBSTAGOON,
 	.ability = ABILITY_SLOT_2,
     .heldItem = ITEM_FLAME_ORB,
@@ -3870,7 +3870,7 @@ static const struct TrainerMon sParty_Norman1[] = {
     },
     {
     .iv = 250,
-    .lvl = 38,
+    .lvl = 40,
     .species = SPECIES_SLAKING,
     .heldItem = ITEM_SITRUS_BERRY,
 	.ability = ABILITY_SLOT_1,
@@ -3884,7 +3884,7 @@ static const struct TrainerMon sParty_Norman1[] = {
 static const struct TrainerMon sParty_Winona1[] = {
     {
     .iv = 210,
-    .lvl = 40,
+    .lvl = 44,
     .species = SPECIES_UNFEZANT,
 	.ability = ABILITY_SLOT_2,
     .heldItem = ITEM_RAZOR_CLAW,
@@ -3895,7 +3895,7 @@ static const struct TrainerMon sParty_Winona1[] = {
     },
     {
     .iv = 210,
-    .lvl = 40,
+    .lvl = 44,
     .species = SPECIES_GLISCOR,
 	.ability = ABILITY_HIDDEN,
     .heldItem = ITEM_TOXIC_ORB,
@@ -3906,7 +3906,7 @@ static const struct TrainerMon sParty_Winona1[] = {
     },
     {
     .iv = 210,
-    .lvl = 44,
+    .lvl = 46,
     .species = SPECIES_PELIPPER,
 	.ability = ABILITY_HIDDEN,
     .heldItem = ITEM_LEFTOVERS,
@@ -3917,7 +3917,7 @@ static const struct TrainerMon sParty_Winona1[] = {
     },
     {
     .iv = 220,
-    .lvl = 44,
+    .lvl = 48,
     .species = SPECIES_SKARMORY,
 	.ability = ABILITY_SLOT_1,
     .heldItem = ITEM_SITRUS_BERRY,
@@ -3928,7 +3928,7 @@ static const struct TrainerMon sParty_Winona1[] = {
     },
     {
     .iv = 255,
-    .lvl = 45,
+    .lvl = 48,
     .species = SPECIES_ALTARIA,
     .heldItem = ITEM_ALTARIANITE,
 	.ability = ABILITY_SLOT_1,
@@ -3942,7 +3942,7 @@ static const struct TrainerMon sParty_Winona1[] = {
 static const struct TrainerMon sParty_TateAndLiza1[] = {
     {
     .iv = 250,
-    .lvl = 44,
+    .lvl = 51,
     .species = SPECIES_GARDEVOIR,
 	.ability = ABILITY_SLOT_1,
     .heldItem = ITEM_GARDEVOIRITE,
@@ -3953,7 +3953,7 @@ static const struct TrainerMon sParty_TateAndLiza1[] = {
     },
     {
     .iv = 250,
-    .lvl = 44,
+    .lvl = 51,
     .species = SPECIES_XATU,
 	.ability = ABILITY_HIDDEN,
     .heldItem = ITEM_NONE,
@@ -3964,7 +3964,7 @@ static const struct TrainerMon sParty_TateAndLiza1[] = {
     },
     {
     .iv = 250,
-    .lvl = 46,
+    .lvl = 52,
     .species = SPECIES_HATTERENE,
 	.ability = ABILITY_SLOT_1,
     .heldItem = ITEM_CHOICE_SPECS,
@@ -3975,7 +3975,7 @@ static const struct TrainerMon sParty_TateAndLiza1[] = {
     },
     {
     .iv = 250,
-    .lvl = 48,
+    .lvl = 52,
     .species = SPECIES_LUNATONE,
     .heldItem = ITEM_SITRUS_BERRY,
 	.ability = ABILITY_SLOT_1,
@@ -3985,7 +3985,7 @@ static const struct TrainerMon sParty_TateAndLiza1[] = {
     },
     {
     .iv = 250,
-    .lvl = 48,
+    .lvl = 52,
     .species = SPECIES_SOLROCK,
     .heldItem = ITEM_SITRUS_BERRY,
 	.ability = ABILITY_SLOT_1,
@@ -3998,7 +3998,7 @@ static const struct TrainerMon sParty_TateAndLiza1[] = {
 static const struct TrainerMon sParty_Juan1[] = {
     {
     .iv = 200,
-    .lvl = 50,
+    .lvl = 62,
     .species = SPECIES_AZUMARILL,
 	.ability = ABILITY_SLOT_1,
     .heldItem = ITEM_LIFE_ORB,
@@ -4008,7 +4008,7 @@ static const struct TrainerMon sParty_Juan1[] = {
     },
     {
     .iv = 200,
-    .lvl = 50,
+    .lvl = 64,
     .species = SPECIES_DRACOVISH,
 	.ability = ABILITY_SLOT_2,
     .heldItem = ITEM_CHOICE_BAND,
@@ -4019,7 +4019,7 @@ static const struct TrainerMon sParty_Juan1[] = {
     },
     {
     .iv = 200,
-    .lvl = 51,
+    .lvl = 64,
     .species = SPECIES_PRIMARINA,
 	.ability = ABILITY_SLOT_1,
     .heldItem = ITEM_LIFE_ORB,
@@ -4029,7 +4029,7 @@ static const struct TrainerMon sParty_Juan1[] = {
     },
     {
     .iv = 200,
-    .lvl = 51,
+    .lvl = 65,
     .species = SPECIES_TOXAPEX,
 	.ability = ABILITY_HIDDEN,
     .heldItem = ITEM_BLACK_SLUDGE,
@@ -4039,7 +4039,7 @@ static const struct TrainerMon sParty_Juan1[] = {
     },
     {
     .iv = 250,
-    .lvl = 52,
+    .lvl = 65,
     .species = SPECIES_KINGDRA,
     .heldItem = ITEM_CHESTO_BERRY,
 	.ability = ABILITY_SLOT_1,
@@ -4049,7 +4049,7 @@ static const struct TrainerMon sParty_Juan1[] = {
     },
     {
     .iv = 250,
-    .lvl = 52,
+    .lvl = 67,
     .species = SPECIES_SWAMPERT,
     .heldItem = ITEM_SWAMPERTITE,
 	.ability = ABILITY_SLOT_1,
@@ -4062,9 +4062,46 @@ static const struct TrainerMon sParty_Juan1[] = {
 
 static const struct TrainerMon sParty_Jerry1[] = {
     {
-    .iv = 10,
-    .lvl = 9,
-    .species = SPECIES_RALTS,
+    .iv = 20,
+    .lvl = 5,
+    .species = SPECIES_CHANSEY,
+	.heldItem = ITEM_TOXIC_ORB,
+	.moves = {MOVE_AGILITY, MOVE_NONE,MOVE_NONE,MOVE_NONE},
+    },
+	{
+    .iv = 20,
+    .lvl = 5,
+    .species = SPECIES_CHANSEY,
+	.heldItem = ITEM_TOXIC_ORB,
+	.moves = {MOVE_AGILITY, MOVE_NONE,MOVE_NONE,MOVE_NONE},
+    },
+	{
+    .iv = 20,
+    .lvl = 5,
+    .species = SPECIES_CHANSEY,
+	.heldItem = ITEM_TOXIC_ORB,
+	.moves = {MOVE_AGILITY, MOVE_NONE,MOVE_NONE,MOVE_NONE},
+    },
+	{
+    .iv = 20,
+    .lvl = 5,
+    .species = SPECIES_CHANSEY,
+	.heldItem = ITEM_TOXIC_ORB,
+	.moves = {MOVE_AGILITY, MOVE_NONE,MOVE_NONE,MOVE_NONE},
+    },
+	{
+    .iv = 20,
+    .lvl = 5,
+    .species = SPECIES_CHANSEY,
+	.heldItem = ITEM_TOXIC_ORB,
+	.moves = {MOVE_AGILITY, MOVE_NONE,MOVE_NONE,MOVE_NONE},
+    },
+	{
+    .iv = 20,
+    .lvl = 5,
+    .species = SPECIES_CHANSEY,
+	.heldItem = ITEM_TOXIC_ORB,
+	.moves = {MOVE_AGILITY, MOVE_NONE,MOVE_NONE,MOVE_NONE},
     }
 };
 
@@ -4097,57 +4134,180 @@ static const struct TrainerMon sParty_Paul[] = {
 static const struct TrainerMon sParty_Jerry2[] = {
     {
     .iv = 20,
-    .lvl = 26,
-    .species = SPECIES_RALTS,
+    .lvl = 5,
+    .species = SPECIES_CONKELDURR,
+	.heldItem = ITEM_TOXIC_ORB,
+	.moves = {MOVE_AGILITY, MOVE_NONE,MOVE_NONE,MOVE_NONE},
     },
-    {
+	{
     .iv = 20,
-    .lvl = 26,
-    .species = SPECIES_MEDITITE,
+    .lvl = 5,
+    .species = SPECIES_CONKELDURR,
+	.heldItem = ITEM_TOXIC_ORB,
+	.moves = {MOVE_SWORDS_DANCE, MOVE_NONE,MOVE_NONE,MOVE_NONE},
+    },
+	{
+    .iv = 20,
+    .lvl = 5,
+    .species = SPECIES_CONKELDURR,
+	.heldItem = ITEM_TOXIC_ORB,
+	.moves = {MOVE_SWORDS_DANCE, MOVE_NONE,MOVE_NONE,MOVE_NONE},
+    },
+	{
+    .iv = 20,
+    .lvl = 5,
+    .species = SPECIES_CONKELDURR,
+	.heldItem = ITEM_TOXIC_ORB,
+	.moves = {MOVE_SWORDS_DANCE, MOVE_NONE,MOVE_NONE,MOVE_NONE},
+    },
+	{
+    .iv = 20,
+    .lvl = 5,
+    .species = SPECIES_CONKELDURR,
+	.heldItem = ITEM_TOXIC_ORB,
+	.moves = {MOVE_SWORDS_DANCE, MOVE_NONE,MOVE_NONE,MOVE_NONE},
+    },
+	{
+    .iv = 20,
+    .lvl = 5,
+    .species = SPECIES_CONKELDURR,
+	.heldItem = ITEM_TOXIC_ORB,
+	.moves = {MOVE_SWORDS_DANCE, MOVE_NONE,MOVE_NONE,MOVE_NONE},
     }
 };
 
 static const struct TrainerMon sParty_Jerry3[] = {
     {
-    .iv = 30,
-    .lvl = 29,
-    .species = SPECIES_KIRLIA,
+    .iv = 20,
+    .lvl = 5,
+    .species = SPECIES_CRUSTLE,
+	.heldItem = ITEM_TOXIC_ORB,
+	.moves = {MOVE_ROCK_POLISH, MOVE_NONE,MOVE_NONE,MOVE_NONE},
     },
-    {
-    .iv = 30,
-    .lvl = 29,
-    .species = SPECIES_MEDITITE,
+	{
+    .iv = 20,
+    .lvl = 5,
+    .species = SPECIES_CRUSTLE,
+	.heldItem = ITEM_TOXIC_ORB,
+	.moves = {MOVE_ROCK_POLISH, MOVE_NONE,MOVE_NONE,MOVE_NONE},
+    },
+	{
+    .iv = 20,
+    .lvl = 5,
+    .species = SPECIES_CRUSTLE,
+	.heldItem = ITEM_TOXIC_ORB,
+	.moves = {MOVE_ROCK_POLISH, MOVE_NONE,MOVE_NONE,MOVE_NONE},
+    },
+	{
+    .iv = 20,
+    .lvl = 5,
+    .species = SPECIES_CRUSTLE,
+	.heldItem = ITEM_TOXIC_ORB,
+	.moves = {MOVE_ROCK_POLISH, MOVE_NONE,MOVE_NONE,MOVE_NONE},
+    },
+	{
+    .iv = 20,
+    .lvl = 5,
+    .species = SPECIES_CRUSTLE,
+	.heldItem = ITEM_TOXIC_ORB,
+	.moves = {MOVE_ROCK_POLISH, MOVE_NONE,MOVE_NONE,MOVE_NONE},
+    },
+	{
+    .iv = 20,
+    .lvl = 5,
+    .species = SPECIES_CRUSTLE,
+	.heldItem = ITEM_TOXIC_ORB,
+	.moves = {MOVE_ROCK_POLISH, MOVE_NONE,MOVE_NONE,MOVE_NONE},
     }
 };
 
 static const struct TrainerMon sParty_Jerry4[] = {
-    {
-    .iv = 40,
-    .lvl = 32,
-    .species = SPECIES_KIRLIA,
+	{
+    .iv = 20,
+    .lvl = 5,
+    .species = SPECIES_SERPERIOR,
+	.heldItem = ITEM_TOXIC_ORB,
+	.moves = {MOVE_COIL, MOVE_NONE,MOVE_NONE,MOVE_NONE},
     },
-    {
-    .iv = 40,
-    .lvl = 32,
-    .species = SPECIES_MEDICHAM,
+	{
+    .iv = 20,
+    .lvl = 5,
+    .species = SPECIES_SERPERIOR,
+	.heldItem = ITEM_TOXIC_ORB,
+	.moves = {MOVE_COIL, MOVE_NONE,MOVE_NONE,MOVE_NONE},
+    },
+	{
+    .iv = 20,
+    .lvl = 5,
+    .species = SPECIES_SERPERIOR,
+	.heldItem = ITEM_TOXIC_ORB,
+	.moves = {MOVE_COIL, MOVE_NONE,MOVE_NONE,MOVE_NONE},
+    },
+	{
+    .iv = 20,
+    .lvl = 5,
+    .species = SPECIES_SERPERIOR,
+	.heldItem = ITEM_TOXIC_ORB,
+	.moves = {MOVE_COIL, MOVE_NONE,MOVE_NONE,MOVE_NONE},
+    },
+	{
+    .iv = 20,
+    .lvl = 5,
+    .species = SPECIES_SERPERIOR,
+	.heldItem = ITEM_TOXIC_ORB,
+	.moves = {MOVE_COIL, MOVE_NONE,MOVE_NONE,MOVE_NONE},
+	},
+	{
+    .iv = 20,
+    .lvl = 5,
+    .species = SPECIES_SERPERIOR,
+	.heldItem = ITEM_TOXIC_ORB,
+	.moves = {MOVE_COIL, MOVE_NONE,MOVE_NONE,MOVE_NONE},
     }
 };
 
 static const struct TrainerMon sParty_Jerry5[] = {
     {
-    .iv = 50,
-    .lvl = 34,
-    .species = SPECIES_KIRLIA,
+    .iv = 20,
+    .lvl = 5,
+    .species = SPECIES_REUNICLUS,
+	.heldItem = ITEM_TOXIC_ORB,
+	.moves = {MOVE_AGILITY, MOVE_NONE,MOVE_NONE,MOVE_NONE},
     },
-    {
-    .iv = 50,
-    .lvl = 34,
-    .species = SPECIES_BANETTE,
+	{
+    .iv = 20,
+    .lvl = 5,
+    .species = SPECIES_REUNICLUS,
+	.heldItem = ITEM_TOXIC_ORB,
+	.moves = {MOVE_AGILITY, MOVE_NONE,MOVE_NONE,MOVE_NONE},
     },
-    {
-    .iv = 50,
-    .lvl = 34,
-    .species = SPECIES_MEDICHAM,
+	{
+    .iv = 20,
+    .lvl = 5,
+    .species = SPECIES_REUNICLUS,
+	.heldItem = ITEM_TOXIC_ORB,
+	.moves = {MOVE_AGILITY, MOVE_NONE,MOVE_NONE,MOVE_NONE},
+    },
+	{
+    .iv = 20,
+    .lvl = 5,
+    .species = SPECIES_REUNICLUS,
+	.heldItem = ITEM_TOXIC_ORB,
+	.moves = {MOVE_AGILITY, MOVE_NONE,MOVE_NONE,MOVE_NONE},
+    },
+	{
+    .iv = 20,
+    .lvl = 5,
+    .species = SPECIES_REUNICLUS,
+	.heldItem = ITEM_TOXIC_ORB,
+	.moves = {MOVE_AGILITY, MOVE_NONE,MOVE_NONE,MOVE_NONE},
+    },
+	{
+    .iv = 20,
+    .lvl = 5,
+    .species = SPECIES_REUNICLUS,
+	.heldItem = ITEM_TOXIC_ORB,
+	.moves = {MOVE_AGILITY, MOVE_NONE,MOVE_NONE,MOVE_NONE},
     }
 };
 
@@ -8733,9 +8893,46 @@ static const struct TrainerMon sParty_Robin[] = {
 
 static const struct TrainerMon sParty_Andrea[] = {
     {
-    .iv = 100,
-    .lvl = 40,
-    .species = SPECIES_LUVDISC,
+    .iv = 20,
+    .lvl = 5,
+    .species = SPECIES_FLORGES,
+	.heldItem = ITEM_TOXIC_ORB,
+	.moves = {MOVE_AGILITY, MOVE_NONE,MOVE_NONE,MOVE_NONE},
+    },
+	{
+    .iv = 20,
+    .lvl = 5,
+    .species = SPECIES_FLORGES,
+	.heldItem = ITEM_TOXIC_ORB,
+	.moves = {MOVE_AGILITY, MOVE_NONE,MOVE_NONE,MOVE_NONE},
+    },
+	{
+    .iv = 20,
+    .lvl = 5,
+    .species = SPECIES_FLORGES,
+	.heldItem = ITEM_TOXIC_ORB,
+	.moves = {MOVE_AGILITY, MOVE_NONE,MOVE_NONE,MOVE_NONE},
+    },
+	{
+    .iv = 20,
+    .lvl = 5,
+    .species = SPECIES_FLORGES,
+	.heldItem = ITEM_TOXIC_ORB,
+	.moves = {MOVE_AGILITY, MOVE_NONE,MOVE_NONE,MOVE_NONE},
+    },
+	{
+    .iv = 20,
+    .lvl = 5,
+    .species = SPECIES_FLORGES,
+	.heldItem = ITEM_TOXIC_ORB,
+	.moves = {MOVE_AGILITY, MOVE_NONE,MOVE_NONE,MOVE_NONE},
+    },
+	{
+    .iv = 20,
+    .lvl = 5,
+    .species = SPECIES_FLORGES,
+	.heldItem = ITEM_TOXIC_ORB,
+	.moves = {MOVE_AGILITY, MOVE_NONE,MOVE_NONE,MOVE_NONE},
     }
 };
 

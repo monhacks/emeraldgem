@@ -64,11 +64,11 @@ TextoEvento1:
  
  
 Password1_Text::
-	.string "¡Te han enviado un Regalo Misterioso!\n¡Recibiste {STR_VAR_1}!.$"
+	.string "¡Te han enviado un Regalo Misterioso!\p¡Recibiste {STR_VAR_1}!.$"
 Password2_Text::
-	.string "¡Te han enviado un Regalo Misterioso!\n¡Recibiste {STR_VAR_1}\ly {STR_VAR_2}!$"
+	.string "¡Te han enviado un Regalo Misterioso!\p¡Recibiste {STR_VAR_1}\ny {STR_VAR_2}!$"
 Password3_Text::
-	.string "¡Te han enviado un Regalo Misterioso!\n¡Recibiste {STR_VAR_1}, \l{STR_VAR_2} y {STR_VAR_3}!$"
+	.string "¡Te han enviado un Regalo Misterioso!\p¡Recibiste {STR_VAR_1}, \n{STR_VAR_2} y {STR_VAR_3}!$"
 PasswordMuchos_Text::
 	.string "¡Te han enviado un Regalo Misterioso!\n¡Recibiste muchas cosas!$"
 PasswordRecibiste_Text::

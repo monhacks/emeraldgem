@@ -415,6 +415,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectSteelBeam               @ EFFECT_STEEL_BEAM
 	.4byte BattleScript_EffectExtremeEvoboost         @ EFFECT_EXTREME_EVOBOOST
 	.4byte BattleScript_EffectTerrainHit              @ EFFECT_DAMAGE_SET_TERRAIN
+	.4byte BattleScript_EffectChillyReception         @ EFFECT_CHILLY_RECEPTION
 
 BattleScript_AffectionBasedEndurance::
 	playanimation BS_TARGET, B_ANIM_AFFECTION_HANGED_ON
@@ -1026,6 +1027,43 @@ BattleScript_EffectSappySeed:
 	goto BattleScript_MoveEnd
 
 BattleScript_EffectBaddyBad:
+	attackcanceler
+	printstring STRINGID_PREPARINGCHILLINGJOKE
+	waitmessage B_WAIT_TIME_LONG
+	attackstring
+	ppreduce
+	jumpifhalfword CMP_COMMON_BITS, gBattleWeather, B_WEATHER_SUN_PRIMAL, BattleScript_ExtremelyHarshSunlightWasNotLessened
+	jumpifhalfword CMP_COMMON_BITS, gBattleWeather, B_WEATHER_RAIN_PRIMAL, BattleScript_NoReliefFromHeavyRain
+	jumpifhalfword CMP_COMMON_BITS, gBattleWeather, B_WEATHER_STRONG_WINDS, BattleScript_MysteriousAirCurrentBlowsOn
+	sethail
+	attackanimation
+	waitanimation
+	printfromtable gMoveWeatherChangeChillyReceptionStringIds
+	waitmessage B_WAIT_TIME_LONG
+	call BattleScript_WeatherFormChanges
+	jumpifbattletype BATTLE_TYPE_ARENA, BattleScript_ChillyReceptionEnd
+	jumpifcantswitch SWITCH_IGNORE_ESCAPE_PREVENTION | BS_ATTACKER, BattleScript_ChillyReceptionEnd
+	printstring STRINGID_PKMNSWITCHESOUTINEMBARRASSMENT
+	waitmessage B_WAIT_TIME_LONG
+	openpartyscreen BS_ATTACKER, BattleScript_ChillyReceptionEnd
+	switchoutabilities BS_ATTACKER
+	waitstate
+	switchhandleorder BS_ATTACKER, 2
+	returntoball BS_ATTACKER
+	getswitchedmondata BS_ATTACKER
+	switchindataupdate BS_ATTACKER
+	hpthresholds BS_ATTACKER
+	trytoclearprimalweather
+	printstring STRINGID_EMPTYSTRING3
+	waitmessage 1
+	printstring STRINGID_SWITCHINMON
+	switchinanim BS_ATTACKER, TRUE
+	waitstate
+	switchineffects BS_ATTACKER
+BattleScript_ChillyReceptionEnd::
+	end
+
+BattleScript_EffectChillyReception:
 	jumpifsideaffecting BS_ATTACKER, SIDE_STATUS_REFLECT, BattleScript_EffectHit
 	attackcanceler
 	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE

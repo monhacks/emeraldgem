@@ -554,3 +554,11 @@ gSpecials::
 	def_special CheckForRegielekiPuzzle
 	def_special CheckForMetatiles
 	def_special SetHourMinutes
+	def_special RyuIvCheckerDef
+	def_special RyuIvCheckerOff
+	def_special RyuEvCheckerDef
+	def_special RyuEvCheckerOff
+	def_special RyuResetEvs
+	def_special RyuSetIvsBad
+	def_special RyuSetIvsMedium
+	def_special RyuSetIvsPerfect

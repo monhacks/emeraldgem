@@ -2149,44 +2149,13 @@ Route116_Text_JanicePostBattle:
 	.string "power, that's ideal, I think.$"
 
 Route116_Text_JerryIntro:
-	.string "We learn all sorts of things at the\n"
-	.string "TRAINER'S SCHOOL.\p"
-	.string "I want to test things out for real!$"
+	.string "...¡Prepárate!$"
 
 Route116_Text_JerryDefeat:
-	.string "I slacked off in school…\n"
-	.string "That's why I lost.$"
+	.string "... ... ...\n...Ah, muy bien.$"
 
 Route116_Text_JerryPostBattle:
-	.string "I'll have to redo some courses at\n"
-	.string "the TRAINER'S SCHOOL.\l"
-	.string "If I don't, ROXANNE will be steamed.$"
-
-Route116_Text_JerryRegister1:
-	.string "I learned at the TRAINER'S SCHOOL\n"
-	.string "that a POKéNAV can register TRAINERS.\p"
-	.string "I don't really get what that means,\n"
-	.string "so can I just try it?$"
-
-Route116_Text_JerryRegister2:
-	.string "I learned at the TRAINER'S SCHOOL\n"
-	.string "that a POKéNAV can register TRAINERS.\p"
-	.string "I don't really get what that means,\n"
-	.string "so can I just try it?$"
-
-Route116_Text_JerryRematchIntro:
-	.string "I've been studying seriously at the\n"
-	.string "TRAINER'S SCHOOL.\l"
-	.string "I won't lose like I did last time.$"
-
-Route116_Text_JerryRematchDefeat:
-	.string "Hunh?\n"
-	.string "I studied diligently.$"
-
-Route116_Text_JerryPostRematch:
-	.string "I'll have to redo some courses at\n"
-	.string "the TRAINER'S SCHOOL.\l"
-	.string "If I don't, ROXANNE will be steamed.$"
+	.string "a.$"
 
 Route116_Text_KarenIntro:
 	.string "I study at school, and I study on\n"

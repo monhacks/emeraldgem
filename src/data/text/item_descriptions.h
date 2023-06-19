@@ -26,18 +26,17 @@ static const u8 sPremierBallDesc[] = _(
     "va bien preparado.");
 
 static const u8 sHealBallDesc[] = _(
-    "Cura totalmente\n"
-    "al Pokémon\n"
-    "capturado.");
+    "Cura totalmente al\n"
+    "Pokémon capturado.");
 
 static const u8 sNetBallDesc[] = _(
-    "Funciona mejor\n"
-	"en Pokémon\n"
-	"Agua o Bicho.");
+    "Funciona mejor en\n"
+	"Pokémon de Tipo\n"
+	"Agua y/o Bicho.");
 
 static const u8 sNestBallDesc[] = _(
-    "Sirve contra\n"
-    "Pokémon de\n"
+    "Sirve mejor contra\n"
+    "Pokémon de un\n"
     "nivel bajo.");
 
 static const u8 sDiveBallDesc[] = _(
@@ -45,166 +44,162 @@ static const u8 sDiveBallDesc[] = _(
     "Pokémon submarinos.");
 
 static const u8 sDuskBallDesc[] = _(
-    "Works well if\n"
-    "used in a\n"
-    "dark place.");
+    "Funciona mejor si\n"
+    "la usas en un\n"
+    "lugar oscuro.");
 
 static const u8 sTimerBallDesc[] = _(
-    "A Ball that gains\n"
-    "power in battles\n"
-    "taking many turns.");
+    "Se hace más\n"
+    "eficiente al pasar\n"
+    "muchos turnos.");
 
 static const u8 sQuickBallDesc[] = _(
-    "Works well if\n"
-    "used on the\n"
-    "first turn.");
+    "Funciona mejor al\n"
+    "usarse en el 1er\n"
+    "turno del combate.");
 
 static const u8 sRepeatBallDesc[] = _(
-    "A Ball that works\n"
-    "better on Pokémon\n"
-    "caught before.");
+    "Ball que funciona\n"
+    "mejor en Pokémon\n"
+    "que ya posees.");
 
 static const u8 sLuxuryBallDesc[] = _(
-    "A cozy Ball that\n"
-    "makes Pokémon\n"
-    "more friendly.");
+    "Ball muy cómoda\n"
+    "que facilita la\n"
+    "mejora de amistad.");
 
 static const u8 sLevelBallDesc[] = _(
-    "A Ball that works\n"
-    "well on lower\n"
-    "level Pokémon.");
+    "Esta Ball es amada\n"
+    "por Pokémon de un\n"
+    "muy bajo nivel.");
 
 static const u8 sLureBallDesc[] = _(
-    "A Ball that works\n"
-    "well on fished\n"
-    "up Pokémon.");
+    "Úsala si vas a\n"
+    "pescar, pues los\n"
+    "peces la aman.");
 
 static const u8 sMoonBallDesc[] = _(
-    "A Ball that works\n"
-    "well on Moon\n"
-    "Stone users.");
+    "Atrapa mejor a los\n"
+    "que evolucionan\n"
+    "con Piedra Lunar.");
 
 static const u8 sFriendBallDesc[] = _(
-    "A Ball that makes\n"
-    "a Pokémon friendly\n"
-    "when caught.");
+    "La mejor Ball para\n"
+    "volverse amigo de\n"
+    "los Pokémon.");
 
 static const u8 sLoveBallDesc[] = _(
-    "Works well on\n"
-    "Pokémon of the\n"
-    "opposite gender.");
+    "Funciona mejor\n"
+    "con Pokémon de\n"
+    "la misma especie.");
 
 static const u8 sFastBallDesc[] = _(
-    "Works well on\n"
-    "very fast\n"
-    "Pokémon.");
+    "Los Pokémon muy\n"
+    "rápidos realmente\n"
+    "la adoran.");
 
 static const u8 sHeavyBallDesc[] = _(
-    "Works well on\n"
-    "very heavy\n"
-    "Pokémon.");
+    "Atrapa Pokémon muy\n"
+    "pesados, pero\n"
+    "ningún otro.");
 
 static const u8 sDreamBallDesc[] = _(
-    "A Ball that works\n"
-    "well on sleeping\n"
-    "Pokémon.");
+    "Ball que da buenos\n"
+    "sueños. Mejora con\n"
+    "Pokémon dormidos.");
 static const u8 sSafariBallDesc[] = _(
-    "A special Ball that\n"
-    "is used only in the\n"
-    "Safari Zone.");
+    "Es una Ultra Ball\n"
+    "hecha para usarse\n"
+    "en la Zona Safari.");
 
 static const u8 sSportBallDesc[] = _(
-    "A special Ball used\n"
-    "in the Bug-Catching\n"
-    "Contest.");
+    "Esta Ball funciona\n"
+    "mejor en Pokémon\n"
+    "Lucha y/o Normal.");
 
 static const u8 sParkBallDesc[] = _(
-    "A special Ball for\n"
-    "the Pal Park.");
+    "Hecha para atrapar\n"
+    "Aves, Roedores y\nBichos Regionales.");
 
 static const u8 sBeastBallDesc[] = _(
-    "A Ball designed to\n"
-    "catch Ultra Beasts.");
+    "Una Ball muy única\n"
+    "que sólo atrapará\na los UltraEntes.");
 
 static const u8 sCherishBallDesc[] = _(
-    "A rare Ball made\n"
-    "in commemoration\n"
-    "of some event.");
+    "Ball pefecta para\n"
+    "los Pokémon raros.\n"
+    "¡Felicitaciones!");
 
 // Medicine
 static const u8 sPotionDesc[] = _(
-    "Restores the HP of\n"
-    "a Pokémon by\n"
-    "20 points.");
+    "Cura 20 PS.");
 
 static const u8 sSuperPotionDesc[] = _(
-    "Restores the HP of\n"
-    "a Pokémon by\n"
+    "Cura"
 #if I_HEALTH_RECOVERY >= GEN_7
-    "60 points.");
+    "60 PS.");
 #else
-    "50 points.");
+    "50 PS.");
 #endif
 
 static const u8 sHyperPotionDesc[] = _(
-    "Restores the HP of\n"
-    "a Pokémon by\n"
+    "Cura"
 #if I_HEALTH_RECOVERY >= GEN_7
-    "120 points.");
+    "120 PS.");
 #else
-    "200 points.");
+    "200 PS.");
 #endif
 
 static const u8 sMaxPotionDesc[] = _(
-    "Fully restores the\n"
-    "HP of a Pokémon.");
+    "Restablece los\n"
+    "PS por completo.");
 
 static const u8 sFullRestoreDesc[] = _(
-    "Fully restores the\n"
-    "HP and status of a\n"
-    "Pokémon.");
+    "Cura al Pokémon de\n"
+    "cualquier daño o\n"
+    "proble de estado.");
 
 static const u8 sReviveDesc[] = _(
-    "Revives a fainted\n"
-    "Pokémon with half\n"
-    "its HP.");
+    "Revive un Pokémon\n"
+    "debilitado con 50%\n"
+    "de sus PS.");
 
 static const u8 sMaxReviveDesc[] = _(
-    "Revives a fainted\n"
-    "Pokémon with all\n"
-    "its HP.");
+    "Revive un Pokémon\n"
+    "debilitado con\n"
+    "todos sus PS.");
 
 static const u8 sFreshWaterDesc[] = _(
-    "A mineral water\n"
-    "that restores HP\n"
+    "Agua mineral que\n"
+    "cura"
 #if I_HEALTH_RECOVERY >= GEN_7
-    "by 30 points.");
+    "30 PS.");
 #else
-    "by 50 points.");
+    "50 PS.");
 #endif
 
 static const u8 sSodaPopDesc[] = _(
-    "A fizzy soda drink\n"
-    "that restores HP\n"
+    "Una gaseosa muy\n"
+    "deliciosa que cura\n"
 #if I_HEALTH_RECOVERY >= GEN_7
-    "by 50 points.");
+    "50 PS.");
 #else
-    "by 60 points.");
+    "60 PS.");
 #endif
 
 static const u8 sLemonadeDesc[] = _(
-    "A very sweet drink\n"
-    "that restores HP\n"
+    "Una bebida muy\n"
+    "deliciosa que cura\n"
 #if I_HEALTH_RECOVERY >= GEN_7
-    "by 70 points.");
+    "70 PS.");
 #else
-    "by 80 points.");
+    "80 PS.");
 #endif
 
 static const u8 sMoomooMilkDesc[] = _(
-    "A nutritious milk\n"
-    "that restores HP\n"
-    "by 100 points.");
+    "Una leche muy\n"
+    "nutritiva que\n"
+    "cura 100 PS.");
 
 static const u8 sEnergyPowderDesc[] = _(
     "A bitter powder\n"

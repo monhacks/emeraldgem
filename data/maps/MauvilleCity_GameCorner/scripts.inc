@@ -28,7 +28,7 @@ MauvilleCity_GameCorner_EventScript_CoinsClerk::
 	goto MauvilleCity_GameCorner_EventScript_ChooseCoinsDefault50
 
 MauvilleCity_GameCorner_EventScript_ChooseCoinsDefault50::
-	multichoice2 15, 0, MauvilleCity_GameCorner_ChoseCoinsText
+	dynmultichoice 15, 0, TRUE, 4, 0, DYN_MULTICHOICE_CB_NONE, MauvilleCity_GameCorner_ChoseCoinsText1, MauvilleCity_GameCorner_ChoseCoinsText2, MauvilleCity_GameCorner_ChoseCoinsText3, MauvilleCity_GameCorner_ChoseCoinsText4
 	switch VAR_RESULT
 	case 0, MauvilleCity_GameCorner_EventScript_Buy50Coins
 	case 1, MauvilleCity_GameCorner_EventScript_Buy500Coins
@@ -36,12 +36,14 @@ MauvilleCity_GameCorner_EventScript_ChooseCoinsDefault50::
 	goto MauvilleCity_GameCorner_EventScript_CancelBuyCoins
 	end
 
-MauvilleCity_GameCorner_ChoseCoinsText::
+MauvilleCity_GameCorner_ChoseCoinsText1:
 	.string "   50 Fichas   ¥100$"
+MauvilleCity_GameCorner_ChoseCoinsText2:
 	.string "  500 Fichas  ¥1.000$"
+MauvilleCity_GameCorner_ChoseCoinsText3:
 	.string "5,000 Fichas ¥10.000$"
+MauvilleCity_GameCorner_ChoseCoinsText4:
 	.string "Cancelar$"
-	.string "$"
 
 MauvilleCity_GameCorner_EventScript_Buy50Coins::
 	checkcoins VAR_TEMP_1
@@ -139,7 +141,7 @@ MauvilleCity_GameCorner_EventScript_ReturnToChooseDollPrize::
 	goto MauvilleCity_GameCorner_EventScript_ChooseDollPrize
 
 MauvilleCity_GameCorner_EventScript_ChooseDollPrize::
-	multichoice2 12, 0, MauvilleCity_GameCorner_ChoseTMsText2
+	dynmultichoice 15, 0, TRUE, 4, 0, DYN_MULTICHOICE_CB_NONE, MauvilleCity_GameCorner_ChoseTMsText2, MauvilleCity_GameCorner_ChoseTMsText3, MauvilleCity_GameCorner_ChoseTMsText4, MauvilleCity_GameCorner_ChoseTMsText5, MauvilleCity_GameCorner_ChoseTMsText6, MauvilleCity_GameCorner_ChoseTMsText6, MauvilleCity_GameCorner_ChoseCoinsText4
 	switch VAR_RESULT
 	case 0, MauvilleCity_GameCorner_EventScript_TM92
 	case 1, MauvilleCity_GameCorner_EventScript_TM94
@@ -150,14 +152,16 @@ MauvilleCity_GameCorner_EventScript_ChooseDollPrize::
 	goto MauvilleCity_GameCorner_EventScript_CancelTMSelect
 	end
 
-MauvilleCity_GameCorner_ChoseTMsText2::
+MauvilleCity_GameCorner_ChoseTMsText2:
 	.string "Psicocorte  F2.500$"
+MauvilleCity_GameCorner_ChoseTMsText3:
 	.string "Colm.Fuego   F3.000$"
+MauvilleCity_GameCorner_ChoseTMsText4:
 	.string "Colm.Hielo    F3.000$"
+MauvilleCity_GameCorner_ChoseTMsText5:
 	.string "Colm.Trueno F3.000$"
+MauvilleCity_GameCorner_ChoseTMsText6:
 	.string "Rompealmas  F6.000$"
-	.string "Cancelar$"
-	.string "$"
 
 MauvilleCity_GameCorner_EventScript_PrizeCornerTMs::
 	lock
@@ -181,7 +185,7 @@ MauvilleCity_GameCorner_EventScript_ReturnToChooseTMPrize::
 	goto MauvilleCity_GameCorner_EventScript_ChooseTMPrize
 
 MauvilleCity_GameCorner_EventScript_ChooseTMPrize::
-	multichoice2 12, 0, MauvilleCity_GameCorner_ChoseTMsText
+	dynmultichoice 15, 0, TRUE, 4, 0, DYN_MULTICHOICE_CB_NONE, MauvilleCity_GameCorner_ChoseTMsText11, MauvilleCity_GameCorner_ChoseTMsText12, MauvilleCity_GameCorner_ChoseTMsText13, MauvilleCity_GameCorner_ChoseTMsText14, MauvilleCity_GameCorner_ChoseTMsText15 , MauvilleCity_GameCorner_ChoseCoinsText4
 	switch VAR_RESULT
 	case 0, MauvilleCity_GameCorner_EventScript_TM32
 	case 1, MauvilleCity_GameCorner_EventScript_TM29
@@ -192,14 +196,17 @@ MauvilleCity_GameCorner_EventScript_ChooseTMPrize::
 	goto MauvilleCity_GameCorner_EventScript_CancelTMSelect
 	end
 
-MauvilleCity_GameCorner_ChoseTMsText::
+MauvilleCity_GameCorner_ChoseTMsText11:
 	.string "Luz Lunar     F1.500$"
+MauvilleCity_GameCorner_ChoseTMsText12:
 	.string "Psíquico      F3.000$"
+MauvilleCity_GameCorner_ChoseTMsText13:
 	.string "Lanzallamas F4.000$"
+MauvilleCity_GameCorner_ChoseTMsText14:
 	.string "Atactrueno  F4.000$"
+MauvilleCity_GameCorner_ChoseTMsText15:
 	.string "Rayo Hielo    F4.000$"
-	.string "Cancelar$"
-	.string "$"
+
 
 MauvilleCity_GameCorner_EventScript_TM32::
 	setvar VAR_TEMP_1, 1

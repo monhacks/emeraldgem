@@ -1481,6 +1481,7 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
                 score -= 8;
             break;
         case EFFECT_HAIL:
+		case EFFECT_BADDY_BAD:
             if (gBattleWeather & (B_WEATHER_HAIL | B_WEATHER_PRIMAL_ANY)
              || PartnerMoveEffectIsWeather(BATTLE_PARTNER(battlerAtk), AI_DATA->partnerMove))
                 score -= 8;
@@ -2691,6 +2692,7 @@ static s16 AI_DoubleBattle(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
         }
         break;
     case EFFECT_HAIL:
+	case EFFECT_BADDY_BAD:
         if (IsBattlerAlive(battlerAtkPartner)
          && ShouldSetHail(battlerAtkPartner, atkPartnerAbility, atkPartnerHoldEffect))
         {
@@ -3547,6 +3549,44 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
         if (!(gBattleTypeFlags & BATTLE_TYPE_TRAINER) || GetBattlerSide(battlerAtk) != B_SIDE_PLAYER)
             break;
         //fallthrough
+	case EFFECT_BADDY_BAD:
+		if (ShouldSetHail(battlerAtk, AI_DATA->abilities[battlerAtk], AI_DATA->holdEffects[battlerAtk]))
+		{
+			if ((HasMoveEffect(battlerAtk, EFFECT_AURORA_VEIL) || HasMoveEffect(BATTLE_PARTNER(battlerAtk), EFFECT_AURORA_VEIL))
+			  && ShouldSetScreen(battlerAtk, battlerDef, EFFECT_AURORA_VEIL))
+				score += 4;
+
+			score++;
+			if (AI_DATA->holdEffects[battlerAtk] == HOLD_EFFECT_ICY_ROCK)
+				score++;
+			if (HasMoveEffect(battlerDef, EFFECT_MORNING_SUN)
+			  || HasMoveEffect(battlerDef, EFFECT_SYNTHESIS)
+			  || HasMoveEffect(battlerDef, EFFECT_MOONLIGHT))
+				score += 6;
+		}
+		if (!IsDoubleBattle())
+		{
+			switch (ShouldPivot(battlerAtk, battlerDef, AI_DATA->abilities[battlerDef], move, AI_THINKING_STRUCT->movesetIndex))
+			{
+			case 0: // no
+				score -= 10;    // technically should go in CheckBadMove, but this is easier/less computationally demanding
+				break;
+			case 1: // maybe
+				break;
+			case 2: // yes
+				score += 7;
+				break;
+			}
+		}
+		else //Double Battle
+		{
+			if (CountUsablePartyMons(battlerAtk) == 0)
+				break; // Can't switch
+
+			// if (switchAbility == ABILITY_INTIMIDATE && PartyHasMoveSplit(battlerDef, SPLIT_PHYSICAL))
+				// score += 7;
+		}
+		break;
     case EFFECT_HIT_ESCAPE:
     case EFFECT_PARTING_SHOT:
         if (!IsDoubleBattle())
@@ -3568,8 +3608,8 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
             if (CountUsablePartyMons(battlerAtk) == 0)
                 break; // Can't switch
 
-            //if (switchAbility == ABILITY_INTIMIDATE && PartyHasMoveSplit(battlerDef, SPLIT_PHYSICAL))
-                //score += 7;
+            // if (switchAbility == ABILITY_INTIMIDATE && PartyHasMoveSplit(battlerDef, SPLIT_PHYSICAL))
+                // score += 7;
         }
         break;
     case EFFECT_BATON_PASS:
@@ -4827,6 +4867,7 @@ static s16 AI_SetupFirstTurn(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
     case EFFECT_DRAGON_DANCE:
     case EFFECT_STICKY_WEB:
     case EFFECT_RAIN_DANCE:
+	case EFFECT_BADDY_BAD:
     case EFFECT_SUNNY_DAY:
     case EFFECT_SANDSTORM:
     case EFFECT_HAIL:
@@ -5050,6 +5091,7 @@ static s16 AI_HPAware(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
             case EFFECT_SOLAR_BEAM:
             case EFFECT_TWO_TURNS_ATTACK:
             case EFFECT_ERUPTION:
+			case EFFECT_BADDY_BAD:
             case EFFECT_TICKLE:
             case EFFECT_SUNNY_DAY:
             case EFFECT_SANDSTORM:

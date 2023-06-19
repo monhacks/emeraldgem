@@ -246,47 +246,6 @@ Route116_EventScript_Jose::
 	msgbox Route116_Text_JosePostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route116_EventScript_Jerry::
-	trainerbattle_single TRAINER_JERRY_1, Route116_Text_JerryIntro, Route116_Text_JerryDefeat, Route116_EventScript_TryRegisterJerryAfterBattle
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	goto_if_eq VAR_RESULT, TRUE, Route116_EventScript_RematchJerry
-	setvar VAR_0x8004, TRAINER_JERRY_1
-	specialvar VAR_RESULT, IsTrainerRegistered
-	goto_if_eq VAR_RESULT, FALSE, Route116_EventScript_TryRegisterJerry
-	msgbox Route116_Text_JerryPostBattle, MSGBOX_DEFAULT
-	release
-	end
-
-Route116_EventScript_TryRegisterJerryAfterBattle::
-	goto_if_set FLAG_HAS_MATCH_CALL, Route116_EventScript_RegisterJerryAfterBattle
-	release
-	end
-
-Route116_EventScript_RegisterJerryAfterBattle::
-	special PlayerFaceTrainerAfterBattle
-	waitmovement 0
-	msgbox Route116_Text_JerryRegister2, MSGBOX_DEFAULT
-	register_matchcall TRAINER_JERRY_1
-	release
-	end
-
-Route116_EventScript_TryRegisterJerry::
-	goto_if_set FLAG_HAS_MATCH_CALL, Route116_EventScript_RegisterJerry
-	msgbox Route116_Text_JerryPostBattle, MSGBOX_DEFAULT
-	release
-	end
-
-Route116_EventScript_RegisterJerry::
-	msgbox Route116_Text_JerryRegister1, MSGBOX_DEFAULT
-	register_matchcall TRAINER_JERRY_1
-	release
-	end
-
-Route116_EventScript_RematchJerry::
-	trainerbattle_rematch TRAINER_JERRY_1, Route116_Text_JerryRematchIntro, Route116_Text_JerryRematchDefeat
-	msgbox Route116_Text_JerryPostRematch, MSGBOX_AUTOCLOSE
-	end
-
 Route116_EventScript_Clark::
 	trainerbattle_single TRAINER_CLARK, Route116_Text_ClarkIntro, Route116_Text_ClarkDefeat
 	msgbox Route116_Text_ClarkPostBattle, MSGBOX_AUTOCLOSE

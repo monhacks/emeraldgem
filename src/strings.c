@@ -554,34 +554,32 @@ const u8 gText_EggAboutToHatch[] = _("It's making sounds.\nIt's about to hatch!"
 const u8 gText_HMMovesCantBeForgotten2[] = _("HM moves can't be\nforgotten now.");
 
 const u8 gText_XNatureMetAtYZ[] = _(
-    "{DYNAMIC 0x00}{DYNAMIC 0x02}{DYNAMIC 0x01}{DYNAMIC 0x05}{DYNAMIC 0x06}{DYNAMIC 0x07} nature,\n"
-    "met at {LV_2}{DYNAMIC 0x00}{DYNAMIC 0x03}{DYNAMIC 0x01},\n{DYNAMIC 0x00}{DYNAMIC 0x04}{DYNAMIC 0x01}.");
+    "{DYNAMIC 0x00}{DYNAMIC 0x02}{DYNAMIC 0x01}{DYNAMIC 0x05}{DYNAMIC 0x06}{DYNAMIC 0x07}, visto en\n{DYNAMIC 0x00}{DYNAMIC 0x04}{DYNAMIC 0x01}. ({LV_2}{DYNAMIC 0x00}{DYNAMIC 0x03}{DYNAMIC 0x01})");
 
 const u8 gText_XNatureHatchedAtYZ[] = _(
-    "{DYNAMIC 0x00}{DYNAMIC 0x02}{DYNAMIC 0x01}{DYNAMIC 0x05}{DYNAMIC 0x06}{DYNAMIC 0x07} nature,\n"
-    "hatched at {LV_2}{DYNAMIC 0x00}{DYNAMIC 0x03}{DYNAMIC 0x01},\n{DYNAMIC 0x00}{DYNAMIC 0x04}{DYNAMIC 0x01}.");
+    "{DYNAMIC 0x00}{DYNAMIC 0x02}{DYNAMIC 0x01}{DYNAMIC 0x05}{DYNAMIC 0x06}{DYNAMIC 0x07}, nacido en\n{DYNAMIC 0x00}{DYNAMIC 0x04}{DYNAMIC 0x01}. ({LV_2}{DYNAMIC 0x00}{DYNAMIC 0x03}{DYNAMIC 0x01})");
+
 
 const u8 gText_XNatureObtainedInTrade[] = _(
-    "{DYNAMIC 0x00}{DYNAMIC 0x02}{DYNAMIC 0x01}{DYNAMIC 0x05}{DYNAMIC 0x06}{DYNAMIC 0x07} nature,\n"
-    "obtained in a trade.");
+    "{DYNAMIC 0x00}{DYNAMIC 0x02}{DYNAMIC 0x01}{DYNAMIC 0x05}{DYNAMIC 0x06}{DYNAMIC 0x07}, conocido\ppor un intercambio.");
+
 
 const u8 gText_XNatureFatefulEncounter[] = _(
-    "{DYNAMIC 0x00}{DYNAMIC 0x02}{DYNAMIC 0x01}{DYNAMIC 0x05}{DYNAMIC 0x06}{DYNAMIC 0x07} nature,\n"
-    "obtained in a fateful\nencounter at {LV_2}{DYNAMIC 0x00}{DYNAMIC 0x03}{DYNAMIC 0x01}.");
+    "{DYNAMIC 0x00}{DYNAMIC 0x02}{DYNAMIC 0x01}{DYNAMIC 0x05}{DYNAMIC 0x06}{DYNAMIC 0x07}, el destino\nlos unió en {DYNAMIC 0x00}{DYNAMIC 0x04}{DYNAMIC 0x01}. ({LV_2}{DYNAMIC 0x00}{DYNAMIC 0x03}{DYNAMIC 0x01}).");
+
 
 const u8 gText_XNatureProbablyMetAt[] = _(
-    "{DYNAMIC 0x00}{DYNAMIC 0x02}{DYNAMIC 0x01}{DYNAMIC 0x05}{DYNAMIC 0x06}{DYNAMIC 0x07} nature,\n"
-    "probably met at {LV_2}{DYNAMIC 0x00}{DYNAMIC 0x03}{DYNAMIC 0x01},\n{DYNAMIC 0x00}{DYNAMIC 0x04}{DYNAMIC 0x01}.");
+    "{DYNAMIC 0x00}{DYNAMIC 0x02}{DYNAMIC 0x01}{DYNAMIC 0x05}{DYNAMIC 0x06}{DYNAMIC 0x07}, visto, quizá en\n{DYNAMIC 0x00}{DYNAMIC 0x04}{DYNAMIC 0x01}. ({LV_2}{DYNAMIC 0x00}{DYNAMIC 0x03}{DYNAMIC 0x01})");
 
-const u8 gText_XNature[] = _("{DYNAMIC 0x00}{DYNAMIC 0x02}{DYNAMIC 0x01}{DYNAMIC 0x05}{DYNAMIC 0x06}{DYNAMIC 0x07} nature");
+
+const u8 gText_XNature[] = _("{DYNAMIC 0x00}{DYNAMIC 0x02}{DYNAMIC 0x01}{DYNAMIC 0x05}{DYNAMIC 0x06}{DYNAMIC 0x07}");
 
 const u8 gText_XNatureMetSomewhereAt[] = _(
-    "{DYNAMIC 0x00}{DYNAMIC 0x02}{DYNAMIC 0x01}{DYNAMIC 0x05}{DYNAMIC 0x06}{DYNAMIC 0x07} nature,\n"
-    "met somewhere at {LV_2}{DYNAMIC 0x00}{DYNAMIC 0x03}{DYNAMIC 0x01}.");
+    "{DYNAMIC 0x00}{DYNAMIC 0x02}{DYNAMIC 0x01}{DYNAMIC 0x05}{DYNAMIC 0x06}{DYNAMIC 0x07}, visto en\nalgún lado. ({LV_2}{DYNAMIC 0x00}{DYNAMIC 0x03}{DYNAMIC 0x01})");
+
 
 const u8 gText_XNatureHatchedSomewhereAt[] = _(
-    "{DYNAMIC 0x00}{DYNAMIC 0x02}{DYNAMIC 0x01}{DYNAMIC 0x05}{DYNAMIC 0x06}{DYNAMIC 0x07} nature,\n"
-    "hatched somewhere at {LV_2}{DYNAMIC 0x00}{DYNAMIC 0x03}{DYNAMIC 0x01}.");
+    "{DYNAMIC 0x00}{DYNAMIC 0x02}{DYNAMIC 0x01}{DYNAMIC 0x05}{DYNAMIC 0x06}{DYNAMIC 0x07}, nacido en\nalgún lado. ({LV_2}{DYNAMIC 0x00}{DYNAMIC 0x03}{DYNAMIC 0x01})");
 
 const u8 gText_OddEggFoundByCouple[] = _("An odd POKéMON EGG found\nby the DAY CARE couple.");
 const u8 gText_PeculiarEggNicePlace[] = _("A peculiar POKéMON EGG\nobtained at the nice place.");
@@ -1912,39 +1910,39 @@ const u8 gText_Stats_Gender_50[]     = _("♀ 1/1 ♂");     //_("♀ 50 / 50 �
 const u8 gText_Stats_Gender_75[]     = _("♀ 3/1 ♂");     //_("♀ 75 / 25 ♂");
 const u8 gText_Stats_Gender_87_5[]   = _("♀ 7/1 ♂");
 const u8 gText_Stats_Gender_100[]    = _("♀");
-const u8 gText_Stats_CatchRate[]     = _("RATIO{0x5B}: ");
-const u8 gText_Stats_CatchRate_Legend[]         = _("LEGENDARIO");
-const u8 gText_Stats_CatchRate_VeryHard[]       = _("MUY DIFÍCIL");
-const u8 gText_Stats_CatchRate_Difficult[]      = _("COMPLICADO");
+const u8 gText_Stats_CatchRate[]     = _("{0x5B}CAPT.: ");
+const u8 gText_Stats_CatchRate_Legend[]         = _("LEYENDA");
+const u8 gText_Stats_CatchRate_VeryHard[]       = _("DIFÍCIL+");
+const u8 gText_Stats_CatchRate_Difficult[]      = _("DIFÍCIL");
 const u8 gText_Stats_CatchRate_Medium[]         = _("MEDIO");
-const u8 gText_Stats_CatchRate_Relaxed[]        = _("SIMPLE");
-const u8 gText_Stats_CatchRate_Easy[]           = _("MUY FÁCIL");
-const u8 gText_Stats_ExpYield[]      = _("PTS. EXP: ");
-const u8 gText_Stats_EggCycles[]     = _("PASOS ECLSN:");
+const u8 gText_Stats_CatchRate_Relaxed[]        = _("FÁCIL");
+const u8 gText_Stats_CatchRate_Easy[]           = _("FÁCIL+");
+const u8 gText_Stats_ExpYield[]      = _("PTS.XP: ");
+const u8 gText_Stats_EggCycles[]     = _("ECLSN:");
 const u8 gText_Stats_EggCycles_VeryFast[]   = _("{EMOJI_BOLT}{EMOJI_DIZZYEGG}");
 const u8 gText_Stats_EggCycles_Fast[]       = _("{EMOJI_DIZZYEGG}");
 const u8 gText_Stats_EggCycles_Normal[]     = _("{EMOJI_DIZZYEGG}{EMOJI_DIZZYEGG}");
 const u8 gText_Stats_EggCycles_Slow[]       = _("{EMOJI_DIZZYEGG}{EMOJI_DIZZYEGG}{EMOJI_DIZZYEGG}");
-const u8 gText_Stats_Growthrate[]    = _("CRECER: ");
-const u8 gText_Stats_Friendship[]    = _("AMISTAD:");
+const u8 gText_Stats_Growthrate[]    = _("CRECE:");
+const u8 gText_Stats_Friendship[]    = _("AMIGO:");
 const u8 gText_Stats_Friendship_BigAnger[]      = _("{EMOJI_BIGANGER}");
 const u8 gText_Stats_Friendship_Neutral[]       = _("{EMOJI_NEUTRAL}");
 const u8 gText_Stats_Friendship_Happy[]         = _("{EMOJI_HAPPY}");
 const u8 gText_Stats_Friendship_BigSmile[]      = _("{EMOJI_BIGSMILE}");
-const u8 gText_Stats_MEDIUM_FAST[]   = _("MEDIO RÁPIDO");
+const u8 gText_Stats_MEDIUM_FAST[]   = _("MEDIO RÁP.");
 const u8 gText_Stats_ERRATIC[]       = _("ERRÁTICO");
 const u8 gText_Stats_FLUCTUATING[]   = _("FLUCTUANTE");
-const u8 gText_Stats_MEDIUM_SLOW[]   = _("MEDIO LENTO");
+const u8 gText_Stats_MEDIUM_SLOW[]   = _("MEDIO LEN.");
 const u8 gText_Stats_FAST[]          = _("RÁPIDO");
 const u8 gText_Stats_SLOW[]          = _("LENTO");
 const u8 gText_Stats_ContestHeart[]  = _("H");
 const u8 gText_Stats_Minus[] = _("-");
-const u8 gText_Stats_eggGroup[]             = _("G. HUEVO 1:");
+const u8 gText_Stats_eggGroup[]             = _("G.HUEVO:");
 const u8 gText_Stats_eggGroup_Groups[]      = _("{STR_VAR_1}/{STR_VAR_2}");
 const u8 gText_Stats_eggGroup_MONSTER[]     = _("MONSTRUO");
 const u8 gText_Stats_eggGroup_WATER_1[]     = _("AGUA {CIRCLE_1}");
-const u8 gText_Stats_eggGroup_BUG[]         = _("BUCHO");
-const u8 gText_Stats_eggGroup_FLYING[]      = _("VOLAR");
+const u8 gText_Stats_eggGroup_BUG[]         = _("BICHO");
+const u8 gText_Stats_eggGroup_FLYING[]      = _("VOLADOR");
 const u8 gText_Stats_eggGroup_FIELD[]       = _("CAMPO");
 const u8 gText_Stats_eggGroup_FAIRY[]       = _("HADA");
 const u8 gText_Stats_eggGroup_GRASS[]       = _("PLANTA");
@@ -1991,13 +1989,14 @@ const u8 gText_EVO_ITEM_HOLD_NIGHT[]                = _("+NVL, equipar {STR_VAR_
 const u8 gText_EVO_MOVE[]                           = _("+NVL, sabiendo {STR_VAR_2}");
 const u8 gText_EVO_MOVE_TYPE[]                      = _("+NVL, sabiendo mov. {STR_VAR_2}");
 const u8 gText_EVO_MAPSEC[]                         = _("+NVL en {STR_VAR_2}");
-const u8 gText_EVO_ITEM_MALE[]                      = _("Usar {STR_VAR_2} sieno macho");
-const u8 gText_EVO_ITEM_FEMALE[]                    = _("Usar {STR_VAR_2} sieno hembra");
+const u8 gText_EVO_ITEM_MALE[]                      = _("Usar {STR_VAR_2} siendo macho");
+const u8 gText_EVO_ITEM_FEMALE[]                    = _("Usar {STR_VAR_2} siendo hembra");
 const u8 gText_EVO_LEVEL_RAIN[]                     = _("Al NVL {STR_VAR_2} si llueve");
 const u8 gText_EVO_SPECIFIC_MON_IN_PARTY[]          = _("+NVL con {STR_VAR_2} en el equipo");
 const u8 gText_EVO_LEVEL_DARK_TYPE_MON_IN_PARTY[]   = _("+NVL con tipo siniestro en el equipo");
 const u8 gText_EVO_TRADE_SPECIFIC_MON[]             = _("Intercambiar por {STR_VAR_2}");
 const u8 gText_EVO_SPECIFIC_MAP[]                   = _("+NVL en {STR_VAR_2}");
+const u8 gText_EVO_CRITICAL[]                   = _("Dar +3 golpes críticos en un combate");
 const u8 gText_EVO_UNKNOWN[]                        = _("Método desconocido");
 const u8 gText_EVO_NONE[]                           = _("{STR_VAR_1} no evoluciona.");
 
@@ -2005,7 +2004,7 @@ const u8 gText_FORMS_Buttons_PE[]                   = _("{A_BUTTON}FORM MODE  {S
 const u8 gText_FORMS_Buttons_Decapped_PE[]          = _("{START_BUTTON}Evos");
 const u8 gText_FORMS_Buttons_Submenu_PE[]           = _("{DPAD_NONE}FORMs {A_BUTTON}CHECK {START_BUTTON}EVOs");
 const u8 gText_FORMS_Buttons_Submenu_Decapped_PE[]  = _("{START_BUTTON}Evos");
-const u8 gText_FORMS_NONE[]                         = _("{STR_VAR_1} has no alternate forms.");
+const u8 gText_FORMS_NONE[]                         = _("{STR_VAR_1} no tiene otras formas.");
 //// side quest data
 //names
 const u8 gText_SideQuestName_1[] = _("¡La Primera Misión!");

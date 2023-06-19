@@ -2908,6 +2908,14 @@ const struct ContestMove gContestMoves[MOVES_COUNT] =
         .comboStarterId = 0,
         .comboMoves = {0}
     },
+	
+	[MOVE_HYPERDRILL] = {
+		.effect = CONTEST_EFFECT_BADLY_STARTLES_MONS_IN_GOOD_CONDITION,
+        .contestCategory = CONTEST_CATEGORY_COOL,
+        .comboStarterId = 0,
+        .comboMoves = {COMBO_STARTER_FOCUS_ENERGY}
+	},
+	[MOVE_CHILLY_RECEPTION] = {0}, // TODO
 
     [MOVE_PLUCK] =
     {
@@ -5966,7 +5974,7 @@ const struct ContestMove gContestMoves[MOVES_COUNT] =
     [MOVE_LUNAR_BLESSING] = {0}, // TODO
 
     [MOVE_TAKE_HEART] = {0}, // TODO
-    [MOVE_HYPERDRILL] = {0}, // TODO
+    
 };
 
 const struct ContestEffect gContestEffects[] =

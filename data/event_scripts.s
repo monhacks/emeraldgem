@@ -1097,3 +1097,64 @@ Script_RemoveTint::
 	.include "data/maps/MirageTower_SecretRoomRegieleki/scripts.inc"
 
 	.include "data/maps/ShoalCave_LowTideIceRoom_DragoTomb/scripts.inc"
+	
+
+
+CheckIVs::
+	special ChoosePartyMon
+	waitstate
+	compare VAR_0x8004, 255
+	goto_if_eq ButIRefuse
+	compare VAR_0x8004, 255
+	goto_if_ne CheckIVs_Proceed
+	end
+CheckIVs_Proceed:
+	special RyuIvCheckerDef
+	msgbox RyuIVDebug1 6
+	special RyuIvCheckerOff
+	msgbox RyuIVDebug2 4
+	closemessage
+	end
+
+CheckEVs::
+	special ChoosePartyMon
+	waitstate
+	compare VAR_0x8004, 255
+	goto_if_eq ButIRefuse
+	compare VAR_0x8004, 255
+	goto_if_ne CheckEVs_Proceed
+	end
+CheckEVs_Proceed:
+	special RyuEvCheckerDef
+	msgbox RyuEVDebug1 6
+	special RyuEvCheckerOff
+	msgbox RyuEVDebug2 4
+	closemessage
+	msgbox Decline 6
+	end
+ButIRefuse:
+	msgbox Decline 6
+	end
+
+RyuIVDebug1::
+	.string "Sus IVs defensivos son:\n"
+	.string "PS: {STR_VAR_1}    Def: {STR_VAR_2}     DefEsp: {STR_VAR_3}$"
+
+RyuIVDebug2::
+	.string "Sus IVs ofensivos son:\n"
+	.string "Atq: {STR_VAR_1}    AtqEsp: {STR_VAR_2}     Vel: {STR_VAR_3}$"
+
+RyuEVDebug1::
+	.string "Sus EVs defensivos son:\n"
+	.string "PS: {STR_VAR_1}    Def: {STR_VAR_2}     DefEsp: {STR_VAR_3}$"
+
+RyuEVDebug2::
+	.string "Sus EVs ofensivos son:\n"
+	.string "Atq: {STR_VAR_1}    AtqEsp: {STR_VAR_2}     Vel: {STR_VAR_3}$"
+
+Reject:
+	.string "Ah, lo siento, pero no puedo\n"
+	.string "analizar a un Huevo.$"
+
+Decline:
+	.string "¡Espero que vuelva pronto!$"

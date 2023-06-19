@@ -6911,17 +6911,17 @@ static u32 GetTrainerMoneyToGive(u16 trainerId)
 
 static void Cmd_getmoneyreward(void)
 {
-    u32 money;
+    u32 money = 0;
     u8 sPartyLevel = 1;
 
-    if (gBattleOutcome == B_OUTCOME_WON)
+    if (gBattleOutcome == B_OUTCOME_WON && VarGet(VAR_LEVEL_FOR_TRAINING) < 2)
     {
         money = GetTrainerMoneyToGive(gTrainerBattleOpponent_A);
         if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS)
             money += GetTrainerMoneyToGive(gTrainerBattleOpponent_B);
         AddMoney(&gSaveBlock1Ptr->money, money);
     }
-    else
+    else if (VarGet(VAR_LEVEL_FOR_TRAINING) < 2)
     {
         s32 i, count;
         for (i = 0; i < PARTY_SIZE; i++)

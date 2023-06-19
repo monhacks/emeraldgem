@@ -14,6 +14,7 @@ bool8 AbnormalWeatherHasExpired(void);
 bool8 ShouldDoBrailleRegicePuzzle(void);
 bool32 ShouldDoWallyCall(void);
 bool32 ShouldDoScottFortreeCall(void);
+extern u16 gScrollableMultichoice_ScrollOffset;
 bool32 ShouldDoScottBattleFrontierCall(void);
 bool32 ShouldDoRoxanneCall(void);
 bool32 ShouldDoRivalRayquazaCall(void);

@@ -664,7 +664,7 @@ const u8 gMoveNames[MOVES_COUNT][MOVE_NAME_LENGTH + 1] =
     [MOVE_PSYCHIC_FANGS] = _("Psicolmillo"),
     [MOVE_STOMPING_TANTRUM] = _("Pataleta"),
     [MOVE_SHADOW_BONE] = _("Hueso Sombra"),
-    [MOVE_ACCELEROCK] = _("Aceleroca"),
+    [MOVE_ACCELEROCK] = _("Acelerroca"),
     [MOVE_LIQUIDATION] = _("Hidroariete"),
     [MOVE_PRISMATIC_LASER] = _("Láser Prisma"),
     [MOVE_SPECTRAL_THIEF] = _("Robasombra"),
@@ -782,6 +782,7 @@ const u8 gMoveNames[MOVES_COUNT][MOVE_NAME_LENGTH + 1] =
     [MOVE_LUNAR_BLESSING] = _("LunarBlessng"),
     [MOVE_TAKE_HEART] = _("Take Heart"),
     [MOVE_HYPERDRILL] = _("Hípertaladro"),
+    [MOVE_CHILLY_RECEPTION] = _("Públ.Difícil"),
 };
 
 static const u8 sText_Breakneck_Blitz[] = _("Breakneck Blitz");
@@ -903,7 +904,7 @@ const u8 gLongMoveNames[MOVES_COUNT][LONG_MOVE_NAME_LENGTH + 1] =
     [MOVE_DOUBLE_EDGE] = _("Doble Filo"),
     [MOVE_TAIL_WHIP] = _("Látigo"),
     [MOVE_POISON_STING] = _("Picotazo Venenoso"),
-    [MOVE_TWINEEDLE] = _("DobleAguijón"),
+    [MOVE_TWINEEDLE] = _("Doble Aguijón"),
     [MOVE_PIN_MISSILE] = _("Misil Aguja"),
     [MOVE_LEER] = _("Malicioso"),
     [MOVE_BITE] = _("Mordida"),
@@ -1643,5 +1644,6 @@ const u8 gLongMoveNames[MOVES_COUNT][LONG_MOVE_NAME_LENGTH + 1] =
     [MOVE_LUNAR_BLESSING] = _("LunarBlessng"),
     [MOVE_TAKE_HEART] = _("Take Heart"),
     [MOVE_HYPERDRILL] = _("Hípertaladro"),
+    [MOVE_CHILLY_RECEPTION] = _("Público Difícil"),
 };
 

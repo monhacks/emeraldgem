@@ -251,6 +251,133 @@ u8 *StringCopy(u8 *dest, const u8 *src)
     return dest;
 }
 
+u8 *StringFormat(u8 *dest, u8 num , const u8 *src)
+{
+	u8 line = 1;
+	const u8 lineBreak[] = _("\n");
+	const u8 minusSymbol[] = _("-");
+	const u8 aSimpleSpace[] = _(" ");
+	int i;
+	for (i=0; src[i]!=EOS;i++){
+		if (src[i] == *aSimpleSpace){
+			if (line == 1) {
+				if (src[i+1] != EOS){
+					i++;
+					*dest = src[i];
+					dest++;
+				}
+			}
+			if ((num-line) <= 2){
+				*dest = *lineBreak;
+				dest++;
+				if (src[i+1] != EOS)
+					i++;
+				line = 0;
+			}
+		}
+		else if (src[i+1] == *aSimpleSpace) {
+			if ((num-line) <= 2){
+				*dest = src[i];
+				dest++;
+				*dest = *lineBreak;
+				dest++;
+				if (src[i+1] != EOS)
+					i++;
+				if (src[i+1] != EOS)
+					i++;
+				line = 0;
+			}
+		}
+		else if (src[i] == *lineBreak){
+			if (line != num){
+				*dest = *aSimpleSpace;
+				dest++;
+				if (src[i+1] != EOS)
+					i++;
+			}
+		}
+		else if (line == num){
+			*dest = *minusSymbol;
+			dest++;
+			*dest = *lineBreak;
+			dest++;
+			line = 0;
+		}
+		*dest = src[i];
+		dest++;
+		line++;
+		// if (line == 1 && src[i] == *aSimpleSpace){
+			// *dest = src[i+1];
+			// dest++;
+			// i++;
+			// line++;
+		// }
+		// if ((num-line)<=1 && src[i] != *lineBreak){
+			// if (src[i] == *aSimpleSpace){
+				// *dest = *lineBreak;
+				// dest++;
+				// line = 0;
+			// }
+			// else if (src[i+1] == *aSimpleSpace){
+				// *dest = src[i];
+				// dest++;
+				// *dest = *lineBreak;
+				// dest++;
+				// i++;
+				// line = 0;
+			// }
+			// else if (src[i+2] == *aSimpleSpace){
+				// *dest = src[i];
+				// dest++;
+				// i++;
+				// *dest = src[i];
+				// dest++;
+				// *dest = *lineBreak;
+				// dest++;
+				// i++;
+				// line = 0;
+			// }
+			// else {
+				// *dest = *minusSymbol;
+				// dest++;
+				// *dest = *lineBreak;
+				// dest++;
+				// line = 0;
+			// }
+			
+		// }
+		// if (src[i] == *lineBreak && line != num){
+			// *dest = *aSimpleSpace;
+		// }
+		// else {
+			// *dest = src[i];
+		// }
+		// dest++;
+		// if (src[(i + 1)] == EOS){
+			// *dest = EOS;
+		// }
+		// line++;
+	}
+    // while (*src != EOS)
+    // {
+		// if (line == num && *src!=*"\n"){
+			// *dest = "\n";
+			// dest++;
+			// line = 0;
+		// }
+		// if (*src == *"\n" && line != num){
+			// src++;
+		// }
+		// *dest = *src;
+        // dest++;
+        // src++;
+		// line++;
+    // }
+
+    *dest = EOS;
+    return dest;
+}
+
 u8 *StringAppend(u8 *dest, const u8 *src)
 {
     while (*dest != EOS)

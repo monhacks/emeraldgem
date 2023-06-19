@@ -79,6 +79,7 @@ bool32 IsMsgSignPost(void);
 bool32 CanWalkAwayToCancelMsgBox(void);
 void ClearMsgBoxCancelableState(void);
 void ScriptContext2_RunNewScript(const u8 *ptr);
+u32 ScriptPeekWord(struct ScriptContext *ctx);
 
 
 #endif // GUARD_SCRIPT_H

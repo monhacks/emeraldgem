@@ -635,8 +635,12 @@
 #define STRINGID_STATNOTROSE	 					  633
 #define STRINGID_PKMNSXPREVENTSFREEZE	 			  634
 #define STRINGID_FREEZEDMG 				 			  635
+#define STRINGID_PREPARINGCHILLINGJOKE 				  636
+#define STRINGID_THECOLDRECEPTIONMADEITSNOW	 		  637
+#define STRINGID_PKMNSWITCHESOUTINEMBARRASSMENT	 	  638
+#define STRINGID_BUTITFAILEDTOSNOW				 	  639
 
-#define BATTLESTRINGS_COUNT                           636
+#define BATTLESTRINGS_COUNT                           640
 
 // This is the string id that gBattleStringsTable starts with.
 // String ids before this (e.g. STRINGID_INTROMSG) are not in the table,

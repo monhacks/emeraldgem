@@ -1307,15 +1307,25 @@ static const struct WindowTemplate sStatsScreen_WindowTemplates[] =
         .paletteNum = 0,
         .baseBlock = 1 + 60 + 40,
     },
-    [WIN_STATS_LEFT] = 
+	[WIN_STATS_MOVES_DESCRIPTION] =
     {
         .bg = 2,
         .tilemapLeft = 0,
         .tilemapTop = 6,
         .width = 12,
-        .height = 8,
+        .height = 5,
         .paletteNum = 0,
         .baseBlock = 1 + 60 + 40 + 48,
+    },
+    [WIN_STATS_LEFT] = 
+    {
+        .bg = 2,
+        .tilemapLeft = 0,
+        .tilemapTop = 11,
+        .width = 12,
+        .height = 8,
+        .paletteNum = 0,
+        .baseBlock = 1 + 60 + 40 + 48 + 72,
     },
     [WIN_STATS_NAVIGATION_BUTTONS] = 
     {
@@ -1325,7 +1335,7 @@ static const struct WindowTemplate sStatsScreen_WindowTemplates[] =
         .width = 12,
         .height = 2,
         .paletteNum = 15,
-        .baseBlock = 1 + 60 + 40 + 48 + 96,
+        .baseBlock = 1 + 60 + 40 + 48 + 72 + 96,
     },
     [WIN_STATS_MOVES_TOP] =
     {
@@ -1335,48 +1345,39 @@ static const struct WindowTemplate sStatsScreen_WindowTemplates[] =
         .width = 18,
         .height = 4,
         .paletteNum = 0,
-        .baseBlock = 1 + 60 + 40 + 48 + 96 + 24,
+        .baseBlock = 1 + 60 + 40 + 48 + 96 + 72	+ 32,
     },
-    [WIN_STATS_MOVES_DESCRIPTION] =
+    
+    [WIN_STATS_MOVES_BOTTOM] =
     {
         .bg = 2,
         .tilemapLeft = 12,
         .tilemapTop = 6,
         .width = 18,
-        .height = 4,
+        .height = 3,
         .paletteNum = 0,
-        .baseBlock = 1 + 60 + 40 + 48 + 96 + 24 + 72,
-    },
-    [WIN_STATS_MOVES_BOTTOM] =
-    {
-        .bg = 2,
-        .tilemapLeft = 12,
-        .tilemapTop = 10,
-        .width = 18,
-        .height = 2,
-        .paletteNum = 0,
-        .baseBlock = 1 + 60 + 40 + 48 + 96 + 24 + 72 + 72,
+        .baseBlock = 1 + 60 + 40 + 48 + 72 + 96 + 72 + 32,
     },
     [WIN_STATS_ABILITIES] =
     {
         .bg = 2,
         .tilemapLeft = 12,
-        .tilemapTop = 12,
+        .tilemapTop = 9,
         .width = 18,
-        .height = 8,
+        .height = 16,
         .paletteNum = 0,
-        .baseBlock = 1 + 60 + 40 + 48 + 96 + 24 + 72 + 72 + 36,
+        .baseBlock = 1 + 60 + 40 + 48 + 72 + 96 + 40 + 72 + 72,
     },
-    [WIN_STATS_LEFT_UNUSED] =
-    {
-        .bg = 2,
-        .tilemapLeft = 0,
-        .tilemapTop = 14,
-        .width = 12,
-        .height = 4,
-        .paletteNum = 0,
-        .baseBlock = 1 + 60 + 40 + 48 + 96 + 24 + 72 + 72 + 36 + 144,
-    },
+    // [WIN_STATS_LEFT_UNUSED] =
+    // {
+        // .bg = 2,
+        // .tilemapLeft = 0,
+        // .tilemapTop = 14,
+        // .width = 12,
+        // .height = 4,
+        // .paletteNum = 0,
+        // .baseBlock = 1 + 60 + 40 + 48 + 120 + 24 + 72 + 72 + 36 + 144,
+    // },
     DUMMY_WIN_TEMPLATE
 };
 
@@ -6479,7 +6480,7 @@ static const u8 sStatsPageNavigationTextColor[] = {TEXT_COLOR_TRANSPARENT, TEXT_
 static void StatsPage_PrintNavigationButtons(void)
 {
     u8 x = 9;
-    u8 y = 0;
+    u8 y = 1;
     if (!HGSS_DECAPPED)
         AddTextPrinterParameterized3(WIN_STATS_NAVIGATION_BUTTONS, 0, x, y, sStatsPageNavigationTextColor, 0, gText_Stats_Buttons);
     else
@@ -6623,10 +6624,10 @@ static void Task_LoadStatsScreen(u8 taskId)
     case 6:
         gTasks[taskId].data[5] = 0;
         PrintStatsScreen_NameGender(taskId, sPokedexListItem->dexNum, sPokedexView->dexMode == DEX_MODE_HOENN ? FALSE : TRUE);
+		PrintStatsScreen_Moves_Description(taskId);
         PrintStatsScreen_Left(taskId);
         PrintStatsScreen_Abilities(taskId);
         PrintStatsScreen_Moves_Top(taskId);
-        PrintStatsScreen_Moves_Description(taskId);
         PrintStatsScreen_Moves_BottomText(taskId);
         PrintStatsScreen_Moves_Bottom(taskId);
         if (!sPokedexListItem->owned)
@@ -6701,12 +6702,12 @@ static void Task_HandleStatsScreenInput(u8 taskId)
             gTasks[taskId].data[5] = 1;
         else
             gTasks[taskId].data[5] = 0;
-
+		FillWindowPixelBuffer(WIN_STATS_MOVES_DESCRIPTION, PIXEL_FILL(0));
+        PrintStatsScreen_Moves_Description(taskId);
         FillWindowPixelBuffer(WIN_STATS_LEFT, PIXEL_FILL(0)); 
         PrintStatsScreen_Left(taskId);
 
-        FillWindowPixelBuffer(WIN_STATS_MOVES_DESCRIPTION, PIXEL_FILL(0));
-        PrintStatsScreen_Moves_Description(taskId);
+        
 
         FillWindowPixelBuffer(WIN_STATS_MOVES_BOTTOM, PIXEL_FILL(0));
         PrintStatsScreen_Moves_BottomText(taskId);
@@ -6952,19 +6953,21 @@ static void PrintStatsScreen_Moves_Description(u8 taskId)
     //Move description
     if (gTasks[taskId].data[5] == 0)
     {
-        StringCopy(gStringVar4, gMoveDescriptionPointers[(move - 1)]);
-        PrintStatsScreenTextSmall(WIN_STATS_MOVES_DESCRIPTION, gStringVar4, moves_x, moves_y);
+        // StringCopy(gStringVar4, gMoveDescriptionPointers[(move - 1)]);
+		StringFormat(gStringVar4, 18 , gMoveDescriptionPointers[(move - 1)]);
+        PrintStatsScreenTextSmall(WIN_STATS_MOVES_DESCRIPTION, gStringVar4, moves_x, moves_y-2);
     }
     else
     {
-        StringCopy(gStringVar4, gContestEffectDescriptionPointers[gContestMoves[move].effect]);
-        PrintStatsScreenTextSmall(WIN_STATS_MOVES_DESCRIPTION, gStringVar4, moves_x, moves_y);
+        // StringCopy(gStringVar4, gContestEffectDescriptionPointers[gContestMoves[move].effect]);
+		StringFormat(gStringVar4, 18 , gContestEffectDescriptionPointers[gContestMoves[move].effect]);
+        PrintStatsScreenTextSmall(WIN_STATS_MOVES_DESCRIPTION, gStringVar4, moves_x, moves_y-2);
     }
 }
 static void PrintStatsScreen_Moves_BottomText(u8 taskId)
 {
     u8 moves_x = 8;
-    u8 moves_y = 3;
+    u8 moves_y = 5;
     if (gTasks[taskId].data[5] == 0)
     {
         PrintStatsScreenTextSmall(WIN_STATS_MOVES_BOTTOM, gText_Power,  moves_x, moves_y);
@@ -6979,7 +6982,7 @@ static void PrintStatsScreen_Moves_BottomText(u8 taskId)
 static void PrintStatsScreen_Moves_Bottom(u8 taskId)
 {
     u8 moves_x = 8;
-    u8 moves_y = 3;
+    u8 moves_y = 5;
     u8 selected = sPokedexView->moveSelected;
     u16 move;
     //Contest
@@ -7135,7 +7138,7 @@ static void PrintStatsScreen_Left(u8 taskId)
     u8 base_x_second_row = 43;
     u8 base_y_offset = 11;
     u8 base_i = 0;
-    u8 base_y = 5;
+    u8 base_y = 0;
     u32 align_x;
     u8 total_x = 93;
     u8 strEV[25];
@@ -7554,13 +7557,13 @@ static void PrintStatsScreen_Abilities(u8 taskId)
     #endif    
         ability0 = sPokedexView->sPokemonStats.ability0;
         PrintStatsScreenTextSmallWhite(WIN_STATS_ABILITIES, gAbilityNames[ability0], abilities_x, abilities_y);
-        PrintStatsScreenTextSmall(WIN_STATS_ABILITIES, gAbilityDescriptionPointers[ability0], abilities_x, abilities_y + 14);
+        PrintStatsScreenTextSmall(WIN_STATS_ABILITIES, gAbilityDescriptionPointers[ability0], abilities_x, abilities_y + 12);
 
         ability1 = sPokedexView->sPokemonStats.ability1;
         if (ability1 != ABILITY_NONE && ability1 != ability0)
         {
-            PrintStatsScreenTextSmallWhite(WIN_STATS_ABILITIES, gAbilityNames[ability1], abilities_x, abilities_y + 30);
-            PrintStatsScreenTextSmall(WIN_STATS_ABILITIES, gAbilityDescriptionPointers[ability1], abilities_x, abilities_y + 44);
+            PrintStatsScreenTextSmallWhite(WIN_STATS_ABILITIES, gAbilityNames[ability1], abilities_x, abilities_y + 42);
+            PrintStatsScreenTextSmall(WIN_STATS_ABILITIES, gAbilityDescriptionPointers[ability1], abilities_x, abilities_y + 54);
         }
     #ifdef POKEMON_EXPANSION  
     }
@@ -7568,7 +7571,7 @@ static void PrintStatsScreen_Abilities(u8 taskId)
     {
         abilityHidden = sPokedexView->sPokemonStats.abilityHidden;
         PrintStatsScreenTextSmallWhite(WIN_STATS_ABILITIES, gAbilityNames[abilityHidden], abilities_x, abilities_y);
-        PrintStatsScreenTextSmall(WIN_STATS_ABILITIES, gAbilityDescriptionPointers[abilityHidden], abilities_x, abilities_y + 14);
+        PrintStatsScreenTextSmall(WIN_STATS_ABILITIES, gAbilityDescriptionPointers[abilityHidden], abilities_x, abilities_y + 12);
     }
     #endif
 }
@@ -7628,7 +7631,7 @@ static void Task_ExitStatsScreen(u8 taskId)
 static u8 ShowSplitIcon(u32 split)
 {
     if (sPokedexView->splitIconSpriteId == 0xFF)
-        sPokedexView->splitIconSpriteId = CreateSprite(&sSpriteTemplate_SplitIcons, 139, 90, 0);
+        sPokedexView->splitIconSpriteId = CreateSprite(&sSpriteTemplate_SplitIcons, 139, 60, 0);
 
     gSprites[sPokedexView->splitIconSpriteId].invisible = FALSE;
     StartSpriteAnim(&gSprites[sPokedexView->splitIconSpriteId], split);
@@ -8324,6 +8327,8 @@ static u8 PrintEvolutionTargetSpeciesAndMethod(u8 taskId, u16 species, u8 depth,
                 GetMapName(gStringVar2, mapHeader->regionMapSectionId, 0);
                 StringExpandPlaceholders(gStringVar4, gText_EVO_SPECIFIC_MAP );
                 break;
+			case EVO_CRITICAL_HITS:
+				StringExpandPlaceholders(gStringVar4, gText_EVO_CRITICAL );
         #endif
         default:
             StringExpandPlaceholders(gStringVar4, gText_EVO_UNKNOWN );

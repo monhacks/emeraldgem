@@ -2628,7 +2628,7 @@ static const struct SpritePalette sSpritePalettes[] =
 //contraseñas
 static const u8 gText_TextoInicialContra[] = _("");
 static const u8 gText_Contrasena1[] = _("WORLDOFPOKEMON");
-static const u8 gText_Recompensa1[] = _("un Ditto y un Paquete\ncompleto de Caramelos\lExperiencia");
+static const u8 gText_Recompensa1[] = _("un Paquete de Caramelos EXP");
 static const u8 gText_Contrasena2[] = _("PASSWORD");
 static const u8 gText_Contrasena3[] = _("RECIEVEPOKEMON");
 static const u8 gText_Contrasena4[] = _("ABCDEFG");
@@ -2661,8 +2661,9 @@ static void CB2_HandleGivenPassword(void)
 		AddBagItem(ITEM_EXP_CANDY_M, 5);
 		AddBagItem(ITEM_EXP_CANDY_L, 5);
 		AddBagItem(ITEM_EXP_CANDY_XL, 5);
-		StringCopy(gStringVar1, gText_Recompensa1);
-		ScriptContext_SetupScript(Password1);
+		GetSpeciesName(gStringVar1, SPECIES_DITTO);
+		StringCopy(gStringVar2, gText_Recompensa1);
+		ScriptContext_SetupScript(Password2);
     }
 	else if (StringCompare(gStringVar2, gText_Contrasena2) == 0) {
 		ScriptGiveMon(SPECIES_ARCEUS, 100, ITEM_MASTER_BALL, 0, 0, 0);

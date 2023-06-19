@@ -5046,7 +5046,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
     [MOVE_BRICK_BREAK] =
     {
         .effect = EFFECT_BRICK_BREAK,
-        .power = 75,
+        .power = 80,
         .type = TYPE_FIGHTING,
         .accuracy = 100,
         .pp = 15,
@@ -5056,7 +5056,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
         .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
         .split = SPLIT_PHYSICAL,
         .zMovePower = 140,
-        .zMoveEffect = Z_EFFECT_NONE,
+        .zMoveEffect = Z_EFFECT_ATK_UP_2,
     },
 
     [MOVE_YAWN] =
@@ -13607,6 +13607,22 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
         .split = SPLIT_PHYSICAL,
         .zMovePower = 180,
         .zMoveEffect = Z_EFFECT_ATK_UP_2,
+    },
+	
+	[MOVE_CHILLY_RECEPTION] =
+    {
+        .effect = EFFECT_BADDY_BAD,
+        .power = 0,
+        .type = TYPE_ICE,
+        .accuracy = 0,
+        .pp = 10,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_ALL_BATTLERS,
+        .priority = 0,
+        .flags = 0,
+        .split = SPLIT_STATUS,
+        .zMovePower = 0,
+        .zMoveEffect = Z_EFFECT_NONE,
     },
 
     // Z-Moves
