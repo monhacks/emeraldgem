@@ -562,3 +562,5 @@ gSpecials::
 	def_special RyuSetIvsBad
 	def_special RyuSetIvsMedium
 	def_special RyuSetIvsPerfect
+	def_special SetTrainerType
+	def_special ShowTrainerType

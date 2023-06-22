@@ -3322,17 +3322,17 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
             u32 rolls = 0;
 			u32 shinyRerolls = I_SHINY_CHARM_REROLLS;
 			if (VarGet(VAR_CHAIN) >= 10 && VarGet(VAR_CHAIN) <= 19)
-				shinyRerolls += 2;
+				shinyRerolls += 1;
 			else if (VarGet(VAR_CHAIN) >= 20 && VarGet(VAR_CHAIN) <= 29)
-				shinyRerolls += 4;
+				shinyRerolls += 2;
 			else if (VarGet(VAR_CHAIN) >= 30 && VarGet(VAR_CHAIN) <= 39)
-				shinyRerolls += 6;
+				shinyRerolls += 3;
 			else if (VarGet(VAR_CHAIN) >= 40 && VarGet(VAR_CHAIN) <= 49)
-				shinyRerolls += 7;
+				shinyRerolls += 4;
 			else if (VarGet(VAR_CHAIN) >= 50 && VarGet(VAR_CHAIN) <= 59)
-				shinyRerolls += 8;
+				shinyRerolls += 5;
 			else if (VarGet(VAR_CHAIN) >= 60)
-				shinyRerolls += 12;
+				shinyRerolls += 7;
             do
             {
                 personality = Random32();
@@ -3346,17 +3346,17 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
             u32 rolls = 0;
 			u32 shinyRerolls = 0;
 			if (VarGet(VAR_CHAIN) >= 10 && VarGet(VAR_CHAIN) <= 19)
-				shinyRerolls += 2;
+				shinyRerolls += 1;
 			else if (VarGet(VAR_CHAIN) >= 20 && VarGet(VAR_CHAIN) <= 29)
-				shinyRerolls += 4;
+				shinyRerolls += 2;
 			else if (VarGet(VAR_CHAIN) >= 30 && VarGet(VAR_CHAIN) <= 39)
-				shinyRerolls += 6;
+				shinyRerolls += 3;
 			else if (VarGet(VAR_CHAIN) >= 40 && VarGet(VAR_CHAIN) <= 49)
-				shinyRerolls += 7;
+				shinyRerolls += 4;
 			else if (VarGet(VAR_CHAIN) >= 50 && VarGet(VAR_CHAIN) <= 59)
-				shinyRerolls += 8;
+				shinyRerolls += 5;
 			else if (VarGet(VAR_CHAIN) >= 60)
-				shinyRerolls += 12;
+				shinyRerolls += 7;
             do
             {
                 personality = Random32();
@@ -3372,8 +3372,6 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
                 personality = ((((Random() % SHINY_ODDS) ^ (HIHALF(value) ^ LOHALF(value))) ^ LOHALF(personality)) << 16) | LOHALF(personality);
             } while (nature != GetNatureFromPersonality(personality));
         }
-
-    }
 	}
 
     SetBoxMonData(boxMon, MON_DATA_PERSONALITY, &personality);
@@ -3537,7 +3535,7 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
 
     GiveBoxMonInitialMoveset(boxMon);
 }
-
+}
 
 u8 GetNature(struct Pokemon *mon, bool32 checkHidden)
 {

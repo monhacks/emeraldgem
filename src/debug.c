@@ -2053,6 +2053,7 @@ static void DebugAction_Util_Trainer_Gender(u8 taskId)
         gSaveBlock2Ptr->playerGender = 1;
     else
         gSaveBlock2Ptr->playerGender = 0;
+	gSaveBlock1Ptr->trainerType = 1;
     ScriptContext_Enable();
     Debug_DestroyMenu_Full(taskId);
 }

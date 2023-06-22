@@ -59,7 +59,7 @@ Text_WantToCut:
 	.string "¿Quieres cortar este árbol?$"
 
 Text_MonUsedFieldMove:
-	.string "¡{STR_VAR_1} cortó el árbol!$"
+	.string "¡{STR_VAR_1} usó {STR_VAR_2}!$"
 
 Text_CantCut:
 	.string "¡Puedes cortar este árbol!$"

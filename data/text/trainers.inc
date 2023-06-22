@@ -43,16 +43,16 @@ Route102_Text_RickDefeated:
 	.string "¡AUAUAU! ¡Derrotado y lastimado!$"
 
 Route102_Text_RickPostBattle:
-	.string "¡Vete!$"
+	.string "¡Vete!\nMis pobres Pokémon…$"
 
 Route102_Text_TianaIntro:
-	.string "¡Seré de lo mejor que hay!$"
+	.string "¡Atrapé mis Pokémon en la noche!\n¡Son más fuertes que los\lque ves de día! ¡Prepárate!$"
 
 Route102_Text_TianaDefeated:
-	.string "Oh…$"
+	.string "Oh… Eres más fuerte.$"
 
 Route102_Text_TianaPostBattle:
-	.string "Necesito más Pokémon.$"
+	.string "Necesito más Pokémon nocturnos.$"
 
 Route103_Text_DaisyIntro:
 	.string "………………$"

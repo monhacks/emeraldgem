@@ -3213,7 +3213,7 @@ static void ChangeDeoxysRockLevel(u8 rockLevel)
 {
     u8 objectEventId;
     LoadPalette(&sDeoxysRockPalettes[rockLevel], 0x1A0, 8);
-	ApplyGlobalFieldPaletteTint(10);
+	// ApplyGlobalFieldPaletteTint(10);
     TryGetObjectEventIdByLocalIdAndMap(LOCALID_BIRTH_ISLAND_EXTERIOR_ROCK, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &objectEventId);
 
     if (rockLevel == 0)
@@ -3262,7 +3262,7 @@ void IncrementBirthIslandRockStepCount(void)
 void SetDeoxysRockPalette(void)
 {
     LoadPalette(&sDeoxysRockPalettes[(u8)VarGet(VAR_DEOXYS_ROCK_LEVEL)], 0x1A0, 8);
-    ApplyGlobalFieldPaletteTint(10);
+    // ApplyGlobalFieldPaletteTint(10);
 }
 
 void SetPCBoxToSendMon(u8 boxId)
@@ -4386,4 +4386,15 @@ void RyuSetIvsPerfect(void)
 		iv = BEST_IV_SPREAD[gSpecialVar_0x8006][j];
 		SetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_HP_IV + j, &iv);
 	}
+}
+
+void SetTrainerType(void)
+{
+	gSaveBlock1Ptr->trainerType = (gSpecialVar_0x8004 + (gSaveBlock2Ptr->playerGender * 5));
+}
+
+void ShowTrainerType(void)
+{
+	gSpecialVar_Result = gSaveBlock1Ptr->trainerType;
+	// return gSpecialVar_Result;
 }

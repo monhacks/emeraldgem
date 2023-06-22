@@ -149,6 +149,26 @@ EWRAM_DATA u8 sBasePaletteGammaTypes[32] =
     GAMMA_NORMAL,
 };
 
+EWRAM_DATA u8 sBasePaletteGammaTypes2[16] =
+{
+    GAMMA_ALT,
+    GAMMA_NORMAL,
+    GAMMA_ALT,
+    GAMMA_ALT,
+    GAMMA_ALT,
+    GAMMA_ALT,
+    GAMMA_NORMAL,
+    GAMMA_NORMAL,
+    GAMMA_NORMAL,
+    GAMMA_NORMAL,
+    GAMMA_ALT,
+    GAMMA_NORMAL,
+    GAMMA_NORMAL,
+    GAMMA_NORMAL,
+    GAMMA_NONE,
+    GAMMA_NORMAL,
+};
+
 const u16 gFogPalette[] = INCBIN_U16("graphics/weather/fog.gbapal");
 
 void StartWeather(void)
@@ -157,7 +177,7 @@ void StartWeather(void)
     {
         u8 index = 15;
         CpuCopy32(gFogPalette, &gPlttBufferUnfaded[0x100 + index * 16], 32);
-		ApplyGlobalFieldPaletteTint(index);
+		// ApplyGlobalFieldPaletteTint(index);
         BuildGammaShiftTables();
         gWeatherPtr->altGammaSpritePalIndex = index;
         gWeatherPtr->rainSpriteCount = 0;
@@ -795,7 +815,7 @@ void FadeScreen(u8 mode, s8 delay)
         gWeatherPtr->palProcessingState = WEATHER_PAL_STATE_SCREEN_FADING_IN;
         gWeatherPtr->fadeInFirstFrame = TRUE;
         gWeatherPtr->fadeInTimer = 0;
-        Weather_SetBlendCoeffs(gWeatherPtr->currBlendEVA, gWeatherPtr->currBlendEVB);
+        // Weather_SetBlendCoeffs(gWeatherPtr->currBlendEVA, gWeatherPtr->currBlendEVB);
         gWeatherPtr->readyForInit = TRUE;
     }
 }
@@ -1106,5 +1126,6 @@ void ResetPreservedPalettesInWeather(void)
 void UpdatePaletteGammaType(u8 index, u8 gammaType)
 {
     if (index != 0xFF)
-        sBasePaletteGammaTypes[index + 16] = gammaType;
+        sBasePaletteGammaTypes2[index] = gammaType;
+        // sBasePaletteGammaTypes[index + 16] = gammaType;
 }

@@ -991,6 +991,10 @@ Common_EventScript_WirelessClubAttendant::
 	call CableClub_EventScript_WirelessClubAttendant
 	end
 
+Common_EventScript_TrainerTypeChanger::
+	call CableClub_EventScript_TrainerTypeChanger
+	end
+
 Common_EventScript_DirectCornerAttendant::
 	call CableClub_EventScript_DirectCornerAttendant
 	end

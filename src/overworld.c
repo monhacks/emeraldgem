@@ -531,10 +531,10 @@ void SetObjEventTemplateMovementType(u8 localId, u8 movementType)
 
 void InitMapView(void)
 {
-	s32 paletteIndex;
+	// s32 paletteIndex;
     ResetFieldCamera();
-	for (paletteIndex = 0; paletteIndex < 15; paletteIndex++)
-        ApplyGlobalFieldPaletteTint(paletteIndex);
+	// for (paletteIndex = 0; paletteIndex < 15; paletteIndex++)
+        // ApplyGlobalFieldPaletteTint(paletteIndex);
     CopyMapTilesetsToVram(gMapHeader.mapLayout);
     LoadMapTilesetPalettes(gMapHeader.mapLayout);
     DrawWholeMapView();
@@ -821,8 +821,8 @@ void LoadMapFromCameraTransition(u8 mapGroup, u8 mapNum)
     CopySecondaryTilesetToVramUsingHeap(gMapHeader.mapLayout);
     LoadSecondaryTilesetPalette(gMapHeader.mapLayout);
 
-    for (paletteIndex = 6; paletteIndex < 13; paletteIndex++)
-        ApplyWeatherGammaShiftToPal(paletteIndex);
+    // for (paletteIndex = 6; paletteIndex < 13; paletteIndex++)
+        // ApplyWeatherGammaShiftToPal(paletteIndex);
 
     InitSecondaryTilesetAnimation();
     UpdateLocationHistoryForRoamer();

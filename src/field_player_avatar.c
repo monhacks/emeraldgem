@@ -1448,23 +1448,22 @@ static u8 GetPlayerAvatarStateTransitionByGraphicsId(u8 graphicsId, u8 gender)
 {
     u8 i;
 	
-	if (VarGet(VAR_COLORSKIN) == 1)
-	{
-			for (i = 0; i < ARRAY_COUNT(sPlayerAvatarGfxToStateFlagSkin2[0]); i++)
-			{
-				if (sPlayerAvatarGfxToStateFlagSkin2[gender][i][0] == graphicsId)
-					return sPlayerAvatarGfxToStateFlagSkin2[gender][i][1];
-			}
-			return PLAYER_AVATAR_FLAG_ON_FOOT;
-	}
-	else {			
+	// if (VarGet(VAR_COLORSKIN) == 1)
+	// {
+			// for (i = 0; i < ARRAY_COUNT(sPlayerAvatarGfxToStateFlagSkin2[0]); i++)
+			// {
+				// if (sPlayerAvatarGfxToStateFlagSkin2[gender][i][0] == graphicsId)
+					// return sPlayerAvatarGfxToStateFlagSkin2[gender][i][1];
+			// }
+			// return PLAYER_AVATAR_FLAG_ON_FOOT;
+	// }
+	// else {			
 		for (i = 0; i < ARRAY_COUNT(sPlayerAvatarGfxToStateFlag[0]); i++)
 			{
 				if (sPlayerAvatarGfxToStateFlag[gender][i][0] == graphicsId)
 					return sPlayerAvatarGfxToStateFlag[gender][i][1];
 			}
 			return PLAYER_AVATAR_FLAG_ON_FOOT;
-	}
 	return PLAYER_AVATAR_FLAG_ON_FOOT;
 }
 
@@ -1473,21 +1472,21 @@ u8 GetPlayerAvatarGraphicsIdByCurrentState(void)
     u8 i;
     u8 flags = gPlayerAvatar.flags;
 	
-	if (VarGet(VAR_COLORSKIN) == 1)
-	{
-		for (i = 0; i < ARRAY_COUNT(sPlayerAvatarGfxToStateFlagSkin2[0]); i++)
-		{
-			if (sPlayerAvatarGfxToStateFlagSkin2[gPlayerAvatar.gender][i][1] & flags)
-				return sPlayerAvatarGfxToStateFlagSkin2[gPlayerAvatar.gender][i][0];
-		}
-	}
-	else {
+	// if (VarGet(VAR_COLORSKIN) == 1)
+	// {
+		// for (i = 0; i < ARRAY_COUNT(sPlayerAvatarGfxToStateFlagSkin2[0]); i++)
+		// {
+			// if (sPlayerAvatarGfxToStateFlagSkin2[gPlayerAvatar.gender][i][1] & flags)
+				// return sPlayerAvatarGfxToStateFlagSkin2[gPlayerAvatar.gender][i][0];
+		// }
+	// }
+	// else {
 		for (i = 0; i < ARRAY_COUNT(sPlayerAvatarGfxToStateFlag[0]); i++)
 		{
 			if (sPlayerAvatarGfxToStateFlag[gPlayerAvatar.gender][i][1] & flags)
 				return sPlayerAvatarGfxToStateFlag[gPlayerAvatar.gender][i][0];
 		}
-	}
+	// }
     return 0;
 }
 

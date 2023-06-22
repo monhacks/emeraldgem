@@ -115,7 +115,7 @@
               {
                 "min_level": 3,
                 "max_level": 3,
-                "species": "SPECIES_WURMPLE"
+                "species": "SPECIES_ZIGZAGOON"
               },
               {
                 "min_level": 3,
@@ -138,8 +138,8 @@
                 "species": "SPECIES_ZIGZAGOON"
               },
               {
-                "min_level": 6,
-                "max_level": 9,
+                "min_level": 2,
+                "max_level": 5,
                 "species": "SPECIES_AUDINO"
               }
             ]
@@ -204,12 +204,12 @@
               {
                 "min_level": 3,
                 "max_level": 3,
-                "species": "SPECIES_ZIGZAGOON"
+                "species": "SPECIES_ZIGZAGOON_GALARIAN"
               },
               {
                 "min_level": 2,
-                "max_level": 10,
-                "species": "SPECIES_BLISSEY"
+                "max_level": 6,
+                "species": "SPECIES_AUDINO"
               }
             ]
           }
@@ -277,7 +277,7 @@
               },
               {
                 "min_level": 2,
-                "max_level": 8,
+                "max_level": 6,
                 "species": "SPECIES_AUDINO"
               }
             ]
@@ -376,7 +376,7 @@
             "mons": [
               {
                 "min_level": 3,
-                "max_level": 35,
+                "max_level": 5,
                 "species": "SPECIES_POOCHYENA"
               },
               {
@@ -431,8 +431,8 @@
               },
               {
                 "min_level": 2,
-                "max_level": 10,
-                "species": "SPECIES_BLISSEY"
+                "max_level": 7,
+                "species": "SPECIES_AUDINO"
               }
             ]
           },
@@ -544,8 +544,8 @@
                 "species": "SPECIES_RATTATA"
               },
               {
-                "min_level": 4,
-                "max_level": 4,
+                "min_level": 2,
+                "max_level": 3,
                 "species": "SPECIES_DUCKLETT"
               },
               {
@@ -564,8 +564,8 @@
                 "species": "SPECIES_ZIGZAGOON"
               },
               {
-                "min_level": 4,
-                "max_level": 4,
+                "min_level": 2,
+                "max_level": 3,
                 "species": "SPECIES_ZORUA"
               },
               {
@@ -585,7 +585,7 @@
               },
               {
                 "min_level": 2,
-                "max_level": 6,
+                "max_level": 5,
                 "species": "SPECIES_AUDINO"
               }
             ]
@@ -719,7 +719,7 @@
               },
               {
                 "min_level": 4,
-                "max_level": 5,
+                "max_level": 4,
                 "species": "SPECIES_ZIGZAGOON"
               },
               {
@@ -739,7 +739,7 @@
               },
               {
                 "min_level": 2,
-                "max_level": 11,
+                "max_level": 6,
                 "species": "SPECIES_BLISSEY"
               }
             ]

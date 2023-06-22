@@ -167,6 +167,8 @@ void NewGameInitData(void)
     gSaveBlock2Ptr->specialSaveWarpFlags = 0;
     gSaveBlock2Ptr->gcnLinkFlags = 0;
     InitPlayerTrainerId();
+	// gSaveBlock1Ptr->trainerType = (gSaveBlock1Ptr->secretBases[secretBaseIdx].trainerId[0] % 5)
+         // + (gSaveBlock1Ptr->secretBases[secretBaseIdx].gender * 5);
     PlayTimeCounter_Reset();
     ClearPokedexFlags();
     InitEventData();

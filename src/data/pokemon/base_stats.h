@@ -5122,12 +5122,12 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_DUNSPARCE] =
     {
-        .baseHP        = 110,
+        .baseHP        = 100,
         .baseAttack    = 90,
-        .baseDefense   = 75,
-        .baseSpeed     = 10,
+        .baseDefense   = 70,
+        .baseSpeed     = 30,
         .baseSpAttack  = 70,
-        .baseSpDefense = 75,
+        .baseSpDefense = 70,
         .type1 = TYPE_NORMAL,
         .type2 = TYPE_BUG,
         .catchRate = 130,
@@ -13248,7 +13248,7 @@ const struct BaseStats gBaseStats[] =
         .type1 = TYPE_NORMAL,
         .type2 = TYPE_NORMAL,
         .catchRate = 255,
-        .expYield = 650,
+        .expYield = 500,
         .evYield_HP        = 3,
         .itemCommon = ITEM_ORAN_BERRY,
         .itemRare = ITEM_SITRUS_BERRY,
@@ -22504,12 +22504,12 @@ const struct BaseStats gBaseStats[] =
 	
 	[SPECIES_DUDUNSPARCE] =
     {
-        .baseHP        = 145,
+        .baseHP        = 125,
         .baseAttack    = 105,
         .baseDefense   = 100,
-        .baseSpeed     = 10,
+        .baseSpeed     = 30,
         .baseSpAttack  = 70,
-        .baseSpDefense = 100,
+        .baseSpDefense = 90,
         .type1 = TYPE_NORMAL,
         .type2 = TYPE_BUG,
         .catchRate = 45,

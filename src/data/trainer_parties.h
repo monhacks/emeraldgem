@@ -4837,8 +4837,13 @@ static const struct TrainerMon sParty_Shelby5[] = {
 static const struct TrainerMon sParty_Calvin1[] = {
     {
     .iv = 0,
-    .lvl = 5,
-    .species = SPECIES_POOCHYENA,
+    .lvl = 3,
+    .species = SPECIES_ZORUA,
+    },
+	{
+    .iv = 0,
+    .lvl = 3,
+    .species = SPECIES_SEWADDLE,
     }
 };
 
@@ -5027,7 +5032,7 @@ static const struct TrainerMon sParty_Allen[] = {
     {
     .iv = 0,
     .lvl = 4,
-    .species = SPECIES_ZIGZAGOON,
+    .species = SPECIES_MARILL,
     },
     {
     .iv = 0,
@@ -7479,7 +7484,7 @@ static const struct TrainerMon sParty_WallyVR1[] = {
 static const struct TrainerMon sParty_BrendanRoute103Mudkip[] = {
     {
     .iv = 0,
-    .lvl = 5,
+    .lvl = 4,
     .species = SPECIES_TREECKO,
     }
 };
@@ -7523,7 +7528,7 @@ static const struct TrainerMon sParty_BrendanRoute119Mudkip[] = {
 static const struct TrainerMon sParty_BrendanRoute103Treecko[] = {
     {
     .iv = 0,
-    .lvl = 5,
+    .lvl = 4, 
     .species = SPECIES_TORCHIC,
     }
 };
@@ -7582,7 +7587,7 @@ static const struct TrainerMon sParty_BrendanRoute119Treecko[] = {
 static const struct TrainerMon sParty_BrendanRoute103Torchic[] = {
     {
     .iv = 0,
-    .lvl = 5,
+    .lvl = 4,
     .species = SPECIES_MUDKIP,
     }
 };
@@ -7626,7 +7631,7 @@ static const struct TrainerMon sParty_BrendanRoute119Torchic[] = {
 static const struct TrainerMon sParty_MayRoute103Mudkip[] = {
     {
     .iv = 0,
-    .lvl = 5,
+    .lvl = 4,
 	.ball = ITEM_FRIEND_BALL,
     .species = SPECIES_TREECKO,
     }
@@ -7677,7 +7682,7 @@ static const struct TrainerMon sParty_MayRoute119Mudkip[] = {
 static const struct TrainerMon sParty_MayRoute103Treecko[] = {
     {
     .iv = 0,
-    .lvl = 5,
+    .lvl = 4,
 	.ball = ITEM_FRIEND_BALL,
     .species = SPECIES_TORCHIC,
     }
@@ -7728,7 +7733,7 @@ static const struct TrainerMon sParty_MayRoute119Treecko[] = {
 static const struct TrainerMon sParty_MayRoute103Torchic[] = {
     {
     .iv = 0,
-    .lvl = 5,
+    .lvl = 4,
 	.ball = ITEM_FRIEND_BALL,
     .species = SPECIES_MUDKIP,
     }
@@ -8760,12 +8765,12 @@ static const struct TrainerMon sParty_Tiana[] = {
     {
     .iv = 0,
     .lvl = 4,
-    .species = SPECIES_ZIGZAGOON,
+    .species = SPECIES_BUDEW,
     },
     {
     .iv = 0,
     .lvl = 4,
-    .species = SPECIES_SHROOMISH,
+    .species = SPECIES_ZIGZAGOON_GALARIAN,
     }
 };
 

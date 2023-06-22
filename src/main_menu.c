@@ -1663,6 +1663,8 @@ static void Task_NewGameBirchSpeech_ReshowBirchLotad(u8 taskId)
 
     if (gTasks[taskId].tIsDoneFadingSprites)
     {
+		gSaveBlock1Ptr->trainerType = ((gSaveBlock2Ptr->playerTrainerId[0] % 5)
+         + (gSaveBlock2Ptr->playerGender * 5));
         gSprites[gTasks[taskId].tBrendanSpriteId].invisible = TRUE;
         gSprites[gTasks[taskId].tMaySpriteId].invisible = TRUE;
         spriteId = gTasks[taskId].tBirchSpriteId;
