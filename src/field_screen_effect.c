@@ -34,6 +34,8 @@
 #include "constants/rgb.h"
 #include "trainer_hill.h"
 #include "fldeff.h"
+#include "field_specials.h"
+#include "battle_pike.h"
 
 static void Task_ExitNonAnimDoor(u8);
 static void Task_ExitNonDoor(u8);
@@ -559,12 +561,14 @@ void DoEscalatorWarp(u8 metatileBehavior)
 void DoLavaridgeGymB1FWarp(void)
 {
     LockPlayerFieldControls();
+	BurnAllTeam();
     StartLavaridgeGymB1FWarp(10);
 }
 
 void DoLavaridgeGym1FWarp(void)
 {
     LockPlayerFieldControls();
+	BurnAllTeam();
     StartLavaridgeGym1FWarp(10);
 }
 

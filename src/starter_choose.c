@@ -490,17 +490,80 @@ static void Task_StarterChoose(u8 taskId)
 static void Task_HandleStarterChooseInput(u8 taskId)
 {
     u8 selection = gTasks[taskId].tStarterSelection;
+	u32 valueForShinyness, totalRerolls, shinyness;
     if (JOY_NEW(A_BUTTON))
     {
         u8 spriteId;
-		u32 value;
-		u32 personality;
         ClearStarterLabel();
 
         // Create white circle background
         spriteId = CreateSprite(&sSpriteTemplate_StarterCircle, sPokeballCoords[selection][0], sPokeballCoords[selection][1], 1);
         gTasks[taskId].tCircleSpriteId = spriteId;
+		
+		
+	if (((VarGet(VAR_SHINY_TREECKO) < 1) && (GetStarterPokemon(gTasks[taskId].tStarterSelection) == SPECIES_TREECKO)) || ((VarGet(VAR_SHINY_TORCHIC) < 1)  && (GetStarterPokemon(gTasks[taskId].tStarterSelection) == SPECIES_TORCHIC)) || ((VarGet(VAR_SHINY_MUDKIP) < 1) && (GetStarterPokemon(gTasks[taskId].tStarterSelection) == SPECIES_MUDKIP)))
+		{
+			valueForShinyness = gSaveBlock2Ptr->playerTrainerId[0]
+						 | (gSaveBlock2Ptr->playerTrainerId[1] << 8)
+						 | (gSaveBlock2Ptr->playerTrainerId[2] << 16)
+						 | (gSaveBlock2Ptr->playerTrainerId[3] << 24);
+			switch (gSaveBlock2Ptr->optionsShinyOdds)
+			{
+					case 0:
+						totalRerolls = 1;
+						break;
+					case 1:
+						totalRerolls = 2;
+						break;
+					case 2:
+						totalRerolls = 4;
+						break;
+					case 3:
+						totalRerolls = 8;
+						break;
+					default:
+						totalRerolls *= 2;
+				}
 
+				while ((GET_SHINY_VALUE(valueForShinyness, shinyness)) >= SHINY_ODDS && (totalRerolls > 0))
+				{
+					shinyness = Random32();
+					totalRerolls--;
+				}
+				if ((GET_SHINY_VALUE(valueForShinyness, shinyness)) < SHINY_ODDS)
+				{
+					switch (GetStarterPokemon(gTasks[taskId].tStarterSelection))
+					{
+						case SPECIES_TREECKO:
+							VarSet(VAR_SHINY_TREECKO, SPECIES_TREECKO);
+							break;
+						case SPECIES_TORCHIC:
+							VarSet(VAR_SHINY_TORCHIC, SPECIES_TORCHIC);
+							break;
+						case SPECIES_MUDKIP:
+						default:
+							VarSet(VAR_SHINY_MUDKIP, SPECIES_MUDKIP);
+							break;
+					}
+				}
+				else
+				{
+					switch (GetStarterPokemon(gTasks[taskId].tStarterSelection))
+					{
+						case SPECIES_TREECKO:
+							VarSet(VAR_SHINY_TREECKO, SPECIES_TREECKO+1);
+							break;
+						case SPECIES_TORCHIC:
+							VarSet(VAR_SHINY_TORCHIC, SPECIES_TORCHIC+1);
+							break;
+						case SPECIES_MUDKIP:
+						default:
+							VarSet(VAR_SHINY_MUDKIP, SPECIES_MUDKIP+1);
+							break;
+					}
+				}
+			}
+			
         // Create Pokemon sprite
 		spriteId = CreatePokemonFrontSprite(GetStarterPokemon(gTasks[taskId].tStarterSelection), sPokeballCoords[selection][0], sPokeballCoords[selection][1]);
         gSprites[spriteId].affineAnims = &sAffineAnims_StarterPokemon;
@@ -635,8 +698,7 @@ static void Task_CreateStarterLabel(u8 taskId)
 static u8 CreatePokemonFrontSprite(u16 species, u8 x, u8 y)
 {
     u8 spriteId;
-
-    spriteId = CreateMonPicSprite_Affine(species, SHINY_ODDS, 0, MON_PIC_AFFINE_FRONT, x, y, 14, TAG_NONE);
+	spriteId = CreateMonPicSprite_Affine(species, SHINY_ODDS, 0, MON_PIC_AFFINE_FRONT, x, y, 14, TAG_NONE);
     gSprites[spriteId].oam.priority = 0;
     return spriteId;
 }

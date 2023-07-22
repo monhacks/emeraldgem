@@ -430,6 +430,8 @@ extern const u8 BattleScript_BeakBlastBurn[];
 extern const u8 BattleScript_DefDownSpeedUp[];
 extern const u8 BattleScript_AffectionBasedStatusHeal[];
 extern const u8 BattleScript_AffectionBasedEndurance[];
+extern const u8 BattleScript_ItemDropped[];
+
 
 // zmoves
 extern const u8 BattleScript_ZMoveActivateDamaging[];

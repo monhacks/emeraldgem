@@ -698,3 +698,23 @@ MagmaHideout_4F_EventScript_ItemMaxRevive::
 MagmaHideout_3F_3R_EventScript_ItemEscapeRope::
 	finditem ITEM_ESCAPE_ROPE, 3
 	end
+
+NewMap1_EventScript_ItemNugget::
+	finditem ITEM_NUGGET, 2
+	end
+
+NewMap1_EventScript_ItemParkBall::
+	finditem ITEM_MAX_ELIXIR, 2
+	end
+
+NewMap1_EventScript_ItemCave::
+	finditem ITEM_NORMAL_GEM
+	end
+
+NewMap1_EventScript_ItemCave2::
+	finditem ITEM_MAX_REVIVE
+	end
+
+NewMap1_EventScript_ItemCave3::
+	finditem ITEM_MOON_BALL, 2
+	end

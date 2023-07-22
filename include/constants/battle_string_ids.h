@@ -639,8 +639,11 @@
 #define STRINGID_THECOLDRECEPTIONMADEITSNOW	 		  637
 #define STRINGID_PKMNSWITCHESOUTINEMBARRASSMENT	 	  638
 #define STRINGID_BUTITFAILEDTOSNOW				 	  639
+#define STRINGID_SCREENCLEANERREFLECTENTERS			  640
+#define STRINGID_PKMNDROPPEDITEM                      641
+#define STRINGID_BAGISFULL                            642
 
-#define BATTLESTRINGS_COUNT                           640
+#define BATTLESTRINGS_COUNT                           643
 
 // This is the string id that gBattleStringsTable starts with.
 // String ids before this (e.g. STRINGID_INTROMSG) are not in the table,
@@ -884,6 +887,7 @@
 #define B_MSG_SWITCHIN_CURIOUS_MEDICINE 14
 #define B_MSG_SWITCHIN_PASTEL_VEIL      15
 #define B_MSG_SWITCHIN_NEUTRALIZING_GAS 16
+#define B_MSG_SWITCHIN_SCREENCLEANERREFLECT 17
 
 // gMentalHerbCureStringIds
 #define B_MSG_MENTALHERBCURE_INFATUATION       0
@@ -919,5 +923,9 @@
 #define B_MSG_Z_RECOVER_HP    4
 #define B_MSG_Z_STAT_UP       5
 #define B_MSG_Z_HP_TRAP       6
+
+// gItemDroppedStringIds
+#define B_MSG_ITEM_DROPPED   0
+#define B_MSG_BAG_IS_FULL    1
 
 #endif // GUARD_CONSTANTS_BATTLE_STRING_IDS_H

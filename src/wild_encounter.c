@@ -302,19 +302,8 @@ static u8 ChooseWildMonLevel(const struct WildPokemon *wildPokemon)
     return min + rand;
 }
 
-static u16 GetCurrentMapWildMonHeaderId(void)
-{
+u16 GetCurrentMapWildMonHeaderIdSpecific(u8 nightorday){
     u16 i;
-	u16 nightorday;
-	RtcCalcLocalTime();
-	if (gLocalTime.hours < 8 || gLocalTime.hours >19)
-	{
-		nightorday = 1; //Day
-	}
-	else
-	{
-		nightorday = 0; //Night
-	}
     for (i = 0; ; i++)
     {
         const struct WildPokemonHeader *wildHeader = &gWildMonHeaders[i];
@@ -394,7 +383,16 @@ static u16 GetCurrentMapWildMonHeaderId(void)
 
 				i += nightorday;
 				}
-			
+			if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(NEW_MAP1) &&
+                gSaveBlock1Ptr->location.mapNum == MAP_NUM(NEW_MAP1)) {
+
+				i += nightorday;
+				}
+			if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MINI_SAFARI_CAVE) &&
+                gSaveBlock1Ptr->location.mapNum == MAP_NUM(MINI_SAFARI_CAVE)) {
+
+				i += nightorday;
+				}
             if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ALTERING_CAVE) &&
                 gSaveBlock1Ptr->location.mapNum == MAP_NUM(ALTERING_CAVE))
             {
@@ -410,6 +408,22 @@ static u16 GetCurrentMapWildMonHeaderId(void)
     }
 
     return HEADER_NONE;
+}
+
+static u16 GetCurrentMapWildMonHeaderId(void)
+{
+	u16 nightorday;
+	RtcCalcLocalTime();
+	if (gLocalTime.hours < 8 || gLocalTime.hours >19)
+	{
+		nightorday = 1; //Night
+	}
+	else
+	{
+		nightorday = 0; //Day
+	}
+
+    return GetCurrentMapWildMonHeaderIdSpecific(nightorday);
 }
 
 static u8 PickWildMonNature(void)
@@ -493,12 +507,10 @@ static void CreateWildMon(u16 species, u8 level)
         CreateMonWithGenderNatureLetter(&gEnemyParty[0], species, level, 32, gender, PickWildMonNature(), 0, OT_ID_PLAYER_ID);
         return;
     }
-	if (VarGet(VAR_SPECIESCHAINED) != GetMonData(&gEnemyParty[0], MON_DATA_SPECIES) && (Random() % 99) < (VarGet(VAR_CHAIN) + 25) && (VarGet(VAR_CHAIN) >= 3))
+	if (VarGet(VAR_SPECIESCHAINED) != GetMonData(&gEnemyParty[0], MON_DATA_SPECIES) && (Random() % 99) < (VarGet(VAR_CHAIN) + 10) && (VarGet(VAR_CHAIN) >= 10))
         species = VarGet(VAR_SPECIESCHAINED);
-	if (VarGet(VAR_SPECIESCHAINED) != GetMonData(&gEnemyParty[0], MON_DATA_SPECIES) && (Random() % 99) < (VarGet(VAR_CHAIN) - 10) && (VarGet(VAR_CHAIN) >= 15))
-        species = SPECIES_BLISSEY;
-	if (gSaveBlock2Ptr->optionsButtonMode == 1 && (Random() % 99) < 5)
-		species = SPECIES_BLISSEY;
+	if (VarGet(VAR_SPECIESCHAINED) != GetMonData(&gEnemyParty[0], MON_DATA_SPECIES) && (Random() % 99) < (VarGet(VAR_CHAIN) - 20) && (VarGet(VAR_CHAIN) >= 25))
+        species = SPECIES_CHANSEY;
 	if (gSaveBlock2Ptr->optionsButtonMode == 1 && (Random() % 99) < 5)
 		species = SPECIES_AUDINO;
 	if (gSaveBlock2Ptr->optionsButtonMode == 1 && (Random() % 99) < 5)

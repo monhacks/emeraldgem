@@ -8,11 +8,17 @@ Route103_MapScripts::
 Route103_OnTransition:
 	call Common_EventScript_SetupRivalGfxId
 	call ProfBirch_EventScript_UpdateLocation
+	call_if_set FLAG_BADGE03_GET, Route103_Transition_MoveCamper
 	end
 
 Route103_OnLoad:
 	call_if_set FLAG_SYS_GAME_CLEAR, Route103_EventScript_OpenAlteringCave
 	end
+
+Route103_Transition_MoveCamper:
+	setobjectxyperm 21, 4, 10
+	return
+	
 
 Route103_EventScript_OpenAlteringCave::
 	setmetatile 45, 5, METATILE_General_CaveEntrance_Top, TRUE
@@ -152,6 +158,55 @@ Route103_EventScript_RivalEnd::
 	releaseall
 	end
 
+Route103_EventScript_SafariGuard::
+	lockall
+	faceplayer
+	goto_if_unset FLAG_BADGE03_GET, Route103_EventScript_SafariGuard_2
+	msgbox Route103_EventScript_SafariGuard_Text_2
+	releaseall
+	return
+
+Route103_EventScript_SafariGuard_2:
+	goto_if_unset FLAG_BADGE02_GET, Route103_EventScript_SafariGuard_5
+Route103_EventScript_SafariGuard_4:
+	goto_if_set FLAG_BADGE02_GET, Route103_EventScript_SafariGuard_9
+Route103_EventScript_SafariGuard_7:
+	releaseall
+	end
+
+Route103_EventScript_SafariGuard_5:
+	msgbox Route103_EventScript_SafariGuard_Text_0
+	goto Route103_EventScript_SafariGuard_4
+
+Route103_EventScript_SafariGuard_8:
+	msgbox Route103_EventScript_SafariGuard_Text_1
+	goto Route103_EventScript_SafariGuard_7
+
+Route103_EventScript_SafariGuard_9:
+	goto_if_set FLAG_BADGE01_GET, Route103_EventScript_SafariGuard_8
+	goto Route103_EventScript_SafariGuard_7
+
+
+Route103_EventScript_SafariGuard_Text_0:
+	.string "¡Hola, Joven Entrenador{A}!\p"
+	.string "Estamos preparando un nuevo Juego del\n"
+	.string "Safari... Aún falta, ¡Pero visítanos a\l"
+	.string "menudo para saber si hemos abierto!$"
+
+Route103_EventScript_SafariGuard_Text_1:
+	.string "¡Hola, Joven Entrenador{A}!\p"
+	.string "Estamos preparando un nuevo Juego del\n"
+	.string "Safari... ¡Pero falta muy poco!\p"
+	.string "Vuelve cuando hayas derrotado a\n"
+	.string "Wattson, el Líder de Gimnasio de Ciudad\l"
+	.string "Mauville, ¡Habremos abierto para\l"
+	.string "entonces!$"
+
+Route103_EventScript_SafariGuard_Text_2:
+	.string "¡Hola, Joven Entrenador{A}!\p"
+	.string "El Mini-Safari ha abierto,\n"
+	.string "¡Buena suerte!$"
+
 Route103_Movement_RivalExitFacingNorth1:
 	walk_left
 	walk_down
@@ -201,6 +256,10 @@ Route103_EventScript_Man::
 
 Route103_EventScript_RouteSign::
 	msgbox Route103_Text_RouteSign, MSGBOX_SIGN
+	end
+	
+Route103_EventScript_SafariSign::
+	msgbox Route103_Text_SafariSign, MSGBOX_SIGN
 	end
 
 Route103_EventScript_Daisy::
@@ -352,5 +411,8 @@ Route103_Text_ShortcutToOldale:
 
 Route103_Text_RouteSign:
 	.string "RUTA 103\n"
-	.string "{DOWN_ARROW} OLDALE TOWN$"
+	.string "{DOWN_ARROW} PUEBLO OLDALE$"
+
+Route103_Text_SafariSign:
+	.string "Mini-Safari\n¡Captura Pokémon muy raros!$"
 

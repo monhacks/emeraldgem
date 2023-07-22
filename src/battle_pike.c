@@ -25,6 +25,13 @@
 #include "constants/moves.h"
 #include "constants/party_menu.h"
 #include "constants/battle_pike.h"
+#include "string_util.h"
+#include "field_message_box.h"
+#include "sound.h"
+#include "constants/songs.h"
+extern const u8 PokemonBurnt[];
+extern const u8 PokemonProtected[];
+
 
 struct PikeRoomNPC
 {
@@ -809,7 +816,7 @@ static void HealMon(struct Pokemon *mon)
     SetMonData(mon, MON_DATA_STATUS, data);
 }
 
-static bool8 DoesAbilityPreventStatus(struct Pokemon *mon, u32 status)
+bool8 DoesAbilityPreventStatus(struct Pokemon *mon, u32 status)
 {
     u16 ability = GetMonAbility(mon);
     bool8 ret = FALSE;
@@ -843,7 +850,7 @@ static bool8 DoesAbilityPreventStatus(struct Pokemon *mon, u32 status)
     return ret;
 }
 
-static bool8 DoesTypePreventStatus(u16 species, u32 status)
+bool8 DoesTypePreventStatus(u16 species, u32 status)
 {
     bool8 ret = FALSE;
 
@@ -1656,4 +1663,38 @@ static u8 SpeciesToPikeMonId(u16 species)
         ret = 2;
 
     return ret;
+}
+
+void BurnAllTeam(void)
+{
+	u32 i;
+	u32 sStatusFlags = STATUS1_BURN;
+	u16 species;
+	struct Pokemon *mon;
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+		mon = &gPlayerParty[i];
+		if (GetMonData(mon, MON_DATA_SANITY_HAS_SPECIES) && !GetMonData(mon, MON_DATA_IS_EGG) && i == 0)
+		{
+			species = GetMonData(mon, MON_DATA_SPECIES);
+			if ((gBaseStats[species].type1 == TYPE_FIRE || gBaseStats[species].type2 == TYPE_FIRE) &&  ((Random() % 100) <= 50))
+			{
+				GetMonData(&gPlayerParty[i], MON_DATA_NICKNAME, gStringVar1);
+				StringGet_Nickname(gStringVar1);
+				ScriptContext_SetupScript(PokemonProtected);
+				break;
+			}
+		}
+        if (GetAilmentFromStatus(GetMonData(mon, MON_DATA_STATUS)) == AILMENT_NONE
+            && GetMonData(mon, MON_DATA_HP) != 0)
+        {
+            species = GetMonData(mon, MON_DATA_SPECIES);
+            if (!DoesAbilityPreventStatus(mon, sStatusFlags) && !DoesTypePreventStatus(species, sStatusFlags) && ((Random() % 100) <= (90/i+1))) {
+				SetMonData(mon, MON_DATA_STATUS, &sStatusFlags);
+			}
+        }
+		// else {
+			// chance++;
+		// }
+    }
 }

@@ -116,7 +116,7 @@ void LoadSpecialReflectionPalette(struct Sprite *sprite)
 	{
 		color = pal[i];
 		R = GET_R(color) + 8;
-		G = GET_G(color) + 8;
+		G = GET_G(color) + 12;
 		B = GET_B(color) + 16;
 		if (R > 31) R = 31;
 		if (G > 31) G = 31;

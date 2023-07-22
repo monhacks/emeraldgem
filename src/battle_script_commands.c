@@ -1596,6 +1596,7 @@ static bool32 AccuracyCalcHelper(u16 move)
         JumpIfMoveFailed(7, move);
         return TRUE;
     }
+	
 #if B_TOXIC_NEVER_MISS >= GEN_6
     else if (gBattleMoves[move].effect == EFFECT_TOXIC && IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_POISON))
     {
@@ -1608,6 +1609,12 @@ static bool32 AccuracyCalcHelper(u16 move)
     {
         if (!JumpIfMoveFailed(7, move))
             RecordAbilityBattle(gBattlerAttacker, ABILITY_NO_GUARD);
+        return TRUE;
+    }
+	else if (GetBattlerAbility(gBattlerAttacker) == ABILITY_FUTURE_VISION && gBattleMoves[move].type == TYPE_PSYCHIC && (move != MOVE_SKY_DROP || gBattleStruct->skyDropTargets[gBattlerTarget] == 0xFF))
+    {
+        if (!JumpIfMoveFailed(7, move))
+            RecordAbilityBattle(gBattlerAttacker, ABILITY_FUTURE_VISION);
         return TRUE;
     }
     // If the target has the ability No Guard and they aren't involved in a Sky Drop or the current move isn't Sky Drop, move hits.
@@ -9767,6 +9774,31 @@ static void Cmd_various(void)
     case VARIOUS_SWAP_SIDE_STATUSES:
         CourtChangeSwapSideStatuses();
         break;
+	case VARIOUS_GIVE_DROPPED_ITEMS:
+        {
+        u8 i;
+        u8 battlers[] = {GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT), 
+                         GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT)};
+        for (i = 0; i < 1 + IsDoubleBattle(); i++)
+        {
+            gLastUsedItem = gBattleResources->battleHistory->heldItems[battlers[i]];
+            gBattleResources->battleHistory->heldItems[battlers[i]] = ITEM_NONE;
+            if (gLastUsedItem && !(gBattleTypeFlags & (BATTLE_TYPE_TRAINER | BATTLE_TYPE_FIRST_BATTLE | BATTLE_TYPE_WALLY_TUTORIAL)))
+            {
+                if(AddBagItem(gLastUsedItem, 1))
+                    gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_ITEM_DROPPED;
+                else
+                    gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_BAG_IS_FULL;
+                if (IsDoubleBattle())
+                    BattleScriptPushCursor();
+                else
+                    BattleScriptPush(gBattlescriptCurrInstr + 3);
+                gBattlescriptCurrInstr = BattleScript_ItemDropped;
+                return;
+            }
+        }
+        break;
+        }
     } // End of switch (gBattlescriptCurrInstr[2])
 
     gBattlescriptCurrInstr += 3;
@@ -11101,6 +11133,7 @@ static void Cmd_tryKO(void)
         if ((((gStatuses3[gBattlerTarget] & STATUS3_ALWAYS_HITS)
                 && gDisableStructs[gBattlerTarget].battlerWithSureHit == gBattlerAttacker)
             || GetBattlerAbility(gBattlerAttacker) == ABILITY_NO_GUARD
+			|| (GetBattlerAbility(gBattlerAttacker) == ABILITY_FUTURE_VISION && gBattleMoves[gCurrentMove].type == TYPE_PSYCHIC)
             || targetAbility == ABILITY_NO_GUARD)
             && gBattleMons[gBattlerAttacker].level >= gBattleMons[gBattlerTarget].level)
         {
@@ -13793,7 +13826,6 @@ static void Cmd_handleballthrow(void)
         switch (gLastUsedItem)
         {
 		case ITEM_SAFARI_BALL:
-			ballMultiplier = 30;
         case ITEM_ULTRA_BALL:
             ballMultiplier = 20;
         case ITEM_GREAT_BALL:

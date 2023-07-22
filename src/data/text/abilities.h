@@ -256,6 +256,7 @@ static const u8 sAsOneIceRiderDescription[] = _("Rival no comerá bayas y\nsube 
 static const u8 sAsOneShadowRiderDescription[] = _("Rival no comerá bayas y\nsube Atq.Esp. al ganarle.");
 static const u8 sDefenseBreakerDescription[] = _("Al bajar Atq. del rival,\nbaja sus defensas.");
 static const u8 sAttackBreakerDescription[] = _("Al bajar Def. del rival,\nbaja su ofensiva.");
+static const u8 sFutureVisionDescription[] = _("Prediciendo el futuro, sus\nataques Psíquicos no fallarán.");
 
 #if B_EXPANDED_ABILITY_NAMES == TRUE
 const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
@@ -531,6 +532,7 @@ const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
     [ABILITY_AS_ONE_SHADOW_RIDER] = _("Unidad"),
     [ABILITY_DEFENSE_BREAKER] = _("Rompedefensa"),
     [ABILITY_ATTACK_BREAKER] = _("Rompeataque"),
+    [ABILITY_FUTURE_VISION] = _("VisiónFutura"),
 };
 #else   // 12 characters
 const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
@@ -806,6 +808,7 @@ const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
     [ABILITY_AS_ONE_SHADOW_RIDER] = _("Unidad"),
     [ABILITY_DEFENSE_BREAKER] = _("Rompedefensa"),
     [ABILITY_ATTACK_BREAKER] = _("Rompeataque"),
+    [ABILITY_FUTURE_VISION] = _("Visión Futura"),
 };
 #endif
 
@@ -1081,4 +1084,5 @@ const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
     [ABILITY_AS_ONE_SHADOW_RIDER] = sAsOneShadowRiderDescription,
     [ABILITY_DEFENSE_BREAKER] = sDefenseBreakerDescription,
     [ABILITY_ATTACK_BREAKER] = sAttackBreakerDescription,
+    [ABILITY_FUTURE_VISION] = sFutureVisionDescription,
 };

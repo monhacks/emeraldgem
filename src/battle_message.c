@@ -127,7 +127,7 @@ static const u8 sText_PkmnInLove[] = _("¡{B_ATK_NAME_WITH_PREFIX} se enamoró\n
 static const u8 sText_PkmnImmobilizedByLove[] = _("¡El amor impide que {B_ATK_NAME_WITH_PREFIX}\npueda atacar!");
 static const u8 sText_PkmnBlownAway[] = _("¡{B_DEF_NAME_WITH_PREFIX}\nsalió volando!");
 static const u8 sText_PkmnChangedType[] = _("¡{B_ATK_NAME_WITH_PREFIX} se transformó en\nun tipo {B_BUFF1}!");
-static const u8 sText_PkmnFlinched[] = _("¡{B_ATK_NAME_WITH_PREFIX} se acobardó!");
+static const u8 sText_PkmnFlinched[] = _("¡{B_ATK_NAME_WITH_PREFIX} se amedrentó!");
 static const u8 sText_PkmnRegainedHealth[] = _("¡{B_DEF_NAME_WITH_PREFIX} recuperó\nsalud!");
 static const u8 sText_PkmnHPFull[] = _("¡Los PS de {B_DEF_NAME_WITH_PREFIX}\nestán al máximo!");
 static const u8 sText_PkmnRaisedSpDef[] = _("¡{B_CURRENT_MOVE} de {B_ATK_PREFIX2}\nsubió su Defensa Especial!");
@@ -308,7 +308,7 @@ static const u8 sText_PkmnsXTookAttack[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_DEF_
 const u8 gText_PkmnsXPreventsSwitching[] = _("{B_BUFF1}'s {B_LAST_ABILITY}\nprevents switching!\p");
 static const u8 sText_PreventedFromWorking[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_DEF_ABILITY}\nprevented {B_SCR_ACTIVE_NAME_WITH_PREFIX}'s\l{B_BUFF1} from working!");
 static const u8 sText_PkmnsXMadeItIneffective[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\nmade it ineffective!");
-static const u8 sText_PkmnsXPreventsFlinching[] = _("{B_EFF_NAME_WITH_PREFIX}'s {B_EFF_ABILITY}\nprevents flinching!");
+static const u8 sText_PkmnsXPreventsFlinching[] = _("¡{B_EFF_ABILITY} de {B_EFF_NAME_WITH_PREFIX}\nevita ser amedrentado!");
 static const u8 sText_PkmnsXPreventsYsZ[] = _("{B_ATK_NAME_WITH_PREFIX}'s {B_ATK_ABILITY}\nprevents {B_DEF_NAME_WITH_PREFIX}'s\l{B_DEF_ABILITY} from working!");
 static const u8 sText_PkmnsXCuredItsYProblem[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\ncured its {B_BUFF1} problem!");
 static const u8 sText_PkmnsXHadNoEffectOnY[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\nhad no effect on {B_EFF_NAME_WITH_PREFIX}!");
@@ -695,11 +695,12 @@ static const u8 sText_DarkAuraActivates[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} i
 static const u8 sText_FairyAuraActivates[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} is radiating\na fairy aura!");
 static const u8 sText_AuraBreakActivates[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} reversed all\nother Pokémon's auras!");
 static const u8 sText_ComatoseActivates[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} is drowsing!");
-static const u8 sText_ScreenCleanerActivates[] = _("All screens on the field were\ncleansed!");
+static const u8 sText_ScreenCleanerActivates[] = _("¡{B_SCR_ACTIVE_NAME_WITH_PREFIX} invocó\nuna Pantalla de Luz para protegerse!");
+static const u8 sText_ScreenCleanerReflectActivates[] = _("¡{B_SCR_ACTIVE_NAME_WITH_PREFIX} invocó\nun Reflejo para protegerse!");
 static const u8 sText_FetchedPokeBall[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} found\na {B_LAST_ITEM}!");
 static const u8 sText_BattlerAbilityRaisedStat[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\nraised its {B_BUFF1}!");
-static const u8 sText_ASandstormKickedUp[] = _("A sandstorm kicked up!");
-static const u8 sText_PkmnsWillPerishIn3Turns[] = _("Both Pokémon will perish\nin three turns!");
+static const u8 sText_ASandstormKickedUp[] = _("¡Una tormenta de arena comenzó!");
+static const u8 sText_PkmnsWillPerishIn3Turns[] = _("¡Todos los Pokémon morirán\npasados tres turnos!");
 static const u8 sText_AbilityRaisedStatDrastically[] = _("{B_DEF_ABILITY} raised {B_DEF_NAME_WITH_PREFIX}'s\n{B_BUFF1} drastically!");
 static const u8 sText_AsOneEnters[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} has two Abilities!");
 static const u8 sText_CuriousMedicineEnters[] = _("{B_EFF_NAME_WITH_PREFIX}'s\nstat changes were reset!");
@@ -764,6 +765,8 @@ static const u8 sText_AttackerBrokeThroughParalysis[] = _("{B_ATK_NAME_WITH_PREF
 static const u8 sText_AttackerHealedItsBurn[] = _("{B_ATK_NAME_WITH_PREFIX} healed its burn with\nits sheer determination!");
 static const u8 sText_AttackerMeltedTheIce[] = _("{B_ATK_NAME_WITH_PREFIX} melted the ice with\nits fiery determination!");
 static const u8 sText_TargetToughedItOut[] = _("{B_DEF_NAME_WITH_PREFIX} toughed it out\nto show you its best side!");
+static const u8 sText_PkmnDroppedItem[] = _("¡{B_SCR_ACTIVE_NAME_WITH_PREFIX} dejó caer\nsu {B_LAST_ITEM}!{WAIT_SE}\p");
+static const u8 sText_BagIsFullBattle[] = _("¡{B_SCR_ACTIVE_NAME_WITH_PREFIX} dejó caer\nsu {B_LAST_ITEM}!{WAIT_SE}\p¡Pero tu Mochila estaba llena!\p");
 
 
 const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
@@ -1396,6 +1399,15 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
     [STRINGID_BUTITFAILEDTOSNOW - BATTLESTRINGS_TABLE_START] = sText_ColdReceptionSnowFail,
     [STRINGID_PKMNSWITCHESOUTINEMBARRASSMENT - BATTLESTRINGS_TABLE_START] = sText_SwitchesInEmbarrassment,
 	[STRINGID_PLAYERLOSTTOENEMYTRAINER - BATTLESTRINGS_TABLE_START] = sText_PlayerLostToEnemyTrainer,
+	[STRINGID_SCREENCLEANERREFLECTENTERS - BATTLESTRINGS_TABLE_START] = sText_ScreenCleanerReflectActivates,
+	[STRINGID_BAGISFULL - BATTLESTRINGS_TABLE_START] = sText_BagIsFullBattle,
+    [STRINGID_PKMNDROPPEDITEM - BATTLESTRINGS_TABLE_START] = sText_PkmnDroppedItem,
+};
+
+const u16 gItemDroppedStringIds[] =
+{
+    [B_MSG_ITEM_DROPPED] = STRINGID_PKMNDROPPEDITEM,
+    [B_MSG_BAG_IS_FULL] = STRINGID_BAGISFULL,
 };
 
 const u16 gZEffectStringIds[] = 
@@ -1470,6 +1482,7 @@ const u16 gSwitchInAbilityStringIds[] =
     [B_MSG_SWITCHIN_CURIOUS_MEDICINE] = STRINGID_CURIOUSMEDICINEENTERS,
     [B_MSG_SWITCHIN_PASTEL_VEIL] = STRINGID_PASTELVEILENTERS,
     [B_MSG_SWITCHIN_NEUTRALIZING_GAS] = STRINGID_NEUTRALIZINGGASENTERS,
+	[B_MSG_SWITCHIN_SCREENCLEANERREFLECT] = STRINGID_SCREENCLEANERREFLECTENTERS,
 };
 
 const u16 gMissStringIds[] =

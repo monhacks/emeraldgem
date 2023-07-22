@@ -1,13 +1,28 @@
 SafariZone_EventScript_OutOfBallsMidBattle::
+	goto_if_eq VAR_SAFARI_ZONE_STATE, 4, MiniSafari_EventScript_OutOfBallsMidBattle
 	setvar VAR_SAFARI_ZONE_STATE, 1
 	special ExitSafariMode
 	setwarp MAP_ROUTE121_SAFARI_ZONE_ENTRANCE, 2, 5
 	end
 
+MiniSafari_EventScript_OutOfBallsMidBattle::
+	setvar VAR_SAFARI_ZONE_STATE, 1
+	special ExitSafariMode
+	setwarp MAP_MINI_SAFARI_MIDDLE, 2, 5
+	end
+
 SafariZone_EventScript_Exit::
+	goto_if_eq VAR_SAFARI_ZONE_STATE, 4, MiniSafari_EventScript_Exit
 	setvar VAR_SAFARI_ZONE_STATE, 1
 	special ExitSafariMode
 	warp MAP_ROUTE121_SAFARI_ZONE_ENTRANCE, 2, 5
+	waitstate
+	end
+
+MiniSafari_EventScript_Exit::
+	setvar VAR_SAFARI_ZONE_STATE, 1
+	special ExitSafariMode
+	warp MAP_MINI_SAFARI_MIDDLE, 2, 5
 	waitstate
 	end
 
@@ -106,81 +121,78 @@ Route121_SafariZoneEntrance_Text_WelcomeToSafariZone:
 	.string "Come in and enjoy the SAFARI ZONE!$"
 
 Route121_SafariZoneEntrance_Text_WelcomeFirstTime:
-	.string "Welcome to the SAFARI ZONE!\n"
-	.string "Is it your first time here?$"
+	.string "¡Bienvenid{OA} a la Zona Safari!\p"
+	.string "¿Necesitas que te explique el juego?$"
 
 Route121_SafariZoneEntrance_Text_ComeInAndEnjoy:
-	.string "Come in and enjoy the SAFARI ZONE!$"
+	.string "¡Entra y disfuta el Juego del Safari!$"
 
 Route121_SafariZoneEntrance_Text_FirstTimeInfo:
-	.string "When you enter the SAFARI ZONE, you\n"
-	.string "start with 30 SAFARI BALLS for\l"
-	.string "catching POKéMON.\p"
-	.string "The SAFARI Game is over when you run\n"
-	.string "out of SAFARI BALLS, or when you've\l"
-	.string "walked 500 steps.\p"
-	.string "Come in and enjoy the SAFARI ZONE!$"
+	.string "En la Zona Safari, tendrás sólo 30\n"
+	.string "Safari Balls y 500 pasos para atrapar\l"
+	.string "tantos Pokémon como quieras. ¡Ojo! ¡No\l"
+	.string "se puede combatir aquí!\p"
+	.string "Para mejorar tus chances de atrapar\n"
+	.string "Pokémon, acércate a ellos y dales\l"
+	.string "PokéCubos. Eso hará que ganen algo de\l"
+	.string "cariño, y quieran quedarse contigo.$"
 
 Route121_SafariZoneEntrance_Text_WouldYouLikeToPlay:
-	.string "Welcome to the SAFARI ZONE!\p"
-	.string "All you can catch for just ¥500!\n"
-	.string "Would you like to play a SAFARI Game?$"
+	.string "¡Todo lo que puedas\natrapar por sólo ¥500!\l"
+	.string "¿Te gustaría jugar al Juego del Safari?$"
 
 Route121_SafariZoneEntrance_Text_PlayAnotherTime:
 	.string "Okay.\n"
-	.string "Please play another time!$"
+	.string "¡Hasta la próxima!$"
 
 Route121_SafariZoneEntrance_Text_NotEnoughMoney:
-	.string "You don't have enough money.\n"
-	.string "Sorry.$"
+	.string "No tienes suficiente dinero.\n"
+	.string "Disculpa.$"
 
 Route121_SafariZoneEntrance_Text_ThatWillBe500Please:
-	.string "That will be ¥500, please.$"
+	.string "Serían ¥500, por favor.$"
 
 Route121_SafariZoneEntrance_Text_HereAreYourSafariBalls:
-	.string "Here are your SAFARI BALLS.$"
+	.string "Aquí tienes tus Safari Balls.$"
 
 Route121_SafariZoneEntrance_Text_Received30SafariBalls:
-	.string "{PLAYER} received 30 SAFARI BALLS.$"
+	.string "¡{PLAYER} recibió 30 Safari Balls!$"
 
 Route121_SafariZoneEntrance_Text_PleaseEnjoyYourself:
-	.string "We'll let you know when your game\n"
-	.string "is over.\p"
-	.string "So, until then, enjoy yourself, please!\n"
-	.string "Off you go on your wild excursion!$"
+	.string "Te avisaremos cuando tengas que\n"
+	.string "volver, así que no te preocupes.\p"
+	.string "¡Disfruta del juego hasta entonces!$"
 
 Route121_SafariZoneEntrance_Text_PCIsFull:
-	.string "Excuse me!\n"
-	.string "Your PC BOX is full.$"
+	.string "¡Disculpa!\n"
+	.string "Tu PC está lleno, no puedes entrar.$"
 
 Route121_SafariZoneEntrance_Text_YouNeedPokeblockCase:
-	.string "Excuse me!\n"
-	.string "You seem to be without a {POKEBLOCK} CASE.\p"
-	.string "Your SAFARI Game will be much more\n"
-	.string "fruitful if you use {POKEBLOCK}S.\p"
-	.string "Please come back with a {POKEBLOCK} CASE.\p"
-	.string "You may obtain a {POKEBLOCK} CASE from\n"
-	.string "the LILYCOVE CONTEST HALL.$"
+	.string "¡Disculpa!\p"
+	.string "Parece que no tienes un {COLOR RED}Tubo {POKEBLOCK}s{COLOR DARK_GRAY},\n"
+	.string "pero en serio se recomienda tener uno\l"
+	.string "para poder jugar. El {COLOR LIGHT_BLUE}Profesor Birch{COLOR DARK_GRAY} te\l"
+	.string "estaba esperando en la Ruta 110 para\l"
+	.string "darte uno, ¡Ve a buscarlo!$"
 
 SafariZone_South_Text_StillHaveTimeExit:
-	.string "You still have time left. Would you like\n"
-	.string "to exit the SAFARI ZONE now?$"
+	.string "Todavía tienes tiempo. ¿Aún así\n"
+	.string "te quieres ir ahora?$"
 
 SafariZone_South_Text_EnjoyTheRestOfYourAdventure:
-	.string "Please enjoy the rest of your wild\n"
-	.string "adventure!$"
+	.string "¡Disfruta el resto de tu aventura!$"
 
 SafariZone_South_Text_ExitEarlyThankYouForPlaying:
 	.string "Okay.\p"
-	.string "I'll take back your remaining SAFARI\n"
-	.string "BALLS.\p"
-	.string "Thank you for playing.\n"
-	.string "We hope to see you again.$"
+	.string "Tendré que quedarme con el resto de\n"
+	.string "tus Safari Balls, si no te molesta.\p"
+	.string "Gracias por jugar.\n"
+	.string "¡Esperamos verte de nuevo!$"
 
 SafariZone_South_Text_GoodLuck:
-	.string "Good luck!\p"
-	.string "If you need anything, don't hesitate\n"
-	.string "to tell me, please!$"
+	.string "¡Buena suerte!\p"
+	.string "Si necesitas algo, ¡No dudes\n"
+	.string "en preguntarme, por favor!$"
 
 SafariZone_South_Text_Boy:
 	.string "Did you know?\p"

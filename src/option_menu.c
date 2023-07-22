@@ -28,6 +28,7 @@ enum
     MENUITEM_HP_BAR,
     MENUITEM_EXP_BAR,
     MENUITEM_UNIT_SYSTEM,
+    MENUITEM_SHINY_ODDS,
     MENUITEM_FRAMETYPE,
     MENUITEM_CANCEL,
     MENUITEM_COUNT,
@@ -62,6 +63,7 @@ static void DrawChoices_Sound(int selection, int y);
 static void DrawChoices_ButtonMode(int selection, int y);
 static void DrawChoices_HpBar(int selection, int y);
 static void DrawChoices_UnitSystem(int selection, int y);
+static void DrawChoices_ShinyOdds(int selection, int y);
 static void DrawChoices_FrameType(int selection, int y);
 static void DrawChoices_Options_Four(const u8 *const *const strings, int selection, int y);
 static void DrawTextOption(void);
@@ -89,6 +91,7 @@ struct
     [MENUITEM_HP_BAR]       = {DrawChoices_HpBar,       ProcessInput_Options_Eleven},
     [MENUITEM_EXP_BAR]      = {DrawChoices_HpBar,       ProcessInput_Options_Eleven},
     [MENUITEM_UNIT_SYSTEM]  = {DrawChoices_UnitSystem,  ProcessInput_Options_Two},
+    [MENUITEM_SHINY_ODDS]   = {DrawChoices_ShinyOdds,   ProcessInput_Options_Four},
     [MENUITEM_FRAMETYPE]    = {DrawChoices_FrameType,   ProcessInput_FrameType},
     [MENUITEM_CANCEL]       = {NULL, NULL},
 };
@@ -100,9 +103,10 @@ static const u16 sOptionMenuText_Pal[] = INCBIN_U16("graphics/interface/option_m
 // note: this is only used in the Japanese release
 static const u8 sEqualSignGfx[] = INCBIN_U8("graphics/interface/option_menu_equals_sign.4bpp");
 
-static const u8 sText_HpBar[] = _("HP BAR");
-static const u8 sText_ExpBar[] = _("EXP BAR");
-static const u8 sText_UnitSystem[] = _("UNIT SYSTEM");
+static const u8 sText_HpBar[] = _("BARRA PS");
+static const u8 sText_ExpBar[] = _("BARRA XP");
+static const u8 sText_UnitSystem[] = _("MEDICIÓN");
+static const u8 sText_ShinyOdds[] = _("SHINIES 1 ENTRE");
 
 static const u8 *const sOptionMenuItemsNames[MENUITEM_COUNT] =
 {
@@ -114,13 +118,19 @@ static const u8 *const sOptionMenuItemsNames[MENUITEM_COUNT] =
     [MENUITEM_HP_BAR]      = sText_HpBar,
     [MENUITEM_EXP_BAR]     = sText_ExpBar,
     [MENUITEM_UNIT_SYSTEM] = sText_UnitSystem,
+    [MENUITEM_SHINY_ODDS]  = sText_ShinyOdds,
     [MENUITEM_FRAMETYPE]   = gText_Frame,
     [MENUITEM_CANCEL]      = gText_OptionMenuSave,
 };
 
 static const u8 sText_Faster[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}FASTER");
 static const u8 sText_Instant[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}INSTANT");
+static const u8 sText_Shiny8k[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}8192");
+static const u8 sText_Shiny4k[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}4096");
+static const u8 sText_Shiny2k[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}2048");
+static const u8 sText_Shiny1k[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}1024");
 static const u8 *const sTextSpeedStrings[] = {gText_TextSpeedSlow, gText_TextSpeedMid, gText_TextSpeedFast, sText_Faster};
+static const u8 *const sShinyOddsStrings[] = {sText_Shiny8k, sText_Shiny4k, sText_Shiny2k, sText_Shiny1k};
 
 static const struct WindowTemplate sOptionMenuWinTemplates[] =
 {
@@ -271,6 +281,7 @@ void CB2_InitOptionMenu(void)
         sOptions->sel[MENUITEM_HP_BAR]      = gSaveBlock2Ptr->optionsHpBarSpeed;
         sOptions->sel[MENUITEM_EXP_BAR]     = gSaveBlock2Ptr->optionsExpBarSpeed;
         sOptions->sel[MENUITEM_UNIT_SYSTEM] = gSaveBlock2Ptr->optionsUnitSystem;
+        sOptions->sel[MENUITEM_SHINY_ODDS]  = gSaveBlock2Ptr->optionsShinyOdds;
         sOptions->sel[MENUITEM_FRAMETYPE]   = gSaveBlock2Ptr->optionsWindowFrameType;
 
         for (i = 0; i < 7; i++)
@@ -430,6 +441,7 @@ static void Task_OptionMenuSave(u8 taskId)
     gSaveBlock2Ptr->optionsHpBarSpeed       = sOptions->sel[MENUITEM_HP_BAR];
     gSaveBlock2Ptr->optionsExpBarSpeed      = sOptions->sel[MENUITEM_EXP_BAR];
     gSaveBlock2Ptr->optionsUnitSystem       = sOptions->sel[MENUITEM_UNIT_SYSTEM];
+    gSaveBlock2Ptr->optionsShinyOdds        = sOptions->sel[MENUITEM_SHINY_ODDS];
     gSaveBlock2Ptr->optionsWindowFrameType  = sOptions->sel[MENUITEM_FRAMETYPE];
 
     BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
@@ -549,6 +561,11 @@ static void DrawChoices_Options_Four(const u8 *const *const strings, int selecti
 static void DrawChoices_TextSpeed(int selection, int y)
 {
     DrawChoices_Options_Four(sTextSpeedStrings, selection, y);
+}
+
+static void DrawChoices_ShinyOdds(int selection, int y)
+{
+    DrawChoices_Options_Four(sShinyOddsStrings, selection, y);
 }
 
 static void DrawChoices_BattleScene(int selection, int y)

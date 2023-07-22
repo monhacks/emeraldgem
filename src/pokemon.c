@@ -3276,6 +3276,7 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
     u32 personality;
     u32 value;
     u16 checksum;
+	u32 totalRerolls;
 
     ZeroBoxMonData(boxMon);
 
@@ -3298,7 +3299,7 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
             do
             {
                 value = Random32();
-                shinyValue = HIHALF(value) ^ LOHALF(value) ^ HIHALF(personality) ^ LOHALF(personality);
+                shinyValue = GET_SHINY_VALUE(value, personality);
             } while (shinyValue < SHINY_ODDS);
         }
         break;
@@ -3315,63 +3316,64 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
                  | (gSaveBlock2Ptr->playerTrainerId[1] << 8)
                  | (gSaveBlock2Ptr->playerTrainerId[2] << 16)
                  | (gSaveBlock2Ptr->playerTrainerId[3] << 24);
+			if (FlagGet(FLAG_NO_SHINIES))
+			{
+				do
+				{
+					personality = Random32();
+				} while ((GET_SHINY_VALUE(value, personality)) < SHINY_ODDS);
+			}
+			else if (FlagGet(FLAG_SHINY_CREATION))
+			{
+				do
+				{
+					personality = Random32();
+				} while ((GET_SHINY_VALUE(value, personality)) >= SHINY_ODDS);
+			}
+			else 
+			{
+				totalRerolls = 0;
+				if ((VarGet(VAR_CHAIN) >= 5) && (VarGet(VAR_CHAIN) <= 9))
+					totalRerolls += 2;
+				else if ((VarGet(VAR_CHAIN) >= 10) && (VarGet(VAR_CHAIN) <= 19))
+					totalRerolls += 4;
+				else if ((VarGet(VAR_CHAIN) >= 20) && (VarGet(VAR_CHAIN) <= 29))
+					totalRerolls += 8;
+				else if ((VarGet(VAR_CHAIN) >= 30) && (VarGet(VAR_CHAIN) <= 39))
+					totalRerolls += 16;
+				else if (VarGet(VAR_CHAIN) >= 40)
+					totalRerolls += 32;
+				if ((species != VarGet(VAR_SPECIESCHAINED)) && (VarGet(VAR_CHAIN) >= 10))
+					totalRerolls /= 2;
+				if (CheckBagHasItem(ITEM_SHINY_CHARM, 1))
+					totalRerolls += I_SHINY_CHARM_REROLLS;
+				// if (LURE_STEP_COUNT != 0)
+					// totalRerolls += 1;
+				// totalRerolls*= (2^gSaveBlock2Ptr->optionsShinyOdds);
+				switch (gSaveBlock2Ptr->optionsShinyOdds){
+					case 0:
+						totalRerolls *= 1;
+						break;
+					case 1:
+						totalRerolls *= 2;
+						break;
+					case 2:
+						totalRerolls *= 4;
+						break;
+					case 3:
+						totalRerolls *= 8;
+						break;
+					default:
+						totalRerolls *= 2;
+				}
 
-		if (CheckBagHasItem(ITEM_SHINY_CHARM, 1))
-        {
-            u32 shinyValue;
-            u32 rolls = 0;
-			u32 shinyRerolls = I_SHINY_CHARM_REROLLS;
-			if (VarGet(VAR_CHAIN) >= 10 && VarGet(VAR_CHAIN) <= 19)
-				shinyRerolls += 1;
-			else if (VarGet(VAR_CHAIN) >= 20 && VarGet(VAR_CHAIN) <= 29)
-				shinyRerolls += 2;
-			else if (VarGet(VAR_CHAIN) >= 30 && VarGet(VAR_CHAIN) <= 39)
-				shinyRerolls += 3;
-			else if (VarGet(VAR_CHAIN) >= 40 && VarGet(VAR_CHAIN) <= 49)
-				shinyRerolls += 4;
-			else if (VarGet(VAR_CHAIN) >= 50 && VarGet(VAR_CHAIN) <= 59)
-				shinyRerolls += 5;
-			else if (VarGet(VAR_CHAIN) >= 60)
-				shinyRerolls += 7;
-            do
-            {
-                personality = Random32();
-                shinyValue = HIHALF(value) ^ LOHALF(value) ^ HIHALF(personality) ^ LOHALF(personality);
-                rolls++;
-            } while (shinyValue >= SHINY_ODDS && rolls < (shinyRerolls));
+				while ((GET_SHINY_VALUE(value, personality)) >= SHINY_ODDS && (totalRerolls > 0))
+				{
+					personality = Random32();
+					totalRerolls--;
+				}
+			}
 		}
-		else
-        {
-            u32 shinyValue;
-            u32 rolls = 0;
-			u32 shinyRerolls = 0;
-			if (VarGet(VAR_CHAIN) >= 10 && VarGet(VAR_CHAIN) <= 19)
-				shinyRerolls += 1;
-			else if (VarGet(VAR_CHAIN) >= 20 && VarGet(VAR_CHAIN) <= 29)
-				shinyRerolls += 2;
-			else if (VarGet(VAR_CHAIN) >= 30 && VarGet(VAR_CHAIN) <= 39)
-				shinyRerolls += 3;
-			else if (VarGet(VAR_CHAIN) >= 40 && VarGet(VAR_CHAIN) <= 49)
-				shinyRerolls += 4;
-			else if (VarGet(VAR_CHAIN) >= 50 && VarGet(VAR_CHAIN) <= 59)
-				shinyRerolls += 5;
-			else if (VarGet(VAR_CHAIN) >= 60)
-				shinyRerolls += 7;
-            do
-            {
-                personality = Random32();
-                shinyValue = HIHALF(value) ^ LOHALF(value) ^ HIHALF(personality) ^ LOHALF(personality);
-                rolls++;
-            } while (shinyValue >= SHINY_ODDS && rolls < shinyRerolls);
-        }
-		if (FlagGet(FLAG_SHINY_CREATION))
-        {
-            u8 nature = personality % NUM_NATURES;  // keep current nature
-            do {
-                personality = Random32();
-                personality = ((((Random() % SHINY_ODDS) ^ (HIHALF(value) ^ LOHALF(value))) ^ LOHALF(personality)) << 16) | LOHALF(personality);
-            } while (nature != GetNatureFromPersonality(personality));
-        }
 	}
 
     SetBoxMonData(boxMon, MON_DATA_PERSONALITY, &personality);
@@ -3441,7 +3443,7 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
 			  }
 		  }
 		  else 
-			if (VarGet(VAR_CHAIN) >=10 && VarGet(VAR_CHAIN) <=29 )
+			if (VarGet(VAR_CHAIN) >=8 && VarGet(VAR_CHAIN) <=29 )
         {
 			if (Random() % 18 == 1) {  //forces a pokemon to have fairy type hidden power, based on the chain level
 			      if (VarGet(VAR_CHAIN) <=14) {
@@ -3469,7 +3471,10 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
 			else
 				{
 				u32 iv;
-				iv = VarGet(VAR_CHAIN);
+				if (VarGet(VAR_CHAIN) < 31)
+					iv = VarGet(VAR_CHAIN);
+				else
+					iv = 31;
 				SetBoxMonData(boxMon, MON_DATA_HP_IV, &iv);
 				SetBoxMonData(boxMon, MON_DATA_ATK_IV, &iv);
 				SetBoxMonData(boxMon, MON_DATA_DEF_IV, &iv);
@@ -3529,12 +3534,16 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
         value = personality & 1;
         SetBoxMonData(boxMon, MON_DATA_ABILITY_NUM, &value);
     }
+	if (VarGet(VAR_CHAIN) >= 10){
+		value = 2;
+		if (Random() % 100 <= (VarGet(VAR_CHAIN)+(VarGet(VAR_CHAIN)/2)) && gBaseStats[species].abilities[2] != ABILITY_NONE)
+			SetBoxMonData(boxMon, MON_DATA_ABILITY_NUM, &value);
+	}
     
     value = HIDDEN_NATURE_NONE;
     SetBoxMonData(boxMon, MON_DATA_HIDDEN_NATURE, &value);
 
     GiveBoxMonInitialMoveset(boxMon);
-}
 }
 
 u8 GetNature(struct Pokemon *mon, bool32 checkHidden)
@@ -7727,7 +7736,9 @@ const u32 *GetMonSpritePalFromSpeciesAndPersonality(u16 species, u32 otId, u32 p
 
     if (species > NUM_SPECIES)
         return gMonPaletteTable[SPECIES_NONE].data;
-
+	if ((VarGet(VAR_SHINY_TREECKO) == species) || (VarGet(VAR_SHINY_MUDKIP) == species) || (VarGet(VAR_SHINY_TORCHIC) == species)){
+		return gMonShinyPaletteTable[species].data;
+	}
     shinyValue = GET_SHINY_VALUE(otId, personality);
     if (shinyValue < SHINY_ODDS)
     {

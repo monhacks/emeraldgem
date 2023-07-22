@@ -93,6 +93,7 @@ static const u8 *GetTrainerCantBattleSpeech(void);
 extern const u8 ChainNumber[];
 extern const u8 ChainBroke[];
 extern const u8 AddChain[];
+static void RestoreAllPlayerPartyHeldItems(void);
 
 EWRAM_DATA static u16 sTrainerBattleMode = 0;
 EWRAM_DATA u16 gTrainerBattleOpponent_A = 0;
@@ -476,10 +477,10 @@ void DoStandardWildBattle_Debug(void)
         gBattleTypeFlags |= BATTLE_TYPE_PYRAMID;
     }
     CreateBattleStartTask_Debug(GetWildBattleTransition(), 0);
-    //IncrementGameStat(GAME_STAT_TOTAL_BATTLES);
-    //IncrementGameStat(GAME_STAT_WILD_BATTLES);
-    //IncrementDailyWildBattles();
-    //TryUpdateGymLeaderRematchFromWild();
+    IncrementGameStat(GAME_STAT_TOTAL_BATTLES);
+    IncrementGameStat(GAME_STAT_WILD_BATTLES);
+    IncrementDailyWildBattles();
+    TryUpdateGymLeaderRematchFromWild();
 }
 
 void BattleSetup_StartRoamerBattle(void)
@@ -704,64 +705,67 @@ static void CB2_EndWildBattle(void)
 {
 	//cadena salvaje
 	u16 species;
+	u16 species2;
     u16 ptr;
     u8 nickname[POKEMON_NAME_LENGTH + 1];
     u16 lastPokemonFound;
     species = GetMonData(&gEnemyParty[0], MON_DATA_SPECIES);
+	if (GetMonData(&gEnemyParty[1], MON_DATA_SPECIES) != SPECIES_NONE) // if its a double battle, gEnemyParty should have more than one element.
+		species2 = GetMonData(&gEnemyParty[1], MON_DATA_SPECIES); // to handle situations where the targeted pokémon wasn't on gEnemyParty[0].
+	else
+	{
+		species2 = 0;
+	}
     CpuFill16(0, (void*)(BG_PLTT), BG_PLTT_SIZE);
     ResetOamRange(0, 128);
+	// RestoreAllPlayerPartyHeldItems();
     if (IsPlayerDefeated(gBattleOutcome) == TRUE && !InBattlePyramid() && !InBattlePike())
     {
+		VarSet(VAR_CHAIN,0);
+        VarSet(VAR_SPECIESCHAINED,0);
         SetMainCallback2(CB2_WhiteOut);
     }
     else
     {
-        if ((gBattleOutcome != B_OUTCOME_WON) && (gBattleOutcome != B_OUTCOME_CAUGHT))
-        {
-            if (species == VarGet(VAR_SPECIESCHAINED) && VarGet(VAR_CHAIN) >= 1)
-            {
-                VarSet(VAR_CHAIN,0);
-                VarSet(VAR_SPECIESCHAINED,0);
-            }
-            else if ((species != VarGet(VAR_SPECIESCHAINED)) && (VarGet(VAR_CHAIN) >= 1))
-                species = VarGet(VAR_SPECIESCHAINED);
-        }
-        else if ((gBattleOutcome == B_OUTCOME_WON) || (gBattleOutcome == B_OUTCOME_CAUGHT))
+        if ((gBattleOutcome == B_OUTCOME_WON) || (gBattleOutcome == B_OUTCOME_CAUGHT))
         {
             if (VarGet(VAR_CHAIN) == 0)
-            {
                 VarSet(VAR_SPECIESCHAINED,species);
-				if (gBattleOutcome == B_OUTCOME_CAUGHT)
-					VarSet(VAR_CHAIN, VarGet(VAR_CHAIN) + 2);
-				else
-					VarSet(VAR_CHAIN, VarGet(VAR_CHAIN) + 1);
-            }
-            else if ((species == VarGet(VAR_SPECIESCHAINED)) && VarGet(VAR_CHAIN) >=60) {
-				GetSpeciesName(gStringVar2 ,VarGet(VAR_SPECIESCHAINED));
-                ScriptContext_SetupScript(ChainNumber);
-                VarSet(VAR_CHAIN,60);
+
+			if ((species == VarGet(VAR_SPECIESCHAINED)) || (species2 == VarGet(VAR_SPECIESCHAINED)))
+			{
+				if (species == species2)
+					VarSet(VAR_CHAIN, (VarGet(VAR_CHAIN) + 1)); // if its a double wild battle, and both are your target, you must've defeated at least ONE of them
+				VarSet(VAR_CHAIN, (VarGet(VAR_CHAIN) + (gBattleOutcome % 5))); // B_OUTCOME_WON (equals 1) % 5 = 1, B_OUTCOME_CAUGHT (equals 7) % 5 = 2
+				if (VarGet(VAR_CHAIN) >=40)
+				{
+					VarSet(VAR_CHAIN,40);
+					GetSpeciesName(gStringVar2, VarGet(VAR_SPECIESCHAINED));
+					ScriptContext_SetupScript(ChainNumber);
+				}
+				else if (VarGet(VAR_CHAIN) >=3)
+				{
+					GetSpeciesName(gStringVar2, VarGet(VAR_SPECIESCHAINED));
+					ScriptContext_SetupScript(ChainNumber);
+				}
 			}
-            else if ((species == VarGet(VAR_SPECIESCHAINED)) && VarGet(VAR_CHAIN) >=3)
-            {
-				if (gBattleOutcome == B_OUTCOME_CAUGHT)
-					VarSet(VAR_CHAIN, VarGet(VAR_CHAIN) + 2);
-				else
-					VarSet(VAR_CHAIN, VarGet(VAR_CHAIN) + 1);
-                GetSpeciesName(gStringVar2 ,VarGet(VAR_SPECIESCHAINED));
-                ScriptContext_SetupScript(ChainNumber);
-            }
-            else if ((species == VarGet(VAR_SPECIESCHAINED)) && (VarGet(VAR_CHAIN) <=2)){
-				if (gBattleOutcome == B_OUTCOME_CAUGHT)
-					VarSet(VAR_CHAIN, VarGet(VAR_CHAIN) + 2);
-				else
-					VarSet(VAR_CHAIN, VarGet(VAR_CHAIN) + 1);
-			}
-            else if ((species != VarGet(VAR_SPECIESCHAINED)) && (VarGet(VAR_CHAIN) >= 3)) {
+            else if (VarGet(VAR_CHAIN) >=3 && (species != VarGet(VAR_SPECIESCHAINED) && species2 != VarGet(VAR_SPECIESCHAINED)))
+			{
                 VarSet(VAR_CHAIN,0);
                 VarSet(VAR_SPECIESCHAINED,0);
 				GetSpeciesName(gStringVar2 ,VarGet(species));
                 ScriptContext_SetupScript(ChainBroke);
 			}
+        }
+		else
+        {
+            if (((species == VarGet(VAR_SPECIESCHAINED)) || species2 == VarGet(VAR_SPECIESCHAINED)) && (VarGet(VAR_CHAIN) >= 3))
+            {
+                VarSet(VAR_CHAIN,0);
+                VarSet(VAR_SPECIESCHAINED,0);
+            }
+            else
+                species = VarGet(VAR_SPECIESCHAINED);
         }
         SetMainCallback2(CB2_ReturnToField);
         gFieldCallback = FieldCB_ReturnToFieldNoScriptCheckMusic;
@@ -1042,10 +1046,21 @@ static void CB2_GiveStarter(void)
     u16 starterMon;
     *GetVarPointer(VAR_STARTER_MON) = gSpecialVar_Result;
     starterMon = GetStarterPokemon(gSpecialVar_Result);
+	if ((VarGet(VAR_SHINY_TREECKO) == starterMon) || (VarGet(VAR_SHINY_MUDKIP) == starterMon) || (VarGet(VAR_SHINY_TORCHIC) == starterMon)){
+		FlagSet(FLAG_SHINY_CREATION);
+	}
+	else if ((VarGet(VAR_SHINY_TREECKO) == starterMon+1) || (VarGet(VAR_SHINY_MUDKIP) == starterMon+1) || (VarGet(VAR_SHINY_TORCHIC) == starterMon+1)){
+		FlagSet(FLAG_NO_SHINIES);
+	}
 	ScriptGiveMon(starterMon, 4, ITEM_ORAN_BERRY, 0, 0, 0);
     ResetTasks();
     PlayBattleBGM();
     SetMainCallback2(CB2_StartFirstBattle);
+	FlagClear(FLAG_SHINY_CREATION);
+	FlagClear(FLAG_NO_SHINIES);
+	VarSet(VAR_SHINY_TREECKO,0);
+	VarSet(VAR_SHINY_TORCHIC,0);
+	VarSet(VAR_SHINY_MUDKIP,0);
     BattleTransition_Start(B_TRANSITION_BLUR);
 }
 
@@ -1394,6 +1409,10 @@ void ClearTrainerFlag(u16 trainerId)
 
 void BattleSetup_StartTrainerBattle(void)
 {
+	if(!FlagGet(FLAG_STARTED_BOSS))
+	{
+		SavePlayerParty();
+	}
     if (gNoOfApproachingTrainers == 2)
         gBattleTypeFlags = (BATTLE_TYPE_DOUBLE | BATTLE_TYPE_TWO_OPPONENTS | BATTLE_TYPE_TRAINER);
     else
@@ -1463,6 +1482,7 @@ void BattleSetup_StartTrainerBattle_Debug(void)
 
 static void CB2_EndTrainerBattle(void)
 {
+	RestoreAllPlayerPartyHeldItems();
     if (gTrainerBattleOpponent_A == TRAINER_SECRET_BASE)
     {
         SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
@@ -1479,6 +1499,7 @@ static void CB2_EndTrainerBattle(void)
 				LoadPlayerParty();
 				GiveBackItemsAndBerries();
 			}
+			
             SetMainCallback2(CB2_WhiteOut);
 		}
     }
@@ -1493,6 +1514,16 @@ static void CB2_EndTrainerBattle(void)
     }
 }
 
+static void RestoreAllPlayerPartyHeldItems(void)
+{
+    int i;
+
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        u16 item = GetMonData(&gSaveBlock1Ptr->playerParty[i], MON_DATA_HELD_ITEM, NULL);
+        SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &item);
+    }
+}
 
 static void CB2_EndRematchBattle(void)
 {

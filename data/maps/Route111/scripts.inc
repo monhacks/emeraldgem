@@ -154,18 +154,22 @@ Route111_EventScript_Wally_1:
 	waitstate
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_ExclamationMark
 	playse SE_PIN
+	waitse
 	waitmovement 0
 	applymovement OBJ_EVENT_ID_PLAYER, Route111_Movement_PlayerHelp
 	delay 8
 	fadescreen FADE_TO_BLACK
 	waitmovement 0
 	msgbox Route111_EventScript_Wally_Text_4
-	setvar VAR_ROUTE111_STATE, VAR_LAVARIDGE_TOWN_STATE
+	closemessage
 	setvar VAR_LAVARIDGE_TOWN_STATE, 5
-	setflag FLAG_HIDE_WALLY_111
 	removeobject LOCALID_WALLY
-	warp MAP_LAVARIDGE_TOWN_GYM_1F, 14, 10
-	waitstate
+	clearflag FLAG_HIDE_WALLY_LAVARIDGE
+	setflag FLAG_REMOVE_WARP_FADE
+	setflag FLAG_REMOVE_WARP_FADE_OUT
+	fadeinbgm 1
+	warp MAP_LAVARIDGE_TOWN_GYM_1F, 14, 11
+	release
 	end
 
 Route111_EventScript_Wally_2:
@@ -203,7 +207,7 @@ Route111_EventScript_Wally_Text_0:
 
 Route111_EventScript_Wally_Text_1:
 	.string "Q{PAUSE 8}uiero... Entrenar en esta misma Ruta,\n"
-	.string "porque -COF, COF-,{PAUSE 25} y{PAUSE 8}o{PAUSE 8} creo que puedo\l"
+	.string "porque -COF, COF-,{PAUSE 25} yo{PAUSE 8} creo que puedo\l"
 	.string "sobreponerme a mi asma. Que puedo\l"
 	.string "vencer a mi enfermedad y lograrlo todo.\l"
 	.string "{PAUSE 25}-COF, COF, COF-\p"

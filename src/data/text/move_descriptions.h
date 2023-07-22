@@ -1,8 +1,8 @@
 ﻿
 #if B_BINDING_TURNS >= GEN_5
-#define BINDING_TURNS "4 or 5"
+#define BINDING_TURNS "4 o 5"
 #else
-#define BINDING_TURNS "2 to 5"
+#define BINDING_TURNS "2 a 5"
 #endif
 
 static const u8 sNullDescription[] = _(
@@ -56,42 +56,41 @@ static const u8 sRazorWindDescription[] = _(
     "Tarda dos turnos en atacar.");
 
 static const u8 sSwordsDanceDescription[] = _(
-    "A fighting dance that\n"
-    "sharply raises Attack.");
+    "Un baile de pelea que\n"
+    "duplica el ataque.");
 
 static const u8 sCutDescription[] = _(
     "Siempre causa un\ngolpe crítico.");
 
 static const u8 sGustDescription[] = _(
-    "Strikes the foe with a gust\n"
-    "of wind whipped up by wings.");
+    "Ataca con un remolinito que\n"
+    "creó al batir sus alitas.");
 
 static const u8 sWingAttackDescription[] = _(
-    "Strikes the foe with wings\n"
-    "spread wide.");
+    "Ataca al rival con\n"
+    "sus alas abiertas.");
 
 static const u8 sWhirlwindDescription[] = _(
-    "Blows away the foe with\n"
-    "wind and ends the battle.");
+    "Fuerza al rival a\n"
+    "cambiar de Pokémon.");
 
 static const u8 sFlyDescription[] = _(
     "Vuela alto y ataca.");
 
 static const u8 sBindDescription[] = _(
-    "Binds and squeezes the foe\n"
-    "for "BINDING_TURNS" turns.");
+    "Atrapa al rival por\n"
+    ""BINDING_TURNS" turnos.");
 
 static const u8 sSlamDescription[] = _(
-    "Slams the foe with a long\n"
-    "tail, vine, etc.");
+    "Ataca al rival con su\n"
+    "cola, liana, etc.");
 
 static const u8 sVineWhipDescription[] = _(
-    "Strikes the foe with\n"
-    "slender, whiplike vines.");
+    "Ataca al rival con un\n"
+    "látigo hecho de lianas.");
 
 static const u8 sStompDescription[] = _(
-    "Stomps the enemy with a big\n"
-    "foot. May cause flinching.");
+    "30% de hacer al rival\namedrentarse o retroceder.");
 
 static const u8 sDoubleKickDescription[] = _(
     "A double-kicking attack\n"
@@ -138,8 +137,8 @@ static const u8 sBodySlamDescription[] = _(
     "cause paralysis.");
 
 static const u8 sWrapDescription[] = _(
-    "Wraps and squeezes the foe\n"
-    BINDING_TURNS" times with vines, etc.");
+    "Atrapa al rival por\n"
+    ""BINDING_TURNS" turnos.");
 
 static const u8 sTakeDownDescription[] = _(
     "A reckless charge attack\n"
@@ -174,16 +173,16 @@ static const u8 sLeerDescription[] = _(
     "leer to lower Defense.");
 
 static const u8 sBiteDescription[] = _(
-    "Bites with vicious fangs.\n"
+    "Muerde con Fuerza.\n"
     "May cause flinching.");
 
 static const u8 sGrowlDescription[] = _(
-    "Growls cutely to reduce the\n"
-    "foe's Attack.");
+    "Gruñe adorablemente para\n"
+    "bajar el ataque del rival.");
 
 static const u8 sRoarDescription[] = _(
-    "Makes the foe flee to end\n"
-    "the battle.");
+    "Fueza al rival a\n"
+    "cambiar de Pokémon.");
 
 static const u8 sSingDescription[] = _(
     "A soothing song lulls the\n"
@@ -330,8 +329,8 @@ static const u8 sDragonRageDescription[] = _(
     "always inflict 40 HP damage.");
 
 static const u8 sFireSpinDescription[] = _(
-    "Traps the foe in a ring of\n"
-    "fire for "BINDING_TURNS" turns.");
+    "Atrapa al rival por\n"
+    ""BINDING_TURNS" turnos.");
 
 static const u8 sThunderShockDescription[] = _(
     "An electrical attack that\n"
@@ -510,8 +509,8 @@ static const u8 sWaterfallDescription[] = _(
     "to climb waterfalls.");
 
 static const u8 sClampDescription[] = _(
-    "Traps and squeezes the\n"
-    "foe for "BINDING_TURNS" turns.");
+   "Atrapa al rival por\n"
+    ""BINDING_TURNS" turnos.");
 
 static const u8 sSwiftDescription[] = _(
     "Sprays star-shaped rays\n"
@@ -998,8 +997,8 @@ static const u8 sRockSmashDescription[] = _(
     "that may lower Defense.");
 
 static const u8 sWhirlpoolDescription[] = _(
-    "Traps and hurts the foe in\n"
-    "a whirlpool for "BINDING_TURNS" turns.");
+    "Atrapa al rival por\n"
+    ""BINDING_TURNS" turnos.");
 
 static const u8 sBeatUpDescription[] = _(
     "Summons party Pokémon to\n"
@@ -1314,8 +1313,8 @@ static const u8 sSkyUppercutDescription[] = _(
     "leaping into the sky.");
 
 static const u8 sSandTombDescription[] = _(
-    "Traps and hurts the foe in\n"
-    "quicksand for "BINDING_TURNS" turns.");
+    "Atrapa al rival por\n"
+    ""BINDING_TURNS" turnos.");
 
 static const u8 sSheerColdDescription[] = _(
     "A chilling attack that\n"
@@ -1818,8 +1817,8 @@ static const u8 sSpacialRendDescription[] = _(
     "High critical-hit ratio.");
 
 static const u8 sMagmaStormDescription[] = _(
-    "Traps the foe in a vortex\n"
-    "of fire for "BINDING_TURNS" turns.");
+    "Atrapa al rival por\n"
+    ""BINDING_TURNS" turnos.");
 
 static const u8 sDarkVoidDescription[] = _(
     "Drags the foe into total\n"
@@ -2070,12 +2069,12 @@ static const u8 sElectrowebDescription[] = _(
     "electric net. Lowers Speed.");
 
 static const u8 sWildChargeDescription[] = _(
-    "An electrical tackle that\n"
-    "also hurts the user.");
+    "Una tacleada descontrolada\n"
+    "que daña al usuario.");
 
 static const u8 sDrillRunDescription[] = _(
-    "Spins its body like a drill.\n"
-    "High critical-hit ratio.");
+    "Rápido cual taladro, siempre\n"
+    "va primero. Alta % de crítico.");
 
 static const u8 sDualChopDescription[] = _(
     "Attacks with brutal hits\n"
@@ -2370,8 +2369,8 @@ static const u8 sNuzzleDescription[] = _(
     "the foe, paralyzing it.");
 
 static const u8 sInfestationDescription[] = _(
-    "The foe is infested and\n"
-    "attacked for "BINDING_TURNS" turns.");
+    "Atrapa al rival por\n"
+    ""BINDING_TURNS" turnos.");
 
 static const u8 sPowerUpPunchDescription[] = _(
     "A hard punch that raises\n"
@@ -2915,8 +2914,8 @@ static const u8 sSurgingStrikesDescription[] = _(
     "strikes with 3 critical hits.");
 
 static const u8 sThunderCageDescription[] = _(
-    "Traps the foe in a cage of\n"
-    "electricity for "BINDING_TURNS" turns.");
+    "Atrapa al rival por\n"
+    ""BINDING_TURNS" turnos.");
 
 static const u8 sDragonEnergyDescription[] = _(
     "The higher the user's HP\n"

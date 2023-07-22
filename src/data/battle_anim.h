@@ -1904,6 +1904,7 @@ const struct CompressedSpritePalette gBattleAnimPaletteTable[] =
     {gBattleAnimSpritePal_PrimalParticles, ANIM_TAG_PRIMAL_PARTICLES},
     {gBattleAnimSpritePal_SteelBeam, ANIM_TAG_STEEL_BEAM},
     {gBattleAnimSpritePal_Poltergeist, ANIM_TAG_POLTERGEIST},
+	// {gBattleAnimSpritePal_BlueStars, ANIM_TAG_GOLD_STARS},
 };
 
 const struct BattleAnimBackground gBattleAnimBackgroundTable[] =

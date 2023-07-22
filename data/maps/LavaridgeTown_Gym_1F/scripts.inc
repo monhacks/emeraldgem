@@ -5,12 +5,134 @@
 
 LavaridgeTown_Gym_1F_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, LavaridgeTown_Gym_1F_OnTransition
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, LavaridgeTown_Gym_1F_OnFrame
 	.byte 0
 
 LavaridgeTown_Gym_1F_OnTransition:
 	call LavaridgeTown_Gym_1F_EventScript_SetTrainerTempVars
 	call LavaridgeTown_Gym_1F_EventScript_CheckBuryTrainers
 	end
+
+LavaridgeTown_Gym_1F_OnFrame:
+	map_script_2 VAR_LAVARIDGE_TOWN_STATE, 5, LavaridgeTown_Gym_1F_EventScript_WallyEvent
+	.2byte 0
+
+LavaridgeTown_Gym_1F_EventScript_WallyEventSetUp::
+	return
+
+LavaridgeTown_Gym_1F_EventScript_WallyEvent::
+	lockall
+	setflag FLAG_HIDE_MAP_NAME_POPUP
+	setobjectxy 1, 12, 11
+	applymovement 1, Common_Movement_FaceRight
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceLeft
+	waitmovement 0
+	fadeoutbgm 1
+	fadescreen FADE_FROM_BLACK
+	delay 24
+	namebox Flannery
+	msgbox LavaridgeTown_Gym_1F_EventScript_WallyEvent_Text_0
+	closemessage
+	hidenamebox
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceLeft
+	waitmovement 0
+	delay 16
+	playse SE_PIN
+	applymovement 1, Common_Movement_ExclamationMark
+	waitmovement 0
+	namebox Flannery
+	msgbox LavaridgeTown_Gym_1F_EventScript_WallyEvent_Text_1
+	hidenamebox
+	closemessage
+	applymovement 7, Common_Movement_FaceRight
+	waitmovement 0
+	playse SE_PIN
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_ExclamationMark
+	applymovement 1, Common_Movement_ExclamationMark
+	waitmovement 0
+	delay 24
+	playbgm MUS_END, FALSE
+	namebox Wally
+	msgbox LavaridgeTown_Gym_1F_EventScript_WallyEvent_Text_2
+	hidenamebox
+	closemessage
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceLeft
+	waitmovement 0
+	delay 24
+	namebox Wally
+	msgbox LavaridgeTown_Gym_1F_EventScript_WallyEvent_Text_3
+	hidenamebox
+	closemessage
+	delay 16
+	applymovement 1, Common_Movement_WalkInPlaceRight
+	waitmovement 0
+	namebox Flannery
+	msgbox LavaridgeTown_Gym_1F_EventScript_WallyEvent_Text_4
+	delay 16
+	applymovement 7, Common_Movement_FaceLeft
+	waitmovement 0
+	msgbox LavaridgeTown_Gym_1F_EventScript_WallyEvent_Text_5
+	hidenamebox
+	closemessage
+	namebox Wally
+	msgbox LavaridgeTown_Gym_1F_EventScript_WallyEvent_Text_6
+	hidenamebox
+	closemessage
+	namebox Flannery
+	msgbox LavaridgeTown_Gym_1F_EventScript_WallyEvent_Text_7
+	hidenamebox
+	closemessage
+	applymovement 1, Common_Movement_WalkInPlaceRight
+	waitmovement 0
+	playfanfare MUS_OBTAIN_ITEM
+	msgbox LavaridgeTown_Gym_1F_EventScript_WallyEvent_Text_8
+	waitfanfare
+	closemessage
+	playse SE_BALL_TRADE
+	applymovement 7, Common_Movement_QuestionMark
+	waitmovement 0
+	namebox Wally
+	msgbox LavaridgeTown_Gym_1F_EventScript_WallyEvent_Text_9
+	hidenamebox
+	closemessage
+	namebox Flannery
+	msgbox LavaridgeTown_Gym_1F_EventScript_WallyEvent_Text_10
+	closemessage
+	hidenamebox
+	savebgm MUS_DUMMY
+	fadedefaultbgm
+	namebox Wally
+	msgbox LavaridgeTown_Gym_1F_EventScript_WallyEvent_Text_11
+	hidenamebox
+	closemessage
+	namebox Flannery
+	msgbox LavaridgeTown_Gym_1F_EventScript_WallyEvent_Text_12
+	closemessage
+	hidenamebox
+	fadescreen FADE_TO_BLACK
+	delay 16
+	setflag FLAG_HIDE_WALLY_LAVARIDGE
+	removeobject 7
+	fadescreen FADE_FROM_BLACK
+	delay 24
+	applymovement 1, LavaridgeGym_Movement_FlanneryAproachesPlayer
+	waitmovement 0
+	namebox Flannery
+	msgbox LavaridgeTown_Gym_1F_EventScript_WallyEvent_Text_13
+	closemessage
+	hidenamebox
+	applymovement 1, LavaridgeGym_Movement_FlanneryBackOnGym
+	waitmovement 0
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceUp
+	waitmovement 0
+	namebox Flannery
+	msgbox LavaridgeTown_Gym_1F_EventScript_WallyEvent_Text_14
+	closemessage
+	hidenamebox
+	addvar VAR_LAVARIDGE_TOWN_STATE, 1
+	releaseall
+	return
+
 
 @ Unclear where/if these temp vars are getting checked
 LavaridgeTown_Gym_1F_EventScript_SetTrainerTempVars::
@@ -149,9 +271,14 @@ LavaridgeTown_Gym_B1F_EventScript_Keegan::
 	end
 
 LavaridgeTown_Gym_1F_EventScript_Danielle::
-	trainerbattle TRAINER_BATTLE_CONTINUE_SCRIPT, TRAINER_DANIELLE, LOCALID_DANIELLE, LavaridgeTown_Gym_1F_Text_DanielleIntro, LavaridgeTown_Gym_1F_Text_DanielleDefeat, LavaridgeTown_Gym_EventScript_CheckTrainerScript
+	trainerbattle_double TRAINER_DANIELLE, LavaridgeTown_Gym_1F_Text_DanielleIntro, LavaridgeTown_Gym_1F_Text_DanielleDefeat, LavaridgeTown_Gym_EventScript_NotEnough,LavaridgeTown_Gym_EventScript_CheckTrainerScript
+LavaridgeTown_Gym_1F_EventScript_DanielleText::
 	msgbox LavaridgeTown_Gym_1F_Text_DaniellePostBattle, MSGBOX_AUTOCLOSE
 	end
+
+LavaridgeTown_Gym_EventScript_NotEnough::
+	trainerbattle TRAINER_BATTLE_CONTINUE_SCRIPT, TRAINER_DANIELLE, LOCALID_DANIELLE, LavaridgeTown_Gym_1F_Text_DanielleIntro, LavaridgeTown_Gym_1F_Text_DanielleDefeat, LavaridgeTown_Gym_EventScript_CheckTrainerScript
+	goto LavaridgeTown_Gym_1F_EventScript_DanielleText
 
 LavaridgeTown_Gym_1F_EventScript_Gerald::
 	trainerbattle TRAINER_BATTLE_CONTINUE_SCRIPT, TRAINER_GERALD, LOCALID_GERALD, LavaridgeTown_Gym_1F_Text_GeraldIntro, LavaridgeTown_Gym_1F_Text_GeraldDefeat, LavaridgeTown_Gym_EventScript_CheckTrainerScript
@@ -208,52 +335,186 @@ LavaridgeTown_Gym_1F_EventScript_GymStatue::
 	releaseall
 	end
 
+
+LavaridgeGym_Movement_FlanneryAproachesPlayer:
+	walk_right
+	step_end
+
+LavaridgeGym_Movement_FlanneryBackOnGym:
+	walk_up
+	walk_up
+	walk_in_place_down
+	step_end
+
+LavaridgeTown_Gym_1F_EventScript_WallyEvent_Text_0:
+	.string "¿Estás bien, {PLAYER}?\n"
+	.string "Tuvieron suerte que estuviera cerca\l"
+	.string "para ayudarte a traer a {COLOR GREEN}Wally{COLOR DARK_GRAY} hasta\l"
+	.string "aquí...\p"
+	.string "... ... ...\n"
+	.string "... ... ...\p"
+	.string "Ya veo, me alegra que estés bien.\p"
+	.string "Entonces, ¿Wally estaba entrenando en\n"
+	.string "la Ruta 111?\l"
+	.string "No veo qué tiene de malo...$"
+
+LavaridgeTown_Gym_1F_EventScript_WallyEvent_Text_1:
+	.string "¿¡Wally tiene {COLOR RED}asma{COLOR DARK_GRAY}!?\p"
+	.string "¿¡P-pero qué hacía entonces en la Ruta\n"
+	.string "111!? ¡Esa Ruta está en una {COLOR RED}Tormenta\l"
+	.string "de Arena constante{COLOR DARK_GRAY}!\p"
+	.string "Quiero decir, entiendo el desafiarse,\n"
+	.string "pero...$"
+
+LavaridgeTown_Gym_1F_EventScript_WallyEvent_Text_2:
+	.string "{PLAYER}... {PAUSE 20} ¿Er-{PAUSE 15} eres tú?\p"
+	.string "¿Q-{PAUSE 20}qué pasó...?$"
+
+LavaridgeTown_Gym_1F_EventScript_WallyEvent_Text_3:
+	.string "O-{PAUSE 15}oh...{PAUSE 15}\n"
+	.string "Creo...{PAUSE 15} Que me sobrepasé, ¿no?\p"
+	.string "Tan típico de mí... No puedo soportar ni\n"
+	.string "un poquito de arena... Si no puedo hacer\l"
+	.string "ni eso,\l"
+	.string "¿Cómo espero ser un Entrenador?\l"
+	.string "¿Cómo espero poder ser alguien...?$"
+
+LavaridgeTown_Gym_1F_EventScript_WallyEvent_Text_4:
+	.string "Wally, eso no está bien.$"
+
+LavaridgeTown_Gym_1F_EventScript_WallyEvent_Text_5:
+	.string "Todos tenemos límites, todos tenemos\n"
+	.string "áreas en donde flaqueamos y donde nos\l"
+	.string "cuesta más que otros mejorar.\p"
+	.string "Tienes asma, y no hay nada de malo con\n"
+	.string "eso, si te cuidas, no va a detenerte de\l"
+	.string "ser un Entrenador poderoso.\p"
+	.string "Después de todo, {COLOR RED}no me detiene a mí{COLOR DARK_GRAY}, ¿O\n"
+	.string "sí?$"
+
+LavaridgeTown_Gym_1F_EventScript_WallyEvent_Text_6:
+	.string "¿Tienes... {PAUSE 10}Asma también?\n"
+	.string "Pero... No parece afectarte, nunca te he\l"
+	.string "visto agitada o sin aliento...$"
+
+LavaridgeTown_Gym_1F_EventScript_WallyEvent_Text_7:
+	.string "Eso es porque sé cuidarme, Wally.\p"
+	.string "He tenido esta condición toda mi vida, y\n"
+	.string "he sentido lo mismo que tú. Querer\l"
+	.string "'Desafiarme,' querer 'Sobrepasarme,'\l"
+	.string "para poder ser tan buena como los\l"
+	.string "demás.\p"
+	.string "Pero eso no me causó ningún bien.\n"
+	.string "Me lastimó, me causó dolor. Y eso sólo\l"
+	.string "empeoraba.\p"
+	.string "No fue hasta que aprendí que está bien\n"
+	.string "tener límites, que pude comensar a ser\l"
+	.string "yo misma más, a realmente mejorar, a mi\l"
+	.string "propio ritmo, con mis propios métodos.\p"
+	.string "Y mírame ahora, soy la {COLOR RED}Líder de Gimnasio{COLOR DARK_GRAY}\n"
+	.string "de Lavaridge.\p"
+	.string "Así que, por favor, Wally. No cometas los\n"
+	.string "mismos errores que yo.$"
+
+LavaridgeTown_Gym_1F_EventScript_WallyEvent_Text_8:
+	.string "¡Flannery le ha dado un inhalador a\n"
+	.string "Wally!$"
+
+LavaridgeTown_Gym_1F_EventScript_WallyEvent_Text_9:
+	.string "Esto... ¿Qué es?$"
+
+LavaridgeTown_Gym_1F_EventScript_WallyEvent_Text_10:
+	.string "Es un inhalador. Te ayudará a mejorar tu\n"
+	.string "condición cuando te sientas mal, y si\l"
+	.string "vas a una clínica, podrán darte\l"
+	.string "indicaciones sobre qué dosis tendrías\l"
+	.string "que tomar y a qué horas.\p"
+	.string "Si eres responsable, deberías\n"
+	.string "mayormente estar bien.$"
+
+LavaridgeTown_Gym_1F_EventScript_WallyEvent_Text_11:
+	.string "Gracias... Gracias, Flannery.\p"
+	.string "-COF, COF- Em...{PAUSE 10} Creo que descansaré un\n"
+	.string "tiempo, pero seguiré entrenando, y me\l"
+	.string "haré lo suficientemente poderoso como\l"
+	.string "para derrotarte, Flannery.\p"
+	.string "Cuando los necesite, tomaré descansos.\n"
+	.string "Pero cuando esté listo, ¡Espero estés\l"
+	.string "preparada para perder!$"
+
+LavaridgeTown_Gym_1F_EventScript_WallyEvent_Text_12:
+	.string "¡Esa es la actitud, Wally!\n"
+	.string "¡Creo en tí, que llegarás más lejos que\l"
+	.string "nadie!$"
+
+LavaridgeTown_Gym_1F_EventScript_WallyEvent_Text_13:
+	.string "Por favor, {PLAYER}, asegúrate de\n"
+	.string "estar ahí para Wally si te necesita.\p"
+	.string "Estará bien, por lo que no necesitas\n"
+	.string "'Cuidarle.'\l"
+	.string "Sólo te pido que estés a su lado, y que\l"
+	.string "seas su amig{OA}, ¿Está bien?$"
+
+LavaridgeTown_Gym_1F_EventScript_WallyEvent_Text_14:
+	.string "¡Ahora, {PLAYER}, sigue mejorando!\p"
+	.string "¡Conociendo nuevas personas y\n"
+	.string "rompiendo tus fronteras!\p"
+	.string "Con cuidado, para no sobrepasarte,\n"
+	.string "¡Pero con constancia, para cada día\l"
+	.string "ser mejor de lo que eras ayer!$"
+
 LavaridgeTown_Gym_1F_Text_GymGuideAdvice:
-	.string "Hey, how's it going, CHAMPION-\n"
-	.string "bound {PLAYER}?\p"
-	.string "LAVARIDGE's GYM LEADER FLANNERY\n"
-	.string "uses FIRE-type POKéMON.\p"
-	.string "Her passion for POKéMON burns stronger\n"
-	.string "and hotter than a volcano.\p"
-	.string "Don't get too close to her--you'll burn!\n"
-	.string "Hose her down with water and then\l"
-	.string "go for it!$"
+	.string "Ah, ¿Como estás, Joven Promesa\n"
+	.string "{PLAYER}?\p"
+	.string "Algo que debes saber de este Gimnasio,\n"
+	.string "es que, aparte de no poder usar el\l"
+	.string "Sistema de Almacenamiento Pokémon...\l"
+	.string "¡No tiene una Regla Especial!\p"
+	.string "Sin embargo, cuando pises uno de esos\n"
+	.string "posos de arena... ¡Existe la posibilidad\l"
+	.string "de que alguno de tus Pokémon resulte\l"
+	.string "quemado, si no es que todos!\p"
+	.string "¡Y hay algunos Entrenadores están\n"
+	.string "esperando que te pase eso para\l"
+	.string "atacarte en las peores condiciones!\p"
+	.string "¡Espero hayas traído Antiquemar!$"
 
 LavaridgeTown_Gym_1F_Text_GymGuidePostVictory:
-	.string "Yow! That was a scorching-hot battle!$"
+	.string "¡Espero verte pronto!$"
 
 LavaridgeTown_Gym_1F_Text_ColeIntro:
-	.string "Owowowowow!\n"
-	.string "Yikes, it's hot!$"
+	.string "¡Auauauauauauuu!\n"
+	.string "¡Ay, la arena estaba caliente!$"
 
 LavaridgeTown_Gym_1F_Text_ColeDefeat:
-	.string "I'm blinded by sweat in my eyes…$"
+	.string "No vale, me cegó mi sudor…$"
 
 LavaridgeTown_Gym_1F_Text_ColePostBattle:
-	.string "Being buried in hot sand promotes\n"
-	.string "circulation.\p"
-	.string "It's effective for healing pain in\n"
-	.string "your joints.$"
+	.string "Supuestamente, esconderse\n"
+	.string "en esta arena caliente mejora\l"
+	.string "la circulación.\p"
+	.string "¡Es muy efectivo para liberar\n"
+	.string "el dolor articular!$"
 
 LavaridgeTown_Gym_1F_Text_AxleIntro:
-	.string "I'm trying to relieve my stress.\n"
-	.string "Don't come along and stress me out!$"
+	.string "Estoy intentando desestresarme.\n"
+	.string "¡No me arruines eso!$"
 
 LavaridgeTown_Gym_1F_Text_AxleDefeat:
-	.string "I hope FLANNERY flames you good!$"
+	.string "Flannery seguramente va a\n"
+	.string "quemarte por completo, ¡No\l"
+	.string "puedo esperar a que eso pase!$"
 
 LavaridgeTown_Gym_1F_Text_AxlePostBattle:
-	.string "Haaah… Whew…\p"
-	.string "If you spend too much time buried in\n"
-	.string "hot sand, it tuckers you out…$"
+	.string "Ahhh… Ufff…\p"
+	.string "Acabaste conmigo…$"
 
 LavaridgeTown_Gym_B1F_Text_KeeganIntro:
-	.string "You must be getting tired by now.\n"
-	.string "You'd like to rest in the hot sand,\l"
-	.string "wouldn't you?\p"
-	.string "But you should know that maintaining\n"
-	.string "your willpower is an important ability\l"
-	.string "for all TRAINERS.$"
+	.string "Debes estarte cansando, ¿no?.\n"
+	.string "Que lástima que no estés\l"
+	.string "acostumbrad{OA} a el calor de\l"
+	.string "esta arena, o no te quemaría.\p"
+	.string "¡Por eso mismo, ganaré!$"
 
 LavaridgeTown_Gym_B1F_Text_KeeganDefeat:
 	.string "Play with fire, and be burned…$"

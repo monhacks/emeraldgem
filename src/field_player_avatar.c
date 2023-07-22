@@ -411,7 +411,7 @@ void PlayerStep(u8 direction, u16 newKeys, u16 heldKeys)
     HideShowWarpArrow(playerObjEvent);
     if (gPlayerAvatar.preventStep == FALSE)
     {
-        TryHidePlayerReflection();
+        // TryHidePlayerReflection();
         Bike_TryAcroBikeHistoryUpdate(newKeys, heldKeys);
         if (TryInterruptObjectEventSpecialAnim(playerObjEvent, direction) == 0)
         {
@@ -423,7 +423,7 @@ void PlayerStep(u8 direction, u16 newKeys, u16 heldKeys)
                 PlayerAllowForcedMovementIfMovingSameDirection();
             }
 
-            TryHidePlayerReflection();
+            // TryHidePlayerReflection();
         }
     }
 }

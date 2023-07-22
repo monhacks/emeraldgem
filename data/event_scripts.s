@@ -1162,3 +1162,9 @@ Reject:
 
 Decline:
 	.string "¡Espero que vuelva pronto!$"
+
+	.include "data/maps/MiniSafariMiddle/scripts.inc"
+
+	.include "data/maps/NewMap1/scripts.inc"
+
+	.include "data/maps/MiniSafariCave/scripts.inc"

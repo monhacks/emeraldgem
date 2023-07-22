@@ -5201,7 +5201,7 @@ static s16 AI_Roaming(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
 		return score;
 	if (gBattleMons[battlerDef].ability == ABILITY_SHADOW_TAG)
         return score;
-	if (IsMonShiny(&gEnemyParty[0]) == TRUE)
+	if (IsMonShiny(&gEnemyParty[0]) == TRUE && ((Random() % 100) <= 50))
 		return score;
 	
 	if ((Random() % 100) <= 80)
@@ -5212,9 +5212,12 @@ static s16 AI_Roaming(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
 // Safari pokemon logic
 static s16 AI_Safari(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
 {
-    u8 safariFleeRate = gBattleStruct->safariEscapeFactor / 2; // Safari flee rate, from 0-20.
+    u8 safariFleeRate = gBattleStruct->safariEscapeFactor*2; // Safari flee rate, from 0-20.
 	if (IsMonShiny(&gEnemyParty[0])) {
-		AI_Watch();
+		if ((Random() % 100) < (safariFleeRate/3))
+			AI_Flee();
+		else
+			AI_Watch();
 		return score;
 	}
 

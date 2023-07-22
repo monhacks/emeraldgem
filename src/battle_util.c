@@ -58,6 +58,7 @@ functions instead of at the top of the file with the other declarations.
 */
 
 static bool32 TryRemoveScreens(u8 battler);
+static bool32 TrySetUpScreens(u8 battler);
 static bool32 IsUnnerveAbilityOnOpposingSide(u8 battlerId);
 static u8 GetFlingPowerFromItemId(u16 itemId);
 
@@ -89,8 +90,8 @@ static const u8 sPkblToEscapeFactor[][3] = {
         [B_MSG_MON_IGNORED]    = 0
     }
 };
-static const u8 sGoNearCounterToCatchFactor[] = {4, 3, 2, 1};
-static const u8 sGoNearCounterToEscapeFactor[] = {4, 4, 4, 4};
+static const u8 sGoNearCounterToCatchFactor[] = {5, 4, 3, 2};
+static const u8 sGoNearCounterToEscapeFactor[] = {2, 3, 4, 5};
 
 static const u16 sSkillSwapBannedAbilities[] =
 {
@@ -807,6 +808,9 @@ void HandleAction_ThrowPokeblock(void)
         else
             gBattleStruct->safariEscapeFactor -= sPkblToEscapeFactor[gBattleStruct->safariPkblThrowCounter][gBattleCommunication[MULTISTRING_CHOOSER]];
     }
+	if (gBattleStruct->safariCatchFactor <= 10){
+		gBattleStruct->safariCatchFactor += sPkblToEscapeFactor[gBattleStruct->safariPkblThrowCounter][gBattleCommunication[MULTISTRING_CHOOSER]];
+	}
 
     gBattlescriptCurrInstr = gBattlescriptsForSafariActions[2];
     gCurrentActionFuncId = B_ACTION_EXEC_SCRIPT;
@@ -4598,9 +4602,8 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
             }
             break;
         case ABILITY_SCREEN_CLEANER:
-            if (!gSpecialStatuses[battler].switchInAbilityDone && TryRemoveScreens(battler))
+            if (!gSpecialStatuses[battler].switchInAbilityDone && TrySetUpScreens(battler))
             {
-                gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_SWITCHIN_SCREENCLEANER;
                 gSpecialStatuses[battler].switchInAbilityDone = TRUE;
                 BattleScriptPushCursorAndCallback(BattleScript_SwitchInAbilityMsg);
                 effect++;
@@ -4729,8 +4732,9 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
             }
             break;
         case ABILITY_INTREPID_SWORD:
-            if (!gSpecialStatuses[battler].switchInAbilityDone)
+            if (!gSpecialStatuses[battler].switchInAbilityDone && CompareStat(battler, STAT_ATK, MAX_STAT_STAGE, CMP_LESS_THAN))
             {
+				gBattlerAttacker = battler;
                 gSpecialStatuses[battler].switchInAbilityDone = TRUE;
                 SET_STATCHANGER(STAT_ATK, 1, FALSE);
                 BattleScriptPushCursorAndCallback(BattleScript_BattlerAbilityStatRaiseOnSwitchIn);
@@ -4738,8 +4742,9 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
             }
             break;
         case ABILITY_DAUNTLESS_SHIELD:
-            if (!gSpecialStatuses[battler].switchInAbilityDone)
+            if (!gSpecialStatuses[battler].switchInAbilityDone && CompareStat(battler, STAT_DEF, MAX_STAT_STAGE, CMP_LESS_THAN))
             {
+				gBattlerAttacker = battler;
                 gSpecialStatuses[battler].switchInAbilityDone = TRUE;
                 SET_STATCHANGER(STAT_DEF, 1, FALSE);
                 BattleScriptPushCursorAndCallback(BattleScript_BattlerAbilityStatRaiseOnSwitchIn);
@@ -7709,26 +7714,26 @@ u8 IsMonDisobedient(void)
 	if (FlagGet(FLAG_BADGE08_GET))
 		return 0;
 	
-	obedienceLevel = 10;
+	obedienceLevel = 15;
 	if (FlagGet(FLAG_BADGE01_GET))
-		obedienceLevel = 15;
+		obedienceLevel = 20;
 	if (FlagGet(FLAG_BADGE02_GET))
 		obedienceLevel = 30;
 	if (FlagGet(FLAG_BADGE03_GET))
-		obedienceLevel = 40;
+		obedienceLevel = 35;
 	if (FlagGet(FLAG_BADGE04_GET))
-		obedienceLevel = 50;
+		obedienceLevel = 40;
 	if (FlagGet(FLAG_BADGE05_GET))
-		obedienceLevel = 60;
+		obedienceLevel = 50;
 	if (FlagGet(FLAG_BADGE06_GET))
-		obedienceLevel = 70;
+		obedienceLevel = 55;
 	if (FlagGet(FLAG_BADGE07_GET))
-		obedienceLevel = 80;
+		obedienceLevel = 70;
 
 
     if (gBattleMons[gBattlerAttacker].level <= obedienceLevel)
         return 0;
-	if ((gBattleMons[gBattlerAttacker].level > obedienceLevel) && (Random() % 99) >= ((gBattleMons[gBattlerAttacker].level + 5) - obedienceLevel))
+	if (gBattleMons[gBattlerAttacker].level > obedienceLevel && (Random() % 100 >= ((gBattleMons[gBattlerAttacker].level - obedienceLevel) + 5)))
 		return 0;
     rnd = (Random() & 255);
     calc = (gBattleMons[gBattlerAttacker].level + obedienceLevel) * rnd >> 8;
@@ -8448,11 +8453,11 @@ static u32 CalcMoveBasePowerAfterModifiers(u16 move, u8 battlerAtk, u8 battlerDe
         break;
     case ABILITY_ANALYTIC:
         if (GetBattlerTurnOrderNum(battlerAtk) == gBattlersCount - 1 && move != MOVE_FUTURE_SIGHT && move != MOVE_DOOM_DESIRE)
-           MulModifier(&modifier, UQ_4_12(1.3));
+           MulModifier(&modifier, UQ_4_12(1.5));
         break;
     case ABILITY_TOUGH_CLAWS:
         if (IsMoveMakingContact(move, battlerAtk))
-           MulModifier(&modifier, UQ_4_12(1.3));
+           MulModifier(&modifier, UQ_4_12(1.5));
         break;
     case ABILITY_STRONG_JAW:
         if (gBattleMoves[move].flags & FLAG_STRONG_JAW_BOOST)
@@ -8554,6 +8559,15 @@ static u32 CalcMoveBasePowerAfterModifiers(u16 move, u8 battlerAtk, u8 battlerDe
                 RecordAbilityBattle(battlerDef, ability);
         }
         break;
+	case ABILITY_MINUS:
+	case ABILITY_PLUS:
+		if (IsBattlerAlive(BATTLE_PARTNER(battlerDef)))
+        {
+            u32 partnerAbility = GetBattlerAbility(BATTLE_PARTNER(battlerDef));
+            if (partnerAbility == ABILITY_PLUS || partnerAbility == ABILITY_MINUS)
+                MulModifier(&modifier, UQ_4_12(0.5));
+        }
+		break;
     case ABILITY_DRY_SKIN:
         if (moveType == TYPE_FIRE)
             MulModifier(&modifier, UQ_4_12(1.25));
@@ -8797,7 +8811,9 @@ static u32 CalcAttackStat(u16 move, u8 battlerAtk, u8 battlerDef, u8 moveType, b
         break;
     case ABILITY_DEFEATIST:
         if (gBattleMons[battlerAtk].hp <= (gBattleMons[battlerAtk].maxHP / 2))
-            MulModifier(&modifier, UQ_4_12(0.5));
+            MulModifier(&modifier, UQ_4_12(0.8));
+		else
+			MulModifier(&modifier, UQ_4_12(1.3));
         break;
     case ABILITY_FLASH_FIRE:
         if (moveType == TYPE_FIRE && gBattleResources->flags->flags[battlerAtk] & RESOURCE_FLAG_FLASH_FIRE)
@@ -9891,6 +9907,59 @@ static bool32 TryRemoveScreens(u8 battler)
     }
 
     return removed;
+}
+
+static bool32 TrySetUpScreens(u8 battler)
+{
+	
+	u32 statId, opposingBattler, i;
+	u32 opposingAtk = 0, opposingSpAtk = 0;
+	bool32 activated = FALSE;
+    u8 battlerSide = GetBattlerSide(battler);
+    u8 enemySide;
+	opposingBattler = BATTLE_OPPOSITE(battler);
+	enemySide = GetBattlerSide(opposingBattler);
+	
+	for (i = 0; i < 2; opposingBattler ^= BIT_FLANK, i++)
+	{
+		if (IsBattlerAlive(opposingBattler))
+		{
+			opposingAtk += gBattleMons[opposingBattler].attack
+						* gStatStageRatios[gBattleMons[opposingBattler].statStages[STAT_ATK]][0]
+						/ gStatStageRatios[gBattleMons[opposingBattler].statStages[STAT_ATK]][1];
+			opposingSpAtk += gBattleMons[opposingBattler].spAttack
+						  * gStatStageRatios[gBattleMons[opposingBattler].statStages[STAT_SPATK]][0]
+						  / gStatStageRatios[gBattleMons[opposingBattler].statStages[STAT_SPATK]][1];
+		}
+	}
+
+	if (opposingAtk > opposingSpAtk)
+		{
+			if (!(gSideStatuses[battlerSide] & (SIDE_STATUS_REFLECT))){
+				gSideStatuses[battlerSide] |= SIDE_STATUS_REFLECT;
+				if (GetBattlerHoldEffect(gBattlerAttacker, TRUE) == HOLD_EFFECT_LIGHT_CLAY)
+					gSideTimers[battlerSide].reflectTimer = 8;
+				else
+					gSideTimers[battlerSide].reflectTimer = 5;
+				gSideTimers[battlerSide].lightscreenBattlerId = gBattlerAttacker;
+				gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_SWITCHIN_SCREENCLEANERREFLECT;
+				activated = TRUE;
+			}
+	}
+	else {
+		if (!(gSideStatuses[battlerSide] & (SIDE_STATUS_LIGHTSCREEN))){
+			gSideStatuses[battlerSide] |= SIDE_STATUS_LIGHTSCREEN;
+			if (GetBattlerHoldEffect(gBattlerAttacker, TRUE) == HOLD_EFFECT_LIGHT_CLAY)
+				gSideTimers[battlerSide].lightscreenTimer = 8;
+			else
+				gSideTimers[battlerSide].lightscreenTimer = 5;
+			gSideTimers[battlerSide].lightscreenBattlerId = gBattlerAttacker;
+			gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_SWITCHIN_SCREENCLEANER;
+			activated = TRUE;
+		}
+	}
+
+    return activated;
 }
 
 static bool32 IsUnnerveAbilityOnOpposingSide(u8 battlerId)

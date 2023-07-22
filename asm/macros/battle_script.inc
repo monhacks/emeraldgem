@@ -2136,3 +2136,7 @@
 	.macro usereviveonopponent
 	various 0, VARIOUS_USE_REVIVE_ON_OPPONENT
 	.endm
+
+.macro givedroppeditems
+	various BS_FAINTED, VARIOUS_GIVE_DROPPED_ITEMS
+	.endm

@@ -1126,6 +1126,6 @@ void ResetPreservedPalettesInWeather(void)
 void UpdatePaletteGammaType(u8 index, u8 gammaType)
 {
     if (index != 0xFF)
-        sBasePaletteGammaTypes2[index] = gammaType;
-        // sBasePaletteGammaTypes[index + 16] = gammaType;
+        sBasePaletteGammaTypes[index + 16] = gammaType;
+        // // sBasePaletteGammaTypes[index + 16] = gammaType;
 }

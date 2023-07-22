@@ -1,7 +1,7 @@
 ChainNumber::
 	lockall
     buffernumberstring 0, VAR_CHAIN
-    msgbox TextoCool, 2
+    msgbox Text_DisplayChain, 2
 	release
     end
 
@@ -9,7 +9,7 @@ ChainNumber::
 ChainBroke::
 	lockall
 	buffernumberstring 0, VAR_CHAIN
-    msgbox TextoCool2, 2
+    msgbox Text_DisplayChainBroke, 2
 	release
 	end
  
@@ -71,12 +71,31 @@ Text_ActuallyOpenRegidragoDoor:
 Text_OpenRegidragoDoor:
 	.string "Parece que los mensajes en\nla pared han cambiado.$" 
 
-TextoCool2::
+Text_DisplayChainBroke::
 	.string "Cadena rota por {STR_VAR_2}.$"
-TextoCool::
+Text_DisplayChain::
     .string "Cadena: {STR_VAR_1}, de {STR_VAR_2}.$"
- 
-AddChain::
-    addvar VAR_CHAIN, 1
-    end
 
+Text_PokemonWereBurnt::
+    .string "¡Tus Pokémon han sido quemados por\nlas arenas ardientes!$"
+
+Text_PokemonProtectedTeam::
+    .string "¡{STR_VAR_1} protegió el equipo!$"
+ 
+PokemonBurnt::
+	lockall
+	playse SE_M_EMBER
+	waitse
+	message Text_PokemonWereBurnt
+	waitmessage
+	delay 24
+	releaseall
+	end
+
+PokemonProtected::
+	lockall
+	message Text_PokemonProtectedTeam
+	waitmessage
+	delay 24
+	releaseall
+	end

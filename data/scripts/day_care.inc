@@ -865,7 +865,6 @@ DayCare_EventScript_EVBerriesMan_1:
 	case 1, DayCare_EventScript_EVBerriesMan_8
 	msgbox DayCare_EventScript_EVBerriesMan_Text_13
 DayCare_EventScript_EVBerriesMan_5:
-	hidemoneybox
 	releaseall
 	end
 

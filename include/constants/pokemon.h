@@ -96,7 +96,7 @@
 #define ABILITY_HIDDEN 2
 
 // Shiny odds
-#define SHINY_ODDS 16 // Actual probability is SHINY_ODDS/65536
+#define SHINY_ODDS 8 // Actual probability is SHINY_ODDS/65536
 
 
 // // // Flags for Get(Box)MonData / Set(Box)MonData
