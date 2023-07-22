@@ -179,7 +179,7 @@ static void FeebasSeedRng(u16 seed)
 }
 
 // LAND_WILD_COUNT
-static u8 ChooseWildMonIndex_Land(void)
+u8 ChooseWildMonIndex_Land(void)
 {
     u8 rand = Random() % ENCOUNTER_CHANCE_LAND_MONS_TOTAL;
 
@@ -210,7 +210,7 @@ static u8 ChooseWildMonIndex_Land(void)
 }
 
 // ROCK_WILD_COUNT / WATER_WILD_COUNT
-static u8 ChooseWildMonIndex_WaterRock(void)
+u8 ChooseWildMonIndex_WaterRock(void)
 {
     u8 rand = Random() % ENCOUNTER_CHANCE_WATER_MONS_TOTAL;
 
@@ -473,7 +473,7 @@ static u8 PickWildMonNature(void)
     return Random() % NUM_NATURES;
 }
 
-static void CreateWildMon(u16 species, u8 level)
+void CreateWildMon(u16 species, u8 level)
 {
     bool32 checkCuteCharm;
 
@@ -507,10 +507,10 @@ static void CreateWildMon(u16 species, u8 level)
         CreateMonWithGenderNatureLetter(&gEnemyParty[0], species, level, 32, gender, PickWildMonNature(), 0, OT_ID_PLAYER_ID);
         return;
     }
-	if (VarGet(VAR_SPECIESCHAINED) != GetMonData(&gEnemyParty[0], MON_DATA_SPECIES) && (Random() % 99) < (VarGet(VAR_CHAIN) + 10) && (VarGet(VAR_CHAIN) >= 10))
-        species = VarGet(VAR_SPECIESCHAINED);
-	if (VarGet(VAR_SPECIESCHAINED) != GetMonData(&gEnemyParty[0], MON_DATA_SPECIES) && (Random() % 99) < (VarGet(VAR_CHAIN) - 20) && (VarGet(VAR_CHAIN) >= 25))
-        species = SPECIES_CHANSEY;
+	// if (VarGet(VAR_SPECIESCHAINED) != GetMonData(&gEnemyParty[0], MON_DATA_SPECIES) && (Random() % 99) < (VarGet(VAR_CHAIN) + 10) && (VarGet(VAR_CHAIN) >= 10))
+        // species = VarGet(VAR_SPECIESCHAINED);
+	// if (VarGet(VAR_SPECIESCHAINED) != GetMonData(&gEnemyParty[0], MON_DATA_SPECIES) && (Random() % 99) < (VarGet(VAR_CHAIN) - 20) && (VarGet(VAR_CHAIN) >= 25))
+        // species = SPECIES_CHANSEY;
 	if (gSaveBlock2Ptr->optionsButtonMode == 1 && (Random() % 99) < 5)
 		species = SPECIES_AUDINO;
 	if (gSaveBlock2Ptr->optionsButtonMode == 1 && (Random() % 99) < 5)
@@ -1128,3 +1128,25 @@ bool8 StandardWildEncounter_Debug(void)
 
     DoStandardWildBattle_Debug();
 }
+
+u8 ChooseHiddenMonIndex(void)
+{
+    #ifdef ENCOUNTER_CHANCE_HIDDEN_MONS_TOTAL
+        u8 rand = Random() % ENCOUNTER_CHANCE_HIDDEN_MONS_TOTAL;
+
+        if (rand < ENCOUNTER_CHANCE_HIDDEN_MONS_SLOT_0)
+            return 0;
+        else if (rand >= ENCOUNTER_CHANCE_HIDDEN_MONS_SLOT_0 && rand < ENCOUNTER_CHANCE_HIDDEN_MONS_SLOT_1)
+            return 1;
+        else
+            return 2;
+    #else
+        return 0xFF;
+    #endif
+}
+
+bool32 MapHasNoEncounterData(void)
+{
+    return (GetCurrentMapWildMonHeaderId() == HEADER_NONE);
+}
+

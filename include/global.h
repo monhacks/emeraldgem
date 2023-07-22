@@ -1057,8 +1057,8 @@ struct SaveBlock1
                 struct RegisteredItemSlot registeredItems[REGISTERED_ITEMS_MAX];
 				struct Pokemon Empty;
 				struct Pokemon BossTeam[PARTY_SIZE - 1];
-
-    // sizeof: 0x3???
+               u8 dexNavChain;
+    // sizeof: 0x3D88
 };
 
 extern struct SaveBlock1* gSaveBlock1Ptr;

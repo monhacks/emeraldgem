@@ -11,6 +11,7 @@
 #include "battle_tower.h"
 #include "battle_z_move.h"
 #include "data.h"
+#include "dexnav.h"
 #include "event_data.h"
 #include "evolution_scene.h"
 #include "field_specials.h"
@@ -3333,17 +3334,17 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
 			else 
 			{
 				totalRerolls = 0;
-				if ((VarGet(VAR_CHAIN) >= 5) && (VarGet(VAR_CHAIN) <= 9))
+				if ((gSaveBlock1Ptr->dexNavChain >= 5) && (gSaveBlock1Ptr->dexNavChain <= 9))
 					totalRerolls += 2;
-				else if ((VarGet(VAR_CHAIN) >= 10) && (VarGet(VAR_CHAIN) <= 19))
+				else if ((gSaveBlock1Ptr->dexNavChain >= 10) && (gSaveBlock1Ptr->dexNavChain <= 19))
 					totalRerolls += 4;
-				else if ((VarGet(VAR_CHAIN) >= 20) && (VarGet(VAR_CHAIN) <= 29))
+				else if ((gSaveBlock1Ptr->dexNavChain >= 20) && (gSaveBlock1Ptr->dexNavChain <= 29))
 					totalRerolls += 8;
-				else if ((VarGet(VAR_CHAIN) >= 30) && (VarGet(VAR_CHAIN) <= 39))
+				else if ((gSaveBlock1Ptr->dexNavChain >= 30) && (gSaveBlock1Ptr->dexNavChain <= 39))
 					totalRerolls += 16;
-				else if (VarGet(VAR_CHAIN) >= 40)
+				else if (gSaveBlock1Ptr->dexNavChain >= 40)
 					totalRerolls += 32;
-				if ((species != VarGet(VAR_SPECIESCHAINED)) && (VarGet(VAR_CHAIN) >= 10))
+				if ((species != VarGet(VAR_SPECIESCHAINED)) && (gSaveBlock1Ptr->dexNavChain >= 10))
 					totalRerolls /= 2;
 				if (CheckBagHasItem(ITEM_SHINY_CHARM, 1))
 					totalRerolls += I_SHINY_CHARM_REROLLS;
@@ -3376,6 +3377,50 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
 		}
 	}
 
+// =======
+            // // Choose random OT IDs until one that results in a non-shiny Pokémon
+            // value = Random32();
+            // shinyValue = GET_SHINY_VALUE(value, personality);
+        // } while (shinyValue < SHINY_ODDS);
+    // }
+    // else if (otIdType == OT_ID_PRESET)
+    // {
+        // value = fixedOtId;
+    // }
+    // else // Player is the OT
+    // {
+        // #ifdef ITEM_SHINY_CHARM
+        // u32 shinyRolls = (CheckBagHasItem(ITEM_SHINY_CHARM, 1)) ? 3 : 1;
+        // #else
+        // u32 shinyRolls = 1;
+        // #endif
+        // u32 i;
+        
+        // value = gSaveBlock2Ptr->playerTrainerId[0]
+                  // | (gSaveBlock2Ptr->playerTrainerId[1] << 8)
+                  // | (gSaveBlock2Ptr->playerTrainerId[2] << 16)
+                  // | (gSaveBlock2Ptr->playerTrainerId[3] << 24);
+                  
+        // for (i = 0; i < shinyRolls; i++)
+        // {
+            // if (Random() < SHINY_ODDS)
+                // FlagSet(FLAG_SHINY_CREATION);   // use a flag bc of CreateDexNavWildMon
+        // }
+
+        // if (FlagGet(FLAG_SHINY_CREATION))
+        // {
+            // u8 nature = personality % NUM_NATURES;  // keep current nature
+            // do {
+                // personality = Random32();
+                // personality = ((((Random() % SHINY_ODDS) ^ (HIHALF(value) ^ LOHALF(value))) ^ LOHALF(personality)) << 16) | LOHALF(personality);
+            // } while (nature != GetNatureFromPersonality(personality));
+            
+            // // clear the flag after use
+            // FlagClear(FLAG_SHINY_CREATION);
+        // }
+    // }
+    
+// >>>>>>> 7d010529d64b4334c11a2ebcde33b96c42fe3227
     SetBoxMonData(boxMon, MON_DATA_PERSONALITY, &personality);
     SetBoxMonData(boxMon, MON_DATA_OT_ID, &value);
 
@@ -3440,10 +3485,10 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
 			  }
 		  }
 		  else 
-			if (VarGet(VAR_CHAIN) >=8 && VarGet(VAR_CHAIN) <=29 )
+			if (gSaveBlock1Ptr->dexNavChain >=8 && gSaveBlock1Ptr->dexNavChain <=29 )
         {
 			if (Random() % 18 == 1) {  //forces a pokemon to have fairy type hidden power, based on the chain level
-			      if (VarGet(VAR_CHAIN) <=14) {
+			      if (gSaveBlock1Ptr->dexNavChain <=14) {
 					  u32 iv1 = 0;
 					  u32 iv2 = 1;
 					  u32 iv3 = 3;
@@ -3468,8 +3513,8 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
 			else
 				{
 				u32 iv;
-				if (VarGet(VAR_CHAIN) < 31)
-					iv = VarGet(VAR_CHAIN);
+				if (gSaveBlock1Ptr->dexNavChain < 31)
+					iv = gSaveBlock1Ptr->dexNavChain;
 				else
 					iv = 31;
 				SetBoxMonData(boxMon, MON_DATA_HP_IV, &iv);
@@ -3480,7 +3525,7 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
 				SetBoxMonData(boxMon, MON_DATA_SPDEF_IV, &iv);
 			}
         }
-        else if (VarGet(VAR_CHAIN) >=30)
+        else if (gSaveBlock1Ptr->dexNavChain >=30)
         {
 			if (Random() % 18 == 1) {
 				  u32 iv1 = 30;
@@ -3531,9 +3576,9 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
         value = personality & 1;
         SetBoxMonData(boxMon, MON_DATA_ABILITY_NUM, &value);
     }
-	if (VarGet(VAR_CHAIN) >= 10){
+	if (gSaveBlock1Ptr->dexNavChain >= 10){
 		value = 2;
-		if (Random() % 100 <= (VarGet(VAR_CHAIN)+(VarGet(VAR_CHAIN)/2)) && gBaseStats[species].abilities[2] != ABILITY_NONE)
+		if (Random() % 100 <= (gSaveBlock1Ptr->dexNavChain+(gSaveBlock1Ptr->dexNavChain/2)) && gBaseStats[species].abilities[2] != ABILITY_NONE)
 			SetBoxMonData(boxMon, MON_DATA_ABILITY_NUM, &value);
 	}
     
@@ -7783,7 +7828,8 @@ static s32 GetWildMonTableIdInAlteringCave(u16 species)
 
 void SetWildMonHeldItem(void)
 {
-    if (!(gBattleTypeFlags & (BATTLE_TYPE_LEGENDARY | BATTLE_TYPE_TRAINER | BATTLE_TYPE_PYRAMID | BATTLE_TYPE_PIKE)))
+    if (!(gBattleTypeFlags & (BATTLE_TYPE_LEGENDARY | BATTLE_TYPE_TRAINER | BATTLE_TYPE_PYRAMID | BATTLE_TYPE_PIKE))
+      && !gDexnavBattle)
     {
         u16 rnd;
         u16 species;

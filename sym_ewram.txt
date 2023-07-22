@@ -157,3 +157,4 @@
 	.include "src/registered_items_menu.o"
 	.include "src/field_name_box.o"
 	.include "src/debug_pokemon_creator.o"
+	.include "src/dexnav.o"

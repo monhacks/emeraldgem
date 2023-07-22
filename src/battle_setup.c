@@ -704,69 +704,17 @@ void StartRegiBattle(void)
 static void CB2_EndWildBattle(void)
 {
 	//cadena salvaje
-	u16 species;
-	u16 species2;
     u16 ptr;
     u8 nickname[POKEMON_NAME_LENGTH + 1];
-    u16 lastPokemonFound;
-    species = GetMonData(&gEnemyParty[0], MON_DATA_SPECIES);
-	if (GetMonData(&gEnemyParty[1], MON_DATA_SPECIES) != SPECIES_NONE) // if its a double battle, gEnemyParty should have more than one element.
-		species2 = GetMonData(&gEnemyParty[1], MON_DATA_SPECIES); // to handle situations where the targeted pokémon wasn't on gEnemyParty[0].
-	else
-	{
-		species2 = 0;
-	}
     CpuFill16(0, (void*)(BG_PLTT), BG_PLTT_SIZE);
     ResetOamRange(0, 128);
 	// RestoreAllPlayerPartyHeldItems();
     if (IsPlayerDefeated(gBattleOutcome) == TRUE && !InBattlePyramid() && !InBattlePike())
     {
-		VarSet(VAR_CHAIN,0);
-        VarSet(VAR_SPECIESCHAINED,0);
         SetMainCallback2(CB2_WhiteOut);
     }
     else
     {
-        if ((gBattleOutcome == B_OUTCOME_WON) || (gBattleOutcome == B_OUTCOME_CAUGHT))
-        {
-            if (VarGet(VAR_CHAIN) == 0)
-                VarSet(VAR_SPECIESCHAINED,species);
-
-			if ((species == VarGet(VAR_SPECIESCHAINED)) || (species2 == VarGet(VAR_SPECIESCHAINED)))
-			{
-				if (species == species2)
-					VarSet(VAR_CHAIN, (VarGet(VAR_CHAIN) + 1)); // if its a double wild battle, and both are your target, you must've defeated at least ONE of them
-				VarSet(VAR_CHAIN, (VarGet(VAR_CHAIN) + (gBattleOutcome % 5))); // B_OUTCOME_WON (equals 1) % 5 = 1, B_OUTCOME_CAUGHT (equals 7) % 5 = 2
-				if (VarGet(VAR_CHAIN) >=40)
-				{
-					VarSet(VAR_CHAIN,40);
-					GetSpeciesName(gStringVar2, VarGet(VAR_SPECIESCHAINED));
-					ScriptContext_SetupScript(ChainNumber);
-				}
-				else if (VarGet(VAR_CHAIN) >=3)
-				{
-					GetSpeciesName(gStringVar2, VarGet(VAR_SPECIESCHAINED));
-					ScriptContext_SetupScript(ChainNumber);
-				}
-			}
-            else if (VarGet(VAR_CHAIN) >=3 && (species != VarGet(VAR_SPECIESCHAINED) && species2 != VarGet(VAR_SPECIESCHAINED)))
-			{
-                VarSet(VAR_CHAIN,0);
-                VarSet(VAR_SPECIESCHAINED,0);
-				GetSpeciesName(gStringVar2 ,VarGet(species));
-                ScriptContext_SetupScript(ChainBroke);
-			}
-        }
-		else
-        {
-            if (((species == VarGet(VAR_SPECIESCHAINED)) || species2 == VarGet(VAR_SPECIESCHAINED)) && (VarGet(VAR_CHAIN) >= 3))
-            {
-                VarSet(VAR_CHAIN,0);
-                VarSet(VAR_SPECIESCHAINED,0);
-            }
-            else
-                species = VarGet(VAR_SPECIESCHAINED);
-        }
         SetMainCallback2(CB2_ReturnToField);
         gFieldCallback = FieldCB_ReturnToFieldNoScriptCheckMusic;
     }

@@ -350,6 +350,7 @@ SECTIONS {
         src/tm_case.o(.text);
 		src/registered_items_menu.o(.text);
         src/field_name_box.o(.text);
+		src/dexnav.o(.text);
     } =0
 
     script_data :
@@ -727,6 +728,7 @@ SECTIONS {
         src/tm_case.o(.rodata);
 		src/registered_items_menu.o(.rodata);
         src/field_name_box.o(.rodata);
+		src/dexnav.o(.rodata);
     } =0
 
     song_data :

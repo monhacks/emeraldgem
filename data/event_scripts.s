@@ -1089,6 +1089,7 @@ Script_RemoveTint::
 	.include "data/scripts/chain.inc"
 	.include "data/scripts/check_fossils.inc"
 	.include "data/scripts/password_system.inc"
+	.include "data/scripts/dexnav.inc"
 
 	.include "data/maps/LittlerootTown_MLMHouse/scripts.inc"
 
@@ -1168,3 +1169,5 @@ Decline:
 	.include "data/maps/NewMap1/scripts.inc"
 
 	.include "data/maps/MiniSafariCave/scripts.inc"
+
+    
