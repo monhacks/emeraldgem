@@ -364,15 +364,14 @@ LittlerootTown_MaysHouse_1F_Movement_MayGoUpstairs2:
 
 RivalsHouse_1F_Text_LikeChildLikeFather:
 	.string "De tal palo, tal astilla…\n"
-	.string "Tanto mi esposo como mi retoño están\l"
+	.string "Tanto mi esposo como mi hij{AO} están\l"
 	.string "siempre hablando de Pokémon, aunque\l"
 	.string "{RIVAL} ha estado actuando raro\l"
 	.string "últimamente…\p"
 	.string "¡Pero bueno! Así son los jóvenes, ¿no?\p"
 	.string "Mi esposo probablemente… UGH…\n"
 	.string "Probablemente esté en el campo\l"
-	.string "estudiando una {COLOR BLUE}“extraña migración de\l"
-	.string "Pokémon a Hoenn,”{COLOR DARK_GRAY} o eso dice él…\p"
+	.string "estudiando alguna estupidez…\p"
 	.string "Pero bueno…$"
 
 RivalsHouse_1F_Text_TooBusyToNoticeVisit:
@@ -402,31 +401,13 @@ RivalsHouse_1F_Text_MayWhoAreYou:
 	.string "¿no?\p"
 	.string "¡Encantada! ¡Yo soy {RIVAL}!\n"
 	.string "… … … … … … … … … … … …\p"
-	.string "Mmmhhh… Mi padre me dijo algo de tí…\p"
-	.string "… … … … … … … …\p"
-	.string "Ah, cierto… Dijo que seamos amigos.\n"
-	.string "Honestamente, {PLAYER}, no tengo\l"
-	.string "tiempo para amistades, tengo una\l"
-	.string "misión, y no quiero que te interpongas.\l"
-	.string "¡Hasta luego, desquiciad{OA}!$"
-
-RivalsHouse_1F_Text_OhYoureTheNewNeighbor:
-	.string "$"
-
-RivalsHouse_1F_Text_BrendanWhoAreYou:
-	.string "¡Oh! Tú eres esa tal\n"
-	.string "{PLAYER}, ¿no?\p"
-	.string "¡Es un placer! ¡Yo soy {RIVAL}!\n"
-	.string "Hey… Mi padre me dijo algo…\p"
-	.string "… … … … … … … …\p"
-	.string "¡AJÁ!\n"
-	.string "… … … … … … … … … … … …\l"
-	.string "Dijo que sea tu amigo.\l"
-	.string "Pero, {PLAYER}, no tengo tiempo para\l"
-	.string "tener amigas, tengo una misión, y no\l"
-	.string "quiero que te interpongas. ¡Hasta\l"
-	.string "luego, desquiciad{OA}!$"
+	.string "Mhhh… Mi papá dijo que fuéramos amigos,\n"
+	.string "{PLAYER}, ¡Ja ja!\l"
+	.string "No puedo ser amig{AO} de la nada con alguien\l"
+	.string "que conocí hoy, ¿Verdad?\p"
+	.string "No tengo mucho tiempo de todas formas,\n"
+	.string "{PLAYER}, espero lo entiendas.$"
 
 RivalsHouse_1F_Text_DoYouHavePokemon:
 	.string "¡Hoda, veshin{OA}!\p"
-	.string "¿Cha tienesh Pokémon?$"
+	.string "¿Ya tienesh Pokémon?$"

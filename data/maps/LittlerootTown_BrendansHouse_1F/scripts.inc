@@ -99,7 +99,6 @@ LittlerootTown_BrendansHouse_1F_EventScript_YoureNewNeighbor::
 	applymovement LOCALID_RIVAL_MOM, LittlerootTown_BrendansHouse_1F_Movement_RivalMomApproach
 	waitmovement 0
 	special GetRivalSonDaughterString
-	msgbox RivalsHouse_1F_Text_OhYoureTheNewNeighbor, MSGBOX_DEFAULT
 	setflag FLAG_MET_RIVAL_MOM
 	setvar VAR_LITTLEROOT_HOUSES_STATE_MAY, 2
 	releaseall
@@ -157,7 +156,7 @@ LittlerootTown_BrendansHouse_1F_EventScript_MeetRival::
 	call_if_eq VAR_0x8008, 1, LittlerootTown_BrendansHouse_1F_EventScript_BrendanApproachPlayer1
 	call_if_eq VAR_0x8008, 2, LittlerootTown_BrendansHouse_1F_EventScript_BrendanApproachPlayer2
 	namebox Rival
-	msgbox RivalsHouse_1F_Text_BrendanWhoAreYou, MSGBOX_DEFAULT
+	msgbox RivalsHouse_1F_Text_MayWhoAreYou, MSGBOX_DEFAULT
 	closemessage
 	call_if_eq VAR_0x8008, 0, LittlerootTown_BrendansHouse_1F_EventScript_BrendanGoUpstairs0
 	call_if_eq VAR_0x8008, 1, LittlerootTown_BrendansHouse_1F_EventScript_BrendanGoUpstairs1
@@ -322,8 +321,7 @@ PlayersHouse_1F_Text_GoIntroduceYourselfNextDoor:
 	.string "acá!\p"
 	.string "Es un Profesor Pokémon, así que no\n"
 	.string "haría daño que lo conocieras.\p"
-	.string "Tiene un{A} hij{OA} de tu edad, creo. ¡Ve a\n"
-	.string "saludarlos!$"
+	.string "¡Ve a saludarlo!$"
 
 PlayersHouse_1F_Text_SeeYouHoney:
 	.string "¡Hasta luego amor!$"
