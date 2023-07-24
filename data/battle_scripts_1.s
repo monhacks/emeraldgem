@@ -9907,3 +9907,8 @@ BattleScript_ItemDropped::
 	playse SE_BALL_BOUNCE_1
 	printfromtable gItemDroppedStringIds
 	return
+
+BattleScript_RunPrompt::
+	printselectionstring STRINGID_RUNPROMPT
+	forfeityesnobox BS_ATTACKER
+	endselectionscript

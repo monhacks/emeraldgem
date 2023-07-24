@@ -1,7 +1,6 @@
 #ifndef GUARD_CONSTANTS_GAME_STAT_H
 #define GUARD_CONSTANTS_GAME_STAT_H
 
-<<<<<<< HEAD
 #define GAME_STAT_SAVED_GAME                 0
 #define GAME_STAT_FIRST_HOF_PLAY_TIME        1
 #define GAME_STAT_STARTED_TRENDS             2

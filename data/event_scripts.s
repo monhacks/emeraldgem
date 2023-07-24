@@ -1171,3 +1171,5 @@ Decline:
 	.include "data/maps/MiniSafariCave/scripts.inc"
 
     
+
+	.include "data/maps/OldaleRuins/scripts.inc"

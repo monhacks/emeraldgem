@@ -1115,6 +1115,7 @@ RustboroCity_EventScript_RivalTrigger7::
 	goto RustboroCity_EventScript_RivalEncounter
 
 RustboroCity_EventScript_RivalEncounter::
+	setflag FLAG_SYS_DEXNAV_GET
 	checkplayergender
 	goto_if_eq VAR_RESULT, MALE, RustboroCity_EventScript_MayEncounter
 	goto_if_eq VAR_RESULT, FEMALE, RustboroCity_EventScript_BrendanEncounter
@@ -1485,9 +1486,9 @@ RustboroCity_Text_MayPassedBrineyWantToBattle:
 	.string "Dexes, que podemos {COLOR GREEN}intercambiar los\l"
 	.string "datos de la Pokédex{COLOR DARK_GRAY} para poder\l"
 	.string "completarla más rápido.\p"
-	.string "Realmente no quiero necesitar tu ayuda\n"
-	.string "para esto, y también dudo que hacerlo\l"
-	.string "vaya a registrarme nuevos Pokémon. Así\l"
+	.string "También, me dijo que te diera el DexNav,\n"
+	.string "para ayudarme con la Pokédex, aunque\l"
+	.string "prefería hacerlo sola... Así\l"
 	.string "que hagamos una cosa:\p"
 	.string "Si me ganas en una Batalla Pokémon, voy\n"
 	.string "a intercambiarte los datos.$"

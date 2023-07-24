@@ -372,8 +372,6 @@ static void BuildNormalStartMenu(void)
 {
 	if (GetSafariZoneFlag() == TRUE) {
 		AddStartMenuAction(MENU_ACTION_RETIRE_SAFARI);
-		if (FlagGet(FLAG_SYS_DEXNAV_GET))
-			AddStartMenuAction(MENU_ACTION_DEXNAV);
 		AddStartMenuAction(MENU_ACTION_POKEDEX);
 		AddStartMenuAction(MENU_ACTION_POKEMON);
 		AddStartMenuAction(MENU_ACTION_BAG);
@@ -403,8 +401,6 @@ static void BuildNormalStartMenu(void)
 			AddStartMenuAction(MENU_ACTION_SAVE);
 			AddStartMenuAction(MENU_ACTION_OPTION);
 			if (!FlagGet(FLAG_SYS_POKEDEX_GET)) {
-				if (FlagGet(FLAG_SYS_QUEST_MENU_GET))
-					AddStartMenuAction(MENU_ACTION_QUEST_MENU);
 				AddStartMenuAction(MENU_ACTION_EXIT);
 			}
 			else {

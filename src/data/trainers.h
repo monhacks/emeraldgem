@@ -13469,4 +13469,15 @@ const struct Trainer gTrainers[] = {
         //.party = ITEM_CUSTOM_MOVES(sParty_MayLinkPlaceholder),
 
     },
+	[TRAINER_WALLY2] =
+    {
+        .trainerClass = TRAINER_CLASS_RIVAL,
+        .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MALE,
+        .trainerPic = TRAINER_PIC_WALLY,
+        .trainerName = _("Wally"),
+        .items = {ITEM_X_DEFENSE, ITEM_HYPER_POTION, ITEM_HYPER_POTION},
+        .doubleBattle = FALSE,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SETUP_FIRST_TURN | AI_FLAG_SMART_SWITCHING,
+        .party = ITEM_CUSTOM_MOVES(sParty_Wally2),
+    },
 };

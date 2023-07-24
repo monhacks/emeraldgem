@@ -1,16 +1,8 @@
 ChainNumber::
-	lockall
-    buffernumberstring 0, VAR_CHAIN
-    msgbox Text_DisplayChain, 2
-	release
     end
 
 
 ChainBroke::
-	lockall
-	buffernumberstring 0, VAR_CHAIN
-    msgbox Text_DisplayChainBroke, 2
-	release
 	end
  
 EventScript_OpenRegidragoDoor::

@@ -842,8 +842,6 @@ static void LoadMapFromWarp(bool32 a1)
 {
     bool8 isOutdoors;
     bool8 isIndoors;
-	SetVar(VAR_CHAIN,0);
-	SetVar(VAR_SPECIESCHAINED,0);
 
     LoadCurrentMapData();
     if (!(sObjectEventLoadFlag & SKIP_OBJECT_EVENT_LOAD))

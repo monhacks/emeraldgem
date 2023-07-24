@@ -3344,8 +3344,6 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
 					totalRerolls += 16;
 				else if (gSaveBlock1Ptr->dexNavChain >= 40)
 					totalRerolls += 32;
-				if ((species != VarGet(VAR_SPECIESCHAINED)) && (gSaveBlock1Ptr->dexNavChain >= 10))
-					totalRerolls /= 2;
 				if (CheckBagHasItem(ITEM_SHINY_CHARM, 1))
 					totalRerolls += I_SHINY_CHARM_REROLLS;
 				// if (LURE_STEP_COUNT != 0)

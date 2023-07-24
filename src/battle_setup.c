@@ -1000,7 +1000,7 @@ static void CB2_GiveStarter(void)
 	else if ((VarGet(VAR_SHINY_TREECKO) == starterMon+1) || (VarGet(VAR_SHINY_MUDKIP) == starterMon+1) || (VarGet(VAR_SHINY_TORCHIC) == starterMon+1)){
 		FlagSet(FLAG_NO_SHINIES);
 	}
-	ScriptGiveMon(starterMon, 4, ITEM_ORAN_BERRY, 0, 0, 0);
+	ScriptGiveMon(starterMon, 4, ITEM_BLAZIKENITE, 0, 0, 0);
     ResetTasks();
     PlayBattleBGM();
     SetMainCallback2(CB2_StartFirstBattle);

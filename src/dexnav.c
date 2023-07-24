@@ -449,7 +449,7 @@ static void DrawDexNavSearchMonIcon(u16 species, u8 *dst, bool8 owned)
     u8 spriteId;
 
     LoadMonIconPalette(species);
-    spriteId = CreateMonIcon(species, SpriteCB_MonIcon, SPECIES_ICON_X - 6, GetSearchWindowY() + 8, 0, 0xFFFFFFFF, 0);
+    spriteId = CreateMonIcon(species, SpriteCB_MonIcon, SPECIES_ICON_X - 6, GetSearchWindowY() + 8, 0, 0xFFFFFFFF);
     gSprites[spriteId].oam.priority = 0;
     *dst = spriteId;
     
@@ -485,6 +485,7 @@ static void AddSearchWindow(u8 width)
 static void AddSearchWindowText(u16 species, u8 proximity, u8 searchLevel, bool8 hidden)
 {
     u8 windowId = sDexNavSearchDataPtr->windowId;
+	u8 empty = 0;
     
     //species name - always present
     if (hidden)
@@ -533,6 +534,9 @@ static void AddSearchWindowText(u16 species, u8 proximity, u8 searchLevel, bool8
     
     //chain level - always present
     ConvertIntToDecimalStringN(gStringVar1, gSaveBlock1Ptr->dexNavChain, STR_CONV_MODE_LEFT_ALIGN, 3);
+	if (species != VarGet(VAR_DEXNAV_SPECIES)){
+		ConvertIntToDecimalStringN(gStringVar1, empty, STR_CONV_MODE_LEFT_ALIGN, 3);
+	}
     if (gSaveBlock1Ptr->dexNavChain > 99)
         StringExpandPlaceholders(gStringVar4, sText_DexNavChainLong);
     else
@@ -970,8 +974,9 @@ bool8 TryStartDexnavSearch(void)
     
     if (FlagGet(FLAG_SYS_DEXNAV_SEARCH) || (val & MASK_SPECIES) == SPECIES_NONE)
         return FALSE;
-    
-    HideMapNamePopUpWindow();
+    if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_BIKE) || (FlagGet(FLAG_REGICE_INFLUENCE) && FlagGet(FLAG_HAS_FIRE_POKEMON)))
+		return FALSE;
+	HideMapNamePopUpWindow();
     ChangeBgY_ScreenOff(0, 0, 0);
     taskId = CreateTask(Task_InitDexNavSearch, 0);
     gTasks[taskId].tSpecies = val & MASK_SPECIES;
@@ -1239,12 +1244,12 @@ static void CreateDexNavWildMon(u16 species, u8 potential, u8 level, u8 abilityN
 	if (Random() % 18 == 1 && potential > 2) {
 	  u32 iv1 = 30;
 	  u32 iv2 = 31;
-	  SetBoxMonData(boxMon, MON_DATA_HP_IV, &iv2);
-	  SetBoxMonData(boxMon, MON_DATA_ATK_IV, &iv1);
-	  SetBoxMonData(boxMon, MON_DATA_DEF_IV, &iv2);
-	  SetBoxMonData(boxMon, MON_DATA_SPEED_IV, &iv2);
-	  SetBoxMonData(boxMon, MON_DATA_SPATK_IV, &iv1);
-	  SetBoxMonData(boxMon, MON_DATA_SPDEF_IV, &iv2);
+	  SetMonData(mon, MON_DATA_HP_IV, &iv2);
+	  SetMonData(mon, MON_DATA_ATK_IV, &iv1);
+	  SetMonData(mon, MON_DATA_DEF_IV, &iv2);
+	  SetMonData(mon, MON_DATA_SPEED_IV, &iv2);
+	  SetMonData(mon, MON_DATA_SPATK_IV, &iv1);
+	  SetMonData(mon, MON_DATA_SPDEF_IV, &iv2);
   }
 	
     //Set ability
@@ -1352,8 +1357,8 @@ static u16 DexNavGenerateHeldItem(u16 species, u8 searchLevel)
 {
     u16 randVal = Random() % 100;
     u8 searchLevelInfluence = searchLevel >> 1;
-    u16 item1 = gSpeciesInfo[species].itemCommon;
-    u16 item2 = gSpeciesInfo[species].itemRare;
+    u16 item1 = gBaseStats[species].itemCommon;
+    u16 item2 = gBaseStats[species].itemRare;
     
     // if both are the same, 100% to hold
     if (item1 == item2)
@@ -1425,11 +1430,7 @@ static u8 DexNavGetAbilityNum(u16 species, u8 searchLevel)
         #endif
     }
     
-    #ifdef BATTLE_ENGINE    // if using RHH, the base stats abilities field is expanded
-    if (genAbility && gSpeciesInfo[species].abilities[2] != ABILITY_NONE && GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_CAUGHT))
-    #else
-    if (genAbility && gSpeciesInfo[species].abilityHidden != ABILITY_NONE && GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_CAUGHT))
-    #endif
+    if (genAbility && gBaseStats[species].abilities[2] != ABILITY_NONE && GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_CAUGHT))
     {
         //Only give hidden ability if Pokemon has been caught before
         abilityNum = 2;
@@ -1437,7 +1438,7 @@ static u8 DexNavGetAbilityNum(u16 species, u8 searchLevel)
     else
     {
         //Pick a normal ability of that Pokemon
-        if (gSpeciesInfo[species].abilities[1] != ABILITY_NONE)
+        if (gBaseStats[species].abilities[1] != ABILITY_NONE)
             abilityNum = Random() & 1;
         else
             abilityNum = 0;
@@ -2008,12 +2009,16 @@ static void DexNavLoadEncounterData(void)
 
 static void TryDrawIconInSlot(u16 species, s16 x, s16 y)
 {
+	u8 spriteId;
     if (species == SPECIES_NONE || species > NUM_SPECIES)
         CreateNoDataIcon(x, y);   //'X' in slot
-    else if (!GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_SEEN))
-        CreateMonIcon(SPECIES_NONE, SpriteCB_MonIcon, x, y, 0, 0xFFFFFFFF, 0); //question mark
+    else if (!GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_SEEN)) {
+        spriteId = CreateMonIcon(species, SpriteCB_MonIcon, x, y, 0, 0xFFFFFFFF); //question mark
+        gSprites[spriteId].oam.paletteNum += 6;
+    }
+		// gSprites[spriteIdData[i]].oam.paletteNum = spriteIdPalette[i] + 6;
     else
-        CreateMonIcon(species, SpriteCB_MonIcon, x, y, 0, 0xFFFFFFFF, 0);
+        CreateMonIcon(species, SpriteCB_MonIcon, x, y, 0, 0xFFFFFFFF);
 }
 
 static void DrawSpeciesIcons(void)
@@ -2049,7 +2054,7 @@ static void DrawSpeciesIcons(void)
        else if (species == SPECIES_NONE || species > NUM_SPECIES)
             CreateNoDataIcon(x, y);
         else
-            CreateMonIcon(SPECIES_NONE, SpriteCB_MonIcon, x, y, 0, 0xFFFFFFFF, 0); //question mark if detector mode inactive
+            CreateMonIcon(SPECIES_NONE, SpriteCB_MonIcon, x, y, 0, 0xFFFFFFFF); //question mark if detector mode inactive
     }
 }
 
@@ -2078,8 +2083,8 @@ static u16 DexNavGetSpecies(void)
         return SPECIES_NONE;
     }
     
-    if (!GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_SEEN))
-        return SPECIES_NONE;
+    // if (!GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_SEEN))
+        // return SPECIES_NONE;
     
     return species;
 }
@@ -2144,14 +2149,14 @@ static void PrintCurrentSpeciesInfo(void)
     FillWindowPixelBuffer(WINDOW_INFO, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
     
     //species name
-    if (species == SPECIES_NONE)
+    if (!GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_SEEN))
         AddTextPrinterParameterized3(WINDOW_INFO, 0, 0, SPECIES_INFO_Y, sFontColor_Black, 0, sText_DexNav_NoInfo);
     else
         AddTextPrinterParameterized3(WINDOW_INFO, 0, 0, SPECIES_INFO_Y, sFontColor_Black, 0, gSpeciesNames[species]);
     
     //type icon(s)
-    type1 = gSpeciesInfo[species].types[0];
-    type2 = gSpeciesInfo[species].types[1];
+    type1 = gBaseStats[species].type1;
+    type2 = gBaseStats[species].type2;
     if (species == SPECIES_NONE)
         type1 = type2 = TYPE_MYSTERY;
     
@@ -2184,13 +2189,8 @@ static void PrintCurrentSpeciesInfo(void)
     }
     else if (GetSetPokedexFlag(dexNum, FLAG_GET_CAUGHT))
     {
-        #ifdef BATTLE_ENGINE
-        if (gSpeciesInfo[species].abilities[2] != ABILITY_NONE)
-            AddTextPrinterParameterized3(WINDOW_INFO, 0, 0, HA_INFO_Y, sFontColor_Black, 0, gAbilityNames[gSpeciesInfo[species].abilities[2]]);
-        #else
-        if (gSpeciesInfo[species].abilityHidden != ABILITY_NONE)           
-            AddTextPrinterParameterized3(WINDOW_INFO, 0, 0, HA_INFO_Y, sFontColor_Black, 0, gAbilityNames[gSpeciesInfo[species].abilityHidden]);
-        #endif
+        if (gBaseStats[species].abilities[2] != ABILITY_NONE)
+            AddTextPrinterParameterized3(WINDOW_INFO, 0, 0, HA_INFO_Y, sFontColor_Black, 0, gAbilityNames[gBaseStats[species].abilities[2]]);
         else
             AddTextPrinterParameterized3(WINDOW_INFO, 0, 0, HA_INFO_Y, sFontColor_Black, 0, gText_None);
     }
@@ -2482,24 +2482,24 @@ static void Task_DexNavMain(u8 taskId)
         // check selection is valid. Play sound if invalid
         species = DexNavGetSpecies();
         
-        if (species != SPECIES_NONE)
+        if (species == SPECIES_NONE || (!GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_SEEN)))
         {            
-            PrintSearchableSpecies(species);
+            PlaySE(SE_FAILURE);
+        }
+        else
+        {
+			PrintSearchableSpecies(species);
             //PlaySE(SE_DEX_SEARCH);
             PlayCry_Script(species, 0);
             
             // create value to store in a var
             VarSet(VAR_DEXNAV_SPECIES, ((sDexNavUiDataPtr->environment << 14) | species));
         }
-        else
-        {
-            PlaySE(SE_FAILURE);
-        }
     }
     else if (JOY_NEW(A_BUTTON))
     {
         species = DexNavGetSpecies();
-        if (species == SPECIES_NONE)
+        if (species == SPECIES_NONE || !GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_SEEN))
         {
             PlaySE(SE_FAILURE);
         }

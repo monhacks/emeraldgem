@@ -767,10 +767,11 @@ static const u8 sText_AttackerMeltedTheIce[] = _("{B_ATK_NAME_WITH_PREFIX} melte
 static const u8 sText_TargetToughedItOut[] = _("{B_DEF_NAME_WITH_PREFIX} toughed it out\nto show you its best side!");
 static const u8 sText_PkmnDroppedItem[] = _("¡{B_SCR_ACTIVE_NAME_WITH_PREFIX} dejó caer\nsu {B_LAST_ITEM}!{WAIT_SE}\p");
 static const u8 sText_BagIsFullBattle[] = _("¡{B_SCR_ACTIVE_NAME_WITH_PREFIX} dejó caer\nsu {B_LAST_ITEM}!{WAIT_SE}\p¡Pero tu Mochila estaba llena!\p");
-
+static const u8 sText_RunPrompt[] = _("¿Quieres escapar?");
 
 const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
 {
+	[STRINGID_RUNPROMPT - 12] = sText_RunPrompt,
     [STRINGID_TARGETTOUGHEDITOUT - BATTLESTRINGS_TABLE_START] = sText_TargetToughedItOut,
     [STRINGID_ATTACKERMELTEDTHEICE - BATTLESTRINGS_TABLE_START] = sText_AttackerMeltedTheIce,
     [STRINGID_ATTACKERHEALEDITSBURN - BATTLESTRINGS_TABLE_START] = sText_AttackerHealedItsBurn,

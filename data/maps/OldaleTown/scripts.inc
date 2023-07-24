@@ -20,12 +20,12 @@ OldaleTown_EventScript_SetOldaleState::
 	return
 
 OldaleTown_EventScript_BlockWestEntrance::
-	setobjectxyperm LOCALID_FOOTPRINTS_MAN, 1, 11
+	setobjectxyperm LOCALID_FOOTPRINTS_MAN, 0, 11
 	setobjectmovementtype LOCALID_FOOTPRINTS_MAN, MOVEMENT_TYPE_FACE_LEFT
 	return
 
 OldaleTown_EventScript_MoveMartEmployee::
-	setobjectxyperm LOCALID_MART_EMPLOYEE, 13, 14
+	setobjectxyperm LOCALID_MART_EMPLOYEE, 13, 17
 	setobjectmovementtype LOCALID_MART_EMPLOYEE, MOVEMENT_TYPE_FACE_DOWN
 	return
 
@@ -263,7 +263,7 @@ OldaleTown_EventScript_ShowMayMessage::
 	end
 
 OldaleTown_EventScript_ShowBrendanMessage::
-	msgbox OldaleTown_Text_BrendanLetsGoBack, MSGBOX_DEFAULT
+	msgbox OldaleTown_Text_MayLetsGoBack, MSGBOX_DEFAULT
 	goto OldaleTown_EventScript_RivalFinish
 	end
 
@@ -368,14 +368,7 @@ OldaleTown_Text_FinishedSketchingFootprints:
 	.string "Pues… Sólo era un Ralts…$"
 
 OldaleTown_Text_MayLetsGoBack:
-	.string "¡{PLAYER}{KUN}!\n"
-	.string "¡CUÁNTO TARDAS!\l"
-	.string "Volvamos a casa.$"
-
-OldaleTown_Text_BrendanLetsGoBack:
-	.string "Estoy volviendo a mi casa,\n"
-	.string "{PLAYER}, no molestes\l"
-	.string "y sígueme.$"
+	.string "Volvamos a casa, mi papá nos\nestá esperando.$"
 
 OldaleTown_Text_TownSign:
 	.string "{COLOR LIGHT_GREEN SHADOW GREEN} PUEBLO OLDALE\n"

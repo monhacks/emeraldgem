@@ -11,6 +11,111 @@ FortreeCity_OnResume:
 	setstepcallback STEP_CB_FORTREE_BRIDGE
 	end
 
+
+FortreeCity_Trigger_Wally::
+	lockall
+	setflag FLAG_HIDE_WALLY_DEWFORD
+	setflag FLAG_HIDE_WALLY_RUSTBORO
+	setflag FLAG_HIDE_WALLY_111
+	namebox Unknown
+	msgbox FortreeCity_Trigger_Wally_Text_0
+	hidenamebox
+	closemessage
+	addobject LOCALID_WALLY
+	playse SE_PIN
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_ExclamationMark
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceLeft
+	waitmovement 0
+	applymovement LOCALID_WALLY, FortreeCity_Movement_WallyApproach
+	waitmovement 0
+	namebox Wally
+	goto_if_set FLAG_WALLY_QUEST_SEEN, FortreeCity_Trigger_Wally_2
+	msgbox FortreeCity_Trigger_Wally_Text_2
+FortreeCity_Trigger_Wally_1:
+	hidenamebox
+	closemessage
+	trainerbattle_no_intro TRAINER_WALLY2, FortreeCity_Trigger_Wally_Text_3
+	namebox Wally
+	msgbox FortreeCity_Trigger_Wally_Text_4
+	hidenamebox
+	closemessage
+	applymovement LOCALID_WALLY, FortreeCity_Movement_WallyLeave
+	waitmovement 0
+	removeobject LOCALID_WALLY
+	setvar VAR_FORTREE_CITY_STATE, 1
+	releaseall
+	return
+
+FortreeCity_Trigger_Wally_2:
+	msgbox FortreeCity_Trigger_Wally_Text_1
+	goto FortreeCity_Trigger_Wally_1
+
+
+FortreeCity_Movement_WallyApproach:
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	step_end
+
+FortreeCity_Movement_WallyLeave:
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	step_end
+
+FortreeCity_Trigger_Wally_Text_0:
+	.string "¡Oh, {PLAYER}!$"
+
+FortreeCity_Trigger_Wally_Text_1:
+	.string "Desde la última vez que nos vimos, he\n"
+	.string "progresado mucho, {PLAYER}.\p"
+	.string "Flannery me ha ayudado a entrenar, y\n"
+	.string "con sus consejos, tu ayuda y apoyo, he\l"
+	.string "logrado derrotar incluso a Norman. Te\l"
+	.string "estoy alcanzando, {PLAYER}.\p"
+	.string "Tengo un equipo fuerte, {PLAYER}, uno\n"
+	.string "que ha logrado sobreponerse a todo.\p"
+	.string "Entonces, {PLAYER}, me anima decir,\n"
+	.string "¡Te desafío a una Batalla Pokémon!$"
+
+FortreeCity_Trigger_Wally_Text_2:
+	.string "No nos vemos desde hace mucho,\n"
+	.string "{PLAYER}, pero desde entonces he\l"
+	.string "progresado mucho.\p"
+	.string "Cada Líder de Gimnasio que has\n"
+	.string "conocido hasta ahora, los he derrotado\l"
+	.string "todos.\p"
+	.string "Tengo un equipo fuerte, {PLAYER}, uno\n"
+	.string "que ha logrado sobreponerse a todo lo\l"
+	.string "que he enfrentado hasta el momento.\p"
+	.string "Entonces, {PLAYER}, me anima decir,\n"
+	.string "¡Te desafío a una Batalla Pokémon!$"
+
+FortreeCity_Trigger_Wally_Text_3:
+	.string "... He vuelto a perder...\p¡Pero gracias a tí, estoy\naprendiendo cada día más!$"
+
+FortreeCity_Trigger_Wally_Text_4:
+	.string "Incluso aunque haya sido derrotado,\n"
+	.string "{PLAYER}, sé que estoy pudiendo\l"
+	.string "mejorar cada día. {PAUSE 20}-COF, COF-{PAUSE 20}... Mhhh.{PAUSE 10}.{PAUSE 10}.\p"
+	.string "{PLAYER}, prepárate. ¡La próxima vez\n"
+	.string "que nos veamos, me habré hecho más\l"
+	.string "fuerte! ¡Mis Pokémon habrán alcanzado\l"
+	.string "su máxima etapa y poder!$"
+
+
 FortreeCity_EventScript_Man::
 	msgbox FortreeCity_Text_SawGiganticPokemonInSky, MSGBOX_NPC
 	end

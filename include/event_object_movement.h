@@ -85,6 +85,7 @@ bool8 TryGetObjectEventIdByLocalIdAndMap(u8, u8, u8, u8 *);
 u8 GetObjectEventIdByXY(s16, s16);
 void SetObjectEventDirection(struct ObjectEvent *, u8);
 u8 GetFirstInactiveObjectEventId(void);
+u8 GetCollisionInDirection(struct ObjectEvent *, u8);
 void RemoveObjectEventByLocalIdAndMap(u8, u8, u8);
 void RemoveObjectEvent(struct ObjectEvent *objectEvent);
 void LoadPlayerObjectReflectionPalette(u16, u8);

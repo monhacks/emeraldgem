@@ -229,14 +229,14 @@
       "y": 33,
       "elevation": 0,
       "dest_map": "MAP_MINI_SAFARI_MIDDLE",
-      "dest_warp_id": "2"
+      "dest_warp_id": 2
     },
     {
       "x": 48,
       "y": 7,
       "elevation": 0,
       "dest_map": "MAP_MINI_SAFARI_CAVE",
-      "dest_warp_id": "0"
+      "dest_warp_id": 0
     }
   ],
   "coord_events": [

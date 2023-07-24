@@ -574,6 +574,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_GivePokedex::
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_ExplainPokedex, MSGBOX_DEFAULT
 	hidenamebox
 	giveitem ITEM_ORAN_BERRY, 5
+	giveitem ITEM_MEGA_RING, 1
 	questmenu QUEST_MENU_UNLOCK_QUEST SIDE_QUEST_2
 	questmenu QUEST_MENU_UNLOCK_QUEST SIDE_QUEST_5
 	questmenu QUEST_MENU_UNLOCK_QUEST SIDE_QUEST_6

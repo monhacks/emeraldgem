@@ -642,8 +642,9 @@
 #define STRINGID_SCREENCLEANERREFLECTENTERS			  640
 #define STRINGID_PKMNDROPPEDITEM                      641
 #define STRINGID_BAGISFULL                            642
+#define STRINGID_RUNPROMPT                  	      643
 
-#define BATTLESTRINGS_COUNT                           643
+#define BATTLESTRINGS_COUNT                           644
 
 // This is the string id that gBattleStringsTable starts with.
 // String ids before this (e.g. STRINGID_INTROMSG) are not in the table,

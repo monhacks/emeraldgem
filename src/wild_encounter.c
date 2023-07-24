@@ -410,7 +410,7 @@ u16 GetCurrentMapWildMonHeaderIdSpecific(u8 nightorday){
     return HEADER_NONE;
 }
 
-static u16 GetCurrentMapWildMonHeaderId(void)
+u16 GetCurrentMapWildMonHeaderId(void)
 {
 	u16 nightorday;
 	RtcCalcLocalTime();

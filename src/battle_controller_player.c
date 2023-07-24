@@ -417,7 +417,7 @@ static void HandleInputChooseAction(void)
 	else if (JOY_NEW(R_BUTTON)) {
 		PlaySE(SE_SELECT);
 		TryHideLastUsedBall();
-		BtlController_EmitTwoReturnValues(BUFFER_B, B_ACTION_RUN, 0);
+		BtlController_EmitTwoReturnValues(BUFFER_B, B_ACTION_RUN_PROMPT, 0);
 		PlayerBufferExecCompleted();
 	}
     #endif

@@ -104,7 +104,6 @@ void FieldClearPlayerInput(struct FieldInput *input)
     input->input_field_1_2 = FALSE;
     input->input_field_1_3 = FALSE;
     input->dpadDirection = 0;
-	input->pressedRButton = FALSE;
 	input->pressedListButton = FALSE;
 }
 
@@ -130,8 +129,8 @@ void FieldGetPlayerInput(struct FieldInput *input, u16 newKeys, u16 heldKeys)
             if ((newKeys & L_BUTTON) && gSaveBlock1Ptr->registeredItemListCount >= 1)
                 input->pressedListButton = TRUE;
 			
-            if (newKeys & R_BUTTON && !FlagGet(FLAG_SYS_DEXNAV_SEARCH))
-                input->pressedRButton = TRUE;
+            // if (newKeys & R_BUTTON && !FlagGet(FLAG_SYS_DEXNAV_SEARCH) && && (!TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_MACH_BIKE | PLAYER_AVATAR_FLAG_ACRO_BIKE)) && (!FlagGet(FLAG_REGICE_INFLUENCE) && !FlagGet(FLAG_HAS_FIRE_POKEMON)))
+                // input->pressedRButton = TRUE;
         }
 
         if (heldKeys & (DPAD_UP | DPAD_DOWN | DPAD_LEFT | DPAD_RIGHT))
@@ -268,7 +267,7 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
         TxRegItemsMenu_OpenMenu();
         return TRUE;
     }
-	if (input->pressedRButton && FlagGet(FLAG_REGICE_INFLUENCE) && FlagGet(FLAG_HAS_FIRE_POKEMON)) {
+	if (input->pressedRButton && FlagGet(FLAG_REGICE_INFLUENCE) && FlagGet(FLAG_HAS_FIRE_POKEMON) && !TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_MACH_BIKE | PLAYER_AVATAR_FLAG_ACRO_BIKE)) {
 		x1 = position.x;
 		y1 = position.y;
 		PlaySE(SE_M_FLAME_WHEEL);
@@ -364,7 +363,7 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
     // if (input->pressedSelectButton && UseRegisteredKeyItemOnField() == TRUE)
         // return TRUE;
     
-    if (input->pressedRButton && TryStartDexnavSearch() && !TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_MACH_BIKE | PLAYER_AVATAR_FLAG_ACRO_BIKE) && (!FlagGet(FLAG_REGICE_INFLUENCE) && !FlagGet(FLAG_HAS_FIRE_POKEMON)))
+    if (input->pressedRButton && TryStartDexnavSearch())
         return TRUE;
 
     return FALSE;
@@ -467,7 +466,38 @@ static const u8 *GetInteractedObjectEventScript(struct MapPosition *position, u8
     u8 objectEventId;
     const u8 *script;
 
-    objectEventId = GetObjectEventIdByPosition(position->x, position->y, position->elevation);
+    s16 currX = gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.x;
+    s16 currY = gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.y;
+    u8 currBehavior = MapGridGetMetatileBehaviorAt(currX, currY);
+
+    switch (direction)
+    {
+    case DIR_EAST:
+        if (MetatileBehavior_IsSidewaysStairsLeftSideAny(metatileBehavior))
+            // sideways stairs left-side to your right -> check northeast
+            objectEventId = GetObjectEventIdByPosition(currX + 1, currY - 1, position->elevation);
+        else if (MetatileBehavior_IsSidewaysStairsRightSideAny(currBehavior))
+            // on top of right-side stairs -> check southeast
+            objectEventId = GetObjectEventIdByPosition(currX + 1, currY + 1, position->elevation);
+        else
+            // check in front of player
+            objectEventId = GetObjectEventIdByPosition(position->x, position->y, position->elevation);
+        break;
+    case DIR_WEST:
+        if (MetatileBehavior_IsSidewaysStairsRightSideAny(metatileBehavior))
+            // facing sideways stairs right side -> check northwest
+            objectEventId = GetObjectEventIdByPosition(currX - 1, currY - 1, position->elevation);
+        else if (MetatileBehavior_IsSidewaysStairsLeftSideAny(currBehavior))
+            // on top of left-side stairs -> check southwest
+            objectEventId = GetObjectEventIdByPosition(currX - 1, currY + 1, position->elevation);
+        else
+            // check in front of player
+            objectEventId = GetObjectEventIdByPosition(position->x, position->y, position->elevation);
+        break;
+    default:
+        objectEventId = GetObjectEventIdByPosition(position->x, position->y, position->elevation);
+        break;
+    }
     if (objectEventId == OBJECT_EVENTS_COUNT || gObjectEvents[objectEventId].localId == OBJ_EVENT_ID_PLAYER)
     {
         if (MetatileBehavior_IsCounter(metatileBehavior) != TRUE)

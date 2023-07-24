@@ -105,7 +105,7 @@
       "id": "LAYOUT_OLDALE_TOWN",
       "name": "OldaleTown_Layout",
       "width": 20,
-      "height": 22,
+      "height": 28,
       "primary_tileset": "gTileset_General",
       "secondary_tileset": "gTileset_Petalburg",
       "border_filepath": "data/layouts/OldaleTown/border.bin",
@@ -4500,6 +4500,16 @@
       "secondary_tileset": "gTileset_Cave",
       "border_filepath": "data/layouts/MiniSafariCave/border.bin",
       "blockdata_filepath": "data/layouts/MiniSafariCave/map.bin"
+    },
+    {
+      "id": "LAYOUT_OLDALE_RUINS",
+      "name": "OldaleRuins_Layout",
+      "width": 40,
+      "height": 20,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Petalburg",
+      "border_filepath": "data/layouts/OldaleRuins/border.bin",
+      "blockdata_filepath": "data/layouts/OldaleRuins/map.bin"
     }
   ]
 }
