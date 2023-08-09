@@ -2655,8 +2655,8 @@ bool32 CanKnockOffItem(u8 battler, u16 item)
 // status checks
 bool32 IsBattlerIncapacitated(u8 battler, u16 ability)
 {
-    if ((gBattleMons[battler].status1 & STATUS1_FREEZE) && !HasThawingMove(battler))
-        return TRUE;    // if battler has thawing move we assume they will definitely use it, and thus being frozen should be neglected
+    // if ((gBattleMons[battler].status1 & STATUS1_FREEZE) && !HasThawingMove(battler))
+        // return TRUE;    // if battler has thawing move we assume they will definitely use it, and thus being frozen should be neglected
 
     if (gBattleMons[battler].status1 & STATUS1_SLEEP)
         return TRUE;

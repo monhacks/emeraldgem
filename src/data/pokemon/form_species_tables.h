@@ -1138,4 +1138,10 @@ static const u16 sCalyrexFormSpeciesIdTable[] = {
     SPECIES_CALYREX_SHADOW_RIDER,
     FORM_SPECIES_END,
 };
+
+static const u16 sRowletFormSpeciesIdTable[] = {
+	SPECIES_ROWLET,
+	SPECIES_ROWLET_ASH,
+	FORM_SPECIES_END,
+};
 #endif

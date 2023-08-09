@@ -153,13 +153,6 @@
       "dest_warp_id": 0
     },
     {
-      "x": 4,
-      "y": 14,
-      "elevation": 0,
-      "dest_map": "MAP_FORTREE_CITY_MART",
-      "dest_warp_id": 0
-    },
-    {
       "x": 17,
       "y": 3,
       "elevation": 0,
@@ -225,14 +218,6 @@
     },
     {
       "type": "sign",
-      "x": 5,
-      "y": 14,
-      "elevation": 0,
-      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
-      "script": "Common_EventScript_ShowPokemartSign"
-    },
-    {
-      "type": "sign",
       "x": 26,
       "y": 10,
       "elevation": 0,
@@ -246,14 +231,6 @@
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
       "script": "Common_EventScript_ShowPokemonCenterSign"
-    },
-    {
-      "type": "sign",
-      "x": 6,
-      "y": 14,
-      "elevation": 0,
-      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
-      "script": "Common_EventScript_ShowPokemartSign"
     }
   ]
 }

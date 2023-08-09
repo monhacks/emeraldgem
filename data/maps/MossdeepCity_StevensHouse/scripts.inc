@@ -74,17 +74,20 @@ MossdeepCity_StevensHouse_Movement_StevenReturn:
 
 MossdeepCity_StevensHouse_EventScript_BeldumPokeball::
 	lockall
+	showmonpicshiny SPECIES_BELDUM, 10, 3, 0
 	msgbox MossdeepCity_StevensHouse_Text_TakeBallContainingBeldum, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, MossdeepCity_StevensHouse_EventScript_LeaveBeldum
 	goto MossdeepCity_StevensHouse_EventScript_GiveBeldum
 	end
 
 MossdeepCity_StevensHouse_EventScript_LeaveBeldum::
+	hidemonpic
 	msgbox MossdeepCity_StevensHouse_Text_LeftPokeBallWhereItWas, MSGBOX_DEFAULT
 	releaseall
 	end
 
 MossdeepCity_StevensHouse_EventScript_GiveBeldum::
+	hidemonpic
 	setvar VAR_TEMP_1, SPECIES_BELDUM
 	givemon SPECIES_BELDUM, 5
 	goto_if_eq VAR_RESULT, MON_GIVEN_TO_PARTY, MossdeepCity_StevensHouse_EventScript_SendBeldumParty
@@ -131,6 +134,7 @@ MossdeepCity_StevensHouse_EventScript_ReceivedBeldum::
 	end
 
 MossdeepCity_StevensHouse_EventScript_RockDisplay::
+	clearflag FLAG_HIDE_MOSSDEEP_CITY_STEVENS_HOUSE_BELDUM_POKEBALL
 	msgbox MossdeepCity_StevensHouse_Text_CollectionOfRareRocks, MSGBOX_SIGN
 	end
 
@@ -178,21 +182,19 @@ MossdeepCity_StevensHouse_Text_UnderwateCavernBetweenMossdeepSootopolis:
 	.string "found in his submarine.$"
 
 MossdeepCity_StevensHouse_Text_TakeBallContainingBeldum:
-	.string "{PLAYER} checked the POKé BALL.\p"
-	.string "It contained the POKéMON\n"
-	.string "BELDUM.\p"
-	.string "Take the POKé BALL?$"
+	.string "Es el Pokémon {COLOR BLUE}Beldum{COLOR DARK_GRAY}.\p"
+	.string "¿Quieres tomar la PokéBall?$"
 
 MossdeepCity_StevensHouse_Text_ObtainedBeldum:
-	.string "{PLAYER} obtained a BELDUM.$"
+	.string "{PLAYER} obtuvo un Beldum.$"
 
 @ Unused
 MossdeepCity_StevensHouse_Text_NoSpaceForAnotherMon:
 	.string "There is no space for another POKéMON.$"
 
 MossdeepCity_StevensHouse_Text_LeftPokeBallWhereItWas:
-	.string "{PLAYER} left the POKé BALL where\n"
-	.string "it was.$"
+	.string "{PLAYER} dejó la PokéBall donde\n"
+	.string "estaba.$"
 
 MossdeepCity_StevensHouse_Text_LetterFromSteven:
 	.string "It's a letter.\p"

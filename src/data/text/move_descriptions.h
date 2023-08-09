@@ -2225,8 +2225,8 @@ static const u8 sFreezeDryDescription[] = _(
     "types. May cause freezing.");
 
 static const u8 sDisarmingVoiceDescription[] = _(
-    "Lets out a charming cry\n"
-    "that cannot be evaded.");
+    "Una linda canción que\n"
+    "daña más a los enamorados.");
 
 static const u8 sPartingShotDescription[] = _(
     "Lowers the foe's Attack and\n"

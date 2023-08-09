@@ -79,9 +79,12 @@ PetalburgCity_Gym_OnFrame:
 
 PetalburgCity_Gym_EventScript_ReturnFromWallyTutorial::
 	lockall
+	namebox Norman
 	msgbox PetalburgCity_Gym_Text_DadSoDidItWorkOut, MSGBOX_DEFAULT
+	namebox Wally
 	msgbox PetalburgCity_Gym_Text_WallyThankYouBye, MSGBOX_DEFAULT
 	closemessage
+	hidenamebox
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterDown
 	applymovement LOCALID_WALLY, PetalburgCity_Gym_Movement_WallyExitGym
 	waitmovement 0
@@ -91,7 +94,10 @@ PetalburgCity_Gym_EventScript_ReturnFromWallyTutorial::
 	delay 30
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
+	namebox Norman
 	msgbox PetalburgCity_Gym_Text_DadGoCollectBadges, MSGBOX_DEFAULT
+	closemessage
+	hidenamebox
 	setvar VAR_PETALBURG_GYM_STATE, 2
 	releaseall
 	end
@@ -106,6 +112,7 @@ PetalburgCity_Gym_Movement_WallyExitGym:
 PetalburgCity_Gym_EventScript_Norman::
 	lock
 	faceplayer
+	namebox Norman
 	switch VAR_PETALBURG_GYM_STATE
 	case 2, PetalburgCity_Gym_EventScript_NormanNoBadges
 	case 3, PetalburgCity_Gym_EventScript_NormanOneBadge
@@ -116,6 +123,7 @@ PetalburgCity_Gym_EventScript_Norman::
 	case 8, PetalburgCity_Gym_EventScript_NormanRematch
 	msgbox PetalburgCity_Gym_Text_DadYoureHereWithYourPokemon, MSGBOX_DEFAULT
 	closemessage
+	hidenamebox
 	switch VAR_FACING
 	case DIR_SOUTH, PetalburgCity_Gym_EventScript_BeginWallyTutorialSouth
 	case DIR_NORTH, PetalburgCity_Gym_EventScript_BeginWallyTutorialNorth
@@ -150,20 +158,28 @@ PetalburgCity_Gym_EventScript_BeginWallyTutorial::
 	call_if_eq VAR_0x8008, 1, PetalburgCity_Gym_EventScript_WallyArriveNorth
 	call_if_eq VAR_0x8008, 2, PetalburgCity_Gym_EventScript_WallyArriveWestEast
 	call_if_eq VAR_0x8008, 3, PetalburgCity_Gym_EventScript_WallyArriveWestEast
+	namebox Unknown
 	msgbox PetalburgCity_Gym_Text_WallyIdLikeAPokemon, MSGBOX_DEFAULT
+	namebox Norman
 	msgbox PetalburgCity_Gym_Text_DadOhYoureWallyRight, MSGBOX_DEFAULT
+	namebox Wally
 	msgbox PetalburgCity_Gym_Text_WallyIveNeverCaughtAPokemon, MSGBOX_DEFAULT
+	namebox Norman
 	msgbox PetalburgCity_Gym_Text_DadHmISee, MSGBOX_DEFAULT
+	hidenamebox
+	closemessage
 	call_if_eq VAR_0x8008, 0, PetalburgCity_Gym_EventScript_NormanAddressPlayerSouth
 	call_if_eq VAR_0x8008, 1, PetalburgCity_Gym_EventScript_NormanAddressPlayerNorth
 	call_if_eq VAR_0x8008, 2, PetalburgCity_Gym_EventScript_NormanAddressPlayerWest
 	call_if_eq VAR_0x8008, 3, PetalburgCity_Gym_EventScript_NormanAddressPlayerEast
+	namebox Norman
 	msgbox PetalburgCity_Gym_Text_DadPlayerGoWithWally, MSGBOX_DEFAULT
 	call_if_eq VAR_0x8008, 0, PetalburgCity_Gym_EventScript_NormanAddressWallySouth
 	call_if_eq VAR_0x8008, 1, PetalburgCity_Gym_EventScript_NormanAddressWallyNorth
 	call_if_eq VAR_0x8008, 2, PetalburgCity_Gym_EventScript_NormanAddressWallyWest
 	call_if_eq VAR_0x8008, 3, PetalburgCity_Gym_EventScript_NormanAddressWallyEast
 	msgbox PetalburgCity_Gym_Text_IllLoanYouMyZigzagoon, MSGBOX_DEFAULT
+	namebox Wally
 	msgbox PetalburgCity_Gym_Text_WallyThankYouAndDadGivesPokeBall, MSGBOX_DEFAULT
 	msgbox PetalburgCity_Gym_Text_WallyOhWowThankYou, MSGBOX_DEFAULT
 	call_if_eq VAR_0x8008, 0, PetalburgCity_Gym_EventScript_NormanFaceDoorSouth
@@ -296,21 +312,29 @@ PetalburgCity_Gym_EventScript_WallyFaceDown::
 
 PetalburgCity_Gym_EventScript_NormanNoBadges::
 	msgbox PetalburgCity_Gym_Text_NormanGoToRustboro, MSGBOX_DEFAULT
+	closemessage
+	hidenamebox
 	release
 	end
 
 PetalburgCity_Gym_EventScript_NormanOneBadge::
 	msgbox PetalburgCity_Gym_Text_NormanGoToDewford, MSGBOX_DEFAULT
+	closemessage
+	hidenamebox
 	release
 	end
 
 PetalburgCity_Gym_EventScript_NormanTwoBadges::
 	msgbox PetalburgCity_Gym_Text_YouHaveGottenStronger, MSGBOX_DEFAULT
+	closemessage
+	hidenamebox
 	release
 	end
 
 PetalburgCity_Gym_EventScript_NormanThreeBadges::
 	msgbox PetalburgCity_Gym_Text_YouHaveGottenStronger2, MSGBOX_DEFAULT
+	closemessage
+	hidenamebox
 	release
 	end
 
@@ -1142,13 +1166,11 @@ PetalburgCity_Gym_EventScript_GymStatue::
 	end
 
 PetalburgCity_Gym_Text_DadYoureHereWithYourPokemon:
-	.string "Papá: ¡Ah, pero si es {PLAYER},\n"
-	.string "hola, hij{OA}!\p"
+	.string "¡Ah, {PLAYER}, hola, hij{OA}!\p"
 	.string "¿Ya terminaron con la mudanza? Yo aún\n"
 	.string "tengo algunas cosas que resolver en el\l"
-	.string "Gimnasio antes de mis vacaciones.\l"
-	.string "¡Oh! ¿Es eso un Pokémon? ¡Me llena de\l"
-	.string "orgullo verte, ya tod{OA} grande, y\l"
+	.string "Gimnasio. ¡Oh! ¿Un Pokémon? ¡Me llena\l"
+	.string "de orgullo verte, ya tod{OA} grande, y\l"
 	.string "convirtiéndote en un{A} Entrenador{A}!$"
 
 PetalburgCity_Gym_Text_WallyIdLikeAPokemon:
@@ -1178,19 +1200,18 @@ PetalburgCity_Gym_Text_DadPlayerGoWithWally:
 
 
 PetalburgCity_Gym_Text_IllLoanYouMyZigzagoon:
-	.string "Mira, Wally, te daré mi Pokémon.\p"
-	.string "¡Wally recibió un Zigzagoon!$"
+	.string "Mira, Wally, te daré mi Pokémon.$"
 
 PetalburgCity_Gym_Text_WallyThankYouAndDadGivesPokeBall:
-	.string "Wally: ¡Es un Zigzagoon!\n"
-	.string "¡Uno de tipo Normal!\p"
-	.string "Papá: Y además, y como me lo pediste,\n"
+	.string "¡Es un Zigzagoon!\n"
+	.string "¡Uno de tipo Normal!$"
+PetalburgCity_Gym_Text_WallyThankYouAndDadGivesPokeBall2:
+	.string "Y además, y como me lo pediste,\n"
 	.string "toma unas cuantas Pokéball, para que\l"
-	.string "puedas atrapar varios Pokémon.\p"
-	.string "¡Wally ha recibido unas Amigoball!$"
+	.string "puedas atrapar varios Pokémon.$"
 
 PetalburgCity_Gym_Text_WallyOhWowThankYou:
-	.string "Wally: ¡Aaahh, gracias!\n"
+	.string "¡Aaahh, gracias!\n"
 	.string "¡Muchísimas -COF- gracias!$"
 
 PetalburgCity_Gym_Text_WouldYouReallyComeWithMe:
@@ -1198,23 +1219,21 @@ PetalburgCity_Gym_Text_WouldYouReallyComeWithMe:
 	.string "vas a ayudar?$"
 
 PetalburgCity_Gym_Text_DadSoDidItWorkOut:
-	.string "Papá: ¿Entonces…?$"
+	.string "¿Entonces…?$"
 
 PetalburgCity_Gym_Text_WallyThankYouBye:
-	.string "Wally: ¡T-todo salió b-bien, señor!\p"
+	.string "¡T-todo salió b-bien, señor!\p"
 	.string "¡{PLAYER} estuvo cuidándome y -COF\n"
 	.string "COF- n-no había tosido nada mientras\l"
 	.string "estuve ahí! ¡Muchísimas gracias!$"
 
 PetalburgCity_Gym_Text_DadGoCollectBadges:
-	.string "Papá: Bueno, {PLAYER}, déjame\n"
+	.string "Bueno, {PLAYER}, déjame\n"
 	.string "contarte algo.\p"
-	.string "Posees un Don Especial, de reconocer\n"
-	.string "los ataques de los Pokémon con tan\l"
-	.string "sólo verlos, y algo así es increíble en\l"
-	.string "un Viaje Pokémon, por lo que voy a\l"
-	.string "darte el permiso de ir a tu aventura,\l"
-	.string "por tu cuenta.\p"
+	.string "Tienes una increíble capacidad para\n"
+	.string "aprender cuando se trata de Pokémon,\l"
+	.string "tanto así, que hasta puedes saber\l"
+	.string "sus movimientos con sólo verlos.\p"
 	.string "Mi gimnasio es más avanzado, por lo que\n"
 	.string "tendrás que derrotar otros 4 gimnasios\l"
 	.string "antes de enfrentarte a mí. ¡Suerte,\l"
@@ -1222,14 +1241,14 @@ PetalburgCity_Gym_Text_DadGoCollectBadges:
 
 
 PetalburgCity_Gym_Text_NormanGoToRustboro:
-	.string "Papá: ¿Y? No tengo toda la vida para\n"
+	.string "¿Y? No tengo toda la vida para\n"
 	.string "esperarte. Ve a Ciudad Rustoboro y\l"
 	.string "gana la medalla de ahí, ¿okay?\p"
 	.string "Recuerda que necesitas 4 medallas para\n"
 	.string "enfrentarte a mí.$"
 
 PetalburgCity_Gym_Text_NormanGoToDewford:
-	.string "Papá: Ah, veo que le has ganado a la\n"
+	.string "Ah, veo que le has ganado a la\n"
 	.string "Líder de Gimnasio de tipo Roca,\l"
 	.string "Roxxane, incluso con su regla de sólo\l"
 	.string "permitir tres Pokémon. ¡Excelente,\l"
@@ -1238,7 +1257,7 @@ PetalburgCity_Gym_Text_NormanGoToDewford:
 	.string "en Ciudad Dewford.$"
 
 PetalburgCity_Gym_Text_YouHaveGottenStronger2:
-	.string "Papá: Perfecto, entonces, ya posees\n"
+	.string "Perfecto, entonces, ya posees\n"
 	.string "tres medallas… ¡Tan sólo te falta una\l"
 	.string "para poder enfrentarte a mí!$"
 	

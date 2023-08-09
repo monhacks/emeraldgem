@@ -123,6 +123,62 @@ static const u16 sStarterMon[STARTER_MON_COUNT] =
     SPECIES_MUDKIP,
 };
 
+static const u16 sStarterMonGen1[STARTER_MON_COUNT] =
+{
+    SPECIES_BULBASAUR,
+    SPECIES_CHARMANDER,
+    SPECIES_SQUIRTLE,
+};
+
+static const u16 sStarterMonGen2[STARTER_MON_COUNT] =
+{
+    SPECIES_CHIKORITA,
+    SPECIES_CYNDAQUIL,
+    SPECIES_TOTODILE,
+};
+
+static const u16 sStarterMonGen4[STARTER_MON_COUNT] =
+{
+    SPECIES_TURTWIG,
+    SPECIES_CHIMCHAR,
+    SPECIES_PIPLUP,
+};
+
+static const u16 sStarterMonGen5[STARTER_MON_COUNT] =
+{
+    SPECIES_SNIVY,
+    SPECIES_TEPIG,
+    SPECIES_OSHAWOTT,
+};
+
+static const u16 sStarterMonGen6[STARTER_MON_COUNT] =
+{
+    SPECIES_CHESPIN,
+    SPECIES_FENNEKIN,
+    SPECIES_FROAKIE,
+};
+
+static const u16 sStarterMonGen7[STARTER_MON_COUNT] =
+{
+    SPECIES_ROWLET,
+    SPECIES_LITTEN,
+    SPECIES_POPPLIO,
+};
+
+static const u16 sStarterMonGen8[STARTER_MON_COUNT] =
+{
+    SPECIES_GROOKEY,
+    SPECIES_SCORBUNNY,
+    SPECIES_SOBBLE,
+};
+
+static const u16 sStarterMonHard[STARTER_MON_COUNT] =
+{
+    SPECIES_BELDUM,
+    SPECIES_DEINO,
+    SPECIES_JANGMO_O,
+};
+
 static const struct BgTemplate sBgTemplates[3] =
 {
     {
@@ -358,7 +414,41 @@ u16 GetStarterPokemon(u16 chosenStarterId)
 {
     if (chosenStarterId > STARTER_MON_COUNT)
         chosenStarterId = 0;
-    return sStarterMon[chosenStarterId];
+	switch (VarGet(VAR_STARTER_REGION)){
+		case 0:
+			return sStarterMon[chosenStarterId];
+			break;
+		case 1:
+			return sStarterMonGen1[chosenStarterId];
+			break;
+		case 2:
+			return sStarterMonGen2[chosenStarterId];
+			break;
+		case 3:
+			return sStarterMon[chosenStarterId];
+			break;
+		case 4:
+			return sStarterMonGen4[chosenStarterId];
+			break;
+		case 5:
+			return sStarterMonGen5[chosenStarterId];
+			break;
+		case 6:
+			return sStarterMonGen6[chosenStarterId];
+			break;
+		case 7:
+			return sStarterMonGen7[chosenStarterId];
+			break;
+		case 8:
+			return sStarterMonGen8[chosenStarterId];
+			break;
+		case 9:
+			return sStarterMonHard[chosenStarterId];
+			break;
+		default:
+			return sStarterMon[chosenStarterId];
+			break;
+	}
 }
 
 static void VblankCB_StarterChoose(void)
@@ -501,7 +591,7 @@ static void Task_HandleStarterChooseInput(u8 taskId)
         gTasks[taskId].tCircleSpriteId = spriteId;
 		
 		
-	if (((VarGet(VAR_SHINY_TREECKO) < 1) && (GetStarterPokemon(gTasks[taskId].tStarterSelection) == SPECIES_TREECKO)) || ((VarGet(VAR_SHINY_TORCHIC) < 1)  && (GetStarterPokemon(gTasks[taskId].tStarterSelection) == SPECIES_TORCHIC)) || ((VarGet(VAR_SHINY_MUDKIP) < 1) && (GetStarterPokemon(gTasks[taskId].tStarterSelection) == SPECIES_MUDKIP)))
+	if (((VarGet(VAR_SHINY_TREECKO) < 1) && (gTasks[taskId].tStarterSelection == 0)) || ((VarGet(VAR_SHINY_TORCHIC) < 1)  && (gTasks[taskId].tStarterSelection == 1)) || ((VarGet(VAR_SHINY_MUDKIP) < 1) && (gTasks[taskId].tStarterSelection) == 2))
 		{
 			valueForShinyness = gSaveBlock2Ptr->playerTrainerId[0]
 						 | (gSaveBlock2Ptr->playerTrainerId[1] << 8)
@@ -513,16 +603,16 @@ static void Task_HandleStarterChooseInput(u8 taskId)
 						totalRerolls = 1;
 						break;
 					case 1:
-						totalRerolls = 2;
+						totalRerolls = 3;
 						break;
 					case 2:
-						totalRerolls = 4;
+						totalRerolls = 5;
 						break;
 					case 3:
-						totalRerolls = 8;
+						totalRerolls = 8000;
 						break;
 					default:
-						totalRerolls *= 2;
+						totalRerolls = 3;
 				}
 
 				while ((GET_SHINY_VALUE(valueForShinyness, shinyness)) >= SHINY_ODDS && (totalRerolls > 0))
@@ -532,33 +622,33 @@ static void Task_HandleStarterChooseInput(u8 taskId)
 				}
 				if ((GET_SHINY_VALUE(valueForShinyness, shinyness)) < SHINY_ODDS)
 				{
-					switch (GetStarterPokemon(gTasks[taskId].tStarterSelection))
+					switch (gTasks[taskId].tStarterSelection)
 					{
-						case SPECIES_TREECKO:
-							VarSet(VAR_SHINY_TREECKO, SPECIES_TREECKO);
+						case 0:
+							VarSet(VAR_SHINY_TREECKO, GetStarterPokemon(gTasks[taskId].tStarterSelection));
 							break;
-						case SPECIES_TORCHIC:
-							VarSet(VAR_SHINY_TORCHIC, SPECIES_TORCHIC);
+						case 1:
+							VarSet(VAR_SHINY_TORCHIC, GetStarterPokemon(gTasks[taskId].tStarterSelection));
 							break;
-						case SPECIES_MUDKIP:
+						case 2:
 						default:
-							VarSet(VAR_SHINY_MUDKIP, SPECIES_MUDKIP);
+							VarSet(VAR_SHINY_MUDKIP, GetStarterPokemon(gTasks[taskId].tStarterSelection));
 							break;
 					}
 				}
 				else
 				{
-					switch (GetStarterPokemon(gTasks[taskId].tStarterSelection))
+					switch (gTasks[taskId].tStarterSelection)
 					{
-						case SPECIES_TREECKO:
-							VarSet(VAR_SHINY_TREECKO, SPECIES_TREECKO+1);
+						case 0:
+							VarSet(VAR_SHINY_TREECKO, (GetStarterPokemon(gTasks[taskId].tStarterSelection)+1));
 							break;
-						case SPECIES_TORCHIC:
-							VarSet(VAR_SHINY_TORCHIC, SPECIES_TORCHIC+1);
+						case 1:
+							VarSet(VAR_SHINY_TORCHIC, (GetStarterPokemon(gTasks[taskId].tStarterSelection)+1));
 							break;
-						case SPECIES_MUDKIP:
+						case 2:
 						default:
-							VarSet(VAR_SHINY_MUDKIP, SPECIES_MUDKIP+1);
+							VarSet(VAR_SHINY_MUDKIP, (GetStarterPokemon(gTasks[taskId].tStarterSelection)+1));
 							break;
 					}
 				}

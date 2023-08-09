@@ -22,6 +22,12 @@ RustboroCity_OnTransition:
 RustboroCity_EventScript_PositionScientistForExit::
 	goto_if_eq VAR_TEMP_0, 11, RustboroCity_EventScript_PositionScientistLeftExit
 	setobjectxyperm LOCALID_SCIENTIST, 12, 15
+	goto_if_unset FLAG_BADGE05_GET, RustboroCity_EventScript_End
+	end
+
+RustboroCity_EventScript_End:
+	setflag FLAG_HIDE_WALLY_RUSTBORO
+	removeobject LOCALID_WALLY
 	end
 
 RustboroCity_EventScript_PositionScientistLeftExit::
@@ -147,35 +153,37 @@ RustboroCity_EventScript_Wally2::
 	waitdooranim
 	applymovement LOCALID_WALLY, RustboroCity_Movement_WallyEnterGym2
 	waitmovement 0
-	delay 8
+	delay 16
 	closedoor 27, 19
 	waitdooranim
 	delay 16
 	fadescreen FADE_TO_BLACK
-	delay 16
+	delay 24
 	namebox Wally
 	msgbox RustboroCity_Text_WallyBattle
 	closemessage
 	hidenamebox
-	delay 8
+	delay 16
 	fadescreen FADE_FROM_BLACK
 	delay 16
 	opendoor 27, 19
 	waitdooranim
-	delay 16
+	delay 30
 	namebox Wally
 	msgbox RustboroCity_Text_WallySilence
 	closemessage
 	hidenamebox
 	applymovement LOCALID_WALLY, RustboroCity_Movement_WallyOutGym
 	waitmovement 0
+	closedoor 27, 19
+	waitdooranim
 	namebox Wally
 	msgbox RustboroCity_Text_WallySilence2
 	closemessage
 	hidenamebox
 	applymovement LOCALID_WALLY, Common_Movement_FaceAwayPlayer
 	waitmovement 0
-	delay 16
+	delay 40
 	applymovement LOCALID_WALLY, Common_Movement_FacePlayer
 	waitmovement 0
 	namebox Wally
@@ -184,7 +192,7 @@ RustboroCity_EventScript_Wally2::
 	closemessage
 	setvar VAR_ROUTE111_STATE, 3
 	fadescreen FADE_TO_BLACK
-	delay 16
+	delay 24
 	removeobject LOCALID_WALLY
 	setflag FLAG_HIDE_WALLY_RUSTBORO
 	clearflag FLAG_HIDE_WALLY_111
@@ -1159,6 +1167,9 @@ RustboroCity_EventScript_BattleMay::
 
 RustboroCity_EventScript_MayBrineyHint::
 	goto_if_set FLAG_MAY_YA_HISO, RustboroCity_EventScript_MayBrineyNoHint
+	playfanfare MUS_OBTAIN_TMHM
+	message RustboroCity_Text_DexNav
+	waitmessage
 	msgbox RustboroCity_Text_MayMrBrineyHint, MSGBOX_DEFAULT
 	setcaughtmon SPECIES_POOCHYENA
 	setcaughtmon SPECIES_WURMPLE
@@ -1470,35 +1481,32 @@ RustboroCity_Text_MayHiLetsRegister:
 	.string "PokéNav?\l"
 	.string "Creí que eran raros de conseguir…\p"
 	.string "¡Pero bueno! Ya que estamos, añádeme a\n"
-	.string "tu lista de contactos para… Bueno…\l"
-	.string "Porque sí, lo que sea.$"
+	.string "tu lista de contactos para controlar\l"
+	.string "tu progreso o algo así.$"
 
 RustboroCity_Text_RegisteredMay:
 	.string "{RIVAL} se registró sol{AO} en tu\n"
 	.string "PokeNav.$"
 
 RustboroCity_Text_MayPassedBrineyWantToBattle:
-	.string "Ah, sí, necesito saber, ¿Cómo va tu\n"
+	.string "Ah, sí, por cierto, ¿Cómo va tu\n"
 	.string "Pokédex?\n"
 	.string "Seguro que no tan bien como la mía.\p"
 	.string "La mía está increíble, ¿Sabías?\p"
 	.string "Además, algo me dijo mi Papá sobre las\n"
 	.string "Dexes, que podemos {COLOR GREEN}intercambiar los\l"
-	.string "datos de la Pokédex{COLOR DARK_GRAY} para poder\l"
+	.string "datos registrados{COLOR DARK_GRAY} para poder\l"
 	.string "completarla más rápido.\p"
 	.string "También, me dijo que te diera el DexNav,\n"
 	.string "para ayudarme con la Pokédex, aunque\l"
-	.string "prefería hacerlo sola... Así\l"
+	.string "prefería hacerlo sol{AO}... Así\l"
 	.string "que hagamos una cosa:\p"
 	.string "Si me ganas en una Batalla Pokémon, voy\n"
 	.string "a intercambiarte los datos.$"
 
-RustboroCity_Text_MayOhHaventRaisedPokemonEnough:
-	.string "?$"
-
 RustboroCity_Text_MayWantToBattle:
-	.string "MAY: So, what do you think?\n"
-	.string "How about a little battle here?$"
+	.string "Si me ganas en una Batalla Pokémon, voy\n"
+	.string "a intercambiarte los datos.$"
 
 RustboroCity_Text_MayImNotGoingToLose:
 	.string "¡Ganaré!$"
@@ -1508,8 +1516,11 @@ RustboroCity_Text_MayDefeat:
 	.string "No… Puedo derrotarte…\l"
 	.string "Pero si he… Considerado todo…$"
 
+RustboroCity_Text_DexNav:
+	.string "¡Has obtenido un DexNav!$"
+
 RustboroCity_Text_MayMrBrineyHint:
-	.string "Pues bueno, terminemos esto.\p"
+	.string "Eso es un {COLOR RED}DexNav{COLOR DARK_GRAY}.\nCon él, podrás {COLOR BLUE}Encadenar Pokémon{COLOR DARK_GRAY}, para\lencontrar individuos más y más\lraros progresivamente.\pPues bueno, terminemos esto.\p"
 	.string "………………………………………………\n"
 	.string "………………………………………………\l"
 	.string "………………………………………………\l"

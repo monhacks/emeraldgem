@@ -26,9 +26,14 @@ FortreeCity_DecorationShop_PokemartDecor_Desks:
 	.2byte DECOR_HEAVY_DESK
 	.2byte DECOR_RAGGED_DESK
 	.2byte DECOR_COMFORT_DESK
+	.2byte DECOR_PRETTY_DESK
 	.2byte DECOR_BRICK_DESK
 	.2byte DECOR_CAMP_DESK
 	.2byte DECOR_HARD_DESK
+	.2byte DECOR_TV
+	.2byte DECOR_ROUND_TV
+	.2byte DECOR_CUTE_TV
+	.2byte DECOR_SOLID_BOARD
 	.2byte DECOR_NONE
 	release
 	end
@@ -48,11 +53,16 @@ FortreeCity_DecorationShop_PokemartDecor_Chairs:
 	.2byte DECOR_SMALL_CHAIR
 	.2byte DECOR_POKEMON_CHAIR
 	.2byte DECOR_HEAVY_CHAIR
+	.2byte DECOR_PRETTY_CHAIR
 	.2byte DECOR_RAGGED_CHAIR
 	.2byte DECOR_COMFORT_CHAIR
 	.2byte DECOR_BRICK_CHAIR
 	.2byte DECOR_CAMP_CHAIR
 	.2byte DECOR_HARD_CHAIR
+	.2byte DECOR_SLIDE
+	.2byte DECOR_FENCE_LENGTH
+	.2byte DECOR_FENCE_WIDTH
+	.2byte DECOR_SOLID_BOARD
 	.2byte DECOR_NONE
 	release
 	end

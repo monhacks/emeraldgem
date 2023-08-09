@@ -3317,12 +3317,22 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
                  | (gSaveBlock2Ptr->playerTrainerId[1] << 8)
                  | (gSaveBlock2Ptr->playerTrainerId[2] << 16)
                  | (gSaveBlock2Ptr->playerTrainerId[3] << 24);
+			if ((VarGet(VAR_SHINY_TREECKO) == species) || (VarGet(VAR_SHINY_MUDKIP) == species) || (VarGet(VAR_SHINY_TORCHIC) == species)){
+				FlagSet(FLAG_SHINY_CREATION);
+			}
+			else if ((VarGet(VAR_SHINY_TREECKO) == species+1) || (VarGet(VAR_SHINY_MUDKIP) == species+1) || (VarGet(VAR_SHINY_TORCHIC) == species+1)){
+				FlagSet(FLAG_NO_SHINIES);
+			}
 			if (FlagGet(FLAG_NO_SHINIES))
 			{
 				do
 				{
 					personality = Random32();
 				} while ((GET_SHINY_VALUE(value, personality)) < SHINY_ODDS);
+				FlagClear(FLAG_NO_SHINIES);
+				VarSet(VAR_SHINY_TREECKO,0);
+				VarSet(VAR_SHINY_TORCHIC,0);
+				VarSet(VAR_SHINY_MUDKIP,0);
 			}
 			else if (FlagGet(FLAG_SHINY_CREATION))
 			{
@@ -3330,10 +3340,14 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
 				{
 					personality = Random32();
 				} while ((GET_SHINY_VALUE(value, personality)) >= SHINY_ODDS);
+				FlagClear(FLAG_SHINY_CREATION);
+				VarSet(VAR_SHINY_TREECKO,0);
+				VarSet(VAR_SHINY_TORCHIC,0);
+				VarSet(VAR_SHINY_MUDKIP,0);
 			}
 			else 
 			{
-				totalRerolls = 0;
+				totalRerolls = 1;
 				if ((gSaveBlock1Ptr->dexNavChain >= 5) && (gSaveBlock1Ptr->dexNavChain <= 9))
 					totalRerolls += 2;
 				else if ((gSaveBlock1Ptr->dexNavChain >= 10) && (gSaveBlock1Ptr->dexNavChain <= 19))
@@ -7455,7 +7469,7 @@ u8 GetMoveRelearnerMoves(struct Pokemon *mon, u16 *moves)
 
         moveLevel = gLevelUpLearnsets[species][i].level;
 
-        if (moveLevel <= level)
+        if (moveLevel <= level && ((moveLevel != 1 && !FlagGet(FLAG_MOVE_RELEARNER_UPGRADE)) || (FlagGet(FLAG_MOVE_RELEARNER_UPGRADE))))
         {
             for (j = 0; j < MAX_MON_MOVES && learnedMoves[j] != gLevelUpLearnsets[species][i].move; j++)
                 ;
@@ -7702,7 +7716,11 @@ const struct CompressedSpritePalette *GetMonSpritePalStruct(struct Pokemon *mon)
 const struct CompressedSpritePalette *GetMonSpritePalStructFromOtIdPersonality(u16 species, u32 otId , u32 personality)
 {
     u32 shinyValue;
-
+	
+	if ((VarGet(VAR_SHINY_TREECKO) == species) || (VarGet(VAR_SHINY_MUDKIP) == species) || (VarGet(VAR_SHINY_TORCHIC) == species)){
+		return &gMonShinyPaletteTable[species];
+	}
+	
     shinyValue = GET_SHINY_VALUE(otId, personality);
     if (shinyValue < SHINY_ODDS)
     {

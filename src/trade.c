@@ -4543,7 +4543,7 @@ void CreateInGameTradePokemon(void)
 		else if (GetMonData(&gPlayerParty[gSpecialVar_0x8005], MON_DATA_SPECIES) == SPECIES_KARRABLAST)
 			CreateMon(pokemon, SPECIES_SHELMET, 99, 32, FALSE, 0, OT_ID_PRESET, 0); 
 		else
-			CreateMon(pokemon, SPECIES_MEW, 99, 32, FALSE, 0, OT_ID_PRESET, 0); // (After the trade this pokemon is set as "Seen and caught" in the players pokedex!)
+			CreateMon(pokemon, SPECIES_PIKACHU, 99, 32, FALSE, 0, OT_ID_PRESET, 0); // (After the trade this pokemon is set as "Seen and caught" in the players pokedex!)
 		SetMonData(&gEnemyParty[0], MON_DATA_HELD_ITEM, heldItem);
         gEnemyParty[1] = gPlayerParty[gSpecialVar_0x8005];
     }

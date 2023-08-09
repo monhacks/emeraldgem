@@ -119,7 +119,7 @@ PetalburgCity_WallysHouse_Text_WallyCantGoDewford:
 	.string "dijeran nada. Supongo que su condición\l"
 	.string "está tan mejorada que viajar en barco\l"
 	.string "no hizo que se desmayara.\p"
-	.string "Pero, ¿Pelear?\n"
+	.string "Pero, ¿Batalla de Gimnasio?\n"
 	.string "Nah, Wally no puede mantenerse en pie\l"
 	.string "durante un Combate Pokémon.$"
 

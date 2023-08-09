@@ -1,3 +1,4 @@
+.set LOCALID_WALLY, 8
 FortreeCity_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, FortreeCity_OnTransition
 	map_script MAP_SCRIPT_ON_RESUME, FortreeCity_OnResume
@@ -14,7 +15,7 @@ FortreeCity_OnResume:
 
 FortreeCity_Trigger_Wally::
 	lockall
-	setflag FLAG_HIDE_WALLY_DEWFORD
+	setflag FLAG_HIDE_WALLY_DEWFORD_TOWN
 	setflag FLAG_HIDE_WALLY_RUSTBORO
 	setflag FLAG_HIDE_WALLY_111
 	namebox Unknown
@@ -26,6 +27,7 @@ FortreeCity_Trigger_Wally::
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_ExclamationMark
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceLeft
 	waitmovement 0
+	delay 16
 	applymovement LOCALID_WALLY, FortreeCity_Movement_WallyApproach
 	waitmovement 0
 	namebox Wally
@@ -85,7 +87,7 @@ FortreeCity_Trigger_Wally_Text_1:
 	.string "con sus consejos, tu ayuda y apoyo, he\l"
 	.string "logrado derrotar incluso a Norman. Te\l"
 	.string "estoy alcanzando, {PLAYER}.\p"
-	.string "Tengo un equipo fuerte, {PLAYER}, uno\n"
+	.string "Tengo un equipo fuerte, ¿Sabes?, uno\n"
 	.string "que ha logrado sobreponerse a todo.\p"
 	.string "Entonces, {PLAYER}, me anima decir,\n"
 	.string "¡Te desafío a una Batalla Pokémon!$"

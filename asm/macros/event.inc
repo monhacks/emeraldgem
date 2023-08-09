@@ -732,11 +732,28 @@
 	.elseif \type == TRAINER_BATTLE_HILL
 		.4byte \pointer1 @ text
 		.4byte \pointer2 @ text
+	.elseif \type == TRAINER_BATTLE_NO_WHITEOUT_CONTINUE_SCRIPT
+		.4byte \pointer1 @ text
+		.4byte \pointer2 @ text
+		.4byte \pointer3 @ event script
+	.elseif \type == TRAINER_BATTLE_NO_INTRO_NO_WHITEOUT
+		.4byte \pointer1 @ text
 	.endif
 	.endm
 
 	NO_MUSIC = FALSE
+	
+	@ Starts a single trainer battle. Takes a trainer, intro text, loss text, and an event script which continues after the battle,regardless of the result.
+	@ When used with an event script, you can also pass in an optional flag to disable music
+    .macro trainerbattle_no_whiteout_continue_script trainer:req, intro_text:req, lose_text:req, event_script:req
+    trainerbattle TRAINER_BATTLE_NO_WHITEOUT_CONTINUE_SCRIPT, \trainer, 0, \intro_text, \lose_text, \event_script
+	.endm
 
+	@ Starts a trainer battle, skipping intro text. Takes a trainer and loss text. Does not warp the player to last heal location if they lose. 
+	.macro trainerbattle_no_intro_no_whiteout trainer:req, lose_text:req
+	trainerbattle TRAINER_BATTLE_NO_INTRO_NO_WHITEOUT, \trainer, 0, \lose_text
+	.endm
+	
 	@ Starts a single trainer battle. Takes a trainer, intro text, loss text, and an optional event script.
 	@ When used with an event script, you can also pass in an optional flag to disable music
 	.macro trainerbattle_single trainer:req, intro_text:req, lose_text:req, event_script=FALSE, music=TRUE
@@ -1819,7 +1836,14 @@
 	_dynmultichoice \left, \top, \ignoreBPress, \maxBeforeScroll, \shouldSort, \initialSelected, \callbacks, NULL
 	.endm
 
-
+	@ Displays a box containing the front sprite for the specified Pokemon species.
+	.macro showmonpicshiny species:req, x:req, y:req, var:req
+	.byte 0xeD
+	.2byte \species
+	.byte \x
+	.byte \y
+	.byte \var
+	.endm
 	
 	@ return current (posType = 0) or map (posType = 1) position of object to VAR_0x8007 (x), VAR_0x8008 (y)
 	.macro getobjectxy localId:req, posType:req
@@ -2150,6 +2174,7 @@
 	MSGBOX_AUTOCLOSE = 6
 	MSGBOX_GETPOINTS = 9
 	MSGBOX_POKENAV = 10
+	MSGBOX_INTERRUPT = 11
 
 	YES = 1
 	NO  = 0

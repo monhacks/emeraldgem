@@ -142,6 +142,7 @@ GraniteCave_1F_Trigger_Bottom::
 
 GraniteCave_1F_EventScript_Grunts::
 	lockall
+	special SpawnCameraObject
 	applymovement 3, Common_Movement_WalkInPlaceDown
 	waitmovement 0
 	namebox Aqua
@@ -212,6 +213,7 @@ GraniteCave_1F_EventScript_Grunts::
 	case 7, GraniteCave_1F_EventScript_Grunts_5
 	call GraniteCave_1F_EventScript_PlayerNoWayOut1
 GraniteCave_1F_EventScript_Grunts_1:
+	setvar VAR_DEWFORD_TOWN_STATE, 1
 	namebox Player
 	msgbox GraniteCave_1F_EventScript_Grunts_Text_8
 	hidenamebox
@@ -326,6 +328,8 @@ GraniteCave_1F_EventScript_Grunts_1:
 	hidenamebox
 	closemessage
 	delay 20
+	applymovement OBJ_EVENT_ID_CAMERA, GraniteCave_1F_Movement_CameraDown
+	waitmovement 0
 	playse SE_DOOR
 	addobject 6
 	setobjectxy 6, 37, 12
@@ -361,6 +365,7 @@ GraniteCave_1F_EventScript_Grunts_1:
 	msgbox GraniteCave_1F_EventScript_Grunts_Text_22
 	hidenamebox
 	closemessage
+	applymovement OBJ_EVENT_ID_CAMERA, GraniteCave_1F_Movement_BrawlyUp2
 	applymovement 6, GraniteCave_1F_Movement_BrawlyUp2
 	delay 20
 	fadescreen FADE_TO_BLACK
@@ -375,6 +380,7 @@ GraniteCave_1F_EventScript_Grunts_1:
 	closemessage
 	playse SE_SUPER_EFFECTIVE
 	waitse
+	applymovement OBJ_EVENT_ID_CAMERA, GraniteCave_1F_Movement_BrawlyDown2
 	applymovement 6, GraniteCave_1F_Movement_BrawlyDown2
 	delay 20
 	fadescreen FADE_FROM_BLACK
@@ -429,6 +435,7 @@ GraniteCave_1F_EventScript_Grunts_1:
 	applymovement 6, Common_Movement_FacePlayer
 	waitmovement 0
 	delay 16
+	applymovement OBJ_EVENT_ID_CAMERA, GraniteCave_1F_Movement_BrawlyWalkPlayer
 	applymovement 6, GraniteCave_1F_Movement_BrawlyWalkPlayer
 	waitmovement 0
 	namebox Brawly
@@ -459,6 +466,7 @@ GraniteCave_1F_EventScript_Grunts_1:
 	playse SE_DOOR
 	setflag FLAG_GRANITE_GRUNTS
 	setvar VAR_DEWFORD_TOWN_STATE, 2
+	special RemoveCameraObject
 	release
 	end
 
@@ -617,6 +625,13 @@ GraniteCave_1F_Movement_Grunt2_BlockExit_Top:
 	walk_faster_down
 	walk_faster_right
 	face_up
+	step_end
+
+GraniteCave_1F_Movement_CameraDown:
+	walk_slow_down
+	walk_slow_down
+	walk_slow_down
+	walk_slow_down
 	step_end
 
 GraniteCave_1F_Movement_Grunt1_BlockExit_Top:

@@ -283,11 +283,12 @@ script RusturfTunnel_EventScript_Grunt {
     applymovement (OBJ_EVENT_ID_PLAYER, Common_Movement_ExclamationMark)
     applymovement (OBJ_EVENT_ID_PLAYER, Common_Movement_Delay48)
     waitmovement (0)
+	special (HealPlayerParty)
     setflag (FLAG_STARTED_BOSS)
 	special (TakeAwayItemsAndBerries)
 	special (SavePlayerParty)
 	deletepokemon (1)
-    message (format("¡Te han robado la mochila!"))
+    message (format("¡Te han robado la mochila!\n¡Ahora sólo podrás usar el Pokémon que tenías a mano!"))
     waitmessage
     closemessage
     applymovement (LOCALID_GRUNT, RusturfTunnel_Movement_GruntNervous)

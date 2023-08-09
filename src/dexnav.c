@@ -175,17 +175,17 @@ static const u32 sHiddenMonIconGfx[] = INCBIN_U32("graphics/dexnav/hidden.4bpp.l
 
 // strings
 static const u8 sText_DexNav_NoInfo[] = _("--------");
-static const u8 sText_DexNav_CaptureToSee[] = _("Capture first!");
-static const u8 sText_DexNav_PressRToRegister[] = _("R TO REGISTER!");
-static const u8 sText_DexNav_SearchForRegisteredSpecies[] = _("Search {STR_VAR_1}");
-static const u8 sText_DexNav_NotFoundHere[] = _("This Pokémon cannot be found here!");
+static const u8 sText_DexNav_CaptureToSee[] = _("¡Capturar primero!");
+static const u8 sText_DexNav_PressRToRegister[] = _("¡Registra con R!");
+static const u8 sText_DexNav_SearchForRegisteredSpecies[] = _("Buscando {STR_VAR_1}");
+static const u8 sText_DexNav_NotFoundHere[] = _("¡Este Pokémon no vive aquí!");
 static const u8 sText_ThreeQmarks[] = _("???");
 static const u8 sText_SearchLevel[] = _("SEARCH {LV}. {STR_VAR_1}");
 static const u8 sText_MonLevel[] = _("{LV}. {STR_VAR_1}");
 static const u8 sText_EggMove[] = _("MOVE: {STR_VAR_1}");
 static const u8 sText_HeldItem[] = _("{STR_VAR_1}");
 static const u8 sText_StartExit[] = _("{START_BUTTON} EXIT");
-static const u8 sText_DexNavChain[] = _("{NO} {STR_VAR_1}");
+static const u8 sText_DexNavChain[] = _("{NO}{STR_VAR_1}");
 static const u8 sText_DexNavChainLong[] = _("{NO}{STR_VAR_1}");
 
 static const u8 sText_ArrowLeft[] = _("{LEFT_ARROW}");
@@ -533,14 +533,11 @@ static void AddSearchWindowText(u16 species, u8 proximity, u8 searchLevel, bool8
     }
     
     //chain level - always present
-    ConvertIntToDecimalStringN(gStringVar1, gSaveBlock1Ptr->dexNavChain, STR_CONV_MODE_LEFT_ALIGN, 3);
-	if (species != VarGet(VAR_DEXNAV_SPECIES)){
-		ConvertIntToDecimalStringN(gStringVar1, empty, STR_CONV_MODE_LEFT_ALIGN, 3);
-	}
-    if (gSaveBlock1Ptr->dexNavChain > 99)
-        StringExpandPlaceholders(gStringVar4, sText_DexNavChainLong);
-    else
-        StringExpandPlaceholders(gStringVar4, sText_DexNavChain);
+    ConvertIntToDecimalStringN(gStringVar1, gSaveBlock1Ptr->dexNavChain, STR_CONV_MODE_LEFT_ALIGN, 2);
+	// if (species != VarGet(VAR_DEXNAV_SPECIES)){
+		// ConvertIntToDecimalStringN(gStringVar1, empty, STR_CONV_MODE_LEFT_ALIGN, 3);
+	// }
+    StringExpandPlaceholders(gStringVar4, sText_DexNavChain);
     AddTextPrinterParameterized3(windowId, 0, SEARCH_ARROW_X - 16, 12, sSearchFontColor, TEXT_SKIP_DRAW, gStringVar4);    
     
     CopyWindowToVram(sDexNavSearchDataPtr->windowId, 2);
@@ -2172,15 +2169,7 @@ static void PrintCurrentSpeciesInfo(void)
     }
     
     //search level
-    if (species == SPECIES_NONE)
-    {
-        AddTextPrinterParameterized3(WINDOW_INFO, 0, 0, SEARCH_LEVEL_Y, sFontColor_Black, 0, sText_DexNav_NoInfo);
-    }
-    else
-    {
-        ConvertIntToDecimalStringN(gStringVar4, gSaveBlock1Ptr->dexNavChain, 0, 4);
-        AddTextPrinterParameterized3(WINDOW_INFO, 0, 0, SEARCH_LEVEL_Y, sFontColor_Black, 0, gStringVar4);
-    }
+    AddTextPrinterParameterized3(WINDOW_INFO, 0, 0, SEARCH_LEVEL_Y, sFontColor_Black, 0, sText_DexNav_NoInfo);
     
     //hidden ability
     if (species == SPECIES_NONE)
@@ -2199,7 +2188,7 @@ static void PrintCurrentSpeciesInfo(void)
         AddTextPrinterParameterized3(WINDOW_INFO, 0, 0, HA_INFO_Y, sFontColor_Black, 0, sText_DexNav_CaptureToSee);
     }
     
-    //current chain
+	//current chain
     ConvertIntToDecimalStringN(gStringVar1, gSaveBlock1Ptr->dexNavChain, STR_CONV_MODE_LEFT_ALIGN, 3);
     AddTextPrinterParameterized3(WINDOW_INFO, 0, 0, CHAIN_BONUS_Y, sFontColor_Black, 0, gStringVar1);
     
@@ -2482,7 +2471,7 @@ static void Task_DexNavMain(u8 taskId)
         // check selection is valid. Play sound if invalid
         species = DexNavGetSpecies();
         
-        if (species == SPECIES_NONE || (!GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_SEEN)))
+        if (species == SPECIES_NONE || !GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_SEEN))
         {            
             PlaySE(SE_FAILURE);
         }
@@ -2491,7 +2480,6 @@ static void Task_DexNavMain(u8 taskId)
 			PrintSearchableSpecies(species);
             //PlaySE(SE_DEX_SEARCH);
             PlayCry_Script(species, 0);
-            
             // create value to store in a var
             VarSet(VAR_DEXNAV_SPECIES, ((sDexNavUiDataPtr->environment << 14) | species));
         }

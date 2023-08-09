@@ -319,9 +319,9 @@ PlayersHouse_1F_Text_ItsOverWeMissedHim:
 PlayersHouse_1F_Text_GoIntroduceYourselfNextDoor:
 	.string "¡El amigo de la infancia de Papá vive\n"
 	.string "acá!\p"
-	.string "Es un Profesor Pokémon, así que no\n"
-	.string "haría daño que lo conocieras.\p"
-	.string "¡Ve a saludarlo!$"
+	.string "Es un Profesor Pokémon, y me dijo\n"
+	.string "que te preguntara cuál es\ltu Región favorita.\p"
+	.string "¿Cuál es?$"
 
 PlayersHouse_1F_Text_SeeYouHoney:
 	.string "¡Hasta luego amor!$"
@@ -347,7 +347,7 @@ PlayersHouse_1F_Text_DontPushYourselfTooHard:
 	.string "Por favor, cuídate mucho, amor.$"
 
 PlayersHouse_1F_Text_IsThatAPokenav:
-	.string "¿¿Qué es eso, amor? ¿Un Pokénav?\p"
+	.string "¿Qué es eso, amor? ¿Un Pokénav?\p"
 	.string "¡Entonces agrégame ahí, así te llamo\n"
 	.string "cada vez que te extraño!$"
 
@@ -374,14 +374,6 @@ PlayersHouse_1F_Text_TheresAMovieOnTV:
 	.string "Un Zigzagoon y un Tailow Azul\n"
 	.string "están en el espacio…\p"
 	.string "… … … … Mejor me voy…$"
-
-PlayersHouse_1F_Text_RunningShoesManual:
-	.string "It's the instruction booklet for the\n"
-	.string "RUNNING SHOES.\p"
-	.string "“Press the B Button to run while\n"
-	.string "wearing your RUNNING SHOES.\p"
-	.string "“Lace up your RUNNING SHOES and hit\n"
-	.string "the road running!”$"
 
 PlayersHouse_1F_Text_TicketFromBrineyCameForYou:
 	.string "DAD: Hm?\p"

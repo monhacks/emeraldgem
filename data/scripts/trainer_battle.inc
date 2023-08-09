@@ -129,3 +129,9 @@ Std_MsgboxAutoclose::
 	waitbuttonpress
 	release
 	return
+
+Std_MsgboxInterrupt::
+	message NULL
+	waitmessage
+	release
+	return

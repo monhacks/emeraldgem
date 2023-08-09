@@ -156,6 +156,7 @@ const u32 gObjectEventPic_Roxanne[] = INCBIN_U32("graphics/object_events/pics/pe
 const u32 gObjectEventPic_Brawly[] = INCBIN_U32("graphics/object_events/pics/people/gym_leaders/brawly.4bpp");
 const u16 gObjectEventPal_Brawly[] = INCBIN_U16("graphics/object_events/palettes/brawly.gbapal");
 const u16 gObjectEventPal_TeamAqua[] = INCBIN_U16("graphics/object_events/palettes/aqua.gbapal");
+const u16 gObjectEventPal_Archie[] = INCBIN_U16("graphics/object_events/palettes/archie.gbapal");
 const u32 gObjectEventPic_Wattson[] = INCBIN_U32("graphics/object_events/pics/people/gym_leaders/wattson.4bpp");
 const u32 gObjectEventPic_Flannery[] = INCBIN_U32("graphics/object_events/pics/people/gym_leaders/flannery.4bpp");
 const u32 gObjectEventPic_Norman[] = INCBIN_U32("graphics/object_events/pics/people/gym_leaders/norman.4bpp");

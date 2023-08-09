@@ -100,7 +100,6 @@ LittlerootTown_MaysHouse_1F_EventScript_YoureNewNeighbor::
 	special GetRivalSonDaughterString
 	checkplayergender
 	namebox Marta
-	goto_if_eq VAR_RESULT, FEMALE, LittlerootTown_MaysHouse_1F_EventScript_YoureNewNeighbor_1
 	msgbox LittlerootTown_MaysHouse_1F_EventScript_YoureNewNeighbor_Text_1
 	setflag FLAG_MET_RIVAL_MOM
 	setvar VAR_LITTLEROOT_HOUSES_STATE_BRENDAN, 2
@@ -109,32 +108,14 @@ LittlerootTown_MaysHouse_1F_EventScript_YoureNewNeighbor::
 	releaseall
 	end
 
-LittlerootTown_MaysHouse_1F_EventScript_YoureNewNeighbor_1:
-	msgbox LittlerootTown_MaysHouse_1F_EventScript_YoureNewNeighbor_Text_0
-	setflag FLAG_MET_RIVAL_MOM
-	setvar VAR_LITTLEROOT_HOUSES_STATE_BRENDAN, 2
-	hidenamebox
-	closemessage
-	releaseall
-	end
-
-
-LittlerootTown_MaysHouse_1F_EventScript_YoureNewNeighbor_Text_0:
-	.string "¡AH! ¿QUIÉN ERES?\p"
-	.string "… … … … … … … … …\n"
-	.string "… … … … … … … … …\p"
-	.string "Ah, ya veo, eres {PLAYER}, {ELLA} hij{OA} de\n"
-	.string "Norman y Silvana…\p"
-	.string "Pues, nuestro hijo vive arriba, ¡Ve a\n"
-	.string "presentarte!$"
 
 LittlerootTown_MaysHouse_1F_EventScript_YoureNewNeighbor_Text_1:
 	.string "¡AH! ¿QUIÉN ERES?\p"
 	.string "… … … … … … … … …\n"
 	.string "… … … … … … … … …\p"
 	.string "Ah, ya veo, eres {PLAYER}, {ELLA} hij{OA} de\n"
-	.string "Norman y Silvana…\p"
-	.string "Pues, nuestra hija vive arriba, ¡Ve a\n"
+	.string "Norman…\p"
+	.string "Pues, nuestr{AO} hij{AO} vive arriba, ¡Ve a\n"
 	.string "presentarte!$"
 
 LittlerootTown_MaysHouse_1F_Movement_RivalMomApproach:
@@ -399,7 +380,7 @@ RivalsHouse_1F_Text_ShouldGoHomeEverySoOften:
 RivalsHouse_1F_Text_MayWhoAreYou:
 	.string "Oh, tú eres… {PLAYER},\n"
 	.string "¿no?\p"
-	.string "¡Encantada! ¡Yo soy {RIVAL}!\n"
+	.string "¡Encantad{AO}! ¡Yo soy {RIVAL}!\n"
 	.string "… … … … … … … … … … … …\p"
 	.string "Mhhh… Mi papá dijo que fuéramos amigos,\n"
 	.string "{PLAYER}, ¡Ja ja!\l"

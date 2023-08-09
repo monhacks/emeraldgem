@@ -350,6 +350,7 @@ RusturfTunnel_EventScript_Grunt::
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_ExclamationMark
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_Delay48
 	waitmovement 0
+	special HealPlayerParty
 	setflag FLAG_STARTED_BOSS
 	special TakeAwayItemsAndBerries
 	special SavePlayerParty
@@ -669,7 +670,9 @@ RusturfTunnel_EventScript_Grunt_Text_1:
 	.string "sucios!$"
 
 RusturfTunnel_EventScript_Grunt_Text_2:
-	.string "¡Te han robado la mochila!$"
+	.string "¡Te han robado la mochila!\n"
+	.string "¡Ahora sólo podrás usar el Pokémon que\l"
+	.string "tenías a mano!$"
 
 RusturfTunnel_EventScript_Grunt_Text_3:
 	.string "¡NO IMPORTA NADA, YO ME VOY!$"

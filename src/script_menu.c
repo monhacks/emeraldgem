@@ -12,7 +12,9 @@
 #include "string_util.h"
 #include "strings.h"
 #include "task.h"
+#include "data.h"
 #include "text.h"
+#include "trainer_pokemon_sprites.h"
 #include "constants/field_specials.h"
 #include "constants/items.h"
 #include "constants/script_menu.h"
@@ -21,6 +23,7 @@
 #include "malloc.h"
 #include "util.h"
 #include "item_icon.h"
+#include "random.h"
 
 #include "data/script_menu.h"
 
@@ -1003,6 +1006,31 @@ bool8 ScriptMenu_ShowPokemonPic(u16 species, u8 x, u8 y)
     else
     {
         spriteId = CreateMonSprite_PicBox(species, x * 8 + 40, y * 8 + 40, 0);
+        taskId = CreateTask(Task_PokemonPicWindow, 0x50);
+        gTasks[taskId].tWindowId = CreateWindowFromRect(x, y, 8, 8);
+        gTasks[taskId].tState = 0;
+        gTasks[taskId].tMonSpecies = species;
+        gTasks[taskId].tMonSpriteId = spriteId;
+        gSprites[spriteId].callback = SpriteCallbackDummy;
+        gSprites[spriteId].oam.priority = 0;
+        SetStandardWindowBorderStyle(gTasks[taskId].tWindowId, TRUE);
+        ScheduleBgCopyTilemapToVram(0);
+        return TRUE;
+    }
+}
+
+bool8 ScriptMenu_ShowPokemonPicShiny(u16 species, u8 varValue, u8 x, u8 y)
+{
+    u8 taskId;
+    u8 spriteId;
+
+    if (FindTaskIdByFunc(Task_PokemonPicWindow) != TASK_NONE)
+    {
+        return FALSE;
+    }
+    else
+    {
+        spriteId = CreateMonSprite_PicBoxShiny(species, varValue, x * 8 + 40, y * 8 + 40, 0);
         taskId = CreateTask(Task_PokemonPicWindow, 0x50);
         gTasks[taskId].tWindowId = CreateWindowFromRect(x, y, 8, 8);
         gTasks[taskId].tState = 0;

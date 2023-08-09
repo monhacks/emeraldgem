@@ -14,6 +14,7 @@
 #include "constants/trainers.h"
 #include "constants/battle_config.h"
 #include "constants/species.h"
+#include "constants/battle_setup.h"
 	.include "asm/macros.inc"
 	.include "asm/macros/battle_script.inc"
 	.include "constants/constants.inc"
@@ -225,7 +226,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectHitEscape               @ EFFECT_HIT_ESCAPE
 	.4byte BattleScript_EffectMudSport                @ EFFECT_MUD_SPORT
 	.4byte BattleScript_EffectPoisonFang              @ EFFECT_POISON_FANG
-	.4byte BattleScript_EffectHit                     @ EFFECT_WEATHER_BALL
+	.4byte BattleScript_EffectWeatherBall             @ EFFECT_WEATHER_BALL
 	.4byte BattleScript_EffectOverheat                @ EFFECT_OVERHEAT
 	.4byte BattleScript_EffectTickle                  @ EFFECT_TICKLE
 	.4byte BattleScript_EffectCosmicPower             @ EFFECT_COSMIC_POWER
@@ -413,6 +414,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectHit                     @ EFFECT_BEAK_BLAST
 	.4byte BattleScript_EffectCourtChange             @ EFFECT_COURT_CHANGE
 	.4byte BattleScript_EffectSteelBeam               @ EFFECT_STEEL_BEAM
+	.4byte BattleScript_EffectHit                     @ EFFECT_LOVE_DUPLICATES_POWER
 	.4byte BattleScript_EffectExtremeEvoboost         @ EFFECT_EXTREME_EVOBOOST
 	.4byte BattleScript_EffectTerrainHit              @ EFFECT_DAMAGE_SET_TERRAIN
 	.4byte BattleScript_EffectChillyReception         @ EFFECT_CHILLY_RECEPTION
@@ -451,6 +453,56 @@ BattleScript_AffectionBasedStatusHeal_Continue:
 	updatestatusicon BS_ATTACKER
 	waitstate
 	end2
+
+BattleScript_EffectWeatherBall::
+	attackcanceler
+	jumpifnoholdeffect BS_ATTACKER, HOLD_EFFECT_HEAT_ROCK, BattleScript_EffectNoSun
+	goto BattleScript_EffectSunBall
+BattleScript_EffectNoSun:
+	jumpifnoholdeffect BS_ATTACKER, HOLD_EFFECT_DAMP_ROCK, BattleScript_EffectNoRain
+	goto BattleScript_EffectRainBall
+BattleScript_EffectNoRain:
+	jumpifnoholdeffect BS_ATTACKER, HOLD_EFFECT_ICY_ROCK, BattleScript_EffectNothing
+	goto BattleScript_EffectHailBall
+BattleScript_EffectNothing:
+	goto BattleScript_EffectHit
+
+
+BattleScript_EffectSunBall:
+	jumpifhalfword CMP_COMMON_BITS, gBattleWeather, B_WEATHER_SUN_PRIMAL, BattleScript_ExtremelyHarshSunlightWasNotLessened
+	jumpifhalfword CMP_COMMON_BITS, gBattleWeather, B_WEATHER_RAIN_PRIMAL, BattleScript_NoReliefFromHeavyRain
+	jumpifhalfword CMP_COMMON_BITS, gBattleWeather, B_WEATHER_STRONG_WINDS, BattleScript_MysteriousAirCurrentBlowsOn
+	jumpifhalfword CMP_COMMON_BITS, gBattleWeather, B_WEATHER_SUN, BattleScript_EffectHit
+	setsunny
+	printfromtable gMoveWeatherChangeStringIds
+	waitmessage B_WAIT_TIME_LONG
+	call BattleScript_WeatherFormChanges
+	printfromtable gMoveWeatherChangeStringIds
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_EffectHit
+	
+
+BattleScript_EffectRainBall:
+	jumpifhalfword CMP_COMMON_BITS, gBattleWeather, B_WEATHER_SUN_PRIMAL, BattleScript_ExtremelyHarshSunlightWasNotLessened
+	jumpifhalfword CMP_COMMON_BITS, gBattleWeather, B_WEATHER_RAIN_PRIMAL, BattleScript_NoReliefFromHeavyRain
+	jumpifhalfword CMP_COMMON_BITS, gBattleWeather, B_WEATHER_STRONG_WINDS, BattleScript_MysteriousAirCurrentBlowsOn
+	jumpifhalfword CMP_COMMON_BITS, gBattleWeather, B_WEATHER_RAIN, BattleScript_EffectHit
+	setrain
+	printfromtable gMoveWeatherChangeStringIds
+	waitmessage B_WAIT_TIME_LONG
+	call BattleScript_WeatherFormChanges
+	goto BattleScript_EffectHit
+
+BattleScript_EffectHailBall:
+	jumpifhalfword CMP_COMMON_BITS, gBattleWeather, B_WEATHER_SUN_PRIMAL, BattleScript_ExtremelyHarshSunlightWasNotLessened
+	jumpifhalfword CMP_COMMON_BITS, gBattleWeather, B_WEATHER_RAIN_PRIMAL, BattleScript_NoReliefFromHeavyRain
+	jumpifhalfword CMP_COMMON_BITS, gBattleWeather, B_WEATHER_STRONG_WINDS, BattleScript_MysteriousAirCurrentBlowsOn
+	jumpifhalfword CMP_COMMON_BITS, gBattleWeather, B_WEATHER_HAIL, BattleScript_EffectHit
+	sethail
+	printfromtable gMoveWeatherChangeStringIds
+	waitmessage B_WAIT_TIME_LONG
+	call BattleScript_WeatherFormChanges
+	goto BattleScript_EffectHit
 
 BattleScript_EffectSteelBeam::
 	attackcanceler
@@ -4202,7 +4254,7 @@ BattleScript_GeomancyEnd::
 	goto BattleScript_MoveEnd
 
 BattleScript_EffectConfuseHit::
-	jumpiftype BS_TARGET, TYPE_BUG, BattleScript_NotAffected
+	jumpiftype BS_TARGET, TYPE_BUG, BattleScript_EffectHit
 	setmoveeffect MOVE_EFFECT_CONFUSION
 	goto BattleScript_EffectHit
 
@@ -5211,7 +5263,7 @@ BattleScript_EffectThunder:
 	goto BattleScript_EffectHit
 
 BattleScript_EffectHurricane:
-	jumpiftype BS_TARGET, TYPE_BUG, BattleScript_MoveEnd
+	jumpiftype BS_TARGET, TYPE_BUG, BattleScript_EffectHit
 	setmoveeffect MOVE_EFFECT_CONFUSION
 	goto BattleScript_EffectHit
 
@@ -6358,6 +6410,8 @@ BattleScript_LocalBattleLostPrintWhiteOut::
 	printstring STRINGID_PLAYERWHITEOUT
 	waitmessage B_WAIT_TIME_LONG
 	getmoneyreward
+	jumpifhalfword CMP_EQUAL, gTrainerBattleMode, TRAINER_BATTLE_NO_WHITEOUT_CONTINUE_SCRIPT, BattleScript_LocalBattleLostPrintNoWhiteout
+	jumpifhalfword CMP_EQUAL, gTrainerBattleMode, TRAINER_BATTLE_NO_INTRO_NO_WHITEOUT, BattleScript_LocalBattleLostPrintNoWhiteout
 	printstring STRINGID_PLAYERWHITEOUT2
 	waitmessage B_WAIT_TIME_LONG
 	end2
@@ -6383,6 +6437,11 @@ BattleScript_LocalBattleLostEnd::
 	waitmessage 0x40
 	end2
 .endif
+
+BattleScript_LocalBattleLostPrintNoWhiteout::
+	printstring STRINGID_PLAYERWHITEOUT3
+	waitmessage B_WAIT_TIME_LONG
+	end2
 
 BattleScript_CheckDomeDrew::
 	jumpifbyte CMP_EQUAL, gBattleOutcome, B_OUTCOME_DREW, BattleScript_LocalBattleLostEnd_

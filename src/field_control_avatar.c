@@ -498,6 +498,7 @@ static const u8 *GetInteractedObjectEventScript(struct MapPosition *position, u8
         objectEventId = GetObjectEventIdByPosition(position->x, position->y, position->elevation);
         break;
     }
+
     if (objectEventId == OBJECT_EVENTS_COUNT || gObjectEvents[objectEventId].localId == OBJ_EVENT_ID_PLAYER)
     {
         if (MetatileBehavior_IsCounter(metatileBehavior) != TRUE)

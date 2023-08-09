@@ -116,15 +116,25 @@ GraniteCave_Braille_None::
 GraniteCave_StevensRoom_EventScript_Steven::
 	lock
 	faceplayer
+	namebox Unknown
 	msgbox GraniteCave_StevensRoom_Text_ImStevenLetterForMe, MSGBOX_DEFAULT
+	namebox Steven
+	msgbox GraniteCave_StevensRoom_Text_ImStevenLetterForMe2, MSGBOX_DEFAULT
+	closemessage
+	hidenamebox
 	setvar VAR_0x8004, ITEM_LETTER
 	call Common_EventScript_PlayerHandedOverTheItem
 	setflag FLAG_DELIVERED_STEVEN_LETTER
+	namebox Steven
 	msgbox GraniteCave_StevensRoom_Text_ThankYouTakeThis, MSGBOX_DEFAULT
+	hidenamebox
+	closemessage
 	giveitem ITEM_TM47
 	call_if_eq VAR_RESULT, FALSE, GraniteCave_StevensRoom_EventScript_BagFull
+	namebox Steven
 	msgbox GraniteCave_StevensRoom_Text_CouldBecomeChampionLetsRegister, MSGBOX_DEFAULT
 	closemessage
+	hidenamebox
 	delay 30
 	playfanfare MUS_REGISTER_MATCH_CALL
 	msgbox GraniteCave_StevensRoom_Text_RegisteredSteven, MSGBOX_DEFAULT
@@ -132,8 +142,10 @@ GraniteCave_StevensRoom_EventScript_Steven::
 	closemessage
 	delay 30
 	setflag FLAG_REGISTERED_STEVEN_POKENAV
+	namebox Steven
 	msgbox GraniteCave_StevensRoom_Text_IveGotToHurryAlong, MSGBOX_DEFAULT
 	closemessage
+	hidenamebox
 	call_if_eq VAR_FACING, DIR_NORTH, GraniteCave_StevensRoom_EventScript_StevenExitNorth
 	call_if_eq VAR_FACING, DIR_SOUTH, GraniteCave_StevensRoom_EventScript_StevenExitSouth
 	call_if_eq VAR_FACING, DIR_WEST, GraniteCave_StevensRoom_EventScript_StevenExitWestEast
@@ -149,13 +161,11 @@ GraniteCave_StevensRoom_EventScript_StevenExitNorth::
 	return
 
 GraniteCave_StevensRoom_EventScript_StevenExitWestEast::
-	applymovement OBJ_EVENT_ID_PLAYER, GraniteCave_StevensRoom_Movement_PlayerTurnTowardExit
 	applymovement LOCALID_STEVEN, GraniteCave_StevensRoom_Movement_StevenExit
 	waitmovement 0
 	return
 
 GraniteCave_StevensRoom_EventScript_StevenExitSouth::
-	applymovement OBJ_EVENT_ID_PLAYER, GraniteCave_StevensRoom_Movement_PlayerTurnTowardExit
 	applymovement LOCALID_STEVEN, GraniteCave_StevensRoom_Movement_StevenExitSouth
 	waitmovement 0
 	return
@@ -168,8 +178,15 @@ GraniteCave_StevensRoom_Movement_StevenExit:
 	walk_up
 	walk_up
 	walk_up
+	walk_left
+	walk_left
+	walk_left
+	walk_left
 	walk_up
 	walk_up
+	walk_left
+	walk_left
+	walk_left
 	delay_8
 	step_end
 
@@ -182,48 +199,50 @@ GraniteCave_StevensRoom_Movement_PlayerTurnTowardExit:
 
 GraniteCave_StevensRoom_Movement_StevenExitSouth:
 	walk_left
+	walk_left
+	walk_left
+	walk_left
 	walk_up
 	walk_up
 	walk_up
-	walk_right
 	walk_up
-	walk_up
+	walk_left
+	walk_left
+	walk_left
 	delay_8
 	step_end
 
 GraniteCave_StevensRoom_Text_ImStevenLetterForMe:
-	.string "My name is STEVEN.\p"
-	.string "I'm interested in rare stones,\n"
-	.string "so I travel here and there.\p"
-	.string "Oh?\n"
-	.string "A LETTER for me?$"
+	.string "Ah, ¡Hola, mi nombre es {COLOR BLUE}Steven{COLOR DARK_GRAY}.$"
+
+GraniteCave_StevensRoom_Text_ImStevenLetterForMe2:
+	.string "Me interesa la geología, y la historia\n"
+	.string "que Hoenn tiene para contar, por eso\l"
+	.string "vine a esta cueva.\p"
+	.string "Estas rocas aquí datan de hace más de\n"
+	.string "10.000 años, y parecen estar llenas de\l"
+	.string "algún tipo de energía de gran poder.\p"
+	.string "Ah, ¿Una carta para mí?\p"
+	.string "Ja, ¿Porqué lo dices así? Parece que me\n"
+	.string "estuvieras callando.\p"
+	.string "¡Pero gracias por traerla!$"
 
 GraniteCave_StevensRoom_Text_ThankYouTakeThis:
-	.string "STEVEN: Okay, thank you.\p"
-	.string "You went through all this trouble to\n"
-	.string "deliver that. I need to thank you.\p"
-	.string "Let me see…\n"
-	.string "I'll give you this TM.\p"
-	.string "It contains my favorite move,\n"
-	.string "STEEL WING.$"
+	.string "¡Voy a darte esta MT como\n"
+	.string "agradecimiento!$"
 
 GraniteCave_StevensRoom_Text_CouldBecomeChampionLetsRegister:
-	.string "STEVEN: Your POKéMON appear quite\n"
-	.string "capable.\p"
-	.string "If you keep training, you could even\n"
-	.string "become the CHAMPION of the POKéMON\l"
-	.string "LEAGUE one day. That's what I think.\p"
-	.string "I know, since we've gotten to know each\n"
-	.string "other, let's register one another in\l"
-	.string "our POKéNAVS.\p"
+	.string "Creo que sería útil mantener el\n"
+	.string "contacto, así que voy a registrarme en\l"
+	.string "tu PokéNav.\p"
 	.string "… … … … … …$"
 
 GraniteCave_StevensRoom_Text_RegisteredSteven:
-	.string "Registered STEVEN\n"
-	.string "in the POKéNAV.$"
+	.string "Steven se registró en tu\n"
+	.string "POKéNAV, por algún motivo.$"
 
 GraniteCave_StevensRoom_Text_IveGotToHurryAlong:
-	.string "Now, I've got to hurry along.$"
+	.string "Ahora debería irme.$"
 
 GraniteCave_StevensRoom_Text_OhBagIsFull:
 	.string "Oh, your BAG is full…\n"

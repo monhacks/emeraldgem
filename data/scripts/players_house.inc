@@ -218,6 +218,8 @@ PlayersHouse_1F_EventScript_PetalburgGymReportMale::
 	msgbox PlayersHouse_1F_Text_ItsOverWeMissedHim, MSGBOX_DEFAULT
 	msgbox PlayersHouse_1F_Text_GoIntroduceYourselfNextDoor, MSGBOX_DEFAULT
 	hidenamebox
+	call PlayersHouse_1F_EventScript_StarterSet
+	hidenamebox
 	closemessage
 	setvar VAR_TEMP_1, 1
 	applymovement VAR_0x8005, PlayersHouse_1F_Movement_MomReturnToSeatMale
@@ -246,6 +248,7 @@ PlayersHouse_1F_EventScript_PetalburgGymReportFemale::
 	namebox Mama
 	msgbox PlayersHouse_1F_Text_ItsOverWeMissedHim, MSGBOX_DEFAULT
 	msgbox PlayersHouse_1F_Text_GoIntroduceYourselfNextDoor, MSGBOX_DEFAULT
+	call PlayersHouse_1F_EventScript_StarterSet
 	hidenamebox
 	closemessage
 	setvar VAR_TEMP_1, 1
@@ -275,6 +278,111 @@ PlayersHouse_1F_EventScript_WatchGymBroadcast::
 	setflag FLAG_SYS_TV_HOME
 	delay 35
 	return
+
+PlayersHouse_1F_EventScript_StarterSet::
+PlayersHouse_1F_EventScript_StarterSet_2:
+	dynmultichoice 25, 4, TRUE, 4, 2, DYN_MULTICHOICE_CB_NONE, PlayersHouse_1F_EventScript_StarterSet_Text_0, PlayersHouse_1F_EventScript_StarterSet_Text_1, PlayersHouse_1F_EventScript_StarterSet_Text_2, PlayersHouse_1F_EventScript_StarterSet_Text_3, PlayersHouse_1F_EventScript_StarterSet_Text_4, PlayersHouse_1F_EventScript_StarterSet_Text_5, PlayersHouse_1F_EventScript_StarterSet_Text_6, PlayersHouse_1F_EventScript_StarterSet_Text_7, PlayersHouse_1F_EventScript_StarterSet_Text_8
+	switch VAR_RESULT
+	case 0, PlayersHouse_1F_EventScript_StarterSet_5
+	case 1, PlayersHouse_1F_EventScript_StarterSet_6
+	case 2, PlayersHouse_1F_EventScript_StarterSet_7
+	case 3, PlayersHouse_1F_EventScript_StarterSet_8
+	case 4, PlayersHouse_1F_EventScript_StarterSet_9
+	case 5, PlayersHouse_1F_EventScript_StarterSet_10
+	case 6, PlayersHouse_1F_EventScript_StarterSet_11
+	case 7, PlayersHouse_1F_EventScript_StarterSet_12
+	case 8, PlayersHouse_1F_EventScript_StarterSet_13
+PlayersHouse_1F_EventScript_StarterSetEnd::
+	namebox Mama
+	msgbox PlayersHouse_1F_EventScript_StarterSet_Text_11
+	closemessage
+	hidenamebox
+	return
+
+PlayersHouse_1F_EventScript_StarterSet_5:
+	setvar VAR_STARTER_REGION, 1
+	goto PlayersHouse_1F_EventScript_StarterSetEnd
+
+PlayersHouse_1F_EventScript_StarterSet_6:
+	setvar VAR_STARTER_REGION, 2
+	goto PlayersHouse_1F_EventScript_StarterSetEnd
+
+PlayersHouse_1F_EventScript_StarterSet_7:
+	setvar VAR_STARTER_REGION, 3
+	goto PlayersHouse_1F_EventScript_StarterSetEnd
+
+PlayersHouse_1F_EventScript_StarterSet_8:
+	setvar VAR_STARTER_REGION, 4
+	goto PlayersHouse_1F_EventScript_StarterSetEnd
+
+PlayersHouse_1F_EventScript_StarterSet_9:
+	setvar VAR_STARTER_REGION, 5
+	goto PlayersHouse_1F_EventScript_StarterSetEnd
+
+PlayersHouse_1F_EventScript_StarterSet_10:
+	setvar VAR_STARTER_REGION, 6
+	goto PlayersHouse_1F_EventScript_StarterSetEnd
+
+PlayersHouse_1F_EventScript_StarterSet_11:
+	setvar VAR_STARTER_REGION, 7
+	goto PlayersHouse_1F_EventScript_StarterSetEnd
+
+PlayersHouse_1F_EventScript_StarterSet_12:
+	setvar VAR_STARTER_REGION, 8
+	goto PlayersHouse_1F_EventScript_StarterSetEnd
+
+PlayersHouse_1F_EventScript_StarterSet_13:
+	msgbox PlayersHouse_1F_EventScript_StarterSet_Text_9, MSGBOX_YESNO
+	compare VAR_RESULT, 1
+	goto_if_eq PlayersHouse_1F_EventScript_StarterSet_15
+	namebox Mama
+	msgbox PlayersHouse_1F_EventScript_StarterSet_Text_10
+	hidenamebox
+	goto PlayersHouse_1F_EventScript_StarterSet_2
+
+PlayersHouse_1F_EventScript_StarterSet_15:
+	setvar VAR_STARTER_REGION, 9
+	goto PlayersHouse_1F_EventScript_StarterSetEnd
+
+
+PlayersHouse_1F_EventScript_StarterSet_Text_0:
+	.string "Kanto$"
+
+PlayersHouse_1F_EventScript_StarterSet_Text_1:
+	.string "Johto$"
+
+PlayersHouse_1F_EventScript_StarterSet_Text_2:
+	.string "Hoenn$"
+
+PlayersHouse_1F_EventScript_StarterSet_Text_3:
+	.string "Sinnoh$"
+
+PlayersHouse_1F_EventScript_StarterSet_Text_4:
+	.string "Unova$"
+
+PlayersHouse_1F_EventScript_StarterSet_Text_5:
+	.string "Kalos$"
+
+PlayersHouse_1F_EventScript_StarterSet_Text_6:
+	.string "Alola$"
+
+PlayersHouse_1F_EventScript_StarterSet_Text_7:
+	.string "Galar$"
+
+PlayersHouse_1F_EventScript_StarterSet_Text_8:
+	.string "Ninguna$"
+
+PlayersHouse_1F_EventScript_StarterSet_Text_9:
+	.string "Oh, entonces, ¿Quieres los Pokémon más\n"
+	.string "difíciles de criar?$"
+
+PlayersHouse_1F_EventScript_StarterSet_Text_10:
+	.string "¿Cuál quieres entonces?$"
+
+PlayersHouse_1F_EventScript_StarterSet_Text_11:
+	.string "Está bien, le haré saber al Profesor tus\n"
+	.string "preferencias.$"
+
 
 PlayersHouse_1F_Movement_MomApproachDadMale:
 	walk_up

@@ -65,6 +65,14 @@ LittlerootTown_EventScript_SetRivalLeftForRoute103::
 	setflag FLAG_RIVAL_LEFT_FOR_ROUTE103
 	return
 
+LittlerootTown_EventScript_MLMSign::
+	msgbox LittlerootTown_Text_MLMSign
+	closemessage
+	end
+	
+LittlerootTown_Text_MLMSign::
+	.string "CASA DE ESMERALDA$"
+
 LittlerootTown_EventScript_MoveRivalFromOldale::
 	setvar VAR_OLDALE_RIVAL_STATE, 2
 	setflag FLAG_HIDE_OLDALE_TOWN_RIVAL
@@ -511,6 +519,7 @@ LittlerootTown_EventScript_GoSaveBirchTrigger::
 	end
 
 LittlerootTown_EventScript_TownSign::
+	setflag FLAG_SYS_DEXNAV_GET
 	msgbox LittlerootTown_Text_TownSign, MSGBOX_SIGN
 	end
 
@@ -1057,10 +1066,6 @@ LittlerootTown_Text_WearTheseRunningShoes:
 	.string "orgullosa de ti, mi pequeñ{ITOITA}…\p"
 	.string "Pero bueno… {PAUSE 5}No puedo evitar que\n"
 	.string "crezcas, así que… {PAUSE 5}Toma esto, mi amor.$"
-
-LittlerootTown_Text_SwitchShoesWithRunningShoes:
-	.string "{PLAYER} switched shoes with the\n"
-	.string "RUNNING SHOES.$"
 
 LittlerootTown_Text_ExplainRunningShoes:
 	.string "Amor, esa Bici es especial. Es\n"

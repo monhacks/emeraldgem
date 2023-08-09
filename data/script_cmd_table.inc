@@ -237,6 +237,7 @@ gScriptCmdTable::
 	.4byte ScrCmd_dynmultichoice            @ 0xeA
 	.4byte ScrCmd_givecustommon				@ 0xeb
 	.4byte ScrCmd_dynmultipush				@ 0xeC
+	.4byte ScrCmd_showmonpicshiny			@ 0xeD
 
 gScriptCmdTableEnd::
 	.4byte ScrCmd_nop

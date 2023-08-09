@@ -129,6 +129,7 @@ script GraniteCave_1F_Trigger_Bottom {
 
 script GraniteCave_1F_EventScript_Grunts {
 	lockall
+	special (SpawnCameraObject)
 	applymovement (LOCALID_GRUNT_1, Common_Movement_WalkInPlaceDown)
 	waitmovement (0)
 	namebox (Aqua)
@@ -203,6 +204,7 @@ script GraniteCave_1F_EventScript_Grunts {
 		default:
 			call (GraniteCave_1F_EventScript_PlayerNoWayOut1)
 	}
+	setvar (VAR_DEWFORD_TOWN_STATE, 1)
 	namebox (Player)
 	msgbox(format("{COLOR BLUE}(D-demonios...)"))
 	hidenamebox
@@ -317,6 +319,8 @@ script GraniteCave_1F_EventScript_Grunts {
 	hidenamebox
 	closemessage
 	delay (20)
+	applymovement (OBJ_EVENT_ID_CAMERA, GraniteCave_1F_Movement_CameraDown)
+	waitmovement (0)
 	playse (SE_DOOR)
 	addobject (LOCALID_BRAWLY)
 	setobjectxy (LOCALID_BRAWLY, 37, 12)
@@ -352,6 +356,7 @@ script GraniteCave_1F_EventScript_Grunts {
 	msgbox(format("Parece que no van a retirarse, ¿Will ya?\p¡Entonces tendré que obligarlas!"))
 	hidenamebox
 	closemessage
+	applymovement (OBJ_EVENT_ID_CAMERA, GraniteCave_1F_Movement_BrawlyUp2)
 	applymovement (LOCALID_BRAWLY, GraniteCave_1F_Movement_BrawlyUp2)
 	delay (20)
 	fadescreen (FADE_TO_BLACK)
@@ -366,6 +371,7 @@ script GraniteCave_1F_EventScript_Grunts {
 	closemessage
 	playse (SE_SUPER_EFFECTIVE)
 	waitse
+	applymovement (OBJ_EVENT_ID_CAMERA, GraniteCave_1F_Movement_BrawlyDown2)
 	applymovement (LOCALID_BRAWLY, GraniteCave_1F_Movement_BrawlyDown2)
 	delay (20)
 	fadescreen (FADE_FROM_BLACK)
@@ -420,6 +426,7 @@ script GraniteCave_1F_EventScript_Grunts {
 	applymovement(LOCALID_BRAWLY, Common_Movement_FacePlayer)
 	waitmovement (0)
 	delay (16)
+	applymovement (OBJ_EVENT_ID_CAMERA, GraniteCave_1F_Movement_BrawlyWalkPlayer)
 	applymovement (LOCALID_BRAWLY, GraniteCave_1F_Movement_BrawlyWalkPlayer)
 	waitmovement (0)
 	namebox(Brawly)
@@ -452,6 +459,7 @@ script GraniteCave_1F_EventScript_Grunts {
 	playse (SE_DOOR)
 	setflag (FLAG_GRANITE_GRUNTS)
 	setvar (VAR_DEWFORD_TOWN_STATE, 2)
+	special (RemoveCameraObject)
 	release
 	end
 }
@@ -599,6 +607,10 @@ movement GraniteCave_1F_Movement_Grunt2_BlockExit_Top {
 	walk_faster_down * 2
 	walk_faster_right
 	face_up
+}
+
+movement GraniteCave_1F_Movement_CameraDown {
+	walk_slow_down * 4
 }
 
 movement GraniteCave_1F_Movement_Grunt1_BlockExit_Top {

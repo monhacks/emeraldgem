@@ -148,12 +148,27 @@ SlateportCity_EventScript_EnergyGuru::
 
 	.align 2
 SlateportCity_Pokemart_EnergyGuru:
-	.2byte ITEM_PROTEIN
-	.2byte ITEM_IRON
-	.2byte ITEM_CARBOS
-	.2byte ITEM_ZINC
-	.2byte ITEM_CALCIUM
-	.2byte ITEM_HP_UP
+	.2byte ITEM_SWEET_APPLE
+	.2byte ITEM_TART_APPLE
+	.2byte ITEM_CRACKED_POT 
+	.2byte ITEM_CHIPPED_POT
+	.2byte ITEM_GALARICA_CUFF
+	.2byte ITEM_GALARICA_WREATH
+	.2byte ITEM_UPGRADE
+	.2byte ITEM_WHIPPED_DREAM
+	.2byte ITEM_SACHET
+	.2byte ITEM_OVAL_STONE
+	.2byte ITEM_STRAWBERRY_SWEET
+	.2byte ITEM_LOVE_SWEET 
+	.2byte ITEM_BERRY_SWEET 
+	.2byte ITEM_CLOVER_SWEET 
+	.2byte ITEM_FLOWER_SWEET 
+	.2byte ITEM_STAR_SWEET
+	.2byte ITEM_RIBBON_SWEET
+	.2byte ITEM_RED_NECTAR 
+	.2byte ITEM_YELLOW_NECTAR 
+	.2byte ITEM_PINK_NECTAR 
+	.2byte ITEM_PURPLE_NECTAR 
 	.2byte ITEM_NONE
 	release
 	end
@@ -977,7 +992,7 @@ SlateportCity_EventScript_BerryCrushRankingsSign::
 	end
 
 SlateportCity_Text_EnergyGuruSellWhatYouNeed:
-	.string "¡Soy el Gurú Energía!\p¡Compra lo que quieras!$"
+	.string "¡Soy el Gurú Evolución!\p¡Compra lo que quieras!$"
 
 SlateportCity_Text_OhYourPokemon:
 	.string "¿Eh?\n"

@@ -328,6 +328,11 @@ u16 GetCurrentMapWildMonHeaderIdSpecific(u8 nightorday){
 
 				i += nightorday;
 				}
+			if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(OLDALE_RUINS) &&
+                gSaveBlock1Ptr->location.mapNum == MAP_NUM(OLDALE_RUINS)) {
+
+				i += nightorday;
+				}
 			if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ROUTE103) &&
                 gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE103)) {
 

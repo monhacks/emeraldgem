@@ -26,6 +26,9 @@
 #include "trainer_pokemon_sprites.h"
 #include "trig.h"
 #include "util.h"
+#include "data.h"
+#include "event_data.h"
+#include "random.h"
 #include "constants/field_effects.h"
 #include "constants/event_object_movement.h"
 #include "constants/metatile_behaviors.h"
@@ -238,7 +241,7 @@ static void Task_MoveDeoxysRock(u8 taskId);
 static u8 sActiveList[32];
 
 // External declarations
-extern struct CompressedSpritePalette gMonPaletteTable[]; // GF made a mistake and did not extern it as const.
+// extern struct CompressedSpritePalette gMonPaletteTable[]; // GF made a mistake and did not extern it as const.
 extern const struct CompressedSpritePalette gTrainerFrontPicPaletteTable[];
 extern const struct CompressedSpriteSheet gTrainerFrontPicTable[];
 extern u8 *gFieldEffectScriptPointers[];
@@ -919,6 +922,16 @@ u8 CreateMonSprite_PicBox(u16 species, s16 x, s16 y, u8 subpriority)
         return spriteId;
 }
 
+u8 CreateMonSprite_PicBoxShiny2(u16 species, u32 valueForShinyness, u32 shinyness, s16 x, s16 y, u8 subpriority)
+{
+	s32 spriteId = CreateMonPicSprite(species, 0, 0x8000, TRUE, x, y, 0, gMonShinyPaletteTable[species].tag);
+    PreservePaletteInWeather(IndexOfSpritePaletteTag(gMonShinyPaletteTable[species].tag) + 0x10);
+    if (spriteId == 0xFFFF)
+        return MAX_SPRITES;
+    else
+        return spriteId;
+}
+
 u8 CreateMonSprite_FieldMove(u16 species, u32 otId, u32 personality, s16 x, s16 y, u8 subpriority)
 {
     const struct CompressedSpritePalette *spritePalette = GetMonSpritePalStructFromOtIdPersonality(species, otId, personality);
@@ -928,6 +941,76 @@ u8 CreateMonSprite_FieldMove(u16 species, u32 otId, u32 personality, s16 x, s16 
         return MAX_SPRITES;
     else
         return spriteId;
+}
+
+u8 CreateMonSprite_PicBoxShiny(u16 species, u8 flagValue, s16 x, s16 y, u8 subpriority)
+{
+	u8 spriteId;
+	u32 valueForShinyness, totalRerolls, shinyness;
+	if (((VarGet(VAR_SHINY_TREECKO) < 1 && flagValue == 0) || (VarGet(VAR_SHINY_TORCHIC) < 1 && flagValue == 1) || (VarGet(VAR_SHINY_MUDKIP) < 1 && flagValue == 2)))
+	{
+		valueForShinyness = gSaveBlock2Ptr->playerTrainerId[0]
+					 | (gSaveBlock2Ptr->playerTrainerId[1] << 8)
+					 | (gSaveBlock2Ptr->playerTrainerId[2] << 16)
+					 | (gSaveBlock2Ptr->playerTrainerId[3] << 24);
+		switch (gSaveBlock2Ptr->optionsShinyOdds)
+		{
+			case 0:
+				totalRerolls = 1;
+				break;
+			case 1:
+				totalRerolls = 3;
+				break;
+			case 2:
+				totalRerolls = 5;
+				break;
+			case 3:
+				totalRerolls = 8000;
+				break;
+			default:
+				totalRerolls = 3;
+		}
+
+		while ((GET_SHINY_VALUE(valueForShinyness, shinyness)) >= SHINY_ODDS && (totalRerolls > 0))
+		{
+			shinyness = Random32();
+			totalRerolls--;
+		}
+		if ((GET_SHINY_VALUE(valueForShinyness, shinyness)) < SHINY_ODDS)
+		{
+			switch (flagValue){
+				case 0:
+					VarSet(VAR_SHINY_TREECKO, species);
+					break;
+				case 1:
+					VarSet(VAR_SHINY_TORCHIC, species);
+					break;
+				case 2:
+					VarSet(VAR_SHINY_MUDKIP, species);
+					break;
+			}	
+		}
+		else
+		{
+			switch (flagValue){
+				case 0:
+					VarSet(VAR_SHINY_TREECKO, species+1);
+					break;
+				case 1:
+					VarSet(VAR_SHINY_TORCHIC, species+1);
+					break;
+				case 2:
+					VarSet(VAR_SHINY_MUDKIP, species+1);
+					break;
+			}
+		}
+	}
+	if (VarGet(VAR_SHINY_TREECKO) == species || VarGet(VAR_SHINY_TORCHIC) == species || VarGet(VAR_SHINY_MUDKIP) == species){
+		CreateMonSprite_PicBoxShiny2(species, valueForShinyness, shinyness, x, y, subpriority);
+	}
+	else {
+		CreateMonSprite_PicBox(species, x, y, subpriority);
+	}
 }
 
 void FreeResourcesAndDestroySprite(struct Sprite *sprite, u8 spriteId)

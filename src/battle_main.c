@@ -4365,14 +4365,19 @@ static void HandleTurnActionSelectionState(void)
                     break;
                 }
 
-                if (!(gBattleTypeFlags & BATTLE_TYPE_TRAINER)
-                    && gBattleResources->bufferB[gActiveBattler][1] == B_ACTION_RUN_PROMPT)
+                if (gBattleResources->bufferB[gActiveBattler][1] == B_ACTION_RUN_PROMPT)
                 {
-                    gSelectionBattleScripts[gActiveBattler] = BattleScript_RunPrompt;
-                    gBattleCommunication[gActiveBattler] = STATE_SELECTION_SCRIPT_MAY_RUN;
-                    *(gBattleStruct->selectionScriptFinished + gActiveBattler) = FALSE;
-                    *(gBattleStruct->stateIdAfterSelScript + gActiveBattler) = STATE_BEFORE_ACTION_CHOSEN;
-                    return;
+					if (!(gBattleTypeFlags & BATTLE_TYPE_TRAINER)){
+						gSelectionBattleScripts[gActiveBattler] = BattleScript_RunPrompt;
+						gBattleCommunication[gActiveBattler] = STATE_SELECTION_SCRIPT_MAY_RUN;
+						*(gBattleStruct->selectionScriptFinished + gActiveBattler) = FALSE;
+						*(gBattleStruct->stateIdAfterSelScript + gActiveBattler) = STATE_BEFORE_ACTION_CHOSEN;
+						return;
+					}
+					else {
+						BattleScriptExecute(BattleScript_PrintCantRunFromTrainer);
+						gBattleCommunication[gActiveBattler] = STATE_BEFORE_ACTION_CHOSEN;
+					}
                 }
                 else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER
                     && gBattleTypeFlags & (BATTLE_TYPE_FRONTIER | BATTLE_TYPE_TRAINER_HILL)
@@ -5604,13 +5609,13 @@ void SetTypeBeforeUsingMove(u16 move, u8 battlerAtk)
     {
         if (WEATHER_HAS_EFFECT)
         {
-            if (gBattleWeather & B_WEATHER_RAIN && holdEffect != HOLD_EFFECT_UTILITY_UMBRELLA)
+            if ((gBattleWeather & B_WEATHER_RAIN && holdEffect != HOLD_EFFECT_UTILITY_UMBRELLA) || holdEffect == HOLD_EFFECT_DAMP_ROCK)
                 gBattleStruct->dynamicMoveType = TYPE_WATER | F_DYNAMIC_TYPE_2;
-            else if (gBattleWeather & B_WEATHER_SANDSTORM)
+            else if ((gBattleWeather & B_WEATHER_SANDSTORM) || holdEffect == HOLD_EFFECT_SMOOTH_ROCK)
                 gBattleStruct->dynamicMoveType = TYPE_ROCK | F_DYNAMIC_TYPE_2;
-            else if (gBattleWeather & B_WEATHER_SUN && holdEffect != HOLD_EFFECT_UTILITY_UMBRELLA)
+            else if ((gBattleWeather & B_WEATHER_SUN && holdEffect != HOLD_EFFECT_UTILITY_UMBRELLA) || holdEffect == HOLD_EFFECT_HEAT_ROCK)
                 gBattleStruct->dynamicMoveType = TYPE_FIRE | F_DYNAMIC_TYPE_2;
-            else if (gBattleWeather & B_WEATHER_HAIL)
+            else if ((gBattleWeather & B_WEATHER_HAIL  || holdEffect == HOLD_EFFECT_ICY_ROCK))
                 gBattleStruct->dynamicMoveType = TYPE_ICE | F_DYNAMIC_TYPE_2;
             else
                 gBattleStruct->dynamicMoveType = TYPE_NORMAL | F_DYNAMIC_TYPE_2;

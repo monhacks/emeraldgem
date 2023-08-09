@@ -184,6 +184,7 @@ DewfordTown_OnFrameWally::
 	hidenamebox
 	fadescreen FADE_TO_BLACK
 	setflag FLAG_HIDE_WALLY_DEWFORD_TOWN
+	clearflag FLAG_HIDE_WALLY_RUSTBORO
 	removeobject LOCALID_WALLY
 	delay 16
 	fadescreen FADE_FROM_BLACK

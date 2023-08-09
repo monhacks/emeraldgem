@@ -3711,7 +3711,7 @@ u8 AtkCanceller_UnableToUseMove(void)
             if (gBattleMons[gBattlerAttacker].status2 & STATUS2_INFATUATION)
             {
                 gBattleScripting.battler = CountTrailingZeroBits((gBattleMons[gBattlerAttacker].status2 & STATUS2_INFATUATION) >> 0x10);
-                if (Random() & 1)
+                if (Random() % 100 >= 25)
                 {
                     BattleScriptPushCursor();
                 }
@@ -4062,17 +4062,17 @@ u8 TryWeatherFormChange(u8 battler)
             SET_BATTLER_TYPE(battler, TYPE_NORMAL);
             ret = CASTFORM_NORMAL + 1;
         }
-        else if (gBattleWeather & B_WEATHER_SUN && holdEffect != HOLD_EFFECT_UTILITY_UMBRELLA && !IS_BATTLER_OF_TYPE(battler, TYPE_FIRE))
+        else if ((gBattleWeather & B_WEATHER_SUN && holdEffect != HOLD_EFFECT_UTILITY_UMBRELLA && !IS_BATTLER_OF_TYPE(battler, TYPE_FIRE)))
         {
             SET_BATTLER_TYPE(battler, TYPE_FIRE);
             ret = CASTFORM_FIRE + 1;
         }
-        else if (gBattleWeather & B_WEATHER_RAIN && holdEffect != HOLD_EFFECT_UTILITY_UMBRELLA && !IS_BATTLER_OF_TYPE(battler, TYPE_WATER))
+        else if ((gBattleWeather & B_WEATHER_RAIN && holdEffect != HOLD_EFFECT_UTILITY_UMBRELLA && !IS_BATTLER_OF_TYPE(battler, TYPE_WATER)))
         {
             SET_BATTLER_TYPE(battler, TYPE_WATER);
             ret = CASTFORM_WATER + 1;
         }
-        else if (gBattleWeather & B_WEATHER_HAIL && !IS_BATTLER_OF_TYPE(battler, TYPE_ICE))
+        else if ((gBattleWeather & B_WEATHER_HAIL && !IS_BATTLER_OF_TYPE(battler, TYPE_ICE)))
         {
             SET_BATTLER_TYPE(battler, TYPE_ICE);
             ret = CASTFORM_ICE + 1;
@@ -7699,6 +7699,7 @@ u8 IsMonDisobedient(void)
     s32 rnd;
     s32 calc;
     u8 obedienceLevel = 0;
+	u16 levelDifference = 0;
 
     if (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK))
         return 0;
@@ -7728,12 +7729,17 @@ u8 IsMonDisobedient(void)
 	if (FlagGet(FLAG_BADGE06_GET))
 		obedienceLevel = 55;
 	if (FlagGet(FLAG_BADGE07_GET))
-		obedienceLevel = 70;
+		obedienceLevel = 65;
 
-
+	levelDifference = gBattleMons[gBattlerAttacker].level - obedienceLevel;
     if (gBattleMons[gBattlerAttacker].level <= obedienceLevel)
         return 0;
-	if (gBattleMons[gBattlerAttacker].level > obedienceLevel && (Random() % 100 >= ((gBattleMons[gBattlerAttacker].level - obedienceLevel) + 5)))
+	if (gBattleMons[gBattlerAttacker].level > obedienceLevel && (levelDifference <= 5))
+	{
+		if (Random() % 100 >= levelDifference)
+			return 0;
+	}
+	if (gBattleMons[gBattlerAttacker].level > obedienceLevel && (Random() % 100 >= (levelDifference + 5)))
 		return 0;
     rnd = (Random() & 255);
     calc = (gBattleMons[gBattlerAttacker].level + obedienceLevel) * rnd >> 8;
@@ -8159,6 +8165,7 @@ static u16 CalcMoveBasePower(u16 move, u8 battlerAtk, u8 battlerDef)
     u32 i;
     u16 basePower = gBattleMoves[move].power;
     u32 weight, hpFraction, speed;
+	u16 holdEffect = GetBattlerHoldEffect(battlerAtk, TRUE);
 
     if (gBattleStruct->zmove.active)
         return gBattleMoves[gBattleStruct->zmove.baseMoves[battlerAtk]].zMovePower;
@@ -8219,8 +8226,9 @@ static u16 CalcMoveBasePower(u16 move, u8 battlerAtk, u8 battlerDef)
             basePower *= 2;
         break;
     case EFFECT_WEATHER_BALL:
-        if (gBattleWeather & B_WEATHER_ANY && WEATHER_HAS_EFFECT)
-            basePower *= 2;
+			if ((gBattleWeather & B_WEATHER_ANY && WEATHER_HAS_EFFECT) || (holdEffect == HOLD_EFFECT_HEAT_ROCK
+			|| holdEffect == HOLD_EFFECT_DAMP_ROCK || holdEffect == HOLD_EFFECT_ICY_ROCK || holdEffect == HOLD_EFFECT_SMOOTH_ROCK))
+				basePower *= 2;
         break;
     case EFFECT_PURSUIT:
         if (gActionsByTurnOrder[GetBattlerTurnOrderNum(gBattlerTarget)] == B_ACTION_SWITCH)
@@ -8565,7 +8573,7 @@ static u32 CalcMoveBasePowerAfterModifiers(u16 move, u8 battlerAtk, u8 battlerDe
         {
             u32 partnerAbility = GetBattlerAbility(BATTLE_PARTNER(battlerDef));
             if (partnerAbility == ABILITY_PLUS || partnerAbility == ABILITY_MINUS)
-                MulModifier(&modifier, UQ_4_12(0.5));
+                MulModifier(&modifier, UQ_4_12(0.8));
         }
 		break;
     case ABILITY_DRY_SKIN:

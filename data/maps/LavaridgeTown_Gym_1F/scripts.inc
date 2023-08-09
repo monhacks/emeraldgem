@@ -23,6 +23,7 @@ LavaridgeTown_Gym_1F_EventScript_WallyEventSetUp::
 LavaridgeTown_Gym_1F_EventScript_WallyEvent::
 	lockall
 	setflag FLAG_HIDE_MAP_NAME_POPUP
+	setflag FLAG_WALLY_QUEST_SEEN
 	setobjectxy 1, 12, 11
 	applymovement 1, Common_Movement_FaceRight
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceLeft
@@ -112,6 +113,7 @@ LavaridgeTown_Gym_1F_EventScript_WallyEvent::
 	fadescreen FADE_TO_BLACK
 	delay 16
 	setflag FLAG_HIDE_WALLY_LAVARIDGE
+	clearflag FLAG_HIDE_WALLY_FORTREE
 	removeobject 7
 	fadescreen FADE_FROM_BLACK
 	delay 24
@@ -183,6 +185,7 @@ LavaridgeTown_Gym_1F_EventScript_FlanneryDefeated::
 	message LavaridgeTown_Gym_1F_Text_ReceivedHeatBadge
 	waitmessage
 	call Common_EventScript_PlayGymBadgeFanfare
+	namebox Flannery
 	msgbox LavaridgeTown_Gym_1F_Text_ExplainHeatBadgeTakeThis, MSGBOX_DEFAULT
 	setflag FLAG_WHITEOUT_TO_LAVARIDGE
 	setflag FLAG_DEFEATED_LAVARIDGE_GYM
@@ -195,20 +198,48 @@ LavaridgeTown_Gym_1F_EventScript_FlanneryDefeated::
 	setvar VAR_LAVARIDGE_TOWN_STATE, 1
 	call LavaridgeTown_Gym_1F_EventScript_GiveOverheat
 	closemessage
-	delay 30
-	playfanfare MUS_REGISTER_MATCH_CALL
-	msgbox LavaridgeTown_Gym_1F_Text_RegisteredFlannery, MSGBOX_DEFAULT
+	hidenamebox
+	playfanfare MUS_OBTAIN_TMHM
+	giveitem ITEM_MEGA_RING
 	waitfanfare
+	delay 30
+	namebox Flannery
+	msgbox LavaridgeTown_Gym_1F_Text_ExplainMegaRing, MSGBOX_DEFAULT
 	closemessage
+	hidenamebox
+	call LavaridgeTown_Gym_1F_EventScript_GiveMegaStone
 	delay 30
 	setflag FLAG_ENABLE_FLANNERY_MATCH_CALL
 	release
 	end
 
+LavaridgeTown_Gym_1F_EventScript_GiveMegaStone::
+	switch VAR_STARTER_MON
+	case 0, LavaridgeTown_Gym_1F_EventScript_GiveMegaStone_2
+	case 1, LavaridgeTown_Gym_1F_EventScript_GiveMegaStone_3
+	case 2, LavaridgeTown_Gym_1F_EventScript_GiveMegaStone_4
+	return
+
+LavaridgeTown_Gym_1F_EventScript_GiveMegaStone_2:
+	giveitem ITEM_SCEPTILITE, 1
+	return
+
+LavaridgeTown_Gym_1F_EventScript_GiveMegaStone_3:
+	giveitem ITEM_BLAZIKENITE, 1
+	return
+
+LavaridgeTown_Gym_1F_EventScript_GiveMegaStone_4:
+	giveitem ITEM_SWAMPERTITE, 1
+	return
+
+
 LavaridgeTown_Gym_1F_EventScript_GiveOverheat2::
 	giveitem ITEM_TM50
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	namebox Flannery
 	msgbox LavaridgeTown_Gym_1F_Text_ExplainOverheat, MSGBOX_DEFAULT
+	closemessage
+	hidenamebox
 	setflag FLAG_RECEIVED_TM50
 	release
 	end
@@ -216,7 +247,10 @@ LavaridgeTown_Gym_1F_EventScript_GiveOverheat2::
 LavaridgeTown_Gym_1F_EventScript_GiveOverheat::
 	giveitem ITEM_TM50
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_BagIsFull
+	namebox Flannery
 	msgbox LavaridgeTown_Gym_1F_Text_ExplainOverheat, MSGBOX_DEFAULT
+	closemessage
+	hidenamebox
 	setflag FLAG_RECEIVED_TM50
 	return
 
@@ -408,7 +442,7 @@ LavaridgeTown_Gym_1F_EventScript_WallyEvent_Text_7:
 	.string "Me lastimó, me causó dolor. Y eso sólo\l"
 	.string "empeoraba.\p"
 	.string "No fue hasta que aprendí que está bien\n"
-	.string "tener límites, que pude comensar a ser\l"
+	.string "tener límites, que pude comenzar a ser\l"
 	.string "yo misma más, a realmente mejorar, a mi\l"
 	.string "propio ritmo, con mis propios métodos.\p"
 	.string "Y mírame ahora, soy la {COLOR RED}Líder de Gimnasio{COLOR DARK_GRAY}\n"
@@ -471,7 +505,7 @@ LavaridgeTown_Gym_1F_Text_GymGuideAdvice:
 	.string "Sistema de Almacenamiento Pokémon...\l"
 	.string "¡No tiene una Regla Especial!\p"
 	.string "Sin embargo, cuando pises uno de esos\n"
-	.string "posos de arena... ¡Existe la posibilidad\l"
+	.string "pozos de arena... ¡Existe la posibilidad\l"
 	.string "de que alguno de tus Pokémon resulte\l"
 	.string "quemado, si no es que todos!\p"
 	.string "¡Y hay algunos Entrenadores están\n"
@@ -588,70 +622,70 @@ LavaridgeTown_Gym_B1F_Text_EliPostBattle:
 	.string "Hehehehe.$"
 
 LavaridgeTown_Gym_1F_Text_FlanneryIntro:
-	.string "Welcome… No, wait.\p"
-	.string "Puny TRAINER, how good to see you've\n"
-	.string "made it here!\p"
-	.string "I have been entrusted with the…\n"
-	.string "No, wait.\p"
-	.string "I am FLANNERY, and I'm the GYM\n"
-	.string "LEADER here!\p"
-	.string "Uh…\n"
-	.string "Dare not underestimate me, though\l"
-	.string "I have been LEADER only a short time!\p"
-	.string "With skills inherited from my grand-\n"
-	.string "father, I shall, uh…demonstrate the\l"
-	.string "hot moves we have honed on this land!$"
+	.string "Bienvenid{AO}… No, espera, no eres-\p"
+	.string "Entrenador{A} inútil, ¿Cómo osas\n"
+	.string "molestar a-?\p"
+	.string "No, olvida todo eso, eh…\p"
+	.string "¡Soy Flannery, la Líder de Gimnasio!\p"
+	.string "Em…\n"
+	.string "He tenido el puesto por poco tiempo,\l"
+	.string "¡Y aún así, mi poder es inconmesurable!\p"
+	.string "¡Prepárate a ser quemad{OA} por\nel poder que mi bisabuelo me otorgó!$"
 
 LavaridgeTown_Gym_1F_Text_FlanneryDefeat:
-	.string "Oh…\n"
-	.string "I guess I was trying too hard…\p"
-	.string "I… I've only recently become\n"
-	.string "a GYM LEADER.\p"
-	.string "I tried too hard to be someone\n"
-	.string "I'm not.\p"
-	.string "I have to do things my natural way. If\n"
-	.string "I don't, my POKéMON will be confused.\p"
-	.string "Thanks for teaching me that.\n"
-	.string "For that, you deserve this.$"
+	.string "-COF, COF-\n Em…\l"
+	.string "Supongo que me sobrepasé un poco\lpor accidente…\p"
+	.string "Creí ya haber aprendido esa\n"
+	.string "lección, pero ser una nueva\lLíder me puso mucha presión y\lsupongo que lo olvidé:\p"
+	.string "Tengo que ir a mi propio ritmo,\n"
+	.string "para no sobrepasarme, y ser fiel\l"
+	.string "a mí misma. Gracias por recordármelo.\p"
+	.string "Como recompensa, ten esto.$"
 
 LavaridgeTown_Gym_1F_Text_ReceivedHeatBadge:
-	.string "{PLAYER} received the HEAT BADGE\n"
-	.string "from FLANNERY.$"
+	.string "{PLAYER} recibió la Medalla Calor\n"
+	.string "de Flannery.$"
 
 LavaridgeTown_Gym_1F_Text_ExplainHeatBadgeTakeThis:
-	.string "If you have a HEAT BADGE, all POKéMON\n"
-	.string "up to Level 50, even those you get in\l"
-	.string "trades from other people, will obey\l"
-	.string "you completely.\p"
-	.string "And, it lets POKéMON use the HM move\n"
-	.string "STRENGTH outside of battle.\p"
-	.string "This is a token of my appreciation.\n"
-	.string "Don't be shy about taking it!$"
+	.string "Con esa Medalla, Pokémon de hasta\n"
+	.string "nivel 40 te escucharán y obedecerán\l"
+	.string "sin problema alguno.\p"
+	.string "Y también podrás usar la MO Fuerza.\p"
+	.string "Sin embargo, ¡No es todo lo que\n"
+	.string "te daré como recompensa!$"
 
 LavaridgeTown_Gym_1F_Text_ExplainOverheat:
-	.string "That TM50 contains OVERHEAT.\p"
-	.string "That move inflicts serious damage on\n"
-	.string "the opponent.\p"
-	.string "But it also sharply cuts the SP. ATK\n"
-	.string "of the POKéMON using it. It might not\l"
-	.string "be suitable for longer battles.$"
+	.string "Es la MT 50 Sofoco.\p"
+	.string "Es un poderoso movimiento que\nbaja tu Ataque Especial al usarlo.\p"
+	.string "Pero basta ya de todas esas\n"
+	.string "formalidades, la verdadera\l"
+	.string "recompensa que te daré es esta.$"
+
+LavaridgeTown_Gym_1F_Text_ExplainMegaRing:
+	.string "¡Es una Mega Pulsera!\p"
+	.string "Con ella, podrás acceder a la\npoderosísima Mega Evolución de\lla que ya fuiste testigo con\lmi Mega-Camerupt.\p"
+	.string "Para poder usarla, requieres un\n"
+	.string "Pokémon capaz de Megaevolucionar,\l"
+	.string "y su respectiva Mega-Piedra.\pMira, te daré esta para que pruebes\nlas Megaevoluciones ahora.$"
 
 LavaridgeTown_Gym_1F_Text_RegisteredFlannery:
-	.string "Registered GYM LEADER FLANNERY\n"
-	.string "in the POKéNAV.$"
+	.string "Después de todas esas explicaciones,\n"
+	.string "registraste a Flannery en el PokéNav.$"
 
 LavaridgeTown_Gym_1F_Text_FlanneryPostBattle:
-	.string "Your power reminds me of someone…\p"
-	.string "Oh! I know! You battle like NORMAN,\n"
-	.string "the GYM LEADER of PETALBURG.$"
+	.string "Tu poder me recuerda a alguien…\p"
+	.string "¡Ah! ¡Que cabeza la mía!\n"
+	.string "¡Batallas como tu padre, Norman!$"
 
 LavaridgeTown_Gym_1F_Text_GymStatue:
-	.string "LAVARIDGE TOWN POKéMON GYM$"
+	.string "Gimnasio Pokémon de Lavaridge\p"
+	.string "Entrenadores Certificados:\n"
+	.string "Leaf$"
 
 LavaridgeTown_Gym_1F_Text_GymStatueCertified:
-	.string "LAVARIDGE TOWN POKéMON GYM\p"
-	.string "FLANNERY'S CERTIFIED TRAINERS:\n"
-	.string "{PLAYER}$"
+	.string "Gimnasio Pokémon de Lavaridge\p"
+	.string "Entrenadores Certificados:\n"
+	.string "Leaf\l{PLAYER}$"
 
 LavaridgeTown_Gym_1F_Text_FlanneryPreRematch:
 	.string "FLANNERY: Losing a battle isn't going\n"

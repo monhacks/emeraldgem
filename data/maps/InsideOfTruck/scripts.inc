@@ -20,6 +20,13 @@ InsideOfTruck_EventScript_SetIntroFlags::
 	setflag FLAG_HIDE_ZIGZA_102
 	setflag FLAG_HIDE_BALL_102
 	setflag FLAG_BALL_CATCH_102
+	setflag FLAG_HIDE_PETALBURG_CITY_WALLYS_DAD
+	setflag FLAG_HIDE_WALLY_RUSTBORO
+	setflag FLAG_HIDE_WALLY_DEWFORD_TOWN
+	setflag FLAG_HIDE_WALLY_FORTREE
+	setflag FLAG_HIDE_WALLY_111
+	setflag FLAG_HIDE_WALLY_LAVARIDGE
+	setflag FLAG_HIDE_PETALBURG_CITY_WALLY
 	checkplayergender
 	goto_if_eq VAR_RESULT, MALE, InsideOfTruck_EventScript_SetIntroFlagsMale
 	goto_if_eq VAR_RESULT, FEMALE, InsideOfTruck_EventScript_SetIntroFlagsFemale

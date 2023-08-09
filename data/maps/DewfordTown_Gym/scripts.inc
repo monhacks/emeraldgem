@@ -1,3 +1,4 @@
+.set LOCALID_GUIDE, 5
 DewfordTown_Gym_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, DewfordTown_Gym_OnTransition
 	.byte 0
@@ -17,6 +18,21 @@ DewfordTown_Gym_EventScript_SetFlashLevel::
 	goto_if_eq VAR_0x8000, 4, DewfordTown_Gym_EventScript_SetFlashLevel3
 	goto_if_eq VAR_0x8000, 5, DewfordTown_Gym_EventScript_SetFlashLevel2
 	goto DewfordTown_Gym_EventScript_SetFlashLevel1
+
+DewfordTown_Gym_EventScript_GymGuideTrigger::
+	setvar VAR_TEMP_0, 1
+	goto_if_defeated TRAINER_BRAWLY_1, DewfordTown_Gym_EventScript_GymGuideTriggerEnd
+	lockall
+	playse SE_PIN
+	applymovement LOCALID_GUIDE, Common_Movement_ExclamationMark
+	waitmovement 0
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceUp
+	waitmovement 0
+	goto DewfordTown_Gym_EventScript_GymGuide
+	end
+
+DewfordTown_Gym_EventScript_GymGuideTriggerEnd::
+	end
 
 DewfordTown_Gym_EventScript_SetLightsOn::
 	setflashlevel 0
@@ -138,6 +154,7 @@ DewfordTown_Gym_EventScript_Brawly::
 	goto_if_set FLAG_BADGE02_GET, DewfordTown_Gym_EventScript_Brawly_Rematch
 	setflag FLAG_STARTED_BOSS
 	special SavePlayerParty
+	special HealPlayerParty
 	deletepokemon 1
 	trainerbattle_single TRAINER_BRAWLY_1, DewfordTown_Gym_Text_BrawlyIntro, DewfordTown_Gym_Text_BrawlyDefeat, DewfordTown_Gym_EventScript_BrawlyDefeated, NO_MUSIC
 	goto_if_unset FLAG_RECEIVED_TM08, DewfordTown_Gym_EventScript_GiveBulkUp2
@@ -430,12 +447,12 @@ DewfordTown_Gym_EventScript_LilithBrightenRoom::
 	end
 
 DewfordTown_Gym_EventScript_GymGuide::
-	lock
+	lockall
 	faceplayer
 	msgbox DewfordTown_Gym_Text_GymGuideAdvice, MSGBOX_DEFAULT
 	call Common_EventScript_OutOfCenterPartyHeal
 	msgbox DewfordTown_Gym_Text_GymGuidePostVictory, MSGBOX_DEFAULT
-	release
+	releaseall
 	end
 
 DewfordTown_Gym_EventScript_LeftGymStatue::
@@ -461,89 +478,78 @@ DewfordTown_Gym_EventScript_GymStatue::
 	end
 
 DewfordTown_Gym_Text_GymGuideAdvice:
-	.string "¡Hola, {PLAYER}!\pComo sabrás, cada Gimnasio tiene un\nrequisito o condición para\lpoder ser enfrentado.\p"
-	.string "Este no es la excepción.\pLa condición que has de cumplir\naquí es simple:\l{COLOR BLUE}Derrota al Líder del Gimnasio usando\lsólo el primer Pokémon de tu Equipo{COLOR DARK_GRAY}.\p"
-	.string "No hay otra restricción, se te permite\nusar cuantos objetos quieras.\lIncluso, ¡Curaré a tus Pokémon ahora\lpara que no te preocupes por eso!$"
+	.string "¡Hola, {PLAYER}!\p"
+	.string "Como sabrás, casi todos los Gimnasios\n"
+	.string "tienen una condición para poder ser\l"
+	.string "enfrentados.\p"
+	.string "Este no es la excepción.\p"
+	.string "La condición de aquí es simple:\n"
+	.string "{COLOR BLUE}Derrota al Líder del Gimnasio usando\l"
+	.string "sólo el primer Pokémon de tu Equipo{COLOR DARK_GRAY}.\p"
+	.string "No hay otra restricción, se te permite\n"
+	.string "usar cuantos objetos quieras.\l"
+	.string "Incluso, ¡Curaré a tus Pokémon ahora\l"
+	.string "para que no te preocupes por eso!$"
 
 DewfordTown_Gym_Text_GymGuidePostVictory:
 	.string "¡Buena suerte, Joven Promesa!$"
 
 DewfordTown_Gym_Text_TakaoIntro:
-	.string "Might is right!\n"
-	.string "Come on!$"
+	.string "¡Poder, poder, poder!\n"
+	.string "¡Poder es querer!$"
 
 DewfordTown_Gym_Text_TakaoDefeat:
-	.string "Not enough power…$"
+	.string "Oh…$"
 
 DewfordTown_Gym_Text_TakaoPostBattle:
-	.string "Your skill overcame my strength!\n"
-	.string "Your technique is commendable!$"
+	.string "¡Tu poder es mayor que el mío!\n"
+	.string "No me sorprende, honestamente$"
 
 DewfordTown_Gym_Text_JocelynIntro:
-	.string "There's no need for BRAWLY to be\n"
-	.string "involved!\p"
-	.string "I'll crush you!$"
+	.string "Terminemos con esto.$"
 
 DewfordTown_Gym_Text_JocelynDefeat:
-	.string "But… How?\n"
-	.string "How could I lose so easily?$"
+	.string "Ah, bien.$"
 
 DewfordTown_Gym_Text_JocelynPostBattle:
-	.string "I'm not going to waste this loss.\n"
-	.string "I'll use it to motivate me to train!\p"
-	.string "One day I'll become a GYM LEADER…\p"
-	.string "No, I'll become the POKéMON LEAGUE\n"
-	.string "CHAMPION!$"
+	.string "Un día, seré la Campeona,\nespera y verás.$"
 
 DewfordTown_Gym_Text_LauraIntro:
-	.string "Don't you dare brush me off!\n"
-	.string "It's not my fault if you cry!$"
+	.string "¡No es mi culpa si te\nhago llorar!$"
 
 DewfordTown_Gym_Text_LauraDefeat:
-	.string "Waaaaaaah!\n"
-	.string "I lost!$"
+	.string "¡BUAAAHHHH!\n"
+	.string "¡Perdí!$"
 
 DewfordTown_Gym_Text_LauraPostBattle:
-	.string "I battle in the dark to make my heart\n"
-	.string "stronger.\p"
-	.string "But because it's so dark, I can never\n"
-	.string "see BRAWLY's face…$"
+	.string "Me da miedo la oscuridad…$"
 
 DewfordTown_Gym_Text_LilithIntro:
-	.string "Ufufu…\n"
-	.string "Are you stumbling around in the dark?$"
+	.string "¿Eres un fantasma?$"
 
 DewfordTown_Gym_Text_LilithDefeat:
-	.string "Oh, you…\n"
-	.string "I don't want to know you!$"
+	.string "¡No quiero ni ver tu\nespantosa cara!$"
 
 DewfordTown_Gym_Text_LilithPostBattle:
-	.string "You deserve to stay lost and end up\n"
-	.string "back at the entrance again!$"
+	.string "¡Espero que tengas un\naccidente fatal!$"
 
 DewfordTown_Gym_Text_BrendenIntro:
-	.string "I'll show you the gumption of\n"
-	.string "a sailing man!$"
+	.string "¡Te mostaré el poder que tienen\nlos hombres que se enfrentan\lal océano a diario!$"
 
 DewfordTown_Gym_Text_BrendenDefeat:
-	.string "How'd this happen?\n"
-	.string "It's not like me to lose this way!$"
+	.string "Interesante. Tu poder\npodrá derrotar a Brawly.$"
 
 DewfordTown_Gym_Text_BrendenPostBattle:
-	.string "Oh, aye! You're worthy of seeing\n"
-	.string "our GYM LEADER.$"
+	.string "Y yo que creía que después de...\nEm... Aguantar a Brawly tantas veces...\p¡Mi cuerpo no podría sentir\ndolor o cansarse!\p¡Estoy tan cansado y adolorido por\nesa derrota aplastante!$"
 
 DewfordTown_Gym_Text_CristianIntro:
-	.string "If you mean to pass, it has to be\n"
-	.string "through me!$"
+	.string "¡Si quieres pasar tendrás que\nderrotarme a mí!$"
 
 DewfordTown_Gym_Text_CristianDefeat:
-	.string "Grrrrr!\n"
-	.string "Vastly overpowered!$"
+	.string "¿Ya perdí?$"
 
 DewfordTown_Gym_Text_CristianPostBattle:
-	.string "You win!\n"
-	.string "Go after that BADGE!$"
+	.string "Debería hacerle caso a Brawly\nde no confiarme de más.$"
 
 DewfordTown_Gym_Text_BrawlyIntro:
 	.string "¡Soy Brawly!\n"
@@ -557,7 +563,7 @@ DewfordTown_Gym_Text_BrawlyIntro:
 DewfordTown_Gym_Text_BrawlyDefeat:
 	.string "¡Yeah! ¡No me esperaba un poder\n"
 	.string "de salpicadura tan abrumador!\p"
-	.string "¡Hell yeah!\p"
+	.string "¡Let's go!\p"
 	.string "¡Mereces esta Medalla!$"
 
 DewfordTown_Gym_Text_ReceivedKnuckleBadge:

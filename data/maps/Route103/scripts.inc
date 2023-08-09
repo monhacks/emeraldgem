@@ -21,8 +21,8 @@ Route103_Transition_MoveCamper:
 	
 
 Route103_EventScript_OpenAlteringCave::
-	setmetatile 45, 5, METATILE_General_CaveEntrance_Top, TRUE
-	setmetatile 45, 6, METATILE_General_CaveEntrance_Bottom, FALSE
+	setmetatile 51, 5, METATILE_General_CaveEntrance_Top, TRUE
+	setmetatile 51, 6, METATILE_General_CaveEntrance_Bottom, FALSE
 	return
 
 Route103_EventScript_Rival::
@@ -52,7 +52,7 @@ Route103_EventScript_RivalMay::
 	end
 
 Route103_EventScript_RivalBrendan::
-	msgbox Route103_Text_BrendanRoute103Pokemon, MSGBOX_DEFAULT
+	msgbox Route103_Text_MayRoute103Pokemon, MSGBOX_DEFAULT
 	closemessage
 	playbgm MUS_ENCOUNTER_BRENDAN, TRUE
 	applymovement LOCALID_RIVAL, Common_Movement_FacePlayer
@@ -61,7 +61,7 @@ Route103_EventScript_RivalBrendan::
 	waitmovement 0
 	applymovement LOCALID_RIVAL, Common_Movement_Delay48
 	waitmovement 0
-	msgbox Route103_Text_BrendanLetsBattle, MSGBOX_DEFAULT
+	msgbox Route103_Text_MayLetsBattle, MSGBOX_DEFAULT
 	switch VAR_STARTER_MON
 	case 0, Route103_EventScript_StartBrendanBattleTreecko
 	case 1, Route103_EventScript_StartBrendanBattleTorchic
@@ -84,17 +84,17 @@ Route103_EventScript_StartMayBattleMudkip::
 	end
 
 Route103_EventScript_StartBrendanBattleTreecko::
-	trainerbattle_no_intro TRAINER_BRENDAN_ROUTE_103_TREECKO, Route103_Text_BrendanDefeated
+	trainerbattle_no_intro TRAINER_BRENDAN_ROUTE_103_TREECKO, Route103_Text_MayDefeated
 	goto Route103_EventScript_AfterBrendanBattle
 	end
 
 Route103_EventScript_StartBrendanBattleTorchic::
-	trainerbattle_no_intro TRAINER_BRENDAN_ROUTE_103_TORCHIC, Route103_Text_BrendanDefeated
+	trainerbattle_no_intro TRAINER_BRENDAN_ROUTE_103_TORCHIC, Route103_Text_MayDefeated
 	goto Route103_EventScript_AfterBrendanBattle
 	end
 
 Route103_EventScript_StartBrendanBattleMudkip::
-	trainerbattle_no_intro TRAINER_BRENDAN_ROUTE_103_MUDKIP, Route103_Text_BrendanDefeated
+	trainerbattle_no_intro TRAINER_BRENDAN_ROUTE_103_MUDKIP, Route103_Text_MayDefeated
 	goto Route103_EventScript_AfterBrendanBattle
 	end
 
@@ -104,7 +104,7 @@ Route103_EventScript_AfterMayBattle::
 	end
 
 Route103_EventScript_AfterBrendanBattle::
-	msgbox Route103_Text_BrendanTimeToHeadBack, MSGBOX_DEFAULT
+	msgbox Route103_Text_MayTimeToHeadBack, MSGBOX_DEFAULT
 	goto Route103_EventScript_RivalExit
 	end
 
@@ -350,21 +350,20 @@ Route103_EventScript_Isabelle::
 	end
 
 Route103_Text_MayRoute103Pokemon:
-	.string "{RIVAL}: Veamos, entonces los\n"
+	.string "Veamos, entonces los\n"
 	.string "nuevos aquí son…\p"
 	.string "¿Ducklett, Sentret y…?$"
 
 Route103_Text_MayLetsBattle:
 	.string "{RIVAL}: ¡Oh!\n"
-	.string "Oh. Eres tú.\p"
-	.string "¿Porqué me seguiste hasta aquí?\n"
-	.string "¿Acaso eres {ELLA} chic{OA} de los recados\l"
-	.string "ahora?\p"
-	.string "Pues no me importa mucho, pero tienes\n"
-	.string "un inicial que yo no, así que\l"
-	.string "combatamos para poder anotar algunos\l"
-	.string "datos sobre su comportamiento en las\l"
-	.string "batallas.$"
+	.string "Hola, {PLAYER}, ¿Necesitas algo?\p"
+	.string "¿O eres {ELLA} chic{OA} de los recados\n"
+	.string "ahora? Jaja, no lo tomes en serio.\p"
+	.string "La verdad mucho no me importa, pero,\n"
+	.string "¿Qué tal si combatimos para poder\l"
+	.string "anotar algunos datos sobre el\l"
+	.string "comportamiento de nuestros Iniciales\l"
+	.string "en las batallas?$"
 
 
 Route103_Text_MayDefeated:
@@ -372,34 +371,10 @@ Route103_Text_MayDefeated:
 	.string "No te lo niego, sabes lo que haces…$"
 
 Route103_Text_MayTimeToHeadBack:
-	.string "{RIVAL}: Creo… que entiendo lo que\n"
+	.string "Creo… que entiendo lo que\n"
 	.string "decía mi Padre sobre ti, {PLAYER},\l"
-	.string "con esa {COLOR BLUE}capacidad{COLOR DARK_GRAY} que tienes… … … Quizá\l"
-	.string "no seas-\l"
-	.string "No, nada…$"
-
-Route103_Text_BrendanRoute103Pokemon:
-	.string "{RIVAL}: Veamos, entonces los\n"
-	.string "nuevos aquí son…\p"
-	.string "¿Ducklett, Sentret y…?$"
-
-Route103_Text_BrendanLetsBattle:
-	.string "{RIVAL}: ¿{PLAYER}…?\n"
-	.string "¿Qué haces aquí?\l"
-	.string "Seguro algún recado para mi padre, ¿no?\p"
-	.string "Pues yo estoy estudiando a los Pokémon\n"
-	.string "de esta ruta, y como estoy de humor\l"
-	.string "para analizar, ¡combatamos!$"
-
-Route103_Text_BrendanDefeated:
-	.string "Pero…………\n"
-	.string "Yo soy el que tiene ventaja…$"
-
-Route103_Text_BrendanTimeToHeadBack:
-	.string "{RIVAL}: Creo… que entiendo lo que\n"
-	.string "decía mi Padre sobre ti, {PLAYER},\l"
-	.string "con esa {COLOR BLUE}capacidad{COLOR DARK_GRAY} que tienes… … … Quizá\l"
-	.string "no seas-\l"
+	.string "con todo el conocimiento que tienes… … … Quizá\l"
+	.string "seas de gran-\l"
 	.string "No, nada…$"
 
 Route103_Text_ShouldHaveBroughtPotion:

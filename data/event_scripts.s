@@ -103,6 +103,7 @@ gStdScripts::
 	.4byte Std_RegisteredInMatchCall   @ STD_REGISTER_MATCH_CALL
 	.4byte Std_MsgboxGetPoints         @ MSGBOX_GETPOINTS
 	.4byte Std_MsgboxPokenav           @ MSGBOX_POKENAV
+	.4byte Std_MsgboxInterrupt 		   @ MSGBOX_INTERRUPT
 gStdScripts_End::
 
 	.include "data/maps/PetalburgCity/scripts.inc"
@@ -1173,3 +1174,5 @@ Decline:
     
 
 	.include "data/maps/OldaleRuins/scripts.inc"
+
+	.include "data/maps/MossdeepCity_House5/scripts.inc"
