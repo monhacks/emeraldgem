@@ -244,9 +244,11 @@
 #define OBJ_EVENT_GFX_CHIMECHO                   240
 #define OBJ_EVENT_GFX_PUSHABLE_BOULDER_2         241
 #define OBJ_EVENT_GFX_BALL_CATCH		         242
+#define OBJ_EVENT_GFX_NORMAN_SPECIAL		     243
+#define OBJ_EVENT_GFX_BRENDAN_SPECIAL		     244
 
 
-#define NUM_OBJ_EVENT_GFX                        243
+#define NUM_OBJ_EVENT_GFX                        245
 // =======
 // // NOTE: By default, the max value for NUM_OBJ_EVENT_GFX is 239.
 // //

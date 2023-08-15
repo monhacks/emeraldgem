@@ -468,9 +468,11 @@ static void _TriggerPendingDaycareEgg(struct DayCare *daycare)
 {
     s32 parent;
     s32 natureTries = 0;
-
+	
     SeedRng2(gMain.vblankCounter2);
     parent = GetParentToInheritNature(daycare);
+	
+
 
     // don't inherit nature
     if (parent < 0)
@@ -909,13 +911,32 @@ static void _GiveEggFromDaycare(struct DayCare *daycare)
     u16 species;
     u8 parentSlots[DAYCARE_MON_COUNT];
     bool8 isEgg;
+	u32 value;
+	s32 personality;
+	u32 totalRerolls = 0;
+	value = gSaveBlock2Ptr->playerTrainerId[0]
+                 | (gSaveBlock2Ptr->playerTrainerId[1] << 8)
+                 | (gSaveBlock2Ptr->playerTrainerId[2] << 16)
+                 | (gSaveBlock2Ptr->playerTrainerId[3] << 24);
 
     species = DetermineEggSpeciesAndParentSlots(daycare, parentSlots);
     AlterEggSpeciesWithIncenseItem(&species, daycare);
+	if (GetBoxMonData(&daycare->mons[0].mon, MON_DATA_OT_ID, NULL) != GetBoxMonData(&daycare->mons[1].mon, MON_DATA_OT_ID, NULL)){
+		if (CheckBagHasItem(ITEM_SHINY_CHARM, 1)){
+			totalRerolls = 3;
+		}
+		totalRerolls += 6;
+		while (((GET_SHINY_VALUE(value, personality)) >= SHINY_ODDS && (totalRerolls > 0)) && (GetNatureFromPersonality(daycare->offspringPersonality) != GetNatureFromPersonality(personality)))
+		{
+			personality = Random32();
+			totalRerolls--;
+		}
+		daycare->offspringPersonality = personality;
+	}
     SetInitialEggData(&egg, species, daycare);
     InheritIVs(&egg, daycare);
     BuildEggMoveset(&egg, &daycare->mons[parentSlots[1]].mon, &daycare->mons[parentSlots[0]].mon);
-
+	
     if (species == SPECIES_PICHU)
         GiveVoltTackleIfLightBall(&egg, daycare);
 
@@ -934,7 +955,8 @@ void CreateEgg(struct Pokemon *mon, u16 species, bool8 setHotSpringsLocation)
     u8 language;
     u8 metLocation;
     u8 isEgg;
-
+	
+	
     CreateMon(mon, species, EGG_HATCH_LEVEL, USE_RANDOM_IVS, FALSE, 0, OT_ID_PLAYER_ID, 0);
     metLevel = 0;
     ball = ITEM_POKE_BALL;

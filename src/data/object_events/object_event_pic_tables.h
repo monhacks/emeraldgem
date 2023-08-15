@@ -1327,6 +1327,28 @@ static const struct SpriteFrameImage sPicTable_Norman[] = {
     overworld_frame(gObjectEventPic_Norman, 2, 4, 7),
     overworld_frame(gObjectEventPic_Norman, 2, 4, 8),
 };
+static const struct SpriteFrameImage sPicTable_NormanSpecial[] = {
+    overworld_frame(gObjectEventPic_NormanSpecial, 2, 4, 0),
+    overworld_frame(gObjectEventPic_NormanSpecial, 2, 4, 1),
+    overworld_frame(gObjectEventPic_NormanSpecial, 2, 4, 2),
+    overworld_frame(gObjectEventPic_NormanSpecial, 2, 4, 3),
+    overworld_frame(gObjectEventPic_NormanSpecial, 2, 4, 4),
+    overworld_frame(gObjectEventPic_NormanSpecial, 2, 4, 5),
+    overworld_frame(gObjectEventPic_NormanSpecial, 2, 4, 6),
+    overworld_frame(gObjectEventPic_NormanSpecial, 2, 4, 7),
+    overworld_frame(gObjectEventPic_NormanSpecial, 2, 4, 8),
+};
+static const struct SpriteFrameImage sPicTable_BrendanSpecial[] = {
+    overworld_frame(gObjectEventPic_BrendanSpecial, 2, 4, 0),
+    overworld_frame(gObjectEventPic_BrendanSpecial, 2, 4, 1),
+    overworld_frame(gObjectEventPic_BrendanSpecial, 2, 4, 2),
+    overworld_frame(gObjectEventPic_BrendanSpecial, 2, 4, 3),
+    overworld_frame(gObjectEventPic_BrendanSpecial, 2, 4, 4),
+    overworld_frame(gObjectEventPic_BrendanSpecial, 2, 4, 5),
+    overworld_frame(gObjectEventPic_BrendanSpecial, 2, 4, 6),
+    overworld_frame(gObjectEventPic_BrendanSpecial, 2, 4, 7),
+    overworld_frame(gObjectEventPic_BrendanSpecial, 2, 4, 8),
+};
 
 static const struct SpriteFrameImage sPicTable_Winona[] = {
     overworld_frame(gObjectEventPic_Winona, 2, 4, 0),

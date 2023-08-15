@@ -778,6 +778,7 @@ static bool8 HandleStartMenuInput(void)
     else if (JOY_NEW(START_BUTTON | B_BUTTON))
     {
 		RemoveExtraStartMenuWindows();
+		FlagClear(FLAG_MENU_DEXRELATED);
 		HideStartMenu();
 		return TRUE;
     }
