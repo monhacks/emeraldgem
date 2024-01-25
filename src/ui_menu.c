@@ -185,6 +185,7 @@ static bool8 Menu_DoGfxSetup(void)
         DmaClearLarge16(3, (void *)VRAM, VRAM_SIZE, 0x1000)
         SetVBlankHBlankCallbacksToNull();
         ClearScheduledBgCopiesToVram();
+        ResetVramOamAndBgCntRegs();
         gMain.state++;
         break;
     case 1:
