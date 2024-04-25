@@ -314,7 +314,7 @@ void HandleAction_UseMove(void)
     }
 
     // Set dynamic move type.
-    SetTypeBeforeUsingMove(gChosenMove, gBattlerAttacker);
+    SetTypeBeforeUsingMove(gChosenMove, gBattlerAttacker, gBattlerTarget);
     GET_MOVE_TYPE(gChosenMove, moveType);
 
     // choose target
@@ -3281,7 +3281,7 @@ bool8 HandleWishPerishSongOnTurnEnd(void)
                 gBattlerAttacker = gWishFutureKnock.futureSightAttacker[gActiveBattler];
                 gSpecialStatuses[gBattlerTarget].dmg = 0xFFFF;
                 gCurrentMove = gWishFutureKnock.futureSightMove[gActiveBattler];
-                SetTypeBeforeUsingMove(gCurrentMove, gActiveBattler);
+                SetTypeBeforeUsingMove(gCurrentMove, gActiveBattler, gBattlerTarget);
                 BattleScriptExecute(BattleScript_MonTookFutureAttack);
 
                 if (gWishFutureKnock.futureSightCounter[gActiveBattler] == 0
@@ -5566,6 +5566,38 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
                 }
             }
             break;
+		case ABILITY_DUAL_BODY:
+			if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
+             && !gProtectStructs[gBattlerAttacker].confusionSelfDmg
+             && TARGET_TURN_DAMAGED
+             && IsBattlerAlive(battler)
+             && (IsMoveMakingContact(move, gBattlerAttacker)))
+			{
+				 if (!(gStatuses3[gBattlerAttacker] & STATUS3_PERISH_SONG)
+					&& (Random() % 3) == 0) {
+						if (!(gStatuses3[battler] & STATUS3_PERISH_SONG))
+						{
+							gStatuses3[battler] |= STATUS3_PERISH_SONG;
+							gDisableStructs[battler].perishSongTimer = 3;
+							gDisableStructs[battler].perishSongTimerStartValue = 3;
+						}
+						gStatuses3[gBattlerAttacker] |= STATUS3_PERISH_SONG;
+						gDisableStructs[gBattlerAttacker].perishSongTimer = 3;
+						gDisableStructs[gBattlerAttacker].perishSongTimerStartValue = 3;
+						BattleScriptPushCursor();
+						gBattlescriptCurrInstr = BattleScript_PerishBodyActivates;
+				}
+				if (CanBeBurned(gBattlerAttacker)
+				 && ((Random() % 3) == 0))
+				{
+					gBattleScripting.moveEffect = MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_BURN;
+					BattleScriptPushCursor();
+					gBattlescriptCurrInstr = BattleScript_AbilityStatusEffect;
+					gHitMarker |= HITMARKER_IGNORE_SAFEGUARD;
+				}
+				effect++;
+			}
+            break;
         case ABILITY_PERISH_BODY:
             if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
              && !gProtectStructs[gBattlerAttacker].confusionSelfDmg
@@ -5912,7 +5944,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
                     {
                         BattleScriptPushCursor();
                         gBattlescriptCurrInstr = BattleScript_TraceActivates;
-                    }
+                    } 
                     gBattleResources->flags->flags[i] &= ~RESOURCE_FLAG_TRACED;
                     gBattleStruct->tracedAbility[i] = gLastUsedAbility = gBattleMons[gActiveBattler].ability;
                     battler = gBattlerAbility = gBattleScripting.battler = i;
@@ -8162,21 +8194,29 @@ const struct TypePower gNaturalGiftTable[] =
 
 static u16 CalcMoveBasePower(u16 move, u8 battlerAtk, u8 battlerDef)
 {
-    u32 i;
+    u32 i, item_Id;
     u16 basePower = gBattleMoves[move].power;
     u32 weight, hpFraction, speed;
 	u16 holdEffect = GetBattlerHoldEffect(battlerAtk, TRUE);
 
     if (gBattleStruct->zmove.active)
         return gBattleMoves[gBattleStruct->zmove.baseMoves[battlerAtk]].zMovePower;
-
+	
+	if (move <= MOVE_THUNDER_PUNCH && move >= MOVE_FIRE_PUNCH && !FlagGet(FLAG_BADGE03_GET) && gSaveBlock2Ptr->optionsDifficulty < DIFFICULTY_HARD){
+		basePower = 50;
+	}
+	
     switch (gBattleMoves[move].effect)
     {
     case EFFECT_PLEDGE:
         // todo
         break;
     case EFFECT_FLING:
-        basePower = GetFlingPowerFromItemId(gBattleMons[battlerAtk].item);
+		item_Id = gBattleMons[battlerAtk].item;
+		if (gBattleMons[battlerAtk].ability == ABILITY_GIFT_GIVER && item_Id == ITEM_NONE){
+			item_Id = Random() % ITEMS_COUNT;
+		}
+        basePower = GetFlingPowerFromItemId(item_Id);
         break;
     case EFFECT_ERUPTION:
         basePower = gBattleMons[battlerAtk].hp * basePower / gBattleMons[battlerAtk].maxHP;
@@ -8235,8 +8275,13 @@ static u16 CalcMoveBasePower(u16 move, u8 battlerAtk, u8 battlerDef)
             basePower *= 2;
         break;
     case EFFECT_NATURAL_GIFT:
-        basePower = gNaturalGiftTable[ITEM_TO_BERRY(gBattleMons[battlerAtk].item)].power;
+		item_Id = gBattleMons[battlerAtk].item;
+		if (gBattleMons[battlerAtk].ability == ABILITY_GIFT_GIVER && (item_Id <= FIRST_BERRY_INDEX || item_Id >= LAST_BERRY_INDEX)){
+				item_Id = ITEM_MARANGA_BERRY;
+		}
+        basePower = gNaturalGiftTable[ITEM_TO_BERRY(item_Id)].power;
         break;
+	// case EFFECT_PRESENT
 	case EFFECT_LOVE_DUPLICATES_POWER:
 		if (gBattleMons[battlerDef].status2 & STATUS2_INFATUATED_WITH(gBattlerAttacker))
             basePower *= 2;
@@ -8818,9 +8863,9 @@ static u32 CalcAttackStat(u16 move, u8 battlerAtk, u8 battlerDef, u8 moveType, b
             MulModifier(&modifier, UQ_4_12(1.5));
         break;
     case ABILITY_DEFEATIST:
-        if (gBattleMons[battlerAtk].hp <= (gBattleMons[battlerAtk].maxHP / 2))
-            MulModifier(&modifier, UQ_4_12(0.8));
-		else
+        if (gBattleMons[battlerAtk].hp <= (gBattleMons[battlerAtk].maxHP / 4))
+            MulModifier(&modifier, UQ_4_12(0.7));
+		else if (gBattleMons[battlerAtk].hp >= (gBattleMons[battlerAtk].maxHP / 4 * 3))
 			MulModifier(&modifier, UQ_4_12(1.3));
         break;
     case ABILITY_FLASH_FIRE:
@@ -8829,7 +8874,7 @@ static u32 CalcAttackStat(u16 move, u8 battlerAtk, u8 battlerDef, u8 moveType, b
         break;
     case ABILITY_SWARM:
         if (moveType == TYPE_BUG && gBattleMons[battlerAtk].hp <= (gBattleMons[battlerAtk].maxHP / 3))
-            MulModifier(&modifier, UQ_4_12(1.5));
+            MulModifier(&modifier, UQ_4_12(1.6));
         break;
     case ABILITY_TORRENT:
         if (moveType == TYPE_WATER && gBattleMons[battlerAtk].hp <= (gBattleMons[battlerAtk].maxHP / 3))
@@ -9078,11 +9123,11 @@ static u32 CalcDefenseStat(u16 move, u8 battlerAtk, u8 battlerDef, u8 moveType, 
             MulModifier(&modifier, UQ_4_12(2.0));
         break;
     case HOLD_EFFECT_METAL_POWDER:
-        if (gBattleMons[battlerDef].species == SPECIES_DITTO && usesDefStat && !(gBattleMons[battlerDef].status2 & STATUS2_TRANSFORMED))
+        if (gBattleMons[battlerDef].species == SPECIES_DITTO && usesDefStat /*&& !(gBattleMons[battlerDef].status2 & STATUS2_TRANSFORMED)*/)
             MulModifier(&modifier, UQ_4_12(2.0));
         break;
     case HOLD_EFFECT_EVIOLITE:
-        if (CanEvolve(gBattleMons[battlerDef].species))
+        if (CanEvolve(gBattleMons[battlerDef].species) || gBattleMons[battlerDef].species == SPECIES_DIPPLIN)
             MulModifier(&modifier, UQ_4_12(1.5));
         break;
     case HOLD_EFFECT_ASSAULT_VEST:
@@ -9105,10 +9150,10 @@ static u32 CalcDefenseStat(u16 move, u8 battlerAtk, u8 battlerDef, u8 moveType, 
 
     // The defensive stats of a Player's Pokémon are boosted by x1.1 (+10%) if they have the 5th badge and 7th badges.
     // Having the 5th badge boosts physical defense while having the 7th badge boosts special defense.
-    if (ShouldGetStatBadgeBoost(FLAG_BADGE05_GET, battlerDef) && IS_MOVE_PHYSICAL(move))
-        MulModifier(&modifier, UQ_4_12(1.1));
-    if (ShouldGetStatBadgeBoost(FLAG_BADGE07_GET, battlerDef) && IS_MOVE_SPECIAL(move))
-        MulModifier(&modifier, UQ_4_12(1.1));
+    // if (ShouldGetStatBadgeBoost(FLAG_BADGE05_GET, battlerDef) && IS_MOVE_PHYSICAL(move))
+        // MulModifier(&modifier, UQ_4_12(1.1));
+    // if (ShouldGetStatBadgeBoost(FLAG_BADGE07_GET, battlerDef) && IS_MOVE_SPECIAL(move))
+        // MulModifier(&modifier, UQ_4_12(1.1));
 
     return ApplyModifier(modifier, defStat);
 }
@@ -10033,7 +10078,8 @@ bool32 CanFling(u8 battlerId)
 {
     u16 item = gBattleMons[battlerId].item;
     u16 itemEffect = ItemId_GetHoldEffect(item);
-
+	if (item == ITEM_NONE && gBattleMons[battlerId].ability == ABILITY_GIFT_GIVER)
+		return TRUE;
     if (item == ITEM_NONE
       #if B_KLUTZ_FLING_INTERACTION >= GEN_5
       || GetBattlerAbility(battlerId) == ABILITY_KLUTZ

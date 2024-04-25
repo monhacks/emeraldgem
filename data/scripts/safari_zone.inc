@@ -128,8 +128,8 @@ Route121_SafariZoneEntrance_Text_ComeInAndEnjoy:
 	.string "¡Entra y disfuta el Juego del Safari!$"
 
 Route121_SafariZoneEntrance_Text_FirstTimeInfo:
-	.string "En la Zona Safari, tendrás sólo 30\n"
-	.string "Safari Balls y 500 pasos para atrapar\l"
+	.string "En la Zona Safari, tendrás sólo 50\n"
+	.string "Safari Balls y 1500 pasos para atrapar\l"
 	.string "tantos Pokémon como quieras. ¡Ojo! ¡No\l"
 	.string "se puede combatir aquí!\p"
 	.string "Para mejorar tus chances de atrapar\n"
@@ -156,7 +156,7 @@ Route121_SafariZoneEntrance_Text_HereAreYourSafariBalls:
 	.string "Aquí tienes tus Safari Balls.$"
 
 Route121_SafariZoneEntrance_Text_Received30SafariBalls:
-	.string "¡{PLAYER} recibió 30 Safari Balls!$"
+	.string "¡{PLAYER} recibió 50 Safari Balls!$"
 
 Route121_SafariZoneEntrance_Text_PleaseEnjoyYourself:
 	.string "Te avisaremos cuando tengas que\n"

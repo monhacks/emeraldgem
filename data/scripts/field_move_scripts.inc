@@ -1,19 +1,16 @@
 @ Interact with cuttable tree
+EventScript_CutTreeNoNeed::
+	lockall
+	message Text_CutTreeNoNeed
+	waitmessage
+	releaseall
+	end
+
 EventScript_CutTree::
 	lockall
-	checkpartytype TYPE_GRASS
-	goto_if_ne VAR_RESULT, PARTY_SIZE, EventScript_CanCutTree
-	checkpartytype TYPE_BUG
-	goto_if_ne VAR_RESULT, PARTY_SIZE, EventScript_CanCutTree
-	checkpartytype TYPE_FLYING
-	goto_if_ne VAR_RESULT, PARTY_SIZE, EventScript_CanCutTree
-	checkpartytype TYPE_STEEL
-	goto_if_ne VAR_RESULT, PARTY_SIZE, EventScript_CanCutTree
-	goto_if_unset FLAG_BADGE01_GET, EventScript_CancelCut
-	goto EventScript_CanCutTree
-	releaseall 
-	end
-EventScript_CanCutTree::
+	goto_if_unset FLAG_BADGE01_GET, EventScript_CheckTreeCantCut
+	checkpartymove MOVE_CUT
+	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_CheckTreeCantCut
 	setfieldeffectargument 0, VAR_RESULT
 	bufferpartymonnick STR_VAR_1, VAR_RESULT
 	buffermovename STR_VAR_2, MOVE_CUT
@@ -68,18 +65,8 @@ Text_CantCut:
 EventScript_RockSmash::
 	lockall
 	goto_if_unset FLAG_BADGE03_GET, EventScript_CantSmashRock
-	checkpartytype TYPE_FIGHTING
-	goto_if_ne VAR_RESULT, PARTY_SIZE, EventScript_CanRockSmash
-	checkpartytype TYPE_STEEL
-	goto_if_ne VAR_RESULT, PARTY_SIZE, EventScript_CanRockSmash
-	checkpartytype TYPE_GROUND
-	goto_if_ne VAR_RESULT, PARTY_SIZE, EventScript_CanRockSmash
-	checkpartytype TYPE_GRASS
-	goto_if_ne VAR_RESULT, PARTY_SIZE, EventScript_CanRockSmash
-	goto EventScript_CanRockSmash
-	releaseall
-	end
-EventScript_CanRockSmash::
+	checkpartymove MOVE_ROCK_SMASH
+	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_CantSmashRock
 	setfieldeffectargument 0, VAR_RESULT
 	bufferpartymonnick STR_VAR_1, VAR_RESULT
 	buffermovename STR_VAR_2, MOVE_ROCK_SMASH
@@ -130,6 +117,138 @@ EventScript_CancelSmash::
 	releaseall
 	end
 
+EventScript_RockSmashFossil::
+	lockall
+	goto_if_unset FLAG_BADGE03_GET, EventScript_CantSmashRock
+	checkpartymove MOVE_ROCK_SMASH
+	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_CantSmashRock
+	goto EventScript_CanRockSmashFossil
+	releaseall
+	end
+
+EventScript_CanRockSmashFossil::
+	setfieldeffectargument 0, VAR_RESULT
+	bufferpartymonnick STR_VAR_1, VAR_RESULT
+	buffermovename STR_VAR_2, MOVE_ROCK_SMASH
+	msgbox Text_WantToSmash, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, EventScript_CancelSmash
+	msgbox Text_MonUsedFieldMove, MSGBOX_DEFAULT
+	closemessage
+	dofieldeffect FLDEFF_USE_ROCK_SMASH
+	waitstate
+	goto EventScript_SmashRockFossil
+	end
+
+EventScript_SmashRockFossil::
+	applymovement VAR_LAST_TALKED, Movement_SmashRock
+	waitmovement 0
+	removeobject VAR_LAST_TALKED
+	random 2
+	switch VAR_RESULT
+	case 0, EventScript_SmashRockFossilFound
+	special RockSmashWildEncounter
+	goto_if_eq VAR_RESULT, FALSE, EventScript_EndSmash
+	waitstate
+	releaseall
+	end
+
+EventScript_SmashRockFossilFound::
+	switch VAR_TEMP_0
+	case ITEM_FOSSILIZED_BIRD, EventScript_SmashRockTopFossilFound
+	case ITEM_FOSSILIZED_FISH, EventScript_SmashRockTopFossilFound
+	case ITEM_FOSSILIZED_DINO, EventScript_SmashRockBottomFossilFound
+	case ITEM_FOSSILIZED_DRAKE, EventScript_SmashRockBottomFossilFound
+EventScript_SmashRockFossilFound2::
+	random 13
+	switch VAR_RESULT
+	case 0, EventScript_SmashRockHelixFound
+	case 1, EventScript_SmashRockDomeFound
+	case 2, EventScript_SmashRockOldAmberFound
+	case 3, EventScript_SmashRockArmorFound
+	case 4, EventScript_SmashRockSkullFound
+	case 5, EventScript_SmashRockCoverFound
+	case 6, EventScript_SmashRockPlumeFound
+	case 7, EventScript_SmashRockJawFound
+	case 8, EventScript_SmashRockSailFound
+	case 9, EventScript_SmashRockBirdFound
+	case 10, EventScript_SmashRockFishFound
+	case 11, EventScript_SmashRockDrakeFound
+	case 12, EventScript_SmashRockDinoFound
+	goto EventScript_EndSmash
+	end
+
+EventScript_SmashRockTopFossilFound:
+	random 3
+	goto_if_ne VAR_RESULT, 0, EventScript_SmashRockFossilFound2
+	random 2
+	switch VAR_RESULT
+	case 0, EventScript_SmashRockDrakeFound
+	case 1, EventScript_SmashRockDinoFound
+
+EventScript_SmashRockBottomFossilFound:
+	random 3
+	goto_if_ne VAR_RESULT, 0, EventScript_SmashRockFossilFound2
+	random 2
+	switch VAR_RESULT
+	case 0, EventScript_SmashRockFishFound
+	case 1, EventScript_SmashRockBirdFound
+
+EventScript_SmashRockHelixFound:
+	giveitem ITEM_HELIX_FOSSIL, 1
+	goto EventScript_EndSmash
+
+EventScript_SmashRockDomeFound:
+	giveitem ITEM_DOME_FOSSIL, 1
+	goto EventScript_EndSmash
+
+EventScript_SmashRockOldAmberFound:
+	giveitem ITEM_OLD_AMBER, 1
+	goto EventScript_EndSmash
+
+EventScript_SmashRockArmorFound:
+	giveitem ITEM_ARMOR_FOSSIL, 1
+	goto EventScript_EndSmash
+
+EventScript_SmashRockSkullFound:
+	giveitem ITEM_SKULL_FOSSIL, 1
+	goto EventScript_EndSmash
+
+EventScript_SmashRockCoverFound:
+	giveitem ITEM_COVER_FOSSIL, 1
+	goto EventScript_EndSmash
+
+EventScript_SmashRockPlumeFound:
+	giveitem ITEM_PLUME_FOSSIL, 1
+	goto EventScript_EndSmash
+
+EventScript_SmashRockJawFound:
+	giveitem ITEM_JAW_FOSSIL, 1
+	goto EventScript_EndSmash
+
+EventScript_SmashRockSailFound:
+	giveitem ITEM_SAIL_FOSSIL, 1
+	goto EventScript_EndSmash
+
+EventScript_SmashRockBirdFound:
+	giveitem ITEM_FOSSILIZED_BIRD, 1
+	setvar VAR_TEMP_0, ITEM_FOSSILIZED_BIRD
+	goto EventScript_EndSmash
+
+EventScript_SmashRockFishFound:
+	giveitem ITEM_FOSSILIZED_FISH, 1
+	setvar VAR_TEMP_0, ITEM_FOSSILIZED_FISH
+	goto EventScript_EndSmash
+
+EventScript_SmashRockDrakeFound:
+	giveitem ITEM_FOSSILIZED_DRAKE, 1
+	setvar VAR_TEMP_0, ITEM_FOSSILIZED_DRAKE
+	goto EventScript_EndSmash
+
+EventScript_SmashRockDinoFound:
+	giveitem ITEM_FOSSILIZED_DINO, 1
+	setvar VAR_TEMP_0, ITEM_FOSSILIZED_DINO
+	goto EventScript_EndSmash
+
 Text_WantToSmash:
 	.string "¿Quieres romper esta roca?$"
 
@@ -138,7 +257,8 @@ Text_CantSmash:
 
 EventScript_StrengthBoulder::
 	lockall
-	goto_if_unset FLAG_BADGE04_GET, EventScript_CantStrength
+	checkpartymove MOVE_STRENGTH
+	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_CantStrength
 	goto_if_set FLAG_SYS_USE_STRENGTH, EventScript_CheckActivatedBoulder
 	setfieldeffectargument 0, VAR_RESULT
 	msgbox Text_WantToStrength, MSGBOX_YESNO
@@ -195,12 +315,10 @@ Text_StrengthActivated:
 
 EventScript_UseWaterfall::
 	lockall
-	checkpartytype TYPE_WATER
-	goto_if_ne VAR_RESULT, PARTY_SIZE, EventScript_CanUseWaterfall
-	checkpartytype TYPE_ICE
-	goto_if_ne VAR_RESULT, PARTY_SIZE, EventScript_CanUseWaterfall
-	checkpartytype TYPE_NORMAL
-	goto_if_ne VAR_RESULT, PARTY_SIZE, EventScript_CanUseWaterfall
+	checkpartymove MOVE_WATERFALL
+	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_CantWaterfall
+	checkpartymove MOVE_DIVE
+	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_CantWaterfall
 	goto EventScript_CanUseWaterfall
 	releaseall
 	end
@@ -237,15 +355,12 @@ Text_MonUsedWaterfall:
 
 EventScript_UseDive::
 	lockall
-	checkpartytype TYPE_WATER
-	goto_if_ne VAR_RESULT, PARTY_SIZE, EventScript_CanDive
-	checkpartytype TYPE_ICE
-	goto_if_ne VAR_RESULT, PARTY_SIZE, EventScript_CanDive
+	checkpartymove MOVE_DIVE
+	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_CantDive
 	goto EventScript_CanDive
 	releaseall
 	end
 EventScript_CanDive::
-	goto_if_unset FLAG_BADGE07_GET, EventScript_CantDive
 	bufferpartymonnick STR_VAR_1, VAR_RESULT
 	setfieldeffectargument 0, VAR_RESULT
 	setfieldeffectargument 1, 1
@@ -271,7 +386,11 @@ EventScript_UseDiveUnderwater::
 	goto_if_ne VAR_RESULT, PARTY_SIZE, EventScript_CanSurface
 	checkpartytype TYPE_ICE
 	goto_if_ne VAR_RESULT, PARTY_SIZE, EventScript_CanSurface
-	goto EventScript_CanSurface
+	checkpartymove MOVE_DIVE
+	goto_if_ne VAR_RESULT, PARTY_SIZE, EventScript_CanSurface
+	checkpartymove MOVE_SURF
+	goto_if_ne VAR_RESULT, PARTY_SIZE, EventScript_CanSurface
+	goto EventScript_CantSurface
 	releaseall
 	end
 	
@@ -320,7 +439,7 @@ EventScript_FailSweetScent::
 	end
 
 Text_FailSweetScent:
-	.string "Aca no hay nada…$"
+	.string "Acá no hay nada…$"
 
 Script_Wishes::
 	lockall
@@ -356,10 +475,13 @@ Script_YouHaveAchieved::
 	releaseall
 	end
 
+Text_CutTreeNoNeed:
+	.string "No tengo porqué cortar este árbol.$"
+
 YouFeelAsThough:
 	.string "Sientes como si un gran ser\nhubiera visto tu buena acción.\pEsperemos esté complacido.$"
 YouHaveAchieved:
-	.string "Escuchas una voz a la distancia:\p“Siete deseos has cumplido,\nY yo, estoy complacido.”\p“Para obetener tu regalo,\nhas de volver a donde\ltodo ha comenzado.”$"
+	.string "Escuchas una voz a la distancia:\p“Siete deseos has cumplido,\nY yo, estoy complacido.”\p“Para obetener tu regalo,\nhas de volver a donde todo\lha comenzado.”$"
 YouAreAlmostThere:
 	.string "Escuchas una voz a la distancia:\p“Tu travesía esta cerca de terminar,\nun solo deseo queda por completar.”$"
 YouAreHalfwayThrough:

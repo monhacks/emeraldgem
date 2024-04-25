@@ -30,7 +30,9 @@
 #define NUM_LANGUAGES     7
 
 #define GAME_VERSION (VERSION_EMERALD)
-#define GAME_LANGUAGE (LANGUAGE_ENGLISH)
+#ifndef GAME_LANGUAGE
+#define GAME_LANGUAGE (LANGUAGE_SPANISH)
+#endif
 
 // party sizes
 #define PARTY_SIZE 6
@@ -105,7 +107,12 @@
 #define WONDER_NEWS_TEXT_LENGTH 40
 #define WONDER_CARD_BODY_TEXT_LINES 4
 #define WONDER_NEWS_BODY_TEXT_LINES 10
-#define TYPE_NAME_LENGTH 6
+#if GAME_LANGUAGE == LANGUAGE_SPANISH
+	#define TYPE_NAME_LENGTH 9
+#else
+	#define TYPE_NAME_LENGTH 6
+#endif
+
 #if B_EXPANDED_ABILITY_NAMES == TRUE
 #define ABILITY_NAME_LENGTH 16
 #else
@@ -158,6 +165,11 @@
 #define CONNECTION_EAST     4
 #define CONNECTION_DIVE     5
 #define CONNECTION_EMERGE   6
+
+#define DIFFICULTY_EASY 0
+#define DIFFICULTY_NORMAL 1
+#define DIFFICULTY_HARD 2
+#define DIFFICULTY_HARDCORE 3
 
 #define SLOW_MOVEMENT_ON_STAIRS         TRUE
 #define FOLLOW_ME_IMPLEMENTED           FALSE    //for stairs movement. see ObjectMovingOnRockStairs in src/field_player_avatar.c

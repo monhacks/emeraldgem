@@ -22,4 +22,3 @@ PetalburgCity_House2_Text_BattledNormanOnce:
 	.string "brazos y, y…\p"
 	.string "Aunque sin contar eso, creo que perdí\n"
 	.string "porque tenía dos Magnemite nivel 13……$"
-

@@ -295,11 +295,12 @@
 #define MAX_SHEEN       255
 #define MAX_CONDITION   255
 
-#define MAX_PER_STAT_IVS 31
-#define MAX_IV_MASK 31
+#define MAX_PER_STAT_IVS 15
+#define MAX_IV_MASK 15
 #define USE_RANDOM_IVS (MAX_PER_STAT_IVS + 1)
-#define MAX_PER_STAT_EVS 252
-#define MAX_TOTAL_EVS 512
+#define MAX_PER_STAT_EVS 63
+#define MAX_TOTAL_EVS 128
+#define MAX_TOTAL_CVS 8
 #define EV_ITEM_RAISE_LIMIT MAX_PER_STAT_EVS
 
 // Battle move flags

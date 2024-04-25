@@ -360,15 +360,21 @@ Route104_EventScript_SailToDewford::
 	end
 
 Route104_EventScript_SailToDewfordNoCall::
-	applymovement LOCALID_BOAT_R104, Route104_Movement_SailToDewford
-	applymovement OBJ_EVENT_ID_PLAYER, Route104_Movement_SailToDewford
+	applymovement LOCALID_BOAT_R104, Route104_Movement_SailToDewfordBeforeDadCalls
+	applymovement OBJ_EVENT_ID_PLAYER, Route104_Movement_SailToDewfordBeforeDadCalls
+	delay 32
+	fadescreen FADE_TO_BLACK
+	warp MAP_DEWFORD_TOWN, 1, 1
 	waitmovement 0
 	goto Route104_EventScript_ArriveInDewford
 
 Route104_EventScript_SailToDewfordDadCalls::
 	applymovement LOCALID_BOAT_R104, Route104_Movement_SailToDewfordBeforeDadCalls
 	applymovement OBJ_EVENT_ID_PLAYER, Route104_Movement_SailToDewfordBeforeDadCalls
+	delay 32
+	fadescreen FADE_TO_BLACK
 	waitmovement 0
+	goto Route104_EventScript_ArriveInDewford
 	pokenavcall Route104_Text_DadPokenavCall
 	waitmessage
 	delay 30
@@ -400,6 +406,7 @@ Route104_EventScript_ArriveInDewford::
 	waitmovement 0
 	addobject LOCALID_BOAT_DEWFORD
 	clearflag FLAG_HIDE_MR_BRINEY_BOAT_DEWFORD_TOWN
+	warp MAP_DEWFORD_TOWN, 12, 8
 	call Common_EventScript_StopBrineysBoatMusic
 	setflag FLAG_HIDE_ROUTE_104_MR_BRINEY_BOAT
 	hideobjectat LOCALID_BOAT_R104, MAP_ROUTE104
@@ -423,6 +430,17 @@ Route104_EventScript_LandedInDewford::
 	end
 
 Route104_Movement_SailToDewfordBeforeDadCalls:
+	walk_down
+	walk_down
+	walk_down
+	walk_fast_down
+	walk_fast_down
+	walk_fast_down
+	walk_faster_down
+	walk_faster_down
+	walk_faster_down
+	step_end
+Route104_Movement_SailToDewfordBeforeDadCallsOld:
 	walk_down
 	walk_down
 	walk_down

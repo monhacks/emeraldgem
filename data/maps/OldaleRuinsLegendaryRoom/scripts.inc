@@ -1,0 +1,2 @@
+OldaleRuinsLegendaryRoom_MapScripts::
+	.byte 0

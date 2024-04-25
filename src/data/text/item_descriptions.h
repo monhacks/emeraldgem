@@ -955,44 +955,44 @@ static const u8 sFossilizedDinoDesc[] = _(
 
 // Mulch
 static const u8 sGrowthMulchDesc[] = _(
-    "A fertilizer that\n"
-    "accelerates the\n"
-    "growth of Berries.");
+    "La Baya tardará la\n"
+    "mitad del tiempo\n"
+    "en crecer.");
 
 static const u8 sDampMulchDesc[] = _(
-    "A fertilizer that\n"
-    "decelerates the\n"
-    "growth of Berries.");
+    "Abonar una Baya con\n"
+    "él hará que siempre\n"
+    "esté regada.");
 
 static const u8 sStableMulchDesc[] = _(
-    "A fertilizer that\n"
-    "ups the life time\n"
-    "of Berry trees.");
+    "La Baya crecerá\n"
+    "más rápido y estará\n"
+    "regada dos veces.");
 
 static const u8 sGooeyMulchDesc[] = _(
-    "A fertilizer that\n"
-    "makes more Berries\n"
-    "regrow after fall.");
+    "Abonar una Baya con\n"
+    "él no tendrá ningún\n"
+    "efecto beneficioso.");
 
 static const u8 sRichMulchDesc[] = _(
-    "A fertilizer that\n"
-    "ups the number of\n"
-    "Berries harvested.");
+    "Abonar una Baya con\n"
+    "él hará que crezcan\n"
+    "5 Bayas más.");
 
 static const u8 sSurpriseMulchDesc[] = _(
-    "A fertilizer that\n"
-    "ups the chance of\n"
-    "Berry mutations.");
+    "¡Sorpresa!\n"
+    "La Baya cambiará de\n"
+    "especie al crecer.");
 
 static const u8 sBoostMulchDesc[] = _(
-    "A fertilizer that\n"
-    "ups the dry speed\n"
-    "of soft soil.");
+    "Abonar una Baya con\n"
+    "él no tendrá efecto\n"
+    "alguno en Hoenn.");
 
 static const u8 sAmazeMulchDesc[] = _(
-    "A fertilizer Rich\n"
-    "Surprising and\n"
-    "Boosting as well.");
+    "Rápido, Fértil y\n"
+    "Húmedo todo en uno:\n"
+    "El Abono Supremo.");
 
 // Apricorns
 static const u8 sRedApricornDesc[] = _(
@@ -1112,65 +1112,26 @@ static const u8 sRetroMailDesc[] = _(
     "Pokémon.");
 
 // Evolution Items
-static const u8 sFireStoneDesc[] = _(
-    "Makes certain\n"
-    "species of Pokémon\n"
-    "evolve.");
 
-static const u8 sWaterStoneDesc[] = _(
-    "Makes certain\n"
-    "species of Pokémon\n"
-    "evolve.");
-
-static const u8 sThunderStoneDesc[] = _(
-    "Makes certain\n"
-    "species of Pokémon\n"
-    "evolve.");
-
-static const u8 sLeafStoneDesc[] = _(
-    "Makes certain\n"
-    "species of Pokémon\n"
-    "evolve.");
-
-static const u8 sIceStoneDesc[] = _(
-    "Makes certain\n"
-    "species of Pokémon\n"
-    "evolve.");
-
-static const u8 sSunStoneDesc[] = _(
-    "Makes certain\n"
-    "species of Pokémon\n"
-    "evolve.");
-
-static const u8 sMoonStoneDesc[] = _(
-    "Makes certain\n"
-    "species of Pokémon\n"
-    "evolve.");
-
-static const u8 sShinyStoneDesc[] = _(
-    "Makes certain\n"
-    "species of Pokémon\n"
-    "evolve.");
-
-static const u8 sDuskStoneDesc[] = _(
-    "Makes certain\n"
-    "species of Pokémon\n"
-    "evolve.");
-
-static const u8 sDawnStoneDesc[] = _(
-    "Makes certain\n"
-    "species of Pokémon\n"
-    "evolve.");
+static const u8 sEvoStoneDesc[] = _(
+    "Hace evolucionar a\n"
+    "ciertas especies de\n"
+    "Pokémon.");
 
 static const u8 sSweetAppleDesc[] = _(
-    "A very sweet apple\n"
-    "that makes certain\n"
-    "Pokémon evolve.");
+    "Una manzana que hace\n"
+    "a Applin evolucionar\n"
+    "en Appletun.");
 
 static const u8 sTartAppleDesc[] = _(
-    "A very tart apple\n"
-    "that makes certain\n"
-    "Pokémon evolve.");
+    "Una manzana que hace\n"
+    "a Applin evolucionar\n"
+    "en Flapple.");
+
+static const u8 sSyrupyAppleDesc[] = _(
+    "Una manzana que hace\n"
+    "a Applin evolucionar\n"
+    "en Dipplin.");
 
 static const u8 sCrackedPotDesc[] = _(
     "A cracked teapot\n"
@@ -1522,6 +1483,11 @@ static const u8 sBlueOrbDesc[] = _(
     "ancient power.");
 
 // Mega Stones
+static const u8 sGigantamaxStoneDesc[] = _(
+    "Esta extraña piedra\n"
+    "Gigantamaxiza a un\n"
+    "Pokémon.");
+
 static const u8 sVenusauriteDesc[] = _(
     "This stone enables\n"
     "Venusaur to Mega\n"

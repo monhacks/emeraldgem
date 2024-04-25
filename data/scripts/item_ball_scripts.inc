@@ -718,3 +718,9 @@ NewMap1_EventScript_ItemCave2::
 NewMap1_EventScript_ItemCave3::
 	finditem ITEM_MOON_BALL, 2
 	end
+
+
+Common_EventScript_FindItem::
+	callnative GetObjectEventTrainerRangeFromTemplate
+	finditem VAR_RESULT
+	end

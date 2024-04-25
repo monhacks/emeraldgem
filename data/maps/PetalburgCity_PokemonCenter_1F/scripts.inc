@@ -83,4 +83,3 @@ PetalburgCity_PokemonCenter_1F_Text_MudkipIsWaterType:
 	.string "Por ejemplo, tu {COLOR LIGHT_GREEN}Mudkip{COLOR DARK_GRAY} es de tipo\n"
 	.string "Agua, por lo que este objeto le viene\l"
 	.string "como anillo al dedo.$"
-

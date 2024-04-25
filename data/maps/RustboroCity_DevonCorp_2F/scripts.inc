@@ -204,4 +204,3 @@ RustboroCity_DevonCorp_2F_Text_DevelopNewPokenavFeature:
 
 RustboroCity_DevonCorp_2F_Text_WhatToWorkOnNext:
 	.string "Me gustaría desarrollar algo nuevo,\nalgo que haga que la mala reputación\lque tiene Devon con los\ladultos mayores mejore.\p¡Ajá! ¡Haré un resurrector\nde bastones rotos!$"
-

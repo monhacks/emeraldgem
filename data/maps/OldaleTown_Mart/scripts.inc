@@ -77,4 +77,3 @@ OldaleTown_Mart_Text_RestoreHPWithPotion:
 	.string "cantidad de Medallas que poseas, ¡Pero\l"
 	.string "escuché que hay una Floristería con\l"
 	.string "bayas, y cambian sus reservas también!$"
-

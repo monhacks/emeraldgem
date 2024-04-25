@@ -82,8 +82,8 @@ static const u8 sBindDescription[] = _(
     ""BINDING_TURNS" turnos.");
 
 static const u8 sSlamDescription[] = _(
-    "Ataca al rival con su\n"
-    "cola, liana, etc.");
+    "Ataca lleno de brillos\n"
+    "y baja la Df. del rival.");
 
 static const u8 sVineWhipDescription[] = _(
     "Ataca al rival con un\n"

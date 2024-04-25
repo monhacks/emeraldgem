@@ -565,3 +565,27 @@ gMetatiles_nuevito::
 	.align 1
 gMetatileAttributes_nuevito::
 	.incbin "data/tilesets/primary/nuevito/metatile_attributes.bin"
+
+	.align 1
+gMetatiles_Nature::
+	.incbin "data/tilesets/primary/nature/metatiles.bin"
+
+	.align 1
+gMetatileAttributes_Nature::
+	.incbin "data/tilesets/primary/nature/metatile_attributes.bin"
+
+	.align 1
+gMetatiles_PetalburgNew::
+	.incbin "data/tilesets/secondary/petalburg_new/metatiles.bin"
+
+	.align 1
+gMetatileAttributes_PetalburgNew::
+	.incbin "data/tilesets/secondary/petalburg_new/metatile_attributes.bin"
+
+	.align 1
+gMetatiles_RustboroNew::
+	.incbin "data/tilesets/secondary/rustboro_new/metatiles.bin"
+
+	.align 1
+gMetatileAttributes_RustboroNew::
+	.incbin "data/tilesets/secondary/rustboro_new/metatile_attributes.bin"

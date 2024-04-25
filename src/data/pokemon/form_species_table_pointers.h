@@ -567,5 +567,11 @@ const u16 *const gFormSpeciesIdTables[NUM_SPECIES] =
     [SPECIES_CALYREX_SHADOW_RIDER] = sCalyrexFormSpeciesIdTable,
     [SPECIES_ROWLET] = sRowletFormSpeciesIdTable,
     [SPECIES_ROWLET_ASH] = sRowletFormSpeciesIdTable,
+	[SPECIES_RILLABOOM_GIGANTAMAX] = sRillaboomFormSpeciesIdTable,
+	[SPECIES_RILLABOOM] = sRillaboomFormSpeciesIdTable,
+    [SPECIES_CINDERACE_GIGANTAMAX] = sCinderaceFormSpeciesIdTable,
+    [SPECIES_CINDERACE] = sCinderaceFormSpeciesIdTable,
+    [SPECIES_INTELEON_GIGANTAMAX]  = sInteleonFormSpeciesIdTable,
+    [SPECIES_INTELEON]  = sInteleonFormSpeciesIdTable,
 #endif
 };

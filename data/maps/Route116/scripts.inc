@@ -383,4 +383,3 @@ Route116_Text_TrainerTipsBToStopEvolution:
 Route116_Text_TrainerTipsBagHasPockets:
 	.string "PISTAS PARA ENTRENADORES\p"
 	.string "Puedes ver quiénes aprenden\ncada MT o MO en el Estuche MT.$"
-

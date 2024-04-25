@@ -842,6 +842,7 @@ const u16 *const gTeachableLearnsets[NUM_SPECIES] =
     [SPECIES_CARKOL] = sCarkolTeachableLearnset,
     [SPECIES_COALOSSAL] = sCoalossalTeachableLearnset,
     [SPECIES_APPLIN] = sApplinTeachableLearnset,
+    [SPECIES_DIPPLIN] = sDipplinTeachableLearnset,
     [SPECIES_FLAPPLE] = sFlappleTeachableLearnset,
     [SPECIES_APPLETUN] = sAppletunTeachableLearnset,
     [SPECIES_SILICOBRA] = sSilicobraTeachableLearnset,
@@ -908,6 +909,8 @@ const u16 *const gTeachableLearnsets[NUM_SPECIES] =
     [SPECIES_OVERQWIL] = sOverqwilTeachableLearnset,
     [SPECIES_ENAMORUS] = sEnamorusTeachableLearnset,
 	[SPECIES_DUDUNSPARCE] = sDudunsparceTeachableLearnset,
+	[SPECIES_RITTO] = sRittoTeachableLearnset,
+	[SPECIES_RIDDUAL] = sRiddualTeachableLearnset,
     // Megas
     [SPECIES_VENUSAUR_MEGA] = sVenusaurTeachableLearnset,
     [SPECIES_CHARIZARD_MEGA_X] = sCharizardTeachableLearnset,

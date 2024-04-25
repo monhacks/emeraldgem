@@ -1,5 +1,4 @@
 {
-  "layouts_table_label": "gMapLayouts",
   "group_order": [
     "gMapGroup_TownsAndRoutes",
     "gMapGroup_IndoorLittleroot",
@@ -53,6 +52,7 @@
     "FallarborTown",
     "VerdanturfTown",
     "PacifidlogTown",
+    "OldaleRuins",
     "Route101",
     "Route102",
     "Route103",
@@ -94,7 +94,8 @@
     "Underwater_Route129",
     "Underwater_Route105",
     "Underwater_Route125",
-    "Ciudaddeprueba"
+    "Ciudaddeprueba",
+    "Route104North"
   ],
   "gMapGroup_IndoorLittleroot": [
     "LittlerootTown_BrendansHouse_1F",
@@ -105,7 +106,6 @@
     "LittlerootTown_MLMHouse"
   ],
   "gMapGroup_IndoorOldale": [
-    "OldaleRuins",
     "OldaleTown_House1",
     "OldaleTown_House2",
     "OldaleTown_PokemonCenter_1F",
@@ -325,9 +325,14 @@
     "Route117_PokemonDayCare"
   ],
   "gMapGroup_IndoorRoute121": [
-    "Route121_SafariZoneEntrance"
+    "Route121_SafariZoneEntrance",
+    "SafariZone_SpecialArea"
   ],
   "gMapGroup_Dungeons": [
+    "OldaleRuinsInsideF1",
+    "OldaleRuinsInsideBF1",
+    "OldaleRuinsInsideBF2",
+    "OldaleRuinsLegendaryRoom",
     "MeteorFalls_1F_1R",
     "MeteorFalls_1F_2R",
     "MeteorFalls_B1F_1R",

@@ -2759,7 +2759,7 @@ static void DebugAction_Give_AllTMs(u8 taskId)
 {
     u16 i;
     PlayFanfare(MUS_OBTAIN_TMHM);
-    for (i = ITEM_TM01; i <= ITEM_TM50; i++)
+    for (i = ITEM_TM01; i <= ITEM_TM100; i++)
         if (!CheckBagHasItem(i, 1))
             AddBagItem(i, 1);
     Debug_DestroyMenu_Full(taskId);
@@ -3096,7 +3096,7 @@ static void DebugAction_Give_Pokemon_SelectNature(u8 taskId)
 
     if (gMain.newKeys & A_BUTTON)
     {
-        u8 abilityId;
+        u16 abilityId;
         sDebugMonData->mon_natureId = gTasks[taskId].data[3]; //NatureId
         gTasks[taskId].data[3] = 0;
         gTasks[taskId].data[4] = 0;
@@ -3120,7 +3120,7 @@ static void DebugAction_Give_Pokemon_SelectNature(u8 taskId)
 }
 static void DebugAction_Give_Pokemon_SelectAbility(u8 taskId)
 {
-    u8 abilityId;
+    u16 abilityId;
     u8 abilityCount = 2 - 1; //-1 for proper iteration
     u8 i = 0;
     #ifdef POKEMON_EXPANSION

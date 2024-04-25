@@ -22,15 +22,34 @@ BerryTree_EventScript_CheckSoil::
 	lock
 	faceplayer
 	specialvar VAR_RESULT, PlayerHasBerries
-	goto_if_eq VAR_RESULT, TRUE, BerryTree_EventScript_WantToPlant
+	goto_if_eq VAR_RESULT, TRUE, BerryTree_EventScript_HasMulch
 	message BerryTree_Text_ItsSoftLoamySoil
 	waitmessage
 	waitbuttonpress
 	release
 	end
 
+BerryTree_EventScript_HasMulch::
+	specialvar VAR_RESULT, PlayerHasMulch
+	goto_if_eq VAR_RESULT, TRUE, BerryTree_EventScript_WantToMulch
+	goto_if_eq VAR_RESULT, FALSE, BerryTree_EventScript_WantToPlant
+	release
+	end
+
 BerryTree_EventScript_WantToPlant::
 	msgbox BerryTree_Text_WantToPlant, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, YES, BerryTree_EventScript_ChooseBerryToPlant
+	goto_if_eq VAR_RESULT, NO, BerryTree_EventScript_CancelPlanting
+	end
+
+BerryTree_EventScript_WantToMulch::
+	msgbox BerryTree_Text_WantToMulch, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, YES, BerryTree_EventScript_ChooseMulchToAdd
+	goto_if_eq VAR_RESULT, NO, BerryTree_EventScript_WantToPlantShort
+	end
+
+BerryTree_EventScript_WantToPlantShort::
+	msgbox BerryTree_Text_WantToPlantShort, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, YES, BerryTree_EventScript_ChooseBerryToPlant
 	goto_if_eq VAR_RESULT, NO, BerryTree_EventScript_CancelPlanting
 	end
@@ -46,6 +65,28 @@ BerryTree_EventScript_ChooseBerryToPlant::
 
 BerryTree_EventScript_CancelPlanting::
 	release
+	end
+
+BerryTree_EventScript_ChooseMulchToAdd::
+	fadescreen FADE_TO_BLACK
+	closemessage
+	chooseitem ITEMS_POCKET
+	switch VAR_ITEM_ID
+	case ITEM_GROWTH_MULCH, BerryTree_EventScript_ChooseMulchToAdd2
+	case ITEM_DAMP_MULCH, BerryTree_EventScript_ChooseMulchToAdd2
+	case ITEM_STABLE_MULCH, BerryTree_EventScript_ChooseMulchToAdd2
+	case ITEM_RICH_MULCH, BerryTree_EventScript_ChooseMulchToAdd2
+	case ITEM_SURPRISE_MULCH, BerryTree_EventScript_ChooseMulchToAdd2
+	case ITEM_AMAZE_MULCH, BerryTree_EventScript_ChooseMulchToAdd2
+	goto BerryTree_EventScript_CancelPlanting
+BerryTree_EventScript_ChooseMulchToAdd2::
+	copyvar VAR_0x8004, VAR_ITEM_ID
+	removeitem VAR_ITEM_ID
+	buffernumberstring STR_VAR_2, VAR_0x8004
+	message BerryTree_Text_MulchWasAdded
+	waitmessage
+	waitbuttonpress
+	goto BerryTree_EventScript_ChooseBerryToPlant
 	end
 
 BerryTree_EventScript_CheckBerryStage1::
@@ -186,51 +227,55 @@ BerryTree_EventScript_PlantBerry::
 	return
 
 BerryTree_Text_ItsSoftLoamySoil:
-	.string "It's soft, loamy soil.$"
+	.string "Es un suelo blando y fértil.$"
 
 BerryTree_Text_WantToPlant:
-	.string "It's soft, loamy soil.\n"
-	.string "Want to plant a BERRY?$"
+	.string "Es un suelo blando y fértil.\n"
+	.string "¿Quieres plantar una baya?$"
+
+BerryTree_Text_WantToPlantShort:
+	.string "¿Quieres plantar una baya?$"
+
+BerryTree_Text_WantToMulch:
+	.string "Es un suelo blando y fértil.\n"
+	.string "¿Quieres aplicarle abono?$"
 
 BerryTree_Text_PlantedOneBerry:
-	.string "{PLAYER} planted one {STR_VAR_1} in\n"
-	.string "the soft, loamy soil.$"
+	.string "{PLAYER} plantó una {STR_VAR_1}\n"
+	.string "en el blando y fértil suelo.$"
 
 BerryTree_Text_BerryGrowthStage1:
-	.string "One {STR_VAR_1} was planted here.$"
+	.string "Una {STR_VAR_1} fue plantada con {STR_VAR_2}.$"
 
 BerryTree_Text_BerryGrowthStage2:
-	.string "{STR_VAR_1} has sprouted.$"
+	.string "{STR_VAR_1} ha crecido.$"
 
 BerryTree_Text_BerryGrowthStage3:
-	.string "This {STR_VAR_1} plant is growing taller.$"
+	.string "El árbol de {STR_VAR_1}\nestá creciendo.$"
 
 BerryTree_Text_BerryGrowthStage4:
-	.string "These {STR_VAR_1} flowers are blooming\n"
-	.string "{STR_VAR_2}.$"
+	.string "Las flores de {STR_VAR_1}\n"
+	.string "están {STR_VAR_2}.$"
 
 BerryTree_Text_CareAdverbGreat:
-	.string "very beautifully$"
+	.string "hermosas$"
 
 BerryTree_Text_CareAdverbPoor:
-	.string "cutely$"
+	.string "feas$"
 
 BerryTree_Text_CareAdverbGood:
-	.string "prettily$"
+	.string "lindas$"
 
 BerryTree_Text_WantToPick:
-	.string "You found {STR_VAR_2} {STR_VAR_1}!\p"
-	.string "Do you want to pick the\n"
+	.string "¡{STR_VAR_2} {STR_VAR_1}!\p"
+	.string "¿Te llevarías algunas\n"
 	.string "{STR_VAR_1}?$"
 
 BerryTree_Text_PickedTheBerry:
-	.string "{PLAYER} picked the {STR_VAR_2} {STR_VAR_1}.$"
+	.string "{PLAYER} recogió {STR_VAR_2} {STR_VAR_1}.$"
 
 BerryTree_Text_PutAwayBerry:
-	.string "{PLAYER} put away the {STR_VAR_1}\n"
-	.string "in the BAG's BERRIES POCKET.\p"
-	.string "The soil returned to its soft and\n"
-	.string "loamy state.$"
+	.string "El suelo sigue fértil.$"
 
 BerryTree_Text_BerryPocketFull:
 	.string "The BAG's BERRIES POCKET is full.\p"
@@ -252,3 +297,7 @@ BerryTree_Text_PlantIsDelighted:
 
 BerryTree_Text_ExclamationPoint:
 	.string "!$"
+
+BerryTree_Text_MulchWasAdded:
+	.string "Abonó el suelo con {STR_VAR_2}.\n"
+	.string "Elige una baya para plantar.$"

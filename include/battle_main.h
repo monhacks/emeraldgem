@@ -29,7 +29,11 @@ struct TrainerBall
 };
 
 
-#define TYPE_NAME_LENGTH 6
+#if GAME_LANGUAGE == LANGUAGE_SPANISH
+	#define TYPE_NAME_LENGTH 9
+#else
+	#define TYPE_NAME_LENGTH 6
+#endif
 
 #if B_EXPANDED_ABILITY_NAMES
 #define ABILITY_NAME_LENGTH 16
@@ -79,7 +83,8 @@ void RunBattleScriptCommands_PopCallbacksStack(void);
 void RunBattleScriptCommands(void);
 bool8 TryRunFromBattle(u8 battlerId);
 void SpecialStatusesClear(void);
-void SetTypeBeforeUsingMove(u16 move, u8 battlerAtk);
+u32 SetTypeSuperEffective(u16 move, u8 battlerAtk, u8 battlerDef);
+void SetTypeBeforeUsingMove(u16 move, u8 battlerAtk, u8 battlerTarget);
 bool32 IsWildMonSmart(void);
 void SpriteCB_MoveWildMonToRight(struct Sprite *sprite);
 void SpriteCB_WildMonShowHealthbox(struct Sprite *sprite);

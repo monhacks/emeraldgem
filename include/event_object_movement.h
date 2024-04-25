@@ -102,16 +102,27 @@ void ObjectEventClearHeldMovement(struct ObjectEvent *);
 void ObjectEventClearHeldMovementIfActive(struct ObjectEvent *);
 void TrySpawnObjectEvents(s16, s16);
 u8 CreateObjectGraphicsSprite(u16, void (*)(struct Sprite *), s16 x, s16 y, u8 subpriority);
-u8 TrySpawnObjectEvent(u8, u8, u8);
+// <<<<<<< HEAD
+// u8 TrySpawnObjectEvent(u8, u8, u8);
+// =======
+u8 TrySpawnObjectEvent(u8 localId, u8 mapNum, u8 mapGroup);
+// >>>>>>> 7f999b172abb4aa1f50e408fd8777c64ccf2c4d1
 u8 SpawnSpecialObjectEventParameterized(u16 graphicsId, u8 movementBehavior, u8 localId, s16 x, s16 y, u8 elevation);
 u8 SpawnSpecialObjectEvent(struct ObjectEventTemplate *);
 void SetSpritePosToMapCoords(s16, s16, s16 *, s16 *);
 void CameraObjectReset1(void);
 void ObjectEventSetGraphicsId(struct ObjectEvent *, u16 graphicsId);
+
 void ObjectEventTurn(struct ObjectEvent *, u8);
 void ObjectEventTurnByLocalIdAndMap(u8, u8, u8, u8);
 const struct ObjectEventGraphicsInfo *GetObjectEventGraphicsInfo(u16 graphicsId);
 void SetObjectInvisibility(u8, u8, u8, bool8);
+// =======
+// void ObjectEventTurn(struct ObjectEvent *, u8 direction);
+// void ObjectEventTurnByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroup, u8 direction);
+// const struct ObjectEventGraphicsInfo *GetObjectEventGraphicsInfo(u16 graphicsId);
+// void SetObjectInvisibility(u8 localId, u8 mapNum, u8 mapGroup, bool8 invisible);
+// >>>>>>> 7f999b172abb4aa1f50e408fd8777c64ccf2c4d1
 void FreeAndReserveObjectSpritePalettes(void);
 void SetObjectEventSpritePosByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroup, s16 x, s16 y);
 void ResetObjectSubpriority(u8, u8, u8);

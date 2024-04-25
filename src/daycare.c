@@ -911,27 +911,11 @@ static void _GiveEggFromDaycare(struct DayCare *daycare)
     u16 species;
     u8 parentSlots[DAYCARE_MON_COUNT];
     bool8 isEgg;
-	u32 value;
-	s32 personality;
-	u32 totalRerolls = 0;
-	value = gSaveBlock2Ptr->playerTrainerId[0]
-                 | (gSaveBlock2Ptr->playerTrainerId[1] << 8)
-                 | (gSaveBlock2Ptr->playerTrainerId[2] << 16)
-                 | (gSaveBlock2Ptr->playerTrainerId[3] << 24);
 
     species = DetermineEggSpeciesAndParentSlots(daycare, parentSlots);
     AlterEggSpeciesWithIncenseItem(&species, daycare);
 	if (GetBoxMonData(&daycare->mons[0].mon, MON_DATA_OT_ID, NULL) != GetBoxMonData(&daycare->mons[1].mon, MON_DATA_OT_ID, NULL)){
-		if (CheckBagHasItem(ITEM_SHINY_CHARM, 1)){
-			totalRerolls = 3;
-		}
-		totalRerolls += 6;
-		while (((GET_SHINY_VALUE(value, personality)) >= SHINY_ODDS && (totalRerolls > 0)) && (GetNatureFromPersonality(daycare->offspringPersonality) != GetNatureFromPersonality(personality)))
-		{
-			personality = Random32();
-			totalRerolls--;
-		}
-		daycare->offspringPersonality = personality;
+		daycare->offspringPersonality = CalculateShininess(FALSE, METHOD_MASUDA_METHOD, 0, 0, GetNatureFromPersonality(daycare->offspringPersonality));
 	}
     SetInitialEggData(&egg, species, daycare);
     InheritIVs(&egg, daycare);
@@ -1031,7 +1015,7 @@ static bool8 TryProduceOrHatchEgg(struct DayCare *daycare)
             if (GetMonData(&gPlayerParty[i], MON_DATA_SANITY_IS_BAD_EGG))
                 continue;
 
-            eggCycles = GetMonData(&gPlayerParty[i], MON_DATA_FRIENDSHIP) - 1;
+            eggCycles = GetMonData(&gPlayerParty[i], MON_DATA_FRIENDSHIP);
             if (eggCycles != 0)
             {
                 if (eggCycles >= toSub)

@@ -176,7 +176,8 @@ LavaridgeTown_Gym_1F_EventScript_Flannery::
 	trainerbattle_single TRAINER_FLANNERY_1, LavaridgeTown_Gym_1F_Text_FlanneryIntro, LavaridgeTown_Gym_1F_Text_FlanneryDefeat, LavaridgeTown_Gym_1F_EventScript_FlanneryDefeated, NO_MUSIC
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, LavaridgeTown_Gym_1F_EventScript_FlanneryRematch
-	goto_if_unset FLAG_RECEIVED_TM50, LavaridgeTown_Gym_1F_EventScript_GiveOverheat2
+	checkitem ITEM_TM50
+	goto_if_eq VAR_RESULT, FALSE, LavaridgeTown_Gym_1F_EventScript_GiveOverheat2
 	msgbox LavaridgeTown_Gym_1F_Text_FlanneryPostBattle, MSGBOX_DEFAULT
 	release
 	end
@@ -214,10 +215,24 @@ LavaridgeTown_Gym_1F_EventScript_FlanneryDefeated::
 	end
 
 LavaridgeTown_Gym_1F_EventScript_GiveMegaStone::
+	switch VAR_STARTER_REGION
+	case 1, LavaridgeTown_Gym_1F_EventScript_GiveMegaStoneKanto
+	case 8, LavaridgeTown_Gym_1F_EventScript_GiveMegaStoneGalar
 	switch VAR_STARTER_MON
 	case 0, LavaridgeTown_Gym_1F_EventScript_GiveMegaStone_2
 	case 1, LavaridgeTown_Gym_1F_EventScript_GiveMegaStone_3
 	case 2, LavaridgeTown_Gym_1F_EventScript_GiveMegaStone_4
+	return
+
+LavaridgeTown_Gym_1F_EventScript_GiveMegaStoneKanto:
+	switch VAR_STARTER_MON
+	case 0, LavaridgeTown_Gym_1F_EventScript_GiveMegaStone_5
+	case 1, LavaridgeTown_Gym_1F_EventScript_GiveMegaStone_6
+	case 2, LavaridgeTown_Gym_1F_EventScript_GiveMegaStone_7
+	return
+
+LavaridgeTown_Gym_1F_EventScript_GiveMegaStoneGalar:
+	giveitem ITEM_GIGANTAMAX_STONE, 1
 	return
 
 LavaridgeTown_Gym_1F_EventScript_GiveMegaStone_2:
@@ -232,6 +247,18 @@ LavaridgeTown_Gym_1F_EventScript_GiveMegaStone_4:
 	giveitem ITEM_SWAMPERTITE, 1
 	return
 
+LavaridgeTown_Gym_1F_EventScript_GiveMegaStone_5:
+	giveitem ITEM_VENUSAURITE, 1
+	return
+
+LavaridgeTown_Gym_1F_EventScript_GiveMegaStone_6:
+	giveitem ITEM_CHARIZARDITE_X, 1
+	giveitem ITEM_CHARIZARDITE_Y, 1
+	return
+
+LavaridgeTown_Gym_1F_EventScript_GiveMegaStone_7:
+	giveitem ITEM_BLASTOISINITE, 1
+	return
 
 LavaridgeTown_Gym_1F_EventScript_GiveOverheat2::
 	giveitem ITEM_TM50
@@ -240,7 +267,6 @@ LavaridgeTown_Gym_1F_EventScript_GiveOverheat2::
 	msgbox LavaridgeTown_Gym_1F_Text_ExplainOverheat, MSGBOX_DEFAULT
 	closemessage
 	hidenamebox
-	setflag FLAG_RECEIVED_TM50
 	release
 	end
 
@@ -251,7 +277,6 @@ LavaridgeTown_Gym_1F_EventScript_GiveOverheat::
 	msgbox LavaridgeTown_Gym_1F_Text_ExplainOverheat, MSGBOX_DEFAULT
 	closemessage
 	hidenamebox
-	setflag FLAG_RECEIVED_TM50
 	return
 
 LavaridgeTown_Gym_1F_EventScript_FlanneryRematch::

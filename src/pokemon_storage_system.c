@@ -9483,6 +9483,17 @@ u32 GetBoxMonDataAt(u8 boxId, u8 boxPosition, s32 request)
         return 0;
 }
 
+u32 GetBoxMonNatureAt(u8 boxId, u8 boxPosition)
+{
+    if (boxId < TOTAL_BOXES_COUNT && boxPosition < IN_BOX_COUNT){
+		if (GetBoxMonData(&gPokemonStoragePtr->boxes[boxId][boxPosition], MON_DATA_HIDDEN_NATURE, 0) == HIDDEN_NATURE_NONE)
+			return GetNatureFromPersonality(GetBoxMonData(&gPokemonStoragePtr->boxes[boxId][boxPosition], MON_DATA_PERSONALITY));
+		return GetBoxMonData(&gPokemonStoragePtr->boxes[boxId][boxPosition], MON_DATA_HIDDEN_NATURE, 0);
+	}
+    else
+        return 0;
+}
+
 void SetBoxMonDataAt(u8 boxId, u8 boxPosition, s32 request, const void *value)
 {
     if (boxId < TOTAL_BOXES_COUNT && boxPosition < IN_BOX_COUNT)

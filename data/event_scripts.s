@@ -1176,3 +1176,15 @@ Decline:
 	.include "data/maps/OldaleRuins/scripts.inc"
 
 	.include "data/maps/MossdeepCity_House5/scripts.inc"
+
+	.include "data/maps/OldaleRuinsInsideF1/scripts.inc"
+
+	.include "data/maps/OldaleRuinsInsideBF1/scripts.inc"
+
+	.include "data/maps/OldaleRuinsInsideBF2/scripts.inc"
+
+	.include "data/maps/OldaleRuinsLegendaryRoom/scripts.inc"
+
+	.include "data/maps/Route104North/scripts.inc"
+
+	.include "data/maps/SafariZone_SpecialArea/scripts.inc"

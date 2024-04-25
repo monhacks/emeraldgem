@@ -14,4 +14,3 @@ RustboroCity_House2_Text_TrainerSchoolExcellent:
 
 RustboroCity_House2_Text_RoxanneKnowsALot:
 	.string "¡Roxanne es genial!$"
-

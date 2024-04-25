@@ -275,7 +275,7 @@ const struct RematchTrainer gRematchTable[REMATCH_TABLE_ENTRIES] =
     [REMATCH_WILTON] = REMATCH(TRAINER_WILTON_1, TRAINER_WILTON_2, TRAINER_WILTON_3, TRAINER_WILTON_4, TRAINER_WILTON_5, ROUTE111),
     [REMATCH_VALERIE] = REMATCH(TRAINER_VALERIE_1, TRAINER_VALERIE_2, TRAINER_VALERIE_3, TRAINER_VALERIE_4, TRAINER_VALERIE_5, MT_PYRE_6F),
     [REMATCH_CINDY] = REMATCH(TRAINER_CINDY_1, TRAINER_CINDY_3, TRAINER_CINDY_4, TRAINER_CINDY_5, TRAINER_CINDY_6, ROUTE104),
-    [REMATCH_THALIA] = REMATCH(TRAINER_THALIA_1, TRAINER_THALIA_2, TRAINER_THALIA_3, TRAINER_THALIA_4, TRAINER_THALIA_5, ABANDONED_SHIP_ROOMS_1F),
+    // [REMATCH_THALIA] = REMATCH(TRAINER_THALIA_1, TRAINER_THALIA_2, TRAINER_THALIA_3, TRAINER_THALIA_4, TRAINER_THALIA_5, ABANDONED_SHIP_ROOMS_1F),
     [REMATCH_JESSICA] = REMATCH(TRAINER_JESSICA_1, TRAINER_JESSICA_2, TRAINER_JESSICA_3, TRAINER_JESSICA_4, TRAINER_JESSICA_5, ROUTE121),
     [REMATCH_WINSTON] = REMATCH(TRAINER_WINSTON_1, TRAINER_WINSTON_2, TRAINER_WINSTON_3, TRAINER_WINSTON_4, TRAINER_WINSTON_5, ROUTE104),
     [REMATCH_STEVE] = REMATCH(TRAINER_STEVE_1, TRAINER_STEVE_2, TRAINER_STEVE_3, TRAINER_STEVE_4, TRAINER_STEVE_5, ROUTE114),
@@ -555,14 +555,18 @@ void StartWallyTutorialBattle(void)
 
 void BattleSetup_StartScriptedWildBattle(void)
 {
-    LockPlayerFieldControls();
-    gMain.savedCallback = CB2_EndScriptedWildBattle;
-    gBattleTypeFlags = 0;
-    CreateBattleStartTask(GetWildBattleTransition(), 0);
-    IncrementGameStat(GAME_STAT_TOTAL_BATTLES);
-    IncrementGameStat(GAME_STAT_WILD_BATTLES);
-    IncrementDailyWildBattles();
-    TryUpdateGymLeaderRematchFromWild();
+	if (FlagGet(FLAG_SYS_SAFARI_MODE))
+        DoSafariBattle();
+	else {
+		LockPlayerFieldControls();
+		gMain.savedCallback = CB2_EndScriptedWildBattle;
+		gBattleTypeFlags = 0;
+		CreateBattleStartTask(GetWildBattleTransition(), 0);
+		IncrementGameStat(GAME_STAT_TOTAL_BATTLES);
+		IncrementGameStat(GAME_STAT_WILD_BATTLES);
+		IncrementDailyWildBattles();
+		TryUpdateGymLeaderRematchFromWild();
+	}
 }
 
 void BattleSetup_StartScriptedDoubleWildBattle(void)
@@ -692,7 +696,7 @@ void StartRegiBattle(void)
         transitionId = B_TRANSITION_REGISTEEL;
         break;
     default:
-        transitionId = B_TRANSITION_GRID_SQUARES;
+        transitionId = B_TRANSITION_BLUR;
         break;
     }
     CreateBattleStartTask(transitionId, MUS_VS_REGI);
@@ -748,7 +752,7 @@ u8 BattleSetup_GetTerrainId(void)
     PlayerGetDestCoords(&x, &y);
     tileBehavior = MapGridGetMetatileBehaviorAt(x, y);
 
-    if (MetatileBehavior_IsTallGrass(tileBehavior))
+    if (MetatileBehavior_IsTallGrass(tileBehavior) || MetatileBehavior_IsDarkGrass(tileBehavior))
         return BATTLE_TERRAIN_GRASS;
     if (MetatileBehavior_IsLongGrass(tileBehavior))
         return BATTLE_TERRAIN_LONG_GRASS;
@@ -859,9 +863,59 @@ static u8 GetSumOfEnemyPartyLevel(u16 opponentId, u8 numMons)
     sum = 0;
 
     for (i = 0; i < count; i++)
-        sum += party[i].lvl;
+        sum += GetScaledLevel(party[i].lvl);
     
     return sum;
+}
+
+u8 GetScaledLevel(u8 lvl)
+{
+    u8 badgeCount = 0;
+    u8 levelScaling = 0;
+    u16 playerAverage = 0;
+    u16 previousLevel = 0;
+    u16 currentLevel = 0;
+    u32 i;
+    for (i = FLAG_BADGE01_GET; i < FLAG_BADGE01_GET + NUM_BADGES; i++)
+    {
+        if (FlagGet(i))
+            badgeCount++;
+    }
+	i = 0;
+    if (FlagGet(FLAG_IS_CHAMPION))
+        levelScaling = 5;
+    else if (badgeCount >= 6)
+        levelScaling = 4;
+    else if (badgeCount >= 4)
+        levelScaling = 3;
+    else if (badgeCount >= 2)
+        levelScaling = 2;
+    else
+        levelScaling = 1;
+	
+	for (i = 0; i < PARTY_SIZE; i++){
+		currentLevel = GetMonData(&gPlayerParty[i], MON_DATA_LEVEL);
+		playerAverage += currentLevel;
+		if (previousLevel == 0)
+			previousLevel = currentLevel;
+		if ((currentLevel - previousLevel >= 10) || (previousLevel - currentLevel >= 10))
+			playerAverage += currentLevel/3;
+	}
+	playerAverage /= PARTY_SIZE;
+	if (playerAverage > (lvl + 1) && gSaveBlock2Ptr->optionsDifficulty > DIFFICULTY_NORMAL){
+		levelScaling += (playerAverage - (lvl + 1));
+	}
+	
+    if (gSaveBlock2Ptr->optionsDifficulty >= DIFFICULTY_HARD)
+        lvl += levelScaling;
+    else if (gSaveBlock2Ptr->optionsDifficulty == DIFFICULTY_EASY)
+        lvl -= levelScaling;
+
+    if (lvl > 100)
+        lvl = 100;
+    if (lvl < 1)
+        lvl = 1;
+    return lvl;
 }
 
 u8 GetWildBattleTransition(void)

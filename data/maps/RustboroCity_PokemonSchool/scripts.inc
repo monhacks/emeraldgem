@@ -278,5 +278,3 @@ RustboroCity_PokemonSchool_Text_ScottMetAlreadyStoneBadge:
 	.string "Si entrenas lo suficiente,\nverás que aparece un nuevo menú\lque te deja seleccionar los\lmovimientos que pueden aprender\llos Pokémon.\p"
 	.string "Siempre recuerda revisar qué\nmovimientos pueden aprender tus\lPokémon luego de evolucionarlos.\p"
 	.string "Deberías intentar hacerlo\nantes de cada Batalla de Gimnasio.$"
-
-

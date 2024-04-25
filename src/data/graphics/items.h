@@ -579,6 +579,7 @@ const u32 gItemIconPalette_SweetApple[] = INCBIN_U32("graphics/items/icon_palett
 
 const u32 gItemIcon_TartApple[] = INCBIN_U32("graphics/items/icons/tart_apple.4bpp.lz");
 const u32 gItemIconPalette_TartApple[] = INCBIN_U32("graphics/items/icon_palettes/tart_apple.gbapal.lz");
+const u32 gItemIcon_GigaStone[] = INCBIN_U32("graphics/items/icons/giga_stone.4bpp.lz");
 
 const u32 gItemIcon_CrackedPot[] = INCBIN_U32("graphics/items/icons/cracked_pot.4bpp.lz");
 const u32 gItemIcon_ChippedPot[] = INCBIN_U32("graphics/items/icons/chipped_pot.4bpp.lz");

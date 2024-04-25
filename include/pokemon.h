@@ -9,6 +9,10 @@
 #define GET_BASE_SPECIES_ID(speciesId) (GetFormSpeciesId(speciesId, 0))
 #define FORM_SPECIES_END (0xffff)
 
+#define METHOD_NONE 0
+#define METHOD_MASUDA_METHOD 1
+#define METHOD_DEXNAV 2
+
 // Property labels for Get(Box)MonData / Set(Box)MonData
 enum {
     MON_DATA_PERSONALITY,
@@ -34,8 +38,11 @@ enum {
     MON_DATA_PP4,
     MON_DATA_PP_BONUSES,
     MON_DATA_COOL,
+    MON_DATA_COOL_CV,
     MON_DATA_BEAUTY,
+    MON_DATA_BEAUTY_CV,
     MON_DATA_CUTE,
+    MON_DATA_CUTE_CV,
     MON_DATA_EXP,
     MON_DATA_HP_EV,
     MON_DATA_ATK_EV,
@@ -45,6 +52,7 @@ enum {
     MON_DATA_SPDEF_EV,
     MON_DATA_FRIENDSHIP,
     MON_DATA_SMART,
+    MON_DATA_SMART_CV,
     MON_DATA_POKERUS,
     MON_DATA_MET_LOCATION,
     MON_DATA_MET_LEVEL,
@@ -59,7 +67,9 @@ enum {
     MON_DATA_IS_EGG,
     MON_DATA_ABILITY_NUM,
     MON_DATA_TOUGH,
+    MON_DATA_TOUGH_CV,
     MON_DATA_SHEEN,
+	MON_DATA_CONTEST_EXP,
     MON_DATA_OT_GENDER,
     MON_DATA_COOL_RIBBON,
     MON_DATA_BEAUTY_RIBBON,
@@ -101,153 +111,55 @@ enum {
     MON_DATA_SPATK2,
     MON_DATA_SPDEF2,
 	MON_DATA_HIDDEN_NATURE,
+	MON_DATA_HIDDEN_POWER,
 };
 
-// <<<<<<< HEAD
-// struct PokemonSubstruct0
-// {
-    // u16 species;
-    // u16 heldItem;
-    // u32 experience;
-    // u8 ppBonuses;
-    // u8 friendship;
-    // u8 hiddenNature:5;  // 25 natures
-    // u8 free_sub0:3;
-    // u8 free_sub0_b;
-// };
-
-// struct PokemonSubstruct1
-// {
-    // u16 moves[MAX_MON_MOVES];
-    // u8 pp[MAX_MON_MOVES];
-// };
-
-// struct PokemonSubstruct2
-// {
-    // u8 hpEV;
-    // u8 attackEV;
-    // u8 defenseEV;
-    // u8 speedEV;
-    // u8 spAttackEV;
-    // u8 spDefenseEV;
-    // u8 cool;
-    // u8 beauty;
-    // u8 cute;
-    // u8 smart;
-    // u8 tough;
-    // u8 sheen;
-// };
-
-// struct PokemonSubstruct3
-// {
- // /* 0x00 */ u8 pokerus;
- // /* 0x01 */ u8 metLocation;
-
- // /* 0x02 */ u16 metLevel:7;
- // /* 0x02 */ u16 metGame:4;
- // /* 0x03 */ u16 pokeball:4;
- // // /* 0x03 */ u16 unused1:4;
- // /* 0x03 */ u16 otGender:1;
-
- // /* 0x04 */ u32 hpIV:5;
- // /* 0x04 */ u32 attackIV:5;
- // /* 0x05 */ u32 defenseIV:5;
- // /* 0x05 */ u32 speedIV:5;
- // /* 0x05 */ u32 spAttackIV:5;
- // /* 0x06 */ u32 spDefenseIV:5;
- // /* 0x07 */ u32 isEgg:1;
- // /* 0x07 */ u32 unused2:1;
-
- // /* 0x08 */ u32 coolRibbon:3;
- // /* 0x08 */ u32 beautyRibbon:3;
- // /* 0x08 */ u32 cuteRibbon:3;
- // /* 0x09 */ u32 smartRibbon:3;
- // /* 0x09 */ u32 toughRibbon:3;
- // /* 0x09 */ u32 championRibbon:1;
- // /* 0x0A */ u32 winningRibbon:1;
- // /* 0x0A */ u32 victoryRibbon:1;
- // /* 0x0A */ u32 artistRibbon:1;
- // /* 0x0A */ u32 effortRibbon:1;
- // /* 0x0A */ u32 marineRibbon:1; // never distributed
- // /* 0x0A */ u32 landRibbon:1; // never distributed
- // /* 0x0A */ u32 skyRibbon:1; // never distributed
- // /* 0x0A */ u32 countryRibbon:1; // distributed during Pokémon Festa '04 and '05 to tournament winners
- // /* 0x0B */ u32 nationalRibbon:1;
- // /* 0x0B */ u32 earthRibbon:1;
- // /* 0x0B */ u32 worldRibbon:1; // distributed during Pokémon Festa '04 and '05 to tournament winners
- // /* 0x0B */ u32 unusedRibbons:2; // discarded in Gen 4
- // /* 0x0B */ u32 abilityNum:2;
- // /* 0x0B */ u32 eventLegal:1; // controls Mew & Deoxys obedience; if set, Pokémon is a fateful encounter in Gen 4+; set for in-game event island legendaries, some distributed events, and Pokémon from XD: Gale of Darkness.
-// }; /* size = 12 */
-
-// // Number of bytes in the largest Pokémon substruct.
-// // They are assumed to be the same size, and will be padded to
-// // the largest size by the union.
-// // By default they are all 12 bytes.
-// #define NUM_SUBSTRUCT_BYTES (max(sizeof(struct PokemonSubstruct0),     \
-                             // max(sizeof(struct PokemonSubstruct1),     \
-                             // max(sizeof(struct PokemonSubstruct2),     \
-                                 // sizeof(struct PokemonSubstruct3)))))
-
-// union PokemonSubstruct
-// {
-    // struct PokemonSubstruct0 type0;
-    // struct PokemonSubstruct1 type1;
-    // struct PokemonSubstruct2 type2;
-    // struct PokemonSubstruct3 type3;
-    // u16 raw[NUM_SUBSTRUCT_BYTES / 2]; // /2 because it's u16, not u8
-// };
-
-// =======
-// >>>>>>> 8bebfa50b48771e0be6dc84f4b4a98bbf3e1bba1
 struct BoxPokemon
 {
     /*0x00*/ u32 personality;
     /*0x04*/ u32 otId;
     /*0x08*/ u8 nickname[POKEMON_NAME_LENGTH];
-    /*0x12*/ u8 language:3; // 7 languages
-             u8 pokerus:5;  // 1-0xF is the timer. 0x10 is set when timer runs out
-    /*0x13*/ u8 isBadEgg:1;
+             u8 pokerus:1;
              u8 hasSpecies:1;
              u8 isEgg:1;
-             u8 eventLegal:1;   // controls Mew & Deoxys obedience; if set, Pokémon is a fateful encounter in Gen 4+; set for in-game event island legendaries, some distributed events, and Pokémon from XD: Gale of Darkness.
              u8 markings:4; // 15 combinations as per sAnims_MarkingCombo
     /*0x14*/ u8 otName[PLAYER_NAME_LENGTH];
     /*0x1B*/ u8 metLocation;    // better to not limit the number of map sections. this is actually used for friendship growth, too
     /*0x1C*/ u32 species:11;    // up to 2047 species. could probably go down to 10 bits...
              u32 heldItem:10;   // up to 1023 items. could probably be 9 bits if hold items are limited to IDs below 511
-             u32 metLevel:7;
-             u32 metGame:4;
+             u8 metLevel:7;
+             u32 contestExp:9; // 0 - 510
     /*0x20*/ u32 experience:21;
-             u32 spAttackIV:5;
-             u32 spDefenseIV:5;
-             u32 otGender:1;
+             // u32 otGender:1;
     /*0x24*/ u32 move1:10;  // 1023 moves
              u32 move2:10;  // bits 11-20
              u32 move3:10;  // bits 21-30
-             u32 unused24:2;
     /*0x28*/ u16 move4:10;  // bits 31-40
-             u16 hpIV:5;        // 41-45 
-             u16 unused22:1;    
     /*0x2A*/ u16 attackIV:5;    // 46-50
              u16 defenseIV:5;   // 51-55
              u16 speedIV:5;     // 56-60
-             u16 unused2A:1;
     /*0x2C*/ u8 ppBonuses;
     /*0x2D*/ u8 friendship;
     /*0x2E*/ u8 pokeball:6;
              u8 abilityNum:2;
-    /*0x2F*/ u8 hpEV;
-    /*0x30*/ u8 attackEV;
-    /*0x31*/ u8 defenseEV;
-    /*0x32*/ u8 speedEV;
-    /*0x33*/ u8 spAttackEV;
-    /*0x34*/ u8 spDefenseEV; 
+    /*0x2F*/ u8 hpEV:6;
+    /*0x30*/ u8 attackEV:6;
+    /*0x31*/ u8 defenseEV:6;
+    /*0x32*/ u8 speedEV:6;
+    /*0x33*/ u8 spAttackEV:6;
+    /*0x34*/ u8 spDefenseEV:6; 
     /*0x35*/ u8 pp1:6;
              u8 pp2:6;
              u8 pp3:6;
              u8 pp4:6;
-}; /* size = 0x3C (60) bytes */
+			 u8 coolCV:2;
+			 u8 toughCV:2;
+			 u8 smartCV:2;
+			 u8 cuteCV:2;
+			 u8 beautyCV:2;
+			 u8 hiddenNature:5; // remain 10 bits
+			 u8 hiddenPower:5; // remain 10 bits
+}; /* size = 0x3C (56) bytes */
 
 struct Pokemon
 {
@@ -307,11 +219,11 @@ struct BattlePokemon
     /*0x17*/ u32 spDefenseIV:5;
     /*0x17*/ u32 abilityNum:2;
     /*0x18*/ s8 statStages[NUM_BATTLE_STATS];
-    /*0x20*/ u8 ability;
+    /*0x20*/ u16 ability;
     /*0x21*/ u8 type1;
     /*0x22*/ u8 type2;
 	/*0x07*/ u8 type3;
-    /*0x23*/ u8 unknown;
+    // /*0x23*/ u8 unknown;
     /*0x24*/ u8 pp[MAX_MON_MOVES];
     /*0x28*/ u16 hp;
     /*0x2A*/ u8 level;
@@ -326,6 +238,7 @@ struct BattlePokemon
     /*0x4C*/ u32 status1;
     /*0x50*/ u32 status2;
     /*0x54*/ u32 otId;
+    /*0x54*/ u8 hiddenPower:5;
 };
 
 struct BaseStats
@@ -604,6 +517,7 @@ u32 CanMonLearnTMHM(struct Pokemon *mon, u8 tm);
 extern const u32 sExpCandyExperienceTable[];
 void CreateShinyMonWithNature(struct Pokemon *mon, u16 species, u8 level, u8 nature);
 u8 SendMonToPC(struct Pokemon* mon);
-
+u32 CalculateShininess(bool8 affectsShinyFlags, u8 method, u8 flagAffected, u16 species, u8 nature);
+// #define METHOD_CHAIN_FISHING 3;
 
 #endif // GUARD_POKEMON_H

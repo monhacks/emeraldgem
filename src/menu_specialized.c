@@ -1,7 +1,9 @@
 #include "global.h"
 #include "malloc.h"
+#include "battle_script_commands.h"
 #include "battle_main.h"
 #include "contest_effect.h"
+#include "contest.h"
 #include "data.h"
 #include "decompress.h"
 #include "gpu_regs.h"
@@ -886,6 +888,22 @@ void MoveRelearnerCreateYesNoMenu(void)
 // Condition menu
 //----------------
 
+s32 GetBoxOrPartyMonNature(u16 boxId, u16 monId)
+{
+    s32 ret;
+
+    if (boxId == TOTAL_BOXES_COUNT) // Party mon.
+    {
+		ret = GetNature(&gPlayerParty[monId], TRUE);
+    }
+    else
+    {	
+		ret = GetBoxMonNatureAt(boxId, monId);
+    }
+
+    return ret;
+}
+
 s32 GetBoxOrPartyMonData(u16 boxId, u16 monId, s32 request, u8 *dst)
 {
     s32 ret;
@@ -908,10 +926,12 @@ s32 GetBoxOrPartyMonData(u16 boxId, u16 monId, s32 request, u8 *dst)
     return ret;
 }
 
+
 // Gets the name/gender/level string for the condition menu
 static u8 *GetConditionMenuMonString(u8 *dst, u16 boxId, u16 monId)
 {
     u16 box, mon, species, level, gender;
+	u32 experience;
     struct BoxPokemon *boxMon;
     u8 *str;
 
@@ -929,14 +949,18 @@ static u8 *GetConditionMenuMonString(u8 *dst, u16 boxId, u16 monId)
     species = GetBoxOrPartyMonData(box, mon, MON_DATA_SPECIES, NULL);
     if (box == TOTAL_BOXES_COUNT) // Party mon.
     {
-        level = GetMonData(&gPlayerParty[mon], MON_DATA_LEVEL);
+        // level = GetMonData(&gPlayerParty[mon], MON_DATA_LEVEL);
+		experience = GetMonData(&gPlayerParty[mon], MON_DATA_CONTEST_EXP, NULL);
+		level = CalculateContestLevel(experience);
         gender = GetMonGender(&gPlayerParty[mon]);
     }
     else
     {
         boxMon = GetBoxedMonPtr(box, mon);
         gender = GetBoxMonGender(boxMon);
-        level = GetLevelFromBoxMonExp(boxMon);
+		experience = GetBoxOrPartyMonData(boxId, monId, MON_DATA_CONTEST_EXP, NULL);
+		level = CalculateContestLevel(experience);
+        // level = GetLevelFromBoxMonExp(boxMon);
     }
 
     if ((species == SPECIES_NIDORAN_F || species == SPECIES_NIDORAN_M) && !StringCompare(dst, gSpeciesNames[species]))
@@ -1042,18 +1066,27 @@ void GetConditionMenuMonNameAndLocString(u8 *locationDst, u8 *nameDst, u16 boxId
 
 void GetConditionMenuMonConditions(struct ConditionGraph *graph, u8 *numSparkles, u16 boxId, u16 monId, u16 partyId, u16 id, u16 numMons, bool8 excludesCancel)
 {
-    u16 i;
+    u16 i, contestLevel, nature;
+	u32 experience;
 
     if (!excludesCancel)
         numMons--;
 
     if (partyId != numMons)
     {
-        graph->conditions[id][CONDITION_COOL] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_COOL, NULL);
-        graph->conditions[id][CONDITION_TOUGH] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_TOUGH, NULL);
-        graph->conditions[id][CONDITION_SMART] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_SMART, NULL);
-        graph->conditions[id][CONDITION_CUTE] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_CUTE, NULL);
-        graph->conditions[id][CONDITION_BEAUTY] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_BEAUTY, NULL);
+        graph->conditions[id][CONDITION_COOL] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_COOL_CV, NULL);
+        graph->conditions[id][CONDITION_TOUGH] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_TOUGH_CV, NULL);
+        graph->conditions[id][CONDITION_SMART] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_SMART_CV, NULL);
+        graph->conditions[id][CONDITION_CUTE] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_CUTE_CV, NULL);
+        graph->conditions[id][CONDITION_BEAUTY] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_BEAUTY_CV, NULL);
+		experience = GetBoxOrPartyMonData(boxId, monId, MON_DATA_CONTEST_EXP, NULL);
+		contestLevel = CalculateContestLevel(experience);
+		nature = GetBoxOrPartyMonNature(boxId, monId);
+		graph->conditions[id][CONDITION_COOL] = CalculateContestStat(contestLevel, graph->conditions[id][CONDITION_COOL], nature, CONTEST_STAT_COOL);
+		graph->conditions[id][CONDITION_TOUGH] = CalculateContestStat(contestLevel, graph->conditions[id][CONDITION_TOUGH], nature, CONTEST_STAT_TOUGH);
+		graph->conditions[id][CONDITION_SMART] = CalculateContestStat(contestLevel, graph->conditions[id][CONDITION_SMART], nature, CONTEST_STAT_SMART);
+		graph->conditions[id][CONDITION_CUTE] = CalculateContestStat(contestLevel, graph->conditions[id][CONDITION_CUTE], nature, CONTEST_STAT_CUTE);
+		graph->conditions[id][CONDITION_BEAUTY] = CalculateContestStat(contestLevel, graph->conditions[id][CONDITION_BEAUTY], nature, CONTEST_STAT_BEAUTY);
 
         numSparkles[id] = GET_NUM_CONDITION_SPARKLES(GetBoxOrPartyMonData(boxId, monId, MON_DATA_SHEEN, NULL));
 

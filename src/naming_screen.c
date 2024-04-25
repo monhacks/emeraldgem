@@ -211,7 +211,7 @@ static const u8 *const sTransferredToPCMessages[] =
     gText_PkmnTransferredLanettesPCBoxFull
 };
 
-static const u8 sText_AlphabetUpperLower[] = _("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!");
+static const u8 sText_AlphabetUpperLower[] = _("ABCDEFGHIJKLMNÑOPQRSTUVWXYZabcdefghijklmnñopqrstuvwxyz!");
 
 static const struct BgTemplate sBgTemplates[] =
 {
@@ -297,32 +297,32 @@ static const u8 sKeyboardChars[KBPAGE_COUNT][KBROW_COUNT][KBCOL_COUNT] = {
     [KEYBOARD_LETTERS_LOWER] = {
         __("abcdef ."),
         __("ghijkl ,"),
-        __("mnopqrs "),
+        __("mnopqrsñ"),
         __("tuvwxyz "),
     },
     [KEYBOARD_LETTERS_UPPER] = {
         __("ABCDEF ."),
         __("GHIJKL ,"),
-        __("MNOPQRS "),
+        __("MNOPQRSÑ"),
         __("TUVWXYZ "),
     },
     [KEYBOARD_SYMBOLS] = {
-        __("01234   "),
-        __("56789   "),
-        __("!?♂♀/-  "),
-        __("…“”‘'   "),
+        __("0123456 "),
+        __("789¡¿!? "),
+        __("♂♀…“”‘' "),
+        __("/-áéíóúü"),
     }
 };
 
 static const u8 sPageColumnCounts[KBPAGE_COUNT] = {
     [KEYBOARD_LETTERS_LOWER] = KBCOL_COUNT,
     [KEYBOARD_LETTERS_UPPER] = KBCOL_COUNT,
-    [KEYBOARD_SYMBOLS]       = 6
+    [KEYBOARD_SYMBOLS]       = KBCOL_COUNT
 };
 static const u8 sPageColumnXPos[KBPAGE_COUNT][KBCOL_COUNT] = {
     [KEYBOARD_LETTERS_LOWER] = {0, 12, 24, 56, 68, 80, 92, 123},
     [KEYBOARD_LETTERS_UPPER] = {0, 12, 24, 56, 68, 80, 92, 123},
-    [KEYBOARD_SYMBOLS]       = {0, 22, 44, 66, 88, 110}
+    [KEYBOARD_SYMBOLS]       = {0, 12, 24, 56, 68, 80, 92, 123}
 };
 
 static const struct NamingScreenTemplate *const sNamingScreenTemplates[];
@@ -1501,6 +1501,10 @@ static bool8 KeyboardKeyHandler_Character(u8 input)
     if (input == INPUT_A_BUTTON)
     {
         bool8 textFull = AddTextCharacter();
+		
+		if (sNamingScreen ->currentPage == KBPAGE_LETTERS_UPPER && GetTextEntryPosition() == 1)
+			MainState_StartPageSwap();
+
 
         SquishCursor();
         if (textFull)
@@ -1884,6 +1888,63 @@ static void ChangeCharacter(void)
     {
         sNamingScreen->textBuffer[index] = sNamingScreen->textBuffer[index] - 0x1A;
     }
+	else if (sNamingScreen->textBuffer[index] >= CHAR_A_ACUTE && sNamingScreen->textBuffer[index] <= CHAR_N_TILDE){
+		sNamingScreen->textBuffer[index] = sNamingScreen->textBuffer[index] + 0x15;
+	}
+	else if (sNamingScreen->textBuffer[index] >= CHAR_a_ACUTE && sNamingScreen->textBuffer[index] <= CHAR_n_TILDE){
+		sNamingScreen->textBuffer[index] = sNamingScreen->textBuffer[index] - 0x15;
+	}
+	else if (sNamingScreen->textBuffer[index] == CHAR_I_ACUTE){
+		sNamingScreen->textBuffer[index] = CHAR_i_ACUTE;
+	}
+	else if (sNamingScreen->textBuffer[index] == CHAR_i_ACUTE){
+		sNamingScreen->textBuffer[index] = CHAR_I_ACUTE;
+	}
+	else if (sNamingScreen->textBuffer[index] == CHAR_U_DIAERESIS){
+		sNamingScreen->textBuffer[index] = CHAR_u_DIAERESIS;
+	}
+	else if (sNamingScreen->textBuffer[index] == CHAR_u_DIAERESIS){
+		sNamingScreen->textBuffer[index] = CHAR_U_DIAERESIS;
+	}
+	// else if (sNamingScreen->textBuffer[index] == CHAR_A_ACUTE){
+		// sNamingScreen->textBuffer[index] = CHAR_a_ACUTE;
+	// }
+	// else if (sNamingScreen->textBuffer[index] == CHAR_e_ACUTE){
+		// sNamingScreen->textBuffer[index] = CHAR_E_ACUTE;
+	// }
+	// else if (sNamingScreen->textBuffer[index] == CHAR_E_ACUTE){
+		// sNamingScreen->textBuffer[index] = CHAR_e_ACUTE;
+	// }
+	// else if (sNamingScreen->textBuffer[index] == CHAR_i_ACUTE){
+		// sNamingScreen->textBuffer[index] = CHAR_I_ACUTE;
+	// }
+	// else if (sNamingScreen->textBuffer[index] == CHAR_I_ACUTE){
+		// sNamingScreen->textBuffer[index] = CHAR_i_ACUTE;
+	// }
+	// else if (sNamingScreen->textBuffer[index] == CHAR_o_ACUTE){
+		// sNamingScreen->textBuffer[index] = CHAR_O_ACUTE;
+	// }
+	// else if (sNamingScreen->textBuffer[index] == CHAR_O_ACUTE){
+		// sNamingScreen->textBuffer[index] = CHAR_o_ACUTE;
+	// }
+	// else if (sNamingScreen->textBuffer[index] == CHAR_u_ACUTE){
+		// sNamingScreen->textBuffer[index] = CHAR_U_ACUTE;
+	// }
+	// else if (sNamingScreen->textBuffer[index] == CHAR_U_ACUTE){
+		// sNamingScreen->textBuffer[index] = CHAR_u_ACUTE;
+	// }
+	// else if (sNamingScreen->textBuffer[index] == CHAR_u_DIAERESIS){
+		// sNamingScreen->textBuffer[index] = CHAR_U_DIAERESIS;
+	// }
+	// else if (sNamingScreen->textBuffer[index] == CHAR_U_DIAERESIS){
+		// sNamingScreen->textBuffer[index] = CHAR_u_DIAERESIS;
+	// }
+	// else if (sNamingScreen->textBuffer[index] == CHAR_n_TILDE){
+		// sNamingScreen->textBuffer[index] = CHAR_N_TILDE;
+	// }
+	// else if (sNamingScreen->textBuffer[index] == CHAR_N_TILDE){
+		// sNamingScreen->textBuffer[index] = CHAR_n_TILDE;
+	// }
     else
     {
         sNamingScreen->textBuffer[index] = sNamingScreen->textBuffer[index];

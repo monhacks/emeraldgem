@@ -1,7 +1,7 @@
 #ifndef GUARD_POKEMON_STORAGE_SYSTEM_H
 #define GUARD_POKEMON_STORAGE_SYSTEM_H
 
-#define TOTAL_BOXES_COUNT       19
+#define TOTAL_BOXES_COUNT       21
 #define IN_BOX_ROWS             5 // Number of rows, 6 Pokémon per row
 #define IN_BOX_COLUMNS          6 // Number of columns, 5 Pokémon per column
 #define IN_BOX_COUNT            (IN_BOX_ROWS * IN_BOX_COLUMNS)
@@ -42,6 +42,7 @@ void ResetPokemonStorageSystem(void);
 s16 CompactPartySlots(void);
 u8 StorageGetCurrentBox(void);
 u32 GetBoxMonDataAt(u8 boxId, u8 boxPosition, s32 request);
+u32 GetBoxMonNatureAt(u8 boxId, u8 boxPosition);
 void SetBoxMonDataAt(u8 boxId, u8 boxPosition, s32 request, const void *value);
 u32 GetCurrentBoxMonData(u8 boxPosition, s32 request);
 void SetCurrentBoxMonData(u8 boxPosition, s32 request, const void *value);

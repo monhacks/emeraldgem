@@ -52,8 +52,8 @@ Route101_EventScript_StartBirchRescue::
 	playbgm MUS_HELP, TRUE
 	msgbox Route101_Text_HelpMe, MSGBOX_DEFAULT
 	closemessage
-	setobjectxy LOCALID_BIRCH, 0, 15
-	setobjectxy LOCALID_ZIGZAGOON, 0, 16
+	setobjectxy LOCALID_BIRCH, 0, 16
+	setobjectxy LOCALID_ZIGZAGOON, 0, 17
 	applymovement OBJ_EVENT_ID_PLAYER, Route101_Movement_EnterScene
 	applymovement LOCALID_BIRCH, Route101_Movement_BirchRunAway1
 	applymovement LOCALID_ZIGZAGOON, Route101_Movement_ZigzagoonChase1
@@ -122,7 +122,7 @@ Route101_Movement_PreventExitNorth:
 Route101_Movement_ZigzagoonChaseInCircles:
 	walk_fast_up
 	walk_fast_up
-	walk_fast_up
+	walk_fast_right
 	walk_fast_right
 	walk_fast_right
 	walk_fast_right
@@ -161,9 +161,6 @@ Route101_Movement_ZigzagoonChase1:
 	walk_fast_up
 	step_end
 
-@ Leftover data? This command is unused.
-	step_end
-
 Route101_Movement_ZigzagoonFaceBirch:
 	walk_in_place_fast_left
 	walk_in_place_fast_left
@@ -176,12 +173,12 @@ Route101_Movement_EnterScene:
 	walk_fast_up
 	walk_fast_up
 	walk_fast_up
-	walk_in_place_faster_left
+	walk_fast_left
 	step_end
 
 Route101_Movement_BirchRunInCircles:
 	walk_fast_up
-	walk_fast_up
+	walk_fast_right
 	walk_fast_right
 	walk_fast_right
 	walk_fast_right
@@ -221,9 +218,6 @@ Route101_Movement_BirchRunAway1:
 	walk_fast_up
 	step_end
 
-@ Leftover data? This command is unused.
-	step_end
-
 Route101_Movement_BirchFaceZigzagoon:
 	walk_in_place_fast_right
 	walk_in_place_fast_right
@@ -231,15 +225,28 @@ Route101_Movement_BirchFaceZigzagoon:
 	walk_in_place_fast_right
 	step_end
 
-Route101_Movement_Unused1:
-	walk_up
-	walk_up
-	step_end
-
-Route101_Movement_Unused2:
-	walk_up
-	walk_left
-	walk_up
+Route101_Movement_PokemonEscape:
+	walk_in_place_fast_left
+	delay_8
+	walk_in_place_fast_right
+	delay_8
+	walk_in_place_fast_left
+	delay_8
+	walk_in_place_fast_right
+	delay_8
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	set_invisible
+	walk_fast_right
+	walk_fast_left
+	walk_fast_right
 	step_end
 
 Route101_EventScript_Youngster::
@@ -267,12 +274,17 @@ Route101_EventScript_BirchsBag::
 	setflag FLAG_SYS_POKEMON_GET
 	setflag FLAG_RESCUED_BIRCH
 	fadescreen FADE_TO_BLACK
-	removeobject LOCALID_ZIGZAGOON
-	setobjectxy OBJ_EVENT_ID_PLAYER, 6, 13
+	setobjectxy OBJ_EVENT_ID_PLAYER, 7, 15
+	applymovement LOCALID_ZIGZAGOON, Common_Movement_WalkInPlaceFasterRight
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
 	special ChooseStarter
 	waitstate
+	playse SE_PIN
+	applymovement LOCALID_ZIGZAGOON, Common_Movement_ExclamationMark
+	applymovement LOCALID_ZIGZAGOON, Route101_Movement_PokemonEscape
+	waitmovement 0
+	removeobject LOCALID_ZIGZAGOON
 	applymovement LOCALID_BIRCH, Route101_Movement_BirchApproachPlayer
 	waitmovement 0
 	namebox Unknown
@@ -323,9 +335,8 @@ Route101_Text_DontLeaveMe:
 Route101_Text_YouSavedMe:
 	.string "¡UFF! ¡MUCHÍSIMAS GRACIAS!\p"
 	.string "Eso estuvo cerca…\n"
-	.string "Estaba estudiando el comportamiento\l"
-	.string "de los Pokémon de esta ruta, y\l"
-	.string "me atacó un Zigzagoon…\p"
+	.string "Estaba estudiando los Pokémon de\l"
+	.string "esta ruta, y me atacó un Zigzagoon…\p"
 	.string "Ya era muy tarde cuando noté que no\n"
 	.string "tenía mis EPI-Pen…\p"
 	.string "¡Por cierto, yo soy el {COLOR BLUE}Profesor Birch{COLOR DARK_GRAY}!$"
@@ -349,5 +360,5 @@ Route101_Text_WildPokemonInTallGrass:
 
 Route101_Text_RouteSign:
 	.string "{COLOR LIGHT_RED SHADOW RED}RUTA 101{COLOR DARK_GRAY SHADOW LIGHT_GRAY}\n"
-	.string "{UP_ARROW} {COLOR LIGHT_GREEN SHADOW GREEN}PUEBLO OLDALE{COLOR DARK_GRAY SHADOW LIGHT_GRAY}$"
-
+	.string "{UP_ARROW} {COLOR LIGHT_GREEN SHADOW GREEN}PUEBLO OLDALE{COLOR DARK_GRAY SHADOW LIGHT_GRAY}\l"
+	.string "{DOWN_ARROW} {COLOR LIGHT_GREEN SHADOW GREEN}VILLA LITTLEROOT{COLOR DARK_GRAY SHADOW LIGHT_GRAY}$"

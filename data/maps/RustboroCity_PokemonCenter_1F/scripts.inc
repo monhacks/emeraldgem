@@ -38,4 +38,3 @@ RustboroCity_PokemonCenter_1F_Text_MaleAndFemalePokemon:
 
 RustboroCity_PokemonCenter_1F_Text_HMCutNextDoor:
 	.string "Quiero viajar para conocer\ndistintos y nuevos tipos de plantas.$"
-

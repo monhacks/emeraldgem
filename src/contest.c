@@ -188,6 +188,7 @@ static void ContestDebugPrintBitStrings(void);
 static void StripPlayerNameForLinkContest(u8 *);
 static void StripMonNameForLinkContest(u8 *, s32);
 static void SwapMoveDescAndContestTilemaps(void);
+// s16 CalculateContestStat(u16 level, s16 contestValue);
 
 // An index into a palette where the text color for each contestant is stored.
 // Contestant 0 will use palette color 10, contestant 1 will use color 11, etc.
@@ -237,6 +238,16 @@ enum {
     CONTEST_DEBUG_MODE_PRINT_WINNER_FLAGS,
     CONTEST_DEBUG_MODE_PRINT_LOSER_FLAGS
 };
+
+// const u32 gContestExperience[MAX_LEVEL + 1] = {
+	// 0,
+	// 10,
+	// 20,
+	// 30,
+	// 40,
+	// 50,
+	
+// };
 
 #define MOVE_WINDOWS_START WIN_MOVE0
 
@@ -2770,10 +2781,130 @@ static bool8 IsPlayerLinkLeader(void)
     return FALSE;
 }
 
+s16 CalculateContestStat(u16 level, s16 contestValue, u16 nature, u16 contestStat){
+	s16 total;
+	if (contestValue == 0){
+		if (level == 1)
+			total = 10;
+		else {
+			total = 10 + level;
+		}
+	}
+	else {
+		total = (10 + level) * (contestValue * 1.5);
+	}
+	switch (contestStat){
+		case CONTEST_STAT_COOL:
+			switch (nature){
+				case NATURE_LONELY:
+				case NATURE_BRAVE:
+				case NATURE_ADAMANT:
+				case NATURE_NAUGHTY:
+					total *= 1.2;
+					break;
+				case NATURE_BOLD:
+				case NATURE_TIMID:
+				case NATURE_MODEST:
+				case NATURE_CALM:
+					total *= 0.7;
+					break;
+			}
+		break;
+		case CONTEST_STAT_TOUGH:
+			switch (nature){
+				case NATURE_BOLD:
+				case NATURE_RELAXED:
+				case NATURE_IMPISH:
+				case NATURE_LAX:
+					total *= 1.2;
+					break;
+				case NATURE_LONELY:
+				case NATURE_HASTY:
+				case NATURE_MILD:
+				case NATURE_GENTLE:
+					total *= 0.8;
+					break;	
+			}
+		break;
+		case CONTEST_STAT_SMART:
+			switch (nature){
+				case NATURE_CALM:
+				case NATURE_GENTLE:
+				case NATURE_SASSY:
+				case NATURE_CAREFUL:
+					total *= 1.2;
+					break;
+				case NATURE_NAUGHTY:
+				case NATURE_LAX:
+				case NATURE_NAIVE:
+				case NATURE_RASH:
+					total *= 0.8;
+					break;
+			}
+		break;
+		case CONTEST_STAT_CUTE:
+			switch (nature){
+				case NATURE_TIMID:
+				case NATURE_HASTY:
+				case NATURE_JOLLY:
+				case NATURE_NAIVE:
+					total *= 1.2;
+					break;
+				case NATURE_BRAVE:
+				case NATURE_RELAXED:
+				case NATURE_QUIET:
+				case NATURE_SASSY:
+					total *= 0.8;
+					break;
+			}
+		break;
+		case CONTEST_STAT_BEAUTY:
+			switch (nature){
+				case NATURE_MODEST:
+				case NATURE_MILD:
+				case NATURE_QUIET:
+				case NATURE_RASH:
+					total *= 1.2;
+					break;
+				case NATURE_ADAMANT:
+				case NATURE_IMPISH:
+				case NATURE_JOLLY:
+				case NATURE_CAREFUL:
+					total *= 0.8;
+					break;
+			}
+		break;
+	}
+	if (total > 255)
+		total = 255;
+	return total;
+}
+u16 CalculateContestLevel(u32 exp)
+{
+	u32 i;
+	u16 contestLevel = 1;
+	if (exp < 500){
+		for (i=0;i<=50;i++){
+			if (exp <= (contestLevel*10)){
+				break;
+			}
+			contestLevel++;
+		}
+	}
+	else {
+		contestLevel = 50;
+	}
+	return contestLevel;
+}
+
 void CreateContestMonFromParty(u8 partyIndex)
 {
     u8 name[20];
+	u32 i;
+    u32 contestExp;
+    u16 contestLevel;
     u16 heldItem;
+    u16 nature;
     s16 cool;
     s16 beauty;
     s16 cute;
@@ -2795,18 +2926,19 @@ void CreateContestMonFromParty(u8 partyIndex)
     gContestMons[gContestPlayerMonIndex].species = GetMonData(&gPlayerParty[partyIndex], MON_DATA_SPECIES);
     GetMonData(&gPlayerParty[partyIndex], MON_DATA_NICKNAME, name);
     StringGet_Nickname(name);
-    if (gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK)
-    {
-        StripMonNameForLinkContest(name, GetMonData(&gPlayerParty[partyIndex], MON_DATA_LANGUAGE));
-    }
+    // if (gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK)
+    // {
+        // StripMonNameForLinkContest(name, GetMonData(&gPlayerParty[partyIndex], MON_DATA_LANGUAGE));
+    // }
     memcpy(gContestMons[gContestPlayerMonIndex].nickname, name, POKEMON_NAME_LENGTH + 1);
     StringCopy(gContestMons[gContestPlayerMonIndex].nickname, name);
-    gContestMons[gContestPlayerMonIndex].cool = GetMonData(&gPlayerParty[partyIndex], MON_DATA_COOL);
-    gContestMons[gContestPlayerMonIndex].beauty = GetMonData(&gPlayerParty[partyIndex], MON_DATA_BEAUTY);
-    gContestMons[gContestPlayerMonIndex].cute = GetMonData(&gPlayerParty[partyIndex], MON_DATA_CUTE);
-    gContestMons[gContestPlayerMonIndex].smart = GetMonData(&gPlayerParty[partyIndex], MON_DATA_SMART);
-    gContestMons[gContestPlayerMonIndex].tough = GetMonData(&gPlayerParty[partyIndex], MON_DATA_TOUGH);
-    gContestMons[gContestPlayerMonIndex].sheen = GetMonData(&gPlayerParty[partyIndex], MON_DATA_SHEEN);
+    gContestMons[gContestPlayerMonIndex].cool = GetMonData(&gPlayerParty[partyIndex], MON_DATA_COOL_CV);
+    gContestMons[gContestPlayerMonIndex].beauty = GetMonData(&gPlayerParty[partyIndex], MON_DATA_BEAUTY_CV);
+    gContestMons[gContestPlayerMonIndex].cute = GetMonData(&gPlayerParty[partyIndex], MON_DATA_CUTE_CV);
+    gContestMons[gContestPlayerMonIndex].smart = GetMonData(&gPlayerParty[partyIndex], MON_DATA_SMART_CV);
+    gContestMons[gContestPlayerMonIndex].tough = GetMonData(&gPlayerParty[partyIndex], MON_DATA_TOUGH_CV);
+    gContestMons[gContestPlayerMonIndex].contestExp = GetMonData(&gPlayerParty[partyIndex], MON_DATA_CONTEST_EXP);
+    gContestMons[gContestPlayerMonIndex].sheen = GetMonData(&gPlayerParty[partyIndex], MON_DATA_CONTEST_EXP);
     gContestMons[gContestPlayerMonIndex].moves[0] = GetMonData(&gPlayerParty[partyIndex], MON_DATA_MOVE1);
     gContestMons[gContestPlayerMonIndex].moves[1] = GetMonData(&gPlayerParty[partyIndex], MON_DATA_MOVE2);
     gContestMons[gContestPlayerMonIndex].moves[2] = GetMonData(&gPlayerParty[partyIndex], MON_DATA_MOVE3);
@@ -2815,12 +2947,15 @@ void CreateContestMonFromParty(u8 partyIndex)
     gContestMons[gContestPlayerMonIndex].otId = GetMonData(&gPlayerParty[partyIndex], MON_DATA_OT_ID);
 
     heldItem = GetMonData(&gPlayerParty[partyIndex], MON_DATA_HELD_ITEM);
-    cool   = gContestMons[gContestPlayerMonIndex].cool;
-    beauty = gContestMons[gContestPlayerMonIndex].beauty;
-    cute   = gContestMons[gContestPlayerMonIndex].cute;
-    smart  = gContestMons[gContestPlayerMonIndex].smart;
-    tough  = gContestMons[gContestPlayerMonIndex].tough;
-    if      (heldItem == ITEM_RED_SCARF)
+    nature = GetNature(&gPlayerParty[partyIndex], TRUE);
+    contestExp = gContestMons[gContestPlayerMonIndex].contestExp;
+	contestLevel = CalculateContestLevel(contestExp);
+    cool   = CalculateContestStat(contestLevel,gContestMons[gContestPlayerMonIndex].cool, nature, CONTEST_STAT_COOL);
+    beauty = CalculateContestStat(contestLevel,gContestMons[gContestPlayerMonIndex].beauty, nature, CONTEST_STAT_BEAUTY);
+    cute   = CalculateContestStat(contestLevel,gContestMons[gContestPlayerMonIndex].cute, nature, CONTEST_STAT_CUTE);
+    smart  = CalculateContestStat(contestLevel,gContestMons[gContestPlayerMonIndex].smart, nature, CONTEST_STAT_SMART);
+    tough  = CalculateContestStat(contestLevel,gContestMons[gContestPlayerMonIndex].tough, nature, CONTEST_STAT_TOUGH);
+    if (heldItem == ITEM_RED_SCARF)
         cool += 20;
     else if (heldItem == ITEM_BLUE_SCARF)
         beauty += 20;
@@ -2830,6 +2965,7 @@ void CreateContestMonFromParty(u8 partyIndex)
         smart += 20;
     else if (heldItem == ITEM_YELLOW_SCARF)
         tough += 20;
+	
     if (cool > 255)
         cool = 255;
     if (beauty > 255)
@@ -2965,19 +3101,19 @@ u8 GetContestEntryEligibility(struct Pokemon *pkmn)
     switch (gSpecialVar_ContestCategory)
     {
     case CONTEST_CATEGORY_COOL:
-        ribbon = GetMonData(pkmn, MON_DATA_COOL_RIBBON);
+        ribbon = GetMonData(pkmn, MON_DATA_COOL_CV);
         break;
     case CONTEST_CATEGORY_BEAUTY:
-        ribbon = GetMonData(pkmn, MON_DATA_BEAUTY_RIBBON);
+        ribbon = GetMonData(pkmn, MON_DATA_BEAUTY_CV);
         break;
     case CONTEST_CATEGORY_CUTE:
-        ribbon = GetMonData(pkmn, MON_DATA_CUTE_RIBBON);
+        ribbon = GetMonData(pkmn, MON_DATA_CUTE_CV);
         break;
     case CONTEST_CATEGORY_SMART:
-        ribbon = GetMonData(pkmn, MON_DATA_SMART_RIBBON);
+        ribbon = GetMonData(pkmn, MON_DATA_SMART_CV);
         break;
     case CONTEST_CATEGORY_TOUGH:
-        ribbon = GetMonData(pkmn, MON_DATA_TOUGH_RIBBON);
+        ribbon = GetMonData(pkmn, MON_DATA_TOUGH_CV);
         break;
     default:
         return CANT_ENTER_CONTEST;

@@ -24,4 +24,3 @@ PetalburgCity_House1_Text_GoOnAdventure:
 	.string "amigos nuevos, quizá un novio o novia,\l"
 	.string "viajar por todo el mundo junto a todos\l"
 	.string "mis Pokémon…$"
-

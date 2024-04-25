@@ -69,4 +69,3 @@ RustboroCity_House1_Text_AnyPokemonCanBeCute:
 
 RustboroCity_House1_Text_AllSortsOfPlaces:
 	.string "A mi primo le encanta intercambiar\nPokémon con variantes regionales.\pSi vienes cada día,\n¡Podrás cambiar muchos!$"
-

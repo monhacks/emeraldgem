@@ -842,6 +842,7 @@ const u8 gSpeciesNames[][POKEMON_NAME_LENGTH + 1] = {
     [SPECIES_APPLIN] = _("Applin"),
     [SPECIES_FLAPPLE] = _("Flapple"),
     [SPECIES_APPLETUN] = _("Appletun"),
+    [SPECIES_DIPPLIN] = _("Dipplin"),
     [SPECIES_SILICOBRA] = _("Silicobra"),
     [SPECIES_SANDACONDA] = _("Sandaconda"),
     [SPECIES_CRAMORANT] = _("Cramorant"),
@@ -906,6 +907,8 @@ const u8 gSpeciesNames[][POKEMON_NAME_LENGTH + 1] = {
     [SPECIES_OVERQWIL] = _("Overqwil"),
     [SPECIES_ENAMORUS] = _("Enamorus"),
 	[SPECIES_DUDUNSPARCE] = _("Dudunsparce"),
+	[SPECIES_RITTO] = _("Ritto"),
+	[SPECIES_RIDDUAL] = _("Riddual"),
 
     // Megas
     [SPECIES_VENUSAUR_MEGA] = _("Venusaur"),
@@ -1305,4 +1308,7 @@ const u8 gSpeciesNames[][POKEMON_NAME_LENGTH + 1] = {
     [SPECIES_CALYREX_ICE_RIDER] = _("Calyrex"),
     [SPECIES_CALYREX_SHADOW_RIDER] = _("Calyrex"),
 	[SPECIES_ROWLET_ASH] = _("Rowlet"),
+	[SPECIES_RILLABOOM_GIGANTAMAX] = _("Rillaboom"),
+	[SPECIES_CINDERACE_GIGANTAMAX] = _("Cinderace"),
+	[SPECIES_INTELEON_GIGANTAMAX] = _("Inteleon"),
 };

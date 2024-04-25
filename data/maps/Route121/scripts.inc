@@ -1,6 +1,8 @@
 .set LOCALID_GRUNT_1, 12
 .set LOCALID_GRUNT_2, 13
 .set LOCALID_GRUNT_3, 14
+.set LOCALID_GRUNT_4, 31
+.set LOCALID_GRUNT_5, 30
 
 Route121_MapScripts::
 	.byte 0
@@ -22,43 +24,41 @@ Route121_EventScript_AquaGruntsMoveOut::
 	playbgm MUS_ENCOUNTER_AQUA, FALSE
 	applymovement LOCALID_GRUNT_2, Common_Movement_WalkInPlaceRight
 	waitmovement 0
+	namebox Aqua
 	msgbox Route121_Text_OkayMoveOutToMtPyre, MSGBOX_DEFAULT
+	applymovement LOCALID_GRUNT_1, Common_Movement_WalkInPlaceRight
+	waitmovement 0
+	msgbox Route121_Text_SurpriseAttack, MSGBOX_DEFAULT
+	applymovement LOCALID_GRUNT_4, Common_Movement_WalkInPlaceLeft
+	waitmovement 0
+	namebox Magma
+	msgbox Route121_Text_ThatWasOur, MSGBOX_DEFAULT
+	applymovement LOCALID_GRUNT_5, Common_Movement_WalkInPlaceDown
+	waitmovement 0
+	msgbox Route121_Text_LetsGoMagma, MSGBOX_DEFAULT
 	closemessage
-	applymovement LOCALID_GRUNT_1, Route121_Movement_Grunt1Exit
-	applymovement LOCALID_GRUNT_2, Route121_Movement_Grunt2Exit
-	applymovement LOCALID_GRUNT_3, Route121_Movement_Grunt3Exit
+	hidenamebox
+	applymovement LOCALID_GRUNT_1, Route121_Movement_GruntExit
+	applymovement LOCALID_GRUNT_2, Route121_Movement_GruntExit
+	applymovement LOCALID_GRUNT_3, Route121_Movement_GruntExit
+	applymovement LOCALID_GRUNT_4, Route121_Movement_GruntExit
+	applymovement LOCALID_GRUNT_5, Route121_Movement_GruntExit
 	waitmovement 0
 	fadedefaultbgm
 	removeobject LOCALID_GRUNT_1
 	removeobject LOCALID_GRUNT_2
 	removeobject LOCALID_GRUNT_3
+	removeobject LOCALID_GRUNT_4
+	removeobject LOCALID_GRUNT_5
 	setvar VAR_ROUTE121_STATE, 1
+	namebox Rival
+	pokenavcall Route121_PokeNavCall_Rival
+	waitmessage
 	releaseall
 	end
 
-Route121_Movement_Grunt1Exit:
+Route121_Movement_GruntExit:
 	walk_down
-	walk_down
-	walk_down
-	walk_down
-	walk_down
-	walk_down
-	walk_down
-	walk_down
-	step_end
-
-Route121_Movement_Grunt2Exit:
-	walk_down
-	walk_down
-	walk_down
-	walk_down
-	walk_down
-	walk_down
-	walk_down
-	walk_down
-	step_end
-
-Route121_Movement_Grunt3Exit:
 	walk_down
 	walk_down
 	walk_down
@@ -173,8 +173,19 @@ Route121_EventScript_RematchCristin::
 	end
 
 Route121_Text_OkayMoveOutToMtPyre:
-	.string "Okay!\n"
-	.string "We're to move out to MT. PYRE!$"
+	.string "Okay, si el Jefecito así lo quiere...\n"
+	.string "¡Tendremos que acompañar al\lEquipo Magma al Monte Pyre!$"
+
+Route121_Text_SurpriseAttack:
+	.string "Y entonces, ¡Seguro que los atacaremos\n"
+	.string "por sorpresa, MUAJAJA!$"
+
+Route121_Text_ThatWasOur:
+	.string "Pero nuestro Líder quiere que vayamos\l"
+	.string "sin problemas, así que cálmate, ¿Ok?$"
+
+Route121_Text_LetsGoMagma:
+	.string "¡Vámonos ya, nos esperan!$"
 
 Route121_Text_AheadLoomsMtPyre:
 	.string "Ahead looms MT. PYRE…\p"
@@ -190,3 +201,19 @@ Route121_Text_SafariZoneSign:
 	.string "“Filled with rare POKéMON!”\n"
 	.string "SAFARI ZONE$"
 
+Route121_PokeNavCall_Rival:
+	.string "Hola, {PLAYER}, me he estado\n"
+	.string "sintiendo mejor al combatir los\l"
+	.string "Gimnasios. De tu padre escuché que el\l"
+	.string "Equipo Magma se dirije hacia el Monte\l"
+	.string "Pyre, ¿Estás bien?\p"
+	.string "... ... ...\n"
+	.string "¿¡El Equipo Aqua también!?\p"
+	.string "Estaré aquí en Ciudad Lilycove\n"
+	.string "comprando Objetos Curativos en caso de\l"
+	.string "que los necesitemos. Te veré allá o en el\l"
+	.string "Monte Pyre, donde sea que decidas ir\l"
+	.string "primero.\p"
+	.string "Ten cuidado, {PLAYER}, necesitamos\n"
+	.string "toda la ayuda posible para derrotar a\l"
+	.string "esos villanos.$"

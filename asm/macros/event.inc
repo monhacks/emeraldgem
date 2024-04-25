@@ -1029,6 +1029,7 @@
 	.byte \slot
 	.2byte \move
 	.endm
+	
 
 	@ Checks if at least one Pokemon in the player's party knows the specified move. If so, VAR_RESULT is set to the
 	@ (zero-indexed) slot number of the first Pokemon that knows the move. If not, VAR_RESULT is set to PARTY_SIZE.
@@ -2027,7 +2028,15 @@
     customgivemon \species, \level, 0, 0, NUM_NATURES, 0xFF, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, \move1, \move2, \move3, \move4, 0
     .endm
 
-
+	@ Replaces the move at 'slot' of the Pokémon in the player's party at 'partyIndex' with the specified move.
+	@ If a value greater than PARTY_SIZE is given for partyIndex it will use the last Pokémon in the party instead.
+	@ Takes a var for the move.
+	.macro setmonmovevar partyIndex:req, slot:req, move:req
+	.byte 0xef
+	.byte \partyIndex
+	.byte \slot
+	.2byte \move
+	.endm
 
 @ Supplementary
 

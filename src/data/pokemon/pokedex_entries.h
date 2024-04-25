@@ -2495,6 +2495,28 @@ const struct PokedexEntry gPokedexEntries[] =
         .trainerScale = 614,
         .trainerOffset = 0,
     },
+	[NATIONAL_DEX_RITTO] =
+    {
+        .categoryName = _("Ritual"),
+        .height = 45,
+        .weight = 474,
+        .description = gRittoPokedexText,
+        .pokemonScale = 256,
+        .pokemonOffset = 9,
+        .trainerScale = 614,
+        .trainerOffset = 0,
+    },
+	[NATIONAL_DEX_RIDDUAL] =
+    {
+        .categoryName = _("Abominación"),
+        .height = 45,
+        .weight = 474,
+        .description = gRiddualPokedexText,
+        .pokemonScale = 256,
+        .pokemonOffset = 9,
+        .trainerScale = 614,
+        .trainerOffset = 0,
+    },
 
     [NATIONAL_DEX_GLIGAR] =
     {
@@ -10095,7 +10117,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_APPLIN] =
     {
-        .categoryName = _("Apple Core"),
+        .categoryName = _("Manzanita"),
         .height = 2,
         .weight = 5,
         .description = gApplinPokedexText,
@@ -10107,7 +10129,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_FLAPPLE] =
     {
-        .categoryName = _("Apple Wing"),
+        .categoryName = _("Manzanala"),
         .height = 3,
         .weight = 10,
         .description = gFlapplePokedexText,
@@ -10119,10 +10141,22 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_APPLETUN] =
     {
-        .categoryName = _("Apple Nectar"),
+        .categoryName = _("Manzanéctar"),
         .height = 4,
         .weight = 130,
         .description = gAppletunPokedexText,
+        .pokemonScale = 356,
+        .pokemonOffset = 17,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+	[NATIONAL_DEX_DIPPLIN] =
+    {
+        .categoryName = _("Manzamelo"),
+        .height = 2,
+        .weight = 5,
+        .description = gDipplinPokedexText,
         .pokemonScale = 356,
         .pokemonOffset = 17,
         .trainerScale = 256,

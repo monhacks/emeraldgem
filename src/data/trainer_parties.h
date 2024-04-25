@@ -469,12 +469,12 @@ static const struct TrainerMon sParty_ShellySeafloorCavern[] = {
 static const struct TrainerMon sParty_Archie[] = {
     {
     .lvl = 52,
-    .species = SPECIES_PELIPPER,
+    .species = SPECIES_POLITOED,
 	.ability = ABILITY_HIDDEN,
 	.build = TRAINER_MON_HP_SPDEF,
 	.difficulty = TRAINER_HARDER,
 	.heldItem = ITEM_DAMP_ROCK,
-	.moves = {MOVE_ROOST, MOVE_HURRICANE, MOVE_THUNDERBOLT, MOVE_HYDRO_PUMP},
+	.moves = {MOVE_RECOVER, MOVE_SCALD, MOVE_PROTECT, MOVE_TOXIC},
 	.ball = ITEM_ULTRA_BALL,
     },
 	{
@@ -2667,14 +2667,6 @@ static const struct TrainerMon sParty_GruntAquaHideout7[] = {
     }
 };
 
-static const struct TrainerMon sParty_GruntAquaHideout8[] = {
-    {
-    .iv = 0,
-    .lvl = 32,
-    .species = SPECIES_CARVANHA,
-    }
-};
-
 static const struct TrainerMon sParty_Shawn[] = {
     {
     .iv = 100,
@@ -3807,13 +3799,13 @@ static const struct TrainerMon sParty_Roxanne1[] = {
     },
     {
     .iv = 100,
-    .lvl = 12,
-    .species = SPECIES_GEODUDE_ALOLAN,
-	.ability = ABILITY_SLOT_2,
-    .heldItem = ITEM_NONE,
-	.build = TRAINER_MON_HP_DEF,
-	.ball = ITEM_GREAT_BALL,
-    .moves = {MOVE_SPARK, MOVE_DEFENSE_CURL, MOVE_HEADBUTT, MOVE_SMACK_DOWN}
+    .lvl = 13,
+    .species = SPECIES_ARCHEN,
+	.ability = ABILITY_HIDDEN,
+    .heldItem = ITEM_ORAN_BERRY,
+	.build = TRAINER_MON_SPEED_PHYS,
+	.ball = ITEM_LUXURY_BALL,
+    .moves = {MOVE_BULLDOZE, MOVE_METAL_CLAW, MOVE_SMACK_DOWN, MOVE_ROOST}
     },
     {
     .iv = 200,
@@ -3824,7 +3816,147 @@ static const struct TrainerMon sParty_Roxanne1[] = {
 	.build = TRAINER_MON_HP_DEF,
 	.difficulty = TRAINER_HARD,
 	.ball = ITEM_DUSK_BALL,
-    .moves = {MOVE_SPARK, MOVE_IRON_DEFENSE, MOVE_HEADBUTT, MOVE_SMACK_DOWN}
+    .moves = {MOVE_THUNDER_PUNCH, MOVE_IRON_DEFENSE, MOVE_HEADBUTT, MOVE_SMACK_DOWN}
+    }
+};
+
+static const struct TrainerMon sEasyParty_Roxanne1[] = {
+    {
+    .iv = 100,
+    .lvl = 12,
+    .species = SPECIES_LILEEP,
+	.ability = ABILITY_HIDDEN,
+    .heldItem = ITEM_NONE,
+	.ball = ITEM_POKE_BALL,
+    .moves = {MOVE_SMACK_DOWN, MOVE_ABSORB, MOVE_LEECH_SEED, MOVE_NONE}
+    },
+    {
+    .iv = 100,
+    .lvl = 12,
+    .species = SPECIES_ARCHEN,
+	.ability = ABILITY_SLOT_1,
+    .heldItem = ITEM_ORAN_BERRY,
+	.build = TRAINER_MON_SPEED_PHYS, 
+	.ball = ITEM_LUXURY_BALL,
+    .moves = {MOVE_BITE, MOVE_PECK, MOVE_SMACK_DOWN, MOVE_NONE}
+    },
+    {
+    .iv = 200,
+    .lvl = 15,
+    .species = SPECIES_NOSEPASS,
+    .heldItem = ITEM_ORAN_BERRY,
+	.ability = ABILITY_SLOT_1,
+	.difficulty = TRAINER_HARD,
+	.ball = ITEM_DUSK_BALL,
+    .moves = {MOVE_SPARK, MOVE_SMACK_DOWN, MOVE_HEADBUTT, MOVE_NONE}
+    }
+};
+
+static const struct TrainerMon sHardParty_Roxanne1[] = {
+    {
+    .iv = 100,
+    .lvl = 14,
+    .species = SPECIES_ROCKRUFF,
+	.ability = ABILITY_SLOT_2,
+    .heldItem = ITEM_ROCK_GEM,
+	.build = TRAINER_MON_SPEED_PHYS,
+	.ball = ITEM_DUSK_BALL,
+    .moves = {MOVE_STEALTH_ROCK, MOVE_ROAR, MOVE_SMACK_DOWN, MOVE_SANDSTORM}
+    },
+	{
+    .iv = 100,
+    .lvl = 12,
+    .species = SPECIES_LILEEP,
+	.ability = ABILITY_HIDDEN,
+    .heldItem = ITEM_LEFTOVERS,
+	.build = TRAINER_MON_HP_DEF,
+	.ball = ITEM_POKE_BALL,
+    .moves = {MOVE_TOXIC, MOVE_ICY_WIND, MOVE_LEECH_SEED, MOVE_INGRAIN}
+    },
+    {
+    .iv = 100,
+    .lvl = 13,
+    .species = SPECIES_ARCHEN,
+	.ability = ABILITY_HIDDEN,
+    .heldItem = ITEM_ORAN_BERRY,
+	.build = TRAINER_MON_SPEED_PHYS,
+	.ball = ITEM_LUXURY_BALL,
+    .moves = {MOVE_CRUNCH, MOVE_IRON_HEAD, MOVE_SMACK_DOWN, MOVE_ROOST}
+    },
+    {
+    .iv = 200,
+    .lvl = 15,
+    .species = SPECIES_NOSEPASS,
+    .heldItem = ITEM_ORAN_BERRY,
+	.ability = ABILITY_SLOT_1,
+	.build = TRAINER_MON_HP_DEF,
+	.difficulty = TRAINER_HARD,
+	.ball = ITEM_DUSK_BALL,
+    .moves = {MOVE_THUNDER_PUNCH, MOVE_SMACK_DOWN, MOVE_IRON_DEFENSE, MOVE_RECOVER}
+    }
+};
+
+static const struct TrainerMon sHardcoreParty_Roxanne1[] = {
+    {
+    .iv = 100,
+    .lvl = 15,
+    .species = SPECIES_ROCKRUFF_OWN_TEMPO,
+	.ability = ABILITY_HIDDEN,
+    .heldItem = ITEM_ROCK_GEM,
+	.build = TRAINER_MON_SPEED_PHYS,
+	.ball = ITEM_DUSK_BALL,
+    .moves = {MOVE_STEALTH_ROCK, MOVE_ROAR, MOVE_STONE_EDGE, MOVE_CRUNCH}
+    },
+	{
+    .iv = 100,
+    .lvl = 15,
+    .species = SPECIES_LILEEP,
+	.ability = ABILITY_HIDDEN,
+    .heldItem = ITEM_LEFTOVERS,
+	.build = TRAINER_MON_HP_DEF,
+	.ball = ITEM_POKE_BALL,
+    .moves = {MOVE_TOXIC, MOVE_GIGA_DRAIN, MOVE_LEECH_SEED, MOVE_INGRAIN}
+    },
+	{
+    .iv = 100,
+    .lvl = 15,
+    .species = SPECIES_DRILBUR,
+	.ability = ABILITY_SLOT_1,
+    .heldItem = ITEM_GROUND_GEM,
+	.build = TRAINER_MON_SPEED_PHYS,
+	.ball = ITEM_DUSK_BALL,
+    .moves = {MOVE_BULLDOZE, MOVE_DETECT, MOVE_DRILL_RUN, MOVE_METAL_CLAW}
+    },
+    {
+    .iv = 100,
+    .lvl = 15,
+    .species = SPECIES_LARVITAR,
+	.ability = ABILITY_HIDDEN,
+    .heldItem = ITEM_DARK_GEM,
+	.build = TRAINER_MON_HP_DEF,
+	.ball = ITEM_GREAT_BALL,
+    .moves = {MOVE_CRUNCH, MOVE_ICE_FANG, MOVE_STONE_EDGE, MOVE_IRON_HEAD}
+    },
+	{
+    .iv = 100,
+    .lvl = 13,
+    .species = SPECIES_ARCHEN,
+	.ability = ABILITY_HIDDEN,
+    .heldItem = ITEM_CHOICE_BAND,
+	.build = TRAINER_MON_SPEED_PHYS,
+	.ball = ITEM_LUXURY_BALL,
+    .moves = {MOVE_BULLDOZE, MOVE_THUNDER_FANG, MOVE_SMACK_DOWN, MOVE_ROOST}
+    },
+    {
+    .iv = 200,
+    .lvl = 15,
+    .species = SPECIES_NOSEPASS,
+    .heldItem = ITEM_ORAN_BERRY,
+	.ability = ABILITY_SLOT_1,
+	.build = TRAINER_MON_HP_DEF,
+	.difficulty = TRAINER_HARD,
+	.ball = ITEM_DUSK_BALL,
+    .moves = {MOVE_THUNDER_PUNCH, MOVE_SMACK_DOWN, MOVE_IRON_DEFENSE, MOVE_RECOVER}
     }
 };
 
@@ -3861,6 +3993,158 @@ static const struct TrainerMon sParty_Brawly1[] = {
 	.difficulty = TRAINER_HARD,
 	.ball = ITEM_DIVE_BALL,
     .moves = {MOVE_DRAIN_PUNCH, MOVE_KNOCK_OFF, MOVE_BULK_UP, MOVE_THROAT_CHOP}
+    }
+};
+
+static const struct TrainerMon sEasyParty_Brawly1[] = {
+    {
+    .iv = 100,
+    .lvl = 17,
+    .species = SPECIES_MEDITITE,
+	.ability = ABILITY_SLOT_1,
+    .heldItem = ITEM_NONE,
+	.build = TRAINER_MON_SPEED_PHYS,
+	.difficulty = TRAINER_HARD,
+	.ball = ITEM_DIVE_BALL,
+    .moves = {MOVE_FOCUS_PUNCH, MOVE_REFLECT, MOVE_NONE, MOVE_NONE}
+    },
+	{
+    .iv = 100,
+    .lvl = 17,
+    .species = SPECIES_MACHOP,
+	.ability = ABILITY_SLOT_1,
+    .heldItem = ITEM_NONE,
+	.build = TRAINER_MON_SPEED_PHYS,
+	.difficulty = TRAINER_HARD,
+	.ball = ITEM_DIVE_BALL,
+    .moves = {MOVE_MACH_PUNCH, MOVE_BULK_UP, MOVE_ROCK_TOMB, MOVE_NONE}
+    },
+    {
+    .iv = 200,
+    .lvl = 20,
+    .species = SPECIES_MAKUHITA,
+    .heldItem = ITEM_NONE,
+	.ability = ABILITY_SLOT_2,
+	.build = TRAINER_MON_HP_DEF,
+	.difficulty = TRAINER_HARD,
+	.ball = ITEM_DIVE_BALL,
+    .moves = {MOVE_DRAIN_PUNCH, MOVE_KNOCK_OFF, MOVE_BULK_UP, MOVE_NONE}
+    }
+};
+
+static const struct TrainerMon sHardParty_Brawly1[] = {
+    {
+    .iv = 100,
+    .lvl = 17,
+    .species = SPECIES_MEDITITE,
+	.ability = ABILITY_SLOT_1,
+    .heldItem = ITEM_LIGHT_CLAY,
+	.build = TRAINER_MON_SPEED_PHYS,
+	.difficulty = TRAINER_HARD,
+	.ball = ITEM_DIVE_BALL,
+    .moves = {MOVE_DRAIN_PUNCH, MOVE_LIGHT_SCREEN, MOVE_REFLECT, MOVE_BULK_UP}
+    },
+	{
+    .iv = 100,
+    .lvl = 17,
+    .species = SPECIES_SCRAGGY,
+	.ability = ABILITY_SLOT_2,
+    .heldItem = ITEM_SITRUS_BERRY,
+	.build = TRAINER_MON_SPEED_PHYS,
+	.difficulty = TRAINER_HARD,
+	.ball = ITEM_DIVE_BALL,
+    .moves = {MOVE_DRAIN_PUNCH, MOVE_THROAT_CHOP, MOVE_ROCK_TOMB, MOVE_SWORDS_DANCE}
+    },
+	{
+    .iv = 100,
+    .lvl = 17,
+    .species = SPECIES_MACHOP,
+	.ability = ABILITY_SLOT_1,
+    .heldItem = ITEM_BLACK_GLASSES,
+	.build = TRAINER_MON_SPEED_PHYS,
+	.difficulty = TRAINER_HARD,
+	.ball = ITEM_DIVE_BALL,
+    .moves = {MOVE_STORM_THROW, MOVE_BULK_UP, MOVE_ROCK_TOMB, MOVE_THROAT_CHOP}
+    },
+    {
+    .iv = 200,
+    .lvl = 20,
+    .species = SPECIES_MAKUHITA,
+    .heldItem = ITEM_FLAME_ORB,
+	.ability = ABILITY_SLOT_2,
+	.build = TRAINER_MON_HP_DEF,
+	.difficulty = TRAINER_HARD,
+	.ball = ITEM_DIVE_BALL,
+    .moves = {MOVE_STORM_THROW, MOVE_KNOCK_OFF, MOVE_BULK_UP, MOVE_ICE_PUNCH}
+    }
+};
+
+static const struct TrainerMon sHardcoreParty_Brawly1[] = {
+    {
+    .iv = 100,
+    .lvl = 20,
+    .species = SPECIES_MEDITITE,
+	.ability = ABILITY_SLOT_1,
+    .heldItem = ITEM_LIGHT_CLAY,
+	.build = TRAINER_MON_SPEED_PHYS,
+	.difficulty = TRAINER_HARD,
+	.ball = ITEM_DIVE_BALL,
+    .moves = {MOVE_DRAIN_PUNCH, MOVE_LIGHT_SCREEN, MOVE_REFLECT, MOVE_BULK_UP}
+    },
+	{
+    .iv = 100,
+    .lvl = 20,
+    .species = SPECIES_SCRAGGY,
+	.ability = ABILITY_SLOT_2,
+    .heldItem = ITEM_SITRUS_BERRY,
+	.build = TRAINER_MON_SPEED_PHYS,
+	.difficulty = TRAINER_HARD,
+	.ball = ITEM_DIVE_BALL,
+    .moves = {MOVE_DRAIN_PUNCH, MOVE_THROAT_CHOP, MOVE_ROCK_TOMB, MOVE_SWORDS_DANCE}
+    },
+	{
+    .iv = 100,
+    .lvl = 20,
+    .species = SPECIES_MACHOP,
+	.ability = ABILITY_SLOT_1,
+    .heldItem = ITEM_BLACK_GLASSES,
+	.build = TRAINER_MON_SPEED_PHYS,
+	.difficulty = TRAINER_HARD,
+	.ball = ITEM_DIVE_BALL,
+    .moves = {MOVE_STORM_THROW, MOVE_BULK_UP, MOVE_ROCK_TOMB, MOVE_THROAT_CHOP}
+    },
+    {
+    .iv = 200,
+    .lvl = 20,
+    .species = SPECIES_MAKUHITA,
+    .heldItem = ITEM_FLAME_ORB,
+	.ability = ABILITY_SLOT_2,
+	.build = TRAINER_MON_HP_DEF,
+	.difficulty = TRAINER_HARD,
+	.ball = ITEM_DIVE_BALL,
+    .moves = {MOVE_STORM_THROW, MOVE_KNOCK_OFF, MOVE_BULK_UP, MOVE_ICE_PUNCH}
+    },
+	{
+    .iv = 200,
+    .lvl = 20,
+    .species = SPECIES_MAKUHITA,
+    .heldItem = ITEM_FLAME_ORB,
+	.ability = ABILITY_SLOT_2,
+	.build = TRAINER_MON_HP_DEF,
+	.difficulty = TRAINER_HARD,
+	.ball = ITEM_DIVE_BALL,
+    .moves = {MOVE_STORM_THROW, MOVE_KNOCK_OFF, MOVE_BULK_UP, MOVE_ICE_PUNCH}
+    },
+	{
+    .iv = 200,
+    .lvl = 20,
+    .species = SPECIES_MAKUHITA,
+    .heldItem = ITEM_FLAME_ORB,
+	.ability = ABILITY_SLOT_2,
+	.build = TRAINER_MON_HP_DEF,
+	.difficulty = TRAINER_HARD,
+	.ball = ITEM_DIVE_BALL,
+    .moves = {MOVE_STORM_THROW, MOVE_KNOCK_OFF, MOVE_BULK_UP, MOVE_ICE_PUNCH}
     }
 };
 
@@ -4072,7 +4356,7 @@ static const struct TrainerMon sParty_Winona1[] = {
 static const struct TrainerMon sParty_TateAndLiza1[] = {
     {
     .iv = 250,
-    .lvl = 51,
+    .lvl = 52,
     .species = SPECIES_GARDEVOIR,
 	.ability = ABILITY_SLOT_1,
     .heldItem = ITEM_GARDEVOIRITE,
@@ -4083,7 +4367,7 @@ static const struct TrainerMon sParty_TateAndLiza1[] = {
     },
     {
     .iv = 250,
-    .lvl = 51,
+    .lvl = 52,
     .species = SPECIES_XATU,
 	.ability = ABILITY_HIDDEN,
     .heldItem = ITEM_CHOICE_BAND,
@@ -4094,7 +4378,7 @@ static const struct TrainerMon sParty_TateAndLiza1[] = {
     },
     {
     .iv = 250,
-    .lvl = 52,
+    .lvl = 54,
     .species = SPECIES_HATTERENE,
 	.ability = ABILITY_SLOT_1,
     .heldItem = ITEM_CHOICE_SPECS,
@@ -4105,7 +4389,7 @@ static const struct TrainerMon sParty_TateAndLiza1[] = {
     },
     {
     .iv = 250,
-    .lvl = 52,
+    .lvl = 54,
     .species = SPECIES_LUNATONE,
     .heldItem = ITEM_SITRUS_BERRY,
 	.ability = ABILITY_SLOT_1,
@@ -4115,7 +4399,7 @@ static const struct TrainerMon sParty_TateAndLiza1[] = {
     },
     {
     .iv = 250,
-    .lvl = 52,
+    .lvl = 54,
     .species = SPECIES_SOLROCK,
     .heldItem = ITEM_SITRUS_BERRY,
 	.ability = ABILITY_SLOT_1,
@@ -8906,24 +9190,231 @@ static const struct TrainerMon sParty_GruntWeatherInst5[] = {
 
 static const struct TrainerMon sParty_TabithaMtChimney[] = {
     {
-    .iv = 50,
-    .lvl = 18,
-    .species = SPECIES_NUMEL,
+    .difficulty = TRAINER_HARDEST,
+    .lvl = 46,
+	.heldItem = ITEM_SOFT_SAND,
+    .species = SPECIES_TYPHLOSION,
+	.moves = {MOVE_EARTH_POWER, MOVE_FLAMETHROWER, MOVE_SOLAR_BEAM, MOVE_SUNNY_DAY},
     },
     {
-    .iv = 50,
-    .lvl = 20,
-    .species = SPECIES_POOCHYENA,
+    .difficulty = TRAINER_HARDEST,
+    .lvl = 46,
+	.heldItem = ITEM_SITRUS_BERRY,
+    .species = SPECIES_EMBOAR,
+	.moves = {MOVE_HEAT_CRASH, MOVE_BULK_UP, MOVE_ROCK_SMASH, MOVE_THUNDER_FANG},
     },
     {
-    .iv = 50,
-    .lvl = 22,
-    .species = SPECIES_NUMEL,
+    .difficulty = TRAINER_HARDEST,
+    .lvl = 46,
+	.heldItem = ITEM_CHARIZARDITE_Y,
+    .species = SPECIES_CHARIZARD,
+	.moves = {MOVE_FIRE_BLAST, MOVE_DRAGON_PULSE, MOVE_AIR_CUTTER, MOVE_EARTH_POWER},
+    }
+};
+
+static const struct TrainerMon sEasyParty_TabithaMtChimney[] = {
+    {
+    .difficulty = TRAINER_HARD,
+    .lvl = 40,
+    .species = SPECIES_TYPHLOSION,
+	.moves = {MOVE_EARTH_POWER, MOVE_FLAMETHROWER, MOVE_CUT, MOVE_NONE},
     },
     {
-    .iv = 50,
-    .lvl = 22,
-    .species = SPECIES_ZUBAT,
+    .difficulty = TRAINER_HARD,
+    .lvl = 40,
+	.heldItem = ITEM_SITRUS_BERRY,
+    .species = SPECIES_EMBOAR,
+	.moves = {MOVE_FLAME_CHARGE, MOVE_WORK_UP, MOVE_ROCK_SMASH, MOVE_SCALD},
+    },
+    {
+    .difficulty = TRAINER_HARD,
+    .lvl = 38,
+	.heldItem = ITEM_CHARIZARDITE_Y,
+    .species = SPECIES_CHARIZARD,
+	.moves = {MOVE_FLAMETHROWER, MOVE_DRAGON_BREATH, MOVE_AIR_CUTTER, MOVE_EARTH_POWER},
+    }
+};
+
+static const struct TrainerMon sHardParty_TabithaMtChimney[] = {
+    {
+    .difficulty = TRAINER_MAX,
+    .lvl = 46,
+	.heldItem = ITEM_SOFT_SAND,
+    .species = SPECIES_TYPHLOSION,
+	.moves = {MOVE_EARTH_POWER, MOVE_FLAMETHROWER, MOVE_SOLAR_BEAM, MOVE_NASTY_PLOT},
+    },
+    {
+    .difficulty = TRAINER_MAX,
+    .lvl = 46,
+	.heldItem = ITEM_SITRUS_BERRY,
+    .species = SPECIES_EMBOAR,
+	.moves = {MOVE_HEAT_CRASH, MOVE_SWORDS_DANCE, MOVE_STORM_THROW, MOVE_THUNDER_FANG},
+    },
+    {
+    .difficulty = TRAINER_MAX,
+    .lvl = 46,
+	.heldItem = ITEM_CHARIZARDITE_Y,
+    .species = SPECIES_CHARIZARD,
+	.moves = {MOVE_FIRE_BLAST, MOVE_EARTHQUAKE, MOVE_SOLAR_BEAM, MOVE_DRAGON_PULSE},
+    }
+};
+
+static const struct TrainerMon sHardcoreParty_TabithaMtChimney[] = {
+    {
+    .difficulty = TRAINER_MAX,
+    .lvl = 48,
+	.heldItem = ITEM_INCINIUM_Z,
+    .species = SPECIES_INCINEROAR,
+	.ability = ABILITY_HIDDEN,
+	.moves = {MOVE_DARKEST_LARIAT, MOVE_FLARE_BLITZ, MOVE_CROSS_CHOP, MOVE_U_TURN},
+    },
+	{
+    .difficulty = TRAINER_MAX,
+    .lvl = 48,
+	.heldItem = ITEM_CHARIZARDITE_Y,
+    .species = SPECIES_CHARIZARD,
+	.ability = ABILITY_HIDDEN,
+	.moves = {MOVE_FIRE_BLAST, MOVE_EARTHQUAKE, MOVE_SOLAR_BEAM, MOVE_DRAGON_PULSE},
+    },
+    {
+    .difficulty = TRAINER_MAX,
+    .lvl = 48,
+	.heldItem = ITEM_GHOST_GEM,
+	.ability = ABILITY_HIDDEN,
+    .species = SPECIES_TYPHLOSION_HISUIAN,
+	.moves = {MOVE_SHADOW_BALL, MOVE_FLAMETHROWER, MOVE_SOLAR_BEAM, MOVE_NASTY_PLOT},
+    }
+};
+
+static const struct TrainerMon sParty_CourtneyMtChimney[] = {
+    {
+    .difficulty = TRAINER_HARDEST,
+    .lvl = 46,
+	.heldItem = ITEM_SITRUS_BERRY,
+    .species = SPECIES_SABLEYE,
+	.ability = ABILITY_HIDDEN,
+	.moves = {MOVE_KNOCK_OFF, MOVE_WILL_O_WISP, MOVE_SUNNY_DAY, MOVE_RECOVER},
+    },
+	{
+    .difficulty = TRAINER_HARDEST,
+    .lvl = 46,
+	.heldItem = ITEM_OCCA_BERRY,
+    .species = SPECIES_MAGNEZONE,
+	.moves = {MOVE_FOCUS_BLAST, MOVE_FLASH_CANNON, MOVE_ZAP_CANNON, MOVE_LOCK_ON},
+    },
+    {
+    .difficulty = TRAINER_HARDEST,
+    .lvl = 46,
+	.heldItem = ITEM_CHARIZARDITE_X,
+    .species = SPECIES_CHARIZARD,
+	.moves = {MOVE_DRAGON_DANCE, MOVE_FLARE_BLITZ, MOVE_ROOST, MOVE_DRAGON_CLAW},
+    }
+};
+
+static const struct TrainerMon sEasyParty_CourtneyMtChimney[] = {
+    {
+    .difficulty = TRAINER_HARD,
+    .lvl = 40,
+	.heldItem = ITEM_SITRUS_BERRY,
+    .species = SPECIES_SABLEYE,
+	.ability = ABILITY_HIDDEN,
+	.moves = {MOVE_SLASH, MOVE_SUNNY_DAY, MOVE_NONE, MOVE_NONE},
+    },
+	{
+    .difficulty = TRAINER_HARD,
+    .lvl = 40,
+	.heldItem = ITEM_NONE,
+    .species = SPECIES_MAGNEZONE,
+	.moves = {MOVE_FOCUS_BLAST, MOVE_FLASH_CANNON, MOVE_ZAP_CANNON, MOVE_NONE},
+    },
+    {
+    .difficulty = TRAINER_HARD,
+    .lvl = 38,
+	.heldItem = ITEM_CHARIZARDITE_X,
+    .species = SPECIES_CHARIZARD,
+	.moves = {MOVE_FLAMETHROWER, MOVE_CRUNCH, MOVE_DRAGON_CLAW, MOVE_NONE},
+    }
+};
+
+static const struct TrainerMon sHardParty_CourtneyMtChimney[] = {
+    {
+    .difficulty = TRAINER_MAX,
+    .lvl = 46,
+	.heldItem = ITEM_LEFTOVERS,
+    .species = SPECIES_SABLEYE,
+	.ability = ABILITY_HIDDEN,
+	.moves = {MOVE_KNOCK_OFF, MOVE_WILL_O_WISP, MOVE_PROTECT, MOVE_RECOVER},
+    },
+	{
+    .difficulty = TRAINER_MAX,
+    .lvl = 46,
+	.heldItem = ITEM_LEFTOVERS,
+    .species = SPECIES_SKARMORY,
+	.moves = {MOVE_SPIKES, MOVE_ROOST, MOVE_WHIRLWIND, MOVE_STEEL_WING},
+    },
+    {
+    .difficulty = TRAINER_MAX,
+    .lvl = 46,
+	.heldItem = ITEM_CHARIZARDITE_X,
+    .species = SPECIES_CHARIZARD,
+	.moves = {MOVE_FLARE_BLITZ, MOVE_DRAGON_DANCE, MOVE_DRAGON_CLAW, MOVE_ROOST},
+    }
+};
+
+static const struct TrainerMon sHardcoreParty_CourtneyMtChimney[] = {
+    {
+    .difficulty = TRAINER_MAX,
+    .lvl = 46,
+	.heldItem = ITEM_ROCKY_HELMET,
+    .species = SPECIES_CORVIKNIGHT,
+	.ability = ABILITY_SLOT_1,
+	.moves = {MOVE_IRON_DEFENSE, MOVE_BODY_PRESS, MOVE_ROOST, MOVE_U_TURN},
+    },
+    {
+    .difficulty = TRAINER_MAX,
+    .lvl = 46,
+	.heldItem = ITEM_POISONIUM_Z,
+    .species = SPECIES_SALAZZLE,
+	.hiddenPower = TYPE_GRASS,
+	.moves = {MOVE_SLUDGE_WAVE, MOVE_HIDDEN_POWER, MOVE_FIRE_BLAST, MOVE_NASTY_PLOT},
+    },
+	{
+    .difficulty = TRAINER_MAX,
+    .lvl = 46,
+	.heldItem = ITEM_SABLENITE,
+    .species = SPECIES_SABLEYE,
+	.ability = ABILITY_HIDDEN,
+	.moves = {MOVE_KNOCK_OFF, MOVE_WILL_O_WISP, MOVE_PROTECT, MOVE_RECOVER},
+    }
+};
+
+static const struct TrainerMon sParty_ArchieAlly[] = {
+    {
+    .lvl = 49,
+    .species = SPECIES_SEISMITOAD,
+	.ability = ABILITY_HIDDEN,
+	.difficulty = TRAINER_HARD,
+	.build = TRAINER_MON_HP_SPDEF,
+	.heldItem = ITEM_GROUND_GEM,
+	.moves = {MOVE_EARTHQUAKE, MOVE_WATERFALL, MOVE_RAIN_DANCE, MOVE_ROCK_SLIDE},
+    },
+	{
+    .lvl = 49,
+    .species = SPECIES_SLOWBRO,
+	.ability = ABILITY_HIDDEN,
+	.difficulty = TRAINER_HARDEST,
+	.build = TRAINER_MON_HP_SPDEF,
+	.heldItem = ITEM_LEFTOVERS,
+	.moves = {MOVE_FLAMETHROWER, MOVE_SCALD, MOVE_RECOVER, MOVE_CALM_MIND},
+    },
+	{
+    .lvl = 54,
+    .species = SPECIES_SHARPEDO,
+	.heldItem = ITEM_SITRUS_BERRY,
+	.ability = ABILITY_HIDDEN,
+	.difficulty = TRAINER_MAX,
+	.build = TRAINER_MON_SPEED_PHYS,
+	.moves = {MOVE_ROCK_SLIDE, MOVE_SWORDS_DANCE, MOVE_CRUNCH, MOVE_WATERFALL},
     }
 };
 
@@ -13983,4 +14474,97 @@ static const struct TrainerMon sParty_Wally2[] = {
 		.moves = {MOVE_THUNDERBOLT, MOVE_ICE_BEAM, MOVE_PSYCHIC, MOVE_DISARMING_VOICE},
 	},
 	
+};
+
+static const struct TrainerMon sParty_RivalAlly[] = {
+	{
+		.lvl = 48,
+		.difficulty = TRAINER_MAX,
+		.build = TRAINER_MON_PHYS,
+		.species = SPECIES_SWAMPERT,
+		.heldItem = ITEM_LEFTOVERS,
+		.moves = {MOVE_SURF, MOVE_EARTHQUAKE, MOVE_BULK_UP, MOVE_AQUA_RING},
+	},
+	{
+		.lvl = 48,
+		.difficulty = TRAINER_MAX,
+		.build = TRAINER_MON_SPEED_SPEC,
+		.species = SPECIES_SCEPTILE,
+		.heldItem = ITEM_BIG_ROOT,
+		.moves = {MOVE_GIGA_DRAIN, MOVE_DRAGON_PULSE, MOVE_THUNDERBOLT, MOVE_ICE_BEAM},
+	},
+	{
+		.lvl = 48,
+		.difficulty = TRAINER_MAX,
+		.build = TRAINER_MON_SPEED_SPEC,
+		.species = SPECIES_BLAZIKEN,
+		.heldItem = ITEM_WHITE_HERB,
+		.moves = {MOVE_CLOSE_COMBAT, MOVE_ACROBATICS, MOVE_SWORDS_DANCE, MOVE_ROOST},
+	},
+};
+
+static const struct TrainerMon sParty_ArchieDouble[] = {
+	{
+    .lvl = 52,
+    .species = SPECIES_FERALIGATR,
+	.ability = ABILITY_HIDDEN,
+	.build = TRAINER_MON_SPEED_PHYS,
+	.difficulty = TRAINER_HARDER,
+	.heldItem = ITEM_MYSTIC_WATER,
+	.moves = {MOVE_DRAGON_DANCE, MOVE_LIQUIDATION, MOVE_THUNDER_PUNCH, MOVE_ICE_PUNCH},
+	.ball = ITEM_ULTRA_BALL,
+    },
+    {
+    .lvl = 52,
+    .species = SPECIES_OVERQWIL,
+	.ability = ABILITY_SLOT_2,
+	.build = TRAINER_MON_SPEED_PHYS,
+	.difficulty = TRAINER_HARDER,
+	.heldItem = ITEM_BLACK_SLUDGE,
+	.moves = {MOVE_BARB_BARRAGE, MOVE_CRUNCH, MOVE_AQUA_JET, MOVE_PROTECT},
+	.ball = ITEM_DUSK_BALL,
+    },
+    {
+    .lvl = 52,
+    .species = SPECIES_SHARPEDO,
+	.ability = ABILITY_SLOT_1,
+	.build = TRAINER_MON_SPEED_PHYS,
+	.difficulty = TRAINER_MAX,
+	.heldItem = ITEM_SHARPEDONITE,
+	.moves = {MOVE_CRUNCH, MOVE_THUNDER_FANG, MOVE_ICE_FANG, MOVE_WATERFALL},
+	.ball = ITEM_DIVE_BALL,
+    }
+};
+
+static const struct TrainerMon sParty_MaxieDouble[] = {
+	{
+    .lvl = 52,
+    .species = SPECIES_INCINEROAR,
+	.ability = ABILITY_HIDDEN,
+	.build = TRAINER_MON_SPEED_PHYS,
+	.difficulty = TRAINER_MAX,
+	.heldItem = ITEM_SITRUS_BERRY,
+	.moves = {MOVE_DARKEST_LARIAT, MOVE_FIRE_BLAST, MOVE_HELPING_HAND, MOVE_MEMENTO},
+	.ball = ITEM_DUSK_BALL,
+    },
+    {
+    .lvl = 52,
+    .species = SPECIES_VOLCARONA,
+	.ability = ABILITY_SLOT_2,
+	.build = TRAINER_MON_SPEED_SPEC,
+	.difficulty = TRAINER_HARDER,
+	.heldItem = ITEM_CHARTI_BERRY,
+	.moves = {MOVE_QUIVER_DANCE, MOVE_BUG_BUZZ, MOVE_FLAMETHROWER, MOVE_ROOST},
+	.ball = ITEM_DUSK_BALL,
+    },
+    {
+    .lvl = 52,
+    .species = SPECIES_CAMERUPT,
+	.ability = ABILITY_SLOT_1,
+	.build = TRAINER_MON_HP_SPDEF,
+	.difficulty = TRAINER_MAX,
+	.heldItem = ITEM_CAMERUPTITE,
+	.moves = {MOVE_CURSE, MOVE_STOMPING_TANTRUM, MOVE_FIRE_FANG, MOVE_THUNDER_FANG},
+	.ball = ITEM_ULTRA_BALL,
+    }
 };

@@ -63,4 +63,3 @@ ShoalCave_LowTideLowerRoom_Text_CanOvercomeColdWithFocus:
 
 ShoalCave_LowTideLowerRoom_Text_EverythingStartsWithFocus:
 	.string "Everything starts with focus!$"
-

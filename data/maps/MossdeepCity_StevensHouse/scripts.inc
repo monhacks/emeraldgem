@@ -216,4 +216,3 @@ MossdeepCity_StevensHouse_Text_LetterFromSteven:
 MossdeepCity_StevensHouse_Text_CollectionOfRareRocks:
 	.string "It's a collection of rare rocks and\n"
 	.string "stones assembled by STEVEN.$"
-

@@ -4303,7 +4303,7 @@ void RyuIvCheckerDef(void)
     ConvertIntToDecimalStringN(gStringVar3, SpDefIv, STR_CONV_MODE_LEADING_ZEROS, 2);
 }
 
-// Stores the chosen Pokémon's ATK, SPD and SP. ATK IVs in the Buffers 1, 2 and 3.
+// Stores the chosen Pokémon's ATK, SP. ATK and SPD IVs in the Buffers 1, 2 and 3.
 void RyuIvCheckerOff(void)
 {
     u8 AtkIv = 0;
@@ -4364,9 +4364,10 @@ void RyuSetIvsBad(void)
 	s32 j;
     PlaySE(SE_EXP_MAX);
 	for (j = 0; j < NUM_STATS; j++){
-		iv = WORST_IV_SPREAD[gSpecialVar_0x8006][j];
+		iv = 2;
 		SetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_HP_IV + j, &iv);
 	}
+	SetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_HIDDEN_POWER,&gSpecialVar_0x8006);
 }
 void RyuSetIvsMedium(void)
 {
@@ -4374,9 +4375,10 @@ void RyuSetIvsMedium(void)
 	s32 j;	
     PlaySE(SE_EXP_MAX);
 	for (j = 0; j < NUM_STATS; j++){
-		iv = PASSABLE_IV_SPREAD[gSpecialVar_0x8006][j];
+		iv = 16;
 		SetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_HP_IV + j, &iv);
 	}
+	SetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_HIDDEN_POWER, &gSpecialVar_0x8006);
 }
 void RyuSetIvsPerfect(void)
 {
@@ -4384,18 +4386,18 @@ void RyuSetIvsPerfect(void)
 	s32 j;
     PlaySE(SE_EXP_MAX);
 	for (j = 0; j < NUM_STATS; j++){
-		iv = BEST_IV_SPREAD[gSpecialVar_0x8006][j];
+		iv = 31;
 		SetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_HP_IV + j, &iv);
 	}
+	SetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_HIDDEN_POWER, &gSpecialVar_0x8006);
 }
 
 void SetTrainerType(void)
 {
-	gSaveBlock1Ptr->trainerType = (gSpecialVar_0x8004 + (gSaveBlock2Ptr->playerGender * 5));
+	gSaveBlock1Ptr->trainerType = gSpecialVar_0x8004;
 }
 
 void ShowTrainerType(void)
 {
 	gSpecialVar_Result = gSaveBlock1Ptr->trainerType;
-	// return gSpecialVar_Result;
 }

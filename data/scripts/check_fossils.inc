@@ -1,6 +1,8 @@
 ScriptThereYouGo::
 	lockall
 	playse SE_PIN
+	bufferspeciesname STR_VAR_2, VAR_0x8004
+	removeitem VAR_ITEM_ID, 1
 	applymovement VAR_LAST_TALKED, Common_Movement_ExclamationMark
 	waitmovement 0
     msgbox Text_Fossil_WithThatICan
@@ -20,7 +22,7 @@ ScriptThereYouGo::
 	waitmovement 0
 	playfanfare MUS_OBTAIN_ITEM
     msgbox Text_Fossil_ThereYouGo
-	givemon VAR_0x8004, VAR_LAST_TALKED, ITEM_NONE
+	givemon VAR_0x8004, 20, ITEM_NONE
 	releaseall
     end
 
@@ -90,103 +92,48 @@ Fossils_Check::
 	end
 
 Fossils_Helix::
-	lockall
-	bufferspeciesname STR_VAR_2, SPECIES_OMANYTE
-	removeitem VAR_ITEM_ID, 1
 	setvar VAR_0x8004, SPECIES_OMANYTE
     goto ScriptThereYouGo
-	release
-	end
 
 Fossils_Dome::
-	lockall
-	bufferspeciesname STR_VAR_2, SPECIES_KABUTOPS
-	removeitem VAR_ITEM_ID, 1
-	setvar VAR_0x8004, SPECIES_KABUTOPS
+	setvar VAR_0x8004, SPECIES_KABUTO
     goto ScriptThereYouGo
-	release
-	end
 
 Fossils_Amber::
-	lockall
-	bufferspeciesname STR_VAR_2, SPECIES_AERODACTYL
-	removeitem VAR_ITEM_ID, 1
 	setvar VAR_0x8004, SPECIES_AERODACTYL
     goto ScriptThereYouGo
-	release
-	end
 
 Fossils_Claw::
-	lockall
-	bufferspeciesname STR_VAR_2, SPECIES_ANORITH
-	removeitem VAR_ITEM_ID, 1
 	setvar VAR_0x8004, SPECIES_ANORITH
     goto ScriptThereYouGo
-	release
-	end
-
+	
 Fossils_Root::
-	lockall
-	bufferspeciesname STR_VAR_2, SPECIES_LILEEP
-	removeitem VAR_ITEM_ID, 1
 	setvar VAR_0x8004, SPECIES_LILEEP
     goto ScriptThereYouGo
-	release
-	end
 
 Fossils_Armor::
-	lockall
-	bufferspeciesname STR_VAR_2, SPECIES_SHIELDON
-	removeitem VAR_ITEM_ID, 1
 	setvar VAR_0x8004, SPECIES_SHIELDON
     goto ScriptThereYouGo
-	release
-	end
 
 Fossils_Skull::
-	lockall
-	bufferspeciesname STR_VAR_2, SPECIES_CRANIDOS
-	removeitem VAR_ITEM_ID, 1
 	setvar VAR_0x8004, SPECIES_CRANIDOS
     goto ScriptThereYouGo
-	release
-	end
 
 Fossils_Cover::
-	lockall
-	bufferspeciesname STR_VAR_2, SPECIES_TIRTOUGA
-	removeitem VAR_ITEM_ID, 1
 	setvar VAR_0x8004, SPECIES_TIRTOUGA
     goto ScriptThereYouGo
-	release
-	end
 
 Fossils_Plume::
-	lockall
-	bufferspeciesname STR_VAR_2, SPECIES_ARCHEN
-	removeitem VAR_ITEM_ID, 1
 	setvar VAR_0x8004, SPECIES_ARCHEN
     goto ScriptThereYouGo
-	release
-	end
 
 Fossils_Jaw::
-	lockall
-	bufferspeciesname STR_VAR_2, SPECIES_TYRUNT
-	removeitem VAR_ITEM_ID, 1
 	setvar VAR_0x8004, SPECIES_TYRUNT
     goto ScriptThereYouGo
-	release
-	end
 
 Fossils_Sail::
-	lockall
-	bufferspeciesname STR_VAR_2, SPECIES_AMAURA
-	removeitem VAR_ITEM_ID, 1
-	setvar VAR_0x8004, SPECIES_TYRUNT
+	setvar VAR_0x8004, SPECIES_AMAURA
     goto ScriptThereYouGo
-	release
-	end
 
 Fossils_Bird::
 	lockall
@@ -289,7 +236,7 @@ Fossils_Drake_Bird::
 	waitmovement 0
 	removeitem ITEM_FOSSILIZED_BIRD, 1
 	removeitem ITEM_FOSSILIZED_DRAKE, 1
-	givemon SPECIES_DRACOZOLT, VAR_LAST_TALKED, ITEM_NONE
+	givemon SPECIES_DRACOZOLT, 25, ITEM_NONE
 	playfanfare MUS_OBTAIN_ITEM
 	msgbox Text_Fossil_HereYouGoTwo
 	releaseall
@@ -316,7 +263,7 @@ Fossils_Dino_Bird::
 	waitmovement 0
 	removeitem ITEM_FOSSILIZED_BIRD, 1
 	removeitem ITEM_FOSSILIZED_DINO, 1
-	givemon SPECIES_ARCTOZOLT, VAR_LAST_TALKED, ITEM_NONE
+	givemon SPECIES_ARCTOZOLT, 25, ITEM_NONE
 	playfanfare MUS_OBTAIN_ITEM
 	msgbox Text_Fossil_HereYouGoTwo
 	releaseall
@@ -343,7 +290,7 @@ Fossils_Drake_Fish::
 	waitmovement 0
 	removeitem ITEM_FOSSILIZED_FISH, 1
 	removeitem ITEM_FOSSILIZED_DRAKE, 1
-	givemon SPECIES_DRACOVISH, VAR_LAST_TALKED, ITEM_NONE
+	givemon SPECIES_DRACOVISH, 25, ITEM_NONE
 	playfanfare MUS_OBTAIN_ITEM
 	msgbox Text_Fossil_HereYouGoTwo
 	releaseall
@@ -370,7 +317,7 @@ Fossils_Dino_Fish::
 	waitmovement 0
 	removeitem ITEM_FOSSILIZED_FISH, 1
 	removeitem ITEM_FOSSILIZED_DINO, 1
-	givemon SPECIES_ARCTOVISH, VAR_LAST_TALKED, ITEM_NONE
+	givemon SPECIES_ARCTOVISH, 25, ITEM_NONE
 	playfanfare MUS_OBTAIN_ITEM
 	msgbox Text_Fossil_HereYouGoTwo
 	releaseall

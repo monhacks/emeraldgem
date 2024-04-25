@@ -597,10 +597,10 @@ static u32 CopyWallyMonData(u8 monId, u8 *dst)
         dst[0] = GetMonData(&gPlayerParty[monId], MON_DATA_MET_LEVEL);
         size = 1;
         break;
-    case REQUEST_MET_GAME_BATTLE:
-        dst[0] = GetMonData(&gPlayerParty[monId], MON_DATA_MET_GAME);
-        size = 1;
-        break;
+    // case REQUEST_MET_GAME_BATTLE:
+        // dst[0] = GetMonData(&gPlayerParty[monId], MON_DATA_MET_GAME);
+        // size = 1;
+        // break;
     case REQUEST_POKEBALL_BATTLE:
         dst[0] = GetMonData(&gPlayerParty[monId], MON_DATA_POKEBALL);
         size = 1;
@@ -897,9 +897,9 @@ static void SetWallyMonData(u8 monId)
     case REQUEST_MET_LEVEL_BATTLE:
         SetMonData(&gPlayerParty[monId], MON_DATA_MET_LEVEL, &gBattleResources->bufferA[gActiveBattler][3]);
         break;
-    case REQUEST_MET_GAME_BATTLE:
-        SetMonData(&gPlayerParty[monId], MON_DATA_MET_GAME, &gBattleResources->bufferA[gActiveBattler][3]);
-        break;
+    // case REQUEST_MET_GAME_BATTLE:
+        // SetMonData(&gPlayerParty[monId], MON_DATA_MET_GAME, &gBattleResources->bufferA[gActiveBattler][3]);
+        // break;
     case REQUEST_POKEBALL_BATTLE:
         SetMonData(&gPlayerParty[monId], MON_DATA_POKEBALL, &gBattleResources->bufferA[gActiveBattler][3]);
         break;

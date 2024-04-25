@@ -148,7 +148,7 @@ static EWRAM_DATA struct PokemonSummaryScreenData
         u8 abilityNum; // 0x8
         u8 metLocation; // 0x9
         u8 metLevel; // 0xA
-        u8 metGame; // 0xB
+        // u8 metGame; // 0xB
         u32 pid; // 0xC
         u32 exp; // 0x10
         u16 moves[MAX_MON_MOVES]; // 0x14
@@ -1535,7 +1535,7 @@ static bool8 ExtractMonDataToSummaryStruct(struct Pokemon *mon)
         sum->OTID = GetMonData(mon, MON_DATA_OT_ID);
         sum->metLocation = GetMonData(mon, MON_DATA_MET_LOCATION);
         sum->metLevel = GetMonData(mon, MON_DATA_MET_LEVEL);
-        sum->metGame = GetMonData(mon, MON_DATA_MET_GAME);
+        // sum->metGame = GetMonData(mon, MON_DATA_MET_GAME);
         sum->friendship = GetMonData(mon, MON_DATA_FRIENDSHIP);
         break;
     default:
@@ -2849,7 +2849,8 @@ static void PrintNotEggInfo(void)
     ConvertIntToDecimalStringN(gStringVar2, summary->level, STR_CONV_MODE_LEFT_ALIGN, 3);
     StringAppend(gStringVar1, gStringVar2);
     PrintTextOnWindow(PSS_LABEL_WINDOW_PORTRAIT_SPECIES, gStringVar1, 24, 17, 0, 1);
-    GetMonNickname(mon, gStringVar1);
+    // GetMonNickname(mon, gStringVar1);
+	ConvertIntToDecimalStringN(gStringVar1, (sizeof(struct BoxPokemon)), STR_CONV_MODE_LEFT_ALIGN, 10);
     PrintTextOnWindow(PSS_LABEL_WINDOW_PORTRAIT_NICKNAME, gStringVar1, 0, 1, 0, 1);
     strArray[0] = CHAR_SLASH;
     StringCopy(&strArray[1], &gSpeciesNames[summary->species2][0]);
@@ -3147,10 +3148,8 @@ static void PrintMonOTName(void)
         windowId = AddWindowFromTemplateList(sPageInfoTemplate, PSS_DATA_WINDOW_INFO_ORIGINAL_TRAINER);
         PrintTextOnWindow(windowId, gText_OTSlash, 0, 1, 0, 1);
         x = GetStringWidth(FONT_NORMAL, gText_OTSlash, 0);
-        if (sMonSummaryScreen->summary.OTGender == 0)
-            PrintTextOnWindow(windowId, sMonSummaryScreen->summary.OTName, x, 1, 0, 5);
-        else
-            PrintTextOnWindow(windowId, sMonSummaryScreen->summary.OTName, x, 1, 0, 6);
+        // if (sMonSummaryScreen->summary.OTGender == 0)
+        PrintTextOnWindow(windowId, sMonSummaryScreen->summary.OTName, x, 1, 0, 1);
     }
 }
 
@@ -3242,7 +3241,7 @@ static void BufferNatureString(void)
 {
     struct PokemonSummaryScreenData *sumStruct = sMonSummaryScreen;
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(2, gNatureNamePointers[sumStruct->summary.nature]);
-    DynamicPlaceholderTextUtil_SetPlaceholderPtr(5, gText_EmptyString5);
+    DynamicPlaceholderTextUtil_SetPlaceholderPtr(5, gText_EmptyString2);
 }
 
 static void GetMetLevelString(u8 *output)
@@ -3274,7 +3273,7 @@ static bool8 DoesMonOTMatchOwner(void)
         StringCopy(gStringVar1, gSaveBlock2Ptr->playerName);
     }
 
-    if (gender != sum->OTGender || trainerId != (sum->OTID & 0xFFFF) || StringCompareWithoutExtCtrlCodes(gStringVar1, sum->OTName))
+    if (/*gender != sum->OTGender ||*/ trainerId != (sum->OTID & 0xFFFF) || StringCompareWithoutExtCtrlCodes(gStringVar1, sum->OTName))
         return FALSE;
     else
         return TRUE;
@@ -3282,18 +3281,18 @@ static bool8 DoesMonOTMatchOwner(void)
 
 static bool8 DidMonComeFromGBAGames(void)
 {
-    struct PokeSummary *sum = &sMonSummaryScreen->summary;
-    if (sum->metGame > 0 && sum->metGame <= VERSION_LEAF_GREEN)
+    // struct PokeSummary *sum = &sMonSummaryScreen->summary;
+    // if (sum->metGame > 0 && sum->metGame <= VERSION_LEAF_GREEN)
         return TRUE;
-    return FALSE;
+    // return FALSE;
 }
 
 bool8 DidMonComeFromRSE(void)
 {
-    struct PokeSummary *sum = &sMonSummaryScreen->summary;
-    if (sum->metGame > 0 && sum->metGame <= VERSION_EMERALD)
+    // struct PokeSummary *sum = &sMonSummaryScreen->summary;
+    // if (sum->metGame > 0 && sum->metGame <= VERSION_EMERALD)
         return TRUE;
-    return FALSE;
+    // return FALSE;
 }
 
 static bool8 IsInGamePartnerMon(void)
@@ -3330,11 +3329,11 @@ static void PrintEggState(void)
 
     if (sMonSummaryScreen->summary.sanity == TRUE)
         text = gText_EggWillTakeALongTime;
-    else if (sum->friendship <= 5)
+    else if (sum->friendship <= 1)
         text = gText_EggAboutToHatch;
-    else if (sum->friendship <= 10)
+    else if (sum->friendship <= 2)
         text = gText_EggWillHatchSoon;
-    else if (sum->friendship <= 40)
+    else if (sum->friendship <= 3)
         text = gText_EggWillTakeSomeTime;
     else
         text = gText_EggWillTakeALongTime;
@@ -3939,47 +3938,6 @@ static void SetMonTypeIcons(void)
     }
 }
 
-// static void SetMoveTypeIcons(void)
-// {
-    // u8 i;
-    // struct PokeSummary *summary = &sMonSummaryScreen->summary;
-    // struct Pokemon *mon = &sMonSummaryScreen->currentMon;
-    // u16 species = GetMonData(mon, MON_DATA_SPECIES);
-    // for (i = 0; i < MAX_MON_MOVES; i++)
-    // {
-        // if (summary->moves[i] != MOVE_NONE) {
-            // if (summary->moves[i] == MOVE_HIDDEN_POWER) {
-                // u8 typeBits  = ((GetMonData(mon, MON_DATA_HP_IV) & 1) << 0)
-                     // | ((GetMonData(mon, MON_DATA_ATK_IV) & 1) << 1)
-                     // | ((GetMonData(mon, MON_DATA_DEF_IV) & 1) << 2)
-                     // | ((GetMonData(mon, MON_DATA_SPEED_IV) & 1) << 3)
-                     // | ((GetMonData(mon, MON_DATA_SPATK_IV) & 1) << 4)
-                     // | ((GetMonData(mon, MON_DATA_SPDEF_IV) & 1) << 5);
-
-                // u8 type = (17 * typeBits) / 63 + 1;
-        // if (type >= TYPE_MYSTERY)
-            // type++;
-		// // if (GetMonData(mon, MON_DATA_HP_IV) == 1 && GetMonData(mon, MON_DATA_ATK_IV) == 1 && GetMonData(mon, MON_DATA_DEF_IV) == 1
-			// // && GetMonData(mon, MON_DATA_SPATK_IV) == 3 && GetMonData(mon, MON_DATA_SPDEF_IV) == 0 && GetMonData(mon, MON_DATA_SPEED_IV) == 1)
-			// // type = TYPE_FAIRY;
-		 // // if (GetMonData(mon, MON_DATA_HP_IV) == 15 && GetMonData(mon, MON_DATA_ATK_IV) == 15 && GetMonData(mon, MON_DATA_DEF_IV) == 15
-			 // // && GetMonData(mon, MON_DATA_SPATK_IV) == 15 && GetMonData(mon, MON_DATA_SPDEF_IV) == 18 && GetMonData(mon, MON_DATA_SPEED_IV) == 15)
-			 // // type = TYPE_FAIRY;
-		 // // if (GetMonData(mon, MON_DATA_HP_IV) == 31 && GetMonData(mon, MON_DATA_ATK_IV) == 30 && GetMonData(mon, MON_DATA_DEF_IV) == 31
-			 // // && GetMonData(mon, MON_DATA_SPATK_IV) == 30 && GetMonData(mon, MON_DATA_SPDEF_IV) == 31 && GetMonData(mon, MON_DATA_SPEED_IV) == 31)
-			 // // type = TYPE_FAIRY;
-                // type |= 0xC0;
-                // SetTypeSpritePosAndPal(type & 0x3F, 85, 32 + (i * 16), i + SPRITE_ARR_ID_TYPE);
-            // }
-			// else {
-                // SetTypeSpritePosAndPal(gBattleMoves[summary->moves[i]].type, 85, 32 + (i * 16), i + SPRITE_ARR_ID_TYPE);
-            // }
-        // }
-        // else
-            // SetSpriteInvisibility(i + SPRITE_ARR_ID_TYPE, TRUE);
-    // }
-// }
-
 static void SetMoveTypeIcons(void)
 {
     u8 i;
@@ -3990,25 +3948,10 @@ static void SetMoveTypeIcons(void)
     {
         if (summary->moves[i] != MOVE_NONE) {
             if (summary->moves[i] == MOVE_HIDDEN_POWER) {
-                u8 typeBits  = ((GetMonData(mon, MON_DATA_HP_IV) & 1) << 0)
-                     | ((GetMonData(mon, MON_DATA_ATK_IV) & 1) << 1)
-                     | ((GetMonData(mon, MON_DATA_DEF_IV) & 1) << 2)
-                     | ((GetMonData(mon, MON_DATA_SPEED_IV) & 1) << 3)
-                     | ((GetMonData(mon, MON_DATA_SPATK_IV) & 1) << 4)
-                     | ((GetMonData(mon, MON_DATA_SPDEF_IV) & 1) << 5);
 
-                u8 type = ((NUMBER_OF_MON_TYPES - 4) * typeBits) / 63 + 1;
-                if (type >= TYPE_MYSTERY)
+                u8 type = GetMonData(mon, MON_DATA_HIDDEN_POWER);
+                if (type == TYPE_MYSTERY || type == TYPE_NORMAL)
                     type++;
-				if (GetMonData(mon, MON_DATA_HP_IV) == 1 && GetMonData(mon, MON_DATA_ATK_IV) == 1 && GetMonData(mon, MON_DATA_DEF_IV) == 1
-					&& GetMonData(mon, MON_DATA_SPATK_IV) == 3 && GetMonData(mon, MON_DATA_SPDEF_IV) == 0 && GetMonData(mon, MON_DATA_SPEED_IV) == 1)
-					type = TYPE_FAIRY;
-				if (GetMonData(mon, MON_DATA_HP_IV) == 15 && GetMonData(mon, MON_DATA_ATK_IV) == 15 && GetMonData(mon, MON_DATA_DEF_IV) == 15
-					&& GetMonData(mon, MON_DATA_SPATK_IV) == 15 && GetMonData(mon, MON_DATA_SPDEF_IV) == 18 && GetMonData(mon, MON_DATA_SPEED_IV) == 15)
-					type = TYPE_FAIRY;
-				if (GetMonData(mon, MON_DATA_HP_IV) == 31 && GetMonData(mon, MON_DATA_ATK_IV) == 30 && GetMonData(mon, MON_DATA_DEF_IV) == 31
-					&& GetMonData(mon, MON_DATA_SPATK_IV) == 30 && GetMonData(mon, MON_DATA_SPDEF_IV) == 31 && GetMonData(mon, MON_DATA_SPEED_IV) == 31)
-					type = TYPE_FAIRY;
                 type |= 0xC0;
                 SetTypeSpritePosAndPal(type & 0x3F, 85, 32 + (i * 16), i + SPRITE_ARR_ID_TYPE);
             } else {
@@ -4033,42 +3976,6 @@ static void SetContestMoveTypeIcons(void)
     }
 }
 
-// static void SetNewMoveTypeIcon(void)
-// {
-    // struct Pokemon *mon = &sMonSummaryScreen->currentMon;
-    // u16 species = GetMonData(mon, MON_DATA_SPECIES);
-
-    // if (sMonSummaryScreen->newMove == MOVE_NONE)
-    // {
-        // SetSpriteInvisibility(SPRITE_ARR_ID_TYPE + 4, TRUE);
-    // }
-    // else
-    // {
-        // if (sMonSummaryScreen->currPageIndex == PSS_PAGE_BATTLE_MOVES)
-            // if (sMonSummaryScreen->newMove == MOVE_HIDDEN_POWER) {
-                // u8 typeBits  = ((GetMonData(mon, MON_DATA_HP_IV) & 1) << 0)
-                     // | ((GetMonData(mon, MON_DATA_ATK_IV) & 1) << 1)
-                     // | ((GetMonData(mon, MON_DATA_DEF_IV) & 1) << 2)
-                     // | ((GetMonData(mon, MON_DATA_SPEED_IV) & 1) << 3)
-                     // | ((GetMonData(mon, MON_DATA_SPATK_IV) & 1) << 4)
-                     // | ((GetMonData(mon, MON_DATA_SPDEF_IV) & 1) << 5);
-
-                // u8 type = (17 * typeBits) / 63 + 1;
-				// if (type >= TYPE_MYSTERY)
-					// type++;
-				// if (GetMonData(mon, MON_DATA_HP_IV) == 31 && GetMonData(mon, MON_DATA_ATK_IV) == 30 && GetMonData(mon, MON_DATA_DEF_IV) == 31 && GetMonData(mon, MON_DATA_SPATK_IV) == 30
-					// && GetMonData(mon, MON_DATA_SPDEF_IV) == 31 && GetMonData(mon, MON_DATA_SPEED_IV) == 31)
-					// type = TYPE_FAIRY;
-                // type |= 0xC0;
-                // SetTypeSpritePosAndPal(type & 0x3F, 85, 96, SPRITE_ARR_ID_TYPE + 4);
-            // } else {
-                // SetTypeSpritePosAndPal(gBattleMoves[sMonSummaryScreen->newMove].type, 85, 96, SPRITE_ARR_ID_TYPE + 4);
-            // }
-        // else
-            // SetTypeSpritePosAndPal(NUMBER_OF_MON_TYPES + gContestMoves[sMonSummaryScreen->newMove].contestCategory, 85, 96, SPRITE_ARR_ID_TYPE + 4);
-    // }
-// }
-
 static void SetNewMoveTypeIcon(void)
 {
     struct Pokemon *mon = &sMonSummaryScreen->currentMon;
@@ -4082,25 +3989,9 @@ static void SetNewMoveTypeIcon(void)
     {
         if (sMonSummaryScreen->currPageIndex == PSS_PAGE_BATTLE_MOVES)
             if (sMonSummaryScreen->newMove == MOVE_HIDDEN_POWER) {
-                u8 typeBits  = ((GetMonData(mon, MON_DATA_HP_IV) & 1) << 0)
-                     | ((GetMonData(mon, MON_DATA_ATK_IV) & 1) << 1)
-                     | ((GetMonData(mon, MON_DATA_DEF_IV) & 1) << 2)
-                     | ((GetMonData(mon, MON_DATA_SPEED_IV) & 1) << 3)
-                     | ((GetMonData(mon, MON_DATA_SPATK_IV) & 1) << 4)
-                     | ((GetMonData(mon, MON_DATA_SPDEF_IV) & 1) << 5);
-
-                u8 type = ((NUMBER_OF_MON_TYPES - 4) * typeBits) / 63 + 1;
-                if (type >= TYPE_MYSTERY)
+                u8 type = GetMonData(mon, MON_DATA_HIDDEN_POWER);
+                if (type == TYPE_MYSTERY || type == TYPE_NORMAL)
                     type++;
-				if (GetMonData(mon, MON_DATA_HP_IV) == 1 && GetMonData(mon, MON_DATA_ATK_IV) == 1 && GetMonData(mon, MON_DATA_DEF_IV) == 1
-					&& GetMonData(mon, MON_DATA_SPATK_IV) == 3 && GetMonData(mon, MON_DATA_SPDEF_IV) == 0 && GetMonData(mon, MON_DATA_SPEED_IV) == 1)
-					type = TYPE_FAIRY;
-				if (GetMonData(mon, MON_DATA_HP_IV) == 15 && GetMonData(mon, MON_DATA_ATK_IV) == 15 && GetMonData(mon, MON_DATA_DEF_IV) == 15
-					&& GetMonData(mon, MON_DATA_SPATK_IV) == 15 && GetMonData(mon, MON_DATA_SPDEF_IV) == 18 && GetMonData(mon, MON_DATA_SPEED_IV) == 15)
-					type = TYPE_FAIRY;
-				if (GetMonData(mon, MON_DATA_HP_IV) == 31 && GetMonData(mon, MON_DATA_ATK_IV) == 30 && GetMonData(mon, MON_DATA_DEF_IV) == 31
-					&& GetMonData(mon, MON_DATA_SPATK_IV) == 30 && GetMonData(mon, MON_DATA_SPDEF_IV) == 31 && GetMonData(mon, MON_DATA_SPEED_IV) == 31)
-					type = TYPE_FAIRY;
                 type |= 0xC0;
                 SetTypeSpritePosAndPal(type & 0x3F, 85, 96, SPRITE_ARR_ID_TYPE + 4);
             } else {

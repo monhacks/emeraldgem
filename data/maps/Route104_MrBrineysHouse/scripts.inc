@@ -123,4 +123,3 @@ Route104_MrBrineysHouse_Text_TellMeWheneverYouWantToSail:
 
 Route104_MrBrineysHouse_Text_Peeko:
 	.string "¡Pii piihyoro!$"
-

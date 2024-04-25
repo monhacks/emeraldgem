@@ -1,4 +1,4 @@
-#!/bi#!/bin/bash
+#!/bin/bash
 
 for directory in data/maps/* ; do
 	pory_exists=$(find $directory -name $"scripts.pory" | wc -l)

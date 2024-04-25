@@ -1757,13 +1757,13 @@ static void Task_ReturnToItemListAfterItemPurchase(u8 taskId)
         {
             if (tItemCount > 19)
             {
-				if ((tItemCount > 80) && (AddBagItem(ITEM_CHERISH_BALL, tItemCount - 80) == TRUE))
+				if ((tItemCount > 49) && (AddBagItem(ITEM_CHERISH_BALL, tItemCount - 49) == TRUE))
 				{
 					BuyMenuDisplayMessage(taskId, gText_ThrowInCherishBalls, BuyMenuReturnToItemList);
 				}
 				else
 				{
-                BuyMenuDisplayMessage(taskId, gText_ThrowInPremierBalls, BuyMenuReturnToItemList);
+					BuyMenuDisplayMessage(taskId, gText_ThrowInPremierBalls, BuyMenuReturnToItemList);
 				}
             }
             else

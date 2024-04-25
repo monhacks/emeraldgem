@@ -13,6 +13,7 @@ static const u8 sTileBitAttributes[NUM_METATILE_BEHAVIORS] =
 {
     [MB_NORMAL]                          = TILE_FLAG_UNUSED,
     [MB_TALL_GRASS]                      = TILE_FLAG_UNUSED | TILE_FLAG_HAS_ENCOUNTERS,
+    [MB_DARK_GRASS]                      = TILE_FLAG_UNUSED | TILE_FLAG_HAS_ENCOUNTERS,
     [MB_LONG_GRASS]                      = TILE_FLAG_UNUSED | TILE_FLAG_HAS_ENCOUNTERS,
     [MB_SPECIAL_DOOR]                    = TILE_FLAG_UNUSED,
     [MB_UNUSED_05]                       = TILE_FLAG_HAS_ENCOUNTERS,
@@ -1431,6 +1432,14 @@ bool8 MetatileBehavior_IsQuestionnaire(u8 metatileBehavior)
 bool8 MetatileBehavior_IsLongGrass_Duplicate(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_LONG_GRASS)
+        return TRUE;
+    else
+        return FALSE;
+}
+
+bool8 MetatileBehavior_IsDarkGrass(u8 metatileBehavior)
+{
+	if (metatileBehavior == MB_DARK_GRASS)
         return TRUE;
     else
         return FALSE;

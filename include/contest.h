@@ -106,9 +106,10 @@ struct ContestPokemon
     u8 sheen;
     u8 highestRank;
     bool8 gameCleared;
-    u8 unused[10];
+    // u8 unused[10];
     u32 personality;
     u32 otId;
+	u32 contestExp:9;
 };
 
 struct ContestTempSave
@@ -354,5 +355,15 @@ bool8 SaveContestWinner(u8 rank);
 u8 GetContestWinnerSaveIdx(u8 rank, bool8 shift);
 void ClearContestWinnerPicsInContestHall(void);
 void StripPlayerAndMonNamesForLinkContest(struct ContestPokemon *mon, s32 language);
+s16 CalculateContestStat(u16 level, s16 contestValue, u16 nature, u16 contestStat);
+u16 CalculateContestLevel(u32 exp);
+
+enum {
+	CONTEST_STAT_COOL,
+	CONTEST_STAT_TOUGH,
+	CONTEST_STAT_SMART,
+	CONTEST_STAT_CUTE,
+	CONTEST_STAT_BEAUTY
+};
 
 #endif //GUARD_CONTEST_H

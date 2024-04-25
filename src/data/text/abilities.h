@@ -126,7 +126,7 @@ static const u8 sSheerForceDescription[] = _("Ignora efectos secundarios\npara s
 static const u8 sContraryDescription[] = _("Hace la contra e invierte\nlos cambios estadísticos.");
 static const u8 sUnnerveDescription[] = _("Intimida al rival para\nque no coma su baya.");
 static const u8 sDefiantDescription[] = _("Bajarle una estadística\nduplicará su ataque.");
-static const u8 sDefeatistDescription[] = _("Se dealienta al perder\nla mitad de sus PS.");
+static const u8 sDefeatistDescription[] = _("+3/4 PS: +30% de daño.\n-1/4 PS: -20% de daño.");
 static const u8 sCursedBodyDescription[] = _("Desactiva los ataques\nal mínimo contacto.");
 static const u8 sHealerDescription[] = _("30% de chance de curar\naliados de sus problemas.");
 static const u8 sFriendGuardDescription[] = _("Protege a sus amigos para\nque reciban menos daño.");
@@ -211,7 +211,7 @@ static const u8 sBatteryDescription[] = _("Mejora el Ataque Especial\nde los ali
 static const u8 sFluffyDescription[] = _("Contacto causa menos daño,\npero es débil al Fuego.");
 static const u8 sSoulHeartDescription[] = _("Sube Ataque Especial al\nganarle a un rival.");
 static const u8 sTanglingHairDescription[] = _("Baja la velocidad\nal mínimo contacto.");
-static const u8 sReceiverDescription[] = _("Copia la habilidad\ndel aliado.");
+static const u8 sReceiverDescription[] = _("Copia la habilidad\ndel aliado al morir.");
 static const u8 sBeastBoostDescription[] = _("Ganarle a un rival sube\nsu mejor estadística.");
 static const u8 sRKSSystemDescription[] = _("Imita al Dios, e iguala su\nTipo al de su Memoria.");
 static const u8 sElectricSurgeDescription[] = _("Invoca el Campo Eléctrico."); 
@@ -235,7 +235,7 @@ static const u8 sSandSpitDescription[] = _("Golpear al Pokémon invoca\nla torme
 static const u8 sIceScalesDescription[] = _("Toma menos daño\nde ataques especiales.");
 static const u8 sRipenDescription[] = _("Las bayas duplican\nsus efectos.");
 static const u8 sIceFaceDescription[] = _("Inmune al primer ataque.\nEl granizo lo recupera.");
-static const u8 sPowerSpotDescription[] = _("Potencia a sus amigos.");
+static const u8 sPowerSpotDescription[] = _("Potencia a sus amigos un 30%.");
 static const u8 sMimicryDescription[] = _("Cambia su tipo dependiendo\ndel Campo.");
 static const u8 sScreenCleanerDescription[] = _("Activa Reflejo o Pant.Luz\na su conveniencia.");
 static const u8 sSteelySpiritDescription[] = _("Sube el poder de\naliados de Acero.");
@@ -256,7 +256,11 @@ static const u8 sAsOneIceRiderDescription[] = _("Rival no comerá bayas y\nsube 
 static const u8 sAsOneShadowRiderDescription[] = _("Rival no comerá bayas y\nsube Atq.Esp. al ganarle.");
 static const u8 sDefenseBreakerDescription[] = _("Al bajar Atq. del rival,\nbaja sus defensas.");
 static const u8 sAttackBreakerDescription[] = _("Al bajar Def. del rival,\nbaja su ofensiva.");
-static const u8 sFutureVisionDescription[] = _("Prediciendo el futuro, sus\nataques Psíquicos no fallarán.");
+static const u8 sFutureVisionDescription[] = _("Prediciendo el futuro, sus\nataques Psíq. no fallarán.");
+static const u8 sDualBodyDescription[] = _("Contacto puede anular atqs\ny/o activar Canto Mortal.");
+static const u8 sPackAttackDescription[] = _("Dobles: Atrapa rivales.\nSiempre: Mandíbula Fuerte.");
+static const u8 sSupersweetSyrupDescription[] = _("Baja la evasión de todo\nrival al entrar a combatir.");
+static const u8 sGiftGiverDescription[] = _("Movs. que dependan del Obj.\nEq. siempre funcionarán.");
 
 #if B_EXPANDED_ABILITY_NAMES == TRUE
 const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
@@ -533,6 +537,10 @@ const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
     [ABILITY_DEFENSE_BREAKER] = _("Rompedefensa"),
     [ABILITY_ATTACK_BREAKER] = _("Rompeataque"),
     [ABILITY_FUTURE_VISION] = _("VisiónFutura"),
+    [ABILITY_DUAL_BODY] = _("Cuerpo Dual"),
+    [ABILITY_PACK_ATTACK] = _("Manada"),
+    [ABILITY_SUPERSWEET_SYRUP] = _("Néctar Dulce"),
+    [ABILITY_GIFT_GIVER] = _("Regalador"),
 };
 #else   // 12 characters
 const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
@@ -809,6 +817,10 @@ const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
     [ABILITY_DEFENSE_BREAKER] = _("Rompedefensa"),
     [ABILITY_ATTACK_BREAKER] = _("Rompeataque"),
     [ABILITY_FUTURE_VISION] = _("Visión Futura"),
+    [ABILITY_DUAL_BODY] = _("Cuerpo Dual"),
+	[ABILITY_PACK_ATTACK] = _("Manada"),
+	[ABILITY_SUPERSWEET_SYRUP] = _("Néctar Dulce"),
+	[ABILITY_GIFT_GIVER] = _("Regalador"),
 };
 #endif
 
@@ -1085,4 +1097,8 @@ const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
     [ABILITY_DEFENSE_BREAKER] = sDefenseBreakerDescription,
     [ABILITY_ATTACK_BREAKER] = sAttackBreakerDescription,
     [ABILITY_FUTURE_VISION] = sFutureVisionDescription,
+	[ABILITY_DUAL_BODY] = sDualBodyDescription,
+	[ABILITY_PACK_ATTACK] = sPackAttackDescription,
+	[ABILITY_SUPERSWEET_SYRUP] = sSupersweetSyrupDescription,
+	[ABILITY_GIFT_GIVER] = sGiftGiverDescription,
 };

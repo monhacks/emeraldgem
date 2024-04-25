@@ -4127,7 +4127,8 @@ const u16 gEggMoves[] = {
         MOVE_SUCKER_PUNCH,
         MOVE_ROLLOUT,
         MOVE_DEFENSE_CURL,
-        MOVE_RECYCLE),
+        MOVE_RECYCLE,
+        MOVE_NASTY_PLOT),
 
     egg_moves(SILICOBRA,
         MOVE_DRAGON_RUSH,

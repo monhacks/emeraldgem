@@ -54,6 +54,8 @@ struct MapLayout
     /*0x0c*/ u16 *map;
     /*0x10*/ struct Tileset *primaryTileset;
     /*0x14*/ struct Tileset *secondaryTileset;
+	u8 borderWidth;
+    u8 borderHeight;
 };
 
 struct BackupMapLayout
@@ -66,8 +68,8 @@ struct BackupMapLayout
 struct ObjectEventTemplate
 {
     /*0x00*/ u8 localId;
+			 u8 kind;
     /*0x01*/ u16 graphicsId;
-    /*0x02*/ u8 inConnection; // Leftover from FRLG
     /*0x04*/ s16 x;
     /*0x06*/ s16 y;
     /*0x08*/ u8 elevation;
@@ -192,7 +194,7 @@ struct ObjectEvent
              u32 disableJumpLandingGroundEffect:1;
              u32 fixedPriority:1;
              u32 hideReflection:1;
-    /*0x04*/ u8 spriteId;
+    // /*0x04*/ u8 spriteId;
     /*0x05*/ u16 graphicsId;
     /*0x06*/ u8 movementType;
     /*0x07*/ u8 trainerType;
@@ -218,6 +220,7 @@ struct ObjectEvent
              u8 directionOverwrite:4;
     /*0x21*/ u8 directionSequenceIndex;
     /*0x22*/ u8 playerCopyableMovement; // COPY_MOVE_*
+			 u8 spriteId;
     /*size = 0x24*/
 };
 

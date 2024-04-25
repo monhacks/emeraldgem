@@ -82,7 +82,7 @@
     {
       "graphics_id": "OBJ_EVENT_GFX_AQUA_MEMBER_M",
       "x": 7,
-      "y": 10,
+      "y": 11,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
       "movement_range_x": 0,
@@ -95,7 +95,7 @@
     {
       "graphics_id": "OBJ_EVENT_GFX_ARCHIE",
       "x": 8,
-      "y": 10,
+      "y": 11,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
       "movement_range_x": 0,
@@ -117,6 +117,58 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "0x0",
       "flag": "FLAG_HIDE_SLATEPORT_CITY_HARBOR_SUBMARINE_SHADOW"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_WINONA",
+      "x": 8,
+      "y": 4,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "NULL",
+      "flag": "FLAG_HIDE_SLATEPORT_CITY_HARBOR_DELTA"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_LUGIA",
+      "x": 8,
+      "y": 5,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "FLAG_HIDE_SLATEPORT_CITY_HARBOR_DELTA",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_WINONA",
+      "x": 12,
+      "y": 14,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "NULL",
+      "flag": "FLAG_HIDE_SLATEPORT_CITY_HARBOR_DELTA"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_SHARPEDO",
+      "x": 8,
+      "y": 5,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "FLAG_HIDE_SLATEPORT_CITY_HARBOR_DELTA",
+      "flag": "0"
     }
   ],
   "warp_events": [
@@ -153,15 +205,6 @@
     {
       "type": "trigger",
       "x": 8,
-      "y": 11,
-      "elevation": 3,
-      "var": "VAR_SLATEPORT_HARBOR_STATE",
-      "var_value": "1",
-      "script": "SlateportCity_Harbor_EventScript_AquaEscapeTrigger0"
-    },
-    {
-      "type": "trigger",
-      "x": 8,
       "y": 12,
       "elevation": 3,
       "var": "VAR_SLATEPORT_HARBOR_STATE",
@@ -170,21 +213,12 @@
     },
     {
       "type": "trigger",
-      "x": 8,
-      "y": 13,
+      "x": 7,
+      "y": 12,
       "elevation": 3,
       "var": "VAR_SLATEPORT_HARBOR_STATE",
       "var_value": "1",
       "script": "SlateportCity_Harbor_EventScript_AquaEscapeTrigger2"
-    },
-    {
-      "type": "trigger",
-      "x": 8,
-      "y": 14,
-      "elevation": 3,
-      "var": "VAR_SLATEPORT_HARBOR_STATE",
-      "var_value": "1",
-      "script": "SlateportCity_Harbor_EventScript_AquaEscapeTrigger3"
     }
   ],
   "bg_events": [

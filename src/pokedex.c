@@ -141,6 +141,7 @@ extern const struct Evolution gEvolutionTable[][EVOS_PER_MON];
 
 static EWRAM_DATA struct PokedexView *sPokedexView = NULL;
 static EWRAM_DATA u16 sLastSelectedPokemon = 0;
+static EWRAM_DATA u16 sFirstSeenMon = 0;
 static EWRAM_DATA u8 sPokeBallRotation = 0;
 static EWRAM_DATA struct PokedexListItem *sPokedexListItem = NULL;
 //Pokedex Plus HGSS_Ui
@@ -148,6 +149,9 @@ static EWRAM_DATA struct PokedexListItem *sPokedexListItem = NULL;
 EWRAM_DATA static u16 sStatsMoves[MOVES_COUNT_TOTAL] = {0};
 EWRAM_DATA static u16 sStatsMovesTMHM_ID[NUM_TECHNICAL_MACHINES + NUM_HIDDEN_MACHINES] = {0};
 ALIGNED(4) static const u8 gExpandedPlaceholder_PokedexDescription[] = _("");
+static u16 AdvanceRegion(u16 selectedMon);
+static u16 RegressRegion(u16 selectedMon);
+static u16 GetIDInList(u16 species);
 
 // This is written to, but never read.
 u8 gUnusedPokedexU8;
@@ -293,7 +297,7 @@ struct PokedexView
     u16 scrollMonIncrement;
     u16 maxScrollTimer;
     u16 scrollSpeed;
-    u16 unkArr1[4]; // Cleared, never read
+    u16 lastPokemonSeen; // Cleared, never read
     u8 filler[8];
     u8 currentPage;
     u8 currentPageBackup;
@@ -303,8 +307,9 @@ struct PokedexView
     u8 menuIsOpen;
     u16 menuCursorPos;
     s16 menuY;     //Menu Y position (inverted because we use REG_BG0VOFS for this)
-    u8 unkArr2[8]; // Cleared, never read
-    u8 unkArr3[8]; // Cleared, never read
+    // u8 unkArr2[8]; // Cleared, never read
+    // u8 unkArr3[8]; // Cleared, never read
+	u16 firstPokemonSeen;
 };
 
 // this file's functions
@@ -2013,8 +2018,8 @@ static void ResetPokedexView(struct PokedexView *pokedexView)
     pokedexView->scrollMonIncrement = 0;
     pokedexView->maxScrollTimer = 0;
     pokedexView->scrollSpeed = 0;
-    for (i = 0; i < ARRAY_COUNT(pokedexView->unkArr1); i++)
-        pokedexView->unkArr1[i] = 0;
+    // for (i = 0; i < ARRAY_COUNT(pokedexView->unkArr1); i++)
+        // pokedexView->unkArr1[i] = 0;
     pokedexView->currentPage = PAGE_MAIN;
     pokedexView->currentPageBackup = PAGE_MAIN;
     pokedexView->isSearchResults = FALSE;
@@ -2023,10 +2028,11 @@ static void ResetPokedexView(struct PokedexView *pokedexView)
     pokedexView->menuIsOpen = 0;
     pokedexView->menuCursorPos = 0;
     pokedexView->menuY = 0;
-    for (i = 0; i < ARRAY_COUNT(pokedexView->unkArr2); i++)
-        pokedexView->unkArr2[i] = 0;
-    for (i = 0; i < ARRAY_COUNT(pokedexView->unkArr3); i++)
-        pokedexView->unkArr3[i] = 0;
+	
+    // for (i = 0; i < ARRAY_COUNT(pokedexView->unkArr2); i++)
+        // pokedexView->unkArr2[i] = 0;
+    // for (i = 0; i < ARRAY_COUNT(pokedexView->unkArr3); i++)
+        // pokedexView->unkArr3[i] = 0;
 }
 
 void CB2_OpenPokedex(void)
@@ -2308,6 +2314,8 @@ static void Task_ClosePokedex(u8 taskId)
         if (!IsNationalPokedexEnabled())
             gSaveBlock2Ptr->pokedex.mode = DEX_MODE_HOENN;
         gSaveBlock2Ptr->pokedex.order = sPokedexView->dexOrder;
+		// sPokedexView->lastPokemonSeen = 0;
+		// sPokedexView->firstPokemonSeenfirstPokemonSeen = 0;
         ClearMonSprites();
         FreeWindowAndBgBuffers();
         DestroyTask(taskId);
@@ -2330,6 +2338,8 @@ static void Task_OpenSearchResults(u8 taskId)
 
 static void Task_HandleSearchResultsInput(u8 taskId)
 {
+	u16 startingPos;
+	u16 regionSelected;
     SetGpuReg(REG_OFFSET_BG0VOFS, sPokedexView->menuY);
 
     if (sPokedexView->menuY)
@@ -2710,11 +2720,15 @@ static void CreatePokedexList(u8 dexMode, u8 order)
             for (i = 0; i < temp_dexCount; i++)
             {
                 temp_dexNum = HoennToNationalOrder(i + 1);
+				// sPokedexView->lastPokemonSeen = temp_dexNum;
                 sPokedexView->pokedexList[i].dexNum = temp_dexNum;
                 sPokedexView->pokedexList[i].seen = GetSetPokedexFlag(temp_dexNum, FLAG_GET_SEEN);
                 sPokedexView->pokedexList[i].owned = GetSetPokedexFlag(temp_dexNum, FLAG_GET_CAUGHT);
-                if (sPokedexView->pokedexList[i].seen)
+                if (sPokedexView->pokedexList[i].seen){
+					if (sFirstSeenMon != 0)
+						sFirstSeenMon = i + 1;
                     sPokedexView->pokemonListCount = i + 1;
+				}
             }
         }
         else
@@ -2723,6 +2737,7 @@ static void CreatePokedexList(u8 dexMode, u8 order)
             for (i = 0, r5 = 0, r10 = 0; i < temp_dexCount; i++)
             {
                 temp_dexNum = i + 1;
+				// sPokedexView->lastPokemonSeen = temp_dexNum;
                 if (GetSetPokedexFlag(temp_dexNum, FLAG_GET_SEEN))
                     r10 = 1;
                 if (r10)
@@ -2730,8 +2745,11 @@ static void CreatePokedexList(u8 dexMode, u8 order)
                     sPokedexView->pokedexList[r5].dexNum = temp_dexNum;
                     sPokedexView->pokedexList[r5].seen = GetSetPokedexFlag(temp_dexNum, FLAG_GET_SEEN);
                     sPokedexView->pokedexList[r5].owned = GetSetPokedexFlag(temp_dexNum, FLAG_GET_CAUGHT);
-                    if (sPokedexView->pokedexList[r5].seen)
+                    if (sPokedexView->pokedexList[r5].seen){
+						if (sFirstSeenMon != 0)
+							sFirstSeenMon = r5 + 1;
                         sPokedexView->pokemonListCount = r5 + 1;
+					}
                     r5++;
                 }
             }
@@ -3093,6 +3111,84 @@ static void CreateScrollingPokemonSprite(u8 direction, u16 selectedMon)
     }
 }
 
+static u16 AdvanceRegion(u16 selectedMon){
+	u16 regionSelected, firstSeen, lastSeen;
+	// firstSeen = sFirstSeenMon;
+	// lastSeen = sPokedexView->pokemonListCount - 1;
+	
+	if (!IsNationalPokedexEnabled()){
+		regionSelected = HOENN_DEX_START;
+		return regionSelected;
+	}
+	if (selectedMon >= GALAR_DEX_START)
+		regionSelected = KANTO_DEX_START;
+	else if (selectedMon >= ALOLA_DEX_START)
+		regionSelected = GALAR_DEX_START;
+	else if (selectedMon >= KALOS_DEX_START)
+		regionSelected = ALOLA_DEX_START;
+	else if (selectedMon >= UNOVA_DEX_START)
+		regionSelected = KALOS_DEX_START;
+	else if (selectedMon >= SINNOH_DEX_START)
+		regionSelected = UNOVA_DEX_START;
+	else if (selectedMon >= HOENN_DEX_START)
+		regionSelected = SINNOH_DEX_START;
+	else if (selectedMon >= JOHTO_DEX_START)
+		regionSelected = HOENN_DEX_START;
+	else /*if (selectedMon >= KANTO_DEX_START)*/
+		regionSelected = JOHTO_DEX_START;
+	// if (regionSelected < firstSeen)
+		// regionSelected = firstSeen;
+	// if (regionSelected > lastSeen)
+		// regionSelected = lastSeen;
+
+	return regionSelected;
+}
+
+static u16 RegressRegion(u16 selectedMon){
+	u16 regionSelected;
+	// firstSeen = sFirstSeenMon;
+	// lastSeen = sPokedexView->pokemonListCount - 1;
+	
+	if (!IsNationalPokedexEnabled()){
+		regionSelected = HOENN_DEX_START;
+		return regionSelected;
+	}
+	if (selectedMon >= GALAR_DEX_START)
+		regionSelected = ALOLA_DEX_START;
+	else if (selectedMon >= ALOLA_DEX_START)
+		regionSelected = KALOS_DEX_START;
+	else if (selectedMon >= KALOS_DEX_START)
+		regionSelected = UNOVA_DEX_START;
+	else if (selectedMon >= UNOVA_DEX_START)
+		regionSelected = SINNOH_DEX_START;
+	else if (selectedMon >= SINNOH_DEX_START)
+		regionSelected = HOENN_DEX_START;
+	else if (selectedMon >= HOENN_DEX_START)
+		regionSelected = JOHTO_DEX_START;
+	else if (selectedMon >= JOHTO_DEX_START)
+		regionSelected = KANTO_DEX_START;
+	else /*if (selectedMon >= KANTO_DEX_START)*/
+		regionSelected = GALAR_DEX_START;
+
+	// if (regionSelected < firstSeen)
+		// regionSelected = firstSeen;
+	// if (regionSelected > lastSeen)
+		// regionSelected = lastSeen;
+
+	return regionSelected;
+}
+
+static u16 GetIDInList(u16 species){
+	u16 i;
+	for (i = 0;i < sPokedexView->pokemonListCount - 1; i++){
+		if (NationalPokedexNumToSpecies(sPokedexView->pokedexList[i].dexNum) == species){
+			return i;
+		}
+	}
+	return 0;
+	// return sPokedexView->pokedexList[20].dexNum;
+}
+
 // u16 ignored is passed but never used
 static u16 TryDoPokedexScroll(u16 selectedMon, u16 ignored)
 {
@@ -3100,6 +3196,8 @@ static u16 TryDoPokedexScroll(u16 selectedMon, u16 ignored)
     u8 scrollMonIncrement;
     u8 i;
     u16 startingPos;
+	u16 regionSelected;
+	u16 firstDexNum;
     u8 scrollDir = 0;
 
     if (JOY_HELD(DPAD_UP) && (selectedMon > 0))
@@ -3120,6 +3218,55 @@ static u16 TryDoPokedexScroll(u16 selectedMon, u16 ignored)
         sPokedexView->justScrolled = TRUE; //HGSS_Ui
         PlaySE(SE_DEX_SCROLL);
     }
+	else if (JOY_NEW(R_BUTTON))
+	{
+		startingPos = selectedMon;
+		firstDexNum = sPokedexView->pokedexList[0].dexNum;
+		regionSelected = AdvanceRegion(sPokedexView->pokedexList[startingPos].dexNum);
+		
+		if (firstDexNum <= regionSelected){
+			regionSelected = regionSelected - firstDexNum;
+		}
+		else if (firstDexNum > regionSelected){
+			regionSelected = 0;
+		}
+		
+		if (regionSelected >= sPokedexView->pokemonListCount - 1){
+			regionSelected = sPokedexView->pokemonListCount - 1;
+		}
+		selectedMon = regionSelected;
+        sPokedexView->pokeBallRotation += 16 * (selectedMon - startingPos);
+        ClearMonSprites();
+        CreateMonSpritesAtPos(selectedMon, 0xE);
+        sPokedexView->justScrolled = TRUE; //HGSS_Ui
+        PlaySE(SE_DEX_PAGE);
+		scrollDir = 0;
+	}
+	else if (JOY_NEW(L_BUTTON))
+	{
+		startingPos = selectedMon;
+		firstDexNum = sPokedexView->pokedexList[0].dexNum;
+		regionSelected = RegressRegion(sPokedexView->pokedexList[startingPos].dexNum);
+		
+		if (firstDexNum <= regionSelected){
+			regionSelected = regionSelected - firstDexNum;
+		}
+		else if (firstDexNum > regionSelected){
+			regionSelected = 0;
+		}
+		
+		if (regionSelected >= sPokedexView->pokemonListCount - 1){
+			regionSelected = sPokedexView->pokemonListCount - 1;
+		}
+		selectedMon = regionSelected;
+		
+        sPokedexView->pokeBallRotation += 16 * (selectedMon - startingPos);
+        ClearMonSprites();
+        CreateMonSpritesAtPos(selectedMon, 0xE);
+        sPokedexView->justScrolled = TRUE; //HGSS_Ui
+        PlaySE(SE_DEX_PAGE);
+		scrollDir = 0;
+	}
     else if (JOY_NEW(DPAD_LEFT) && (selectedMon > 0))
     {
         startingPos = selectedMon;

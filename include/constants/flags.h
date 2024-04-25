@@ -45,7 +45,7 @@
 #define FLAG_ASHS_POKEMON    0x21 
 #define FLAG_SPAWN_INVISIBLE    0x22 
 #define FLAG_HIDE_WALLY_VERDANTURF    0x23  
-#define FLAG_SHINY_CREATION    0x24
+#define FLAG_UNUSED_0x24    0x24
 #define FLAG_POKEMONPCMENU    0x25
 #define FLAG_HIDE_WALLY_RUSTBORO  	  0x26// unused flag
 #define FLAG_HIDE_WALLY_111    0x27// unused flag
@@ -63,7 +63,7 @@
 #define FLAG_DEFEATED_LEAF    0x33
 #define FLAG_BAYASMART       0x34
 #define FLAG_HIDE_WALLY_DEWFORD_TOWN    0x35
-#define FLAG_DONT_GET_MUCH_EXP_TRAINER    0x36
+#define FLAG_HIDE_SLATEPORT_CITY_HARBOR_DELTA	0x36
 #define FLAG_MENU_DEXRELATED    0x37
 #define FLAG_ENABLED_PC    0x38
 #define FLAG_MAY_YA_HISO    0x39
@@ -79,7 +79,7 @@
 #define FLAG_TALKED_EVMAN    0x43
 #define FLAG_TALKED_TRAININGMAN    0x44
 #define FLAG_GOTTEN_EV_TRAINING    0x45
-#define FLAG_NO_SHINIES    0x46
+#define FLAG_UNUSED_0x46    0x46
 #define FLAG_HIDE_WALLY_LAVARIDGE    0x47
 #define FLAG_HIDE_JIRACHI    0x48
 #define FLAG_STARTED_BOSS    0x49
@@ -88,7 +88,7 @@
 #define FLAG_REGICE_INFLUENCE    0x4C 
 #define FLAG_HAS_FIRE_POKEMON    0x4D 
 #define FLAG_MINI_SAFARI_PARK_BALL    0x4E // Unused Flag
-#define FLAG_UNUSED_0x04F    0x4F // Unused Flag
+#define FLAG_NOT_DOUBLE_BIKE    0x4F // Unused Flag
 
 // Scripts
 #define FLAG_HIDE_SKY_PILLAR_TOP_RAYQUAZA_STILL  0x50
@@ -182,14 +182,14 @@
 #define FLAG_CUTE_PAINTING_MADE              0xA2
 #define FLAG_SMART_PAINTING_MADE             0xA3
 #define FLAG_TOUGH_PAINTING_MADE             0xA4
-#define FLAG_RECEIVED_TM39                   0xA5
-#define FLAG_RECEIVED_TM08                   0xA6
-#define FLAG_RECEIVED_TM34                   0xA7
-#define FLAG_RECEIVED_TM50                   0xA8
-#define FLAG_RECEIVED_TM42                   0xA9
-#define FLAG_RECEIVED_TM40                   0xAA
-#define FLAG_RECEIVED_TM04                   0xAB
-#define FLAG_RECEIVED_TM03                   0xAC
+#define FLAG_UNUSED_0xA5                     0xA5
+#define FLAG_UNUSED_0xA6                     0xA6
+#define FLAG_UNUSED_0xA7                     0xA7
+#define FLAG_UNUSED_0xA8                     0xA8
+#define FLAG_UNUSED_0xA9                     0xA9
+#define FLAG_HIDE_WINONA_GYM                 0xAA
+#define FLAG_UNUSED_0xAB                     0xAB
+#define FLAG_UNUSED_0xAC                     0xAC
 #define FLAG_HIDE_SECRET_BASE_TRAINER        0xAD
 #define FLAG_DECORATION_1                    0xAE
 #define FLAG_DECORATION_2                    0xAF
@@ -209,13 +209,13 @@
 #define FLAG_DELIVERED_STEVEN_LETTER         0xBD
 #define FLAG_DEFEATED_WALLY_MAUVILLE         0xBE
 #define FLAG_DEFEATED_GRUNT_SPACE_CENTER_1F  0xBF
-#define FLAG_RECEIVED_SUN_STONE_MOSSDEEP     0xC0
+#define FLAG_RECEIVED_SUN_STONE_MOSSDEEP     0xC0 
 #define FLAG_WALLY_SPEECH                    0xC1
-#define FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_1   0xC2 // Leftover from the RS version of Puzzle Room 7, functionally unused
-#define FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_2   0xC3 // unused flag
-#define FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_3   0xC4 // unused flag
-#define FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_4   0xC5 // unused flag
-#define FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_5   0xC6 // unused flag
+#define FLAG_INVERSE_BATTLE   				 0xC2 
+#define FLAG_FORCE_DOUBLE_WILD   			 0xC3 
+#define FLAG_SMART_WILD_AI   				 0xC4 
+#define FLAG_DELTA_GRUNT_AQUA_HIDEOUT   	 0xC5 
+#define FLAG_HELPED_AQUA_GRUNT   			 0xC6
 #define FLAG_RUSTURF_TUNNEL_OPENED           0xC7
 #define FLAG_RECEIVED_RED_SCARF              0xC8
 #define FLAG_RECEIVED_BLUE_SCARF             0xC9
@@ -240,7 +240,7 @@
 
 #define FLAG_UNUSED_0x0DC                 0xDC // unused flag
 
-#define FLAG_RECEIVED_GO_GOGGLES             0xDD
+#define FLAG_UNUSED_0xDD		             0xDD
 #define FLAG_WINGULL_SENT_ON_ERRAND          0xDE
 #define FLAG_RECEIVED_MENTAL_HERB            0xDF
 #define FLAG_WINGULL_DELIVERED_MAIL          0xE0
@@ -248,15 +248,15 @@
 #define FLAG_RECEIVED_STARTER_DOLL           0xE2
 #define FLAG_RECEIVED_GOOD_ROD               0xE3
 #define FLAG_REGI_DOORS_OPENED               0xE4
-#define FLAG_RECEIVED_TM27                   0xE5
-#define FLAG_RECEIVED_TM36                   0xE6
-#define FLAG_RECEIVED_TM05                   0xE7
-#define FLAG_RECEIVED_TM19                   0xE8
+#define FLAG_HIDE_PLAYER_SPECIAL_DADS_GYM    0xE5
+#define FLAG_HIDE_NORMAN_SPECIAL_DADS_GYM    0xE6
+#define FLAG_UNUSED_0x0E7                    0xE7
+#define FLAG_UNUSED_0x0E8                    0xE8
 
 #define FLAG_UNUSED_0x0E9                    0xE9 // Unused Flag
 
-#define FLAG_RECEIVED_TM44                   0xEA
-#define FLAG_RECEIVED_TM45                   0xEB
+#define FLAG_UNUSED_0x0EA                    0xEA
+#define FLAG_UNUSED_0x0EB                    0xEB
 #define FLAG_RECEIVED_GLASS_ORNAMENT         0xEC
 #define FLAG_RECEIVED_SILVER_SHIELD          0xED
 #define FLAG_RECEIVED_GOLD_SHIELD            0xEE
@@ -387,7 +387,7 @@
 #define FLAG_REMATCH_WILTON                  0x165
 #define FLAG_REMATCH_VALERIE                 0x166
 #define FLAG_REMATCH_CINDY                   0x167
-#define FLAG_REMATCH_THALIA                  0x168
+#define FLAG_REMATCH_UNUSED_0x168            0x168
 #define FLAG_REMATCH_JESSICA                 0x169
 #define FLAG_REMATCH_WINSTON                 0x16A
 #define FLAG_REMATCH_STEVE                   0x16B
@@ -482,8 +482,8 @@
 #define FLAG_DEFEATED_VOLTORB_1_NEW_MAUVILLE 0x1C1
 #define FLAG_DEFEATED_VOLTORB_2_NEW_MAUVILLE 0x1C2
 #define FLAG_DEFEATED_VOLTORB_3_NEW_MAUVILLE 0x1C3
-#define FLAG_DEFEATED_ELECTRODE_1_AQUA_HIDEOUT 0x1C4
-#define FLAG_DEFEATED_ELECTRODE_2_AQUA_HIDEOUT 0x1C5
+#define FLAG_UNUSED_0x1C4 					 0x1C4
+#define FLAG_UNUSED_0x1C5		 			 0x1C5
 #define FLAG_DEFEATED_SUDOWOODO              0x1C6
 #define FLAG_DEFEATED_MEW                    0x1C7
 #define FLAG_DEFEATED_LATIAS_OR_LATIOS       0x1C8
@@ -864,11 +864,11 @@
 #define FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_2F_POKE_BALL           0x332
 #define FLAG_HIDE_ROUTE_112_TEAM_MAGMA                              0x333
 #define FLAG_HIDE_CAVE_OF_ORIGIN_B1F_WALLACE                        0x334
-#define FLAG_HIDE_AQUA_HIDEOUT_1F_GRUNT_1_BLOCKING_ENTRANCE         0x335
-#define FLAG_HIDE_AQUA_HIDEOUT_1F_GRUNT_2_BLOCKING_ENTRANCE         0x336
+#define FLAG_HIDE_AQUA_HIDEOUT_1F_GRUNTS_BLOCKING_ENTRANCE          0x335
+#define FLAG_AQUA_HIDEOUT_SET_DELTA_DIVISION			        	0x336
 #define FLAG_HIDE_MOSSDEEP_CITY_TEAM_MAGMA                          0x337
 #define FLAG_HIDE_PETALBURG_GYM_WALLYS_DAD                          0x338
-#define FLAG_HIDE_LEGEND_MON_CAVE_OF_ORIGIN                         0x339 // Unused, leftover from R/S
+#define FLAG_HIDE_UNUSED_0x339			                         	0x339 // Unused, leftover from R/S
 #define FLAG_HIDE_SOOTOPOLIS_CITY_ARCHIE                            0x33A
 #define FLAG_HIDE_SOOTOPOLIS_CITY_MAXIE                             0x33B
 #define FLAG_HIDE_SEAFLOOR_CAVERN_ROOM_9_ARCHIE                     0x33C
@@ -1078,7 +1078,7 @@
 #define FLAG_ITEM_ROUTE_120_NUGGET                                  0x406
 #define FLAG_ITEM_ROUTE_120_FULL_HEAL                               0x407
 #define FLAG_ITEM_ROUTE_123_CALCIUM                                 0x408
-#define FLAG_ITEM_ROUTE_123_RARE_CANDY                              0x409 // Unused Flag, leftover from R/S. In Emerald this is a hidden item and uses a different flag
+#define FLAG_UNUSED_0x409			                                0x409 // Unused Flag, leftover from R/S. In Emerald this is a hidden item and uses a different flag
 #define FLAG_ITEM_ROUTE_127_ZINC                                    0x40A
 #define FLAG_ITEM_ROUTE_127_CARBOS                                  0x40B
 #define FLAG_ITEM_ROUTE_132_RARE_CANDY                              0x40C
@@ -1383,8 +1383,8 @@
 #define FLAG_NURSE_UNION_ROOM_REMINDER              (SYSTEM_FLAGS + 0x20)
 
 #define FLAG_SYS_DEXNAV_SEARCH                      (SYSTEM_FLAGS + 0x21)
-#define FLAG_UNUSED_0x882                         (SYSTEM_FLAGS + 0x22)   // force creation of a shiny mon
-#define FLAG_UNUSED_0x883                           (SYSTEM_FLAGS + 0x23) // Unused Flag
+#define FLAG_SHINY_CREATION                         (SYSTEM_FLAGS + 0x22) // force creation of a shiny mon
+#define FLAG_NO_SHINIES                             (SYSTEM_FLAGS + 0x23) // force creation of non shiny mon
 #define FLAG_UNUSED_0x884                           (SYSTEM_FLAGS + 0x24) // Unused Flag
 #define FLAG_UNUSED_0x885                           (SYSTEM_FLAGS + 0x25) // Unused Flag
 #define FLAG_UNUSED_0x886                           (SYSTEM_FLAGS + 0x26) // Unused Flag

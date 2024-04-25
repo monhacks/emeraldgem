@@ -3096,7 +3096,8 @@ BattleScript_EffectNaturalGift:
 	attackcanceler
 	attackstring
 	ppreduce
-	jumpifnotberry BS_ATTACKER, BattleScript_ButItFailed
+	jumpifnotberry BS_ATTACKER, BattleScript_EffectNaturalGiftGiftGiverCheck
+BattleScript_EffectNaturalGiftAfterGiftGiverCheck:
 	jumpifword CMP_COMMON_BITS, gFieldStatuses, STATUS_FIELD_MAGIC_ROOM, BattleScript_ButItFailed
 	jumpifability BS_ATTACKER, ABILITY_KLUTZ, BattleScript_ButItFailed
 	jumpifstatus3 BS_ATTACKER, STATUS3_EMBARGO, BattleScript_ButItFailed
@@ -3117,10 +3118,20 @@ BattleScript_EffectNaturalGift:
 	waitmessage B_WAIT_TIME_LONG
 	seteffectwithchance
 	jumpifmovehadnoeffect BattleScript_EffectNaturalGiftEnd
+	jumpifnotberry BS_ATTACKER, BattleScript_EffectNaturalGiftGiftGiverCheck2
 	removeitem BS_ATTACKER
 BattleScript_EffectNaturalGiftEnd:
 	tryfaintmon BS_TARGET
 	goto BattleScript_MoveEnd
+	
+BattleScript_EffectNaturalGiftGiftGiverCheck:
+	jumpifability BS_ATTACKER, ABILITY_GIFT_GIVER, BattleScript_EffectNaturalGiftAfterGiftGiverCheck
+	goto BattleScript_ButItFailed
+
+BattleScript_EffectNaturalGiftGiftGiverCheck2:
+	jumpifability BS_ATTACKER, ABILITY_GIFT_GIVER, BattleScript_EffectNaturalGiftEnd
+	removeitem BS_ATTACKER
+	goto BattleScript_EffectNaturalGiftEnd
 
 BattleScript_MakeMoveMissed::
 	orhalfword gMoveResultFlags, MOVE_RESULT_MISSED
@@ -7714,7 +7725,7 @@ BattleScript_AttackerFormChangeEnd3::
 	call BattleScript_AttackerFormChange
 	end3
 
-BattleScript_AttackerFormChangeEnd3NoPopup::
+BattleScript_AttackerFormChangeEnd3NoPopup:: 
 	call BattleScript_AttackerFormChangeNoPopup
 
 BattleScript_AttackerFormChangeMoveEffect::

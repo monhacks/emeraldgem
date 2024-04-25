@@ -69,5 +69,6 @@ void ShouldTryGetTrainerScript(void);
 u16 CountBattledRematchTeams(u16 trainerId);
 void DoStandardWildBattle_Debug(void);
 void BattleSetup_StartTrainerBattle_Debug(void);
+u8 GetScaledLevel(u8 lvl);
 
 #endif // GUARD_BATTLE_SETUP_H

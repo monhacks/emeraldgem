@@ -583,4 +583,20 @@ u32 ScriptPeekWord(struct ScriptContext *ctx)
     return (((((value3 << 8) + value2) << 8) + value1) << 8) + value0;
 }
 
+// sets the var_result to the object's trainerRange property 
+void GetObjectEventTrainerRangeFromTemplate(void)
+{
+    gSpecialVar_Result = gMapHeader.events->objectEvents[gSpecialVar_LastTalked - 1].trainerRange_berryTreeId;
+}
+
+// // sets the var_result to the object's rangeX property 
+// void GetObjectEventRangeXFromTemplate(void)
+// {
+	// u8 rangeX = gMapHeader.events->objectEvents[gSpecialVar_LastTalked - 1].rangeX;
+	// if (rangeX >= 1)
+		// gSpecialVar_Result = gMapHeader.events->objectEvents[gSpecialVar_LastTalked - 1].rangeX;
+	// else
+		// gSpecialVar_Result = 1;
+// }
+
 

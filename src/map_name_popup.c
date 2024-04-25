@@ -91,6 +91,7 @@ static const u8 sRegionMapSectionId_To_PopUpThemeIdMapping[] =
     [MAPSEC_ROUTE_102] = MAPPOPUP_THEME_WOOD,
     [MAPSEC_ROUTE_103] = MAPPOPUP_THEME_WOOD,
     [MAPSEC_ROUTE_104] = MAPPOPUP_THEME_WOOD,
+    [MAPSEC_ROUTE_104_NORTH] = MAPPOPUP_THEME_WOOD,
     [MAPSEC_ROUTE_105] = MAPPOPUP_THEME_UNDERWATER,
     [MAPSEC_ROUTE_106] = MAPPOPUP_THEME_UNDERWATER,
     [MAPSEC_ROUTE_107] = MAPPOPUP_THEME_UNDERWATER,
@@ -121,6 +122,8 @@ static const u8 sRegionMapSectionId_To_PopUpThemeIdMapping[] =
     [MAPSEC_ROUTE_132] = MAPPOPUP_THEME_UNDERWATER,
     [MAPSEC_ROUTE_133] = MAPPOPUP_THEME_UNDERWATER,
     [MAPSEC_ROUTE_134] = MAPPOPUP_THEME_UNDERWATER,
+    [MAPSEC_SEVII_ISLE_22] = MAPPOPUP_THEME_STONE,
+    [MAPSEC_SEVII_ISLE_23] = MAPPOPUP_THEME_STONE2,
     [MAPSEC_UNDERWATER_124] = MAPPOPUP_THEME_STONE2,
     [MAPSEC_UNDERWATER_126] = MAPPOPUP_THEME_STONE2,
     [MAPSEC_UNDERWATER_127] = MAPPOPUP_THEME_STONE2,
@@ -129,6 +132,7 @@ static const u8 sRegionMapSectionId_To_PopUpThemeIdMapping[] =
     [MAPSEC_GRANITE_CAVE] = MAPPOPUP_THEME_STONE,
     [MAPSEC_MT_CHIMNEY] = MAPPOPUP_THEME_STONE,
     [MAPSEC_SAFARI_ZONE] = MAPPOPUP_THEME_WOOD,
+    [MAPSEC_MINI_SAFARI_ZONE] = MAPPOPUP_THEME_WOOD,
     [MAPSEC_BATTLE_FRONTIER] = MAPPOPUP_THEME_MARBLE,
     [MAPSEC_PETALBURG_WOODS] = MAPPOPUP_THEME_WOOD,
     [MAPSEC_RUSTURF_TUNNEL] = MAPPOPUP_THEME_STONE,
@@ -372,13 +376,13 @@ static void LoadMapNamePopUpWindowBg(void)
     u8 popupWindowId = GetMapNamePopUpWindowId();
     u16 regionMapSectionId = gMapHeader.regionMapSectionId;
 
-    if (regionMapSectionId >= KANTO_MAPSEC_START)
-    {
-        if (regionMapSectionId > KANTO_MAPSEC_END)
-            regionMapSectionId -= KANTO_MAPSEC_COUNT;
-        else
-            regionMapSectionId = 0; // Discard kanto region sections;
-    }
+    // if (regionMapSectionId >= KANTO_MAPSEC_START)
+    // {
+        // if (regionMapSectionId > KANTO_MAPSEC_END)
+            // regionMapSectionId -= KANTO_MAPSEC_COUNT;
+        // else
+            // regionMapSectionId = 0; // Discard kanto region sections;
+    // }
     popUpThemeId = sRegionMapSectionId_To_PopUpThemeIdMapping[regionMapSectionId];
 
     LoadBgTiles(GetWindowAttribute(popupWindowId, WINDOW_BG), sMapPopUp_OutlineTable[popUpThemeId], 0x400, 0x21D);

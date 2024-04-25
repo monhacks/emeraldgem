@@ -5,6 +5,7 @@
 .set LOCALID_GRUNT_3, 6
 .set LOCALID_GRUNT_4, 7
 .set LOCALID_MAXIE, 8
+.set LOCALID_RIVAL, 9
 
 MtPyre_Summit_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, MtPyre_Summit_OnTransition
@@ -12,6 +13,7 @@ MtPyre_Summit_MapScripts::
 
 MtPyre_Summit_OnTransition:
 	call_if_eq VAR_MT_PYRE_STATE, 2, MtPyre_Summit_EventScript_SetArchieMaxiePositions
+	call Common_EventScript_SetupRivalGfxId
 	end
 
 MtPyre_Summit_EventScript_SetArchieMaxiePositions::
@@ -42,15 +44,56 @@ MtPyre_Summit_EventScript_TeamAquaExits::
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceUp
 	waitmovement 0
 	applymovement LOCALID_ARCHIE, Common_Movement_WalkInPlaceFasterDown
+	applymovement LOCALID_MAXIE, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	delay 50
 	call_if_eq VAR_0x8008, 0, MtPyre_Summit_EventScript_ArchieFacePlayer0
 	call_if_eq VAR_0x8008, 1, MtPyre_Summit_EventScript_ArchieFacePlayer1
 	call_if_eq VAR_0x8008, 2, MtPyre_Summit_EventScript_ArchieFacePlayer2
-	msgbox MtPyre_Summit_Text_ArchieWeGotTheOrbLetsGo, MSGBOX_DEFAULT
+	addobject LOCALID_RIVAL
+	namebox Unknown
+	msgbox MyPyre_Summit_Text_WaitImHere
 	closemessage
+	hidenamebox
+	applymovement LOCALID_RIVAL, MtPyre_Summit_Movement_RivalEnter
+	waitmovement 0
+	namebox Rival
+	msgbox MtPyre_Summit_Text_WeCanBeatThem, MSGBOX_INTERRUPT
+	namebox Archie
+	msgbox MtPyre_Summit_Text_ArchieReady, MSGBOX_DEFAULT
+	namebox Maxie
+	msgbox MtPyre_Summit_Text_MaxieReady, MSGBOX_DEFAULT
+	namebox Archie
+	msgbox MtPyre_Summit_Text_ArchieIntro, MSGBOX_DEFAULT
+	closemessage
+	hidenamebox
+	call MtPyre_EventScript_PrepareMultiBattle
+	checkplayergender
+	goto_if_eq VAR_RESULT, FEMALE, MtPyre_Summit_EventScript_MultiBattleFemale
+	multi_2_vs_2 TRAINER_ARCHIE_DOUBLE, MtChimney_Text_TabithaDefeat, TRAINER_ARCHIE_DOUBLE, MtChimney_Text_CourtneyDefeat, TRAINER_RIVAL_HELPS, TRAINER_BACK_PIC_MAY
+	goto MtPyre_Summit_EventScript_MultiBattleContinue
+
+MtPyre_Summit_Movement_RivalEnter:
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	step_end
+
+MtPyre_Summit_EventScript_MultiBattleFemale::
+	multi_2_vs_2 TRAINER_ARCHIE_DOUBLE, MtChimney_Text_TabithaDefeat, TRAINER_ARCHIE_DOUBLE, MtChimney_Text_CourtneyDefeat, TRAINER_RIVAL_HELPS, TRAINER_BACK_PIC_MAY
+	goto MtPyre_Summit_EventScript_MultiBattleContinue
+
+MtPyre_Summit_EventScript_MultiBattleContinue::
+	specialvar VAR_RESULT, GetBattleOutcome
+    compare VAR_RESULT, B_OUTCOME_LOST
+    goto_if_eq MtPyre_EventScript_LostMultiBattle
 	fadescreen FADE_TO_BLACK
 	removeobject LOCALID_ARCHIE
+	removeobject LOCALID_MAXIE
 	removeobject LOCALID_GRUNT_1
 	removeobject LOCALID_GRUNT_2
 	removeobject LOCALID_GRUNT_3
@@ -71,18 +114,35 @@ MtPyre_Summit_EventScript_TeamAquaExits::
 	releaseall
 	end
 
+MtPyre_EventScript_LostMultiBattle::
+	setvar VAR_MT_PYRE_STATE, 0
+	fadescreen FADE_TO_BLACK
+	special SetCB2WhiteOut
+	releaseall
+	end
+
+MtPyre_EventScript_PrepareMultiBattle:
+	lockall
+	namebox Rival
+	msgbox PleasePick3Mons
+	closemessage
+	hidenamebox
+    choose_mons
+    compare VAR_RESULT, 0
+    goto_if_eq script_NeedToChoose3ValidMons
+    return
+
 MtPyre_Summit_EventScript_ArchieFacePlayer0::
-	applymovement LOCALID_ARCHIE, MtPyre_Summit_Movement_ArchieFacePlayer0
-	waitmovement 0
+	setobjectxyperm LOCALID_RIVAL, 23, 13
 	return
 
 @ Archie is already facing player
 MtPyre_Summit_EventScript_ArchieFacePlayer1::
+	setobjectxyperm LOCALID_RIVAL, 22, 13
 	return
 
 MtPyre_Summit_EventScript_ArchieFacePlayer2::
-	applymovement LOCALID_ARCHIE, MtPyre_Summit_Movement_ArchieFacePlayer2
-	waitmovement 0
+	setobjectxyperm LOCALID_RIVAL, 23, 13
 	return
 
 MtPyre_Summit_EventScript_OldLadyApproachPlayer0::
@@ -489,15 +549,20 @@ MtPyre_Summit_Text_Grunt4PostBattle:
 	.string "We have a great combination going\n"
 	.string "with us members and our leader.$"
 
-MtPyre_Summit_Text_ArchieWeGotTheOrbLetsGo:
-	.string "ARCHIE: TEAM MAGMA's MAXIE got ahead\n"
-	.string "of us, but we also got what we wanted.\p"
-	.string "The RED ORB preserved at MT. PYRE…\n"
-	.string "I, ARCHIE, now have it in my possession!\p"
-	.string "Fufufu… Now we can bring our ultimate\n"
-	.string "objective to fruition!\p"
-	.string "Okay, TEAM!\n"
-	.string "We're pulling out!$"
+MtPyre_Summit_Text_MaxieReady:
+	.string "Ya sabes que lo estoy, Archie.\p"
+	.string "¡Prepárense para ser derrotados por el\n"
+	.string "poder combinado del Equipo Aqua y\l"
+	.string "Magma!$"
+
+MtPyre_Summit_Text_ArchieReady:
+	.string "Maxie, este es el momento, ¿Estás listo?$"
+
+MtPyre_Summit_Text_ArchieIntro:
+	.string "¡Deben saber que hacemos un equipo\n"
+	.string "formidable!\p"
+	.string "¡Dennos una batalla de la que estar\n"
+	.string "orgullosos!$"
 
 MtPyre_Summit_Text_BothOrbsTakenMagmaLeftThis:
 	.string "Oh, no…\n"
@@ -623,3 +688,9 @@ MtPyre_Summit_Text_HoennTrioTale:
 	.string "Then, its duty done, the green POKéMON\n"
 	.string "flew off into the wild blue yonder…$"
 
+MyPyre_Summit_Text_WaitImHere:
+	.string "¡Espera! ¡Ya llegué!$"
+
+MtPyre_Summit_Text_WeCanBeatThem:
+	.string "Hola, {PLAYER}, lamento haber tardado\n"
+	.string "tanto en llegar, tuve unos problemas y{PAUSE 32}-$"

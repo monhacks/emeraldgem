@@ -1997,7 +1997,7 @@
 	.macro chosenstatus2animation battler:req, status:req
 	chosenstatusanimation \battler, 0x1, \status
 	.endm
-
+ 
 	.macro sethword dst:req, value:req
 	setbyte \dst, (\value) & 0xFF
 	setbyte \dst + 1, ((\value) >> 8) & 0xFF

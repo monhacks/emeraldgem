@@ -39,4 +39,3 @@ Route116_TunnelersRestHouse_Text_GetToVerdanturfWithoutTunnel:
 
 Route116_TunnelersRestHouse_Text_TunnelHasGoneThrough:
 	.string "¡El túnel fue terminado!\n¡El hombre ese lo logró!$"
-

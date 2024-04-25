@@ -322,25 +322,47 @@ static const s8 sCenterToCornerVecXs[8] ={-32, -16, -16, -32, -32};
 
 const u8 gTypeNames[NUMBER_OF_MON_TYPES][TYPE_NAME_LENGTH + 1] =
 {
-    [TYPE_NORMAL] = _("Normal"),
-    [TYPE_FIGHTING] = _("Fight"),
-    [TYPE_FLYING] = _("Flying"),
-    [TYPE_POISON] = _("Poison"),
-    [TYPE_GROUND] = _("Ground"),
-    [TYPE_ROCK] = _("Rock"),
-    [TYPE_BUG] = _("Bug"),
-    [TYPE_GHOST] = _("Ghost"),
-    [TYPE_STEEL] = _("Steel"),
-    [TYPE_MYSTERY] = _("???"),
-    [TYPE_FIRE] = _("Fire"),
-    [TYPE_WATER] = _("Water"),
-    [TYPE_GRASS] = _("Grass"),
-    [TYPE_ELECTRIC] = _("Electr"),
-    [TYPE_PSYCHIC] = _("Psychc"),
-    [TYPE_ICE] = _("Ice"),
-    [TYPE_DRAGON] = _("Dragon"),
-    [TYPE_DARK] = _("Dark"),
-    [TYPE_FAIRY] = _("Fairy"),
+    #if GAME_LANGUAGE == LANGUAGE_SPANISH
+        [TYPE_NORMAL] = _("Normal"),
+        [TYPE_FIGHTING] = _("Lucha"),
+        [TYPE_FLYING] = _("Volador"),
+        [TYPE_POISON] = _("Veneno"),
+        [TYPE_GROUND] = _("Tierra"),
+        [TYPE_ROCK] = _("Roca"),
+        [TYPE_BUG] = _("Bicho"),
+        [TYPE_GHOST] = _("Fantasma"),
+        [TYPE_STEEL] = _("Acero"),
+        [TYPE_MYSTERY] = _("???"),
+        [TYPE_FIRE] = _("Fuego"),
+        [TYPE_WATER] = _("Agua"),
+        [TYPE_GRASS] = _("Planta"),
+        [TYPE_ELECTRIC] = _("Eléctrico"),
+        [TYPE_PSYCHIC] = _("Psíquico"),
+        [TYPE_ICE] = _("Hielo"),
+        [TYPE_DRAGON] = _("Dragón"),
+        [TYPE_DARK] = _("Siniestro"),
+        [TYPE_FAIRY] = _("Hada"),
+    #else
+        [TYPE_NORMAL] = _("Normal"),
+        [TYPE_FIGHTING] = _("Fight"),
+        [TYPE_FLYING] = _("Flying"),
+        [TYPE_POISON] = _("Poison"),
+        [TYPE_GROUND] = _("Ground"),
+        [TYPE_ROCK] = _("Rock"),
+        [TYPE_BUG] = _("Bug"),
+        [TYPE_GHOST] = _("Ghost"),
+        [TYPE_STEEL] = _("Steel"),
+        [TYPE_MYSTERY] = _("???"),
+        [TYPE_FIRE] = _("Fire"),
+        [TYPE_WATER] = _("Water"),
+        [TYPE_GRASS] = _("Grass"),
+        [TYPE_ELECTRIC] = _("Electr"),
+        [TYPE_PSYCHIC] = _("Psychc"),
+        [TYPE_ICE] = _("Ice"),
+        [TYPE_DRAGON] = _("Dragon"),
+        [TYPE_DARK] = _("Dark"),
+        [TYPE_FAIRY] = _("Fairy"),
+    #endif
 };
 
 const struct TrainerBall gTrainerBallTable[] = {
@@ -1903,14 +1925,20 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
     u8 monsCount;
     u8 nickname[POKEMON_NAME_LENGTH + 1];
     u8 trainerName[(PLAYER_NAME_LENGTH * 3) + 1];
-    u8 ability, gender, friendship;
+    u8 ability;
+	u8 gender, friendship;
 	u32 ball;
     u8 difficulty, amount, build;
     u8 ivs[NUM_STATS];
 
     if (trainerNum == TRAINER_SECRET_BASE)
         return 0;
-
+	if (gSaveBlock2Ptr->optionsDifficulty == DIFFICULTY_HARD)
+		monsCount = gTrainers[trainerNum].hardPartySize;
+	else if (gSaveBlock2Ptr->optionsDifficulty == DIFFICULTY_HARDCORE)
+		monsCount = gTrainers[trainerNum].hardcorePartySize;
+	else
+		monsCount = gTrainers[trainerNum].partySize;
     if (gBattleTypeFlags & BATTLE_TYPE_TRAINER && !(gBattleTypeFlags & (BATTLE_TYPE_FRONTIER
                                                                         | BATTLE_TYPE_EREADER_TRAINER
                                                                         | BATTLE_TYPE_TRAINER_HILL)))
@@ -1920,19 +1948,22 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
 
         if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS)
         {
-            if (gTrainers[trainerNum].partySize > PARTY_SIZE / 2)
+            if (monsCount > PARTY_SIZE / 2)
                 monsCount = PARTY_SIZE / 2;
-            else
-                monsCount = gTrainers[trainerNum].partySize;
         }
-        else
-        {
-            monsCount = gTrainers[trainerNum].partySize;
-        }
-
+        
         for (i = 0; i < monsCount; i++)
         {
-            const struct TrainerMon *partyData = gTrainers[trainerNum].party.TrainerMon;
+            // const struct TrainerMon *partyData = gTrainers[trainerNum].party.TrainerMon;
+			const struct TrainerMon *partyData;
+			if (gSaveBlock2Ptr->optionsDifficulty == DIFFICULTY_HARD)
+				partyData = gTrainers[trainerNum].hardParty.TrainerMon;
+			else if (gSaveBlock2Ptr->optionsDifficulty == DIFFICULTY_HARDCORE)
+				partyData = gTrainers[trainerNum].hardcoreParty.TrainerMon;
+			else if (gSaveBlock2Ptr->optionsDifficulty == DIFFICULTY_EASY)
+				partyData = gTrainers[trainerNum].easyParty.TrainerMon;
+			else
+				partyData = gTrainers[trainerNum].party.TrainerMon;
 
 // Comment out the following line if you have changed .iv to go 0-31, instead of 0-255 as in vanilla.
             fixedIV = fixedIV * MAX_PER_STAT_IVS / 255;
@@ -1972,10 +2003,10 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
 			}
 			else {
 				if (partyData[i].nature > 0)
-					CreateMonWithGenderNatureLetter(&party[i], partyData[i].species, partyData[i].lvl, fixedIV, gender, partyData[i].nature, 0, partyData[i].shiny ? OT_ID_SHINY : OT_ID_RANDOM_NO_SHINY);
+					CreateMonWithGenderNatureLetter(&party[i], partyData[i].species, GetScaledLevel(partyData[i].lvl), fixedIV, gender, partyData[i].nature, 0, partyData[i].shiny ? OT_ID_SHINY : OT_ID_RANDOM_NO_SHINY);
 				else
 				{
-					CreateMon(&party[i], partyData[i].species, partyData[i].lvl, fixedIV, TRUE, personalityValue, partyData[i].shiny ? OT_ID_SHINY : OT_ID_RANDOM_NO_SHINY, 0);
+					CreateMon(&party[i], partyData[i].species, GetScaledLevel(partyData[i].lvl), fixedIV, TRUE, personalityValue, partyData[i].shiny ? OT_ID_SHINY : OT_ID_RANDOM_NO_SHINY, 0);
 				}
 			}
 
@@ -2047,47 +2078,58 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
             if ((difficulty == TRAINER_EASIEST) && (partyData[i].hiddenPower > 0))
             {
                for (j = 0; j < NUM_STATS; j++)
-                   ivs[j] = WORST_IV_SPREAD[partyData[i].hiddenPower][j];
+                   ivs[j] = WORST_IV_SPREAD[TYPE_DARK][j];
+			   j = partyData[i].hiddenPower;
+			   SetMonData(&party[i], MON_DATA_HIDDEN_POWER, &j);
             }
             else if (difficulty == TRAINER_EASY)
             {
                for (j = 0; j < NUM_STATS; j++)
-                   ivs[j] = PASSABLE_IV_SPREAD[partyData[i].hiddenPower][j];
+                   ivs[j] = PASSABLE_IV_SPREAD[TYPE_DARK][j];
+			   j = partyData[i].hiddenPower;
+			   SetMonData(&party[i], MON_DATA_HIDDEN_POWER, &j);
             }
             else
             {
                for (j = 0; j < NUM_STATS; j++)
-                   ivs[j] = BEST_IV_SPREAD[partyData[i].hiddenPower][j];
+                   ivs[j] = BEST_IV_SPREAD[TYPE_DARK][j];
+			   j = partyData[i].hiddenPower;
+			   SetMonData(&party[i], MON_DATA_HIDDEN_POWER, &j);
 
 // Now to start assigning effort points.
                if (difficulty >= TRAINER_HARD)
                {
-                  if ((build > 0) || (difficulty == TRAINER_MAX))
-                     amount = MAX_PER_STAT_EVS;
-                  else
-                     amount = MAX_TOTAL_EVS / NUM_STATS;
+				  if (gSaveBlock2Ptr->optionsDifficulty == DIFFICULTY_HARDCORE){
+					  amount = MAX_PER_STAT_EVS;
+				  }
+				  else {
+						if ((build > 0) || (difficulty == TRAINER_MAX))
+						 amount = MAX_PER_STAT_EVS;
+					  else
+						 amount = MAX_TOTAL_EVS / NUM_STATS;
 
-                  if (difficulty == TRAINER_HARD)
-                     amount = amount / 4;
-                  else if (difficulty == TRAINER_HARDER)
-                     amount = amount / 2;
+					  if (difficulty == TRAINER_HARD)
+						 amount = amount / 4;
+					  else if (difficulty == TRAINER_HARDER)
+						 amount = amount / 2;  
+				  }
 
-                  if ((difficulty == TRAINER_MAX) || (build == TRAINER_MON_HP_DEF) || (build == TRAINER_MON_HP_SPDEF))
+                  if ((difficulty == TRAINER_MAX) || (gSaveBlock2Ptr->optionsDifficulty == DIFFICULTY_HARDCORE) || (build == TRAINER_MON_HP_DEF) || (build == TRAINER_MON_HP_SPDEF))
                       SetMonData(&party[i], MON_DATA_HP_EV, &amount);
 
-                  if ((difficulty == TRAINER_MAX) || (build == TRAINER_MON_SPEED_PHYS) || (build == TRAINER_MON_PHYS))
+                  if ((difficulty == TRAINER_MAX) || (gSaveBlock2Ptr->optionsDifficulty == DIFFICULTY_HARDCORE) || (build == TRAINER_MON_SPEED_PHYS) || (build == TRAINER_MON_PHYS))
                       SetMonData(&party[i], MON_DATA_ATK_EV, &amount);
 
-                  if ((difficulty == TRAINER_MAX) || (build == TRAINER_MON_HP_DEF) || (build == TRAINER_MON_DEFENSES) || (build == TRAINER_MON_PHYS))
+                  if ((difficulty == TRAINER_MAX) || (gSaveBlock2Ptr->optionsDifficulty == DIFFICULTY_HARDCORE) || (build == TRAINER_MON_HP_DEF) || (build == TRAINER_MON_DEFENSES) || (build == TRAINER_MON_PHYS))
                       SetMonData(&party[i], MON_DATA_DEF_EV, &amount);
 
-                  if ((difficulty == TRAINER_MAX) || (build == TRAINER_MON_SPEED_PHYS) || (build == TRAINER_MON_SPEED_SPEC))
+                  if ((difficulty == TRAINER_MAX) || (gSaveBlock2Ptr->optionsDifficulty == DIFFICULTY_HARDCORE) || (build == TRAINER_MON_SPEED_PHYS) || (build == TRAINER_MON_SPEED_SPEC))
                       SetMonData(&party[i], MON_DATA_SPEED_EV, &amount);
 
-                  if ((difficulty == TRAINER_MAX) || (build == TRAINER_MON_SPEED_SPEC) || (build == TRAINER_MON_SPEC))
+                  if ((difficulty == TRAINER_MAX) || (gSaveBlock2Ptr->optionsDifficulty == DIFFICULTY_HARDCORE) || (build == TRAINER_MON_SPEED_SPEC) || (build == TRAINER_MON_SPEC))
                       SetMonData(&party[i], MON_DATA_SPATK_EV, &amount);
 
-                  if ((difficulty == TRAINER_MAX) || (build == TRAINER_MON_HP_SPDEF) || (build == TRAINER_MON_SPEC))
+                  if ((difficulty == TRAINER_MAX) || (gSaveBlock2Ptr->optionsDifficulty == DIFFICULTY_HARDCORE) || (build == TRAINER_MON_HP_SPDEF) || (build == TRAINER_MON_SPEC))
                       SetMonData(&party[i], MON_DATA_SPDEF_EV, &amount);
                }
 
@@ -3849,7 +3891,7 @@ static void TryDoEventsBeforeFirstTurn(void)
     TurnValuesCleanUp(FALSE);
     SpecialStatusesClear();
     *(&gBattleStruct->absentBattlerFlags) = gAbsentBattlerFlags;
-    BattlePutTextOnWindow(gText_EmptyString3, B_WIN_MSG);
+    BattlePutTextOnWindow(gText_EmptyString2, B_WIN_MSG);
     gBattleMainFunc = HandleTurnActionSelectionState;
     ResetSentPokesToOpponentValue();
 
@@ -3958,7 +4000,7 @@ void BattleTurnPassed(void)
         *(gBattleStruct->monToSwitchIntoId + i) = PARTY_SIZE;
 
     *(&gBattleStruct->absentBattlerFlags) = gAbsentBattlerFlags;
-    BattlePutTextOnWindow(gText_EmptyString3, B_WIN_MSG);
+    BattlePutTextOnWindow(gText_EmptyString2, B_WIN_MSG);
     GetAiLogicData(); // get assumed abilities, hold effects, etc of all battlers
     // gBattleMainFunc = HandleTurnActionSelectionState;
     gBattleMainFunc = PlayerTryEvolution;
@@ -3991,7 +4033,7 @@ u8 IsRunningFromBattleImpossible(void)
     if (GetBattlerPosition(gActiveBattler) == B_POSITION_PLAYER_RIGHT && WILD_DOUBLE_BATTLE
         && IsBattlerAlive(GetBattlerAtPosition(B_POSITION_PLAYER_LEFT))) // The second pokemon cannot run from a double wild battle, unless it's the only alive mon.
     {
-        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_CANT_ESCAPE;
+        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_CANT_ESCAPE; 
         return BATTLE_RUN_FORBIDDEN;
     }
 
@@ -4253,7 +4295,8 @@ static void HandleTurnActionSelectionState(void)
                     if (FlagGet(FLAG_SYS_NO_BAG_USE) || gBattleTypeFlags & (BATTLE_TYPE_LINK
                                             | BATTLE_TYPE_FRONTIER_NO_PYRAMID
                                             | BATTLE_TYPE_EREADER_TRAINER
-                                            | BATTLE_TYPE_RECORDED_LINK))
+                                            | BATTLE_TYPE_RECORDED_LINK) || (gSaveBlock2Ptr->optionsDifficulty >= DIFFICULTY_HARD &&
+											gBattleTypeFlags & (BATTLE_TYPE_TRAINER)))
                     {
                         RecordedBattle_ClearBattlerAction(gActiveBattler, 1);
                         gSelectionBattleScripts[gActiveBattler] = BattleScript_ActionSelectionItemsCantBeUsed;
@@ -4266,7 +4309,8 @@ static void HandleTurnActionSelectionState(void)
                     if (FlagGet(FLAG_SYS_NO_BAG_USE) || gBattleTypeFlags & (BATTLE_TYPE_LINK //DEBUG
                                             | BATTLE_TYPE_FRONTIER_NO_PYRAMID
                                             | BATTLE_TYPE_EREADER_TRAINER
-                                            | BATTLE_TYPE_RECORDED_LINK))
+                                            | BATTLE_TYPE_RECORDED_LINK) || (gSaveBlock2Ptr->optionsDifficulty >= DIFFICULTY_HARD &&
+											gBattleTypeFlags & (BATTLE_TYPE_TRAINER)))
                     {
                         RecordedBattle_ClearBattlerAction(gActiveBattler, 1);
                         gSelectionBattleScripts[gActiveBattler] = BattleScript_ActionSelectionItemsCantBeUsed;
@@ -5593,9 +5637,28 @@ void RunBattleScriptCommands(void)
         gBattleScriptingCommandsTable[gBattlescriptCurrInstr[0]]();
 }
 
-void SetTypeBeforeUsingMove(u16 move, u8 battlerAtk)
+u32 SetTypeSuperEffective(u16 move, u8 battlerAtk, u8 battlerDef) {
+	u32 i, type1, type2, superType = 0;
+	// u32 typeDmg = UQ_4_12(1.0); //baseline typing damage
+	// type1 = gBattleMons[battler].type1;
+	// type2 = gBattleMons[battler].type2;
+
+	for (i = 0; i < NUMBER_OF_MON_TYPES; i++) // Find a type that is supereffective
+	{	
+		
+		// typeDmg *= UQ_4_12_TO_INT(GetTypeModifier(i, type1));
+		// if (type1 != type2)
+			// typeDmg *= UQ_4_12_TO_INT(GetTypeModifier(i, type2));
+		if (CalcTypeEffectivenessMultiplier(move, i, battlerAtk, battlerDef, TRUE) >= UQ_4_12(2.0))
+			superType = i;
+		// typeDmg = UQ_4_12(1.0); 
+	}
+	return superType;
+}
+
+void SetTypeBeforeUsingMove(u16 move, u8 battlerAtk, u8 battlerDef)
 {
-    u32 moveType, ateType, attackerAbility;
+    u32 moveType, ateType, attackerAbility, item_Id;
     u16 holdEffect = GetBattlerHoldEffect(battlerAtk, TRUE);
 
     if (move == MOVE_STRUGGLE)
@@ -5623,27 +5686,9 @@ void SetTypeBeforeUsingMove(u16 move, u8 battlerAtk)
     }
     else if (gBattleMoves[move].effect == EFFECT_HIDDEN_POWER)
     {
-        u8 typeBits  = ((gBattleMons[battlerAtk].hpIV & 1) << 0)
-                     | ((gBattleMons[battlerAtk].attackIV & 1) << 1)
-                     | ((gBattleMons[battlerAtk].defenseIV & 1) << 2)
-                     | ((gBattleMons[battlerAtk].speedIV & 1) << 3)
-                     | ((gBattleMons[battlerAtk].spAttackIV & 1) << 4)
-                     | ((gBattleMons[battlerAtk].spDefenseIV & 1) << 5);
-
-        // Subtract 4 instead of 1 below because 3 types are excluded (TYPE_NORMAL and TYPE_MYSTERY and TYPE_FAIRY)
-        // The final + 1 skips past Normal, and the following conditional skips TYPE_MYSTERY
-        gBattleStruct->dynamicMoveType = ((NUMBER_OF_MON_TYPES - 4) * typeBits) / 63 + 1;
-        if (gBattleStruct->dynamicMoveType >= TYPE_MYSTERY)
+        gBattleStruct->dynamicMoveType = gBattleMons[battlerAtk].hiddenPower; 
+        if (gBattleStruct->dynamicMoveType == TYPE_MYSTERY || gBattleStruct->dynamicMoveType == TYPE_NORMAL)
             gBattleStruct->dynamicMoveType++;
-		if (gBattleMons[battlerAtk].hpIV == 1 && gBattleMons[battlerAtk].attackIV == 1 && gBattleMons[battlerAtk].defenseIV == 1
-			 && gBattleMons[battlerAtk].spDefenseIV == 0  && gBattleMons[battlerAtk].spAttackIV == 3 && gBattleMons[battlerAtk].speedIV == 1)
-			gBattleStruct->dynamicMoveType = TYPE_FAIRY;
-		if (gBattleMons[battlerAtk].hpIV == 15&& gBattleMons[battlerAtk].attackIV == 15 && gBattleMons[battlerAtk].defenseIV == 15
-			  && gBattleMons[battlerAtk].spDefenseIV == 18  && gBattleMons[battlerAtk].spAttackIV == 15 && gBattleMons[battlerAtk].speedIV ==  15)
-			gBattleStruct->dynamicMoveType = TYPE_FAIRY;
-		if (gBattleMons[battlerAtk].hpIV == 31 && gBattleMons[battlerAtk].attackIV == 30 && gBattleMons[battlerAtk].defenseIV == 31
-			  && gBattleMons[battlerAtk].spDefenseIV == 31 && gBattleMons[battlerAtk].spAttackIV == 30 && gBattleMons[battlerAtk].speedIV == 31)
-			gBattleStruct->dynamicMoveType = TYPE_FAIRY;
         gBattleStruct->dynamicMoveType |= F_DYNAMIC_TYPE_1 | F_DYNAMIC_TYPE_2;
     }
     else if (gBattleMoves[move].effect == EFFECT_CHANGE_TYPE_ON_ITEM)
@@ -5662,9 +5707,18 @@ void SetTypeBeforeUsingMove(u16 move, u8 battlerAtk)
     }
     else if (gBattleMoves[move].effect == EFFECT_NATURAL_GIFT)
     {
-        if (ItemId_GetPocket(gBattleMons[battlerAtk].item) == POCKET_BERRIES)
-            gBattleStruct->dynamicMoveType = gNaturalGiftTable[ITEM_TO_BERRY(gBattleMons[battlerAtk].item)].type;
+		item_Id = gBattleMons[battlerAtk].item;
+		if ((ItemId_GetPocket(item_Id) != POCKET_BERRIES || item_Id == ITEM_NONE) && gBattleMons[battlerAtk].ability == ABILITY_GIFT_GIVER)
+		{
+				item_Id = Random() % (LAST_BERRY_INDEX - FIRST_BERRY_INDEX);
+				item_Id += FIRST_BERRY_INDEX;
+		}
+        if (ItemId_GetPocket(item_Id) == POCKET_BERRIES)
+            gBattleStruct->dynamicMoveType = gNaturalGiftTable[ITEM_TO_BERRY(item_Id)].type;
     }
+    else if (gBattleMoves[move].effect == EFFECT_PRESENT){
+		gBattleStruct->dynamicMoveType = SetTypeSuperEffective(move, battlerAtk, battlerDef);
+	}
     else if (gBattleMoves[move].effect == EFFECT_TERRAIN_PULSE)
     {
         if (IsBattlerTerrainAffected(battlerAtk, STATUS_FIELD_TERRAIN_ANY))

@@ -144,7 +144,7 @@ static const struct FormChange sKeldeoResoluteFormChangeTable[] = {
     {FORM_MOVE, SPECIES_KELDEO, MOVE_SECRET_SWORD, WHEN_FORGOTTEN},
     {FORM_CHANGE_END},
 };
-
+ 
 static const struct FormChange sGenesectFormChangeTable[] = {
     {FORM_ITEM_HOLD, SPECIES_GENESECT,             ITEM_NONE},
     {FORM_ITEM_HOLD, SPECIES_GENESECT_DOUSE_DRIVE, ITEM_DOUSE_DRIVE},

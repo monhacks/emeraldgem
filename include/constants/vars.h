@@ -114,7 +114,7 @@
 #define VAR_EVER_GRANDE_CITY_STATE           0x405F // Unused Var
 #define VAR_ROUTE101_STATE                   0x4060
 #define VAR_ROUTE102_STATE                   0x4061 // Unused Var
-#define VAR_ROUTE103_STATE                   0x4062 // Unused Var
+#define VAR_MT_CHIMNEY_STATE                 0x4062
 #define VAR_ROUTE104_STATE                   0x4063
 #define VAR_ROUTE105_STATE                   0x4064 // Unused Var
 #define VAR_ROUTE106_STATE                   0x4065 // Unused Var
@@ -231,14 +231,14 @@
 #define VAR_SS_TIDAL_SCOTT_STATE             0x40D4 // Always equal to FLAG_MET_SCOTT_ON_SS_TIDAL
 #define VAR_ROAMER_POKEMON                   0x40D5 // 0 = Latias, 1 = Latios
 #define VAR_TRAINER_HILL_IS_ACTIVE           0x40D6
-#define VAR_SKY_PILLAR_RAQUAZA_CRY_DONE      0x40D7
+#define VAR_AQUA_HIDEOUT_STATE		      	 0x40D7
 #define VAR_SOOTOPOLIS_WALLACE_STATE         0x40D8
 #define VAR_HAS_TALKED_TO_SEAFLOOR_CAVERN_ENTRANCE_GRUNT 0x40D9
 #define VAR_REGISTER_BIRCH_STATE             0x40DA
 #define VAR_MISTERIO	                     0x40DB 
 #define VAR_UNUSED_0x40DC                    0x40DC // Unused Var
 #define VAR_GIFT_PICHU_SLOT                  0x40DD
-#define VAR_GIFT_UNUSED_1                    0x40DE // Var is written to, but never read
+#define VAR_SAFARI_ZONE_RIGHT                    0x40DE // Var is written to, but never read
 #define VAR_GIFT_UNUSED_2                    0x40DF // Var is written to, but never read
 #define VAR_GIFT_UNUSED_3                    0x40E0 // Var is written to, but never read
 #define VAR_GIFT_UNUSED_4                    0x40E1 // Var is written to, but never read

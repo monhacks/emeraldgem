@@ -23,6 +23,7 @@
 #include "constants/items.h"
 #include "constants/layouts.h"
 #include "constants/weather.h"
+#include "constants/metatile_behaviors.h"
 #include "rtc.h"
 
 extern const u8 EventScript_RepelWoreOff[];
@@ -304,6 +305,14 @@ static u8 ChooseWildMonLevel(const struct WildPokemon *wildPokemon)
 
 u16 GetCurrentMapWildMonHeaderIdSpecific(u8 nightorday){
     u16 i;
+	s16 x, y;
+
+    PlayerGetDestCoords(&x, &y);
+	if (MetatileBehavior_IsDarkGrass(MapGridGetMetatileBehaviorAt(x, y)))
+	{
+		nightorday = Random() % 2;
+	}
+	
     for (i = 0; ; i++)
     {
         const struct WildPokemonHeader *wildHeader = &gWildMonHeaders[i];
@@ -481,6 +490,13 @@ static u8 PickWildMonNature(void)
 void CreateWildMon(u16 species, u8 level)
 {
     bool32 checkCuteCharm;
+	s16 x, y;
+
+    PlayerGetDestCoords(&x, &y);
+	if (MetatileBehavior_IsDarkGrass(MapGridGetMetatileBehaviorAt(x, y)))
+	{
+		level += (Random() % 5 + 1); // 1 - 5 levels higher if on dark grass
+	}
 
     ZeroEnemyPartyMons();
     checkCuteCharm = TRUE;
@@ -493,6 +509,7 @@ void CreateWildMon(u16 species, u8 level)
         checkCuteCharm = FALSE;
         break;
     }
+	
 
     if (checkCuteCharm
         && !GetMonData(&gPlayerParty[0], MON_DATA_SANITY_IS_EGG)
@@ -512,10 +529,7 @@ void CreateWildMon(u16 species, u8 level)
         CreateMonWithGenderNatureLetter(&gEnemyParty[0], species, level, 32, gender, PickWildMonNature(), 0, OT_ID_PLAYER_ID);
         return;
     }
-	// if (VarGet(VAR_SPECIESCHAINED) != GetMonData(&gEnemyParty[0], MON_DATA_SPECIES) && (Random() % 99) < (VarGet(VAR_CHAIN) + 10) && (VarGet(VAR_CHAIN) >= 10))
-        // species = VarGet(VAR_SPECIESCHAINED);
-	// if (VarGet(VAR_SPECIESCHAINED) != GetMonData(&gEnemyParty[0], MON_DATA_SPECIES) && (Random() % 99) < (VarGet(VAR_CHAIN) - 20) && (VarGet(VAR_CHAIN) >= 25))
-        // species = SPECIES_CHANSEY;
+	
 	if (gSaveBlock2Ptr->optionsButtonMode == 1 && (Random() % 99) < 5)
 		species = SPECIES_AUDINO;
 	if (gSaveBlock2Ptr->optionsButtonMode == 1 && (Random() % 99) < 5)
@@ -681,6 +695,7 @@ static bool8 AreLegendariesInSootopolisPreventingEncounters(void)
 bool8 StandardWildEncounter(u16 currMetaTileBehavior, u16 previousMetaTileBehavior)
 {
     u16 headerId;
+	u8 rand;
     struct Roamer *roamer;
 
     if (sWildEncountersDisabled == TRUE)
@@ -778,7 +793,11 @@ bool8 StandardWildEncounter(u16 currMetaTileBehavior, u16 previousMetaTileBehavi
                 return FALSE;
             else if (DoWildEncounterRateTest(gWildMonHeaders[headerId].waterMonsInfo->encounterRate, FALSE) != TRUE)
                 return FALSE;
-
+			
+			if (currMetaTileBehavior == MB_OCEAN_WATER){
+				rand = Random() % 2;
+			}
+			
             if (TryStartRoamerEncounter() == TRUE)
             {
                 roamer = &gSaveBlock1Ptr->roamer;
@@ -790,7 +809,7 @@ bool8 StandardWildEncounter(u16 currMetaTileBehavior, u16 previousMetaTileBehavi
             }
             else // try a regular surfing encounter
             {
-                if (TryGenerateWildMon(gWildMonHeaders[headerId].waterMonsInfo, WILD_AREA_WATER, WILD_CHECK_REPEL | WILD_CHECK_KEEN_EYE) == TRUE)
+                if (TryGenerateWildMon(gWildMonHeaders[headerId].waterMonsInfo, WILD_AREA_WATER, WILD_CHECK_REPEL | WILD_CHECK_KEEN_EYE) == TRUE && rand == 1)
                 {
                     gIsSurfingEncounter = TRUE;
                     if (TryDoDoubleWildBattle())
@@ -891,7 +910,19 @@ bool8 SweetScentWildEncounter(void)
                 SetUpMassOutbreakEncounter(0);
             else
                 TryGenerateWildMon(gWildMonHeaders[headerId].landMonsInfo, WILD_AREA_LAND, 0);
-
+			if (MetatileBehavior_IsDarkGrass(MapGridGetMetatileBehaviorAt(x, y)))
+			{
+				FlagSet(B_FLAG_FORCE_DOUBLE_WILD);
+				if (TryDoDoubleWildBattle())
+                    {
+                        struct Pokemon mon1 = gEnemyParty[0];
+						FlagClear(B_FLAG_FORCE_DOUBLE_WILD);
+                        TryGenerateWildMon(gWildMonHeaders[headerId].landMonsInfo, WILD_AREA_LAND, WILD_CHECK_KEEN_EYE);
+                        gEnemyParty[1] = mon1;
+                        BattleSetup_StartDoubleWildBattle();
+						return TRUE;
+                    }
+			}
             BattleSetup_StartWildBattle();
             return TRUE;
         }
@@ -1112,6 +1143,9 @@ static void ApplyCleanseTagEncounterRateMod(u32 *encRate)
 
 bool8 TryDoDoubleWildBattle(void)
 {
+	s16 x, y;
+
+    PlayerGetDestCoords(&x, &y);
     if (GetSafariZoneFlag() || GetMonsStateToDoubles() != PLAYER_HAS_TWO_USABLE_MONS)
         return FALSE;
 #if B_FLAG_FORCE_DOUBLE_WILD != 0 
@@ -1119,7 +1153,7 @@ bool8 TryDoDoubleWildBattle(void)
         return TRUE;
 #endif
 #if B_DOUBLE_WILD_CHANCE != 0
-    else if ((Random() % 100) + 1 < B_DOUBLE_WILD_CHANCE)
+    else if ((Random() % 100) + 1 < (MetatileBehavior_IsDarkGrass(MapGridGetMetatileBehaviorAt(x, y)) ? B_DOUBLE_WILD_CHANCE * 2 : B_DOUBLE_WILD_CHANCE))
         return TRUE;
 #endif
     return FALSE;

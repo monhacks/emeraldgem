@@ -970,13 +970,14 @@ CableClub_EventScript_TrainerTypeChangerSeeType::
 	case 0, CableClub_EventScript_TrainerTypeChangerSeeType_2
 	case 1, CableClub_EventScript_TrainerTypeChangerSeeType_3
 	case 2, CableClub_EventScript_TrainerTypeChangerSeeType_4
-	case 4, CableClub_EventScript_TrainerTypeChangerSeeType_5
-	case 5, CableClub_EventScript_TrainerTypeChangerSeeType_6
-	case 6, CableClub_EventScript_TrainerTypeChangerSeeType_7
-	case 7, CableClub_EventScript_TrainerTypeChangerSeeType_8
-	case 8, CableClub_EventScript_TrainerTypeChangerSeeType_9
-	case 9, CableClub_EventScript_TrainerTypeChangerSeeType_10
-	case 10, CableClub_EventScript_TrainerTypeChangerSeeType_11
+	case 3, CableClub_EventScript_TrainerTypeChangerSeeType_5
+	case 4, CableClub_EventScript_TrainerTypeChangerSeeType_6
+	case 5, CableClub_EventScript_TrainerTypeChangerSeeType_7
+	case 6, CableClub_EventScript_TrainerTypeChangerSeeType_8
+	case 7, CableClub_EventScript_TrainerTypeChangerSeeType_9
+	case 8, CableClub_EventScript_TrainerTypeChangerSeeType_10
+	case 9, CableClub_EventScript_TrainerTypeChangerSeeType_11
+	goto CableClub_EventScript_TrainerTypeChangerSeeType_2
 	return
 
 CableClub_EventScript_TrainerTypeChangerSeeType_2:
@@ -1028,8 +1029,8 @@ CableClub_EventScript_TrainerTypeChanger_2:
 	dynmultichoice 12, 2, TRUE, 3, 0, DYN_MULTICHOICE_CB_NONE, CableClub_EventScript_TrainerTypeChanger_Text_8, CableClub_EventScript_TrainerTypeChanger_Text_9, CableClub_EventScript_TrainerTypeChanger_Text_10, CableClub_EventScript_TrainerTypeChanger_Text_11, CableClub_EventScript_TrainerTypeChanger_Text_6
 	setvar VAR_0x8004, VAR_RESULT
 	special SetTrainerType
-	playse MUS_OBTAIN_ITEM
-	waitse
+	playfanfare MUS_OBTAIN_ITEM
+	waitfanfare
 	special ShowTrainerType
 	call CableClub_EventScript_TrainerTypeChangerSeeType
 	msgbox CableClub_EventScript_TrainerTypeChanger_Text_7

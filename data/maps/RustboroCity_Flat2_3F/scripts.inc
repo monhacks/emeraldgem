@@ -41,4 +41,3 @@ RustboroCity_Flat2_3F_Text_PresidentsSonAlsoCollectsRare:
 
 RustboroCity_Flat2_3F_Text_PresidentsSonAlsoCollectsRareStones:
 	.string "Casi no tenemos visitas, así que\nsi quieres, puedo cambiarte tus\lPokéball por Superball.\p¿Te parece?$"
-

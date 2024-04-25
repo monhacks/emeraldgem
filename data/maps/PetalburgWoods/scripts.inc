@@ -554,4 +554,3 @@ PetalburgWoods_Text_TrainerTipsPP:
 	.string "incorrecto. ¡Y no te preocupes!\l"
 	.string "Mientras más avances en la cdena, más\l"
 	.string "fácil será encontrarlo.$"
-

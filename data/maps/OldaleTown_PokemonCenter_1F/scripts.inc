@@ -49,5 +49,3 @@ OldaleTown_PokemonCenter_1F_Text_WirelessClubNotAvailable:
 	.string "pero la otra puede ayudarte con\l"
 	.string "evoluciones más específicas,\l"
 	.string "y con la Pokédex.$"
-
-

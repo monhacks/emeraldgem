@@ -67,7 +67,7 @@ static const u8 Str_Egg[] = _("Egg");
 static const u8 Str_Egg2[] = _("Egg2");
 static const u8 Str_HasSpecies[] = _("Present");
 static const u8 Str_Language[] = _("Language");
-static const u8 Str_Game[] = _("Origin Game");
+static const u8 Str_Game[] = _("Contest EXP");
 static const u8 Str_Item[] = _("Held Item");
 static const u8 Str_Level[] = _("Level");
 static const u8 Str_EXP[] = _("Experience/Level");
@@ -93,12 +93,12 @@ static const u8 Str_EV[] = _("EV");
 static const u8 Str_IV[] = _("IV");
 static const u8 Str_Current[] = _("Current");
 static const u8 Str_Status[] = _("Status");
-static const u8 Str_Cool[] = _("Cool");
-static const u8 Str_Cute[] = _("Cute");
-static const u8 Str_Tough[] = _("Tough");
-static const u8 Str_Beauty[] = _("Beauty");
-static const u8 Str_Smart[] = _("Smart");
-static const u8 Str_Sheen[] = _("Sheen");
+static const u8 Str_Cool[] = _("Cool Stars");
+static const u8 Str_Cute[] = _("Cute Stars");
+static const u8 Str_Tough[] = _("Tough Stars");
+static const u8 Str_Beauty[] = _("Beauty Stars");
+static const u8 Str_Smart[] = _("Smart Stars");
+static const u8 Str_Sheen[] = _("Contest EXP");
 static const u8 Str_Fateful[] = _("Fateful");
 static const u8 Str_Fateful2[] = _("Unused Ribbons");
 static const u8 Str_CoolRibbon[] = _("Cool Ribbons");
@@ -289,18 +289,18 @@ static const struct EditPokemonStruct DebugPkmCreator_Options[] =
         [VAL_EGG2]                 = {Str_Egg2, EDIT_BOOL, 0, 1, 0, MON_DATA_SANITY_IS_EGG, 1},
         [VAL_HASSPECIES]           = {Str_HasSpecies, EDIT_BOOL, 0, 1, 1, MON_DATA_SANITY_HAS_SPECIES, 1},
         [VAL_LANGUAGE]             = {Str_Language, EDIT_NORMAL, 0, NUM_LANGUAGES - 1, GAME_LANGUAGE, MON_DATA_LANGUAGE, 2},
-        [VAL_GAME]                 = {Str_Game, EDIT_NORMAL, 0, 49, GAME_VERSION, MON_DATA_MET_GAME, 2}, // 45 = Shield
+        [VAL_GAME]                 = {Str_Game, EDIT_NORMAL, 0, 510, 0, MON_DATA_CONTEST_EXP, 3}, // 45 = Shield
         [VAL_ITEM]                 = {Str_Item, EDIT_NORMAL, 0, ITEMS_COUNT - 1, 0, MON_DATA_HELD_ITEM, 3},
         [VAL_LEVEL]                = {Str_Level, EDIT_NORMAL, 0, 100, 10, MON_DATA_LEVEL, 3},
         [VAL_EXP]                  = {Str_EXP, EDIT_NORMAL, 0, 1640000, 1000, MON_DATA_EXP, 7},
         [VAL_ABILITY]              = {Str_Ability, EDIT_NORMAL, 0, 2, 0, MON_DATA_ABILITY_NUM, 1},
         [VAL_FRIENDSHIP]           = {Str_Friendship, EDIT_NORMAL, 0, 255, 0, MON_DATA_FRIENDSHIP, 3},
-        [VAL_METLVL]               = {Str_MetLevel, EDIT_NORMAL, 0, 100, 10, MON_DATA_MET_LEVEL, 3}, // 0 instead of 1 because 0 means hatched from an Egg
+        [VAL_METLVL]               = {Str_MetLevel, EDIT_NORMAL, 0, 1, 10, MON_DATA_MET_LEVEL, 3}, // 0 instead of 1 because 0 means hatched from an Egg
         [VAL_METLOCATATION]        = {Str_MetLocation, EDIT_NORMAL, 0, 65535, MAPSEC_LITTLEROOT_TOWN, MON_DATA_MET_LOCATION, 5},
         [VAL_BALL]                 = {Str_Ball, EDIT_NORMAL, 0, LAST_BALL, ITEM_POKE_BALL, MON_DATA_POKEBALL, 2},
-        [VAL_PKRUS_STRAIN]         = {Str_PKrus, EDIT_NORMAL, 0, 3, 0, MON_DATA_POKERUS, 1}, // 4 different "strains"
-        [VAL_PKRUS_DAYS_DEF]       = {Str_PKrus, EDIT_NORMAL, 1, 4, 1, MON_DATA_POKERUS, 1}, // "default" days until cured
-        [VAL_PKRUS_DAYS_LEFT]      = {Str_PKrus, EDIT_NORMAL, 0, 7, 0, MON_DATA_POKERUS, 1}, // Days until cured
+        [VAL_PKRUS_STRAIN]         = {Str_PKrus, EDIT_NORMAL, 0, 1, 0, MON_DATA_POKERUS, 1}, // 4 different "strains"
+        [VAL_PKRUS_DAYS_DEF]       = {Str_PKrus, EDIT_NORMAL, 1, 1, 1, MON_DATA_POKERUS, 1}, // "default" days until cured
+        [VAL_PKRUS_DAYS_LEFT]      = {Str_PKrus, EDIT_NORMAL, 0, 1, 0, MON_DATA_POKERUS, 1}, // Days until cured
         // Current stats
         [VAL_HP_CURRENT]           = {Str_HP, EDIT_NORMAL, 0, 999, 0, MON_DATA_HP, 3},
         [VAL_HP_MAX]               = {Str_HP, EDIT_READONLY, 0, 999, 0, MON_DATA_MAX_HP, 3},
@@ -317,19 +317,19 @@ static const struct EditPokemonStruct DebugPkmCreator_Options[] =
         [VAL_SPATK_IV]             = {Str_SpA_IV_EV, EDIT_NORMAL, 0, 31, 0, MON_DATA_SPATK_IV, 2},
         [VAL_SPDEF_IV]             = {Str_SpD_IV_EV, EDIT_NORMAL, 0, 31, 0, MON_DATA_SPDEF_IV, 2},
         // EVs
-        [VAL_HP_EV]                = {Str_HP_IV_EV, EDIT_NORMAL, 0, 255, 0, MON_DATA_HP_EV, 3},
-        [VAL_ATK_EV]               = {Str_Atk_IV_EV, EDIT_NORMAL, 0, 255, 0, MON_DATA_ATK_EV, 3},
-        [VAL_DEF_EV]               = {Str_Def_IV_EV, EDIT_NORMAL, 0, 255, 0, MON_DATA_DEF_EV, 3},
-        [VAL_SPEED_EV]             = {Str_Spe_IV_EV, EDIT_NORMAL, 0, 255, 0, MON_DATA_SPEED_EV, 3},
-        [VAL_SPATK_EV]             = {Str_SpA_IV_EV, EDIT_NORMAL, 0, 255, 0, MON_DATA_SPATK_EV, 3},
-        [VAL_SPDEF_EV]             = {Str_SpD_IV_EV, EDIT_NORMAL, 0, 255, 0, MON_DATA_SPDEF_EV, 3},
+        [VAL_HP_EV]                = {Str_HP_IV_EV, EDIT_NORMAL, 0, 63, 0, MON_DATA_HP_EV, 3},
+        [VAL_ATK_EV]               = {Str_Atk_IV_EV, EDIT_NORMAL, 0, 63, 0, MON_DATA_ATK_EV, 3},
+        [VAL_DEF_EV]               = {Str_Def_IV_EV, EDIT_NORMAL, 0, 63, 0, MON_DATA_DEF_EV, 3},
+        [VAL_SPEED_EV]             = {Str_Spe_IV_EV, EDIT_NORMAL, 0, 63, 0, MON_DATA_SPEED_EV, 3},
+        [VAL_SPATK_EV]             = {Str_SpA_IV_EV, EDIT_NORMAL, 0, 63, 0, MON_DATA_SPATK_EV, 3},
+        [VAL_SPDEF_EV]             = {Str_SpD_IV_EV, EDIT_NORMAL, 0, 63, 0, MON_DATA_SPDEF_EV, 3},
         // Contest Stats
-        [VAL_COOL]                 = {Str_Cool, EDIT_NORMAL, 0, 255, 0, MON_DATA_COOL, 3},
-        [VAL_CUTE]                 = {Str_Cute, EDIT_NORMAL, 0, 255, 0, MON_DATA_CUTE, 3},
-        [VAL_BEAUTY]               = {Str_Beauty, EDIT_NORMAL, 0, 255, 0, MON_DATA_BEAUTY, 3},
-        [VAL_SMART]                = {Str_Smart, EDIT_NORMAL, 0, 255, 0, MON_DATA_SMART, 3},
-        [VAL_TOUGH]                = {Str_Tough, EDIT_NORMAL, 0, 255, 0, MON_DATA_TOUGH, 3},
-        [VAL_SHEEN]                = {Str_Sheen, EDIT_NORMAL, 0, 255, 0, MON_DATA_SHEEN, 3},
+        [VAL_COOL]                 = {Str_Cool, EDIT_NORMAL, 0, 3, 0, MON_DATA_COOL_CV, 1},
+        [VAL_CUTE]                 = {Str_Cute, EDIT_NORMAL, 0, 3, 0, MON_DATA_CUTE_CV, 1},
+        [VAL_BEAUTY]               = {Str_Beauty, EDIT_NORMAL, 0, 3, 0, MON_DATA_BEAUTY_CV, 1},
+        [VAL_SMART]                = {Str_Smart, EDIT_NORMAL, 0, 3, 0, MON_DATA_SMART_CV, 1},
+        [VAL_TOUGH]                = {Str_Tough, EDIT_NORMAL, 0, 3, 0, MON_DATA_TOUGH_CV, 1},
+        [VAL_SHEEN]                = {Str_Sheen, EDIT_NORMAL, 0, 510, 0, MON_DATA_CONTEST_EXP, 3},
         [VAL_STATUS]               = {Str_Status, EDIT_NORMAL, 0, 6, 0, MON_DATA_STATUS, 1},
         [VAL_SLEEP_TIMER]          = {Str_Slp, EDIT_NORMAL, 0, 7, 0, MON_DATA_STATUS, 1}, // sleep timer
         [VAL_PSN2_TIMER]           = {Str_Psn2, EDIT_NORMAL, 0, 15, 0, MON_DATA_STATUS, 2}, // badly poisoned timer
@@ -624,9 +624,9 @@ static void DebugPkmCreator_Init_SetNewMonData(bool8 setMoves)
     data = (sDebugPkmCreatorData.data[3] << 16) | sDebugPkmCreatorData.data[2];
     CreateMon(mons, sDebugPkmCreatorData.data[0], sDebugPkmCreatorData.data[15], 32, 1, sDebugPkmCreatorData.data[1], OT_ID_PRESET, data);
     SetMonData(mons, MON_DATA_OT_NAME, DebugPkmCreator_NameBuffer);
-    data = ((sDebugPkmCreatorData.data[23] - 1) & 3) << 6;
-    data |= (sDebugPkmCreatorData.data[22] & 3) << 4;
-    data |= (sDebugPkmCreatorData.data[24] & 0xf);
+    // data = ((sDebugPkmCreatorData.data[23] - 1) & 3) << 6;
+    data = sDebugPkmCreatorData.data[22];
+    // data |= (sDebugPkmCreatorData.data[24] & 0xf);
     SetMonData(mons, MON_DATA_POKERUS, &data);
     for (i = 0; i < EDIT_OPTION_COUNT; i++)
     {
@@ -752,9 +752,9 @@ static void DebugPkmCreator_SetMonData(void)
 {
     struct Pokemon* mons = &sDebugPkmCreatorData.mon;
     u32 data, i, j, k;
-    data = ((sDebugPkmCreatorData.data[23] - 1) & 3) << 6;
-    data |= (sDebugPkmCreatorData.data[22] & 3) << 4;
-    data |= (sDebugPkmCreatorData.data[24] & 0xf);
+    // data = ((sDebugPkmCreatorData.data[23] - 1) & 3) << 6;
+    data = sDebugPkmCreatorData.data[22];
+    // data |= (sDebugPkmCreatorData.data[24] & 0xf);
     SetMonData(mons, MON_DATA_POKERUS, &data);
     for (i = 0; i < EDIT_OPTION_COUNT; i++)
     {
@@ -877,20 +877,20 @@ static void DebugPkmCreator_PopulateDataStruct(void)
             break;
         case VAL_PKRUS_STRAIN:
             data = GetMonData(mons, DebugPkmCreator_Options[i].SetMonDataParam, NULL);
-            data &= 0x30;
-            data >>= 4;
+            // data &= 0x30;
+            // data >>= 4;
             sDebugPkmCreatorData.data[i] = data;
             break;
         case VAL_PKRUS_DAYS_DEF:
-            data = GetMonData(mons, DebugPkmCreator_Options[i].SetMonDataParam, NULL);
-            data &= 0xc0;
-            data >>= 6;
-            sDebugPkmCreatorData.data[i] = data + 1;
+            // data = GetMonData(mons, DebugPkmCreator_Options[i].SetMonDataParam, NULL);
+            // data &= 0xc0;
+            // data >>= 6;
+            sDebugPkmCreatorData.data[i] = 0;
             break;
         case VAL_PKRUS_DAYS_LEFT:
-            data = GetMonData(mons, DebugPkmCreator_Options[i].SetMonDataParam, NULL);
-            data &= 0xf;
-            sDebugPkmCreatorData.data[i] = data;
+            // data = GetMonData(mons, DebugPkmCreator_Options[i].SetMonDataParam, NULL);
+            // data &= 0xf;
+            sDebugPkmCreatorData.data[i] = 0;
             break;
         case VAL_STATUS:
             data = GetMonData(mons, DebugPkmCreator_Options[i].SetMonDataParam, NULL);
@@ -1094,8 +1094,9 @@ static void DebugPkmCreator_Redraw(void)
             *gStringVar3 = EOS;
             StringExpandPlaceholders(bufferPosition, Str_StringVars);
             AddTextPrinterParameterized(sDebugPkmCreatorData.menuWindowId, FONT_NARROW, gStringVar2, x, y, 0, NULL);
-            x = 130;
-            AddTextPrinterParameterized(sDebugPkmCreatorData.menuWindowId, 1, gText_ThreeDashes, x, y, 0, NULL);
+            x = 140;
+            // ConvertIntToDecimalStringN(gStringVar1, sDebugPkmCreatorData.data[VAL_GAME], STR_CONV_MODE_LEADING_ZEROS, DebugPkmCreator_Options[VAL_GAME].digitCount);
+            AddTextPrinterParameterized(sDebugPkmCreatorData.menuWindowId, FONT_NARROW, gStringVar1, x, y, 0, NULL);
             break;
         case VAL_ITEM:
             ConvertIntToDecimalStringN(gStringVar1, sDebugPkmCreatorData.data[index], STR_CONV_MODE_LEADING_ZEROS, data->digitCount);

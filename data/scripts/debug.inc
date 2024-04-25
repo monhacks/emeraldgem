@@ -44,7 +44,6 @@ Debug_CheatStart::
 	clearflag FLAG_HIDE_BRINEYS_HOUSE_PEEKO
 	 additem ITEM_MAX_REPEL, 10
 	 giveitem ITEM_EON_TICKET
-	 @setflag FLAG_SYS_HAS_EON_TICKET
 	 setflag FLAG_SHOWN_EON_TICKET
 	 setvar VAR_DISTRIBUTE_EON_TICKET, 0
 	 giveitem ITEM_MYSTIC_TICKET
@@ -54,15 +53,19 @@ Debug_CheatStart::
 	 setflag FLAG_ENABLE_SHIP_BIRTH_ISLAND
 	 setflag FLAG_RECEIVED_AURORA_TICKET
 	 setflag FLAG_BADGE06_GET @ Badge for flying filed move
-	 setweather WEATHER_VOLCANIC_ASH
-	 doweather
 	closemessage
 	release
 	end
 
 Debug_Script_1::
-	special DoPasswordNamingScreen
-	waitstate
+	setflag FLAG_SYS_POKEDEX_GET
+    setflag FLAG_SYS_POKEMON_GET
+    setflag FLAG_SYS_POKENAV_GET
+	setflag FLAG_MENU_DEXRELATED
+	setflag FLAG_SYS_DEXNAV_GET
+	setflag FLAG_SYS_QUEST_MENU_GET
+	setflag FLAG_ENABLED_PC
+	releaseall
 	end
 
 Debug_Script_2::

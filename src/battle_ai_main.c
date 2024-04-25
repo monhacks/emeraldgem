@@ -590,7 +590,7 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
     u32 i;
     u16 predictedMove = AI_DATA->predictedMoves[battlerDef];
 
-    SetTypeBeforeUsingMove(move, battlerAtk);
+    SetTypeBeforeUsingMove(move, battlerAtk, battlerDef);
     GET_MOVE_TYPE(move, moveType);
 
     if (IsTargetingPartner(battlerAtk, battlerDef))
@@ -2610,7 +2610,7 @@ static s16 AI_DoubleBattle(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
     bool32 partnerHasBadAbility = (GetAbilityRating(atkPartnerAbility) < 0);
     u16 predictedMove = AI_DATA->predictedMoves[battlerDef];
 
-    SetTypeBeforeUsingMove(move, battlerAtk);
+    SetTypeBeforeUsingMove(move, battlerAtk, battlerDef);
     GET_MOVE_TYPE(move, moveType);
 
     // check what effect partner is using
@@ -4476,7 +4476,7 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
         if (!IsBattlerGrounded(battlerDef))
             score += 3;
         break;
-    case EFFECT_RELIC_SONG:
+    case EFFECT_RELIC_SONG: 
         #if (defined SPECIES_MELOETTA && defined SPECIES_MELOETTA_PIROUETTE)
         if (!(gBattleMons[battlerAtk].status2 & STATUS2_TRANSFORMED)) // Don't try to change form if it's transformed.
         {
@@ -4993,7 +4993,7 @@ static s16 AI_HPAware(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
     u16 effect = gBattleMoves[move].effect;
     u8 moveType = gBattleMoves[move].type;
 
-    SetTypeBeforeUsingMove(move, battlerAtk);
+    SetTypeBeforeUsingMove(move, battlerAtk, battlerDef);
     GET_MOVE_TYPE(move, moveType);
 
     if (IsTargetingPartner(battlerAtk, battlerDef))

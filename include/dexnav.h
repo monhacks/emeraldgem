@@ -4,59 +4,59 @@
 #define DEXNAV_TIMEOUT                  15  //15 seconds is the time out. Max of 1092 seconds allowed
 #define SNEAKING_PROXIMITY              4   //Tile amount
 #define CREEPING_PROXIMITY              2
-#define MAX_PROXIMITY                   20
+#define MAX_PROXIMITY                   15
 
-#define DEXNAV_CHAIN_MAX                40
+#define DEXNAV_CHAIN_MAX                50
 
 //hidden pokemon options - no info so I just guessed at values
-#define HIDDEN_MON_STEP_COUNT       100  //look for hidden pokemon every x steps
-#define HIDDEN_MON_SEARCH_RATE      25  //x% chance of finding hidden pokemon every x steps
-#define HIDDEN_MON_PROBABILTY       15  //x% chance of finding hidden mon compared to regular encounter data
+#define HIDDEN_MON_STEP_COUNT       75  //look for hidden pokemon every x steps
+#define HIDDEN_MON_SEARCH_RATE      50  //x% chance of finding hidden pokemon every x steps
+#define HIDDEN_MON_PROBABILTY       35  //x% chance of finding hidden mon compared to regular encounter data
 
 //// SEARCH PROBABILITIES
 // see https://m.bulbapedia.bulbagarden.net/wiki/DexNav#Benefits
 //Chance of encountering egg move at search levels
 #define SEARCHLEVEL0_MOVECHANCE         0
-#define SEARCHLEVEL5_MOVECHANCE         21
-#define SEARCHLEVEL10_MOVECHANCE        46
-#define SEARCHLEVEL25_MOVECHANCE        58
-#define SEARCHLEVEL50_MOVECHANCE        63
-#define SEARCHLEVEL100_MOVECHANCE       83
+#define SEARCHLEVEL5_MOVECHANCE         25
+#define SEARCHLEVEL10_MOVECHANCE        50
+#define SEARCHLEVEL25_MOVECHANCE        60
+#define SEARCHLEVEL50_MOVECHANCE        80
+#define SEARCHLEVEL100_MOVECHANCE       95
 //Chance of encountering Hidden Abilities at search levels
 #define SEARCHLEVEL0_ABILITYCHANCE      0
-#define SEARCHLEVEL5_ABILITYCHANCE      0
-#define SEARCHLEVEL10_ABILITYCHANCE     5
-#define SEARCHLEVEL25_ABILITYCHANCE     15
+#define SEARCHLEVEL5_ABILITYCHANCE      5
+#define SEARCHLEVEL10_ABILITYCHANCE     10
+#define SEARCHLEVEL25_ABILITYCHANCE    	15
 #define SEARCHLEVEL50_ABILITYCHANCE     20
-#define SEARCHLEVEL100_ABILITYCHANCE    23
+#define SEARCHLEVEL100_ABILITYCHANCE    30
 //Chance of encountering held item
 #define SEARCHLEVEL0_ITEM               0
-#define SEARCHLEVEL5_ITEM               0
-#define SEARCHLEVEL10_ITEM              1
-#define SEARCHLEVEL25_ITEM              7
-#define SEARCHLEVEL50_ITEM              6
-#define SEARCHLEVEL100_ITEM             12
+#define SEARCHLEVEL5_ITEM               5
+#define SEARCHLEVEL10_ITEM              10
+#define SEARCHLEVEL25_ITEM              15
+#define SEARCHLEVEL50_ITEM              20
+#define SEARCHLEVEL100_ITEM             25
 //Chance of encountering one star potential
-#define SEARCHLEVEL0_ONESTAR            0
-#define SEARCHLEVEL5_ONESTAR            14
-#define SEARCHLEVEL10_ONESTAR           17
-#define SEARCHLEVEL25_ONESTAR           17
-#define SEARCHLEVEL50_ONESTAR           15
-#define SEARCHLEVEL100_ONESTAR          8
+#define SEARCHLEVEL0_ONESTAR            10
+#define SEARCHLEVEL5_ONESTAR            20
+#define SEARCHLEVEL10_ONESTAR           15
+#define SEARCHLEVEL25_ONESTAR           15
+#define SEARCHLEVEL50_ONESTAR           10
+#define SEARCHLEVEL100_ONESTAR          5
 //Chance of encountering two star potential
-#define SEARCHLEVEL0_TWOSTAR            0
-#define SEARCHLEVEL5_TWOSTAR            1
-#define SEARCHLEVEL10_TWOSTAR           9
-#define SEARCHLEVEL25_TWOSTAR           16
-#define SEARCHLEVEL50_TWOSTAR           17
-#define SEARCHLEVEL100_TWOSTAR          24
+#define SEARCHLEVEL0_TWOSTAR            5
+#define SEARCHLEVEL5_TWOSTAR            5
+#define SEARCHLEVEL10_TWOSTAR           10
+#define SEARCHLEVEL25_TWOSTAR           15
+#define SEARCHLEVEL50_TWOSTAR           20
+#define SEARCHLEVEL100_TWOSTAR          25
 //Chance of encountering three star potential
 #define SEARCHLEVEL0_THREESTAR          0
-#define SEARCHLEVEL5_THREESTAR          0
-#define SEARCHLEVEL10_THREESTAR         1
-#define SEARCHLEVEL25_THREESTAR         7
-#define SEARCHLEVEL50_THREESTAR         6
-#define SEARCHLEVEL100_THREESTAR        12
+#define SEARCHLEVEL5_THREESTAR          1
+#define SEARCHLEVEL10_THREESTAR         2
+#define SEARCHLEVEL25_THREESTAR         6
+#define SEARCHLEVEL50_THREESTAR         12
+#define SEARCHLEVEL100_THREESTAR        25
 
 // GUI Info
 #define ROW_WATER       0
@@ -95,8 +95,8 @@
 
 #define SPECIES_INFO_Y          5
 #define TYPE_ICONS_Y            (SPECIES_INFO_Y + 24)
-#define SEARCH_LEVEL_Y          (TYPE_ICONS_Y + 24)
-#define HA_INFO_Y               (SEARCH_LEVEL_Y + 24)
+#define SEARCH_LEVEL_Y          (TYPE_ICONS_Y + 22)
+#define HA_INFO_Y               (SEARCH_LEVEL_Y + 34)
 #define CHAIN_BONUS_Y           (HA_INFO_Y + 24)
 
 #define MON_LEVEL_NONEXISTENT   255 //if mon not in area GetEncounterLevel returns this to exit the search
@@ -112,7 +112,7 @@
 #define HIDDEN_SEARCH_TAG       SELECTION_CURSOR_TAG
 #define HIDDEN_MON_ICON_TAG     0x4006
 #define LIT_STAR_TILE_TAG       0x4010
-//#define SIGHT_TAG               0x5424
+#define SIGHT_TAG               0x5424
 #define HELD_ITEM_TAG           0xd750
 
 // dexnav search variable

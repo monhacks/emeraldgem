@@ -212,4 +212,3 @@ PetalburgCity_WallysHouse_Text_WallyLeftWithoutTelling:
 	.string "vea que si alguien que él quiere tanto\l"
 	.string "confía en él, podrá comenzar a confiar\l"
 	.string "en sus propias capacidades también…$"
-

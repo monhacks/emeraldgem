@@ -89,8 +89,8 @@
 #define MAPSEC_SKY_PILLAR                   0x55
 #define MAPSEC_SECRET_BASE                  0x56
 #define MAPSEC_DYNAMIC                      0x57
-#define MAPSEC_PALLET_TOWN                  0x58
-#define MAPSEC_VIRIDIAN_CITY                0x59
+#define MAPSEC_ROUTE_104_NORTH              0x58
+#define MAPSEC_MINI_SAFARI_ZONE             0x59
 #define MAPSEC_PEWTER_CITY                  0x5A
 #define MAPSEC_CERULEAN_CITY                0x5B
 #define MAPSEC_LAVENDER_TOWN                0x5C
@@ -102,8 +102,8 @@
 #define MAPSEC_SAFFRON_CITY                 0x62
 #define MAPSEC_ROUTE_4_POKECENTER           0x63
 #define MAPSEC_ROUTE_10_POKECENTER          0x64
-#define MAPSEC_ROUTE_1                      0x65
-#define MAPSEC_ROUTE_2                      0x66
+#define MAPSEC_UNUSED_0x65                  0x65
+#define MAPSEC_UNUSED_0x66                  0x66
 #define MAPSEC_ROUTE_3                      0x67
 #define MAPSEC_ROUTE_4                      0x68
 #define MAPSEC_ROUTE_5                      0x69
@@ -220,7 +220,7 @@
 #define METLOC_IN_GAME_TRADE                0xFE
 #define METLOC_FATEFUL_ENCOUNTER            0xFF
 
-#define KANTO_MAPSEC_START  MAPSEC_PALLET_TOWN
+#define KANTO_MAPSEC_START  MAPSEC_PEWTER_CITY
 #define KANTO_MAPSEC_END    MAPSEC_SPECIAL_AREA
 #define KANTO_MAPSEC_COUNT (KANTO_MAPSEC_END - KANTO_MAPSEC_START + 1)
 

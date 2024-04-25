@@ -29,6 +29,7 @@ enum
     MENUITEM_EXP_BAR,
     MENUITEM_UNIT_SYSTEM,
     MENUITEM_SHINY_ODDS,
+    MENUITEM_DIFFICULTY,
     MENUITEM_FRAMETYPE,
     MENUITEM_CANCEL,
     MENUITEM_COUNT,
@@ -64,6 +65,7 @@ static void DrawChoices_ButtonMode(int selection, int y);
 static void DrawChoices_HpBar(int selection, int y);
 static void DrawChoices_UnitSystem(int selection, int y);
 static void DrawChoices_ShinyOdds(int selection, int y);
+static void DrawChoices_Difficulty(int selection, int y);
 static void DrawChoices_FrameType(int selection, int y);
 static void DrawChoices_Options_Four(const u8 *const *const strings, int selection, int y);
 static void DrawTextOption(void);
@@ -92,6 +94,7 @@ struct
     [MENUITEM_EXP_BAR]      = {DrawChoices_HpBar,       ProcessInput_Options_Eleven},
     [MENUITEM_UNIT_SYSTEM]  = {DrawChoices_UnitSystem,  ProcessInput_Options_Two},
     [MENUITEM_SHINY_ODDS]   = {DrawChoices_ShinyOdds,   ProcessInput_Options_Four},
+    [MENUITEM_DIFFICULTY]   = {DrawChoices_Difficulty,  ProcessInput_Options_Four},
     [MENUITEM_FRAMETYPE]    = {DrawChoices_FrameType,   ProcessInput_FrameType},
     [MENUITEM_CANCEL]       = {NULL, NULL},
 };
@@ -107,6 +110,7 @@ static const u8 sText_HpBar[] = _("BARRA PS");
 static const u8 sText_ExpBar[] = _("BARRA XP");
 static const u8 sText_UnitSystem[] = _("MEDICIÓN");
 static const u8 sText_ShinyOdds[] = _("SHINIES 1 ENTRE");
+static const u8 sText_Difficulty[] = _("DIFICULTAD");
 
 static const u8 *const sOptionMenuItemsNames[MENUITEM_COUNT] =
 {
@@ -119,18 +123,24 @@ static const u8 *const sOptionMenuItemsNames[MENUITEM_COUNT] =
     [MENUITEM_EXP_BAR]     = sText_ExpBar,
     [MENUITEM_UNIT_SYSTEM] = sText_UnitSystem,
     [MENUITEM_SHINY_ODDS]  = sText_ShinyOdds,
+    [MENUITEM_DIFFICULTY]  = sText_Difficulty,
     [MENUITEM_FRAMETYPE]   = gText_Frame,
     [MENUITEM_CANCEL]      = gText_OptionMenuSave,
 };
 
-static const u8 sText_Faster[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}FASTER");
-static const u8 sText_Instant[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}INSTANT");
-static const u8 sText_Shiny8k[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}8192");
-static const u8 sText_Shiny4k[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}4096");
-static const u8 sText_Shiny2k[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}2048");
-static const u8 sText_Shiny1k[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}1024");
+static const u8 sText_Faster[]   = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}FASTER");
+static const u8 sText_Instant[]  = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}INSTANT");
+static const u8 sText_Shiny8k[]  = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}8192");
+static const u8 sText_Shiny4k[]  = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}4096");
+static const u8 sText_Shiny2k[]  = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}2048");
+static const u8 sText_Shiny1k[]  = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}1024");
+static const u8 sText_Easy[]     = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}FÁCIL");
+static const u8 sText_Normal[]   = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}NRML");
+static const u8 sText_Hard[]     = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}DFCL");
+static const u8 sText_Hardcore[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}EXTREMO");
 static const u8 *const sTextSpeedStrings[] = {gText_TextSpeedSlow, gText_TextSpeedMid, gText_TextSpeedFast, sText_Faster};
 static const u8 *const sShinyOddsStrings[] = {sText_Shiny8k, sText_Shiny4k, sText_Shiny2k, sText_Shiny1k};
+static const u8 *const sDifficultyStrings[] = {sText_Easy, sText_Normal, sText_Hard, sText_Hardcore};
 
 static const struct WindowTemplate sOptionMenuWinTemplates[] =
 {
@@ -275,13 +285,19 @@ void CB2_InitOptionMenu(void)
         sOptions = AllocZeroed(sizeof(*sOptions));
         sOptions->sel[MENUITEM_TEXTSPEED]   = gSaveBlock2Ptr->optionsTextSpeed;
         sOptions->sel[MENUITEM_BATTLESCENE] = gSaveBlock2Ptr->optionsBattleSceneOff;
-        sOptions->sel[MENUITEM_BATTLESTYLE] = gSaveBlock2Ptr->optionsBattleStyle;
+		if (gSaveBlock2Ptr->optionsDifficulty != DIFFICULTY_EASY){
+			sOptions->sel[MENUITEM_BATTLESTYLE] = OPTIONS_BATTLE_STYLE_SET;
+		}
+		else {
+			sOptions->sel[MENUITEM_BATTLESTYLE] = gSaveBlock2Ptr->optionsBattleStyle;
+		}
         sOptions->sel[MENUITEM_SOUND]       = gSaveBlock2Ptr->optionsSound;
         sOptions->sel[MENUITEM_BUTTONMODE]  = gSaveBlock2Ptr->optionsButtonMode;
         sOptions->sel[MENUITEM_HP_BAR]      = gSaveBlock2Ptr->optionsHpBarSpeed;
         sOptions->sel[MENUITEM_EXP_BAR]     = gSaveBlock2Ptr->optionsExpBarSpeed;
         sOptions->sel[MENUITEM_UNIT_SYSTEM] = gSaveBlock2Ptr->optionsUnitSystem;
         sOptions->sel[MENUITEM_SHINY_ODDS]  = gSaveBlock2Ptr->optionsShinyOdds;
+        sOptions->sel[MENUITEM_DIFFICULTY]  = gSaveBlock2Ptr->optionsDifficulty;
         sOptions->sel[MENUITEM_FRAMETYPE]   = gSaveBlock2Ptr->optionsWindowFrameType;
 
         for (i = 0; i < 7; i++)
@@ -435,13 +451,19 @@ static void Task_OptionMenuSave(u8 taskId)
 {
     gSaveBlock2Ptr->optionsTextSpeed        = sOptions->sel[MENUITEM_TEXTSPEED];
     gSaveBlock2Ptr->optionsBattleSceneOff   = sOptions->sel[MENUITEM_BATTLESCENE];
-    gSaveBlock2Ptr->optionsBattleStyle      = sOptions->sel[MENUITEM_BATTLESTYLE];
+	if (sOptions->sel[MENUITEM_DIFFICULTY] != DIFFICULTY_EASY){
+		gSaveBlock2Ptr->optionsBattleStyle  = OPTIONS_BATTLE_STYLE_SET;
+	}
+	else {
+		gSaveBlock2Ptr->optionsBattleStyle  = sOptions->sel[MENUITEM_BATTLESTYLE];
+	}
     gSaveBlock2Ptr->optionsSound            = sOptions->sel[MENUITEM_SOUND];
     gSaveBlock2Ptr->optionsButtonMode       = sOptions->sel[MENUITEM_BUTTONMODE];
     gSaveBlock2Ptr->optionsHpBarSpeed       = sOptions->sel[MENUITEM_HP_BAR];
     gSaveBlock2Ptr->optionsExpBarSpeed      = sOptions->sel[MENUITEM_EXP_BAR];
     gSaveBlock2Ptr->optionsUnitSystem       = sOptions->sel[MENUITEM_UNIT_SYSTEM];
     gSaveBlock2Ptr->optionsShinyOdds        = sOptions->sel[MENUITEM_SHINY_ODDS];
+    gSaveBlock2Ptr->optionsDifficulty       = sOptions->sel[MENUITEM_DIFFICULTY];
     gSaveBlock2Ptr->optionsWindowFrameType  = sOptions->sel[MENUITEM_FRAMETYPE];
 
     BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
@@ -568,7 +590,12 @@ static void DrawChoices_ShinyOdds(int selection, int y)
     DrawChoices_Options_Four(sShinyOddsStrings, selection, y);
 }
 
-static void DrawChoices_BattleScene(int selection, int y)
+static void DrawChoices_Difficulty(int selection, int y)
+{
+    DrawChoices_Options_Four(sDifficultyStrings, selection, y);
+}
+
+static void DrawChoices_BattleStyle(int selection, int y)
 {
     u8 styles[2] = {0};
 
@@ -588,7 +615,7 @@ static int ProcessInput_BattleStyle(int selection)
     return selection;
 }
 
-static void DrawChoices_BattleStyle(int selection, int y)
+static void DrawChoices_BattleScene(int selection, int y)
 {
     u8 styles[2] = {0};
 

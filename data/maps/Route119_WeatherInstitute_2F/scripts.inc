@@ -340,7 +340,7 @@ Route119_WeatherInstitute_2F_EventScript_Shelly_Text_9:
 
 Route119_WeatherInstitute_2F_EventScript_Shelly_Text_10:
 	.string "Ah. Supongo que tendré que acabarte\n"
-	.string "denuevo.\p"
+	.string "de nuevo.\p"
 	.string "Usa {COLOR GREEN}Gigadr{COLOR DARK_GRAY}-{PAUSE 8} $"
 
 Route119_WeatherInstitute_2F_EventScript_Shelly_Text_11:
@@ -348,7 +348,7 @@ Route119_WeatherInstitute_2F_EventScript_Shelly_Text_11:
 
 Route119_WeatherInstitute_2F_EventScript_Shelly_Text_12:
 	.string "Hmmm... Interesante. Acabemos con esto,\n"
-	.string "{COLOR BLUE}Al{COLOR DARK_GRAY}-{PAUSE 8} $"
+	.string "{COLOR BLUE}Alt{COLOR DARK_GRAY}-{PAUSE 8} $"
 
 Route119_WeatherInstitute_2F_EventScript_Shelly_Text_13:
 	.string "¡{COLOR BLUE}Rayo de Hielo{COLOR DARK_GRAY}!$"
@@ -712,4 +712,3 @@ Route119_WeatherInstitute_2F_Text_NoAbnormalWeather:
 	.string "no longer being reported.\p"
 	.string "The occasional rainfall is a blessing,\n"
 	.string "really.$"
-

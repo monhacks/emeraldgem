@@ -138,7 +138,10 @@ TOOLDIRS := $(filter-out tools/agbcc tools/binutils tools/poryscript,$(wildcard 
 TOOLBASE = $(TOOLDIRS:tools/%=%)
 TOOLS = $(foreach tool,$(TOOLBASE),tools/$(tool)/$(tool)$(EXE))
 
+# ./poryscript -i script.pory -o script.inc -s GAME_VERSION=RUBY -s LANGUAGE=SPANISH
+
 MAKEFLAGS += --no-print-directory
+
 
 # Clear the default suffixes
 .SUFFIXES:
@@ -284,7 +287,18 @@ include songs.mk
 $(CRY_SUBDIR)/uncomp_%.bin: $(CRY_SUBDIR)/uncomp_%.aif ; $(AIF) $< $@
 $(CRY_SUBDIR)/%.bin: $(CRY_SUBDIR)/%.aif ; $(AIF) $< $@ --compress
 sound/%.bin: sound/%.aif ; $(AIF) $< $@
-data/%.inc: data/%.pory; $(SCRIPT) -i $< -o $@ -fw tools/poryscript/font_widths.json
+# Language-specific flags
+
+LANG := ES
+
+ifeq ($(LANG),ES)
+override CPPFLAGS += -D GAME_LANGUAGE=LANGUAGE_SPANISH
+data/%.inc: data/%.pory; $(SCRIPT) -i $< -o $@ -s LANGUAGE=ES -fc tools/poryscript/font_config.json
+else
+override CPPFLAGS += -D GAME_LANGUAGE=LANGUAGE_ENGLISH
+data/%.inc: data/%.pory; $(SCRIPT) -i $< -o $@ -s LANGUAGE=EN -fc tools/poryscript/font_config.json
+endif
+
 
 
 ifeq ($(MODERN),0)

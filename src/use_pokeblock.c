@@ -5,6 +5,7 @@
 #include "malloc.h"
 #include "decompress.h"
 #include "graphics.h"
+#include "contest.h"
 #include "palette.h"
 #include "pokenav.h"
 #include "menu_specialized.h"
@@ -180,11 +181,20 @@ static const u32 sGraphData_Tilemap[] = INCBIN_U32("graphics/pokeblock/use_scree
 // Normally they would go Cool/Spicy, Beauty/Dry, Cute/Sweet, Smart/Bitter, Tough/Sour (also graph order, but clockwise)
 static const u32 sConditionToMonData[CONDITION_COUNT] =
 {
-    [CONDITION_COOL]   = MON_DATA_COOL,
-    [CONDITION_TOUGH]  = MON_DATA_TOUGH,
-    [CONDITION_SMART]  = MON_DATA_SMART,
-    [CONDITION_CUTE]   = MON_DATA_CUTE,
-    [CONDITION_BEAUTY] = MON_DATA_BEAUTY
+    [CONDITION_COOL]   = MON_DATA_COOL_CV,
+    [CONDITION_TOUGH]  = MON_DATA_TOUGH_CV,
+    [CONDITION_SMART]  = MON_DATA_SMART_CV,
+    [CONDITION_CUTE]   = MON_DATA_CUTE_CV,
+    [CONDITION_BEAUTY] = MON_DATA_BEAUTY_CV
+};
+
+static const u32 sConditionToMonData2[CONDITION_COUNT] =
+{
+    [CONDITION_COOL]   = CONTEST_STAT_COOL,
+    [CONDITION_TOUGH]  = CONTEST_STAT_TOUGH,
+    [CONDITION_SMART]  = CONTEST_STAT_SMART,
+    [CONDITION_CUTE]   = CONTEST_STAT_CUTE,
+    [CONDITION_BEAUTY] = CONTEST_STAT_BEAUTY
 };
 
 static const u8 sConditionToFlavor[CONDITION_COUNT] =
@@ -974,9 +984,9 @@ static void BufferEnhancedText(u8 *dest, u8 condition, s16 enhancement)
         enhancement = 0;
         // fallthrough
     case -32768 ... -1: // if < 0
-        if (enhancement)
-            dest[(u16)enhancement] += 0; // something you can't imagine
-        StringCopy(dest, sConditionNames[condition]);
+        // if (enhancement)
+            // dest[(u16)enhancement] += 0; // something you can't imagine
+        // StringCopy(dest, sConditionNames[condition]);
         StringAppend(dest, gText_WasEnhanced);
         break;
     case 0:
@@ -988,9 +998,13 @@ static void BufferEnhancedText(u8 *dest, u8 condition, s16 enhancement)
 static void GetMonConditions(struct Pokemon *mon, u8 *data)
 {
     u16 i;
-
-    for (i = 0; i < CONDITION_COUNT; i++)
-        data[i] = GetMonData(mon, sConditionToMonData[i]);
+	u8 nature = GetNature(mon, TRUE);
+    u16 contestExp = GetMonData(mon, MON_DATA_CONTEST_EXP);
+	u8 contestLevel = CalculateContestLevel(contestExp);
+	
+    for (i = 0; i < CONDITION_COUNT; i++){
+        data[i] = CalculateContestStat(contestLevel, GetMonData(mon, sConditionToMonData[i]), nature, sConditionToMonData2[i]);
+	}
 }
 
 static void AddPokeblockToConditions(struct Pokeblock *pokeblock, struct Pokemon *mon)
@@ -999,28 +1013,36 @@ static void AddPokeblockToConditions(struct Pokeblock *pokeblock, struct Pokemon
     s16 stat;
     u8 data;
 
-    if (GetMonData(mon, MON_DATA_SHEEN) != MAX_SHEEN)
-    {
-        CalculatePokeblockEffectiveness(pokeblock, mon);
-        for (i = 0; i < CONDITION_COUNT; i++)
-        {
-            data = GetMonData(mon, sConditionToMonData[i]);
-            stat = data +  sInfo->pokeblockStatBoosts[i];
-            if (stat < 0)
-                stat = 0;
-            if (stat > MAX_CONDITION)
-                stat = MAX_CONDITION;
-            data = stat;
-            SetMonData(mon, sConditionToMonData[i], &data);
-        }
+    // if (GetMonData(mon, MON_DATA_SHEEN) != MAX_SHEEN)
+    // {
+        // CalculatePokeblockEffectiveness(pokeblock, mon);
+        // for (i = 0; i < CONDITION_COUNT; i++)
+        // {
+            // data = GetMonData(mon, sConditionToMonData[i]);
+            // stat = data +  sInfo->pokeblockStatBoosts[i];
+            // if (stat < 0)
+                // stat = 0;
+            // if (stat > MAX_CONDITION)
+                // stat = MAX_CONDITION;
+            // data = stat;
+            // SetMonData(mon, sConditionToMonData[i], &data);
+        // }
 
-        stat = (u8)(GetMonData(mon, MON_DATA_SHEEN)) + pokeblock->feel;
-        if (stat > MAX_SHEEN)
-            stat = MAX_SHEEN;
+        // stat = (u8)(GetMonData(mon, MON_DATA_SHEEN)) + pokeblock->feel;
+        // if (stat > MAX_SHEEN)
+            // stat = MAX_SHEEN;
 
-        data = stat;
-        SetMonData(mon, MON_DATA_SHEEN, &data);
-    }
+        // data = stat;
+        // SetMonData(mon, MON_DATA_SHEEN, &data);
+    // }
+	if ((GetMonData(mon, MON_DATA_CONTEST_EXP)) >= 490){
+		stat = 510;
+		SetMonData(mon, MON_DATA_CONTEST_EXP, &stat);
+	}
+	else {
+		stat = (u16)(GetMonData(mon, MON_DATA_CONTEST_EXP)) + 20;
+		SetMonData(mon, MON_DATA_CONTEST_EXP, &stat);
+	}
 }
 
 static void CalculateConditionEnhancements(void)

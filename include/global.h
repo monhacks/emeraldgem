@@ -291,6 +291,7 @@ struct BattleTowerPokemon
     u32 speedIV:5;
     u32 spAttackIV:5;
     u32 spDefenseIV:5;
+    u8 hiddenPower:5;
     u32 gap:1;
     u32 abilityNum:2;
     u32 personality;
@@ -510,7 +511,8 @@ struct SaveBlock2
              u16 optionsUnitSystem:1;   //tx_optionsPlus
              u16 optionsHpBarSpeed:4;   //tx_optionsPlus
              u16 optionsExpBarSpeed:4;  //tx_optionsPlus
-			 u16 optionsShinyOdds:4;
+			 u16 optionsShinyOdds:3;
+			 u16 optionsDifficulty:3;
     /*0x18*/ struct Pokedex pokedex;
     // /*0x90*/ u8 filler_90[0x8];
     /*0x98*/ struct Time localTimeOffset;

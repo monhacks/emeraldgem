@@ -19,7 +19,7 @@ PetalburgCity_OnTransition:
 	end
 
 PetalburgCity_EventScript_MoveGymBoyToWestEntrance::
-	setobjectxyperm LOCALID_GYM_BOY, 5, 11
+	setobjectxyperm LOCALID_GYM_BOY, 5, 13
 	return
 
 PetalburgCity_EventScript_DisableMapNameAndMusic::
@@ -34,9 +34,9 @@ PetalburgCity_EventScript_SetTintForMemory::
 	clearflag FLAG_HIDE_PETALBURG_CITY_WALLY
 	addobject LOCALID_WALLY
 	addobject LOCALID_WALLYS_DAD
-	setobjectxyperm LOCALID_WALLY, 15, 17
-	setobjectxyperm LOCALID_WALLYS_DAD, 14, 17
-	setobjectxyperm LOCALID_GYM_BOY, 12, 11
+	setobjectxyperm LOCALID_WALLY, 15, 19
+	setobjectxyperm LOCALID_WALLYS_DAD, 14, 19
+	setobjectxyperm LOCALID_GYM_BOY, 12, 13
 	savebgm MUS_END
 	return
 
@@ -45,7 +45,6 @@ PetalburgCity_EventScript_SetGymDoorsUnlocked::
 	return
 
 PetalburgCity_OnFrame:
-	map_script_2 VAR_PETALBURG_CITY_STATE, 2, PetalburgCity_EventScript_WallyTutorial
 	map_script_2 VAR_PETALBURG_CITY_STATE, 4, PetalburgCity_EventScript_WalkToWallyHouse
 	map_script_2 VAR_PETALBURG_CITY_STATE, 6, PetalburgCity_EventScript_WallysFlashback
 	.2byte 0
@@ -189,108 +188,7 @@ PetalburgCity_Movement_WallyDadMemory2:
 	set_invisible
 	step_end
 
-PetalburgCity_EventScript_WallyTutorial::
-	lockall
-	special SavePlayerParty
-	special PutZigzagoonInPlayerParty
-	applymovement LOCALID_WALLY, PetalburgCity_Movement_WallyTutorialWally
-	applymovement OBJ_EVENT_ID_PLAYER, PetalburgCity_Movement_WallyTutorialPlayer
-	waitmovement 0
-	namebox Wally
-	msgbox Route102_Text_WatchMeCatchPokemon, MSGBOX_DEFAULT
-	hidenamebox
-	call Route102_EventScript_RaltsAppears
-	msgbox Route102_Text_UnRalts, MSGBOX_DEFAULT
-	closemessage
-	hidenamebox
-	call Route102_EventScript_ZigzagoonAppears
-	namebox Wally
-	msgbox Route102_Text_WallyCommands
-	applymovement LOCALID_WALLY, PetalburgCity_Movement_WallyJump, MAP_PETALBURG_CITY
-	waitmovement 0
-	closemessage
-	hidenamebox
-	call Route102_EventScript_ZigzagoonAttacks
-	playmoncry SPECIES_ZIGZAGOON, CRY_MODE_NORMAL
-	msgbox Route102_Text_Sigsa, MSGBOX_DEFAULT
-	waitmoncry
-	closemessage
-	call Route102_EventScript_RaltsTeleport
-	call Route102_EventScript_ZigzaSurprise
-	applymovement LOCALID_WALLY, Common_Movement_ExclamationMark, MAP_PETALBURG_CITY
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_ExclamationMark
-	waitmovement 0
-	playmoncry SPECIES_RALTS, CRY_MODE_NORMAL
-	waitmoncry
-	call Route102_EventScript_ZigzaHurt
-	delay 60
-	msgbox Route102_Text_PokeballVe, MSGBOX_DEFAULT
-	closemessage
-	call Route102_EventScript_BallThrow
-	delay 8
-	call Route102_EventScript_BallCatch
-	delay 8
-	applymovement LOCALID_WALLY, Route102_Movement_WallyGrabBall, MAP_PETALBURG_CITY
-	waitmovement 0
-	delay 16
-	applymovement LOCALID_WALLY, Common_Movement_WalkInPlaceRight, MAP_PETALBURG_CITY
-	waitmovement 0
-	call Route102_EventScript_BallCatchHide
-	namebox Wally
-	msgbox Route102_Text_WallyIDidIt, MSGBOX_DEFAULT
-	applymovement LOCALID_WALLY, Route102_Movement_WallyGrabBall, MAP_PETALBURG_CITY
-	waitmovement 0
-	closemessage
-	hidenamebox
-	msgbox Route102_Text_WallyZigzagoonThanks, MSGBOX_DEFAULT
-	namebox Wally
-	call Route102_EventScript_BallZigza
-	closemessage
-	hidenamebox
-	applymovement LOCALID_WALLY, Common_Movement_WalkInPlaceRight, MAP_PETALBURG_CITY
-	waitmovement 0
-	call Route102_EventScript_BallZigzaHide
-	applymovement LOCALID_WALLY, Common_Movement_WalkInPlaceFasterLeft, MAP_PETALBURG_CITY
-	waitmovement LOCALID_WALLY, MAP_PETALBURG_CITY
-	msgbox Route102_Text_LetsGoBack, MSGBOX_DEFAULT
-	closemessage
-	clearflag FLAG_HIDE_MAP_NAME_POPUP
-	setvar VAR_PETALBURG_CITY_STATE, 3
-	fadedefaultbgm
-	clearflag FLAG_DONT_TRANSITION_MUSIC
-	special LoadPlayerParty
-	setvar VAR_PETALBURG_GYM_STATE, 1
-	warp MAP_PETALBURG_CITY_GYM, 4, 108
-	waitstate
-	releaseall
-	end
 
-Route102_Text_Sigsa:
-	.string "¡ZIGZA!$"
-Route102_Text_Ralts:
-	.string "¡R-RALTS!$"
-Route102_Text_UnRalts:
-	.string "¡WOW! ¡Un Ralts!\n"
-	.string "Estos son raros, leí en un libro.\l"
-	.string "Bueno, ahora es tiempo de atraparlo…\l"
-	.string "Eh… ¿Cómo…?\p"
-	.string "Em… Z-Zigzagon… ¡Sal de ahí!$"
-
-Route102_Text_WallyCommands:
-	.string "Ahora, tengo que atacar, ¿no?\pZigzagoon, ¡Tacleada!$"
-
-Route102_Text_PokeballVe:
-	.string "¡Y-y-y-y ahora, eh…!\p"
-	.string "¡POKÉBALL, CAPTÚRALO!$"
-
-PetalburgCity_Movement_WallyJump:
-	jump_in_place_right
-	step_end
-
-Route102_Movement_WallyGrabBall:
-	walk_right
-	walk_right
-	step_end
 
 PetalburgCity_EventScript_WalkToWallyHouse::
 	lockall
@@ -383,30 +281,6 @@ PetalburgCity_Movement_WalkInsideHouseWallysDad:
 
 PetalburgCity_Movement_WallyTutorialPlayer:
 	delay_8
-	walk_down
-	walk_down
-	walk_down
-	walk_down
-	walk_down
-	walk_down
-	walk_down
-	walk_down
-	walk_right
-	walk_right
-	walk_right
-	walk_right
-	walk_right
-	walk_right
-	walk_right
-	walk_right
-	walk_right
-	walk_right
-	walk_right
-	walk_right
-	walk_right
-	walk_right
-	walk_right
-	walk_right
 	walk_right
 	walk_right
 	walk_up
@@ -416,32 +290,8 @@ PetalburgCity_Movement_WallyTutorialPlayer:
 
 PetalburgCity_Movement_WallyTutorialWally:
 	delay_8
-	walk_down
-	walk_down
-	walk_down
-	walk_down
-	walk_down
-	walk_down
-	walk_down
 	walk_right
-	walk_right
-	walk_right
-	walk_right
-	walk_right
-	walk_right
-	walk_right
-	walk_right
-	walk_right
-	walk_right
-	walk_right
-	walk_right
-	walk_right
-	walk_right
-	walk_right
-	walk_right
-	walk_right
-	walk_right
-	walk_right
+	walk_up
 	walk_up
 	walk_up
 	delay_16
@@ -1137,5 +987,3 @@ PetalburgCity_Text_WallysMemory3:
 	.string "de mí para burlarse y hacer cosas como\l"
 	.string "empujarme hacia la hierba alta y\l"
 	.string "escapar...$"
-
-

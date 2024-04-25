@@ -53,6 +53,7 @@
 #include "battle.h"
 #include "list_menu.h"
 #include "malloc.h"
+#include "constants/items.h"
 
 #include "field_name_box.h"
 
@@ -1847,6 +1848,20 @@ bool8 ScrCmd_checkpartymove(struct ScriptContext *ctx)
             break;
         }
     }
+	if (gSpecialVar_Result == PARTY_SIZE && (CheckBagHasItem(MoveToHM(moveId), 1))){
+        for (i = 0; i < PARTY_SIZE; i++)
+        {
+            u16 species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES, NULL);
+            if (!species)
+                break;
+            if (!GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG) && (CanLearnTeachableMove(GetMonData(&gPlayerParty[gPartyMenu.slotId], MON_DATA_SPECIES), MoveToHM(moveId) - ITEM_TM01)))
+            {
+                gSpecialVar_Result = i;
+                gSpecialVar_0x8004 = species;
+                break;
+            }
+        }
+    }
     return FALSE;
 }
 
@@ -2065,9 +2080,9 @@ bool8 ScrCmd_setberrytree(struct ScriptContext *ctx)
     u8 growthStage = ScriptReadByte(ctx);
 
     if (berry == 0)
-        PlantBerryTree(treeId, berry, growthStage, FALSE);
+        PlantBerryTree(treeId, berry, growthStage, FALSE, 0);
     else
-        PlantBerryTree(treeId, berry, growthStage, FALSE);
+        PlantBerryTree(treeId, berry, growthStage, FALSE, 0);
     return FALSE;
 }
 
@@ -2642,3 +2657,14 @@ bool8 ScrCmd_givecustommon(struct ScriptContext *ctx)
     gSpecialVar_Result = ScriptGiveCustomMon(species, level, item, ball, nature, abilityNum, evs, ivs, moves, isShiny);
     return FALSE;
 }
+
+bool8 ScrCmd_setmonmovevar(struct ScriptContext *ctx)
+{
+    u8 partyIndex = ScriptReadByte(ctx);
+    u8 slot = ScriptReadByte(ctx);
+    u16 move = ScriptReadHalfword(ctx);
+
+    ScriptSetMonMoveSlot(partyIndex, VarGet(move), slot);
+    return FALSE;
+}
+

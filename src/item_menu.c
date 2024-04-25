@@ -1780,8 +1780,14 @@ static void OpenContextMenu(u8 taskId)
                 gBagMenu->contextMenuItemsPtr = gBagMenu->contextMenuItemsBuffer;
                 if (sRegisterSubMenu == FALSE)
                         {
-                            gBagMenu->contextMenuNumItems = ARRAY_COUNT(sContextMenuItems_KeyItemsPocket);
-                            memcpy(&gBagMenu->contextMenuItemsBuffer, &sContextMenuItems_KeyItemsPocket, sizeof(sContextMenuItems_KeyItemsPocket));
+                            if (ItemId_GetFieldFunc(gSpecialVar_ItemId) == ItemUseOutOfBattle_CannotUse){
+								gBagMenu->contextMenuNumItems = ARRAY_COUNT(sContextMenuItems_Cancel);
+                    			memcpy(&gBagMenu->contextMenuItemsBuffer, &sContextMenuItems_Cancel, sizeof(sContextMenuItems_Cancel));
+			                }
+			                else{
+			                    gBagMenu->contextMenuNumItems = ARRAY_COUNT(sContextMenuItems_KeyItemsPocket);
+			                    memcpy(&gBagMenu->contextMenuItemsBuffer, &sContextMenuItems_KeyItemsPocket, sizeof(sContextMenuItems_KeyItemsPocket));
+			                }
 
                             // check replacing USE with WALK
                             if (gSpecialVar_ItemId == ITEM_MACH_BIKE || gSpecialVar_ItemId == ITEM_ACRO_BIKE)
@@ -3157,6 +3163,7 @@ static const u16 sItemsByType[ITEMS_COUNT] =
         [ITEM_AUDINITE] = ITEM_TYPE_MEGA_STONE,
         [ITEM_DIANCITE] = ITEM_TYPE_MEGA_STONE,
         [ITEM_ULTRANECROZIUM_Z] =  ITEM_TYPE_MEGA_STONE,
+        [ITEM_GIGANTAMAX_STONE] =  ITEM_TYPE_MEGA_STONE,
         
         [ITEM_NORMALIUM_Z] = ITEM_TYPE_Z_CRYSTAL,
         [ITEM_FIGHTINIUM_Z] = ITEM_TYPE_Z_CRYSTAL,

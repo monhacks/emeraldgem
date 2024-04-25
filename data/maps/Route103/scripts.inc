@@ -2,7 +2,6 @@
 
 Route103_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, Route103_OnTransition
-	map_script MAP_SCRIPT_ON_LOAD, Route103_OnLoad
 	.byte 0
 
 Route103_OnTransition:
@@ -11,19 +10,11 @@ Route103_OnTransition:
 	call_if_set FLAG_BADGE03_GET, Route103_Transition_MoveCamper
 	end
 
-Route103_OnLoad:
-	call_if_set FLAG_SYS_GAME_CLEAR, Route103_EventScript_OpenAlteringCave
-	end
 
 Route103_Transition_MoveCamper:
-	setobjectxyperm 21, 4, 10
+	setobjectxyperm 21, 5, 11
 	return
 	
-
-Route103_EventScript_OpenAlteringCave::
-	setmetatile 51, 5, METATILE_General_CaveEntrance_Top, TRUE
-	setmetatile 51, 6, METATILE_General_CaveEntrance_Bottom, FALSE
-	return
 
 Route103_EventScript_Rival::
 	lockall
@@ -374,8 +365,8 @@ Route103_Text_MayTimeToHeadBack:
 	.string "Creo… que entiendo lo que\n"
 	.string "decía mi Padre sobre ti, {PLAYER},\l"
 	.string "con todo el conocimiento que tienes… … … Quizá\l"
-	.string "seas de gran-\l"
-	.string "No, nada…$"
+	.string "seas de gran ayuda, pero…\l"
+	.string "No, nada, olvídalo…$"
 
 Route103_Text_ShouldHaveBroughtPotion:
 	.string "Mi Pokémon…\n"
@@ -390,4 +381,3 @@ Route103_Text_RouteSign:
 
 Route103_Text_SafariSign:
 	.string "Mini-Safari\n¡Captura Pokémon muy raros!$"
-

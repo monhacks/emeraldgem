@@ -1044,6 +1044,16 @@ const struct MonCoords gMonBackPicCoords[] =
         .size = MON_COORDS_SIZE(56, 32),
         .y_offset = 9,
     },
+	[SPECIES_RITTO] =
+    {
+        .size = MON_COORDS_SIZE(64, 64),
+        .y_offset = 0,
+    },
+	[SPECIES_RIDDUAL] =
+    {
+        .size = MON_COORDS_SIZE(64, 64),
+        .y_offset = 0,
+    },
     [SPECIES_GLIGAR] =
     {
         .size = MON_COORDS_SIZE(64, 64),
@@ -4075,6 +4085,11 @@ const struct MonCoords gMonBackPicCoords[] =
         .size = MON_COORDS_SIZE(64, 56),
         .y_offset = 4,
     },
+	[SPECIES_RILLABOOM_GIGANTAMAX] =
+    {
+        .size = MON_COORDS_SIZE(64, 56),
+        .y_offset = 4,
+    },
     [SPECIES_SCORBUNNY] =
     {
         .size = MON_COORDS_SIZE(48, 56),
@@ -4090,6 +4105,11 @@ const struct MonCoords gMonBackPicCoords[] =
         .size = MON_COORDS_SIZE(48, 56),
         .y_offset = 4,
     },
+	[SPECIES_CINDERACE_GIGANTAMAX] =
+    {
+        .size = MON_COORDS_SIZE(48, 56),
+        .y_offset = 4,
+    },
     [SPECIES_SOBBLE] =
     {
         .size = MON_COORDS_SIZE(40, 56),
@@ -4101,6 +4121,11 @@ const struct MonCoords gMonBackPicCoords[] =
         .y_offset = 9,
     },
     [SPECIES_INTELEON] =
+    {
+        .size = MON_COORDS_SIZE(56, 64),
+        .y_offset = 4,
+    },
+	[SPECIES_INTELEON_GIGANTAMAX] =
     {
         .size = MON_COORDS_SIZE(56, 64),
         .y_offset = 4,
@@ -4224,6 +4249,11 @@ const struct MonCoords gMonBackPicCoords[] =
     {
         .size = MON_COORDS_SIZE(64, 56),
         .y_offset = 11,
+    },
+	[SPECIES_DIPPLIN] =
+    {
+        .size = MON_COORDS_SIZE(48, 64),
+        .y_offset = 0,
     },
     [SPECIES_SILICOBRA] =
     {

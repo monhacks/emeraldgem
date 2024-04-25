@@ -132,4 +132,3 @@ RustboroCity_DevonCorp_1F_Text_ProductDisplay:
 	.string "monopolio de farmacéutica y arquitectura\l"
 	.string "en Hoenn, teniendo así el poder de\l"
 	.string "crear cualquier proyecto imaginable.”$"
-

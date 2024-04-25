@@ -1,3 +1,5 @@
+.set LOCALID_WINONA, 1
+
 FortreeCity_Gym_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, FortreeCity_Gym_OnTransition
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, FortreeCity_Gym_OnWarp
@@ -19,7 +21,8 @@ FortreeCity_Gym_EventScript_Winona::
 	trainerbattle_single TRAINER_WINONA_1, FortreeCity_Gym_Text_WinonaIntro, FortreeCity_Gym_Text_WinonaDefeat, FortreeCity_Gym_EventScript_WinonaDefeated, NO_MUSIC
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, FortreeCity_Gym_EventScript_WinonaRematch
-	goto_if_unset FLAG_RECEIVED_TM40, FortreeCity_Gym_EventScript_GiveAerialAce2
+	checkitem ITEM_TM40
+	goto_if_eq VAR_RESULT, FALSE, FortreeCity_Gym_EventScript_GiveAerialAce2
 	msgbox FortreeCity_Gym_Text_WinonaPostBattle, MSGBOX_DEFAULT
 	release
 	end
@@ -44,14 +47,62 @@ FortreeCity_Gym_EventScript_WinonaDefeated::
 	setflag FLAG_ENABLE_WINONA_MATCH_CALL
 	setvar VAR_SCOTT_FORTREE_CALL_STEP_COUNTER, 0
 	setflag FLAG_SCOTT_CALL_FORTREE_GYM
+	playse SE_PIN
+	applymovement LOCALID_WINONA, Common_Movement_ExclamationMark
+	waitmovement 0
+	applymovement LOCALID_WINONA, Common_Movement_FaceAwayPlayer
+	waitmovement 0
+	namebox Winona
+	msgbox FortreeCity_Gym_Text_WinonaMessage
+	applymovement LOCALID_WINONA, Common_Movement_FacePlayer
+	waitmovement 0
+	namebox Winona
+	msgbox FortreeCity_Gym_Text_WinonaHasToGo
+	hidenamebox
+	closemessage
+	switch VAR_FACING
+	case DIR_NORTH, FortreeCity_Gym_EventScript_GetOut
+	goto FortreeCity_Gym_EventScript_WinonaOut
 	release
 	end
+
+FortreeCity_Gym_EventScript_WinonaOut::
+	applymovement LOCALID_WINONA, FortreeCity_Gym_Movement_WinonaOut
+	delay 8
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceDown
+	waitmovement 0
+	setflag FLAG_HIDE_WINONA_GYM
+	release
+	end
+
+FortreeCity_Gym_EventScript_GetOut::
+	applymovement OBJ_EVENT_ID_PLAYER, FortreeCity_Gym_Movement_GetOut
+	goto FortreeCity_Gym_EventScript_WinonaOut
+	release
+	end
+
+FortreeCity_Gym_Movement_GetOut::
+	walk_left
+	face_right
+	step_end
+
+FortreeCity_Gym_Movement_WinonaOut::
+	walk_down
+	walk_down
+	walk_down
+	jump_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	jump_down
+	step_end
 
 FortreeCity_Gym_EventScript_GiveAerialAce2::
 	giveitem ITEM_TM40
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	msgbox FortreeCity_Gym_Text_ExplainAerialAce, MSGBOX_DEFAULT
-	setflag FLAG_RECEIVED_TM40
 	release
 	end
 
@@ -59,7 +110,6 @@ FortreeCity_Gym_EventScript_GiveAerialAce::
 	giveitem ITEM_TM40
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_BagIsFull
 	msgbox FortreeCity_Gym_Text_ExplainAerialAce, MSGBOX_DEFAULT
-	setflag FLAG_RECEIVED_TM40
 	return
 
 FortreeCity_Gym_EventScript_WinonaRematch::
@@ -315,3 +365,14 @@ FortreeCity_Gym_Text_WinonaRematchNeedTwoMons:
 	.string "POKéMON with you?\p"
 	.string "Please return with two POKéMON\n"
 	.string "at the very least.$"
+
+FortreeCity_Gym_Text_WinonaMessage:
+	.string "¿Qué? Estoy ocupada, ¿No lo notas?\n"
+	.string "... ... ... ...Comprendo.\l"
+	.string "Sí, estaré allí cuanto antes.\p"
+	.string "Hasta entonces, hagan lo que acordamos.$"
+
+FortreeCity_Gym_Text_WinonaHasToGo:
+	.string "Lo lamento, {PLAYER}, pero tengo que\n"
+	.string "irme ahora. Tengo muchas responsabilidades\l"
+	.string "que atender. Cuídate mucho, {PLAYER}.$"

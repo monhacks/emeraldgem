@@ -3005,7 +3005,8 @@ static void FillPartnerParty(u16 trainerId)
     u32 nameHash = 0;
     u32 personalityValue;
     u8 fixedIV;
-    u8 ability, gender, friendship, ball, hiddenPower;
+    u16 ability;
+	u8 gender, friendship, ball, hiddenPower;
     u8 difficulty, amount, build;
     s32 i, j;
     u32 ivs, level;

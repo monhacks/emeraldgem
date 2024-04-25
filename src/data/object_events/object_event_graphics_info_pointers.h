@@ -60,6 +60,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Nurse;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_ItemBall;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BallCatch;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BrendanSpecial;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_MaySpecial;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_NormanSpecial;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BerryTree;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BerryTreeEarlyStages;
@@ -316,6 +317,7 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_BALL_CATCH] =                &gObjectEventGraphicsInfo_BallCatch,
     [OBJ_EVENT_GFX_NORMAN_SPECIAL] =                &gObjectEventGraphicsInfo_NormanSpecial,
     [OBJ_EVENT_GFX_BRENDAN_SPECIAL] =                &gObjectEventGraphicsInfo_BrendanSpecial,
+    [OBJ_EVENT_GFX_MAY_SPECIAL] =                &gObjectEventGraphicsInfo_MaySpecial,
     [OBJ_EVENT_GFX_BERRY_TREE] =               &gObjectEventGraphicsInfo_BerryTree,
     [OBJ_EVENT_GFX_BERRY_TREE_EARLY_STAGES] =  &gObjectEventGraphicsInfo_BerryTreeEarlyStages,
     [OBJ_EVENT_GFX_BERRY_TREE_LATE_STAGES] =   &gObjectEventGraphicsInfo_BerryTreeLateStages,
@@ -498,6 +500,11 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_RALTS] =                    &gObjectEventGraphicsInfo_Ralts,
     [OBJ_EVENT_GFX_CHIMECHO] =                 &gObjectEventGraphicsInfo_Chimecho,
 	[OBJ_EVENT_GFX_PUSHABLE_BOULDER_2] =         &gObjectEventGraphicsInfo_PushableBoulder2,
+	[OBJ_EVENT_GFX_PELIPPER] =         &gObjectEventGraphicsInfo_Pelipper,
+	[OBJ_EVENT_GFX_QWILFISH] =         &gObjectEventGraphicsInfo_Qwilfish,
+	[OBJ_EVENT_GFX_MAGCARGO] =         &gObjectEventGraphicsInfo_Magcargo,
+	[OBJ_EVENT_GFX_KROKOROK] =         &gObjectEventGraphicsInfo_Krokorok,
+	[OBJ_EVENT_GFX_SHARPEDO] =         &gObjectEventGraphicsInfo_Sharpedo,
 };
 
 const struct ObjectEventGraphicsInfo *const gMauvilleOldManGraphicsInfoPointers[] = {

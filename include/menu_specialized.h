@@ -108,6 +108,7 @@ void GetConditionMenuMonGfx(void *tilesDst, void *palDst, u16 boxId, u16 monId, 
 void LoadConditionMonPicTemplate(struct SpriteSheet *sheet, struct SpriteTemplate *template, struct SpritePalette *pal);
 void LoadConditionSelectionIcons(struct SpriteSheet *sheets, struct SpriteTemplate * template, struct SpritePalette *pals);
 s32 GetBoxOrPartyMonData(u16 boxId, u16 monId, s32 request, u8 *dst);
+s32 GetBoxOrPartyMonNature(u16 boxId, u16 monId);
 
 // Condition sparkles
 void LoadConditionSparkle(struct SpriteSheet *sheet, struct SpritePalette *pal);

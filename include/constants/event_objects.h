@@ -246,9 +246,16 @@
 #define OBJ_EVENT_GFX_BALL_CATCH		         242
 #define OBJ_EVENT_GFX_NORMAN_SPECIAL		     243
 #define OBJ_EVENT_GFX_BRENDAN_SPECIAL		     244
+#define OBJ_EVENT_GFX_MAY_SPECIAL		         245
+#define OBJ_EVENT_GFX_PELIPPER			         246
+#define OBJ_EVENT_GFX_QWILFISH			         247
+#define OBJ_EVENT_GFX_MAGCARGO			         248
+#define OBJ_EVENT_GFX_KROKOROK  		         249
+#define OBJ_EVENT_GFX_SHARPEDO  		         250
+// #define OBJ_EVENT_GFX_		         251
 
 
-#define NUM_OBJ_EVENT_GFX                        245
+#define NUM_OBJ_EVENT_GFX                        251
 // =======
 // // NOTE: By default, the max value for NUM_OBJ_EVENT_GFX is 239.
 // //

@@ -1018,6 +1018,68 @@ static const struct SpriteFrameImage sPicTable_Poochyena[] = {
     overworld_frame(gObjectEventPic_Poochyena, 4, 4, 8),
 };
 
+static const struct SpriteFrameImage sPicTable_Pelipper[] = {
+    overworld_frame(gObjectEventPic_Pelipper, 4, 4, 0),
+    overworld_frame(gObjectEventPic_Pelipper, 4, 4, 1),
+    overworld_frame(gObjectEventPic_Pelipper, 4, 4, 2),
+    overworld_frame(gObjectEventPic_Pelipper, 4, 4, 3),
+    overworld_frame(gObjectEventPic_Pelipper, 4, 4, 4),
+    overworld_frame(gObjectEventPic_Pelipper, 4, 4, 5),
+    overworld_frame(gObjectEventPic_Pelipper, 4, 4, 6),
+    overworld_frame(gObjectEventPic_Pelipper, 4, 4, 7),
+    overworld_frame(gObjectEventPic_Pelipper, 4, 4, 8),
+};
+
+static const struct SpriteFrameImage sPicTable_Magcargo[] = {
+    overworld_frame(gObjectEventPic_Magcargo, 4, 4, 0),
+    overworld_frame(gObjectEventPic_Magcargo, 4, 4, 1),
+    overworld_frame(gObjectEventPic_Magcargo, 4, 4, 2),
+    overworld_frame(gObjectEventPic_Magcargo, 4, 4, 3),
+    overworld_frame(gObjectEventPic_Magcargo, 4, 4, 4),
+    overworld_frame(gObjectEventPic_Magcargo, 4, 4, 5),
+    overworld_frame(gObjectEventPic_Magcargo, 4, 4, 6),
+    overworld_frame(gObjectEventPic_Magcargo, 4, 4, 7),
+    overworld_frame(gObjectEventPic_Magcargo, 4, 4, 8),
+};
+
+static const struct SpriteFrameImage sPicTable_Qwilfish[] = {
+    overworld_frame(gObjectEventPic_Qwilfish, 4, 4, 0),
+    overworld_frame(gObjectEventPic_Qwilfish, 4, 4, 1),
+    overworld_frame(gObjectEventPic_Qwilfish, 4, 4, 2),
+    overworld_frame(gObjectEventPic_Qwilfish, 4, 4, 3),
+    overworld_frame(gObjectEventPic_Qwilfish, 4, 4, 4),
+    overworld_frame(gObjectEventPic_Qwilfish, 4, 4, 5),
+    overworld_frame(gObjectEventPic_Qwilfish, 4, 4, 6),
+    overworld_frame(gObjectEventPic_Qwilfish, 4, 4, 7),
+    overworld_frame(gObjectEventPic_Qwilfish, 4, 4, 8),
+};
+
+static const struct SpriteFrameImage sPicTable_Krokorok[] = {
+    overworld_frame(gObjectEventPic_Krokorok, 4, 4, 0),
+    overworld_frame(gObjectEventPic_Krokorok, 4, 4, 1),
+    overworld_frame(gObjectEventPic_Krokorok, 4, 4, 2),
+    overworld_frame(gObjectEventPic_Krokorok, 4, 4, 3),
+    overworld_frame(gObjectEventPic_Krokorok, 4, 4, 4),
+    overworld_frame(gObjectEventPic_Krokorok, 4, 4, 5),
+    overworld_frame(gObjectEventPic_Krokorok, 4, 4, 6),
+    overworld_frame(gObjectEventPic_Krokorok, 4, 4, 7),
+    overworld_frame(gObjectEventPic_Krokorok, 4, 4, 8),
+};
+
+static const struct SpriteFrameImage sPicTable_Sharpedo[] = {
+    overworld_frame(gObjectEventPic_Sharpedo, 4, 4, 0),
+    overworld_frame(gObjectEventPic_Sharpedo, 4, 4, 1),
+    overworld_frame(gObjectEventPic_Sharpedo, 4, 4, 2),
+    overworld_frame(gObjectEventPic_Sharpedo, 4, 4, 3),
+    overworld_frame(gObjectEventPic_Sharpedo, 4, 4, 4),
+    overworld_frame(gObjectEventPic_Sharpedo, 4, 4, 5),
+    overworld_frame(gObjectEventPic_Sharpedo, 4, 4, 6),
+    overworld_frame(gObjectEventPic_Sharpedo, 4, 4, 7),
+    overworld_frame(gObjectEventPic_Sharpedo, 4, 4, 8),
+};
+
+
+
 static const struct SpriteFrameImage sPicTable_Artist[] = {
     overworld_frame(gObjectEventPic_Artist, 2, 4, 0),
     overworld_frame(gObjectEventPic_Artist, 2, 4, 1),
@@ -1348,6 +1410,18 @@ static const struct SpriteFrameImage sPicTable_BrendanSpecial[] = {
     overworld_frame(gObjectEventPic_BrendanSpecial, 2, 4, 6),
     overworld_frame(gObjectEventPic_BrendanSpecial, 2, 4, 7),
     overworld_frame(gObjectEventPic_BrendanSpecial, 2, 4, 8),
+};
+
+static const struct SpriteFrameImage sPicTable_MaySpecial[] = {
+    overworld_frame(gObjectEventPic_MaySpecial, 2, 4, 0),
+    overworld_frame(gObjectEventPic_MaySpecial, 2, 4, 1),
+    overworld_frame(gObjectEventPic_MaySpecial, 2, 4, 2),
+    overworld_frame(gObjectEventPic_MaySpecial, 2, 4, 3),
+    overworld_frame(gObjectEventPic_MaySpecial, 2, 4, 4),
+    overworld_frame(gObjectEventPic_MaySpecial, 2, 4, 5),
+    overworld_frame(gObjectEventPic_MaySpecial, 2, 4, 6),
+    overworld_frame(gObjectEventPic_MaySpecial, 2, 4, 7),
+    overworld_frame(gObjectEventPic_MaySpecial, 2, 4, 8),
 };
 
 static const struct SpriteFrameImage sPicTable_Winona[] = {

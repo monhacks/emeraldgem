@@ -841,3 +841,36 @@ gTileset_nuevito::
 	.4byte gMetatiles_nuevito
 	.4byte gMetatileAttributes_nuevito
 	.4byte NULL
+
+	.align 2
+gTileset_Nature::
+	.byte TRUE @ is compressed
+	.byte FALSE @ is secondary
+	.2byte 0 @ padding
+	.4byte gTilesetTiles_Nature
+	.4byte gTilesetPalettes_Nature
+	.4byte gMetatiles_Nature
+	.4byte gMetatileAttributes_Nature
+	.4byte NULL @ animation callback
+
+	.align 2
+gTileset_PetalburgNew::
+	.byte TRUE @ is compressed
+	.byte TRUE @ is secondary
+	.2byte 0 @ padding
+	.4byte gTilesetTiles_PetalburgNew
+	.4byte gTilesetPalettes_PetalburgNew
+	.4byte gMetatiles_PetalburgNew
+	.4byte gMetatileAttributes_PetalburgNew
+	.4byte NULL @ animation callback
+
+	.align 2
+gTileset_RustboroNew::
+	.byte TRUE @ is compressed
+	.byte TRUE @ is secondary
+	.2byte 0 @ padding
+	.4byte gTilesetTiles_RustboroNew
+	.4byte gTilesetPalettes_RustboroNew
+	.4byte gMetatiles_RustboroNew
+	.4byte gMetatileAttributes_RustboroNew
+	.4byte NULL @ animation callback

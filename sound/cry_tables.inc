@@ -898,14 +898,17 @@ gCryTable::
 	cry Cry_Glastrier
 	cry Cry_Spectrier
 	cry Cry_Calyrex
-	cry Cry_Bulbasaur //Cry_Wyrdeer
-	cry Cry_Bulbasaur //Cry_Kleavor
-	cry Cry_Bulbasaur //Cry_Ursaluna
-	cry Cry_Bulbasaur //Cry_Basculegion
-	cry Cry_Bulbasaur //Cry_Sneasler
-	cry Cry_Bulbasaur //Cry_Overqwil
+	cry Cry_Stantler  //Cry_Wyrdeer
+	cry Cry_Scyther   //Cry_Kleavor
+	cry Cry_Ursaring  //Cry_Ursaluna
+	cry Cry_Basculin  //Cry_Basculegion
+	cry Cry_Weavile   //Cry_Sneasler
+	cry Cry_Qwilfish  //Cry_Overqwil
 	cry Cry_Bulbasaur //Cry_Enamorus
-	cry Cry_Dunsparce
+	cry Cry_Dunsparce //cry_dudunsparce
+	cry Cry_Ditto     //cry_ritto
+	cry Cry_Mew       //cry_riddual
+	cry Cry_Applin       //cry_dipplin
 	@ Megas
 	cry Cry_VenusaurMega
 	cry Cry_CharizardMegaX
@@ -1299,6 +1302,9 @@ gCryTable::
 	@ Calyrex
 	cry Cry_CalyrexIceRider
 	cry Cry_CalyrexShadowRider
+	cry Cry_Rillaboom
+	cry Cry_Cinderace
+	cry Cry_Inteleon
 
 	.align 2
 gCryTable_Reverse::
@@ -2207,7 +2213,10 @@ gCryTable_Reverse::
 	cry_reverse Cry_Bulbasaur //Cry_Sneasler
 	cry_reverse Cry_Bulbasaur //Cry_Overqwil
 	cry_reverse Cry_Bulbasaur //Cry_Enamorus
-	cry_reverse Cry_Dunsparce
+	cry_reverse Cry_Dunsparce // dudunsparce
+	cry_reverse Cry_Ditto // ritto
+	cry_reverse Cry_Mew  // riddual
+	cry_reverse Cry_Applin  // dipplin
 	@ Megas
 	cry_reverse Cry_VenusaurMega
 	cry_reverse Cry_CharizardMegaX
@@ -2602,3 +2611,6 @@ gCryTable_Reverse::
 	@ Calyrex
 	cry_reverse Cry_CalyrexIceRider
 	cry_reverse Cry_CalyrexShadowRider
+	cry_reverse Cry_Rillaboom
+	cry_reverse Cry_Cinderace
+	cry_reverse Cry_Inteleon

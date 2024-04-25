@@ -2,5 +2,9 @@
 #define GUARD_CONSTANTS_MUGSHOTS_H
 
 //Add your mugshot constants here
+#define MUGHSOT_THUNDER_FRAME_1		0
+#define MUGHSOT_THUNDER_FRAME_2		1
+#define MUGHSOT_THUNDER_FRAME_3		3
+#define MUGHSOT_WINONA_APPEARS		4
 
 #endif

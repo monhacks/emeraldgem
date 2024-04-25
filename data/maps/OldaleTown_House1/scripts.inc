@@ -12,4 +12,3 @@ OldaleTown_House1_Text_LeftPokemonGoesOutFirst:
 	.string "que recibiría normalmente, esto\l"
 	.string "para entrenarlo más rápidamente.\p"
 	.string "Aunque no sé dónde se consigue eso.$"
-

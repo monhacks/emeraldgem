@@ -193,8 +193,8 @@
 #define TRAINER_DAISUKE                     189
 #define TRAINER_ATSUSHI                     190
 #define TRAINER_KIRK                        191
-#define TRAINER_GRUNT_AQUA_HIDEOUT_7        192
-#define TRAINER_GRUNT_AQUA_HIDEOUT_8        193
+#define TRAINER_ARCHIE_ALLY                 192
+#define TRAINER_ARCHIE_2		        	193
 #define TRAINER_SHAWN                       194
 #define TRAINER_FERNANDO_1                  195
 #define TRAINER_DALTON_1                    196
@@ -845,10 +845,10 @@
 #define TRAINER_GABRIELLE_3                 841
 #define TRAINER_GABRIELLE_4                 842
 #define TRAINER_GABRIELLE_5                 843
-#define TRAINER_THALIA_2                    844
-#define TRAINER_THALIA_3                    845
-#define TRAINER_THALIA_4                    846
-#define TRAINER_THALIA_5                    847
+#define TRAINER_ARCHIE_DOUBLE               844
+#define TRAINER_MAXIE_DOUBLE                845
+#define TRAINER_RIVAL_HELPS                 846
+#define TRAINER_UNUSED_847                  847
 #define TRAINER_MARIELA                     848
 #define TRAINER_ALVARO                      849
 #define TRAINER_EVERETT                     850
@@ -860,12 +860,13 @@
 #define TRAINER_WALLY2						857
 #define TRAINER_WALLY3						858
 #define TRAINER_WALLY4						859
+#define TRAINER_COURTNEY_MT_CHIMNEY			860
 
 // NOTE: Because each Trainer uses a flag to determine when they are defeated, there is only space for 9 additional trainers before trainer flag space overflows
 //       More space can be made by shifting flags around in constants/flags.h or changing how trainer flags are handled
 //       MAX_TRAINERS_COUNT can be increased but will take up additional saveblock space
 
-#define TRAINERS_COUNT                      859
+#define TRAINERS_COUNT                      860
 #define MAX_TRAINERS_COUNT                  864
 
 #endif  // GUARD_CONSTANTS_OPPONENTS_H

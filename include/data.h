@@ -65,7 +65,7 @@ struct TrainerMon
     u8 difficulty:3;
     u8 build:3;
     u32 ball:5;
-    u16 ability:2;
+    u8 ability:2;
     u16 friendship:2;
     u16 gender:2;
     u16 shiny:1;
@@ -73,11 +73,12 @@ struct TrainerMon
     u16 unused:4;
 };
 
-#define NO_ITEM_DEFAULT_MOVES(party) { .TrainerMon = party }, .partySize = ARRAY_COUNT(party), .partyFlags = 0
-#define NO_ITEM_CUSTOM_MOVES(party) { .TrainerMon = party }, .partySize = ARRAY_COUNT(party), .partyFlags = F_TRAINER_PARTY_CUSTOM_MOVESET
-#define ITEM_DEFAULT_MOVES(party) { .TrainerMon = party }, .partySize = ARRAY_COUNT(party), .partyFlags = F_TRAINER_PARTY_HELD_ITEM
-#define ITEM_CUSTOM_MOVES(party) { .TrainerMon = party }, .partySize = ARRAY_COUNT(party), .partyFlags = F_TRAINER_PARTY_CUSTOM_MOVESET | F_TRAINER_PARTY_HELD_ITEM
-
+// #define NO_ITEM_DEFAULT_MOVES(party) { .TrainerMon = party }, .partySize = ARRAY_COUNT(party), .partyFlags = 0
+// #define NO_ITEM_CUSTOM_MOVES(party) { .TrainerMon = party }, .partySize = ARRAY_COUNT(party), .partyFlags = F_TRAINER_PARTY_CUSTOM_MOVESET
+// #define ITEM_DEFAULT_MOVES(party) { .TrainerMon = party }, .partySize = ARRAY_COUNT(party), .partyFlags = F_TRAINER_PARTY_HELD_ITEM
+#define NULL_PARTY(party) { .TrainerMon = party }, .partySize = ARRAY_COUNT(party), .partyFlags = F_TRAINER_PARTY_CUSTOM_MOVESET | F_TRAINER_PARTY_HELD_ITEM, .hardParty = { .TrainerMon = party }, .hardPartySize = ARRAY_COUNT(party), .easyParty = { .TrainerMon = party}, .hardcoreParty = { .TrainerMon = party }, .hardcorePartySize = ARRAY_COUNT(party)
+#define ITEM_CUSTOM_MOVES_NO_HARD(party) { .TrainerMon = sParty_##party }, .partySize = ARRAY_COUNT(sParty_##party), .partyFlags = F_TRAINER_PARTY_CUSTOM_MOVESET | F_TRAINER_PARTY_HELD_ITEM, .hardParty = { .TrainerMon = sParty_##party }, .hardPartySize = ARRAY_COUNT(sParty_##party), .easyParty = { .TrainerMon = sParty_##party }, .hardcoreParty = { .TrainerMon = sParty_##party }, .hardcorePartySize = ARRAY_COUNT(sParty_##party)
+#define ITEM_CUSTOM_MOVES(party) { .TrainerMon = sParty_##party }, .partySize = ARRAY_COUNT(sParty_##party), .partyFlags = F_TRAINER_PARTY_CUSTOM_MOVESET | F_TRAINER_PARTY_HELD_ITEM, .hardParty = { .TrainerMon = sHardParty_##party }, .hardPartySize = ARRAY_COUNT(sHardParty_##party), .easyParty = { .TrainerMon = sEasyParty_##party }, .hardcoreParty = { .TrainerMon = sHardcoreParty_##party }, .hardcorePartySize = ARRAY_COUNT(sHardcoreParty_##party)
 union TrainerMonPtr
 {
     const struct TrainerMon *TrainerMon;
@@ -95,7 +96,13 @@ struct Trainer
     /*0x18*/ bool8 doubleBattle;
     /*0x1C*/ u32 aiFlags;
     /*0x20*/ u8 partySize;
-    /*0x24*/ union TrainerMonPtr party;
+    /*0x24*/ u8 hardPartySize;
+    /*0x24*/ u8 hardcorePartySize;
+    /*0x28*/ union TrainerMonPtr party;
+			 union TrainerMonPtr easyParty;
+			 union TrainerMonPtr hardParty;
+			 union TrainerMonPtr hardcoreParty;
+
 };
 
 #define TRAINER_ENCOUNTER_MUSIC(trainer)((gTrainers[trainer].encounterMusic_gender & 0x7F))
@@ -145,7 +152,7 @@ extern const struct CompressedSpriteSheet gMonFrontPicTable[];
 extern const struct CompressedSpriteSheet gMonFrontPicTableFemale[];
 
 extern const struct Trainer gTrainers[];
-extern const u8 gTrainerClassNames[][13];
+extern const u8 gTrainerClassNames[][14];
 extern const u8 gSpeciesNames[][POKEMON_NAME_LENGTH + 1];
 extern const u8 gMoveNames[MOVES_COUNT][MOVE_NAME_LENGTH + 1];
 extern const u8 gLongMoveNames[MOVES_COUNT][LONG_MOVE_NAME_LENGTH + 1];

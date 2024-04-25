@@ -3,6 +3,7 @@
 .set LOCALID_TABITHA, 3
 .set LOCALID_MAGMA_GRUNT_2, 22
 .set LOCALID_MAGMA_GRUNT_1, 29
+.set LOCALID_COURTNEY, 31
 
 
 MtChimney_MapScripts::
@@ -12,11 +13,44 @@ MtChimney_MapScripts::
 
 MtChimney_OnTransition:
 	setvar VAR_JAGGED_PASS_ASH_WEATHER, 1
+	call_if_eq VAR_MT_CHIMNEY_STATE, 2, MtChimney_OnTransition_PrepareTeamMagmaCheating
 	end
 
 MtChimney_OnResume:
 	setstepcallback STEP_CB_ASH
 	end
+
+MtChimney_OnTransition_PrepareTeamMagmaCheating::
+	setobjectxyperm 17, 30, 10
+	addobject 17
+	setobjectxyperm 15, 31, 6
+	addobject 15
+	setobjectmovementtype 17, MOVEMENT_TYPE_FACE_DOWN
+	setobjectmovementtype 15, MOVEMENT_TYPE_WALK_IN_PLACE_UP
+	setobjectxyperm 16, 31, 7
+	addobject 16
+	setobjectxyperm 13, 39, 0
+	addobject 13
+	setobjectxyperm 12, 39, 0
+	addobject 12
+	setobjectxyperm LOCALID_ARCHIE, 29, 14
+	removeobject LOCALID_ARCHIE
+	setobjectmovementtype LOCALID_ARCHIE, MOVEMENT_TYPE_FACE_UP
+	setobjectxyperm 11, 29, 13
+	addobject 11
+	setobjectmovementtype 11, MOVEMENT_TYPE_WALK_IN_PLACE_UP
+	setobjectxyperm 14, 30, 11
+	addobject 14
+	setobjectmovementtype 14, MOVEMENT_TYPE_WALK_IN_PLACE_DOWN
+	setobjectxyperm LOCALID_TABITHA, 39, 0
+	setobjectxyperm LOCALID_COURTNEY, 39, 0
+	setobjectxyperm LOCALID_MAGMA_GRUNT_1, 39, 0
+	setobjectxyperm LOCALID_MAGMA_GRUNT_2, 39, 0
+	removeobject LOCALID_MAGMA_GRUNT_1
+	removeobject LOCALID_MAGMA_GRUNT_2
+	clearflag FLAG_HIDE_MT_CHIMNEY_TEAM_MAGMA
+	clearflag FLAG_HIDE_MT_CHIMNEY_TEAM_AQUA
+	return
 
 MtChimney_EventScript_Archie::
 	lock
@@ -40,8 +74,12 @@ MtChimney_EventScript_ArchieBusyFighting::
 
 MtChimney_EventScript_Maxie::
 	lockall
+	special SpawnCameraObject
 	playbgm MUS_ENCOUNTER_MAGMA, FALSE
+	namebox Maxie
 	msgbox MtChimney_Text_MeteoriteWillActivateVolcano, MSGBOX_DEFAULT
+	hidenamebox
+	closemessage
 	applymovement LOCALID_MAXIE, Common_Movement_FacePlayer
 	waitmovement 0
 	playse SE_PIN
@@ -49,17 +87,34 @@ MtChimney_EventScript_Maxie::
 	waitmovement 0
 	applymovement LOCALID_MAXIE, Common_Movement_Delay48
 	waitmovement 0
+	namebox Maxie
 	msgbox MtChimney_Text_MaxieIntro, MSGBOX_DEFAULT
+	hidenamebox
+	closemessage
 	trainerbattle_no_intro TRAINER_MAXIE_MT_CHIMNEY, MtChimney_Text_MaxieDefeat
+	playse SE_PIN
+	applymovement LOCALID_MAXIE, Common_Movement_ExclamationMark
+	waitmovement 0
+	applymovement LOCALID_MAXIE, Common_Movement_FaceAwayPlayer
+	waitmovement 0
+	delay 16
+	namebox Maxie
 	msgbox MtChimney_Text_MaxieYouHaventSeenLastOfMagma, MSGBOX_DEFAULT
+	applymovement LOCALID_MAXIE, Common_Movement_FacePlayer
+	waitmovement 0
+	msgbox MtChimney_Text_MaxieYouHaventSeenLastOfMagma2, MSGBOX_DEFAULT
+	hidenamebox
 	closemessage
 	delay 30
 	fadescreen FADE_TO_BLACK
 	removeobject LOCALID_MAXIE
 	removeobject LOCALID_MAGMA_GRUNT_1
 	removeobject LOCALID_TABITHA
+	removeobject LOCALID_COURTNEY
 	removeobject LOCALID_MAGMA_GRUNT_2
 	setflag FLAG_HIDE_MT_CHIMNEY_TEAM_MAGMA
+	setobjectxyperm LOCALID_MAXIE, 11, 7
+	addobject LOCALID_MAXIE
 	fadescreen FADE_FROM_BLACK
 	setobjectxyperm LOCALID_ARCHIE, 10, 12
 	addobject LOCALID_ARCHIE
@@ -81,11 +136,13 @@ MtChimney_EventScript_Maxie::
 	end
 
 MtChimney_EventScript_ArchieApproachPlayerEast::
+	call MtChimney_EventScript_ArchieMaxieReunion
 	applymovement LOCALID_ARCHIE, MtChimney_Movement_ArchieApproachPlayerEast
 	waitmovement 0
 	return
 
 MtChimney_EventScript_ArchieApproachPlayerNorth::
+	call MtChimney_EventScript_ArchieMaxieReunion
 	applymovement LOCALID_ARCHIE, MtChimney_Movement_ArchieApproachPlayerNorth
 	waitmovement 0
 	return
@@ -99,6 +156,96 @@ MtChimney_EventScript_ArchieExitNorth::
 	applymovement LOCALID_ARCHIE, MtChimney_Movement_ArchieExitNorth
 	waitmovement 0
 	return
+
+MtChimney_EventScript_ArchieMaxieReunion::
+	applymovement LOCALID_ARCHIE, MtChimney_Movement_ArchieGetToMaxie
+	applymovement LOCALID_MAXIE, MtChimney_Movement_MaxieGetToArchie
+	applymovement OBJ_EVENT_ID_CAMERA, MtChimney_Movement_MaxieGetToArchie
+	waitmovement 0
+	namebox Maxie
+	msgbox MtChimney_Text_MaxieWhatDoYouWant, MSGBOX_INTERRUPT
+	namebox Archie
+	msgbox MtChimney_Text_ArchieWhoDidThat
+	namebox Maxie
+	msgbox MtChimney_Text_MaxieWhat
+	namebox Archie
+	msgbox MtChimney_Text_ArchieSomethingsUp
+	namebox Maxie
+	msgbox MtChimney_Text_MaxieDelightful
+	closemessage
+	hidenamebox
+	fadescreen FADE_TO_BLACK
+	applymovement OBJ_EVENT_ID_CAMERA, Common_Movement_WalkUp
+	waitmovement 0
+	applymovement OBJ_EVENT_ID_CAMERA, Common_Movement_WalkRight
+	waitmovement 0
+	delay 16
+	removeobject LOCALID_MAXIE
+	applymovement LOCALID_ARCHIE, Common_Movement_FaceDown
+	waitmovement 0
+	fadescreen FADE_FROM_BLACK
+	delay 16
+	namebox Archie
+	msgbox MtChimney_Text_OhMaxie
+	closemessage
+	hidenamebox
+	return
+
+MtChimney_Text_MaxieWhatDoYouWant:
+	.string "Archie.\p"
+	.string "¿Qué es lo que quieres?\n"
+	.string "¿Estás aquí para burlarte de mí, del\l"
+	.string "fracaso de mi Equipo?\p"
+	.string "Porque si es así, debo recordarte qu-{PAUSE 32}$"
+
+MtChimney_Text_ArchieWhoDidThat:
+	.string "No hay tiempo para eso, bacalao. Tú no\n"
+	.string "gastarías una oportunidad así\l"
+	.string "esperando a que alguien te detenga.\l"
+	.string "¿Qué le pasó a esa máquina, y quién fue\l"
+	.string "el filibustero que lo hizo?$"
+
+MtChimney_Text_MaxieWhat:
+	.string "…{PAUSE 16}…{PAUSE 8}¿F…{PAUSE 16}Fili-qué?{PAUSE 16} ¿…Bacalao?\n"
+	.string "En cualquier caso, no es algo que te\l"
+	.string "incumba, idiota.\p"
+	.string "A menos… ¿Acaso te ha estado pasando\n"
+	.string "lo mismo?$"
+
+MtChimney_Text_ArchieSomethingsUp:
+	.string "Aye, aye, atinaste, amigo.\n"
+	.string "Algo en estas aguas huele mal, y parece\l"
+	.string "que en tierra también, ¿eh?\p"
+	.string "Creo que tenemos alguien en nuestras\n"
+	.string "tripulaciones que nos están queriendo\l"
+	.string "hundir, Maxie.$"
+
+MtChimney_Text_MaxieDelightful:
+	.string "¡Ja! ¡Jajajaja!\n"
+	.string "Pues me deleita escuchar eso, ¿Sabes?\p"
+	.string "Aunque signifique tener contratiempos,\n"
+	.string "verte sufrir antes de hundirte es\l"
+	.string "delicioso, Archie.\p"
+	.string "Sólo espero poder unirme a la diversión\n"
+	.string "antes de que toques fondo. Hasta luego,\l"
+	.string "Archie.$"
+
+MtChimney_Text_OhMaxie:
+	.string "Ah, mi Maxie…\n"
+	.string "Siempre sintiéndose tan superior.\p"
+	.string "Nunca cambies, Maxie.$"
+
+MtChimney_Movement_ArchieGetToMaxie:
+	walk_up
+	walk_up
+	walk_up
+	step_end
+
+MtChimney_Movement_MaxieGetToArchie:
+	walk_left
+	walk_down
+	walk_in_place_down
+	step_end
 
 MtChimney_EventScript_LavaCookieLady::
 	lock
@@ -144,9 +291,6 @@ MtChimney_Movement_ArchieApproachPlayerEast:
 	walk_up
 	walk_up
 	walk_up
-	walk_up
-	walk_up
-	walk_up
 	walk_right
 	step_end
 
@@ -162,9 +306,6 @@ MtChimney_Movement_ArchieExitEast:
 	step_end
 
 MtChimney_Movement_ArchieApproachPlayerNorth:
-	walk_up
-	walk_up
-	walk_up
 	walk_up
 	walk_up
 	walk_right
@@ -183,209 +324,6 @@ MtChimney_Movement_ArchieExitNorth:
 	walk_down
 	step_end
 
-MtChimney_Movement_Unused1:
-	walk_down
-	walk_down
-	walk_down
-	walk_down
-	walk_down
-	walk_left
-	walk_left
-	walk_down
-	walk_down
-	walk_down
-	walk_down
-	walk_left
-	walk_left
-	walk_left
-	walk_left
-	walk_left
-	walk_down
-	step_end
-
-MtChimney_Movement_Unused2:
-	walk_down
-	walk_down
-	walk_down
-	walk_down
-	walk_left
-	walk_left
-	walk_left
-	walk_down
-	step_end
-
-MtChimney_Movement_Unused3:
-	walk_right
-	walk_down
-	walk_down
-	walk_down
-	walk_down
-	walk_left
-	walk_left
-	walk_left
-	walk_left
-	walk_left
-	walk_down
-	walk_down
-	walk_down
-	walk_down
-	step_end
-
-MtChimney_Movement_Unused4:
-	walk_fast_down
-	walk_fast_down
-	walk_fast_down
-	walk_fast_down
-	walk_fast_down
-	walk_fast_down
-	walk_fast_down
-	walk_fast_down
-	walk_fast_down
-	walk_left
-	walk_left
-	walk_down
-	walk_down
-	walk_down
-	walk_left
-	walk_left
-	walk_down
-	walk_down
-	walk_left
-	walk_left
-	walk_left
-	walk_left
-	walk_left
-	walk_down
-	step_end
-
-MtChimney_Movement_Unused5:
-	delay_16
-	delay_16
-	delay_16
-	walk_down
-	walk_down
-	walk_down
-	walk_left
-	walk_left
-	walk_left
-	walk_down
-	step_end
-
-MtChimney_Movement_Unused6:
-	delay_16
-	walk_left
-	walk_down
-	walk_down
-	walk_down
-	walk_down
-	walk_left
-	walk_left
-	walk_left
-	walk_left
-	walk_left
-	walk_down
-	walk_down
-	walk_down
-	walk_down
-	step_end
-
-MtChimney_Movement_Unused7:
-	delay_16
-	walk_left
-	walk_left
-	walk_down
-	walk_down
-	walk_down
-	walk_left
-	walk_left
-	walk_down
-	walk_down
-	walk_left
-	walk_left
-	walk_left
-	walk_left
-	walk_left
-	walk_down
-	step_end
-
-MtChimney_Movement_Unused8:
-	delay_16
-	walk_down
-	walk_left
-	walk_left
-	walk_left
-	walk_left
-	walk_in_place_faster_down
-	step_end
-
-MtChimney_Movement_Unused9:
-	walk_down
-	walk_down
-	walk_down
-	walk_down
-	walk_left
-	walk_left
-	walk_left
-	walk_left
-	walk_left
-	walk_down
-	walk_down
-	walk_down
-	walk_down
-	step_end
-
-MtChimney_Movement_Unused10:
-	walk_down
-	step_end
-
-MtChimney_Movement_Unused11:
-	walk_down
-	walk_down
-	walk_down
-	walk_down
-	walk_down
-	walk_down
-	walk_down
-	step_end
-
-MtChimney_Movement_Unused12:
-	delay_16
-	delay_16
-	walk_in_place_faster_left
-	delay_16
-	walk_down
-	walk_down
-	walk_down
-	walk_down
-	walk_down
-	step_end
-
-MtChimney_Movement_Unused13:
-	delay_16
-	delay_16
-	delay_16
-	delay_16
-	delay_16
-	delay_16
-	walk_in_place_faster_left
-	delay_16
-	walk_down
-	walk_down
-	step_end
-
-MtChimney_Movement_Unused14:
-	lock_facing_direction
-	walk_fast_left
-	unlock_facing_direction
-	face_right
-	step_end
-
-MtChimney_Movement_Unused15:
-	walk_left
-	walk_in_place_faster_right
-	delay_16
-	step_end
-
 MtChimney_EventScript_BusyAquaGrunt1::
 	msgbox MtChimney_Text_MagmaOutnumbersUs, MSGBOX_SIGN
 	end
@@ -398,9 +336,240 @@ MtChimney_EventScript_BusyAquaGrunt3::
 	msgbox MtChimney_Text_MagmasNameSimilar, MSGBOX_SIGN
 	end
 
+MtChimney_EventScript_Trigger1::
+	lockall
+	setvar VAR_MT_CHIMNEY_STATE, 1
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkUp
+	waitmovement 0
+	playse SE_PIN
+	applymovement LOCALID_TABITHA, Common_Movement_ExclamationMark
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceRight
+	waitmovement 0
+	playbgm TRAINER_ENCOUNTER_MUSIC_MAGMA, FALSE
+	namebox Tabitha
+	msgbox MtChimney_Text_TabithaIntro
+	closemessage
+	hidenamebox
+	playse SE_PIN
+	applymovement LOCALID_COURTNEY, Common_Movement_ExclamationMark
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceLeft
+	waitmovement 0
+	namebox Courtney
+	msgbox MtChimney_Text_CourtneyIntro
+	closemessage
+	hidenamebox
+	applymovement LOCALID_COURTNEY, Common_Movement_WalkRight
+	waitmovement 0
+	fadedefaultbgm
+	namebox Unknown
+	msgbox MtChimney_Text_ArchieStop
+	closemessage
+	hidenamebox
+	setobjectxyperm LOCALID_ARCHIE, 11, 17
+	call MtChimney_EventScript_Trigger
+	applymovement LOCALID_ARCHIE, Common_Movement_WalkLeft
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkDown
+	waitmovement 0
+	applymovement LOCALID_ARCHIE, Common_Movement_FaceUp
+	applymovement LOCALID_COURTNEY, Common_Movement_FaceDown
+	waitmovement 0
+	applymovement LOCALID_TABITHA, Common_Movement_WalkLeft
+	waitmovement 0
+	applymovement LOCALID_TABITHA, Common_Movement_FaceDown
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceUp
+	waitmovement 0
+	call MtChimney_EventScript_PrepareMultiBattle
+	multi_2_vs_2 TRAINER_TABITHA_MT_CHIMNEY, MtChimney_Text_TabithaDefeat, TRAINER_COURTNEY_MT_CHIMNEY, MtChimney_Text_CourtneyDefeat, TRAINER_ARCHIE_ALLY, TRAINER_BACK_PIC_RED
+	specialvar VAR_RESULT, GetBattleOutcome
+    compare VAR_RESULT, B_OUTCOME_LOST
+    goto_if_eq MtChimney_EventScript_LostMultiBattle
+	call MtChimney_EventScript_TabithaCourtneyLost
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceLeft
+	waitmovement 0
+	call MtChimney_EventScript_ArchieYouCanDoIt
+	releaseall
+	end
+	
+	
+MtChimney_EventScript_Trigger2::
+	lockall
+	setvar VAR_MT_CHIMNEY_STATE, 1
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkUp
+	waitmovement 0
+	playse SE_PIN
+	applymovement LOCALID_COURTNEY, Common_Movement_ExclamationMark
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceLeft
+	waitmovement 0
+	playbgm TRAINER_ENCOUNTER_MUSIC_MAGMA, FALSE
+	namebox Courtney
+	msgbox MtChimney_Text_CourtneyIntro
+	closemessage
+	hidenamebox
+	playse SE_PIN
+	applymovement LOCALID_TABITHA, Common_Movement_ExclamationMark
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceRight
+	waitmovement 0
+	applymovement LOCALID_TABITHA, Common_Movement_WalkLeft
+	waitmovement 0
+	namebox Tabitha
+	msgbox MtChimney_Text_TabithaIntro
+	closemessage
+	hidenamebox
+	fadedefaultbgm
+	namebox Unknown
+	msgbox MtChimney_Text_ArchieStop
+	closemessage
+	hidenamebox
+	setobjectxyperm LOCALID_ARCHIE, 10, 17
+	call MtChimney_EventScript_Trigger
+	applymovement LOCALID_ARCHIE, Common_Movement_WalkRight
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkDown
+	waitmovement 0
+	applymovement LOCALID_ARCHIE, Common_Movement_FaceUp
+	applymovement LOCALID_TABITHA, Common_Movement_FaceDown
+	waitmovement 0
+	applymovement LOCALID_COURTNEY, Common_Movement_WalkRight
+	waitmovement 0
+	applymovement LOCALID_COURTNEY, Common_Movement_FaceDown
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceUp
+	waitmovement 0
+	call MtChimney_EventScript_PrepareMultiBattle
+	multi_2_vs_2 TRAINER_TABITHA_MT_CHIMNEY, MtChimney_Text_TabithaDefeat, TRAINER_COURTNEY_MT_CHIMNEY, MtChimney_Text_CourtneyDefeat, TRAINER_ARCHIE_ALLY, TRAINER_BACK_PIC_RED
+	specialvar VAR_RESULT, GetBattleOutcome
+    compare VAR_RESULT, B_OUTCOME_LOST
+    goto_if_eq MtChimney_EventScript_LostMultiBattle
+	call MtChimney_EventScript_TabithaCourtneyLost
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceRight
+	waitmovement 0
+	call MtChimney_EventScript_ArchieYouCanDoIt
+	releaseall
+	end
+
+MtChimney_EventScript_TabithaCourtneyLost::
+	playse SE_PIN
+	applymovement LOCALID_TABITHA, Common_Movement_ExclamationMark
+	applymovement LOCALID_COURTNEY, Common_Movement_ExclamationMark
+	waitmovement 0
+	namebox Courtney
+	msgbox MtChimney_Text_CourtneyPostBattle
+	applymovement LOCALID_TABITHA, Common_Movement_WalkInPlaceUp
+	waitmovement 0
+	namebox Tabitha
+	msgbox MtChimney_Text_TabithaPostBattle
+	closemessage
+	hidenamebox
+	applymovement LOCALID_TABITHA, Common_Movement_WalkInPlaceDown
+	waitmovement 0
+	namebox Tabitha
+	msgbox MtChimney_Text_TabithaYouHaventSeen
+	closemessage
+	hidenamebox
+	fadescreen FADE_TO_BLACK
+	delay 16
+	setobjectxyperm LOCALID_COURTNEY, 39, 0
+	setobjectxyperm LOCALID_TABITHA, 39, 0
+	removeobject LOCALID_TABITHA
+	removeobject LOCALID_COURTNEY
+	clearflag FLAG_HIDE_MT_CHIMNEY_TEAM_MAGMA
+	fadescreen FADE_FROM_BLACK
+	delay 16
+	applymovement LOCALID_ARCHIE, Common_Movement_FacePlayer
+	return
+
+MtChimney_EventScript_LostMultiBattle::
+	setvar VAR_MT_CHIMNEY_STATE, 0
+	fadescreen FADE_TO_BLACK
+	special SetCB2WhiteOut
+	releaseall
+	end
+
+MtChimney_EventScript_PrepareMultiBattle::
+    lockall
+	namebox Archie
+	msgbox PleasePick3Mons
+	closemessage
+	hidenamebox
+    choose_mons
+    compare VAR_RESULT, 0
+    goto_if_eq script_NeedToChoose3ValidMons
+    return
+
+script_NeedToChoose3ValidMons::
+    namebox Archie
+	msgbox PleasePick3Mons
+	closemessage
+	hidenamebox
+    choose_mons
+    compare VAR_RESULT, 0
+    goto_if_eq script_CancelBattle
+    return
+
+MtChimney_EventScript_ArchieYouCanDoIt::
+	namebox Archie
+	msgbox MtChimney_Text_ArchieYouCanDoIt
+	closemessage
+	hidenamebox
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceDown
+	applymovement LOCALID_ARCHIE, MtChimney_Movement_ArchieWalkDown
+	waitmovement 0
+	setvar VAR_MT_CHIMNEY_STATE, 2
+	fadescreen FADE_TO_BLACK
+	call MtChimney_OnTransition_PrepareTeamMagmaCheating
+	special DrawWholeMapView
+	fadescreen FADE_FROM_BLACK
+	return
+
+MtChimney_Movement_ArchieWalkDown:
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	step_end
+
+PleasePick3Mons::
+	.string "Deberás elegir 3 o\nmenos Pokémon, {PLAYER}.$"
+
+script_CancelBattle::
+    goto MtChimney_EventScript_PrepareMultiBattle
+    return
+
+MtChimney_EventScript_Trigger::
+	addobject LOCALID_ARCHIE
+	playse SE_PIN
+	applymovement LOCALID_COURTNEY, Common_Movement_ExclamationMark
+	applymovement LOCALID_TABITHA, Common_Movement_ExclamationMark
+	waitmovement 0
+	applymovement LOCALID_COURTNEY, Common_Movement_FaceDown
+	applymovement LOCALID_TABITHA, Common_Movement_FaceDown
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceDown
+	waitmovement 0
+	applymovement LOCALID_ARCHIE, MtChimney_Movement_ArchieApproachPlayerDown
+	waitmovement 0
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceDown
+	waitmovement 0
+	namebox Archie
+	msgbox MtChimney_Text_ArchieDontWorry
+	closemessage
+	hidenamebox
+	return
+	
+
+MtChimney_Movement_ArchieApproachPlayerDown:
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	step_end
+
 MtChimney_EventScript_Tabitha::
-	trainerbattle_single TRAINER_TABITHA_MT_CHIMNEY, MtChimney_Text_TabithaIntro, MtChimney_Text_TabithaDefeat
 	msgbox MtChimney_Text_TabithaPostBattle, MSGBOX_AUTOCLOSE
+	end
+
+MtChimney_EventScript_Courtney::
+	msgbox MtChimney_Text_CourtneyPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 MtChimney_EventScript_Grunt2::
@@ -432,12 +601,34 @@ MtChimney_EventScript_BusyMagmaGrunt6::
 	msgbox MtChimney_Text_KeepMakingMoreLand, MSGBOX_SIGN
 	end
 
-MtChimney_EventScript_MagmaPoochyena::
-	msgbox MtChimney_Text_Bufoh, MSGBOX_SIGN
+MtChimney_EventScript_Magcargo::
+	playmoncry SPECIES_MAGCARGO, CRY_MODE_NORMAL
+	msgbox MtChimney_Text_Magcargo, MSGBOX_SIGN
 	end
 
-MtChimney_EventScript_AquaPoochyena::
-	msgbox MtChimney_Text_Bushaa, MSGBOX_SIGN
+MtChimney_EventScript_Qwilfish::
+	playmoncry SPECIES_QWILFISH, CRY_MODE_NORMAL
+	msgbox MtChimney_Text_Qwilfish, MSGBOX_SIGN
+	end
+
+MtChimney_EventScript_Krokorok::
+	playmoncry SPECIES_KROKOROK, CRY_MODE_NORMAL
+	msgbox MtChimney_Text_Krokorok, MSGBOX_SIGN
+	end
+
+MtChimney_EventScript_Pelipper::
+	playmoncry SPECIES_PELIPPER, CRY_MODE_NORMAL
+	msgbox MtChimney_Text_Pelipper, MSGBOX_SIGN
+	end
+
+MtChimney_EventScript_Sharpedo::
+	playmoncry SPECIES_SHARPEDO, CRY_MODE_NORMAL
+	msgbox MtChimney_Text_Sharpedo, MSGBOX_SIGN
+	end
+
+MtChimney_EventScript_Poochyena::
+	playmoncry SPECIES_POOCHYENA, CRY_MODE_NORMAL
+	msgbox MtChimney_Text_Poochyena, MSGBOX_SIGN
 	end
 
 MtChimney_EventScript_MeteoriteMachine::
@@ -533,180 +724,225 @@ MtChimney_EventScript_SawyerRematch::
 	msgbox MtChimney_Text_SawyerPostRematch, MSGBOX_AUTOCLOSE
 	end
 
+MtChimney_Text_ArchieYouCanDoIt:
+	.string "Ahora, {PLAYER}, voy a continuar a\n"
+	.string "ayudar a mis Reclutas a combatir al\l"
+	.string "Equipo Magma. Están atacándolos en\l"
+	.string "grupo ahora y realmente me están\l"
+	.string "cansando con su cobardía.\p"
+	.string "¡Tú puedes derrotar a {COLOR RED}Maxie{COLOR DARK_GRAY}!\n"
+	.string "No te preocupes, que no es alguien que\l"
+	.string "pueda preparar un “Plan B”.\p"
+	.string "Créeme…\p"
+	.string "Bueno, sigue adelante, niñ{OA}, venceremos\n"
+	.string "al Equipo Magma juntos.$"
+
 MtChimney_Text_MeteoriteWillActivateVolcano:
-	.string "The power contained in the METEORITE…\p"
-	.string "By amplifying its power with this\n"
-	.string "machine, MT. CHIMNEY's volcanic\l"
-	.string "activity will instantly intensify…\p"
-	.string "Its energy will grow deep inside\n"
-	.string "the crater and…\l"
-	.string "Fufufu…$"
+	.string "¿¡Qué!?\n"
+	.string "El {COLOR RED}Meteorito{COLOR DARK_GRAY}…\l"
+	.string "Ha sido desconectado de la fuente de\l"
+	.string "poder…\p"
+	.string "Pero si llegamos antes que ese Archie…\n"
+	.string "¡Y-Y que todo el Equipo Aqua también!\l¿Quién pudo ser?\pSanto Arceus, tendría que haber traído a\nmis Pokémon más fuertes…$"
 
 MtChimney_Text_MaxieIntro:
-	.string "MAXIE: Hm?\n"
-	.string "Who are you?\p"
-	.string "… … … … … …\n"
-	.string "… … … … … …\p"
-	.string "I'd heard ARCHIE bemoaning a child\n"
-	.string "who's been meddling in TEAM AQUA's\l"
-	.string "affairs.\p"
-	.string "It must be you he meant.\p"
-	.string "Humph! So you're thinking of\n"
-	.string "interfering with us, TEAM MAGMA?\p"
-	.string "Now you listen.\n"
-	.string "Long ago, living things used the\l"
-	.string "land to live and grow.\p"
-	.string "That is why land is all important!\n"
-	.string "It is the cradle of all!\p"
-	.string "That is why TEAM MAGMA is dedicated\n"
-	.string "to the expansion of the land mass.\p"
-	.string "It is for further advancement of\n"
-	.string "humankind and POKéMON!\p"
-	.string "And for that, we need the power of\n"
-	.string "what sleeps within this mountain…\p"
-	.string "Oh! There was no need for you to\n"
-	.string "learn that much.\p"
-	.string "But, no matter!\n"
-	.string "I'll teach you the consequences of\l"
-	.string "meddling in our grand design!$"
+	.string "Un{A} niñ{OA}… ¡¿Qué estás haciendo aquí!?\p"
+	.string "Creí que Tabitha y Courtney serían\n"
+	.string "defensa suficiente… Apuesto a que ese\l"
+	.string "Archie te ha ayudado…\p"
+	.string "Pero eso es lo de menos. El {COLOR LIGHT_RED SHADOW RED}Equipo Magma{COLOR DARK_GRAY SHADOW LIGHT_GRAY}\n"
+	.string "y yo, {COLOR RED}su Líder Maxie{COLOR DARK_GRAY}, tenemos objetivos\l"
+	.string "tan grandes que este mero contratiempo\l"
+	.string "no significa nada.\p"
+	.string "La juventud es el futuro, ¿Sabes?\n"
+	.string "Por ese motivo, debo educarte.\p"
+	.string "Al derrotarte, reactivaré la máquina, y\n"
+	.string "con ella formaré una {COLOR RED}Piedra Activadora{COLOR DARK_GRAY}\l"
+	.string "con el poder suficiente para controlar\l"
+	.string "al {COLOR LIGHT_RED SHADOW RED}Legendario Durmiente del Magma{COLOR DARK_GRAY SHADOW LIGHT_GRAY}…\l"
+	.string "Entonces, ¡Podremos cumplir nuestro\l"
+	.string "objetivo!\p¿Que cuál es, preguntas? No, eso es\n"
+	.string "para la siguiente clase.\p"
+	.string "Y ahora, como es debido, déjame darte\n"
+	.string "un examen que se quemará en tu\l"
+	.string "memoria.$"
 
 MtChimney_Text_MaxieDefeat:
-	.string "What?!\p"
-	.string "I, MAXIE, was caught off guard?!$"
+	.string "¡¿Qué?!\p"
+	.string "¡¿Me han derrotado, al gran Maxie!?$"
 
 MtChimney_Text_MaxieYouHaventSeenLastOfMagma:
-	.string "MAXIE: But, enough.\n"
-	.string "I will back off this time.\p"
-	.string "But don't think that this is the last\n"
-	.string "you've seen of TEAM MAGMA.\p"
-	.string "Fufufu…\p"
-	.string "Even without the METEORITE, if we\n"
-	.string "obtain that ORB… Fufufu…$"
+	.string "¿¡C-cómo!?\n"
+	.string "¿Qué quieres decir con eso?\p"
+	.string "… … … No importa, estaré ahí en un\n"
+	.string "minuto.\p"
+	.string "Supongo… Que tendremos que proceder\n"
+	.string "con el Plan de Emergencia…\l"
+	.string "No creí que llegara a esto.\p"
+	.string "No falles con esto, ¿Entiendes?$"
+
+MtChimney_Text_MaxieYouHaventSeenLastOfMagma2:
+	.string "Lo siento, niñ{OA}, pero los adultos tenemos\n"
+	.string "cosas por hacer. La próxima vez que nos\l"
+	.string "veamos, no me contendré.$"
 
 MtChimney_Text_TabithaIntro:
-	.string "Hehehe!\p"
-	.string "So you've come all the way here!\p"
-	.string "But you're too late!\n"
-	.string "I've already delivered the METEORITE\l"
-	.string "from METEOR FALLS to the BOSS!$"
+	.string "Veo que nuestros Reclutas no poseen\nsuficiente poder para derrotar\la un{A} simple niñ{OA}.\p"
+	.string "Pero llegas tarde, ¿No lo ves?\p"
+	.string "¡Nuestro Jefe liberará el poder\ndel Meteorito!$"
 
 MtChimney_Text_TabithaDefeat:
-	.string "Hehehe…\p"
-	.string "Even though I've lost, if our leader\n"
-	.string "awakens that thing…$"
+	.string "Equipo… Aqua…$"
 
 MtChimney_Text_TabithaPostBattle:
-	.string "BOSS, hurry!\n"
-	.string "Give it the METEORITE's energy!\p"
-	.string "Hehehe…$"
+	.string "¡Jefe, es tu oportunidad!$"
+
+MtChimney_Text_CourtneyIntro:
+	.string "Intrus{OA}… Rango de visión…\n"
+	.string "Analizando…\p"
+	.string "… … …\p"
+	.string "Procediendo… Protocolo B…$"
+
+MtChimney_Text_CourtneyDefeat:
+	.string "Interesante…$"
+
+MtChimney_Text_CourtneyPostBattle:
+	.string "Maxie… Lo siento tanto…\n"
+	.string "No pude… Detener…$"
+
+MtChimney_Text_ArchieStop:
+	.string "¿Atacando a un{A} niñ{OA} indefens{OA}?\p"
+	.string "Compórtense como los adultos que son.$"
+
+MtChimney_Text_ArchieDontWorry:
+	.string "No te preocupes, {PLAYER}, estamos en\n"
+	.string "esta misión para detener al Equipo\l"
+	.string "Magma juntos. No dejaré que te ataquen\l"
+	.string "entre dos de esa manera, ¡Ni yo que soy\l"
+	.string "un pirata haría trucos tan sucios!\p"
+	.string "Principalmente porque no los necesito…$"
+
+MtChimney_Text_TabithaYouHaventSeen:
+	.string "¡N-{PAUSE 8}n-{PAUSE 16}n-{PAUSE 32}NO ES\n"
+	.string "LO Ú-{PAUSE 16}ÚLTIMO QUE VERÁN DE MÍ!\l"
+	.string "¡Muajajaja!$"
 
 MtChimney_Text_Grunt2Intro:
-	.string "We of TEAM MAGMA are working hard for\n"
-	.string "everyone's sake.\p"
-	.string "Like, if that thing's power made more\n"
-	.string "land, there'd be more places to live.\p"
-	.string "Everyone'd be happy!$"
+	.string "¡Nos del Equipo Magma estamos haciendo\n"
+	.string "lo posible para mejorar la vida de los\l"
+	.string "humanos!\p"
+	.string "Todos serán felices si ganamos.$"
 
 MtChimney_Text_Grunt2Defeat:
-	.string "Hunh?\n"
-	.string "What do you mean I lost?$"
+	.string "¿¡CÓMO QUE PERDÍ!?$"
 
 MtChimney_Text_Grunt2PostBattle:
-	.string "Our BOSS says, “It will make everyone\n"
-	.string "happy.”\p"
-	.string "But why does everyone keep getting\n"
-	.string "in our way?$"
+	.string "Nuestro Jefe siempre dice que todos\n"
+	.string "serán felices si él gana, pero… ¿Porqué\l"
+	.string "entonces somos tan odiados?$"
 
 MtChimney_Text_Grunt1Intro:
-	.string "If there were more land, I'd be able\n"
-	.string "to get a big house of my own!\p"
-	.string "I'm going to build it on hardened lava!$"
+	.string "Si hubiera más tierra, ¡Podría comprarme\n"
+	.string "mi propia casa!\p"
+	.string "Supongo que aún así habría que\n"
+	.string "comprarla, y seguro seguría siendo\l"
+	.string "carísima…$"
 
 MtChimney_Text_Grunt1Defeat:
-	.string "My dream of a big house…$"
+	.string "¿Es la falta de tierra el motivo de la\n"
+	.string "falta de casas para la gente?$"
 
 MtChimney_Text_Grunt1PostBattle:
-	.string "A kid like you, you ought to be\n"
-	.string "splashing about in the waves!$"
+	.string "Creo que el verdadero enemigo aquí es\n"
+	.string "el capitalismo, ¿No?\p"
+	.string "¿Será que puedo convencer al Jefe de\n"
+	.string "usar el poder que quiere reunir para\l"
+	.string "expandir el comunismo?$"
 
 MtChimney_Text_TeamAquaAlwaysMessingWithPlans:
-	.string "That annoying TEAM AQUA…\n"
-	.string "They always mess with our plans!$"
+	.string "Estos del Equipo Aqua, siempre\n"
+	.string "persiguiéndonos…\p"
+	.string "¡¿Tan enamorados de nosotros están?!$"
 
 MtChimney_Text_MeteoritesPackAmazingPower:
-	.string "METEORITES pack amazing power!$"
+	.string "Quiero un helado.$"
 
 MtChimney_Text_YouBetterNotMessWithUs:
-	.string "You'd better not mess with us!\p"
-	.string "We're trying to awaken that thing\n"
-	.string "for the benefit of everyone!$"
+	.string "No me gustan estos trajes… ¡Hace que\n"
+	.string "todos nos veamos iguales! ¡Me hace\l"
+	.string "morirme de calor!$"
 
 MtChimney_Text_AquasNameSimilar:
-	.string "We're TEAM MAGMA!\p"
-	.string "They're TEAM AQUA!\p"
-	.string "It totally annoys me that they'd\n"
-	.string "use a name like ours!$"
+	.string "Son el Equipo Aqua… Somos el Equipo\n"
+	.string "Magma… ¡Eligieron un nombre tan\l"
+	.string "parecido para confundirme a mí!$"
 
 MtChimney_Text_DouseThemInFire:
-	.string "Yeah!\n"
-	.string "Douse them in fire!$"
+	.string "¡Sí! ¡Acábalos!$"
 
 MtChimney_Text_KeepMakingMoreLand:
-	.string "We're going to keep making more land!$"
+	.string "¡Sí! ¡Magma!$"
 
-MtChimney_Text_Bufoh:
-	.string "Bufoh!$"
+MtChimney_Text_Sharpedo:
+	.string "¡SHAR! ¡SHAAARRRGGGHHH!$"
 
 MtChimney_Text_ArchieGoStopTeamMagma:
-	.string "ARCHIE: Grr, {PLAYER}!\n"
-	.string "I should've guessed you'd show up!\p"
-	.string "See for yourself what the fanatics\n"
-	.string "of TEAM MAGMA are up to!\p"
-	.string "They're trying to inject the stolen\n"
-	.string "METEORITE's power into the volcano!\p"
-	.string "Doing something like that will cause\n"
-	.string "the volcano's eruption!$"
+	.string "¡Sabía que vendrías, {PLAYER}!\p"
+	.string "¡Grrr! Tengo que ir a derrotar a Maxie, si\n"
+	.string "logra encender esa máquina, ¡El volcán\l"
+	.string "hará erupción!$"
 
 MtChimney_Text_ArchieIHaveMyHandsFull:
-	.string "ARCHIE: Grrr…\p"
-	.string "I want to stop that MAXIE,\n"
-	.string "but I can't!\p"
-	.string "Not when I have my hands full battling\n"
-	.string "three opponents at once!$"
+	.string "{PLAYER}, odio tener que pedirle esto\n"
+	.string "a un{A} niñ{OA}, pero necesito que vayas a\l"
+	.string "derrotar a Maxie por mí, ¿Lo harías?$"
 
 MtChimney_Text_ArchieThankYou:
-	.string "ARCHIE: {PLAYER}!\n"
-	.string "Thank you!\p"
-	.string "With your help, we thwarted TEAM\n"
-	.string "MAGMA's destructive plan!\p"
-	.string "But… You…\n"
-	.string "Whose side are you on?\p"
-	.string "Ah, it doesn't matter.\p"
-	.string "We will remain vigilant and keep up\n"
-	.string "our pursuit of TEAM MAGMA.\p"
-	.string "{PLAYER}, we shall meet again!$"
+	.string "¡{PLAYER}!\p"
+	.string "¡Ja ja ja! ¡Sabía que podías hacerlo!\l"
+	.string "… … … …\l"
+	.string "Ah, ¿Eso?\p"
+	.string "¡No te preocupes, cosa de adultos!\n"
+	.string "Pero lo que quiero saber es… ¿De qué\l"
+	.string "lado estás, niñ{OA}?\l"
+	.string "¡Ah, no importa, siempre y cuando nos\l"
+	.string "ayudes a derrotar a esos idiotas!\p"
+	.string "Espero nos volvamos a ver pronto,\n"
+	.string "{PLAYER}.$"
 
 MtChimney_Text_MagmaOutnumbersUs:
-	.string "Darn… TEAM MAGMA outnumbers us!\n"
-	.string "We can't keep up with them!$"
+	.string "Maldita sea… ¡El Equipo Magma\n"
+	.string "nos supera en número, no\lpodemos contra ellos así!$"
 
 MtChimney_Text_LessHabitatForWaterPokemon:
-	.string "If they expand the land, there'll be\n"
-	.string "less habitats for WATER POKéMON!$"
+	.string "¡Pero si expanden la tierra,\n"
+	.string "matarán a los Pokémon del océano!$"
 
 MtChimney_Text_MagmasNameSimilar:
-	.string "We're TEAM AQUA!\p"
-	.string "They're TEAM MAGMA!\p"
-	.string "It burns me up that they'd use such\n"
-	.string "a confusing name!$"
+	.string "Son el Equipo Magma… Somos el Equipo\n"
+	.string "Aqua… ¡Eligieron un nombre tan\l"
+	.string "parecido para confundirme a mí!$"
 
-MtChimney_Text_Bushaa:
-	.string "Bushaa!$"
+MtChimney_Text_Poochyena:
+	.string "¡Pochyyyyy!$"
+
+MtChimney_Text_Magcargo:
+	.string "¡Mmmmmaaaagggg!$"
+
+MtChimney_Text_Qwilfish:
+	.string "¡Qwil! ¡Qwiiil!$"
+
+MtChimney_Text_Krokorok:
+	.string "¡Krookoroook!$"
+
+MtChimney_Text_Pelipper:
+	.string "¡Peeeeliiiii!$"
 
 MtChimney_Text_LavaCookiesJust200:
 	.string "LAVA COOKIES are MT. CHIMNEY's local\n"
 	.string "specialty.\p"
 	.string "Try one. It's just ¥200.$"
+
 
 MtChimney_Text_ThankYouDear:
 	.string "Thank you, dear!$"
@@ -843,4 +1079,3 @@ MtChimney_Text_SawyerRematchDefeat:
 MtChimney_Text_SawyerPostRematch:
 	.string "Actually, it really is hot here.\n"
 	.string "I'm overdressed for these parts.$"
-

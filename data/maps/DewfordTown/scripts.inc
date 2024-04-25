@@ -1162,4 +1162,3 @@ DewfordTown_EventScript_WallyBeginSpeech:
 	.string "aspirar a ser bueno…\p"
 	.string "Tengo miedo de fallar, y que todos se\n"
 	.string "burlen de mí denuevo…$"
-	

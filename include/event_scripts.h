@@ -624,6 +624,10 @@ extern const u8 EventScript_CancelMessageBox[];
 extern const u8 EventScript_ObjectApproachPlayer[];
 // Dexnav
 extern const u8 EventScript_StartDexNavBattle[];
+extern const u8 EventScript_JumpPlayerAndStartDexNavBattle[];
+extern const u8 EventScript_JumpPlayerDexNav[];
+extern const u8 EventScript_CaughtOverworld[];
+extern const u8 EventScript_NotCaughtOverworld[];
 extern const u8 EventScript_NotFoundNearby[];
 extern const u8 EventScript_PokemonGotAway[];
 extern const u8 EventScript_LostSignal[];

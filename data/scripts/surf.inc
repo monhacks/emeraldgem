@@ -1,15 +1,6 @@
 EventScript_UseSurf::
-	goto_if_unset FLAG_BADGE05_GET, EventScript_EndUseSurf
-	checkpartytype TYPE_WATER
-	goto_if_ne VAR_RESULT, PARTY_SIZE, EventScript_CanUseSurf
-	checkpartytype TYPE_ICE
-	goto_if_ne VAR_RESULT, PARTY_SIZE, EventScript_CanUseSurf
-	checkpartytype TYPE_NORMAL
-	goto_if_ne VAR_RESULT, PARTY_SIZE, EventScript_CanUseSurf
-	goto EventScript_CanUseSurf
-	releaseall
-	end
-EventScript_CanUseSurf::
+	checkpartymove MOVE_SURF
+	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_EndUseSurf
 	bufferpartymonnick STR_VAR_1, VAR_RESULT
 	setfieldeffectargument 0, VAR_RESULT
 	lockall
@@ -20,7 +11,34 @@ EventScript_CanUseSurf::
 EventScript_ReleaseUseSurf::
 	releaseall
 EventScript_EndUseSurf::
-	releaseall
 	end
+
+EventScript_MoveBeforeSurf::
+	specialvar VAR_RESULT, GetPlayerFacingDirection
+	switch VAR_RESULT
+	case DIR_NORTH, EventScript_SurfMoveUp
+	case DIR_SOUTH, EventScript_SurfMoveDown
+	case DIR_EAST, EventScript_SurfMoveRight
+	case DIR_WEST, EventScript_SurfMoveLeft
+	goto EventScript_ReleaseUseSurf
 	
-	
+EventScript_SurfMoveUp::
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkUp
+	waitmovement 0
+	goto EventScript_ReleaseUseSurf
+
+EventScript_SurfMoveDown::
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkDown
+	waitmovement 0
+	goto EventScript_ReleaseUseSurf
+
+EventScript_SurfMoveRight::
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkRight
+	waitmovement 0
+	goto EventScript_ReleaseUseSurf
+
+EventScript_SurfMoveLeft::
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkLeft
+	waitmovement 0
+	goto EventScript_ReleaseUseSurf
+

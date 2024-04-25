@@ -16,4 +16,3 @@ OldaleTown_House2_Text_PokemonLevelUp:
 OldaleTown_House2_Text_YoullGoFurtherWithStrongPokemon:
 	.string "Si tu Pokémon se sobrepasa de nivel,\n"
 	.string "podría llegar a no obedecerte.$"
-

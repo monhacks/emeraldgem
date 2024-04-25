@@ -1144,4 +1144,23 @@ static const u16 sRowletFormSpeciesIdTable[] = {
 	SPECIES_ROWLET_ASH,
 	FORM_SPECIES_END,
 };
+
+static const u16 sRillaboomFormSpeciesIdTable[] = {
+    SPECIES_RILLABOOM,
+    SPECIES_RILLABOOM_GIGANTAMAX,
+    FORM_SPECIES_END,
+};
+
+static const u16 sCinderaceFormSpeciesIdTable[] = {
+    SPECIES_CINDERACE,
+    SPECIES_CINDERACE_GIGANTAMAX,
+    FORM_SPECIES_END,
+};
+
+static const u16 sInteleonFormSpeciesIdTable[] = {
+    SPECIES_INTELEON,
+    SPECIES_INTELEON_GIGANTAMAX,
+    FORM_SPECIES_END,
+};
+
 #endif

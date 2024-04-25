@@ -1749,3 +1749,63 @@ gTilesetPalettes_nuevito::
 	.align 2
 gTilesetTiles_nuevito::
 	.incbin "data/tilesets/primary/nuevito/tiles.4bpp.lz"
+
+	.align 2
+gTilesetPalettes_Nature::
+	.incbin "data/tilesets/primary/nature/palettes/00.gbapal"
+	.incbin "data/tilesets/primary/nature/palettes/01.gbapal"
+	.incbin "data/tilesets/primary/nature/palettes/02.gbapal"
+	.incbin "data/tilesets/primary/nature/palettes/03.gbapal"
+	.incbin "data/tilesets/primary/nature/palettes/04.gbapal"
+	.incbin "data/tilesets/primary/nature/palettes/05.gbapal"
+	.incbin "data/tilesets/primary/nature/palettes/06.gbapal"
+	.incbin "data/tilesets/primary/nature/palettes/07.gbapal"
+	.incbin "data/tilesets/primary/nature/palettes/08.gbapal"
+	.incbin "data/tilesets/primary/nature/palettes/09.gbapal"
+	.incbin "data/tilesets/primary/nature/palettes/10.gbapal"
+	.incbin "data/tilesets/primary/nature/palettes/11.gbapal"
+	.incbin "data/tilesets/primary/nature/palettes/12.gbapal"
+
+	.align 2
+gTilesetTiles_Nature::
+	.incbin "data/tilesets/primary/nature/tiles.4bpp.lz"
+
+	.align 2
+gTilesetPalettes_PetalburgNew::
+	.incbin "data/tilesets/secondary/petalburg_new/palettes/00.gbapal"
+	.incbin "data/tilesets/secondary/petalburg_new/palettes/01.gbapal"
+	.incbin "data/tilesets/secondary/petalburg_new/palettes/02.gbapal"
+	.incbin "data/tilesets/secondary/petalburg_new/palettes/03.gbapal"
+	.incbin "data/tilesets/secondary/petalburg_new/palettes/04.gbapal"
+	.incbin "data/tilesets/secondary/petalburg_new/palettes/05.gbapal"
+	.incbin "data/tilesets/secondary/petalburg_new/palettes/06.gbapal"
+	.incbin "data/tilesets/secondary/petalburg_new/palettes/07.gbapal"
+	.incbin "data/tilesets/secondary/petalburg_new/palettes/08.gbapal"
+	.incbin "data/tilesets/secondary/petalburg_new/palettes/09.gbapal"
+	.incbin "data/tilesets/secondary/petalburg_new/palettes/10.gbapal"
+	.incbin "data/tilesets/secondary/petalburg_new/palettes/11.gbapal"
+	.incbin "data/tilesets/secondary/petalburg_new/palettes/12.gbapal"
+
+	.align 2
+gTilesetTiles_PetalburgNew::
+	.incbin "data/tilesets/secondary/petalburg_new/tiles.4bpp.lz"
+
+	.align 2
+gTilesetPalettes_RustboroNew::
+	.incbin "data/tilesets/secondary/rustboro_new/palettes/00.gbapal"
+	.incbin "data/tilesets/secondary/rustboro_new/palettes/01.gbapal"
+	.incbin "data/tilesets/secondary/rustboro_new/palettes/02.gbapal"
+	.incbin "data/tilesets/secondary/rustboro_new/palettes/03.gbapal"
+	.incbin "data/tilesets/secondary/rustboro_new/palettes/04.gbapal"
+	.incbin "data/tilesets/secondary/rustboro_new/palettes/05.gbapal"
+	.incbin "data/tilesets/secondary/rustboro_new/palettes/06.gbapal"
+	.incbin "data/tilesets/secondary/rustboro_new/palettes/07.gbapal"
+	.incbin "data/tilesets/secondary/rustboro_new/palettes/08.gbapal"
+	.incbin "data/tilesets/secondary/rustboro_new/palettes/09.gbapal"
+	.incbin "data/tilesets/secondary/rustboro_new/palettes/10.gbapal"
+	.incbin "data/tilesets/secondary/rustboro_new/palettes/11.gbapal"
+	.incbin "data/tilesets/secondary/rustboro_new/palettes/12.gbapal"
+
+	.align 2
+gTilesetTiles_RustboroNew::
+	.incbin "data/tilesets/secondary/rustboro_new/tiles.4bpp.lz"

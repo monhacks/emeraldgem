@@ -236,21 +236,22 @@ RustboroCity_DevonCorp_3F_Text_NotFamiliarWithTrends:
 	.string "Honestamente, pienso que si nos\ndejáramos llevar por “lo que está bien,”\lperderíamos de vista el progreso.\pEs mejor incomodar a un grupo\nmenor molesto, que lidiar con\lla opresión y discomfort de muchos.$"
 
 RustboroCity_DevonCorp_3F_Text_ThisIs3rdFloorWaitHere:
-	.string "Este es el piso más importante\n de la Corporación.\pEl {COLOR BLUE}Presidente{COLOR DARK_GRAY} está en esta\lsala. Déjame decirte que el hombre es\lmuy decidido y eso ha llevado\la nuestro éxito actual.\p"
-	.string "Por eso mismo, no puedo dejar\nque cualquiera se le acerque, primero\ltendrá que aprobarlo él.$"
+	.string "Esta es la oficina del Presidente.\p"
+	.string "Él es un hombre muy ocupado, por lo que\n"
+	.string "tendré que preguntarle si tiene tiempo\l"
+	.string "para atenderte.$"
 
 RustboroCity_DevonCorp_3F_Text_WordWithPresidentComeWithMe:
-	.string "El Presidente ha aceptado\ntu prescencia. Por favor, sígueme.$"
+	.string "El Presidente está libre.\nPor favor, sígueme.$"
 
 RustboroCity_DevonCorp_3F_Text_PleaseGoAhead:
 	.string "Por favor, pase.$"
 
 RustboroCity_DevonCorp_3F_Text_VisitCaptSternShipyard:
-	.string "El Capitán Stern es un gran hombre.\pOjalá él hubiese sido mi padre.$"
+	.string "El Capitán Stern es reconocido\nmundialmente. Espero un día ser tan\lexitoso como él.$"
 
 RustboroCity_DevonCorp_3F_Text_RepeatAndTimerHugelyPopular:
-	.string "Cuando era chico solía besar a\nmis Barbies y Kens.\l¡Y mírame ahora, trabajando en Devon\ny besando a mi esposa y esposo!$"
+	.string "Fabricamos Pokéballs. Compra Pokéballs.$"
 
 RustboroCity_DevonCorp_3F_Text_RareRocksDisplay:
 	.string "Es una colección de rocas raras.\nUna inscripción dice:\l“No te las comas, Fer.” y tiene\luna cara triste dibujada.$"
-

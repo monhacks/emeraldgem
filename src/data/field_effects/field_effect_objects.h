@@ -1,5 +1,6 @@
 const struct SpritePalette gSpritePalette_GeneralFieldEffect0 = {gFieldEffectObjectPalette0, FLDEFF_PAL_TAG_GENERAL_0};
 const struct SpritePalette gSpritePalette_GeneralFieldEffect1 = {gFieldEffectObjectPalette1, FLDEFF_PAL_TAG_GENERAL_1};
+const struct SpritePalette gSpritePalette_GeneralTallGrass = {gFieldEffectObjectPaletteTallGrass, FLDEFF_PAL_TAG_TALL_GRASS};
 
 static const union AnimCmd sAnim_Shadow[] =
 {
@@ -93,7 +94,7 @@ static const union AnimCmd *const sAnimTable_TallGrass[] =
 
 const struct SpriteTemplate gFieldEffectObjectTemplate_TallGrass = {
     .tileTag = TAG_NONE,
-    .paletteTag = FLDEFF_PAL_TAG_GENERAL_1,
+    .paletteTag = FLDEFF_PAL_TAG_TALL_GRASS,
     .oam = &gObjectEventBaseOam_16x16,
     .anims = sAnimTable_TallGrass,
     .images = sPicTable_TallGrass,
@@ -680,29 +681,29 @@ const struct SpriteTemplate gFieldEffectObjectTemplate_JumpLongGrass = {
 };
 
 static const struct SpriteFrameImage sPicTable_UnusedGrass[] = {
-    overworld_frame(gFieldEffectObjectPic_JumpLongGrass, 2, 2, 6),
-    overworld_frame(gFieldEffectObjectPic_Unknown17, 2, 2, 0),
-    overworld_frame(gFieldEffectObjectPic_Unknown17, 2, 2, 1),
-    overworld_frame(gFieldEffectObjectPic_Unknown17, 2, 2, 2),
-    overworld_frame(gFieldEffectObjectPic_Unknown17, 2, 2, 3),
-    overworld_frame(gFieldEffectObjectPic_Unknown17, 2, 2, 4),
-    overworld_frame(gFieldEffectObjectPic_Unknown17, 2, 2, 5),
-    overworld_frame(gFieldEffectObjectPic_Unknown17, 2, 2, 6),
-    overworld_frame(gFieldEffectObjectPic_Unknown17, 2, 2, 7),
+    overworld_frame(gUnusedGrass3, 2, 2, 0),
+    overworld_frame(gUnusedGrass3, 2, 2, 0),
+    overworld_frame(gUnusedGrass3, 2, 2, 1),
+    overworld_frame(gUnusedGrass3, 2, 2, 1),
+    overworld_frame(gUnusedGrass3, 2, 2, 2),
+    overworld_frame(gUnusedGrass3, 2, 2, 2),
+    overworld_frame(gUnusedGrass3, 2, 2, 3),
+    overworld_frame(gUnusedGrass3, 2, 2, 3),
+    overworld_frame(gUnusedGrass3, 2, 2, 3),
 };
 
 static const union AnimCmd sAnim_UnusedGrass[] =
 {
     ANIMCMD_FRAME(0, 10),
-    ANIMCMD_FRAME(1, 4),
     ANIMCMD_FRAME(2, 4),
-    ANIMCMD_FRAME(3, 4),
+    ANIMCMD_FRAME(2, 4),
     ANIMCMD_FRAME(4, 4),
-    ANIMCMD_FRAME(5, 4),
+    ANIMCMD_FRAME(4, 4),
     ANIMCMD_FRAME(6, 4),
-    ANIMCMD_FRAME(7, 4),
-    ANIMCMD_FRAME(8, 4),
-    ANIMCMD_JUMP(7),
+    ANIMCMD_FRAME(6, 4),
+    ANIMCMD_FRAME(4, 4),
+    ANIMCMD_FRAME(4, 4),
+    ANIMCMD_JUMP(1),
 };
 
 static const union AnimCmd *const sAnimTable_UnusedGrass[] =
@@ -712,7 +713,7 @@ static const union AnimCmd *const sAnimTable_UnusedGrass[] =
 
 const struct SpriteTemplate gFieldEffectObjectTemplate_UnusedGrass = {
     .tileTag = TAG_NONE,
-    .paletteTag = FLDEFF_PAL_TAG_GENERAL_1,
+    .paletteTag = FLDEFF_PAL_TAG_TALL_GRASS,
     .oam = &gObjectEventBaseOam_16x16,
     .anims = sAnimTable_UnusedGrass,
     .images = sPicTable_UnusedGrass,
@@ -745,7 +746,7 @@ static const union AnimCmd *const sAnimTable_UnusedGrass2[] =
 
 const struct SpriteTemplate gFieldEffectObjectTemplate_UnusedGrass2 = {
     .tileTag = TAG_NONE,
-    .paletteTag = FLDEFF_PAL_TAG_GENERAL_1,
+    .paletteTag = FLDEFF_PAL_TAG_TALL_GRASS,
     .oam = &gObjectEventBaseOam_16x16,
     .anims = sAnimTable_UnusedGrass2,
     .images = sPicTable_UnusedGrass2,

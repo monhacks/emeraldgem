@@ -445,6 +445,11 @@ const u8 gInitialMovementTypeFacingDirections[] = {
 #define OBJ_EVENT_PAL_TAG_BRAWLY                  0x1126
 #define OBJ_EVENT_PAL_TAG_TEAM_AQUA               0x1127
 #define OBJ_EVENT_PAL_TAG_ARCHIE               	  0x1128
+#define OBJ_EVENT_PAL_TAG_PELIPPER                0x1129
+#define OBJ_EVENT_PAL_TAG_QWILFISH             	  0x1130
+#define OBJ_EVENT_PAL_TAG_KROKOROK             	  0x1131
+#define OBJ_EVENT_PAL_TAG_SHARPEDO             	  0x1132
+#define OBJ_EVENT_PAL_TAG_MAGCARGO             	  0x1133
 #define OBJ_EVENT_PAL_TAG_NONE                    0x11FF
 
 #include "data/field_effects/field_effect_object_template_pointers.h"
@@ -518,6 +523,11 @@ static const struct SpritePalette sObjectEventSpritePalettes[] = {
     {gObjectEventPal_Lugia,                 OBJ_EVENT_PAL_TAG_LUGIA},
     {gObjectEventPal_RubySapphireBrendan,   OBJ_EVENT_PAL_TAG_RS_BRENDAN},
     {gObjectEventPal_RubySapphireMay,       OBJ_EVENT_PAL_TAG_RS_MAY},
+    {gObjectEventPal_Sharpedo,       		OBJ_EVENT_PAL_TAG_SHARPEDO},
+    {gObjectEventPal_Krokorok,   		    OBJ_EVENT_PAL_TAG_KROKOROK},
+    {gObjectEventPal_Magcargo,    		    OBJ_EVENT_PAL_TAG_MAGCARGO},
+    {gObjectEventPal_Qwilfish,   		    OBJ_EVENT_PAL_TAG_QWILFISH},
+    {gObjectEventPal_Pelipper,    		    OBJ_EVENT_PAL_TAG_PELIPPER},
     {},
 };
 // static const u16 sReflectionPaletteTags_Brendan[] = {
@@ -1586,7 +1596,7 @@ u8 SpawnSpecialObjectEventParameterized(u16 graphicsId, u8 movementBehavior, u8 
     y -= MAP_OFFSET;
     objectEventTemplate.localId = localId;
     objectEventTemplate.graphicsId = graphicsId;
-    objectEventTemplate.inConnection = 0;
+    // objectEventTemplate.inConnection = 0;
     objectEventTemplate.x = x;
     objectEventTemplate.y = y;
     objectEventTemplate.elevation = elevation;
@@ -1975,7 +1985,7 @@ const struct ObjectEventGraphicsInfo *GetObjectEventGraphicsInfo(u16 graphicsId)
     }
 
     if (graphicsId >= NUM_OBJ_EVENT_GFX)
-        graphicsId = OBJ_EVENT_GFX_NINJA_BOY;
+        graphicsId -= 1;
 
     return gObjectEventGraphicsInfoPointers[graphicsId];
 }
@@ -7712,13 +7722,13 @@ static void GetGroundEffectFlags_Reflection(struct ObjectEvent *objEvent, u32 *f
 
 static void GetGroundEffectFlags_TallGrassOnSpawn(struct ObjectEvent *objEvent, u32 *flags)
 {
-    if (MetatileBehavior_IsTallGrass(objEvent->currentMetatileBehavior))
+    if (MetatileBehavior_IsTallGrass(objEvent->currentMetatileBehavior) || MetatileBehavior_IsDarkGrass(objEvent->currentMetatileBehavior))
         *flags |= GROUND_EFFECT_FLAG_TALL_GRASS_ON_SPAWN;
 }
 
 static void GetGroundEffectFlags_TallGrassOnBeginStep(struct ObjectEvent *objEvent, u32 *flags)
 {
-    if (MetatileBehavior_IsTallGrass(objEvent->currentMetatileBehavior))
+    if (MetatileBehavior_IsTallGrass(objEvent->currentMetatileBehavior) || MetatileBehavior_IsDarkGrass(objEvent->currentMetatileBehavior))
         *flags |= GROUND_EFFECT_FLAG_TALL_GRASS_ON_MOVE;
 }
 

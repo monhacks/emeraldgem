@@ -29,4 +29,3 @@ RustboroCity_Flat2_2F_Text_MyDaddyMadeThisYouCanHaveIt:
 
 RustboroCity_Flat2_2F_Text_GoingToWorkAtDevonToo:
 	.string "¡Ojalá trabaje ahí cuando sea grande!$"
-

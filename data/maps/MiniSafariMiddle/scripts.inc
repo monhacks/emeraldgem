@@ -154,4 +154,3 @@ MiniSafariMiddle_Text_FirstTimeInfo::
 	.string "das 500 pasos.\p"
 	.string "Además, necesitarás un {COLOR RED}Tubo {POKEBLOCK}s\n"
 	.string "{COLOR DARK_GRAY}para jugar.$"
-

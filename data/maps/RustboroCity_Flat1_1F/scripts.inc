@@ -14,4 +14,3 @@ RustboroCity_Flat1_1F_Text_EveryPokemonHasAbility:
 
 RustboroCity_Flat1_1F_Text_PokemonStrange:
 	.string "Mi esposo dice cosas tan obvias que me\nhace querer divorciarme.\pPero es más barato vivir\ncon dos sueldos.$"
-

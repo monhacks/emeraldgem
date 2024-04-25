@@ -101,10 +101,6 @@ AquaHideout_B1F_EventScript_Grunt5::
 	msgbox AquaHideout_B1F_Text_Grunt5PostBattle, MSGBOX_AUTOCLOSE
 	end
 
-AquaHideout_B1F_EventScript_Grunt7::
-	trainerbattle_single TRAINER_GRUNT_AQUA_HIDEOUT_7, AquaHideout_B1F_Text_Grunt7Intro, AquaHideout_B1F_Text_Grunt7Defeat
-	msgbox AquaHideout_B1F_Text_Grunt7PostBattle, MSGBOX_AUTOCLOSE
-	end
 
 AquaHideout_B1F_Text_Grunt2Intro:
 	.string "If you want to know the secret about\n"
