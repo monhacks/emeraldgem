@@ -5,217 +5,217 @@ SlateportCity_Harbor_MapScripts::
 
 SlateportCity_Harbor_MapScripts_MAP_SCRIPT_ON_TRANSITION:
 # 13 "data/maps/SlateportCity_Harbor/scripts.pory"
-	setescapewarp MAP_SLATEPORT_CITY, 28, 13
-# 14 "data/maps/SlateportCity_Harbor/scripts.pory"
 	setvar VAR_TEMP_1, 0
-# 15 "data/maps/SlateportCity_Harbor/scripts.pory"
+# 14 "data/maps/SlateportCity_Harbor/scripts.pory"
 	compare VAR_SLATEPORT_HARBOR_STATE, 1
 	goto_if_eq SlateportCity_Harbor_MapScripts_MAP_SCRIPT_ON_TRANSITION_2
 SlateportCity_Harbor_MapScripts_MAP_SCRIPT_ON_TRANSITION_1:
-# 21 "data/maps/SlateportCity_Harbor/scripts.pory"
+# 20 "data/maps/SlateportCity_Harbor/scripts.pory"
 	goto_if_set FLAG_SYS_GAME_CLEAR, SlateportCity_Harbor_MapScripts_MAP_SCRIPT_ON_TRANSITION_4
 	return
 
 SlateportCity_Harbor_MapScripts_MAP_SCRIPT_ON_TRANSITION_2:
-# 16 "data/maps/SlateportCity_Harbor/scripts.pory"
+# 15 "data/maps/SlateportCity_Harbor/scripts.pory"
 	savebgm MUS_ENCOUNTER_AQUA
-# 17 "data/maps/SlateportCity_Harbor/scripts.pory"
+# 16 "data/maps/SlateportCity_Harbor/scripts.pory"
 	setobjectxyperm 4, 12, 13
-# 18 "data/maps/SlateportCity_Harbor/scripts.pory"
+# 17 "data/maps/SlateportCity_Harbor/scripts.pory"
 	setobjectmovementtype 4, MOVEMENT_TYPE_FACE_LEFT
-# 19 "data/maps/SlateportCity_Harbor/scripts.pory"
+# 18 "data/maps/SlateportCity_Harbor/scripts.pory"
 	setflag FLAG_HIDE_SLATEPORT_CITY_HARBOR_PATRONS
 	goto SlateportCity_Harbor_MapScripts_MAP_SCRIPT_ON_TRANSITION_1
 
 SlateportCity_Harbor_MapScripts_MAP_SCRIPT_ON_TRANSITION_4:
-# 22 "data/maps/SlateportCity_Harbor/scripts.pory"
+# 21 "data/maps/SlateportCity_Harbor/scripts.pory"
 	clearflag FLAG_HIDE_SLATEPORT_CITY_HARBOR_SS_TIDAL
 	return
 
 
 SlateportCity_Harbor_EventScript_AquaEscapeTrigger1::
-# 28 "data/maps/SlateportCity_Harbor/scripts.pory"
+# 27 "data/maps/SlateportCity_Harbor/scripts.pory"
 	lockall
-# 29 "data/maps/SlateportCity_Harbor/scripts.pory"
+# 28 "data/maps/SlateportCity_Harbor/scripts.pory"
 	setvar VAR_0x8008, 1
-# 30 "data/maps/SlateportCity_Harbor/scripts.pory"
+# 29 "data/maps/SlateportCity_Harbor/scripts.pory"
 	goto SlateportCity_Harbor_EventScript_AquaEscapeScene
 	return
 
 
 SlateportCity_Harbor_EventScript_AquaEscapeTrigger2::
-# 34 "data/maps/SlateportCity_Harbor/scripts.pory"
+# 33 "data/maps/SlateportCity_Harbor/scripts.pory"
 	lockall
-# 35 "data/maps/SlateportCity_Harbor/scripts.pory"
+# 34 "data/maps/SlateportCity_Harbor/scripts.pory"
 	setvar VAR_0x8008, 2
-# 36 "data/maps/SlateportCity_Harbor/scripts.pory"
+# 35 "data/maps/SlateportCity_Harbor/scripts.pory"
 	goto SlateportCity_Harbor_EventScript_AquaEscapeScene
 	return
 
 
 SlateportCity_Harbor_EventScript_AquaEscapeScene::
-# 40 "data/maps/SlateportCity_Harbor/scripts.pory"
+# 39 "data/maps/SlateportCity_Harbor/scripts.pory"
 	lockall
-# 41 "data/maps/SlateportCity_Harbor/scripts.pory"
+# 40 "data/maps/SlateportCity_Harbor/scripts.pory"
 	special SpawnCameraObject
-# 42 "data/maps/SlateportCity_Harbor/scripts.pory"
+# 41 "data/maps/SlateportCity_Harbor/scripts.pory"
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterUp
+# 42 "data/maps/SlateportCity_Harbor/scripts.pory"
+	applymovement 7, Common_Movement_WalkInPlaceDown
 # 43 "data/maps/SlateportCity_Harbor/scripts.pory"
-	applymovement 7, Common_Movement_WalkInPlaceDown
+	applymovement 6, Common_Movement_WalkInPlaceDown
 # 44 "data/maps/SlateportCity_Harbor/scripts.pory"
-	applymovement 6, Common_Movement_WalkInPlaceDown
+	waitmovement 0
 # 45 "data/maps/SlateportCity_Harbor/scripts.pory"
-	waitmovement 0
+	namebox Archie
 # 46 "data/maps/SlateportCity_Harbor/scripts.pory"
-	namebox Archie
-# 47 "data/maps/SlateportCity_Harbor/scripts.pory"
 	msgbox SlateportCity_Harbor_EventScript_AquaEscapeScene_Text_0, MSGBOX_INTERRUPT
+# 47 "data/maps/SlateportCity_Harbor/scripts.pory"
+	namebox Unknown
 # 48 "data/maps/SlateportCity_Harbor/scripts.pory"
-	namebox Unknown
-# 49 "data/maps/SlateportCity_Harbor/scripts.pory"
 	msgbox SlateportCity_Harbor_EventScript_AquaEscapeScene_Text_1
-# 50 "data/maps/SlateportCity_Harbor/scripts.pory"
+# 49 "data/maps/SlateportCity_Harbor/scripts.pory"
 	fadeoutbgm 1
+# 50 "data/maps/SlateportCity_Harbor/scripts.pory"
+	playse SE_PIN
 # 51 "data/maps/SlateportCity_Harbor/scripts.pory"
-	playse SE_PIN
+	applymovement 7, Common_Movement_ExclamationMark
 # 52 "data/maps/SlateportCity_Harbor/scripts.pory"
-	applymovement 7, Common_Movement_ExclamationMark
-# 53 "data/maps/SlateportCity_Harbor/scripts.pory"
 	applymovement 7, Common_Movement_WalkInPlaceDown
-# 54 "data/maps/SlateportCity_Harbor/scripts.pory"
+# 53 "data/maps/SlateportCity_Harbor/scripts.pory"
 	applymovement 6, Common_Movement_WalkInPlaceDown
+# 54 "data/maps/SlateportCity_Harbor/scripts.pory"
+	waitmovement 0
 # 55 "data/maps/SlateportCity_Harbor/scripts.pory"
-	waitmovement 0
+	namebox Archie
 # 56 "data/maps/SlateportCity_Harbor/scripts.pory"
-	namebox Archie
-# 57 "data/maps/SlateportCity_Harbor/scripts.pory"
 	msgbox SlateportCity_Harbor_EventScript_AquaEscapeScene_Text_2
-# 58 "data/maps/SlateportCity_Harbor/scripts.pory"
+# 57 "data/maps/SlateportCity_Harbor/scripts.pory"
 	namebox Aqua
-# 59 "data/maps/SlateportCity_Harbor/scripts.pory"
+# 58 "data/maps/SlateportCity_Harbor/scripts.pory"
 	msgbox SlateportCity_Harbor_EventScript_AquaEscapeScene_Text_3, MSGBOX_INTERRUPT
-# 60 "data/maps/SlateportCity_Harbor/scripts.pory"
+# 59 "data/maps/SlateportCity_Harbor/scripts.pory"
 	msgbox SlateportCity_Harbor_EventScript_AquaEscapeScene_Text_4
+# 60 "data/maps/SlateportCity_Harbor/scripts.pory"
+	namebox Archie
 # 61 "data/maps/SlateportCity_Harbor/scripts.pory"
-	namebox Archie
-# 62 "data/maps/SlateportCity_Harbor/scripts.pory"
 	msgbox SlateportCity_Harbor_EventScript_AquaEscapeScene_Text_5
-# 63 "data/maps/SlateportCity_Harbor/scripts.pory"
+# 62 "data/maps/SlateportCity_Harbor/scripts.pory"
 	applymovement 4, Common_Movement_FaceDown
+# 63 "data/maps/SlateportCity_Harbor/scripts.pory"
+	waitmovement 0
 # 64 "data/maps/SlateportCity_Harbor/scripts.pory"
-	waitmovement 0
+	namebox Unknown
 # 65 "data/maps/SlateportCity_Harbor/scripts.pory"
-	namebox Unknown
-# 66 "data/maps/SlateportCity_Harbor/scripts.pory"
 	msgbox SlateportCity_Harbor_EventScript_AquaEscapeScene_Text_6
-# 67 "data/maps/SlateportCity_Harbor/scripts.pory"
+# 66 "data/maps/SlateportCity_Harbor/scripts.pory"
 	playse SE_PIN
-# 68 "data/maps/SlateportCity_Harbor/scripts.pory"
+# 67 "data/maps/SlateportCity_Harbor/scripts.pory"
 	applymovement 7, Common_Movement_ExclamationMark
-# 69 "data/maps/SlateportCity_Harbor/scripts.pory"
+# 68 "data/maps/SlateportCity_Harbor/scripts.pory"
 	applymovement 6, Common_Movement_ExclamationMark
-# 70 "data/maps/SlateportCity_Harbor/scripts.pory"
+# 69 "data/maps/SlateportCity_Harbor/scripts.pory"
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceDown
+# 70 "data/maps/SlateportCity_Harbor/scripts.pory"
+	waitmovement 0
 # 71 "data/maps/SlateportCity_Harbor/scripts.pory"
-	waitmovement 0
-# 72 "data/maps/SlateportCity_Harbor/scripts.pory"
 	addobject 11
-# 73 "data/maps/SlateportCity_Harbor/scripts.pory"
+# 72 "data/maps/SlateportCity_Harbor/scripts.pory"
 	namebox Unknown
-# 74 "data/maps/SlateportCity_Harbor/scripts.pory"
+# 73 "data/maps/SlateportCity_Harbor/scripts.pory"
 	msgbox SlateportCity_Harbor_EventScript_AquaEscapeScene_Text_7
-# 75 "data/maps/SlateportCity_Harbor/scripts.pory"
+# 74 "data/maps/SlateportCity_Harbor/scripts.pory"
 	applymovement 11, SlateportCity_Harbor_Movement_DeltaEnter
+# 75 "data/maps/SlateportCity_Harbor/scripts.pory"
+	namebox Archie
 # 76 "data/maps/SlateportCity_Harbor/scripts.pory"
-	namebox Archie
-# 77 "data/maps/SlateportCity_Harbor/scripts.pory"
 	msgbox SlateportCity_Harbor_EventScript_AquaEscapeScene_Text_8
-# 78 "data/maps/SlateportCity_Harbor/scripts.pory"
+# 77 "data/maps/SlateportCity_Harbor/scripts.pory"
 	namebox Delta
-# 79 "data/maps/SlateportCity_Harbor/scripts.pory"
+# 78 "data/maps/SlateportCity_Harbor/scripts.pory"
 	msgbox SlateportCity_Harbor_EventScript_AquaEscapeScene_Text_9, MSGBOX_INTERRUPT
-# 80 "data/maps/SlateportCity_Harbor/scripts.pory"
+# 79 "data/maps/SlateportCity_Harbor/scripts.pory"
 	waitmovement 0
-# 81 "data/maps/SlateportCity_Harbor/scripts.pory"
+# 80 "data/maps/SlateportCity_Harbor/scripts.pory"
 	namebox Archie
-# 82 "data/maps/SlateportCity_Harbor/scripts.pory"
+# 81 "data/maps/SlateportCity_Harbor/scripts.pory"
 	msgbox SlateportCity_Harbor_EventScript_AquaEscapeScene_Text_10
-# 83 "data/maps/SlateportCity_Harbor/scripts.pory"
+# 82 "data/maps/SlateportCity_Harbor/scripts.pory"
 	closemessage
-# 84 "data/maps/SlateportCity_Harbor/scripts.pory"
+# 83 "data/maps/SlateportCity_Harbor/scripts.pory"
 	hidenamebox
-# 85 "data/maps/SlateportCity_Harbor/scripts.pory"
+# 84 "data/maps/SlateportCity_Harbor/scripts.pory"
 	compare VAR_0x8008, 1
 	goto_if_eq SlateportCity_Harbor_EventScript_AquaEscapeScene_2
 SlateportCity_Harbor_EventScript_AquaEscapeScene_1:
+# 88 "data/maps/SlateportCity_Harbor/scripts.pory"
+	addobject 12
 # 89 "data/maps/SlateportCity_Harbor/scripts.pory"
-	addobject 12
-# 90 "data/maps/SlateportCity_Harbor/scripts.pory"
 	setobjectxy 12, 8, 12
-# 91 "data/maps/SlateportCity_Harbor/scripts.pory"
+# 90 "data/maps/SlateportCity_Harbor/scripts.pory"
 	addobject 12
-# 92 "data/maps/SlateportCity_Harbor/scripts.pory"
+# 91 "data/maps/SlateportCity_Harbor/scripts.pory"
 	playmoncry SPECIES_SHARPEDO, CRY_MODE_NORMAL
+# 92 "data/maps/SlateportCity_Harbor/scripts.pory"
+	namebox Archie
 # 93 "data/maps/SlateportCity_Harbor/scripts.pory"
-	namebox Archie
-# 94 "data/maps/SlateportCity_Harbor/scripts.pory"
 	msgbox SlateportCity_Harbor_EventScript_AquaEscapeScene_Text_11
-# 95 "data/maps/SlateportCity_Harbor/scripts.pory"
+# 94 "data/maps/SlateportCity_Harbor/scripts.pory"
 	fadescreen FADE_TO_BLACK
+# 95 "data/maps/SlateportCity_Harbor/scripts.pory"
+	delay 16
 # 96 "data/maps/SlateportCity_Harbor/scripts.pory"
-	delay 16
-# 97 "data/maps/SlateportCity_Harbor/scripts.pory"
 	namebox Unknown
-# 98 "data/maps/SlateportCity_Harbor/scripts.pory"
+# 97 "data/maps/SlateportCity_Harbor/scripts.pory"
 	msgbox SlateportCity_Harbor_EventScript_AquaEscapeScene_Text_12
-# 99 "data/maps/SlateportCity_Harbor/scripts.pory"
+# 98 "data/maps/SlateportCity_Harbor/scripts.pory"
 	playse SE_THUNDER
-# 100 "data/maps/SlateportCity_Harbor/scripts.pory"
+# 99 "data/maps/SlateportCity_Harbor/scripts.pory"
 	fadescreenspeed FADE_FROM_WHITE, 2
+# 100 "data/maps/SlateportCity_Harbor/scripts.pory"
+	waitse
 # 101 "data/maps/SlateportCity_Harbor/scripts.pory"
-	waitse
-# 102 "data/maps/SlateportCity_Harbor/scripts.pory"
 	playse SE_FAINT
-# 103 "data/maps/SlateportCity_Harbor/scripts.pory"
+# 102 "data/maps/SlateportCity_Harbor/scripts.pory"
 	waitse
-# 104 "data/maps/SlateportCity_Harbor/scripts.pory"
+# 103 "data/maps/SlateportCity_Harbor/scripts.pory"
 	closemessage
-# 105 "data/maps/SlateportCity_Harbor/scripts.pory"
+# 104 "data/maps/SlateportCity_Harbor/scripts.pory"
 	hidenamebox
-# 106 "data/maps/SlateportCity_Harbor/scripts.pory"
+# 105 "data/maps/SlateportCity_Harbor/scripts.pory"
 	removeobject 12
-# 107 "data/maps/SlateportCity_Harbor/scripts.pory"
+# 106 "data/maps/SlateportCity_Harbor/scripts.pory"
 	setobjectxyperm 12, 23, 0
-# 108 "data/maps/SlateportCity_Harbor/scripts.pory"
+# 107 "data/maps/SlateportCity_Harbor/scripts.pory"
 	addobject 9
-# 109 "data/maps/SlateportCity_Harbor/scripts.pory"
+# 108 "data/maps/SlateportCity_Harbor/scripts.pory"
 	addobject 10
-# 110 "data/maps/SlateportCity_Harbor/scripts.pory"
+# 109 "data/maps/SlateportCity_Harbor/scripts.pory"
 	delay 16
-# 111 "data/maps/SlateportCity_Harbor/scripts.pory"
+# 110 "data/maps/SlateportCity_Harbor/scripts.pory"
 	playse SE_PIN
-# 112 "data/maps/SlateportCity_Harbor/scripts.pory"
+# 111 "data/maps/SlateportCity_Harbor/scripts.pory"
 	applymovement 7, Common_Movement_ExclamationMark
-# 113 "data/maps/SlateportCity_Harbor/scripts.pory"
+# 112 "data/maps/SlateportCity_Harbor/scripts.pory"
 	applymovement 6, Common_Movement_ExclamationMark
-# 114 "data/maps/SlateportCity_Harbor/scripts.pory"
+# 113 "data/maps/SlateportCity_Harbor/scripts.pory"
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_ExclamationMark
+# 114 "data/maps/SlateportCity_Harbor/scripts.pory"
+	waitmovement 0
 # 115 "data/maps/SlateportCity_Harbor/scripts.pory"
-	waitmovement 0
-# 116 "data/maps/SlateportCity_Harbor/scripts.pory"
 	applymovement 7, Common_Movement_WalkInPlaceUp
-# 117 "data/maps/SlateportCity_Harbor/scripts.pory"
+# 116 "data/maps/SlateportCity_Harbor/scripts.pory"
 	applymovement 6, Common_Movement_WalkInPlaceUp
-# 118 "data/maps/SlateportCity_Harbor/scripts.pory"
+# 117 "data/maps/SlateportCity_Harbor/scripts.pory"
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceUp
-# 119 "data/maps/SlateportCity_Harbor/scripts.pory"
+# 118 "data/maps/SlateportCity_Harbor/scripts.pory"
 	waitmovement 0
-# 120 "data/maps/SlateportCity_Harbor/scripts.pory"
+# 119 "data/maps/SlateportCity_Harbor/scripts.pory"
 	namebox Archie
-# 121 "data/maps/SlateportCity_Harbor/scripts.pory"
+# 120 "data/maps/SlateportCity_Harbor/scripts.pory"
 	msgbox SlateportCity_Harbor_EventScript_AquaEscapeScene_Text_13
-# 122 "data/maps/SlateportCity_Harbor/scripts.pory"
+# 121 "data/maps/SlateportCity_Harbor/scripts.pory"
 	applymovement OBJ_EVENT_ID_CAMERA, SlateportCity_Harbor_Movement_CameraPan
+# 122 "data/maps/SlateportCity_Harbor/scripts.pory"
+	delay 8
 # 123 "data/maps/SlateportCity_Harbor/scripts.pory"
 	msgbox SlateportCity_Harbor_EventScript_AquaEscapeScene_Text_14
 # 124 "data/maps/SlateportCity_Harbor/scripts.pory"
@@ -423,9 +423,9 @@ SlateportCity_Harbor_EventScript_AquaEscapeScene_1:
 	end
 
 SlateportCity_Harbor_EventScript_AquaEscapeScene_2:
-# 86 "data/maps/SlateportCity_Harbor/scripts.pory"
+# 85 "data/maps/SlateportCity_Harbor/scripts.pory"
 	applymovement OBJ_EVENT_ID_PLAYER, SlateportCity_Harbor_Movement_JumpLeft
-# 87 "data/maps/SlateportCity_Harbor/scripts.pory"
+# 86 "data/maps/SlateportCity_Harbor/scripts.pory"
 	waitmovement 0
 	goto SlateportCity_Harbor_EventScript_AquaEscapeScene_1
 
@@ -1182,7 +1182,7 @@ SlateportCity_Harbor_Text_ThisWillHelpResearch:
 	.string "This will help our research a lot!$"
 
 SlateportCity_Harbor_EventScript_AquaEscapeScene_Text_0:
-# 47 "data/maps/SlateportCity_Harbor/scripts.pory"
+# 46 "data/maps/SlateportCity_Harbor/scripts.pory"
 	.string "¡Increíble, {PLAYER}!\n"
 	.string "Así que nos has seguido desde el Monte\l"
 	.string "Pyre hasta aquí, ¿Eh?\p"
@@ -1196,23 +1196,23 @@ SlateportCity_Harbor_EventScript_AquaEscapeScene_Text_0:
 	.string "{PAUSE 15}estaré en nuestra-{PAUSE 20}$"
 
 SlateportCity_Harbor_EventScript_AquaEscapeScene_Text_1:
-# 49 "data/maps/SlateportCity_Harbor/scripts.pory"
+# 48 "data/maps/SlateportCity_Harbor/scripts.pory"
 	.string "¡J-Jefe!\n"
 	.string "¡El Submarino no responde!\l"
 	.string "¡Alguien metió mano en los controles!$"
 
 SlateportCity_Harbor_EventScript_AquaEscapeScene_Text_2:
-# 57 "data/maps/SlateportCity_Harbor/scripts.pory"
+# 56 "data/maps/SlateportCity_Harbor/scripts.pory"
 	.string "¿¡QUÉ!?$"
 
 SlateportCity_Harbor_EventScript_AquaEscapeScene_Text_3:
-# 59 "data/maps/SlateportCity_Harbor/scripts.pory"
+# 58 "data/maps/SlateportCity_Harbor/scripts.pory"
 	.string "¡D-{PAUSE 5}Deben ser esos idiotas!{PAUSE 15}\n"
 	.string "Los que vimos en el Instituto\l"
 	.string "Meteorológ-{PAUSE 25}$"
 
 SlateportCity_Harbor_EventScript_AquaEscapeScene_Text_4:
-# 60 "data/maps/SlateportCity_Harbor/scripts.pory"
+# 59 "data/maps/SlateportCity_Harbor/scripts.pory"
 	.string "¡AH!{PAUSE 15}\n"
 	.string "¡O-{PAUSE 5}O-{PAUSE 5}Osea, quiero decir, es{EA} idiota {PAUSE 15}-- en\l"
 	.string "singular --{PAUSE 15} que vimos en el Insituto\l"
@@ -1220,19 +1220,19 @@ SlateportCity_Harbor_EventScript_AquaEscapeScene_Text_4:
 	.string "es!$"
 
 SlateportCity_Harbor_EventScript_AquaEscapeScene_Text_5:
-# 62 "data/maps/SlateportCity_Harbor/scripts.pory"
+# 61 "data/maps/SlateportCity_Harbor/scripts.pory"
 	.string "....................\n"
 	.string ".............\p"
 	.string "¿Hay algo que no me estés contanto,\n"
 	.string "Recluta?$"
 
 SlateportCity_Harbor_EventScript_AquaEscapeScene_Text_6:
-# 66 "data/maps/SlateportCity_Harbor/scripts.pory"
+# 65 "data/maps/SlateportCity_Harbor/scripts.pory"
 	.string "Meh. Así que este es el Gran Archie,\n"
 	.string "¿Eh?$"
 
 SlateportCity_Harbor_EventScript_AquaEscapeScene_Text_7:
-# 74 "data/maps/SlateportCity_Harbor/scripts.pory"
+# 73 "data/maps/SlateportCity_Harbor/scripts.pory"
 	.string "Tomar control de este Submarino fue\n"
 	.string "extremadamente fácil, sobretodo\l"
 	.string "después de robarles información en ese\l"
@@ -1242,35 +1242,35 @@ SlateportCity_Harbor_EventScript_AquaEscapeScene_Text_7:
 	.string "Reclutas.$"
 
 SlateportCity_Harbor_EventScript_AquaEscapeScene_Text_8:
-# 77 "data/maps/SlateportCity_Harbor/scripts.pory"
+# 76 "data/maps/SlateportCity_Harbor/scripts.pory"
 	.string "Ese... Ese uniforme...\p"
 	.string "¡Es del Equipo Delta!\p"
 	.string "¿Siguen bajo operaciones?\n"
 	.string "¡Dismantelamos el Equipo hace 10 años!$"
 
 SlateportCity_Harbor_EventScript_AquaEscapeScene_Text_9:
-# 79 "data/maps/SlateportCity_Harbor/scripts.pory"
+# 78 "data/maps/SlateportCity_Harbor/scripts.pory"
 	.string "Ah, sí, bajo orden suya y de Maxie.\p"
 	.string "Apuesto que apenas pueden verse a los\n"
 	.string "ojos después de tal fr-{PAUSE 20}$"
 
 SlateportCity_Harbor_EventScript_AquaEscapeScene_Text_10:
-# 82 "data/maps/SlateportCity_Harbor/scripts.pory"
+# 81 "data/maps/SlateportCity_Harbor/scripts.pory"
 	.string "¡Ahórratelo!\n"
 	.string "¡No vuelvas a hablar así de Maxie y yo!\p"
 	.string "¡Y no creas que te dejaré arruinar\n"
 	.string "nuestros planes ni una ves más!$"
 
 SlateportCity_Harbor_EventScript_AquaEscapeScene_Text_11:
-# 94 "data/maps/SlateportCity_Harbor/scripts.pory"
+# 93 "data/maps/SlateportCity_Harbor/scripts.pory"
 	.string "¡Sharpedo, {PAUSE 15}{COLOR BLUE SHADOW LIGHT_BLUE}Mega Evoluciona{COLOR DARK_GRAY SHADOW LIGHT_GRAY}!$"
 
 SlateportCity_Harbor_EventScript_AquaEscapeScene_Text_12:
-# 98 "data/maps/SlateportCity_Harbor/scripts.pory"
+# 97 "data/maps/SlateportCity_Harbor/scripts.pory"
 	.string "{COLOR LIGHT_GREEN}Trueno{COLOR DARK_GRAY}.$"
 
 SlateportCity_Harbor_EventScript_AquaEscapeScene_Text_13:
-# 121 "data/maps/SlateportCity_Harbor/scripts.pory"
+# 120 "data/maps/SlateportCity_Harbor/scripts.pory"
 	.string "Tú... Así que nunca disolviste el Equipo,\n"
 	.string "¿Eh...?$"
 
@@ -1293,7 +1293,7 @@ SlateportCity_Harbor_EventScript_AquaEscapeScene_Text_16:
 SlateportCity_Harbor_EventScript_AquaEscapeScene_Text_17:
 # 136 "data/maps/SlateportCity_Harbor/scripts.pory"
 	.string "¡Ja, ja ja ja!\p"
-	.string "Eres el mismo de siempre, siento yo. Me\n"
+	.string "Eres el mismo de siempre, amigo. Me\n"
 	.string "alegra, significa que entenderás mis\l"
 	.string "motivos.$"
 
@@ -1308,7 +1308,7 @@ SlateportCity_Harbor_EventScript_AquaEscapeScene_Text_18:
 SlateportCity_Harbor_EventScript_AquaEscapeScene_Text_19:
 # 148 "data/maps/SlateportCity_Harbor/scripts.pory"
 	.string "Si pudieras sentirlo,{PAUSE 15} {COLOR BLUE}el dolor del\n"
-	.string "mundo{COLOR DARK_GRAY}...\p"
+	.string "mundo{COLOR DARK_GRAY}{PAUSE 30}...\p"
 	.string "Entenderías porq-{PAUSE 20}$"
 
 SlateportCity_Harbor_EventScript_AquaEscapeScene_Text_20:
@@ -1320,9 +1320,8 @@ SlateportCity_Harbor_EventScript_AquaEscapeScene_Text_21:
 	.string "¡Agh!\n"
 	.string "Mhh... {PAUSE 15}Ah...\l"
 	.string "Está... {PAUSE 15}Empeorando...\p"
-	.string "Bueno, Archie, lamento tener que irme\n"
-	.string "tan rápido. ¿Qué te parece terminar\l"
-	.string "nuestra conversación en Lilycove?\p"
+	.string "Bueno, Archie, perdón tener que irme tan\n"
+	.string "rápido. ¿Nos vemos en Lilycove?\p"
 	.string "Ah, y, Stern, muchas gracias por el\n"
 	.string "Submarino.$"
 

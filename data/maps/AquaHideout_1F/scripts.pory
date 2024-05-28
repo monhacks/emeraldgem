@@ -3,7 +3,110 @@ const LOCALID_GRUNT_RIGHT = 2
 const LOCALID_GRUNT_UP    = 3
 const LOCALID_DELTA_GRUNT = 4
 
-mapscripts AquaHideout_1F_MapScripts {}
+mapscripts AquaHideout_1F_MapScripts {
+	MAP_SCRIPT_ON_TRANSITION {
+		if (var(VAR_AQUA_HIDEOUT_STATE) >= 1){
+			setobjectxyperm (LOCALID_GRUNT_UP, 23, 2)
+		}
+		return
+	}
+}
+
+script AquaHideout_1F_EventScript_HideoutEntranceGrunts{
+	lock
+	applymovement(LOCALID_GRUNT_LEFT, Common_Movement_WalkInPlaceRight)
+	applymovement(LOCALID_GRUNT_RIGHT, Common_Movement_WalkInPlaceLeft)
+	waitmovement(0)
+	namebox(Aqua)
+	if (flag(FLAG_GROUDON_AWAKENED_MAGMA_HIDEOUT))
+	{
+		msgbox(format("¿Escuchaste lo que el Jefe está haciendo en Ciudad Slateport?"))
+		msgbox(format("¡Sí! Está yendo a buscar el Submarino...\nEspera a ver la cara del público cuando\lse enteren para quién Devon ha-{PAUSE 20} "), MSGBOX_INTERRUPT)
+		msgbox(format("¡Calla, calla! ¿Quién sabe si alguien nos está escuchando?"))
+	}
+	elif (flag(FLAG_RECEIVED_RED_OR_BLUE_ORB))
+	{
+		msgbox(format("¿Te enteraste?\n¡El Equipo Magma está siendo acorralado en su Base Secreta!\pDeberíamos intentar proteger mejor la nuestra, que muy Secreta no es..."))
+		msgbox(format("Escuché que es otro Equipo como nostros... Uno que ha estado atacando a tanto Aqua como Magma...\p"
+				"Escuché que Shelly los vio, pero que les dijo a los Reclutas que los vieron que cerraran la boca..."))
+		msgbox(format("¡No seas tonto!\nNuestros Admins nunca se dejarían vencer por idiotas así, ¡Nunca!"))
+	}
+	else {
+		msgbox(format("¿Escuchaste lo que el Jefe está haciendo en la Ruta 122?"))
+		msgbox(format("¡Sí!\nPor lo que escuché, está intentando robar un Orbe, pero creo que... ¿Están siendo ayudados por el Equipo Magma?"))
+		msgbox(format("¡No seas tonto!\nNuestro Jefe nunca se juntaría con el idiota de Maxie, ¡Ya no más, al menos!"))
+	}
+	hidenamebox
+	applymovement(LOCALID_GRUNT_LEFT, Common_Movement_WalkInPlaceDown)
+	applymovement(LOCALID_GRUNT_RIGHT, Common_Movement_WalkInPlaceDown)
+	waitmovement(0)
+	namebox(Aqua)
+	msgbox(format("¡E-ey! ¿Estabas escuchando lo que decíamos?"))
+	hidenamebox
+	closemessage
+	release
+	end
+}
+
+script AquaHideout_1F_EventScript_Grunt1 {
+	lockall
+	faceplayer
+	namebox (Aqua)
+	msgbox(format("M-mis pobres Pokémon...\nEstos desgraciados los dejaron muy lastimados...\pE-estoy tan preocupado por ellos, te prometo que no te haré nada si me ayudas...\p¿Podrías darme algún Revivir para curarlos?"), MSGBOX_YESNO)
+	if (var(VAR_RESULT) == YES){
+		hidenamebox
+		checkitem (ITEM_REVIVE)
+		if (var(VAR_RESULT)==TRUE){
+			removeitem(ITEM_REVIVE)
+			playfanfare(MUS_OBTAIN_ITEM)
+			message(format("¡Le diste un Revivir al Recluta!"))
+			waitfanfare
+			waitmessage
+			goto (AquaHideout_1F_EventScript_Grunt1Helped)
+		}
+		checkitem(ITEM_REVIVAL_HERB)
+		if (var(VAR_RESULT)==TRUE){
+			removeitem(ITEM_REVIVAL_HERB)
+			playfanfare(MUS_OBTAIN_ITEM)
+			message(format("¡Le diste una Hierba Revivir al Recluta!"))
+			waitfanfare
+			waitmessage
+			goto (AquaHideout_1F_EventScript_Grunt1Helped)
+		}
+		checkitem(ITEM_MAX_REVIVE)
+		if (var(VAR_RESULT)==TRUE){
+			removeitem(ITEM_MAX_REVIVE)
+			playfanfare(MUS_OBTAIN_ITEM)
+			message(format("¡Le diste un Maxi Revivir al Recluta!"))
+			waitfanfare
+			waitmessage
+			goto (AquaHideout_1F_EventScript_Grunt1Helped)
+		}
+	}
+	namebox (Aqua)
+	msgbox(format("Oh... Está bien...\nM-mis pobres Pokémon.."))
+	hidenamebox
+	closemessage
+	releaseall
+}
+
+script AquaHideout_1F_EventScript_Grunt1Helped {
+	msgbox(format("¡M-muchas gracias!\nAhora podré ir a un Centro Pokémon..."))
+	waitmessage
+	hidenamebox
+	closemessage
+	addvar(VAR_WISHES_FUFILLED, 1)
+	fadescreen (FADE_TO_WHITE)
+	delay (16)
+	removeobject(LOCALID_GRUNT_UP)
+	setflag(FLAG_HELPED_AQUA_GRUNT)
+	fadescreen(FADE_FROM_WHITE)
+	delay (16)
+	call(Script_Wishes)
+	releaseall
+	end
+}
+
 
 script AquaHideout_1F_TriggerLeft {
 	lockall
@@ -29,6 +132,8 @@ script AquaHideout_1F_Triggers {
 	waitmovement (0)
 	namebox (Delta)
 	msgbox(format("Ahora, sal de mi camino.\nO tendré que usar medidas más drásticas que derrotar a tus Pokémon."))
+	hidenamebox
+	closemessage
 	applymovement (LOCALID_GRUNT_UP, Common_Movement_ExclamationMark)
 	playse (SE_PIN)
 	waitmovement (0)
@@ -37,6 +142,7 @@ script AquaHideout_1F_Triggers {
 	waitmovement (0)
 	removeobject (LOCALID_DELTA_GRUNT)
 	setflag (FLAG_DELTA_GRUNT_AQUA_HIDEOUT)
+	setobjectxyperm(LOCALID_GRUNT_UP, 23, 2)
 	if (var(VAR_AQUA_HIDEOUT_STATE) == 2){
 		applymovement (OBJ_EVENT_ID_CAMERA, AquaHideout_1F_Movement_PanLeftDown)
 	}
@@ -77,91 +183,4 @@ movement AquaHideout_1F_Movement_GetOut {
 	face_right
 	delay_16
 	face_down
-}
-
-script AquaHideout_1F_EventScript_HideoutEntranceGrunts{
-	lock
-	applymovement(LOCALID_GRUNT_LEFT, Common_Movement_WalkInPlaceRight)
-	applymovement(LOCALID_GRUNT_RIGHT, Common_Movement_WalkInPlaceLeft)
-	waitmovement(0)
-	namebox(Aqua)
-	if (flag(FLAG_GROUDON_AWAKENED_MAGMA_HIDEOUT))
-	{
-		msgbox("¿Escuchaste lo que el Jefe está haciendo en Ciudad Slateport?", MSGBOX_DEFAULT)
-		msgbox("¡Sí! Está yendo a buscar el Submarino...\nEspera a ver la cara del público cuando\lse enteren para quién Devon ha-{PAUSE 20} ", MSGBOX_INTERRUPT)
-		msgbox("¡Calla, calla! ¿Quién sabe si alguien nos está escuchando?", MSGBOX_DEFAULT)
-	}
-	elif (flag(FLAG_RECEIVED_RED_OR_BLUE_ORB))
-	{
-		msgbox("¿Te enteraste?\n¡El Equipo Magma está siendo acorralado en su Base Secreta!\pDeberíamos intentar proteger mejor la nuestra, que muy Secreta no es...", MSGBOX_DEFAULT)
-		msgbox("Escuché que es otro Equipo como nostros... Uno que ha estado atacando a tanto Aqua como Magma...\p"
-				"Escuché que Shelly los vio, pero que les dijo a los Reclutas que los vieron que cerraran la boca...", MSGBOX_DEFAULT)
-		msgbox("¡No seas tonto!\nNuestros Admins nunca se dejarían vencer por idiotas así, ¡Nunca!", MSGBOX_DEFAULT)
-	}
-	else {
-		msgbox("¿Escuchaste lo que el Jefe está haciendo en la Ruta 122?", MSGBOX_DEFAULT)
-		msgbox("¡Sí!\nPor lo que escuché, está intentando robar un Orbe, pero creo que... ¿Están siendo ayudados por el Equipo Magma?", MSGBOX_DEFAULT)
-		msgbox("¡No seas tonto!\nNuestro Jefe nunca se juntaría con el idiota de Maxie, ¡Ya no más, al menos!", MSGBOX_DEFAULT)
-	}
-	hidenamebox
-	applymovement(LOCALID_GRUNT_LEFT, Common_Movement_WalkInPlaceDown)
-	applymovement(LOCALID_GRUNT_RIGHT, Common_Movement_WalkInPlaceDown)
-	waitmovement(0)
-	namebox(Aqua)
-	msgbox("¡E-ey! ¿Estabas escuchando lo que decíamos?")
-	hidenamebox
-	closemessage
-	release
-	end
-}
-
-script AquaHideout_1F_EventScript_Grunt1 {
-	if (flag(FLAG_HELPED_AQUA_GRUNT)){
-		namebox (Aqua)
-		msgbox(format("M-mis pobres Pokémon...\nEstos desgraciados los dejaron muy lastimados...\pE-estoy tan preocupado por ellos, te prometo que no te haré nada si me ayudas...\p¿Podrías darme algún Revivir para curarlos?"), MSGBOX_DEFAULT)
-		if (var(VAR_RESULT) == YES){
-			hidenamebox
-			checkitem (ITEM_REVIVE)
-			if (var(VAR_RESULT)==TRUE){
-				removeitem(ITEM_REVIVE)
-				playfanfare(MUS_OBTAIN_ITEM)
-				message(format("¡Le diste un Revivir al Recluta!"))
-				waitmessage
-				goto (AquaHideout_1F_EventScript_Grunt1Helped)
-			}
-			checkitem(ITEM_REVIVAL_HERB)
-			if (var(VAR_RESULT)==TRUE){
-				removeitem(ITEM_REVIVAL_HERB)
-				playfanfare(MUS_OBTAIN_ITEM)
-				message(format("¡Le diste una Hierba Revivir al Recluta!"))
-				waitmessage
-				goto (AquaHideout_1F_EventScript_Grunt1Helped)
-			}
-			checkitem(ITEM_MAX_REVIVE)
-			if (var(VAR_RESULT)==TRUE){
-				removeitem(ITEM_MAX_REVIVE)
-				playfanfare(MUS_OBTAIN_ITEM)
-				message(format("¡Le diste un Maxi Revivir al Recluta!"))
-				waitmessage
-				goto (AquaHideout_1F_EventScript_Grunt1Helped)
-			}
-		}
-		namebox (Aqua)
-		msgbox(format("Oh... Está bien...\nM-mis pobres Pokémon.."), MSGBOX_DEFAULT)
-		releaseall
-	}
-}
-script AquaHideout_1F_EventScript_Grunt1Helped {
-	msgbox(format("¡M-muchas gracias!\nAhora podré ir a un Centro Pokémon..."))
-	waitmessage
-	addvar(VAR_WISHES_FUFILLED, 1)
-	fadescreen (FADE_TO_WHITE)
-	delay (16)
-	removeobject(LOCALID_GRUNT_UP)
-	setflag(FLAG_HELPED_AQUA_GRUNT)
-	fadescreen(FADE_FROM_WHITE)
-	delay (16)
-	call(Script_Wishes)
-	releaseall
-	end
 }

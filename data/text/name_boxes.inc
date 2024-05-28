@@ -109,7 +109,7 @@ Chico:
 Gabby:
 	.string "{COLOR RED}Gabby$"
 Ty:
-	.string "{COLOR RED}Ty$"
+	.string "{COLOR BLUE}Ty$"
 Delta:
 	.string "{COLOR GREEN}Delta$"
 

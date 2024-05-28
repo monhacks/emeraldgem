@@ -3,6 +3,7 @@
 #include "battle.h"
 #include "battle_pike.h"
 #include "battle_tower.h"
+#include "battle_main.h"
 #include "cable_club.h"
 #include "data.h"
 #include "decoration.h"
@@ -134,6 +135,7 @@ static u8 DidPlayerGetFirstFans(void);
 static void SetInitialFansOfPlayer(void);
 static u16 PlayerGainRandomTrainerFan(void);
 static void BufferFanClubTrainerName_(struct LinkBattleRecords *, u8, u8);
+extern struct Evolution gEvolutionTable[][EVOS_PER_MON];
 
 void GetDayOrNight(void)
 {
@@ -4298,6 +4300,9 @@ void RyuIvCheckerDef(void)
     HpIv = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_HP_IV);
     DefIv = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_DEF_IV);
     SpDefIv = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPDEF_IV);
+	HpIv = GetRealIV(HpIv);
+	DefIv = GetRealIV(DefIv);
+	SpDefIv = GetRealIV(SpDefIv);
     ConvertIntToDecimalStringN(gStringVar1, HpIv, STR_CONV_MODE_LEADING_ZEROS, 2);
     ConvertIntToDecimalStringN(gStringVar2, DefIv, STR_CONV_MODE_LEADING_ZEROS, 2);
     ConvertIntToDecimalStringN(gStringVar3, SpDefIv, STR_CONV_MODE_LEADING_ZEROS, 2);
@@ -4312,6 +4317,9 @@ void RyuIvCheckerOff(void)
     AtkIv = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_ATK_IV);
     SpAtkIv = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPATK_IV);
     SpeIv = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPEED_IV);
+	AtkIv = GetRealIV(AtkIv);
+	SpAtkIv = GetRealIV(SpAtkIv);
+	SpeIv = GetRealIV(SpeIv);
     ConvertIntToDecimalStringN(gStringVar1, AtkIv, STR_CONV_MODE_LEADING_ZEROS, 2);
     ConvertIntToDecimalStringN(gStringVar2, SpAtkIv, STR_CONV_MODE_LEADING_ZEROS, 2);
     ConvertIntToDecimalStringN(gStringVar3, SpeIv, STR_CONV_MODE_LEADING_ZEROS, 2);
@@ -4375,7 +4383,7 @@ void RyuSetIvsMedium(void)
 	s32 j;	
     PlaySE(SE_EXP_MAX);
 	for (j = 0; j < NUM_STATS; j++){
-		iv = 16;
+		iv = MAX_PER_STAT_IVS/2+1;
 		SetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_HP_IV + j, &iv);
 	}
 	SetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_HIDDEN_POWER, &gSpecialVar_0x8006);
@@ -4386,7 +4394,7 @@ void RyuSetIvsPerfect(void)
 	s32 j;
     PlaySE(SE_EXP_MAX);
 	for (j = 0; j < NUM_STATS; j++){
-		iv = 31;
+		iv = MAX_PER_STAT_IVS;
 		SetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_HP_IV + j, &iv);
 	}
 	SetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_HIDDEN_POWER, &gSpecialVar_0x8006);
@@ -4401,3 +4409,129 @@ void ShowTrainerType(void)
 {
 	gSpecialVar_Result = gSaveBlock1Ptr->trainerType;
 }
+
+bool8 GetMatchPokemon(u32 data, u8 attribute, u16 species){
+	u32 total,num;
+	switch (attribute){
+		case POKEDOKU_ABILITY:
+			if (gBaseStats[species].abilities[0] == data || gBaseStats[species].abilities[1] == data || gBaseStats[species].abilities[2] == data)
+				return TRUE;
+			break;
+		case POKEDOKU_TYPE:
+			if (gBaseStats[species].type1 == data || gBaseStats[species].type2 == data)
+				return TRUE;
+			break;
+		case POKEDOKU_BASE_STAT_TOTAL:
+			total = (gBaseStats[species].baseAttack + gBaseStats[species].baseDefense + gBaseStats[species].baseHP +
+					gBaseStats[species].baseSpAttack + gBaseStats[species].baseSpDefense + gBaseStats[species].baseSpeed);
+			if (total == data)
+				return TRUE;
+			break;
+		case POKEDOKU_DUAL_OR_SINGLE_TYPE:
+			if (data == 0 && gBaseStats[species].type1 == gBaseStats[species].type2)
+				return TRUE;
+			if (data == 1 && gBaseStats[species].type1 != gBaseStats[species].type2)
+				return TRUE;
+			break;
+		// case POKEDOKU_CATEGORY:
+			// if (gPokedexEntries[species].categoryName == gPokedexEntries[data].categoryName)
+				// return TRUE;
+			// break;
+		case POKEDOKU_EGG_GROUP:
+			if (gBaseStats[species].eggGroup1 == data || gBaseStats[species].eggGroup2 == data)
+				return TRUE;
+			break;
+		case POKEDOKU_EVOLINE:
+			num = GetPreEvolution(species);
+			for (total=0;total<EVOS_PER_MON;total++) {
+				if (gEvolutionTable[num][total].targetSpecies == species && data == 0)
+					return TRUE;
+				if (gEvolutionTable[species][total].targetSpecies != SPECIES_NONE && data == 1)
+					return TRUE;
+				if (gEvolutionTable[num][total].targetSpecies == species && gEvolutionTable[species][total].targetSpecies == SPECIES_NONE && data == 2)
+					return TRUE;
+			}
+			break;
+		case POKEDOKU_EVO_METHOD:
+			for (total=0;total<EVOS_PER_MON;total++) {
+				if (gEvolutionTable[species][total].targetSpecies != SPECIES_NONE && gEvolutionTable[species][total].method == EVO_ITEM && data == 0)
+					return TRUE;
+				if (gEvolutionTable[species][total].targetSpecies != SPECIES_NONE && gEvolutionTable[species][total].method == EVO_FRIENDSHIP && data == 1)
+					return TRUE;
+				if (gEvolutionTable[species][total].targetSpecies != SPECIES_NONE && gEvolutionTable[species][total].method == (EVO_TRADE || EVO_TRADE_ITEM) && data == 2)
+					return TRUE;
+			}
+			break;
+	}
+	return FALSE;
+}
+
+
+u32 GetPokemonAttribute(void){
+	u32 data, random, attribute, species;
+	bool8 check1, check2;
+	attribute = Random() % 2;
+	species = SPECIES_SAWK;
+	// StringExpandPlaceholders(gStringVar4,gSpeciesNames[species]);
+	// gSpecialVar_0x8004 = species;
+	// switch (attribute){
+		// case 0:
+			random = Random() % 3;
+			data = gBaseStats[species].abilities[random];
+			if (data == 0)
+				data = gBaseStats[species].abilities[0];
+			StringExpandPlaceholders(gStringVar1,gAbilityNames[data]);
+			gSpecialVar_0x8000 = data;
+			// break;
+		// case 1:
+		// default:
+			random = Random() % 2;
+			if (random == 0)
+				data = gBaseStats[species].type1;
+			else
+				data = gBaseStats[species].type2;
+			StringExpandPlaceholders(gStringVar2,gTypeNames[data]);
+			// data = (gBaseStats[species].baseAttack + gBaseStats[species].baseDefense + gBaseStats[species].baseHP +
+					// gBaseStats[species].baseSpAttack + gBaseStats[species].baseSpDefense + gBaseStats[species].baseSpeed);
+			gSpecialVar_0x8001 = data;
+			// break;
+	// }
+	species = SPECIES_THROH;
+	check1 = GetMatchPokemon(gSpecialVar_0x8000, POKEDOKU_ABILITY, species);
+	check2 = GetMatchPokemon(gSpecialVar_0x8001, POKEDOKU_TYPE, species);
+	if (check1 == TRUE && check2 == TRUE)
+		StringExpandPlaceholders(gStringVar3,gSpeciesNames[species]);
+	else
+		StringExpandPlaceholders(gStringVar3,gSpeciesNames[0]);
+	return data;
+}
+
+
+/*
+enum {
+	// EASY
+	POKEDOKU_TYPE,
+	POKEDOKU_ABILITY,
+	POKEDOKU_EVOLINE,
+	POKEDOKU_SPECIES_FLAG,
+	POKEDOKU_DUAL_OR_SINGLE_TYPE,
+	// MEDIUM
+	POKEDOKU_SIGNATURE_MOVE,
+	POKEDOKU_EVO_METHOD,
+	POKEDOKU_REGION,
+	POKEDOKU_MEGA_FORM,
+	POKEDOKU_REGIONAL_FORM,
+	// HARD
+	POKEDOKU_HIGHEST_STAT,
+	POKEDOKU_BASE_STAT_TOTAL,
+	POKEDOKU_LEARNS_MOVE,
+	POKEDOKU_STRONGEST_STAB,
+	POKEDOKU_CATEGORY,
+	// IMPOSSIBLE
+	POKEDOKU_STAT_NUMBER,
+	POKEDOKU_EV_YIELD,
+	POKEDOKU_HEIGHT,
+	POKEDOKU_WEIGHT,
+	POKEDOKU_EGG_GROUP,
+}
+*/

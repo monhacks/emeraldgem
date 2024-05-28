@@ -1,7 +1,7 @@
-const u8 gTrainerClassNames[][14] = {
+const u8 gTrainerClassNames[][15] = {
 #if GAME_LANGUAGE == LANGUAGE_SPANISH
-    [TRAINER_CLASS_PKMN_TRAINER_1] = _("Entrenador"),
-    [TRAINER_CLASS_PKMN_TRAINER_2] = _("Entrenadora"),
+    [TRAINER_CLASS_PKMN_TRAINER_1] = _("Entrenador {PKMN}"),
+    [TRAINER_CLASS_PKMN_TRAINER_2] = _("Entrenadora {PKMN}"),
     [TRAINER_CLASS_HIKER] = _("Montañero"),
     [TRAINER_CLASS_TEAM_AQUA] = _("Equipo Aqua"),
     [TRAINER_CLASS_PKMN_BREEDER] = _("Cría {PKMN}"),
@@ -66,6 +66,8 @@ const u8 gTrainerClassNames[][14] = {
     [TRAINER_CLASS_PIKE_QUEEN] = _("Reina Sierpe"),
     [TRAINER_CLASS_PYRAMID_KING] = _("Rey Pirámide"),
     [TRAINER_CLASS_RS_PROTAG] = _("Leyenda {PKMN}"),
+    [TRAINER_CLASS_DELTA_LEADER] = _("Líder Delta"),
+    [TRAINER_CLASS_DELTA_DIVISION] = _("División Delta"),
 #else
     [TRAINER_CLASS_PKMN_TRAINER_1] = _("{PKMN} Trainer"),
     [TRAINER_CLASS_PKMN_TRAINER_2] = _("{PKMN} Trainer"),
@@ -133,5 +135,7 @@ const u8 gTrainerClassNames[][14] = {
     [TRAINER_CLASS_PIKE_QUEEN] = _("Pike Queen"),
     [TRAINER_CLASS_PYRAMID_KING] = _("Pyramid King"),
     [TRAINER_CLASS_RS_PROTAG] = _("{PKMN} Legend"),
+	[TRAINER_CLASS_DELTA_LEADER] = _("Delta Leader"),
+    [TRAINER_CLASS_DELTA_DIVISION] = _("Delta Division"),
 #endif
 };

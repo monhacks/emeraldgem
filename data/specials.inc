@@ -565,3 +565,5 @@ gSpecials::
 	def_special RyuSetIvsPerfect
 	def_special SetTrainerType
 	def_special ShowTrainerType
+	def_special GetPokemonAttribute
+	def_special GetMatchPokemon

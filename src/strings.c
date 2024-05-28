@@ -558,32 +558,35 @@ const u8 gText_HMMovesCantBeForgotten2[] = _("");
 
 #if GAME_LANGUAGE == LANGUAGE_SPANISH
 const u8 gText_XNatureMetAtYZ[] = _(
-    "{DYNAMIC 0x00}{DYNAMIC 0x02}{DYNAMIC 0x01}{DYNAMIC 0x05}{DYNAMIC 0x06}{DYNAMIC 0x07}, capturado en\n{DYNAMIC 0x00}{DYNAMIC 0x04}{DYNAMIC 0x01}. ({LV_2}{DYNAMIC 0}{DYNAMIC 3}{DYNAMIC 1})");
+    "{DYNAMIC 0x00}{DYNAMIC 0x02}{DYNAMIC 0x01}{DYNAMIC 0x05}{DYNAMIC 0x06}{DYNAMIC 0x07}, capturado en\n{DYNAMIC 0x00}{DYNAMIC 0x04}{DYNAMIC 0x01}. ");
 
 const u8 gText_XNatureHatchedAtYZ[] = _(
-    "{DYNAMIC 0x00}{DYNAMIC 0x02}{DYNAMIC 0x01}{DYNAMIC 0x05}{DYNAMIC 0x06}{DYNAMIC 0x07}, nacido en\n{DYNAMIC 0x00}{DYNAMIC 0x04}{DYNAMIC 0x01}. ({LV_2}{DYNAMIC 0}{DYNAMIC 3}{DYNAMIC 1})");
+    "{DYNAMIC 0x00}{DYNAMIC 0x02}{DYNAMIC 0x01}{DYNAMIC 0x05}{DYNAMIC 0x06}{DYNAMIC 0x07}, nacido en\n{DYNAMIC 0x00}{DYNAMIC 0x04}{DYNAMIC 0x01}. ");
 
 
 const u8 gText_XNatureObtainedInTrade[] = _(
-    "{DYNAMIC 0x00}{DYNAMIC 0x02}{DYNAMIC 0x01}{DYNAMIC 0x05}{DYNAMIC 0x06}{DYNAMIC 0x07}, conocido\ppor un intercambio. ({LV_2}{DYNAMIC 0}{DYNAMIC 3}{DYNAMIC 1})");
+    "{DYNAMIC 0x00}{DYNAMIC 0x02}{DYNAMIC 0x01}{DYNAMIC 0x05}{DYNAMIC 0x06}{DYNAMIC 0x07}, conocido\ppor un intercambio. ");
 
 
 const u8 gText_XNatureFatefulEncounter[] = _(
-    "{DYNAMIC 0x00}{DYNAMIC 0x02}{DYNAMIC 0x01}{DYNAMIC 0x05}{DYNAMIC 0x06}{DYNAMIC 0x07}, el destino\nlos unió en {DYNAMIC 0x00}{DYNAMIC 0x04}{DYNAMIC 0x01}. ({LV_2}{DYNAMIC 0}{DYNAMIC 3}{DYNAMIC 1})");
+    "{DYNAMIC 0x00}{DYNAMIC 0x02}{DYNAMIC 0x01}{DYNAMIC 0x05}{DYNAMIC 0x06}{DYNAMIC 0x07}, el destino\nlos unió en un lugar misterioso. ");
+
+const u8 gText_XNatureFatefulEncounterAtYZ[] = _(
+    "{DYNAMIC 0x00}{DYNAMIC 0x02}{DYNAMIC 0x01}{DYNAMIC 0x05}{DYNAMIC 0x06}{DYNAMIC 0x07}, el destino\nlos unió en {DYNAMIC 0x00}{DYNAMIC 0x04}{DYNAMIC 0x01}. ");
 
 
 const u8 gText_XNatureProbablyMetAt[] = _(
-    "{DYNAMIC 0x00}{DYNAMIC 0x02}{DYNAMIC 0x01}{DYNAMIC 0x05}{DYNAMIC 0x06}{DYNAMIC 0x07}, capturado, quizá en\n{DYNAMIC 0x00}{DYNAMIC 0x04}{DYNAMIC 0x01}. ({LV_2}{DYNAMIC 0}{DYNAMIC 3}{DYNAMIC 1})");
+    "{DYNAMIC 0x00}{DYNAMIC 0x02}{DYNAMIC 0x01}{DYNAMIC 0x05}{DYNAMIC 0x06}{DYNAMIC 0x07}, capturado, quizá en\n{DYNAMIC 0x00}{DYNAMIC 0x04}{DYNAMIC 0x01}. ");
 
 
 const u8 gText_XNature[] = _("{DYNAMIC 0x00}{DYNAMIC 0x02}{DYNAMIC 0x01}{DYNAMIC 0x05}{DYNAMIC 0x06}{DYNAMIC 0x07}");
 
 const u8 gText_XNatureMetSomewhereAt[] = _(
-    "{DYNAMIC 0x00}{DYNAMIC 0x02}{DYNAMIC 0x01}{DYNAMIC 0x05}{DYNAMIC 0x06}{DYNAMIC 0x07}, capturado\nen algún lado. ({LV_2}{DYNAMIC 0}{DYNAMIC 3}{DYNAMIC 1})");
+    "{DYNAMIC 0x00}{DYNAMIC 0x02}{DYNAMIC 0x01}{DYNAMIC 0x05}{DYNAMIC 0x06}{DYNAMIC 0x07}, capturado\nen algún lado. ");
 
 
 const u8 gText_XNatureHatchedSomewhereAt[] = _(
-    "{DYNAMIC 0x00}{DYNAMIC 0x02}{DYNAMIC 0x01}{DYNAMIC 0x05}{DYNAMIC 0x06}{DYNAMIC 0x07}, nacido en\nalgún lado. ({LV_2}{DYNAMIC 0}{DYNAMIC 3}{DYNAMIC 1})");
+    "{DYNAMIC 0x00}{DYNAMIC 0x02}{DYNAMIC 0x01}{DYNAMIC 0x05}{DYNAMIC 0x06}{DYNAMIC 0x07}, nacido en\nalgún lado. ");
 
 const u8 gText_OddEggFoundByCouple[] = _("Un Huevo Extraño encontrado\nen la Guardería.");
 const u8 gText_PeculiarEggNicePlace[] = _("Un Huevo peculiar obtenido\npor cosa del destino.");
@@ -631,32 +634,35 @@ const u8 gText_NoDecorationsInUse[] = _("No hay ninguna decoración.{PAUSE_UNTIL
 #else
 	
 const u8 gText_XNatureMetAtYZ[] = _(
-    "{DYNAMIC 0x00}{DYNAMIC 0x02}{DYNAMIC 0x01}{DYNAMIC 0x05}{DYNAMIC 0x06}{DYNAMIC 0x07}, met in\n{DYNAMIC 0x00}{DYNAMIC 0x04}{DYNAMIC 0x01}. ({LV_2}{DYNAMIC 0}{DYNAMIC 3}{DYNAMIC 1})");
+    "{DYNAMIC 0x00}{DYNAMIC 0x02}{DYNAMIC 0x01}{DYNAMIC 0x05}{DYNAMIC 0x06}{DYNAMIC 0x07}, met in\n{DYNAMIC 0x00}{DYNAMIC 0x04}{DYNAMIC 0x01}. ");
 
 const u8 gText_XNatureHatchedAtYZ[] = _(
-    "{DYNAMIC 0x00}{DYNAMIC 0x02}{DYNAMIC 0x01}{DYNAMIC 0x05}{DYNAMIC 0x06}{DYNAMIC 0x07}, hatched in\n{DYNAMIC 0x00}{DYNAMIC 0x04}{DYNAMIC 0x01}. ({LV_2}{DYNAMIC 0}{DYNAMIC 3}{DYNAMIC 1})");
+    "{DYNAMIC 0x00}{DYNAMIC 0x02}{DYNAMIC 0x01}{DYNAMIC 0x05}{DYNAMIC 0x06}{DYNAMIC 0x07}, hatched in\n{DYNAMIC 0x00}{DYNAMIC 0x04}{DYNAMIC 0x01}. ");
 
 
 const u8 gText_XNatureObtainedInTrade[] = _(
-    "{DYNAMIC 0x00}{DYNAMIC 0x02}{DYNAMIC 0x01}{DYNAMIC 0x05}{DYNAMIC 0x06}{DYNAMIC 0x07}, met\pon a trade. ({LV_2}{DYNAMIC 0}{DYNAMIC 3}{DYNAMIC 1})");
+    "{DYNAMIC 0x00}{DYNAMIC 0x02}{DYNAMIC 0x01}{DYNAMIC 0x05}{DYNAMIC 0x06}{DYNAMIC 0x07}, met\pon a trade. ");
 
 
 const u8 gText_XNatureFatefulEncounter[] = _(
-    "{DYNAMIC 0x00}{DYNAMIC 0x02}{DYNAMIC 0x01}{DYNAMIC 0x05}{DYNAMIC 0x06}{DYNAMIC 0x07}, met in\na fateful encounter {DYNAMIC 0x00}{DYNAMIC 0x04}{DYNAMIC 0x01}. ({LV_2}{DYNAMIC 0}{DYNAMIC 3}{DYNAMIC 1})");
+    "{DYNAMIC 0x00}{DYNAMIC 0x02}{DYNAMIC 0x01}{DYNAMIC 0x05}{DYNAMIC 0x06}{DYNAMIC 0x07}, met in\na fateful encounter in a mysterious place. ");
+
+const u8 gText_XNatureFatefulEncounterAtYZ[] = _(
+    "{DYNAMIC 0x00}{DYNAMIC 0x02}{DYNAMIC 0x01}{DYNAMIC 0x05}{DYNAMIC 0x06}{DYNAMIC 0x07}, met in\na fateful encounter at {DYNAMIC 0x00}{DYNAMIC 0x04}{DYNAMIC 0x01}. ");
 
 
 const u8 gText_XNatureProbablyMetAt[] = _(
-    "{DYNAMIC 0x00}{DYNAMIC 0x02}{DYNAMIC 0x01}{DYNAMIC 0x05}{DYNAMIC 0x06}{DYNAMIC 0x07}, met, it seems,\nin {DYNAMIC 0x00}{DYNAMIC 0x04}{DYNAMIC 0x01}. ({LV_2}{DYNAMIC 0}{DYNAMIC 3}{DYNAMIC 1})");
+    "{DYNAMIC 0x00}{DYNAMIC 0x02}{DYNAMIC 0x01}{DYNAMIC 0x05}{DYNAMIC 0x06}{DYNAMIC 0x07}, met, it seems,\nin {DYNAMIC 0x00}{DYNAMIC 0x04}{DYNAMIC 0x01}. ");
 
 
 const u8 gText_XNature[] = _("{DYNAMIC 0x00}{DYNAMIC 0x02}{DYNAMIC 0x01}{DYNAMIC 0x05}{DYNAMIC 0x06}{DYNAMIC 0x07}");
 
 const u8 gText_XNatureMetSomewhereAt[] = _(
-    "{DYNAMIC 0x00}{DYNAMIC 0x02}{DYNAMIC 0x01}{DYNAMIC 0x05}{DYNAMIC 0x06}{DYNAMIC 0x07}, met\nsomewhere. ({LV_2}{DYNAMIC 0}{DYNAMIC 3}{DYNAMIC 1})");
+    "{DYNAMIC 0x00}{DYNAMIC 0x02}{DYNAMIC 0x01}{DYNAMIC 0x05}{DYNAMIC 0x06}{DYNAMIC 0x07}, met\nsomewhere. ");
 
 
 const u8 gText_XNatureHatchedSomewhereAt[] = _(
-    "{DYNAMIC 0x00}{DYNAMIC 0x02}{DYNAMIC 0x01}{DYNAMIC 0x05}{DYNAMIC 0x06}{DYNAMIC 0x07}, hatched\nsomewhere. ({LV_2}{DYNAMIC 0}{DYNAMIC 3}{DYNAMIC 1})");
+    "{DYNAMIC 0x00}{DYNAMIC 0x02}{DYNAMIC 0x01}{DYNAMIC 0x05}{DYNAMIC 0x06}{DYNAMIC 0x07}, hatched\nsomewhere. ");
 
 const u8 gText_OddEggFoundByCouple[] = _("An odd POKéMON EGG found\nby the DAY CARE couple.");
 const u8 gText_PeculiarEggNicePlace[] = _("A peculiar POKéMON EGG\nobtained at the nice place.");

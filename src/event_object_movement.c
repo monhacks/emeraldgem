@@ -5467,7 +5467,7 @@ bool8 MovementAction_WalkNormalDiagonalUpLeft_Step0(struct ObjectEvent *objectEv
     if (objectEvent->directionOverwrite)
         InitMovementNormal(objectEvent, sprite, objectEvent->directionOverwrite, MOVE_SPEED_NORMAL);
     else
-        InitMovementNormal(objectEvent, sprite, DIR_WEST, MOVE_SPEED_NORMAL);
+        InitMovementNormal(objectEvent, sprite, DIR_NORTHWEST, MOVE_SPEED_NORMAL);
     return MovementAction_WalkNormalDiagonalUpLeft_Step1(objectEvent, sprite);
 }
 
@@ -5486,7 +5486,7 @@ bool8 MovementAction_WalkNormalDiagonalUpRight_Step0(struct ObjectEvent *objectE
     if (objectEvent->directionOverwrite)
         InitMovementNormal(objectEvent, sprite, objectEvent->directionOverwrite, MOVE_SPEED_NORMAL);
     else
-        InitMovementNormal(objectEvent, sprite, DIR_EAST, MOVE_SPEED_NORMAL);
+        InitMovementNormal(objectEvent, sprite, DIR_NORTHEAST, MOVE_SPEED_NORMAL);
     return MovementAction_WalkNormalDiagonalUpRight_Step1(objectEvent, sprite);
 }
 
@@ -5505,7 +5505,7 @@ bool8 MovementAction_WalkNormalDiagonalDownLeft_Step0(struct ObjectEvent *object
     if (objectEvent->directionOverwrite)
         InitMovementNormal(objectEvent, sprite, objectEvent->directionOverwrite, MOVE_SPEED_NORMAL);
     else
-        InitMovementNormal(objectEvent, sprite, DIR_WEST, MOVE_SPEED_NORMAL);
+        InitMovementNormal(objectEvent, sprite, DIR_SOUTHWEST, MOVE_SPEED_NORMAL);
     return MovementAction_WalkNormalDiagonalDownLeft_Step1(objectEvent, sprite);
 }
 
@@ -5524,7 +5524,7 @@ bool8 MovementAction_WalkNormalDiagonalDownRight_Step0(struct ObjectEvent *objec
     if (objectEvent->directionOverwrite)
         InitMovementNormal(objectEvent, sprite, objectEvent->directionOverwrite, MOVE_SPEED_NORMAL);
     else
-        InitMovementNormal(objectEvent, sprite, DIR_EAST, MOVE_SPEED_NORMAL);
+        InitMovementNormal(objectEvent, sprite, DIR_SOUTHEAST, MOVE_SPEED_NORMAL);
     return MovementAction_WalkNormalDiagonalDownRight_Step1(objectEvent, sprite);
 }
 

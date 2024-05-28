@@ -10,7 +10,6 @@ const LOCALID_SHARPEDO = 12
 
 mapscripts SlateportCity_Harbor_MapScripts {
 	MAP_SCRIPT_ON_TRANSITION {
-		setescapewarp (MAP_SLATEPORT_CITY, 28, 13)
 		setvar (VAR_TEMP_1, 0)
 		if (var(VAR_SLATEPORT_HARBOR_STATE) == 1){
 			savebgm(MUS_ENCOUNTER_AQUA)
@@ -120,6 +119,7 @@ script SlateportCity_Harbor_EventScript_AquaEscapeScene {
     namebox (Archie)
     msgbox(format("Tú... Así que nunca disolviste el Equipo, ¿Eh...?"))
 	applymovement (OBJ_EVENT_ID_CAMERA, SlateportCity_Harbor_Movement_CameraPan)
+	delay (8)
 	msgbox(format("¿... Winona?"))
 	waitmovement (0)
     namebox (Winona)
@@ -133,7 +133,7 @@ script SlateportCity_Harbor_EventScript_AquaEscapeScene {
 	applymovement (OBJ_EVENT_ID_CAMERA, SlateportCity_Harbor_Movement_CameraDown)
 	waitmovement(0)
 	namebox (Winona)
-    msgbox(format("¡Ja, ja ja ja!\pEres el mismo de siempre, siento yo. Me alegra, significa que entenderás mis motivos."))
+    msgbox(format("¡Ja, ja ja ja!\pEres el mismo de siempre, amigo. Me alegra, significa que entenderás mis motivos."))
 	closemessage
 	hidenamebox
     applymovement (LOCALID_WINONA, SlateportCity_Harbor_Movement_JumpDown)
@@ -145,7 +145,7 @@ script SlateportCity_Harbor_EventScript_AquaEscapeScene {
 	namebox (Archie)
     msgbox(format("Los entiendo, y es por eso que no comprendo tu posición.\pEstás en contra tanto del Equipo Magma, como de nostros.\p¿Porqué?"))
 	namebox (Winona)
-    msgbox(format("Si pudieras sentirlo,{PAUSE 15} {COLOR BLUE}el dolor del mundo{COLOR DARK_GRAY}...\pEntenderías porq-{PAUSE 20} "), MSGBOX_INTERRUPT)
+    msgbox(format("Si pudieras sentirlo,{PAUSE 15} {COLOR BLUE}el dolor del mundo{COLOR DARK_GRAY}{PAUSE 30}...\pEntenderías porq-{PAUSE 20} "), MSGBOX_INTERRUPT)
 	closemessage
 	hidenamebox
 	setvar (VAR_0x8004, 1) 
@@ -163,7 +163,7 @@ script SlateportCity_Harbor_EventScript_AquaEscapeScene {
     applymovement (OBJ_EVENT_ID_PLAYER, Common_Movement_ExclamationMark)
     waitmovement (0)
 	namebox (Winona)
-	msgbox(format("¡Agh!\nMhh... {PAUSE 15}Ah...\lEstá... {PAUSE 15}Empeorando...\pBueno, Archie, lamento tener que irme tan rápido. ¿Qué te parece terminar nuestra conversación en Lilycove?\pAh, y, Stern, muchas gracias por el Submarino."))
+	msgbox(format("¡Agh!\nMhh... {PAUSE 15}Ah...\lEstá... {PAUSE 15}Empeorando...\pBueno, Archie, perdón tener que irme tan rápido. ¿Nos vemos en Lilycove?\pAh, y, Stern, muchas gracias por el Submarino."))
 	applymovement (LOCALID_WINONA, SlateportCity_Harbor_Movement_WinonaLeave)
 	namebox (Archie)
 	msgbox(format("¡Lilycove!\n¡Rápido, Recluta, avísale a los chicos que se preparen en la Base!\p¡Emergencia Nivel Zafiro Alfa!"))

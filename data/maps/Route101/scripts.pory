@@ -251,7 +251,7 @@ Route101_Movement_PokemonEscape:
 	step_end
 
 Route101_EventScript_Youngster::
-	goto_if_set FLAG_EVENTOMISTERIOSO1, Route101_EventScript_Night
+	special GetPokemonAttribute
 	msgbox Route101_Text_TakeTiredPokemonToPokeCenter, MSGBOX_NPC
 	end
 Route101_EventScript_Night::
@@ -348,12 +348,9 @@ Route101_Text_YouSavedMe2:
 
 
 Route101_Text_TakeTiredPokemonToPokeCenter:
-	.string "¡Los Pokémon que aparecen en\nla noche son mucho más fuertes!\lTen cuidado con ellos.$"
+	.string "¡{STR_VAR_1}! ¡{STR_VAR_2}! ¡{STR_VAR_3}!$"
 Route101_Text_TakeTiredPokemonToPokeCenter2:
-	.string "Ah, entonces veo que activaste el\n"
-	.string "evento misterioso. ¡Pues a ver si\l"
-	.string "puedes derrotar a este poderosísimo\l"
-	.string "Pokémon!$"
+	.string "¡{STR_VAR_1}!$"
 Route101_Text_WildPokemonInTallGrass:
 	.string "Los Pokémon salvajes te atacarán\n"
 	.string "sin pensar en la hierba alta.\p"

@@ -976,7 +976,9 @@ static void HandleMoveSwitching(void)
 
             for (i = 0; i < MAX_MON_MOVES; i++)
                 perMovePPBonuses[i] = (gBattleMons[gActiveBattler].ppBonuses & (3 << (i * 2))) >> (i * 2);
-
+				// 											i=0	(10 01 01 11  &  (11 << 0)) == 00 10 01 01  (perMovePPBonuses[0] = 11)
+				// 											i=0	 2  1  1  3		 (3)        ==  0  2  1  1  (perMovePPBonuses[0] =  3) 
+ 
             totalPPBonuses = perMovePPBonuses[gMoveSelectionCursor[gActiveBattler]];
             perMovePPBonuses[gMoveSelectionCursor[gActiveBattler]] = perMovePPBonuses[gMultiUsePlayerCursor];
             perMovePPBonuses[gMultiUsePlayerCursor] = totalPPBonuses;
@@ -984,6 +986,7 @@ static void HandleMoveSwitching(void)
             totalPPBonuses = 0;
             for (i = 0; i < MAX_MON_MOVES; i++)
                 totalPPBonuses |= perMovePPBonuses[i] << (i * 2);
+			//  					00 00 00 00  |=  11 == 00 00 00 11
 
             gBattleMons[gActiveBattler].ppBonuses = totalPPBonuses;
 

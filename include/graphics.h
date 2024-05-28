@@ -3659,6 +3659,8 @@ extern const u32 gMonPalette_CalyrexIceRider[];
 extern const u32 gMonPalette_CalyrexShadowRider[];
 #endif
 extern const u32 gMonPalette_Egg[];
+extern const u32 gMonPalette_EggShiny[];
+extern const u32 gMonPalette_EggOldGens[];
 
 extern const u32 gMonShinyPalette_CircledQuestionMark[];
 extern const u32 gMonShinyPalette_DoubleQuestionMark[];

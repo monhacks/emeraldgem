@@ -61,6 +61,7 @@
 #include "constants/trainers.h"
 #include "battle_util.h"
 #include "constants/pokemon.h"
+#include "global.fieldmap.h"
 
 extern struct Evolution gEvolutionTable[][EVOS_PER_MON];
 
@@ -13702,6 +13703,7 @@ bool32 CanCamouflage(u8 battlerId)
 static void Cmd_settypetoterrain(void)
 {
     u8 terrainType;
+	u16 currentMap = gMapHeader.regionMapSectionId; 
     switch(gFieldStatuses & STATUS_FIELD_TERRAIN_ANY)
     {
     case STATUS_FIELD_ELECTRIC_TERRAIN:
@@ -13720,7 +13722,8 @@ static void Cmd_settypetoterrain(void)
         terrainType = sTerrainToType[gBattleTerrain];
         break;
     }
-
+	if (currentMap == MAPSEC_RUSTBORO_CITY)
+		terrainType = TYPE_ROCK;
     if (!IS_BATTLER_OF_TYPE(gBattlerAttacker, terrainType))
     {
         SET_BATTLER_TYPE(gBattlerAttacker, terrainType);

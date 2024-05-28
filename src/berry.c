@@ -1949,7 +1949,7 @@ static u8 CalcBerryYield(struct BerryTree *tree)
 static u8 GetBerryCountByBerryTreeId(u8 id)
 {
 	u16 j;
-        const struct MapHeader *mapHeader;
+    const struct MapHeader *mapHeader;
     struct BerryTree *tree = GetBerryTreeInfo(id);
     const struct Berry *berry = GetBerryInfo(tree->berry);
     u16 currentMap = gMapHeader.regionMapSectionId;

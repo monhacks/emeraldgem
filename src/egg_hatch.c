@@ -83,6 +83,7 @@ static void CreateEggShardSprite(u8, u8, s16, s16, s16, u8);
 static struct EggHatchData *sEggHatchData;
 
 static const u16 sEggPalette[]  = INCBIN_U16("graphics/pokemon/egg/normal.gbapal");
+static const u16 sEggPaletteOldGens[]  = INCBIN_U16("graphics/pokemon/egg/oldgens.gbapal");
 static const u8 sEggHatchTiles[] = INCBIN_U8("graphics/pokemon/egg/hatch.4bpp");
 static const u8 sEggShardTiles[] = INCBIN_U8("graphics/pokemon/egg/shard.4bpp");
 
@@ -159,6 +160,12 @@ static const struct SpriteSheet sEggShards_Sheet =
 static const struct SpritePalette sEgg_SpritePalette =
 {
     .data = sEggPalette,
+    .tag = PALTAG_EGG
+};
+
+static const struct SpritePalette sEgg_SpritePalette2 =
+{
+    .data = sEggPaletteOldGens,
     .tag = PALTAG_EGG
 };
 
@@ -494,6 +501,7 @@ static void Task_EggHatch(u8 taskId)
 
 static void CB2_LoadEggHatch(void)
 {
+	u16 species = GetMonData((&gPlayerParty[sEggHatchData->eggPartyId]), MON_DATA_SPECIES);
     switch (gMain.state)
     {
     case 0:
@@ -543,7 +551,13 @@ static void CB2_LoadEggHatch(void)
     case 3:
         LoadSpriteSheet(&sEggHatch_Sheet);
         LoadSpriteSheet(&sEggShards_Sheet);
-        LoadSpritePalette(&sEgg_SpritePalette);
+		
+		if (species <= 251){
+			LoadSpritePalette(&sEgg_SpritePalette2);
+		}
+		else {
+			LoadSpritePalette(&sEgg_SpritePalette);
+		}
         gMain.state++;
         break;
     case 4:

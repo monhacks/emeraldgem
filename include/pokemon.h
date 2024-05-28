@@ -13,6 +13,33 @@
 #define METHOD_MASUDA_METHOD 1
 #define METHOD_DEXNAV 2
 
+enum {
+	// EASY
+	POKEDOKU_TYPE = 1,
+	POKEDOKU_ABILITY,
+	POKEDOKU_EVOLINE,
+	POKEDOKU_SPECIES_FLAG,
+	POKEDOKU_DUAL_OR_SINGLE_TYPE,
+	// MEDIUM
+	POKEDOKU_SIGNATURE_MOVE,
+	POKEDOKU_EVO_METHOD,
+	POKEDOKU_REGION,
+	POKEDOKU_MEGA_FORM,
+	POKEDOKU_REGIONAL_FORM,
+	// HARD
+	POKEDOKU_HIGHEST_STAT,
+	POKEDOKU_BASE_STAT_TOTAL,
+	POKEDOKU_LEARNS_MOVE,
+	POKEDOKU_STRONGEST_STAB,
+	POKEDOKU_CATEGORY,
+	// IMPOSSIBLE
+	POKEDOKU_STAT_NUMBER,
+	POKEDOKU_EV_YIELD,
+	POKEDOKU_HEIGHT,
+	POKEDOKU_WEIGHT,
+	POKEDOKU_EGG_GROUP
+};
+
 // Property labels for Get(Box)MonData / Set(Box)MonData
 enum {
     MON_DATA_PERSONALITY,
@@ -120,14 +147,14 @@ struct BoxPokemon
     /*0x04*/ u32 otId;
     /*0x08*/ u8 nickname[POKEMON_NAME_LENGTH];
              u8 pokerus:1;
-             u8 hasSpecies:1;
+             // u8 hasSpecies:1;
              u8 isEgg:1;
              u8 markings:4; // 15 combinations as per sAnims_MarkingCombo
     /*0x14*/ u8 otName[PLAYER_NAME_LENGTH];
     /*0x1B*/ u8 metLocation;    // better to not limit the number of map sections. this is actually used for friendship growth, too
     /*0x1C*/ u32 species:11;    // up to 2047 species. could probably go down to 10 bits...
              u32 heldItem:10;   // up to 1023 items. could probably be 9 bits if hold items are limited to IDs below 511
-             u8 metLevel:7;
+             u8 metLevel:1;
              u32 contestExp:9; // 0 - 510
     /*0x20*/ u32 experience:21;
              // u32 otGender:1;
@@ -135,9 +162,9 @@ struct BoxPokemon
              u32 move2:10;  // bits 11-20
              u32 move3:10;  // bits 21-30
     /*0x28*/ u16 move4:10;  // bits 31-40
-    /*0x2A*/ u16 attackIV:5;    // 46-50
-             u16 defenseIV:5;   // 51-55
-             u16 speedIV:5;     // 56-60
+    /*0x2A*/ u16 attackIV:3;    // 46-50
+             u16 defenseIV:3;   // 51-55
+             u16 speedIV:3;     // 56-60
     /*0x2C*/ u8 ppBonuses;
     /*0x2D*/ u8 friendship;
     /*0x2E*/ u8 pokeball:6;
@@ -148,10 +175,6 @@ struct BoxPokemon
     /*0x32*/ u8 speedEV:6;
     /*0x33*/ u8 spAttackEV:6;
     /*0x34*/ u8 spDefenseEV:6; 
-    /*0x35*/ u8 pp1:6;
-             u8 pp2:6;
-             u8 pp3:6;
-             u8 pp4:6;
 			 u8 coolCV:2;
 			 u8 toughCV:2;
 			 u8 smartCV:2;
@@ -159,6 +182,10 @@ struct BoxPokemon
 			 u8 beautyCV:2;
 			 u8 hiddenNature:5; // remain 10 bits
 			 u8 hiddenPower:5; // remain 10 bits
+	/*0x35*/ u8 pp1:6;
+             u8 pp2:6;
+             u8 pp3:6;
+			 u8 pp4:6;
 }; /* size = 0x3C (56) bytes */
 
 struct Pokemon
@@ -272,7 +299,7 @@ struct BaseStats
             u8 safariZoneFleeRate;
             u8 bodyColor : 7;
             u8 noFlip : 1;
-            u8 flags;
+            u16 flags;
 };
 
 #include "constants/battle_config.h"
@@ -333,6 +360,12 @@ struct FormChange {
 ) % NUM_UNOWN_FORMS)
 
 #define GET_SHINY_VALUE(otId, personality)HIHALF(otId) ^ LOHALF(otId) ^ HIHALF(personality) ^ LOHALF(personality)
+						// (01000010 01000010 10000001 10000001) (10000001 10000001 01000010 01000010)
+						// ((01000010 01000010) ^ (01000010 01000010)) == 0000000 00000000
+						// ((0000000 00000000) ^ (10000001 10000001)) == 1000001 10000001
+						// ((10000001 10000001) ^ (01000010 01000010)) == 1100011 11000011
+						// 						 (1100011 11000011) == 3
+												       // 128+64+2+1 == 199 no shiny
 
 extern u8 gPlayerPartyCount;
 extern struct Pokemon gPlayerParty[PARTY_SIZE];
@@ -476,7 +509,8 @@ void CreateTask_PlayMapChosenOrBattleBGM(u16 songId);
 const u32 *GetMonFrontSpritePal(struct Pokemon *mon);
 const u32 *GetMonSpritePalFromSpeciesAndPersonality(u16 species, u32 otId, u32 personality);
 const struct CompressedSpritePalette *GetMonSpritePalStruct(struct Pokemon *mon);
-const struct CompressedSpritePalette *GetMonSpritePalStructFromOtIdPersonality(u16 species, u32 otId , u32 personality);
+const struct CompressedSpritePalette *GetMonSpritePalStructFromOtIdPersonality(u16 species2, u32 otId , u32 personality, u16 species);
+// const struct CompressedSpritePalette *GetMonSpritePalStructFromOtIdPersonality2(u16 species, u16 species2, u32 otId , u32 personality);
 bool32 IsHMMove2(u16 move);
 bool8 IsMonSpriteNotFlipped(u16 species);
 s8 GetMonFlavorRelation(struct Pokemon *mon, u8 flavor);
@@ -518,6 +552,8 @@ extern const u32 sExpCandyExperienceTable[];
 void CreateShinyMonWithNature(struct Pokemon *mon, u16 species, u8 level, u8 nature);
 u8 SendMonToPC(struct Pokemon* mon);
 u32 CalculateShininess(bool8 affectsShinyFlags, u8 method, u8 flagAffected, u16 species, u8 nature);
+u8 GetRealIV(u8 iv);
+u16 GetPreEvolution(u16 species);
 // #define METHOD_CHAIN_FISHING 3;
 
 #endif // GUARD_POKEMON_H

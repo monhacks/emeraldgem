@@ -496,7 +496,6 @@ MtChimney_EventScript_PrepareMultiBattle::
     return
 
 script_NeedToChoose3ValidMons::
-    namebox Archie
 	msgbox PleasePick3Mons
 	closemessage
 	hidenamebox
@@ -530,7 +529,7 @@ MtChimney_Movement_ArchieWalkDown:
 	step_end
 
 PleasePick3Mons::
-	.string "Deberás elegir 3 o\nmenos Pokémon, {PLAYER}.$"
+	.string "Deberás elegir 3 o\nmenos Pokémon.$"
 
 script_CancelBattle::
     goto MtChimney_EventScript_PrepareMultiBattle

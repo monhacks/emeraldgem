@@ -133,6 +133,7 @@ extern const struct MonCoords gMonBackPicCoords[];
 extern const struct CompressedSpriteSheet gMonBackPicTable[];
 extern const struct CompressedSpriteSheet gMonBackPicTableFemale[];
 extern const struct CompressedSpritePalette gMonPaletteTable[];
+extern const struct CompressedSpritePalette gEggOldGensPaletteTable[];
 extern const struct CompressedSpritePalette gMonPaletteTableFemale[];
 extern const struct CompressedSpritePalette gMonShinyPaletteTable[];
 extern const struct CompressedSpritePalette gMonShinyPaletteTableFemale[];
@@ -152,7 +153,7 @@ extern const struct CompressedSpriteSheet gMonFrontPicTable[];
 extern const struct CompressedSpriteSheet gMonFrontPicTableFemale[];
 
 extern const struct Trainer gTrainers[];
-extern const u8 gTrainerClassNames[][14];
+extern const u8 gTrainerClassNames[][15];
 extern const u8 gSpeciesNames[][POKEMON_NAME_LENGTH + 1];
 extern const u8 gMoveNames[MOVES_COUNT][MOVE_NAME_LENGTH + 1];
 extern const u8 gLongMoveNames[MOVES_COUNT][LONG_MOVE_NAME_LENGTH + 1];

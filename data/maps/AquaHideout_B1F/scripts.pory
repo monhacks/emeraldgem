@@ -1,150 +1,230 @@
-raw `
-AquaHideout_B1F_MapScripts::
-	map_script MAP_SCRIPT_ON_RESUME, AquaHideout_B1F_OnResume
-	map_script MAP_SCRIPT_ON_TRANSITION, AquaHideout_B1F_OnTransition
-	.byte 0
+const LOCALID_DELTA = 9
 
-AquaHideout_B1F_OnResume:
-	call_if_set FLAG_SYS_CTRL_OBJ_DELETE, AquaHideout_B1F_EventScript_TryRemoveElectrode
+mapscripts AquaHideout_B1F_MapScripts
+{
+	MAP_SCRIPT_ON_RESUME {
+		// if (flag(FLAG_SYS_CTRL_OBJ_DELETE)){
+			// specialvar (VAR_RESULT, GetBattleOutcome)
+			// if (var(VAR_RESULT) == B_OUTCOME_CAUGHT){
+				// call (Common_EventScript_NopReturn)
+				// removeobject (VAR_LAST_TALKED)
+				// return
+			// }
+		// }
+		return
+	}
+	MAP_SCRIPT_ON_TRANSITION {
+		if (var(VAR_AQUA_HIDEOUT_STATE) == 4){
+			setobjectxyperm(LOCALID_DELTA, 32, 21)
+			setobjectxyperm(1, 32, 20)
+			setobjectxyperm(4, 31, 21)
+		}
+		if (var(VAR_AQUA_HIDEOUT_STATE) == 3){
+			setobjectxyperm(LOCALID_DELTA, 32, 20)
+		}
+		// AquaHideout_B1F_OnTransition
+		// if (flag(FLAG_TEMP_0)){
+			// call (AquaHideout_B1F_EventScript_ShowElectrode1)
+		// }
+		// if (flag(FLAG_TEMP_1)){
+			// call (AquaHideout_B1F_EventScript_ShowElectrode2)
+		// }
+		return
+	}
+	
+}
+
+script AquaHideout_B1F_EventScript_Trigger {
+	poryswitch(LANGUAGE){
+		ES{
+			namebox (Aqua)
+			msgbox (format("¡N-{PAUSE 5}No!\nMe derrotó usando un solo Pokémon..."))
+			namebox (Delta)
+			msgbox (format("Tsk.\n¿Es todo este Equipo igual de patético?"))
+		}
+		EN {
+			namebox (Aqua)
+			msgbox (format("¡N-{PAUSE 5}No!\nShe defeated me using a single Pokémon..."))
+			namebox (Delta)
+			msgbox (format("Tsk.\nIs this whole Team this pathetic?"))
+		}
+	}
+	hidenamebox
+	closemessage
+	applymovement (LOCALID_DELTA, AquaHideout_B1F_Movement_LeavesFirstRoom)
+	waitmovement (0)
+	setobjectxyperm (LOCALID_DELTA, 32, 20)
+	namebox (Aqua)
+	poryswitch(LANGUAGE){
+		ES{
+			msgbox (format("¡Tengo que avisarle a Matt!"))
+		}
+		EN {
+			msgbox (format("I gotta tell Matt about 'em!"))
+		}
+	}
+	hidenamebox
+	closemessage
+	setvar (VAR_AQUA_HIDEOUT_STATE, 3)
+	releaseall
 	end
+}
 
-AquaHideout_B1F_EventScript_TryRemoveElectrode::
-	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_ne VAR_RESULT, B_OUTCOME_CAUGHT, Common_EventScript_NopReturn
-	removeobject VAR_LAST_TALKED
-	return
-
-AquaHideout_B1F_OnTransition:
-	call_if_unset FLAG_TEMP_0, AquaHideout_B1F_EventScript_ShowElectrode1
-	call_if_unset FLAG_TEMP_1, AquaHideout_B1F_EventScript_ShowElectrode2
+script AquaHideout_B1F_EventScript_Electrode1 {
+	call (AquaHideout_B1F_EventScript_Electrodes)
+	if (var(VAR_RESULT) == B_OUTCOME_CAUGHT){
+		removeobject(VAR_LAST_TALKED)
+		setflag (FLAG_HIDE_AQUA_HIDEOUT_B1F_ELECTRODE_1)
+		goto (Common_EventScript_RemoveStaticPokemon)
+	}
+	release
 	end
+}
 
-AquaHideout_B1F_EventScript_ShowElectrode1::
-	// clearflag FLAG_HIDE_AQUA_HIDEOUT_B1F_ELECTRODE_1
-	return
-
-AquaHideout_B1F_EventScript_ShowElectrode2::
-	// clearflag FLAG_HIDE_AQUA_HIDEOUT_B1F_ELECTRODE_2
-	return
-
-AquaHideout_B1F_EventScript_Electrode1::
+script AquaHideout_B1F_EventScript_Electrodes {
 	lock
 	faceplayer
-	setwildbattle SPECIES_ELECTRODE, 30
+	setwildbattle (SPECIES_ELECTRODE, 30)
 	waitse
-	playmoncry SPECIES_ELECTRODE, CRY_MODE_ENCOUNTER
-	delay 40
+	playmoncry (SPECIES_ELECTRODE, CRY_MODE_ENCOUNTER)
+	delay (40)
 	waitmoncry
-	setflag FLAG_SYS_CTRL_OBJ_DELETE
+	// setflag (FLAG_SYS_CTRL_OBJ_DELETE)
 	dowildbattle
-	clearflag FLAG_SYS_CTRL_OBJ_DELETE
-	goto AquaHideout_B1F_EventScript_DefeatedElectrode1
+	// clearflag (FLAG_SYS_CTRL_OBJ_DELETE)
+	specialvar (VAR_RESULT, GetBattleOutcome)
+	return
+}
+
+script AquaHideout_B1F_EventScript_Electrode2 {
+	call (AquaHideout_B1F_EventScript_Electrodes)
+	if (var(VAR_RESULT) == B_OUTCOME_CAUGHT){
+		removeobject(VAR_LAST_TALKED)
+		setflag (FLAG_HIDE_AQUA_HIDEOUT_B1F_ELECTRODE_2)
+		goto (Common_EventScript_RemoveStaticPokemon)
+	}
 	release
 	end
+}
 
-AquaHideout_B1F_EventScript_DefeatedElectrode1::
-	setflag FLAG_HIDE_AQUA_HIDEOUT_B1F_ELECTRODE_1
-	goto Common_EventScript_RemoveStaticPokemon
-	end
-
-AquaHideout_B1F_EventScript_Electrode2::
-	lock
+script AquaHideout_B1F_EventScript_Grunt3 {
+	lockall
 	faceplayer
-	setwildbattle SPECIES_ELECTRODE, 30
+	namebox (Aqua)
+	poryswitch(LANGUAGE){
+		ES{
+			msgbox (format("Normalmente, te atacaría, pero ya no tengo Pokémon...\p¡Igual! ¡Todo estará bien!\nLe avisé a nuestro {COLOR BLUE}Administrador Matt{COLOR DARK_GRAY} sobre esta intrusa...\p¡El poder que él posee es abismal!"))
+		}
+		EN{
+			msgbox (format("Usually, I'd attack you, but I ain't got no Pokémon left...\pWhatever! It'll be fine!\nTold our {COLOR BLUE}Admin Matt{COLOR DARK_GRAY} 'bout that indtruder...\pHis power is abyssmal!"))
+		}	
+	}
+	hidenamebox
+	closemessage
+	releaseall
+	end
+}
+
+script AquaHideout_B1F_EventScript_Grunt5 {
+	lockall
+	if (var(VAR_AQUA_HIDEOUT_STATE) == 3){
+		goto (AquaHideout_B1F_EventScript_Delta2)
+	}
+	else {
+		faceplayer
+		namebox (Aqua)
+		poryswitch(LANGUAGE){
+			ES {
+				msgbox (format("Tomó todo lo que teníamos, hasta los más débiles, pero parece que logramos detenerla...\p¡Estos idiotas no son tan invencibles como creíamos!"))
+			}
+			EN {
+				msgbox (format("It took everything we had, even our weakest Pokémon, but we defeated 'er...\pThese dumbaxes ain't unstoppable after all!"))
+			}
+		}
+		hidenamebox
+		closemessage
+	}
+}
+
+script AquaHideout_B1F_EventScript_Delta {
+	lockall
+	if (var(VAR_AQUA_HIDEOUT_STATE) == 3){
+		goto (AquaHideout_B1F_EventScript_Delta2)
+	}
+}
+script AquaHideout_B1F_EventScript_Delta2 {
+	applymovement (1, AquaHideout_B1F_Movement_AquaWin1)
+	applymovement (4, AquaHideout_B1F_Movement_AquaWin2)
+	applymovement (LOCALID_DELTA, AquaHideout_B1F_Movement_DeltaDefeat)
+	waitmovement (0)
+	namebox (Delta)poryswitch(LANGUAGE){
+		ES {
+			msgbox (format("Dejen de engañarse, los tres sabemos que no podrán derrot-{PAUSE 50} "), MSGBOX_INTERRUPT)
+			fadescreen (FADE_TO_BLACK)
+			delay (16)
+			namebox (Aqua)
+			msgbox (format("¡Usa {COLOR LIGHT_BLUE}Granizo{COLOR DARK_GRAY}!"))
+			msgbox (format("¡Y tú, usa {COLOR LIGHT_BLUE}Rayo Hielo{COLOR DARK_GRAY}!"))
+		}
+		EN {
+			msgbox (format("Stop fooling yourselves, all three of us know well that you can't with-{PAUSE 50} "), MSGBOX_INTERRUPT)
+			fadescreen (FADE_TO_BLACK)
+			delay (16)
+			namebox (Aqua)
+			msgbox (format("Use {COLOR LIGHT_BLUE}Hail{COLOR DARK_GRAY}!"))
+			msgbox (format("And you, use {COLOR LIGHT_BLUE}Ice Beam{COLOR DARK_GRAY}!"))
+		}
+	}
+	hidenamebox
+	closemessage
+	playse(SE_M_ICY_WIND)
 	waitse
-	playmoncry SPECIES_ELECTRODE, CRY_MODE_ENCOUNTER
-	delay 40
-	waitmoncry
-	setflag FLAG_SYS_CTRL_OBJ_DELETE
-	dowildbattle
-	clearflag FLAG_SYS_CTRL_OBJ_DELETE
-	goto AquaHideout_B1F_EventScript_DefeatedElectrode2
-	release
+	playse(SE_SUPER_EFFECTIVE)
+	waitse
+	playse(SE_FAINT)
+	waitse
+	fadescreen (FADE_FROM_BLACK)
+	delay (16)
+	playse (SE_PIN)
+	applymovement (LOCALID_DELTA, Common_Movement_ExclamationMark)
+	waitmovement (0)
+	namebox (Delta)
+	poryswitch(LANGUAGE){
+		ES {
+			msgbox (format("M-me han... Derrotado."))
+		}
+		EN {
+			msgbox (format("Defeated..."))
+		}
+	}
+	setvar(VAR_AQUA_HIDEOUT_STATE, 4)
+	hidenamebox
+	closemessage
+	releaseall
 	end
+}
 
-AquaHideout_B1F_EventScript_DefeatedElectrode2::
-	setflag FLAG_DEFEATED_ELECTRODE_2_AQUA_HIDEOUT
-	goto Common_EventScript_RemoveStaticPokemon
-	end
+movement AquaHideout_B1F_Movement_DeltaDefeat {
+	lock_facing_direction
+	walk_down
+	unlock_facing_direction
+	delay_8
+	walk_in_place_left
+	walk_in_place_up
+}
 
-AquaHideout_B1F_EventScript_Grunt2::
-	trainerbattle_single TRAINER_GRUNT_AQUA_HIDEOUT_2, AquaHideout_B1F_Text_Grunt2Intro, AquaHideout_B1F_Text_Grunt2Defeat, AquaHideout_B1F_EventScript_Grunt2Defeated
-	msgbox AquaHideout_B1F_Text_Grunt2PostBattle, MSGBOX_AUTOCLOSE
-	end
+movement AquaHideout_B1F_Movement_AquaWin1 {
+	walk_faster_down * 2
+}
 
-AquaHideout_B1F_EventScript_Grunt2Defeated::
-	special PlayerFaceTrainerAfterBattle
-	waitmovement 0
-	msgbox AquaHideout_B1F_Text_Grunt2PostBattle, MSGBOX_DEFAULT
-	release
-	end
+movement AquaHideout_B1F_Movement_AquaWin2 {
+	walk_faster_down * 2
+	walk_in_place_fast_right
+}
 
-AquaHideout_B1F_EventScript_Grunt3::
-	trainerbattle_single TRAINER_GRUNT_AQUA_HIDEOUT_3, AquaHideout_B1F_Text_Grunt3Intro, AquaHideout_B1F_Text_Grunt3Defeat, AquaHideout_B1F_EventScript_Grunt3Defeated
-	msgbox AquaHideout_B1F_Text_Grunt3PostBattle, MSGBOX_AUTOCLOSE
-	end
-
-AquaHideout_B1F_EventScript_Grunt3Defeated::
-	msgbox AquaHideout_B1F_Text_Grunt3PostBattle, MSGBOX_DEFAULT
-	release
-	end
-
-AquaHideout_B1F_EventScript_Grunt5::
-	trainerbattle_single TRAINER_GRUNT_AQUA_HIDEOUT_5, AquaHideout_B1F_Text_Grunt5Intro, AquaHideout_B1F_Text_Grunt5Defeat
-	msgbox AquaHideout_B1F_Text_Grunt5PostBattle, MSGBOX_AUTOCLOSE
-	end
-
-
-AquaHideout_B1F_Text_Grunt2Intro:
-	.string "If you want to know the secret about\n"
-	.string "our HIDEOUT, you have me to beat!$"
-
-AquaHideout_B1F_Text_Grunt2Defeat:
-	.string "I can't win at all…$"
-
-AquaHideout_B1F_Text_Grunt2PostBattle:
-	.string "Our HIDEOUT's secret?\p"
-	.string "Well, let's just say…\n"
-	.string "There's a submarine at the far end!\p"
-	.string "But, by now…\n"
-	.string "Kekekeke…$"
-
-AquaHideout_B1F_Text_Grunt3Intro:
-	.string "Fuel supply loaded A-OK!\n"
-	.string "In-cruise snacks loaded A-OK!\p"
-	.string "Nothing left to do but KO a pesky\n"
-	.string "meddler!$"
-
-AquaHideout_B1F_Text_Grunt3Defeat:
-	.string "I took a serious licking!$"
-
-AquaHideout_B1F_Text_Grunt3PostBattle:
-	.string "Humph!\n"
-	.string "This was supposed to happen!\p"
-	.string "My mission was to just hold you up!$"
-
-AquaHideout_B1F_Text_Grunt5Intro:
-	.string "Yawn… Keeping watch over the\n"
-	.string "HIDEOUT bores me. I'll take you on.$"
-
-AquaHideout_B1F_Text_Grunt5Defeat:
-	.string "Yawn…\n"
-	.string "Oh, I lost…$"
-
-AquaHideout_B1F_Text_Grunt5PostBattle:
-	.string "If you scurry too much, other TEAM\n"
-	.string "AQUA members might get you.$"
-
-AquaHideout_B1F_Text_Grunt7Intro:
-	.string "Hey!\n"
-	.string "You there!\p"
-	.string "Which do you think is cooler?\n"
-	.string "TEAM AQUA's uniform or TEAM MAGMA's?$"
-
-AquaHideout_B1F_Text_Grunt7Defeat:
-	.string "I lost in a cool way…$"
-
-AquaHideout_B1F_Text_Grunt7PostBattle:
-	.string "If you have a cool uniform, you look\n"
-	.string "good even in a loss, don't you think?$"
-`
+movement AquaHideout_B1F_Movement_LeavesFirstRoom {
+	walk_down
+	walk_right * 8
+	walk_up * 7
+	set_invisible
+}

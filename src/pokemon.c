@@ -3292,11 +3292,6 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
 
     ZeroBoxMonData(boxMon);
 
-    if (hasFixedPersonality)
-        personality = fixedPersonality;
-    else
-        personality = Random32();
-
     switch (otIdType)
     {
         case OT_ID_SHINY:
@@ -3363,6 +3358,9 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
 		}
 	}
 
+	if (hasFixedPersonality)
+        personality = fixedPersonality;
+
     SetBoxMonData(boxMon, MON_DATA_PERSONALITY, &personality);
     SetBoxMonData(boxMon, MON_DATA_OT_ID, &value);
 
@@ -3375,6 +3373,7 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
     SetBoxMonData(boxMon, MON_DATA_FRIENDSHIP, &gBaseStats[species].friendship);
     value = GetCurrentRegionMapSectionId();
     SetBoxMonData(boxMon, MON_DATA_MET_LOCATION, &value);
+	level = 1;
     SetBoxMonData(boxMon, MON_DATA_MET_LEVEL, &level);
     // SetBoxMonData(boxMon, MON_DATA_MET_GAME, &gGameVersion);
     value = ITEM_POKE_BALL;
@@ -3917,7 +3916,7 @@ static u16 CalculateBoxMonChecksum(struct BoxPokemon *boxMon)
 #define CALC_STAT(base, iv, ev, statIndex, field)               \
 {                                                               \
     u8 baseStat = gBaseStats[species].base;                     \
-    s32 n = (((2 * baseStat + iv + ev) * level) / 100) + 5; \
+    s32 n = (((2 * baseStat + (GetRealIV(iv)) + ev) * level) / 100) + 5; \
     u8 nature = GetNature(mon, TRUE);                                 \
     n = ModifyStatByNature(nature, n, statIndex);               \
     SetMonData(mon, field, &n);                                 \
@@ -4437,6 +4436,18 @@ u32 GetMonData(struct Pokemon *mon, s32 field, u8 *data)
     case MON_DATA_MAIL:
         ret = mon->mail;
         break;
+	// case MON_DATA_PP1:
+        // ret = mon->pp1;
+        // break;
+    // case MON_DATA_PP2:
+        // ret = mon->pp2;
+        // break;
+    // case MON_DATA_PP3:
+        // ret = mon->pp3;
+        // break;
+    // case MON_DATA_PP4:
+        // ret = mon->pp4;
+        // break;
     default:
         ret = GetBoxMonData(&mon->box, field, data);
         break;
@@ -4448,6 +4459,8 @@ u32 GetBoxMonData(struct BoxPokemon *boxMon, s32 field, u8 *data)
 {
     s32 i;
     u32 retVal = 0;
+	// struct Pokemon mon;
+	// BoxMonToMon(boxMon, &mon);
 
     switch (field)
     {
@@ -4502,7 +4515,7 @@ u32 GetBoxMonData(struct BoxPokemon *boxMon, s32 field, u8 *data)
         retVal = FALSE;
         break;
     case MON_DATA_SANITY_HAS_SPECIES:
-        retVal = boxMon->hasSpecies;
+        retVal = TRUE;
         break;
     case MON_DATA_SANITY_IS_EGG:
         retVal = boxMon->isEgg;
@@ -4643,12 +4656,12 @@ u32 GetBoxMonData(struct BoxPokemon *boxMon, s32 field, u8 *data)
     case MON_DATA_HP_IV:
 	case MON_DATA_SPDEF_IV:
     case MON_DATA_DEF_IV:
+	case MON_DATA_SPATK_IV:
         retVal = boxMon->defenseIV;
         break;
     case MON_DATA_SPEED_IV:
         retVal = boxMon->speedIV;
         break;
-    case MON_DATA_SPATK_IV:
     case MON_DATA_ATK_IV:
         retVal = boxMon->attackIV;
         break;
@@ -4856,6 +4869,8 @@ void SetMonData(struct Pokemon *mon, s32 field, const void *dataArg)
 void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg)
 {
     const u8 *data = dataArg;
+	// struct Pokemon mon;
+	// BoxMonToMon(boxMon, &mon);
 
     switch (field)
     {
@@ -4879,7 +4894,6 @@ void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg)
         // SET8(boxMon->isBadEgg);
         break;
     case MON_DATA_SANITY_HAS_SPECIES:
-        SET8(boxMon->hasSpecies);
         break;
     case MON_DATA_SANITY_IS_EGG:
         SET8(boxMon->isEgg);
@@ -4903,10 +4917,10 @@ void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg)
     case MON_DATA_SPECIES:
     {
         SET32(boxMon->species);
-        if (boxMon->species)
-            boxMon->hasSpecies = 1;
-        else
-            boxMon->hasSpecies = FALSE;
+        // if (boxMon->species)
+            // boxMon->hasSpecies = 1;
+        // else
+            // boxMon->hasSpecies = FALSE;
         break;
     }
     case MON_DATA_HELD_ITEM:
@@ -4933,7 +4947,7 @@ void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg)
     case MON_DATA_MOVE4:
         SET16(boxMon->move4);
         break;
-    case MON_DATA_PP1:
+	case MON_DATA_PP1:
         SET8(boxMon->pp1);
         break;
     case MON_DATA_PP2:
@@ -4945,6 +4959,12 @@ void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg)
     case MON_DATA_PP4:
         SET8(boxMon->pp4);
         break;
+    // case MON_DATA_PP1:
+    // case MON_DATA_PP2:
+    // case MON_DATA_PP3:
+    // case MON_DATA_PP4:
+        // SetMonData(&mon, field, data);
+        // break;
     case MON_DATA_HP_EV:
         SET8(boxMon->hpEV);
         break;
@@ -5026,9 +5046,9 @@ void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg)
     case MON_DATA_HP_IV:
 	case MON_DATA_SPDEF_IV:
 	case MON_DATA_DEF_IV:
+	case MON_DATA_SPATK_IV:
         SET32(boxMon->defenseIV);
         break;
-	case MON_DATA_SPATK_IV:
     case MON_DATA_ATK_IV:
         SET32(boxMon->attackIV);
         break;
@@ -7530,33 +7550,62 @@ const u32 *GetMonSpritePalFromSpeciesAndPersonality(u16 species, u32 otId, u32 p
 const struct CompressedSpritePalette *GetMonSpritePalStruct(struct Pokemon *mon)
 {
     u16 species = GetMonData(mon, MON_DATA_SPECIES2, 0);
+    u16 species1 = GetMonData(mon, MON_DATA_SPECIES, 0);
     u32 otId = GetMonData(mon, MON_DATA_OT_ID, 0);
     u32 personality = GetMonData(mon, MON_DATA_PERSONALITY, 0);
-    return GetMonSpritePalStructFromOtIdPersonality(species, otId, personality);
+	
+    return GetMonSpritePalStructFromOtIdPersonality(species, otId, personality, species1);
 }
 
-const struct CompressedSpritePalette *GetMonSpritePalStructFromOtIdPersonality(u16 species, u32 otId , u32 personality)
+// const struct CompressedSpritePalette *GetMonSpritePalStructFromOtIdPersonality(u16 species, u32 otId , u32 personality)
+// {
+    // u32 shinyValue;
+	
+	// if ((VarGet(VAR_SHINY_TREECKO) == species) || (VarGet(VAR_SHINY_MUDKIP) == species) || (VarGet(VAR_SHINY_TORCHIC) == species)){
+		// return &gMonShinyPaletteTable[species];
+	// }
+	
+    // shinyValue = GET_SHINY_VALUE(otId, personality);
+    // if (shinyValue < SHINY_ODDS)
+    // {
+        // if (ShouldShowFemaleDifferences(species, personality))
+            // return &gMonShinyPaletteTableFemale[species];
+        // else
+            // return &gMonShinyPaletteTable[species];
+    // }
+    // else
+    // {
+        // if (ShouldShowFemaleDifferences(species, personality))
+            // return &gMonPaletteTableFemale[species];
+        // else
+            // return &gMonPaletteTable[species];
+    // }
+// }
+
+const struct CompressedSpritePalette *GetMonSpritePalStructFromOtIdPersonality(u16 species2, u32 otId , u32 personality, u16 species)
 {
     u32 shinyValue;
-	
-	if ((VarGet(VAR_SHINY_TREECKO) == species) || (VarGet(VAR_SHINY_MUDKIP) == species) || (VarGet(VAR_SHINY_TORCHIC) == species)){
-		return &gMonShinyPaletteTable[species];
+	if (species2 == SPECIES_EGG && species <= SPECIES_CELEBI){
+		return &gEggOldGensPaletteTable[SPECIES_EGG];
+	} 
+	if ((VarGet(VAR_SHINY_TREECKO) == species2) || (VarGet(VAR_SHINY_MUDKIP) == species2) || (VarGet(VAR_SHINY_TORCHIC) == species2)){
+		return &gMonShinyPaletteTable[species2];
 	}
 	
     shinyValue = GET_SHINY_VALUE(otId, personality);
     if (shinyValue < SHINY_ODDS)
     {
-        if (ShouldShowFemaleDifferences(species, personality))
-            return &gMonShinyPaletteTableFemale[species];
+        if (ShouldShowFemaleDifferences(species2, personality))
+            return &gMonShinyPaletteTableFemale[species2];
         else
-            return &gMonShinyPaletteTable[species];
+            return &gMonShinyPaletteTable[species2];
     }
     else
     {
-        if (ShouldShowFemaleDifferences(species, personality))
-            return &gMonPaletteTableFemale[species];
+        if (ShouldShowFemaleDifferences(species2, personality))
+            return &gMonPaletteTableFemale[species2];
         else
-            return &gMonPaletteTable[species];
+            return &gMonPaletteTable[species2];
     }
 }
 
@@ -8406,11 +8455,11 @@ u32 CalculateShininess(bool8 affectsShinyFlags, u8 method, u8 flagAffected, u16 
 			else if ((gSaveBlock1Ptr->dexNavChain >= 10) && (gSaveBlock1Ptr->dexNavChain <= 19))
 				totalRerolls += 4;
 			else if ((gSaveBlock1Ptr->dexNavChain >= 20) && (gSaveBlock1Ptr->dexNavChain <= 29))
-				totalRerolls += 8;
+				totalRerolls += 6;
 			else if ((gSaveBlock1Ptr->dexNavChain >= 30) && (gSaveBlock1Ptr->dexNavChain <= 39))
-				totalRerolls += 16;
+				totalRerolls += 8;
 			else if (gSaveBlock1Ptr->dexNavChain >= 40)
-				totalRerolls += 32;
+				totalRerolls += 10;
 			if (gSaveBlock1Ptr->dexNavChain % 5 == 0 && gSaveBlock1Ptr->dexNavChain != 50){
 				totalRerolls * 2;
 			}
@@ -8431,7 +8480,7 @@ u32 CalculateShininess(bool8 affectsShinyFlags, u8 method, u8 flagAffected, u16 
 			totalRerolls *= 4;
 			break;
 		case 3:
-			totalRerolls *= 4000;
+			totalRerolls *= 8;
 			break;
 		default:
 			totalRerolls *= 2;
@@ -8479,4 +8528,23 @@ u32 CalculateShininess(bool8 affectsShinyFlags, u8 method, u8 flagAffected, u16 
 		}
 	}
 	return personality;
+}
+
+u8 GetRealIV(u8 iv){
+	return (iv==0?0:iv*4+3);
+}
+
+u16 GetPreEvolution(u16 species){
+	u16 i, j;
+	for (i = 0; i < NUM_SPECIES; i++)
+    {
+        for (j = 0; j < EVOS_PER_MON; j++)
+        {
+            if (gEvolutionTable[i][j].targetSpecies == species)
+            {
+                species = i;
+            }
+        }
+    }
+	return species;
 }

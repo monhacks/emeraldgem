@@ -1113,6 +1113,7 @@ extern const u8 gText_XNatureHatchedSomewhereAt[];
 extern const u8 gText_XNatureMetAtYZ[];
 extern const u8 gText_XNatureMetSomewhereAt[];
 extern const u8 gText_XNatureFatefulEncounter[];
+extern const u8 gText_XNatureFatefulEncounterAtYZ[];
 extern const u8 gText_XNatureProbablyMetAt[];
 extern const u8 gText_XNatureObtainedInTrade[];
 extern const u8 gText_EmptyString5[];

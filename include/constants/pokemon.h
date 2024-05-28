@@ -295,8 +295,8 @@
 #define MAX_SHEEN       255
 #define MAX_CONDITION   255
 
-#define MAX_PER_STAT_IVS 15
-#define MAX_IV_MASK 15
+#define MAX_PER_STAT_IVS 7
+#define MAX_IV_MASK 7
 #define USE_RANDOM_IVS (MAX_PER_STAT_IVS + 1)
 #define MAX_PER_STAT_EVS 63
 #define MAX_TOTAL_EVS 128
@@ -448,6 +448,9 @@
 #define FLAG_GALARIAN_FORM      (1 << 4)
 #define FLAG_HISUIAN_FORM       (1 << 5)
 #define FLAG_GENDER_DIFFERENCE  (1 << 6)
+#define FLAG_BABY				(1 << 7)
+#define FLAG_STARTER			(1 << 8)
+#define FLAG_FOSSIL				(1 << 9)
 
 #define LEGENDARY_PERFECT_IV_COUNT 3
 

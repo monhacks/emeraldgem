@@ -1059,7 +1059,7 @@ struct Pokemon *CreateDexNavMon(u16 species, u8 potential, u8 level, u8 abilityN
     struct Pokemon* mon = &gEnemyParty[0];
     u8 iv[3] = {NUM_STATS};
     u8 i;
-    u8 perfectIv = 31;
+    u8 perfectIv = MAX_PER_STAT_IVS;
     
     if (DexNavTryMakeShinyMon())
         FlagSet(FLAG_SHINY_CREATION); // just easier this way
@@ -1080,17 +1080,6 @@ struct Pokemon *CreateDexNavMon(u16 species, u8 potential, u8 level, u8 abilityN
         SetMonData(mon, MON_DATA_HP_IV + iv[1], &perfectIv);
     if (potential > 0 && iv[0] != NUM_STATS)
         SetMonData(mon, MON_DATA_HP_IV + iv[0], &perfectIv);
-	
-	if (Random() % 18 == 1 && potential > 2) {
-	  u32 iv1 = 30;
-	  u32 iv2 = 31;
-	  SetMonData(mon, MON_DATA_HP_IV, &iv2);
-	  SetMonData(mon, MON_DATA_ATK_IV, &iv1);
-	  SetMonData(mon, MON_DATA_DEF_IV, &iv2);
-	  SetMonData(mon, MON_DATA_SPEED_IV, &iv2);
-	  SetMonData(mon, MON_DATA_SPATK_IV, &iv1);
-	  SetMonData(mon, MON_DATA_SPDEF_IV, &iv2);
-  }
 	
     //Set ability
     SetMonData(mon, MON_DATA_ABILITY_NUM, &abilityNum);
@@ -1341,7 +1330,7 @@ static void CreateDexNavWildMon(u16 species, u8 potential, u8 level, u8 abilityN
     struct Pokemon* mon = &gEnemyParty[0];
     u8 iv[3] = {NUM_STATS};
     u8 i;
-    u8 perfectIv = 31;
+    u8 perfectIv = MAX_PER_STAT_IVS;
     
     if (DexNavTryMakeShinyMon())
         FlagSet(FLAG_SHINY_CREATION); // just easier this way
