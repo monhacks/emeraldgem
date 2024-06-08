@@ -1,45 +1,51 @@
-raw `
-MagmaHideout_3F_1R_MapScripts::
-	.byte 0
+const 	LOCALID_GRUNT_1 = 1
+const 	LOCALID_GRUNT_2 = 3
+const 	LOCALID_DELTA   = 4
 
-MagmaHideout_3F_1R_EventScript_Grunt9::
-	trainerbattle_single TRAINER_GRUNT_MAGMA_HIDEOUT_9, MagmaHideout_3F_1R_Text_Grunt9Intro, MagmaHideout_3F_1R_Text_Grunt9Defeat
-	msgbox MagmaHideout_3F_1R_Text_Grunt9PostBattle, MSGBOX_AUTOCLOSE
+mapscripts MagmaHideout_3F_1R_Mapscripts {
+	MAP_SCRIPT_ON_TRANSITION {
+		if (var(VAR_MAGMA_HIDEOUT_STATE) == 1) {
+			call (MagmaHideout_3F_1R_EventScripts_PrepareMagmaWin)
+		}
+	}
+}
+
+script MagmaHideout_3F_1R_EventScripts_PrepareMagmaWin {
+	setobjeventpermxy (LOCALID_GRUNT_1, 7, 17)
+	setobjectmovementtype (LOCALID_GRUNT_1, MOVEMENT_TYPE_FACE_RIGHT)
+	setobjeventpermxy (LOCALID_GRUNT_2, 8, 16)
+	setobjectmovementtype (LOCALID_GRUNT_2, MOVEMENT_TYPE_FACE_DOWN)
+	setobjeventpermxy (LOCALID_DELTA, 8, 17)
+	setobjectmovementtype (LOCALID_DELTA, MOVEMENT_TYPE_FACE_LEFT)
+}
+
+script MagmaHideout_3F_1R_EventScripts_Trigger {
+	special (SpawnCameraObject)
+	lockall
+	applymovement (OBJ_EVENT_ID_CAMERA, MagmaHideout_3F_1R_Movement_PanToDrama)
+	waitmovement (0)
+	namebox (Magma)
+	msgbox(format("¡No vas a pasar! ¡Nuestros compañeros ya han detenido a tus amigos, y nosotros te detendremos a tí!"))
+	namebox (Delta)
+	msgbox(format("Dejen de molestar. Necesitamos ese Orbe Rojo que tienen. Entrégenoslo y los dejaremos traquilos."))
+	applymovement (LOCALID_GRUNT_1, Common_Movement_WalkInPlaceFasterLeft)
+	waitmovement (0)
+	namebox (Magma)
+	msgbox(format("¡Silencio! ¡No intentes nada!"))
+	hidenamebox
+	msgbox(format("¿Deseas intervenir, ayudando al Equipo Magma?"),MSGBOX_YESNO)
+	if (var(VAR_RESULT) == YES){
+		setvar(VAR_MAGMA_HIDEOUT_STATE, 1)
+		subvar(VAR_EVIL_TEAM_SIDE, 1)
+		msgbox(format("Si."))
+		call (MagmaHideout_3F_1R_EventScripts_PrepareMagmaWin)
+	}
+	else {
+		setvar(VAR_MAGMA_HIDEOUT_STATE, 1)
+		addvar(VAR_EVIL_TEAM_SIDE, 1)
+		msgbox(format("No."))
+		call (MagmaHideout_3F_1R_EventScripts_PrepareMagmaWin)
+	}
+	releaseall
 	end
-
-MagmaHideout_3F_1R_EventScript_Grunt16::
-	trainerbattle_single TRAINER_GRUNT_MAGMA_HIDEOUT_16, MagmaHideout_3F_1R_Text_Grunt16Intro, MagmaHideout_3F_1R_Text_Grunt16Defeat
-	msgbox MagmaHideout_3F_1R_Text_Grunt16PostBattle, MSGBOX_AUTOCLOSE
-	end
-
-MagmaHideout_3F_1R_Text_Grunt9Intro:
-	.string "What did I do to deserve this guard\n"
-	.string "posting?\p"
-	.string "My left ear is burning up!$"
-
-MagmaHideout_3F_1R_Text_Grunt9Defeat:
-	.string "I'm getting heat exhaustion…$"
-
-MagmaHideout_3F_1R_Text_Grunt9PostBattle:
-	.string "Do you think it's odd that we're wearing\n"
-	.string "hoods in this magma-filled volcano?$"
-
-MagmaHideout_3F_1R_Text_Grunt16Intro:
-	.string "We joined so we can help our leader\n"
-	.string "achieve his fantastic vision.\p"
-	.string "I don't care if you're with TEAM AQUA\n"
-	.string "or if you're just some kid passing by.\p"
-	.string "No one interferes with us and gets\n"
-	.string "away with it!$"
-
-MagmaHideout_3F_1R_Text_Grunt16Defeat:
-	.string "Oh, no!\n"
-	.string "You're not to be trusted at all!$"
-
-MagmaHideout_3F_1R_Text_Grunt16PostBattle:
-	.string "Listen to me.\n"
-	.string "TEAM MAGMA is right!\p"
-	.string "Don't listen to TEAM AQUA.\n"
-	.string "Don't believe their lies!$"
-
-`
+}

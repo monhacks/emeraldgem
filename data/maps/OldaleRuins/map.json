@@ -22,7 +22,7 @@
   "object_events": [
     {
       "graphics_id": "OBJ_EVENT_GFX_BREAKABLE_ROCK",
-      "x": 5,
+      "x": 9,
       "y": 11,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_NONE",
@@ -35,7 +35,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_BREAKABLE_ROCK",
-      "x": 6,
+      "x": 10,
       "y": 11,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_NONE",
@@ -48,7 +48,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_BREAKABLE_ROCK",
-      "x": 3,
+      "x": 7,
       "y": 8,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_NONE",
@@ -61,7 +61,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_BREAKABLE_ROCK",
-      "x": 9,
+      "x": 13,
       "y": 8,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_NONE",
@@ -74,7 +74,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_BREAKABLE_ROCK",
-      "x": 11,
+      "x": 15,
       "y": 13,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_NONE",
@@ -87,7 +87,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_BREAKABLE_ROCK",
-      "x": 6,
+      "x": 10,
       "y": 5,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_NONE",
@@ -101,7 +101,7 @@
   ],
   "warp_events": [
     {
-      "x": 5,
+      "x": 9,
       "y": 10,
       "elevation": 0,
       "dest_map": "MAP_OLDALE_RUINS_INSIDE_F1",

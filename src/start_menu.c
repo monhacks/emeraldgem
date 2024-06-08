@@ -56,6 +56,8 @@
 #include "debug.h"
 #include "debug_pokemon_creator.h"
 
+#include "constants/songs.h"
+#include "ui_menu.h"
 
 // Menu actions
 enum
@@ -81,7 +83,8 @@ enum
     MENU_ACTION_QUEST_MENU,
     MENU_ACTION_PASSWORDS,
     MENU_ACTION_DEBUG,
-    MENU_ACTION_DEXNAV
+    MENU_ACTION_DEXNAV,
+    MENU_ACTION_UI_MENU
 };
 
 // Save status
@@ -131,6 +134,7 @@ static bool8 StartMenuDebugCallback(void);
 static bool8 StartMenuDexRelatedCallback(void);
 
 static bool8 StartMenuDexNavCallback(void);
+static bool8 StartMenuUiMenuCallback(void);
 
 // Menu callbacks
 static bool8 SaveStartCallback(void);
@@ -186,6 +190,7 @@ static const u8 *const sPyramidFloorNames[FRONTIER_STAGES_PER_CHALLENGE + 1] =
 static const struct WindowTemplate sPyramidFloorWindowTemplate_2 = {0, 1, 1, 0xA, 4, 0xF, 8};
 static const struct WindowTemplate sPyramidFloorWindowTemplate_1 = {0, 1, 1, 0xC, 4, 0xF, 8};
 
+
 static const u8 gText_MenuDebug[] = _("Debug");
 static const u8 sText_QuestMenu[] = _("Misiones");
 static const u8 gText_MenuDexRelated[] = _("Dex y Otros");
@@ -193,6 +198,9 @@ static const u8 gText_LeftArrow[] = _("{LEFT_ARROW}");
 static const u8 sText_Passwords[] = _("Claves");
 static const u8 gText_MenuExit2[] = _("Salir {DPAD_LEFT}");
 static const u8 gText_MenuExit3[] = _("Salir");
+static const u8 sText_NewMenu[] = _("My Menu");
+
+
 static const struct MenuAction sStartMenuItems[] =
 {
 	
@@ -218,9 +226,8 @@ static const struct MenuAction sStartMenuItems[] =
     [MENU_ACTION_PASSWORDS]        = {sText_Passwords, {.u8_void = PasswordCallback}},
     [MENU_ACTION_DEBUG]        = {gText_MenuDebug, {.u8_void = StartMenuDebugCallback}},
     [MENU_ACTION_DEXNAV]          = {gText_MenuDexNav,  {.u8_void = StartMenuDexNavCallback}},
+	[MENU_ACTION_UI_MENU]         = {sText_NewMenu,     {.u8_void = StartMenuUiMenuCallback}}
 };
-
-
 
 static const struct BgTemplate sBgTemplates_LinkBattleSave[] =
 {
@@ -425,6 +432,8 @@ static void BuildDebugStartMenu(void)
 
     if (FlagGet(FLAG_SYS_POKENAV_GET) == TRUE)
         AddStartMenuAction(MENU_ACTION_POKENAV);
+    
+    AddStartMenuAction(MENU_ACTION_UI_MENU);
 
     AddStartMenuAction(MENU_ACTION_PLAYER);
     AddStartMenuAction(MENU_ACTION_SAVE);
@@ -1649,6 +1658,7 @@ void AppendToList(u8 *list, u8 *pos, u8 newEntry)
     (*pos)++;
 }
 
+
 static bool8 QuestMenuCallback(void)
 {
     CreateTask(Task_OpenQuestMenuFromStartMenu, 0);
@@ -1678,5 +1688,11 @@ static void ShowStartMenuExtraWindow(void) // Función que carga una ventana aux
 static bool8 StartMenuDexNavCallback(void)
 {
     CreateTask(Task_OpenDexNavFromStartMenu, 0);
+	return TRUE;
+}
+
+static bool8 StartMenuUiMenuCallback(void)
+{
+    CreateTask(Task_OpenMenuFromStartMenu, 0);
     return TRUE;
 }

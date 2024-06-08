@@ -18,7 +18,7 @@ OldaleTown_EventScript_SetOldaleState::
 	return
 
 OldaleTown_EventScript_BlockWestEntrance::
-	setobjectxyperm LOCALID_FOOTPRINTS_MAN, 0, 13
+	setobjectxyperm LOCALID_FOOTPRINTS_MAN, 4, 13
 	setobjectmovementtype LOCALID_FOOTPRINTS_MAN, MOVEMENT_TYPE_FACE_LEFT
 	return
 

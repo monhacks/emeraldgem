@@ -118,7 +118,7 @@
               {
                 "min_level": 3,
                 "max_level": 3,
-                "species": "SPECIES_BIDOOF"
+                "species": "SPECIES_SENTRET"
               },
               {
                 "min_level": 3,
@@ -301,12 +301,12 @@
               {
                 "min_level": 3,
                 "max_level": 3,
-                "species": "SPECIES_ZIGZAGOON"
+                "species": "SPECIES_BIDOOF"
               },
               {
                 "min_level": 3,
                 "max_level": 3,
-                "species": "SPECIES_ZIGZAGOON"
+                "species": "SPECIES_BIDOOF"
               },
               {
                 "min_level": 4,
@@ -619,7 +619,7 @@
               {
                 "min_level": 2,
                 "max_level": 2,
-                "species": "SPECIES_SEWADDLE"
+                "species": "SPECIES_BUNNELBY"
               },
               {
                 "min_level": 3,
@@ -992,7 +992,7 @@
               {
                 "min_level": 5,
                 "max_level": 6,
-                "species": "SPECIES_POOCHYENA"
+                "species": "SPECIES_SKWOVET"
               },
               {
                 "min_level": 4,
@@ -2720,7 +2720,7 @@
               {
                 "min_level": 6,
                 "max_level": 8,
-                "species": "SPECIES_WHISMUR"
+                "species": "SPECIES_YUNGOOS"
               },
               {
                 "min_level": 6,
@@ -15043,7 +15043,7 @@
           "map": "MAP_OLDALE_RUINS",
           "base_label": "gOldaleRuinsDay",
           "land_mons": {
-            "encounter_rate": 25,
+            "encounter_rate": 10,
             "mons": [
               {
                 "min_level": 3,
@@ -15058,7 +15058,7 @@
               {
                 "min_level": 3,
                 "max_level": 7,
-                "species": "SPECIES_BUNNELBY"
+                "species": "SPECIES_PHANPY"
               },
               {
                 "min_level": 3,
@@ -15078,7 +15078,7 @@
               {
                 "min_level": 3,
                 "max_level": 5,
-                "species": "SPECIES_PHANPY"
+                "species": "SPECIES_GIBLE"
               },
               {
                 "min_level": 3,
@@ -15103,7 +15103,7 @@
               {
                 "min_level": 3,
                 "max_level": 7,
-                "species": "SPECIES_GIBLE"
+                "species": "SPECIES_TRAPINCH"
               }
             ]
           },
@@ -15132,7 +15132,7 @@
           "map": "MAP_OLDALE_RUINS",
           "base_label": "gOldaleRuinsNight",
           "land_mons": {
-            "encounter_rate": 25,
+            "encounter_rate": 10,
             "mons": [
               {
                 "min_level": 3,
@@ -15146,12 +15146,12 @@
               },
               {
                 "min_level": 3,
-                "max_level": 7,
-                "species": "SPECIES_YUNGOOS"
+                "max_level": 6,
+                "species": "SPECIES_MINIOR"
               },
               {
                 "min_level": 3,
-                "max_level": 7,
+                "max_level": 6,
                 "species": "SPECIES_ABSOL"
               },
               {
@@ -15172,26 +15172,26 @@
               {
                 "min_level": 3,
                 "max_level": 5,
-                "species": "SPECIES_TRAPINCH"
+                "species": "SPECIES_BELDUM"
               },
               {
                 "min_level": 3,
-                "max_level": 7,
+                "max_level": 6,
                 "species": "SPECIES_LARVITAR"
               },
               {
                 "min_level": 3,
-                "max_level": 7,
+                "max_level": 6,
                 "species": "SPECIES_DREEPY"
               },
               {
                 "min_level": 3,
-                "max_level": 7,
+                "max_level": 6,
                 "species": "SPECIES_DREEPY"
               },
               {
                 "min_level": 3,
-                "max_level": 7,
+                "max_level": 6,
                 "species": "SPECIES_BELDUM"
               }
             ]

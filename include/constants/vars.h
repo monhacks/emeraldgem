@@ -236,10 +236,10 @@
 #define VAR_HAS_TALKED_TO_SEAFLOOR_CAVERN_ENTRANCE_GRUNT 0x40D9
 #define VAR_REGISTER_BIRCH_STATE             0x40DA
 #define VAR_MISTERIO	                     0x40DB 
-#define VAR_EVIL_TEAM_SIDE                   0x40DC // Unused Var
+#define VAR_EVIL_TEAM_SIDE                   0x40DC 
 #define VAR_GIFT_PICHU_SLOT                  0x40DD
-#define VAR_SAFARI_ZONE_RIGHT                0x40DE // Var is written to, but never read
-#define VAR_GIFT_UNUSED_2                    0x40DF // Var is written to, but never read
+#define VAR_SAFARI_ZONE_RIGHT                0x40DE 
+#define VAR_MAGMA_HIDEOUT_STATE              0x40DF 
 #define VAR_GIFT_UNUSED_3                    0x40E0 // Var is written to, but never read
 #define VAR_GIFT_UNUSED_4                    0x40E1 // Var is written to, but never read
 #define VAR_GIFT_UNUSED_5                    0x40E2 // Var is written to, but never read
