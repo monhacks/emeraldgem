@@ -7924,8 +7924,10 @@ bool32 IsBattlerProtected(u8 battlerId, u16 move)
     // Protective Pads doesn't stop Unseen Fist from bypassing Protect effects, so IsMoveMakingContact() isn't used here.
     // This means extra logic is needed to handle Shell Side Arm.
     if (GetBattlerAbility(gBattlerAttacker) == ABILITY_UNSEEN_FIST
-        && (gBattleMoves[move].flags & FLAG_MAKES_CONTACT || (gBattleMoves[move].effect == EFFECT_SHELL_SIDE_ARM && gBattleStruct->swapDamageCategory)))
-        return FALSE;
+        && (gBattleMoves[move].flags & FLAG_MAKES_CONTACT || (gBattleMoves[move].effect == EFFECT_SHELL_SIDE_ARM && gBattleStruct->swapDamageCategory))){
+        // gBattleMoves[move].power /= 4;
+		return FALSE;
+		}
     else if (!(gBattleMoves[move].flags & FLAG_PROTECT_AFFECTED))
         return FALSE;
     else if (gBattleMoves[move].effect == MOVE_EFFECT_FEINT)
@@ -8205,7 +8207,9 @@ static u16 CalcMoveBasePower(u16 move, u8 battlerAtk, u8 battlerDef)
 	if (move <= MOVE_THUNDER_PUNCH && move >= MOVE_FIRE_PUNCH && !FlagGet(FLAG_BADGE03_GET) && gSaveBlock2Ptr->optionsDifficulty < DIFFICULTY_HARD){
 		basePower = 50;
 	}
-	
+	if (gBattleMons[battlerAtk].ability == ABILITY_UNSEEN_FIST) {
+		basePower /= 4;
+	}
     switch (gBattleMoves[move].effect)
     {
     case EFFECT_PLEDGE:

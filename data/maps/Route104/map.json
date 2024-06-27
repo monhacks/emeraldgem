@@ -165,7 +165,7 @@
       "x": 9,
       "y": 7,
       "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_DOWN_AND_RIGHT",
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NORMAL",
@@ -232,35 +232,35 @@
       "y": 16,
       "elevation": 0,
       "dest_map": "MAP_ROUTE104_MR_BRINEYS_HOUSE",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 10,
       "y": 5,
       "elevation": 3,
       "dest_map": "MAP_PETALBURG_WOODS",
-      "dest_warp_id": 2
+      "dest_warp_id": "2"
     },
     {
       "x": 11,
       "y": 5,
       "elevation": 3,
       "dest_map": "MAP_PETALBURG_WOODS",
-      "dest_warp_id": 3
+      "dest_warp_id": "3"
     },
     {
       "x": 32,
       "y": 9,
       "elevation": 3,
       "dest_map": "MAP_PETALBURG_WOODS",
-      "dest_warp_id": 4
+      "dest_warp_id": "4"
     },
     {
       "x": 33,
       "y": 9,
       "elevation": 3,
       "dest_map": "MAP_PETALBURG_WOODS",
-      "dest_warp_id": 5
+      "dest_warp_id": "5"
     }
   ],
   "coord_events": [

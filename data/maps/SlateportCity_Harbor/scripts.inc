@@ -273,9 +273,9 @@ SlateportCity_Harbor_EventScript_AquaEscapeScene_1:
 # 150 "data/maps/SlateportCity_Harbor/scripts.pory"
 	hidenamebox
 # 151 "data/maps/SlateportCity_Harbor/scripts.pory"
-	setvar VAR_0x8004, 1
+	setvar VAR_0x8004, 2
 # 152 "data/maps/SlateportCity_Harbor/scripts.pory"
-	setvar VAR_0x8005, 1
+	setvar VAR_0x8005, 2
 # 153 "data/maps/SlateportCity_Harbor/scripts.pory"
 	setvar VAR_0x8006, 5
 # 154 "data/maps/SlateportCity_Harbor/scripts.pory"
@@ -1309,7 +1309,7 @@ SlateportCity_Harbor_EventScript_AquaEscapeScene_Text_19:
 # 148 "data/maps/SlateportCity_Harbor/scripts.pory"
 	.string "Si pudieras sentirlo,{PAUSE 15} {COLOR BLUE}el dolor del\n"
 	.string "mundo{COLOR DARK_GRAY}{PAUSE 30}...\p"
-	.string "Entenderías porq-{PAUSE 20}$"
+	.string "Entenderías porq-{PAUSE 30}$"
 
 SlateportCity_Harbor_EventScript_AquaEscapeScene_Text_20:
 # 157 "data/maps/SlateportCity_Harbor/scripts.pory"

@@ -874,3 +874,14 @@ gTileset_RustboroNew::
 	.4byte gMetatiles_RustboroNew
 	.4byte gMetatileAttributes_RustboroNew
 	.4byte NULL @ animation callback
+
+	.align 2
+gTileset_DewfordNew::
+	.byte TRUE @ is compressed
+	.byte TRUE @ is secondary
+	.2byte 0 @ padding
+	.4byte gTilesetTiles_DewfordNew
+	.4byte gTilesetPalettes_DewfordNew
+	.4byte gMetatiles_DewfordNew
+	.4byte gMetatileAttributes_DewfordNew
+	.4byte NULL @ animation callback

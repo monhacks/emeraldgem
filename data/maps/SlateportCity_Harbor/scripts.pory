@@ -145,11 +145,11 @@ script SlateportCity_Harbor_EventScript_AquaEscapeScene {
 	namebox (Archie)
     msgbox(format("Los entiendo, y es por eso que no comprendo tu posición.\pEstás en contra tanto del Equipo Magma, como de nostros.\p¿Porqué?"))
 	namebox (Winona)
-    msgbox(format("Si pudieras sentirlo,{PAUSE 15} {COLOR BLUE}el dolor del mundo{COLOR DARK_GRAY}{PAUSE 30}...\pEntenderías porq-{PAUSE 20} "), MSGBOX_INTERRUPT)
+    msgbox(format("Si pudieras sentirlo,{PAUSE 15} {COLOR BLUE}el dolor del mundo{COLOR DARK_GRAY}{PAUSE 30}...\pEntenderías porq-{PAUSE 30} "), MSGBOX_INTERRUPT)
 	closemessage
 	hidenamebox
-	setvar (VAR_0x8004, 1) 
-	setvar (VAR_0x8005, 1)
+	setvar (VAR_0x8004, 2) 
+	setvar (VAR_0x8005, 2)
 	setvar (VAR_0x8006, 5)
 	setvar (VAR_0x8007, 4)
 	special (ShakeCamera)

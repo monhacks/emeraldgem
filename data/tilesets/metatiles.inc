@@ -589,3 +589,11 @@ gMetatiles_RustboroNew::
 	.align 1
 gMetatileAttributes_RustboroNew::
 	.incbin "data/tilesets/secondary/rustboro_new/metatile_attributes.bin"
+
+	.align 1
+gMetatiles_DewfordNew::
+	.incbin "data/tilesets/secondary/dewford_new/metatiles.bin"
+
+	.align 1
+gMetatileAttributes_DewfordNew::
+	.incbin "data/tilesets/secondary/dewford_new/metatile_attributes.bin"

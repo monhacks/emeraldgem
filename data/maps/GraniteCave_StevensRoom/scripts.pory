@@ -131,6 +131,7 @@ GraniteCave_StevensRoom_EventScript_Steven::
 	hidenamebox
 	closemessage
 	giveitem ITEM_TM47
+	giveitem ITEM_EXP_SHARE
 	call_if_eq VAR_RESULT, FALSE, GraniteCave_StevensRoom_EventScript_BagFull
 	namebox Steven
 	msgbox GraniteCave_StevensRoom_Text_CouldBecomeChampionLetsRegister, MSGBOX_DEFAULT
@@ -229,7 +230,7 @@ GraniteCave_StevensRoom_Text_ImStevenLetterForMe2:
 	.string "¡Pero gracias por traerla!$"
 
 GraniteCave_StevensRoom_Text_ThankYouTakeThis:
-	.string "¡Voy a darte esta MT como\n"
+	.string "¡Voy a darte esto como\n"
 	.string "agradecimiento!$"
 
 GraniteCave_StevensRoom_Text_CouldBecomeChampionLetsRegister:

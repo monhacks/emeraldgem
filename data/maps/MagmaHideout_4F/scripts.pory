@@ -1,3 +1,157 @@
+const LOCALID_GROUDON 		   = 1
+const LOCALID_GRUNT_1 		   = 2
+const LOCALID_GRUNT_2 		   = 3
+const LOCALID_GRUNT_3 		   = 4
+const LOCALID_TABITHA 		   = 5
+const LOCALID_MAXIE 		   = 6
+const LOCALID_GROUDON_SLEEPING = 7
+const LOCALID_WINONA 		   = 9
+
+script MagmaHideout_4F_EventScript_Winona {
+	lockall
+	special (SpawnCameraObject)
+	playbgm (MUS_ENCOUNTER_MAGMA, FALSE)
+	namebox (Tabitha)
+	msgbox(format("¡Jefe! ¡Es ella!\pLa líder de la División Delta!"))
+	namebox (Winona)
+	msgbox(format("Hola, Maxie, ¡Tanto tiempo!\nSé lo de tú y Archie... Lo lamento mucho, eran tan unidos."))
+	setvar (VAR_0x8004, 4) 
+	setvar (VAR_0x8005, 4)
+	setvar (VAR_0x8006, 6)
+	setvar (VAR_0x8007, 4)
+	special (ShakeCamera)
+	namebox (Winona)
+	msgbox(format("¡MGAAAAAAAAAAAH!"))
+	namebox (Maxie)
+	msgbox(format("¡Winona! ¿Estás-{PAUSE 30} "),MSGBOX_INTERRUPT)
+	msgbox(format("Ugh- ¿¡Podrías decirle a tu estúpido Admin que salga del camino y poder tener una conversación normal!?"))
+	closemessage
+	hidenamebox
+	playse(SE_PIN)
+	applymovement(LOCALID_MAXIE, Common_Movement_ExclamationMark)
+	waitmovement (0)
+	namebox (Winona)
+	msgbox(format("Está... {PAUSE 30}Empeorando aún más... {PAUSE 30}{COLOR BLUE}el dolor del mundo{COLOR DARK_GRAY}...{PAUSE 30}\p... ... ...\pDiscúlpame por eso, Maxie. Este dolor que siento, el que siente la naturaleza... Me arruina..."))
+	namebox (Maxie)
+	msgbox(format("Winona...{PAUSE 30}\pDetén esta locura, y descansa. No puedes seguir así...\pY no te preocupes, este “dolor del mundo,” yo lo detendré.\pSólo déjame despertar a Groudon,\ny-{PAUSE 30} "), MSGBOX_INTERRUPT)
+	namebox (Winona)
+	msgbox(format("¡NO!\p¡Tus soluciones no han funcionado jamás, ¿Qué te hace pensar que funcionarán ahora, Maxie?\p¿No estás satisfecho con los problemas que causaste en ese entonces?"))
+	closemessage
+	hidenamebox
+	if (var(VAR_EVIL_TEAM_SIDE) <= 3){
+		setvar(VAR_TEMP_1, 1)
+		msgbox(format("Parece que están por combatir. ¿Deseas ayudar al Equipo Magma?"),MSGBOX_YESNO)
+		if (var(VAR_RESULT) == YES){
+			goto(MagmaHideout_4F_EventScript_AgainstWinona)
+		}
+		else {
+			setvar(VAR_EVIL_TEAM_SIDE, 4)
+			applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterRight)
+			waitmovement (0)
+			goto(MagmaHideout_4F_EventScript_AgainstWinona)
+		}
+	}
+	elif (var(VAR_EVIL_TEAM_SIDE) > 3){
+		setvar(VAR_TEMP_1, 2)
+		msgbox(format("Parece que están por combatir. ¿Deseas ayudar a la División Delta?"),MSGBOX_YESNO)
+		if (var(VAR_RESULT) == YES){
+			addvar(VAR_EVIL_TEAM_SIDE, 1)
+			applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterRight)
+			waitmovement (0)
+			goto(MagmaHideout_4F_EventScript_AgainstWinona)
+		}
+		else {
+			goto(MagmaHideout_4F_EventScript_AgainstWinona)
+		}
+	}
+	
+}
+
+script MagmaHideout_4F_EventScript_AgainstWinona {
+	subvar(VAR_EVIL_TEAM_SIDE, 1)
+	applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterUp)
+	applymovement(LOCALID_WINONA, Common_Movement_WalkInPlaceFasterDown)
+	waitmovement (0)
+	namebox (Winona)
+	trainerbattle_no_whiteout_continue_script (TRAINER_WINONA_AQUA_HIDEOUT, "Tú eres {PLAYER}, ¿No?\pAquí no soy la Líder del Gimnasio, y no\nvoy a jugar limpio.", "¡AAAHHH! ¡Mi cabesa!", MagmaHideout_4F_EventScript_WinonaDefeated)
+}
+
+script MagmaHideout_4F_EventScript_DoGroudonAwakening {
+	delay (20)
+	setvar (VAR_RESULT, 1)
+	playse (SE_M_DETECT)
+	dofieldeffectsparkle (18, 42, 0)
+	waitfieldeffect (FLDEFF_SPARKLE)
+	setvar (VAR_RESULT, 0)
+	playfanfare (MUS_AWAKEN_LEGEND)
+	playse (SE_ORB)
+	special (DoOrbEffect)
+	applymovement (OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterRight)
+	applymovement (LOCALID_WINONA, Common_Movement_WalkInPlaceFasterRight)
+	applymovement (LOCALID_WINONA, Common_Movement_ExclamationMark)
+	waitmovement (0)
+	delay (150)
+	removeobject (LOCALID_GROUDON_SLEEPING)
+	addobject (LOCALID_GROUDON)
+	waitstate
+	delay (60)
+	applymovement (LOCALID_GROUDON, MagmaHideout_4F_Movement_GroudonApproach)
+	waitmovement (0)
+	special (FadeOutOrbEffect)
+	waitstate
+	setvar (VAR_0x8004, 1)  // vertical pan
+	setvar (VAR_0x8005, 1)  // horizontal pan
+	setvar (VAR_0x8006, 8)  // num shakes
+	setvar (VAR_0x8007, 5)  // shake delay
+	special (ShakeCamera)
+	waitstate
+	applymovement (LOCALID_GROUDON, MagmaHideout_4F_Movement_GroudonExit)
+	waitmovement (0)
+	removeobject (LOCALID_GROUDON)
+	delay (4)
+	setvar (VAR_0x8004, 2)  // vertical pan
+	setvar (VAR_0x8005, 2)  // horizontal pan
+	setvar (VAR_0x8006, 8)  // num shakes
+	setvar (VAR_0x8007, 5)  // shake delay
+	special (ShakeCamera)
+	waitstate
+	delay (30)
+	applymovement (LOCALID_MAXIE, MagmaHideout_4F_Movement_MaxieLookAround)
+	delay (8)
+	applymovement (LOCALID_TABITHA, MagmaHideout_4F_Movement_MaxieLookAround)
+	delay (16)
+	applymovement (LOCALID_WINONA, MagmaHideout_4F_Movement_MaxieLookAround)
+	waitmovement (0)
+	namebox(Winona)
+	msgbox(format("¡¿Porqué lo hiciste?!\n¿No sabes lo que acabas de desatar en Hooenn?\p¿Has olvidado lo que pasó la última vez?"))
+	namebox(Maxie)
+	msgbox(format("Lo recuerdo. Y es por eso mismo que lo hice. Ahora, tengo el Orbe Rojo en mi poder.\pGroudon sucumbirá a él y recobrará su poder primigenio."
+	"\pCon ese poder, daré a la humaniidad más espacio en tierra firme para que se desarrolle y encontrar una solución a nuestro problema."))
+	namebox(Winona)
+	msgbox(format("¡IDIOTA!\n¡El poder del Orbe hace a Groudon imposible de controlar!\pYo iba a usar el Orbe para potenciar una máquina, una capaz de modificar nuestra realidad..."
+	"\pUna con el poder de arreglarlo todo... ¡Y LO ARRUINASTE!"))
+	namebox(Maxie)
+	msgbox(format("Wow, esta no es la calmada y calculadora Winona que conozco. Parece que tus locuras con la naturaleza al fin te están afectando.\pPero...\p"
+	"¡¿Qué dijiste!? ¿Modificar la realidad?\n¿Es eso siquiera posible?"))
+	namebox(Winona)
+	msgbox(format("Sí, la máquina, la Flora Bismuto, ya ha modificado la realidad.\pPero necesitaba más poder. Ahora, tendré que ir a robar el Orbe Azul, Y lidiar con Groudon, todo gracias a tu ignorancia."))
+	releaseall
+}
+script MagmaHideout_4F_EventScript_WinonaDefeated {
+	namebox(Winona)
+	msgbox(format("UGHHH... El dolor sigue fuerte...\p¿Porqué... te has entrometido?\pAcaso..."))
+	hidenamebox
+	closemessage
+	applymovement (OBJ_EVENT_ID_CAMERA, MagmaHideout_4F_Movement_PanToMaxie)
+	waitmovement(0)
+	goto(MagmaHideout_4F_EventScript_DoGroudonAwakening)
+}
+
+movement MagmaHideout_4F_Movement_PanToMaxie {
+	walk_diag_northeast
+	walk_right
+}
+
 raw `
 .set LOCALID_GROUDON, 1
 .set LOCALID_GRUNT_1, 2
@@ -6,6 +160,7 @@ raw `
 .set LOCALID_TABITHA, 5
 .set LOCALID_MAXIE, 6
 .set LOCALID_GROUDON_SLEEPING, 7
+.set LOCALID_WINONA, 7
 
 MagmaHideout_4F_MapScripts::
 	.byte 0

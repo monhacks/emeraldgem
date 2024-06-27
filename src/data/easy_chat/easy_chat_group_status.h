@@ -7,15 +7,15 @@
     const u8 gEasyChatWord_ArenaTrap[] = _("TRAMPA ARENA");
     const u8 gEasyChatWord_Intimidate[] = _("INTIMIDACIÓN");
     const u8 gEasyChatWord_RockHead[] = _("CABEZA ROCA");
-    const u8 gEasyChatWord_Color[] = _("PROFECÍAS");
-    const u8 gEasyChatWord_AltColor[] = _("ENTRENANDO");
+    const u8 gEasyChatWord_Color[] = _("COLOR");
+    const u8 gEasyChatWord_AltColor[] = _("VARIOCOLOR");
     const u8 gEasyChatWord_Rock[] = _("ROCA");
     const u8 gEasyChatWord_Beautiful[] = _("BELLO");
     const u8 gEasyChatWord_Beauty[] = _("BELLEZA");
     const u8 gEasyChatWord_AirLock[] = _("BUCLE AIRE");
     const u8 gEasyChatWord_Psychic[] = _("PSÍQUICO");
     const u8 gEasyChatWord_HyperCutter[] = _("CORTE FUERTE");
-    const u8 gEasyChatWord_Fighting[] = _("CRUEL");
+    const u8 gEasyChatWord_Fighting[] = _("LUCHA");
     const u8 gEasyChatWord_ShadowTag[] = _("SOMBRATRAMPA");
     const u8 gEasyChatWord_Smart[] = _("INGENIO");
     const u8 gEasyChatWord_Smartness[] = _("INGENIOSO");
@@ -73,7 +73,7 @@
     const u8 gEasyChatWord_Illuminate[] = _("ILUMINACIÓN");
     const u8 gEasyChatWord_EarlyBird[] = _("MADRUGAR");
     const u8 gEasyChatWord_Hustle[] = _("ENTUSIASMO");
-    const u8 gEasyChatWord_Shine[] = _("SUPER");
+    const u8 gEasyChatWord_Shine[] = _("SHINY");
     const u8 gEasyChatWord_Flying[] = _("VOLADOR");
     const u8 gEasyChatWord_Drought[] = _("SEQUÍA");
     const u8 gEasyChatWord_Lightningrod[] = _("PARARRAYOS");
@@ -731,7 +731,7 @@
     const u8 gEasyChatWord_Illuminate[] = _("ILLUMINATE");
     const u8 gEasyChatWord_EarlyBird[] = _("EARLY BIRD");
     const u8 gEasyChatWord_Hustle[] = _("HUSTLE");
-    const u8 gEasyChatWord_Shine[] = _("SHINE");
+    const u8 gEasyChatWord_Shine[] = _("SHINY");
     const u8 gEasyChatWord_Flying[] = _("FLYING");
     const u8 gEasyChatWord_Drought[] = _("DROUGHT");
     const u8 gEasyChatWord_Lightningrod[] = _("LIGHTNINGROD");
