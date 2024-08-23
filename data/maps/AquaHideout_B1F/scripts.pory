@@ -38,13 +38,13 @@ script AquaHideout_B1F_EventScript_Trigger {
 	poryswitch(LANGUAGE){
 		ES{
 			namebox (Aqua)
-			msgbox (format("¡N-{PAUSE 5}No!\nMe derrotó usando un solo Pokémon..."))
+			msgbox (format("¡N-{PAUSE 5}No!\nMe derrotó usando un solo Pokémon…"))
 			namebox (Delta)
 			msgbox (format("Tsk.\n¿Es todo este Equipo igual de patético?"))
 		}
 		EN {
 			namebox (Aqua)
-			msgbox (format("¡N-{PAUSE 5}No!\nShe defeated me using a single Pokémon..."))
+			msgbox (format("¡N-{PAUSE 5}No!\nShe defeated me using a single Pokémon…"))
 			namebox (Delta)
 			msgbox (format("Tsk.\nIs this whole Team this pathetic?"))
 		}
@@ -113,10 +113,10 @@ script AquaHideout_B1F_EventScript_Grunt3 {
 	namebox (Aqua)
 	poryswitch(LANGUAGE){
 		ES{
-			msgbox (format("Normalmente, te atacaría, pero ya no tengo Pokémon...\p¡Igual! ¡Todo estará bien!\nLe avisé a nuestro {COLOR BLUE}Administrador Matt{COLOR DARK_GRAY} sobre esta intrusa...\p¡El poder que él posee es abismal!"))
+			msgbox (format("Normalmente, te atacaría, pero ya no tengo Pokémon…\p¡Igual! ¡Todo estará bien!\nLe avisé a nuestro {COLOR BLUE}Administrador Matt{COLOR DARK_GRAY} sobre esta intrusa…\p¡El poder que él posee es abismal!"))
 		}
 		EN{
-			msgbox (format("Usually, I'd attack you, but I ain't got no Pokémon left...\pWhatever! It'll be fine!\nTold our {COLOR BLUE}Admin Matt{COLOR DARK_GRAY} 'bout that indtruder...\pHis power is abyssmal!"))
+			msgbox (format("Usually, I'd attack you, but I ain't got no Pokémon left…\pWhatever! It'll be fine!\nTold our {COLOR BLUE}Admin Matt{COLOR DARK_GRAY} 'bout that indtruder…\pHis power is abyssmal!"))
 		}	
 	}
 	hidenamebox
@@ -135,10 +135,10 @@ script AquaHideout_B1F_EventScript_Grunt5 {
 		namebox (Aqua)
 		poryswitch(LANGUAGE){
 			ES {
-				msgbox (format("Tomó todo lo que teníamos, hasta los más débiles, pero parece que logramos detenerla...\p¡Estos idiotas no son tan invencibles como creíamos!"))
+				msgbox (format("Tomó todo lo que teníamos, hasta los más débiles, pero parece que logramos detenerla…\p¡Estos idiotas no son tan invencibles como creíamos!"))
 			}
 			EN {
-				msgbox (format("It took everything we had, even our weakest Pokémon, but we defeated 'er...\pThese dumbaxes ain't unstoppable after all!"))
+				msgbox (format("It took everything we had, even our weakest Pokémon, but we defeated 'er…\pThese dumbaxes ain't unstoppable after all!"))
 			}
 		}
 		hidenamebox
@@ -191,10 +191,10 @@ script AquaHideout_B1F_EventScript_Delta2 {
 	namebox (Delta)
 	poryswitch(LANGUAGE){
 		ES {
-			msgbox (format("M-me han... Derrotado."))
+			msgbox (format("M-me han… Derrotado."))
 		}
 		EN {
-			msgbox (format("Defeated..."))
+			msgbox (format("Defeated…"))
 		}
 	}
 	setvar(VAR_AQUA_HIDEOUT_STATE, 4)

@@ -106,11 +106,19 @@ static const u16 sOptionMenuText_Pal[] = INCBIN_U16("graphics/interface/option_m
 // note: this is only used in the Japanese release
 static const u8 sEqualSignGfx[] = INCBIN_U8("graphics/interface/option_menu_equals_sign.4bpp");
 
-static const u8 sText_HpBar[] = _("BARRA PS");
-static const u8 sText_ExpBar[] = _("BARRA XP");
-static const u8 sText_UnitSystem[] = _("MEDICIÓN");
-static const u8 sText_ShinyOdds[] = _("SHINIES 1 ENTRE");
-static const u8 sText_Difficulty[] = _("DIFICULTAD");
+#if GAME_LANGUAGE == LANGUAGE_SPANISH
+	static const u8 sText_HpBar[] = _("BARRA PS");
+	static const u8 sText_ExpBar[] = _("BARRA XP");
+	static const u8 sText_UnitSystem[] = _("MEDICIÓN");
+	static const u8 sText_ShinyOdds[] = _("SHINIES 1 ENTRE");
+	static const u8 sText_Difficulty[] = _("DIFICULTAD");
+#else
+	static const u8 sText_HpBar[] = _("HP BAR");
+	static const u8 sText_ExpBar[] = _("EXP BAR");
+	static const u8 sText_UnitSystem[] = _("UNIT SYSTEM");
+	static const u8 sText_ShinyOdds[] = _("SHINIES 1 IN");
+	static const u8 sText_Difficulty[] = _("DIFFICULTY");
+#endif
 
 static const u8 *const sOptionMenuItemsNames[MENUITEM_COUNT] =
 {
@@ -128,16 +136,29 @@ static const u8 *const sOptionMenuItemsNames[MENUITEM_COUNT] =
     [MENUITEM_CANCEL]      = gText_OptionMenuSave,
 };
 
-static const u8 sText_Faster[]   = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}FASTER");
-static const u8 sText_Instant[]  = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}INSTANT");
-static const u8 sText_Shiny8k[]  = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}8192");
-static const u8 sText_Shiny4k[]  = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}4096");
-static const u8 sText_Shiny2k[]  = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}2048");
-static const u8 sText_Shiny1k[]  = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}1024");
-static const u8 sText_Easy[]     = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}FÁCIL");
-static const u8 sText_Normal[]   = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}NRML");
-static const u8 sText_Hard[]     = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}DFCL");
-static const u8 sText_Hardcore[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}EXTREMO");
+#if GAME_LANGUAGE == LANGUAGE_SPANISH
+	static const u8 sText_Faster[]   = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}+RÁPIDO");
+	static const u8 sText_Instant[]  = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}INSTANT");
+	static const u8 sText_Shiny8k[]  = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}8192");
+	static const u8 sText_Shiny4k[]  = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}4096");
+	static const u8 sText_Shiny2k[]  = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}2048");
+	static const u8 sText_Shiny1k[]  = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}1024");
+	static const u8 sText_Easy[]     = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}FÁCIL");
+	static const u8 sText_Normal[]   = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}NRML");
+	static const u8 sText_Hard[]     = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}DFCL");
+	static const u8 sText_Hardcore[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}EXTREMO");
+#else
+	static const u8 sText_Faster[]   = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}FASTER");
+	static const u8 sText_Instant[]  = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}INSTANT");
+	static const u8 sText_Shiny8k[]  = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}8192");
+	static const u8 sText_Shiny4k[]  = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}4096");
+	static const u8 sText_Shiny2k[]  = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}2048");
+	static const u8 sText_Shiny1k[]  = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}1024");
+	static const u8 sText_Easy[]     = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}EASY");
+	static const u8 sText_Normal[]   = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}NRML");
+	static const u8 sText_Hard[]     = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}HARD");
+	static const u8 sText_Hardcore[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}XTREME");
+#endif
 static const u8 *const sTextSpeedStrings[] = {gText_TextSpeedSlow, gText_TextSpeedMid, gText_TextSpeedFast, sText_Faster};
 static const u8 *const sShinyOddsStrings[] = {sText_Shiny8k, sText_Shiny4k, sText_Shiny2k, sText_Shiny1k};
 static const u8 *const sDifficultyStrings[] = {sText_Easy, sText_Normal, sText_Hard, sText_Hardcore};

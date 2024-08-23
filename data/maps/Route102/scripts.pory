@@ -1,4 +1,141 @@
 
+text Route102_Text_Sigsa {
+	poryswitch(LANGUAGE){
+		EN {
+			"ZIGZA!"
+		}
+		ES {
+			"¡ZIGZA!"
+		}
+	}
+	
+}
+text Route102_Text_Ralts {
+	poryswitch(LANGUAGE){
+		EN {
+			"R-{PAUSE 20}RALTS!"
+		}
+		ES {
+			"¡R-{PAUSE 20}RALTS!"
+		}
+	}
+}
+text Route102_Text_UnRalts {
+	poryswitch(LANGUAGE){
+		EN {
+			format("WOW! A Ralts!\nThese Pokémon are rare, or so I've read.\p"
+			"Well, now to catch it…\nUh…{PAUSE 20} How…?\p"
+			"Em…{PAUSE 20} Z-Zigzagon… {PAUSE 20}Come out now!")
+		}
+		ES {
+			format("¡WOW! ¡Un Ralts!\nEstos son raros, leí en un libro.\p"
+			"Bueno, ahora es tiempo de atraparlo…\nEh…{PAUSE 20} ¿Cómo…?\p"
+			"Em…{PAUSE 20} Z-Zigzagon… ¡Sal de ahí!")
+		}
+	}
+	
+}
+
+text Route102_Text_WallyCommands {
+	poryswitch(LANGUAGE){
+		EN {
+			format("Now, I have to attack, no?\pZigzagoon, Tackle!")
+		}
+		ES {
+			format("Ahora, tengo que atacar, ¿no?\pZigzagoon, ¡Tacleada!")
+		}
+	}
+	
+}
+
+text Route102_Text_PokeballVe {
+	poryswitch(LANGUAGE){
+		EN {
+			format("A-a-a-an-and, uh…!\p"
+			"POKÉBALL, CATCH IT!")
+		}
+		ES {
+			format("¡Y-y-y-y ahora, eh…!\p"
+			"¡POKÉBALL, CAPTÚRALO!")
+		}
+	}
+	
+}
+
+text Route102_Text_WatchMeCatchPokemon {
+	poryswitch(LANGUAGE){
+		EN {
+			format("{PLAYER}…\nPokémon live in tall grass, no?\p"
+			"Please stay with me so I…\n"
+			"…WAHHH-!{PAUSE 20} ")
+		}
+		ES {
+			format("{PLAYER}…\nLos Pokémon viven en el pasto, ¿no?\p"
+			"Por favor quédate así puedo…\n¡…AHHH-!{PAUSE 20} ")
+		}
+	}
+	
+}
+
+text Route102_Text_WallyIDidIt {
+	
+	poryswitch(LANGUAGE){
+		EN {
+			format("I-I did it…\n"
+			"I HAVE A POKÉMON!")
+		}
+		ES {
+			format("L-lo hice…\n"
+			"¡TENGO UN POKÉMON!")
+		}
+	}
+	
+}
+
+text Route102_Text_WallyZigzagoonThanks {
+	poryswitch(LANGUAGE){
+		EN {
+			format("Thanks, Zigzagoon!\nI couldn't have done it without you...\pUh... Return!")
+		}
+		ES {
+			format("¡Gracias, Zigzagoon!\nNo podría haberlo hecho sin ti...\pEh... ¡Regresa!")
+		}
+	}
+	
+}
+
+text Route102_Text_LetsGoBack {
+	poryswitch(LANGUAGE){
+		EN {
+			format("{PLAYER}, I'm so happy!\n"
+			"Let's go back to the Gym!!")
+		}
+		ES {
+			format("¡{PLAYER}, gracias!\n"
+			"¡Volvamos al Gimnasio!")
+		}
+	}
+	
+}
+
+text Route102_Text_ImNotVeryTall {
+	"No…soy tan alto, así que\n"
+	"me hundo en el pasto alto.\p"
+	"Ayúdame… Soy alérgic-\n"
+	"-AAAA…\l"
+	"CHOOO- alégica…"
+}
+
+text Route102_Text_RouteSignOldale {
+	"RUTA 102\n"
+	"{RIGHT_ARROW} PUEBLO OLDALE"
+}
+
+text Route102_Text_RouteSignPetalburg {
+	"RUTA 102\n"
+	"{LEFT_ARROW} CIUDAD PETALBURG"
+}
+
 
 script Route102_EventScript_Boy{
 	CheckItem(ITEM_GREAT_BALL)
@@ -6,14 +143,14 @@ script Route102_EventScript_Boy{
 		poryswitch(LANGUAGE){
 			EN {
 				msgbox(format("¡Ah!\nYou scared me...\pAccept this and tell nobody I was here!"))
-				message ("You got a Quick Ball in exchange for the Great Ball!")
+				message (format("You got a Quick Ball in exchange for the Great Ball!"))
 				giveitem(ITEM_QUICK_BALL)
 				removeitem(ITEM_GREAT_BALL)
 				msgbox(format("A Quick Ball is better if you use it in the first turn.\pGet from behind and catch your prey!"))
 			}
 			ES {
 				msgbox(format("¡Ah!\nMe asustaste...\p¡Acepta este cambio y no le digas a nadie que estaba acá!"))
-				message ("¡Obtuviste una Veloz Ball a cambio de la Super Ball!")
+				message (format("¡Obtuviste una Veloz Ball a cambio de la Super Ball!"))
 				giveitem(ITEM_QUICK_BALL)
 				removeitem(ITEM_GREAT_BALL)
 				msgbox(format("La Veloz Ball es mejor cuando la usas al inicio de un combate.\p¡Acércate por detrás y atrapa a tu presa!"))
@@ -30,6 +167,7 @@ script Route102_EventScript_Boy{
 			}
 		}
 	}
+	closemessage
 }
 
 
@@ -81,7 +219,7 @@ Route102_WallyTutorial::
 	applymovement OBJ_EVENT_ID_PLAYER, Route102_Movement_WallyTutorialPlayer
 	waitmovement 0
 	namebox Wally
-	msgbox Route102_Text_WatchMeCatchPokemon, MSGBOX_DEFAULT
+	msgbox Route102_Text_WatchMeCatchPokemon, MSGBOX_INTERRUPT
 	hidenamebox
 	call Route102_EventScript_RaltsAppears
 	msgbox Route102_Text_UnRalts, MSGBOX_DEFAULT
@@ -157,7 +295,7 @@ Route102_WallyTutorial::
 	namebox Wally
 	fadescreen FADE_TO_WHITE
 	removeobject LOCALID_ZIGZA
-	setobjectxy LOCALID_BALL, 5, 7
+	setobjectxy LOCALID_BALL, 7, 6
 	playse SE_BALL_OPEN
 	delay 8
 	fadescreen FADE_FROM_WHITE
@@ -411,54 +549,5 @@ Route102_EventScript_Allen::
 	msgbox Route102_Text_AllenPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route102_Text_Sigsa:
-	.string "¡ZIGZA!$"
-Route102_Text_Ralts:
-	.string "¡R-RALTS!$"
-Route102_Text_UnRalts:
-	.string "¡WOW! ¡Un Ralts!\n"
-	.string "Estos son raros, leí en un libro.\l"
-	.string "Bueno, ahora es tiempo de atraparlo…\l"
-	.string "Eh… ¿Cómo…?\p"
-	.string "Em… Z-Zigzagon… ¡Sal de ahí!$"
 
-Route102_Text_WallyCommands:
-	.string "Ahora, tengo que atacar, ¿no?\pZigzagoon, ¡Tacleada!$"
-
-Route102_Text_PokeballVe:
-	.string "¡Y-y-y-y ahora, eh…!\p"
-	.string "¡POKÉBALL, CAPTÚRALO!$"
-
-Route102_Text_WatchMeCatchPokemon:
-	.string "{PLAYER}…\n"
-	.string "Los Pokémon viven en el pasto,\l"
-	.string "¿no?\p"
-	.string "Por favor quédate así puedo…\n"
-	.string "¡…AHHH!$"
-
-Route102_Text_WallyIDidIt:
-	.string "L-lo hice…\n"
-	.string "¡TENGO UN POKÉMON!$"
-
-Route102_Text_WallyZigzagoonThanks:
-	.string "¡Gracias, Zigzagoon!\nNo podría haberlo hecho sin ti...\pEh... ¡Regresa!$"
-
-Route102_Text_LetsGoBack:
-	.string "¡{PLAYER}, gracias!\n"
-	.string "¡Volvamos al Gimnasio!$"
-
-Route102_Text_ImNotVeryTall:
-	.string "No…soy tan alto, así que\n"
-	.string "me hundo en el pasto alto.\p"
-	.string "Ayúdame… Soy alérgic-\n"
-	.string "-AAAA…\l"
-	.string "CHOOO- alégica…$"
-
-Route102_Text_RouteSignOldale:
-	.string "RUTA 102\n"
-	.string "{RIGHT_ARROW} PUEBLO OLDALE$"
-
-Route102_Text_RouteSignPetalburg:
-	.string "RUTA 102\n"
-	.string "{LEFT_ARROW} CIUDAD PETALBURG$"
 `

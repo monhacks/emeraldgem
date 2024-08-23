@@ -1,0 +1,389 @@
+const LOCALID_GROUDON 		   = 1
+const LOCALID_GRUNT_1 		   = 2
+const LOCALID_GRUNT_2 		   = 3
+const LOCALID_GRUNT_3 		   = 4
+const LOCALID_TABITHA 		   = 5
+const LOCALID_MAXIE 		   = 6
+const LOCALID_GROUDON_SLEEPING = 7
+const LOCALID_WINONA 		   = 9
+
+script MagmaHideout_4F_EventScript_Winona {
+	lockall
+	special (SpawnCameraObject)
+	playbgm (MUS_ENCOUNTER_MAGMA, FALSE)
+	namebox (Tabitha)
+	msgbox(format("¡Jefe! ¡Es ella!\pLa líder de la División Delta!"))
+	namebox (Winona)
+	msgbox(format("Hola, Maxie, ¡Tanto tiempo!\nSé lo de tú y Archie... Lo lamento mucho, eran tan unidos."))
+	setvar (VAR_0x8004, 4) 
+	setvar (VAR_0x8005, 4)
+	setvar (VAR_0x8006, 6)
+	setvar (VAR_0x8007, 4)
+	special (ShakeCamera)
+	namebox (Winona)
+	msgbox(format("¡MGAAAAAAAAAAAH!"))
+	namebox (Maxie)
+	msgbox(format("¡Winona! ¿Estás-{PAUSE 30} "),MSGBOX_INTERRUPT)
+	msgbox(format("Ugh- ¿¡Podrías decirle a tu estúpido Admin que salga del camino y poder tener una conversación normal!?"))
+	closemessage
+	hidenamebox
+	playse(SE_PIN)
+	applymovement(LOCALID_MAXIE, Common_Movement_ExclamationMark)
+	waitmovement (0)
+	namebox (Winona)
+	msgbox(format("Está... {PAUSE 30}Empeorando aún más... {PAUSE 30}{COLOR BLUE}el dolor del mundo{COLOR DARK_GRAY}...{PAUSE 30}\p... ... ...\pDiscúlpame por eso, Maxie. Este dolor que siento, el que siente la naturaleza... Me arruina..."))
+	namebox (Maxie)
+	msgbox(format("Winona...{PAUSE 30}\pDetén esta locura, y descansa. No puedes seguir así...\pY no te preocupes, este “dolor del mundo,” yo lo detendré.\pSólo déjame despertar a Groudon,\ny-{PAUSE 30} "), MSGBOX_INTERRUPT)
+	namebox (Winona)
+	msgbox(format("¡NO!\p¡Tus soluciones no han funcionado jamás, ¿Qué te hace pensar que funcionarán ahora, Maxie?\p¿No estás satisfecho con los problemas que causaste en ese entonces?"))
+	closemessage
+	hidenamebox
+	if (var(VAR_EVIL_TEAM_SIDE) <= 3){
+		setvar(VAR_TEMP_1, 1)
+		msgbox(format("Parece que están por combatir. ¿Deseas ayudar al Equipo Magma?"),MSGBOX_YESNO)
+		if (var(VAR_RESULT) == YES){
+			goto(MagmaHideout_4F_EventScript_AgainstWinona)
+		}
+		else {
+			setvar(VAR_EVIL_TEAM_SIDE, 4)
+			applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterRight)
+			waitmovement (0)
+			goto(MagmaHideout_4F_EventScript_AgainstWinona)
+		}
+	}
+	elif (var(VAR_EVIL_TEAM_SIDE) > 3){
+		setvar(VAR_TEMP_1, 2)
+		msgbox(format("Parece que están por combatir. ¿Deseas ayudar a la División Delta?"),MSGBOX_YESNO)
+		if (var(VAR_RESULT) == YES){
+			addvar(VAR_EVIL_TEAM_SIDE, 1)
+			applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterRight)
+			waitmovement (0)
+			goto(MagmaHideout_4F_EventScript_AgainstWinona)
+		}
+		else {
+			goto(MagmaHideout_4F_EventScript_AgainstWinona)
+		}
+	}
+	
+}
+
+script MagmaHideout_4F_EventScript_AgainstWinona {
+	subvar(VAR_EVIL_TEAM_SIDE, 1)
+	applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterUp)
+	applymovement(LOCALID_WINONA, Common_Movement_WalkInPlaceFasterDown)
+	waitmovement (0)
+	namebox (Winona)
+	trainerbattle_no_whiteout_continue_script (TRAINER_WINONA_AQUA_HIDEOUT, "Tú eres {PLAYER}, ¿No?\pAquí no soy la Líder del Gimnasio, y no\nvoy a jugar limpio.", "¡AAAHHH! ¡Mi cabesa!", MagmaHideout_4F_EventScript_WinonaDefeated)
+}
+
+script MagmaHideout_4F_EventScript_DoGroudonAwakening {
+	delay (20)
+	setvar (VAR_RESULT, 1)
+	playse (SE_M_DETECT)
+	dofieldeffectsparkle (18, 42, 0)
+	waitfieldeffect (FLDEFF_SPARKLE)
+	setvar (VAR_RESULT, 0)
+	playfanfare (MUS_AWAKEN_LEGEND)
+	playse (SE_ORB)
+	special (DoOrbEffect)
+	applymovement (OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterRight)
+	applymovement (LOCALID_WINONA, Common_Movement_WalkInPlaceFasterRight)
+	applymovement (LOCALID_WINONA, Common_Movement_ExclamationMark)
+	waitmovement (0)
+	delay (150)
+	removeobject (LOCALID_GROUDON_SLEEPING)
+	addobject (LOCALID_GROUDON)
+	waitstate
+	delay (60)
+	applymovement (LOCALID_GROUDON, MagmaHideout_4F_Movement_GroudonApproach)
+	waitmovement (0)
+	special (FadeOutOrbEffect)
+	waitstate
+	setvar (VAR_0x8004, 1)  // vertical pan
+	setvar (VAR_0x8005, 1)  // horizontal pan
+	setvar (VAR_0x8006, 8)  // num shakes
+	setvar (VAR_0x8007, 5)  // shake delay
+	special (ShakeCamera)
+	waitstate
+	applymovement (LOCALID_GROUDON, MagmaHideout_4F_Movement_GroudonExit)
+	waitmovement (0)
+	removeobject (LOCALID_GROUDON)
+	delay (4)
+	setvar (VAR_0x8004, 2)  // vertical pan
+	setvar (VAR_0x8005, 2)  // horizontal pan
+	setvar (VAR_0x8006, 8)  // num shakes
+	setvar (VAR_0x8007, 5)  // shake delay
+	special (ShakeCamera)
+	waitstate
+	delay (30)
+	applymovement (LOCALID_MAXIE, MagmaHideout_4F_Movement_MaxieLookAround)
+	delay (8)
+	applymovement (LOCALID_TABITHA, MagmaHideout_4F_Movement_MaxieLookAround)
+	delay (16)
+	applymovement (LOCALID_WINONA, MagmaHideout_4F_Movement_MaxieLookAround)
+	waitmovement (0)
+	namebox(Winona)
+	msgbox(format("¡¿Porqué lo hiciste?!\n¿No sabes lo que acabas de desatar en Hooenn?\p¿Has olvidado lo que pasó la última vez?"))
+	namebox(Maxie)
+	msgbox(format("Lo recuerdo. Y es por eso mismo que lo hice. Ahora, tengo el Orbe Rojo en mi poder.\pGroudon sucumbirá a él y recobrará su poder primigenio."
+	"\pCon ese poder, daré a la humaniidad más espacio en tierra firme para que se desarrolle y encontrar una solución a nuestro problema."))
+	namebox(Winona)
+	msgbox(format("¡IDIOTA!\n¡El poder del Orbe hace a Groudon imposible de controlar!\pYo iba a usar el Orbe para potenciar una máquina, una capaz de modificar nuestra realidad..."
+	"\pUna con el poder de arreglarlo todo... ¡Y LO ARRUINASTE!"))
+	namebox(Maxie)
+	msgbox(format("Wow, esta no es la calmada y calculadora Winona que conozco. Parece que tus locuras con la naturaleza al fin te están afectando.\pPero...\p"
+	"¡¿Qué dijiste!? ¿Modificar la realidad?\n¿Es eso siquiera posible?"))
+	namebox(Winona)
+	msgbox(format("Sí, la máquina, la Flora Bismuto, ya ha modificado la realidad.\pPero necesitaba más poder. Ahora, tendré que ir a robar el Orbe Azul, Y lidiar con Groudon, todo gracias a tu ignorancia."))
+	releaseall
+}
+script MagmaHideout_4F_EventScript_WinonaDefeated {
+	namebox(Winona)
+	msgbox(format("UGHHH... El dolor sigue fuerte...\p¿Porqué... te has entrometido?\pAcaso..."))
+	hidenamebox
+	closemessage
+	applymovement (OBJ_EVENT_ID_CAMERA, MagmaHideout_4F_Movement_PanToMaxie)
+	waitmovement(0)
+	goto(MagmaHideout_4F_EventScript_DoGroudonAwakening)
+}
+
+movement MagmaHideout_4F_Movement_PanToMaxie {
+	walk_diag_northeast
+	walk_right
+}
+
+raw `
+.set LOCALID_GROUDON, 1
+.set LOCALID_GRUNT_1, 2
+.set LOCALID_GRUNT_2, 3
+.set LOCALID_GRUNT_3, 4
+.set LOCALID_TABITHA, 5
+.set LOCALID_MAXIE, 6
+.set LOCALID_GROUDON_SLEEPING, 7
+.set LOCALID_WINONA, 7
+
+MagmaHideout_4F_MapScripts::
+	.byte 0
+
+MagmaHideout_4F_EventScript_Maxie::
+	lockall
+	playbgm MUS_ENCOUNTER_MAGMA, FALSE
+	msgbox MagmaHideout_4F_Text_MaxieAwakenGroudon, MSGBOX_DEFAULT
+	closemessage
+	delay 20
+	setvar VAR_RESULT, 1
+	playse SE_M_DETECT
+	dofieldeffectsparkle 18, 42, 0
+	waitfieldeffect FLDEFF_SPARKLE
+	setvar VAR_RESULT, 1
+	playfanfare MUS_AWAKEN_LEGEND
+	playse SE_ORB
+	special DoOrbEffect
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterUp
+	waitmovement 0
+	delay 150
+	removeobject LOCALID_GROUDON_SLEEPING
+	addobject LOCALID_GROUDON
+	waitstate
+	delay 60
+	applymovement LOCALID_GROUDON, MagmaHideout_4F_Movement_GroudonApproach
+	waitmovement 0
+	special FadeOutOrbEffect
+	waitstate
+	setvar VAR_0x8004, 1  @ vertical pan
+	setvar VAR_0x8005, 1  @ horizontal pan
+	setvar VAR_0x8006, 8  @ num shakes
+	setvar VAR_0x8007, 5  @ shake delay
+	special ShakeCamera
+	waitstate
+	applymovement LOCALID_GROUDON, MagmaHideout_4F_Movement_GroudonExit
+	waitmovement 0
+	removeobject LOCALID_GROUDON
+	delay 4
+	setvar VAR_0x8004, 2  @ vertical pan
+	setvar VAR_0x8005, 2  @ horizontal pan
+	setvar VAR_0x8006, 8  @ num shakes
+	setvar VAR_0x8007, 5  @ shake delay
+	special ShakeCamera
+	waitstate
+	delay 30
+	applymovement LOCALID_MAXIE, MagmaHideout_4F_Movement_MaxieLookAround
+	waitmovement 0
+	msgbox MagmaHideout_4F_Text_MaxieGroudonWhatsWrong, MSGBOX_DEFAULT
+	closemessage
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterRight
+	waitmovement 0
+	delay 30
+	applymovement LOCALID_MAXIE, Common_Movement_FacePlayer
+	waitmovement 0
+	msgbox MagmaHideout_4F_Text_MaxieOhItWasYou, MSGBOX_DEFAULT
+	closemessage
+	trainerbattle_no_intro TRAINER_MAXIE_MAGMA_HIDEOUT, MagmaHideout_4F_Text_MaxieDefeat
+	msgbox MagmaHideout_4F_Text_MaxieImGoingAfterGroudon, MSGBOX_DEFAULT
+	closemessage
+	clearflag FLAG_HIDE_SLATEPORT_CITY_CAPTAIN_STERN
+	clearflag FLAG_HIDE_SLATEPORT_CITY_GABBY_AND_TY
+	setvar VAR_SLATEPORT_CITY_STATE, 1
+	setflag FLAG_GROUDON_AWAKENED_MAGMA_HIDEOUT
+	setvar VAR_SLATEPORT_HARBOR_STATE, 1
+	fadescreen FADE_TO_BLACK
+	removeobject LOCALID_MAXIE
+	removeobject LOCALID_GRUNT_1
+	removeobject LOCALID_GRUNT_2
+	removeobject LOCALID_GRUNT_3
+	removeobject LOCALID_TABITHA
+	setflag FLAG_HIDE_MAGMA_HIDEOUT_GRUNTS
+	fadescreen FADE_FROM_BLACK
+	releaseall
+	end
+
+MagmaHideout_4F_Movement_GroudonApproach:
+	delay_16
+	delay_16
+	walk_slow_down
+	delay_16
+	delay_16
+	delay_16
+	walk_slow_down
+	delay_16
+	delay_16
+	delay_16
+	step_end
+
+MagmaHideout_4F_Movement_GroudonExit:
+	slide_up
+	slide_up
+	step_end
+
+MagmaHideout_4F_Movement_MaxieLookAround:
+	face_left
+	delay_16
+	face_right
+	delay_16
+	face_left
+	delay_16
+	face_right
+	delay_16
+	face_up
+	delay_16
+	delay_16
+	step_end
+
+MagmaHideout_4F_EventScript_Grunt11::
+	trainerbattle_single TRAINER_GRUNT_MAGMA_HIDEOUT_11, MagmaHideout_4F_Text_Grunt11Intro, MagmaHideout_4F_Text_Grunt11Defeat
+	msgbox MagmaHideout_4F_Text_Grunt11PostBattle, MSGBOX_AUTOCLOSE
+	end
+
+MagmaHideout_4F_EventScript_Grunt12::
+	trainerbattle_single TRAINER_GRUNT_MAGMA_HIDEOUT_12, MagmaHideout_4F_Text_Grunt12Intro, MagmaHideout_4F_Text_Grunt12Defeat
+	msgbox MagmaHideout_4F_Text_Grunt12PostBattle, MSGBOX_AUTOCLOSE
+	end
+
+MagmaHideout_4F_EventScript_Grunt13::
+	trainerbattle_single TRAINER_GRUNT_MAGMA_HIDEOUT_13, MagmaHideout_4F_Text_Grunt13Intro, MagmaHideout_4F_Text_Grunt13Defeat
+	msgbox MagmaHideout_4F_Text_Grunt13PostBattle, MSGBOX_AUTOCLOSE
+	end
+
+MagmaHideout_4F_EventScript_Tabitha::
+	trainerbattle_single TRAINER_TABITHA_MAGMA_HIDEOUT, MagmaHideout_4F_Text_TabithaIntro, MagmaHideout_4F_Text_TabithaDefeat
+	msgbox MagmaHideout_4F_Text_TabithaPostBattle, MSGBOX_AUTOCLOSE
+	end
+
+MagmaHideout_4F_Text_Grunt11Intro:
+	.string "I want to see GROUDON, too, but they\n"
+	.string "won't let me see even its tail…\p"
+	.string "It's got me feeling really frustrated.\p"
+	.string "Oh, no!\n"
+	.string "I blabbed about GROUDON!$"
+
+MagmaHideout_4F_Text_Grunt11Defeat:
+	.string "I guess it's impossible to win if one\n"
+	.string "doesn't have a calm mind…$"
+
+MagmaHideout_4F_Text_Grunt11PostBattle:
+	.string "I wonder if GROUDON even has a tail?$"
+
+MagmaHideout_4F_Text_Grunt12Intro:
+	.string "Fuhahaha!\n"
+	.string "Soon! Very soon!\l"
+	.string "Our grand objective will be achieved!$"
+
+MagmaHideout_4F_Text_Grunt12Defeat:
+	.string "Grrr…\n"
+	.string "I've come so far, but now this?$"
+
+MagmaHideout_4F_Text_Grunt12PostBattle:
+	.string "MAXIE, sir!\n"
+	.string "An intruder is headed your way!$"
+
+MagmaHideout_4F_Text_Grunt13Intro:
+	.string "You're not finished yet!\n"
+	.string "You're not getting by me easily!$"
+
+MagmaHideout_4F_Text_Grunt13Defeat:
+	.string "Was I that easy to knock down?$"
+
+MagmaHideout_4F_Text_Grunt13PostBattle:
+	.string "C-come on, one more match…$"
+
+MagmaHideout_4F_Text_TabithaIntro:
+	.string "Hehehe!\n"
+	.string "You made it this far, so I'll tell you!\p"
+	.string "That's right!\n"
+	.string "Up ahead, GROUDON is sleeping!\p"
+	.string "MAXIE went to GROUDON just seconds\n"
+	.string "ago!\p"
+	.string "It's going to awaken real soon!\n"
+	.string "Hehe! Hehehe!$"
+
+MagmaHideout_4F_Text_TabithaDefeat:
+	.string "Taken down again…\n"
+	.string "Hehe…$"
+
+MagmaHideout_4F_Text_TabithaPostBattle:
+	.string "…And while you wasted time with me,\n"
+	.string "MAXIE should have awakened GROUDON…$"
+
+MagmaHideout_4F_Text_MaxieAwakenGroudon:
+	.string "MAXIE: GROUDON…\p"
+	.string "Nothing could awaken you from your\n"
+	.string "sleep bathed in magma…\p"
+	.string "This BLUE ORB is what you sought.\n"
+	.string "Wasn't it?\p"
+	.string "I have brought you the BLUE ORB.\n"
+	.string "Let its shine awaken you!\p"
+	.string "And show me…\n"
+	.string "Show me the full extent of your power!$"
+
+MagmaHideout_4F_Text_MaxieGroudonWhatsWrong:
+	.string "MAXIE: GROUDON!\n"
+	.string "What's wrong?\p"
+	.string "Wasn't the BLUE ORB the key?\p"
+	.string "GROUDON!\n"
+	.string "Where have you gone…$"
+
+MagmaHideout_4F_Text_MaxieOhItWasYou:
+	.string "MAXIE: Oh, so it was you?\p"
+	.string "I've seen you poking around uninvited\n"
+	.string "here and there…\p"
+	.string "I get it now!\n"
+	.string "You must have pulled a cheap stunt!$"
+
+MagmaHideout_4F_Text_MaxieDefeat:
+	.string "What makes you so adept at handling\n"
+	.string "POKéMON?$"
+
+MagmaHideout_4F_Text_MaxieImGoingAfterGroudon:
+	.string "MAXIE: There has to be some reason\n"
+	.string "why GROUDON fled…\p"
+	.string "That's what you're trying to say,\n"
+	.string "aren't you?\p"
+	.string "… … … … … …\n"
+	.string "… … … … … …\p"
+	.string "Humph…\n"
+	.string "You think I didn't know that?\p"
+	.string "With GROUDON gone, there is no longer\n"
+	.string "any need for this blasted volcano.\p"
+	.string "I am going after GROUDON, so this\n"
+	.string "is where we part!$"
+`

@@ -1,3 +1,328 @@
+text DewfordTown_EventScript_Trigger_Text_2 {
+	poryswitch(LANGUAGE){
+		ES {
+			format("El Gimnasio está cerrado.")
+		}
+		EN {
+			format("The Gym's closed.")
+		}
+	}
+}
+
+text DewfordTown_Text_TinyIslandCommunity {
+	format("Dewford es una pequeña comunidad.\pSi algo se pone de moda,\ntodos lo saben.")
+}
+
+text DewfordTown_Text_TownSign {
+	format("PUEBLO DEWFORD\n"
+	"“Una islita en el mar azul.”")
+}
+
+text DewfordTown_Text_GymSign {
+	format("GIMNASIO DE PUEBLO DEWFORD\n"
+	"Líder: Brawly\l"
+	"“¡Una enorme ola de poder!”")
+}
+
+text DewfordTown_Text_HallSign {
+	format("SALÓN COMUNITARIO DEWFORD\n"
+	"“¡Un lugar de encuentros!”")
+}
+
+text Route104_Text_LandedInDewfordDeliverLetter {
+	poryswitch(LANGUAGE){
+		ES {
+			format("¡Ahoy, mariner{OA}!\n¡Esto es Dewford!\pAhora podrás entregar la carta.")
+		}
+		EN {
+			format("Ahoy, matey!\nThis is Dewford!\pNow you can deliver that letter.")
+		}
+	}
+}
+
+text DewfordTown_Text_SetSailBackToPetalburg {
+	poryswitch(LANGUAGE){
+		ES {
+			format("¿Has terminado y quieres volver?")
+		}
+		EN {
+			format("You finished and want to go back?")
+		}
+	}
+	
+}
+
+text DewfordTown_Text_PetalburgWereSettingSail2 {
+	poryswitch(LANGUAGE){
+		ES {
+			format("¡A Petalburg entonces!")
+		}
+		EN {
+			format("To Petalburg then!")
+		}
+	}
+	
+}
+
+text DewfordTown_Text_GoDeliverIllBeWaiting {
+	format("Ah, OK.")
+}
+
+text DewfordTown_Text_BrineyLandedInDewford {
+	poryswitch(LANGUAGE){
+		ES {
+			format("¡Ahoy!")
+		}
+		EN {
+			format("Ahoy!")
+		}
+	}
+	
+}
+
+text DewfordTown_Text_WhereAreWeBound {
+	poryswitch(LANGUAGE){
+		ES {
+			format("¡Allá vamos!")
+		}
+		EN {
+			format("Let's go!")
+		}
+	}
+	
+}
+
+text DewfordTown_Text_PetalburgWereSettingSail {
+	poryswitch(LANGUAGE){
+		ES {
+			format("¿A Petalburg?\n¡Vamos, Peeko, querido!")
+		}
+		EN {
+			format("To Petalburg?\nGet ready, Peeko, baby!")
+		}
+	}
+	
+}
+
+text DewfordTown_Text_SlateportWereSettingSail {
+	poryswitch(LANGUAGE){
+		ES {
+			format("¿A Slaterport?\n¡Lo lamento!\pHasta aquí llega la DEMO de\nPokémon Bismuto.\pPuedes continuar si quieres, pero las\ncosas no estarán terminadas, y los\lmapas usarán gráficos viejos.\p¿Continuar igualmente?")
+		}
+		EN {
+			format("To Slaterport?\nSorry!\pPokemon Bismuth's DEMO ends here!\pYou can go on if you want to, but things are far from polished, although there is some untranslated story to experience.\pGo on anyway?")
+		}
+	}
+}
+
+text DewfordTown_Text_JustTellMeWhenYouNeedToSetSail {
+	poryswitch(LANGUAGE){
+		ES {
+			format("¡Aquí esperaré!")
+		}
+		EN {
+			format("I'll be waiting here!")
+		}
+	}
+}
+
+text DewfordTown_Text_GettingItchToFish {
+	format("¡Ah! ¡Quiero pescar!\p¿Tú no?")
+}
+
+text DewfordTown_Text_GiveYouOneOfMyRods {
+	format("¡Te escucho fuerte y claro!\p¡Toma esto, pequeñ{OA}!")
+}
+
+text DewfordTown_Text_ThrowInFishingAdvice {
+	format("¿Sabes?\pHe desarrollado una caña que puede\npescar Pokémon, ¡Sin necesidad\lde esperar tanto!")
+}
+
+text DewfordTown_Text_ThatsTooBadThen {
+	format("Qué mal.")
+}
+
+text DewfordTown_Text_HowsYourFishing {
+	format("¡Ey!\n"
+	"¿Cómo va todo?")
+}
+
+text DewfordTown_Text_GreatHaulInSomeBigOnes {
+	format("¡Genial, atrapa unos grandes!")
+}
+
+text DewfordTown_Text_FishingAdvice {
+	format("Oh, bueno, ¡Ya irá mejor!")
+}
+
+text DewfordTown_Text_XIsTheBiggestHappeningThingRight {
+	format("Osea, está muy de moda eso de\n“{STR_VAR_1}”\p"
+	"Obvio lo conoces, osea,\n"
+	"“{STR_VAR_1}”…\l"
+	"¡Todos hablan de eso!\n"
+	"“{STR_VAR_1}”\l"
+	"Es lo más, ¿no?")
+}
+
+text DewfordTown_Text_TellMeWhatsNewAndIn {
+	format("¿Qué?\n¿Ya pasó de moda?\pEntonces, ¿Qué es lo más?")
+}
+
+text DewfordTown_Text_OfCourseIKnowAboutThat {
+	format("¿“{STR_VAR_2}”?\p"
+	"… …\p"
+	"…Eh… ¡Sí! ¡Claro, claro!\n"
+	"“{STR_VAR_2},” ¿No?\p"
+	"Pfff, ¡Obvio!\n"
+	"“{STR_VAR_2}”\pEs lo más.")
+}
+
+text DewfordTown_Text_XHuhIThinkYIsCool {
+	format("Mmmhhh…\n"
+	"“{STR_VAR_2},” ¿No?\p"
+	"Aunque pienso que\n"
+	"“{STR_VAR_1}”\l"
+	"es mucho mejor.")
+}
+
+text DewfordTown_Text_HearOfAnyTrendsComeShareWithMe {
+	format("Bueno, si hay otras\ntrends, dímelo, ¿Sí?")
+}
+
+text DewfordTown_Text_YeahDefinitionOfInRightNow {
+	format("¡Osea, obvio!\p"
+	"“{STR_VAR_1}” es la\n"
+	"definición de cool.")
+}
+
+text DewfordTown_EventScript_WallyHello {
+	format("¡O-oh!\n"
+	"-COF COF-\l"
+	"¡{PLAYER}!\p"
+	"N-no sabía que vendrías…\n"
+	"¡Pero que bien que estés aquí!")
+}
+
+text DewfordTown_EventScript_WallyBeginSpeech {
+	format("Sabes, tengo mucho miedo de comenzar mi\n"
+	"{COLOR BLUE}Desafío de los Gimnasios{COLOR DARK_GRAY}, y n-no sé si\l"
+	"sea algo en lo que pueda siquiera\l"
+	"aspirar a ser bueno…\p"
+	"Tengo miedo de fallar, y que todos se\n"
+	"burlen de mí de nuevo…")
+}
+
+
+text DewfordTown_Text_HopeYouEnjoyed {
+	poryswitch(LANGUAGE){
+		ES {
+			format("¡Espero hays disfrutado esta DEMO!")
+		}
+		EN {
+			format("Hope you enjoyed the DEMO!")
+		}
+	}
+}
+
+
+text DewfordTown_Text_WallyContinueSpeech {
+	format("Pero ahora.\nAhora voy a demostrarles que\lse equivocaban conmigo.\p"
+	"…\n…\pO…\n¿…Sabes qué?\p"
+	"¿A quién le importa lo\nque ellos piensan de mí?")
+}
+
+text DewfordTown_Text_WallyContinueSpeech2 {
+	format("Claramente no les importa\nquién soy, o qué es lo que haga.\p"
+	"Quizá… Sea mejor hacer este viaje\npor mí mismo, y no por otros.\p¿Eso… Eso suena bien, ¿no?\p"
+	"Pero aún así… Me gustaría\nque estés aquí conmigo…")
+}
+
+text DewfordTown_Text_WallyDetermined {
+	format("…\p"
+	"El {COLOR BLUE}Gimnasio Dewford{COLOR DARK_GRAY}…\p"
+	"{COLOR GREEN}(Vamos Wally… ¡Tú puedes!){COLOR DARK_GRAY}\p"
+	"El tipo de este Gimnasio es Lucha…\p"
+	"Mi Ralts es tipo Psíquico Y Hada, así\n"
+	"que debería ser relativamente fácil\l"
+	"para él…")
+}
+
+text DewfordTown_Text_WallyLetsGo {
+	format("Bueno, Ralts… ¿Estás listo?\p"
+	"¡Entonces vamos!")
+}
+
+text DewfordTown_Text_WallyGym1 {
+	format("¡Wow! ¡En serio no puede verse nada!\p"
+	"¿Cómo siquiera funcionan las luces en\n"
+	"este Gimnasio? ¿Los Entrenadores acá\l"
+	"pueden verme pero yo a ellos no?\p"
+	"Eh- ¡No importa, Wally!\n"
+	"¡Concéntrate!\p"
+	"…\p"
+	"¡AH!")
+}
+
+text DewfordTown_Text_WallyGym2 {
+	format("G-gracias, Ralts, pensé que ese- COF,\n"
+	"COF- Em… Ese Meditite iba a\l"
+	"lastimarme…\p"
+	"¡Pero ahora, Ralts, usa {COLOR LIGHT_RED}Brillo Mágico{COLOR DARK_GRAY}!")
+}
+
+text DewfordTown_Text_WallyGym3 {
+	format("¡Bien hecho, Ralts!\n"
+	"¡Eso fue increíble!\p"
+	"Ahora… Yo estudié la arquitectura de\n"
+	"este Gimnasio… El Líder debería\l"
+	"estar…\l"
+	"………\p"
+	"¡Acá!\n"
+	"¡Ja! ¡Lo sabía! ¡Vamos, Ralts!")
+}
+
+text DewfordTown_Text_WallyGymBattle {
+	format("Y ahora, Ralts… ¡¡Usa {COLOR LIGHT_RED}Campo Psíquico{COLOR DARK_GRAY}, y\n"
+	"luego usa {COLOR LIGHT_RED}Confusión{COLOR DARK_GRAY}!!")
+}
+text DewfordTown_Text_WallyGymBattle2 {
+	format("{COLOR RED}D-detección{COLOR DARK_GRAY}…\n"
+	"Brawly leyó mi estrategia y reaccionó\l"
+	"acorde…")
+}
+text DewfordTown_Text_WallyGymBattle3 {
+	format("¡Cuidado, Ralts, esquiva eso!\p"
+	"………\p"
+	"¿E-eh?")
+}
+text DewfordTown_Text_WallyGymBattle4 {
+	format("¡R-Ralts! ¡Evolucionaste a Kirlia!\n"
+	"¡Estoy t-tan orgulloso de tí, Ra- Eh,\l"
+	"Kirlia!\p"
+	"-COF, COF, COF- Em… Ahora, ¡Usa {COLOR LIGHT_RED}Fuerza\n"
+	"Expansiva{COLOR DARK_GRAY}!")
+}
+text DewfordTown_Text_WallyAfter {
+	format("¡G-gané, {PLAYER}, gané!\n"
+	"¡Y Ralts evolucionó a Kirlia, también!\p"
+	"Muchas gracias por estar ahí,\n"
+	"{PLAYER}, sin tu apoyo, no habría\l"
+	"podido hacer nada…\p"
+	"Ahora, ¡Voy a continuar mejorando, y un\n"
+	"día, voy a derrotarte en un combate,\l"
+	"{PLAYER}!")
+}
+text DewfordTown_EventScript_Trigger_Text_0 {
+	poryswitch(LANGUAGE){
+		ES {
+			format("{COLOR BLUE}(¿Q-qué fue eso…?){COLOR LIGHT_GRAY}")
+		}
+		EN {
+			format("{COLOR BLUE}(W-what's that about…?){COLOR LIGHT_GRAY}")
+		}
+	}
+	
+}
 raw `
 @ Sailing to and from Dewford uses local IDs from different maps
 @ e.g. Route 104's sail to Dewford script references local IDs from Dewford's map
@@ -228,82 +553,6 @@ DewfordTown_OnFrameWallySouth::
 	waitmovement 0
 	return
 
-DewfordTown_Text_WallyContinueSpeech::
-	.string "Pero ahora.\nAhora voy a demostrarles que\lse equivocaban conmigo.\p"
-	.string "…\n…\pO…\n¿…Sabes qué?\p"
-	.string "¿A quién le importa lo\nque ellos piensan de mí?$"
-
-DewfordTown_Text_WallyContinueSpeech2::
-	.string "Claramente no les importa\nquién soy, o qué es lo que haga.\p"
-	.string "Quizá… Sea mejor hacer este viaje\npor mí mismo, y no por otros.\p¿Eso… Eso suena bien, ¿no?\p"
-	.string "Pero aún así… Me gustaría\nque estés aquí conmigo…$"
-
-DewfordTown_Text_WallyDetermined::
-	.string "…\p"
-	.string "El {COLOR BLUE}Gimnasio Dewford{COLOR DARK_GRAY}…\p"
-	.string "{COLOR GREEN}(Vamos Wally… ¡Tú puedes!){COLOR DARK_GRAY}\p"
-	.string "El tipo de este Gimnasio es Lucha…\p"
-	.string "Mi Ralts es tipo Psíquico Y Hada, así\n"
-	.string "que debería ser relativamente fácil\l"
-	.string "para él…$"
-
-DewfordTown_Text_WallyLetsGo::
-	.string "Bueno, Ralts… ¿Estás listo?\p"
-	.string "¡Entonces vamos!$"
-
-DewfordTown_Text_WallyGym1::
-	.string "¡Wow! ¡En serio no puede verse nada!\p"
-	.string "¿Cómo siquiera funcionan las luces en\n"
-	.string "este Gimnasio? ¿Los Entrenadores acá\l"
-	.string "pueden verme pero yo a ellos no?\p"
-	.string "Eh- ¡No importa, Wally!\n"
-	.string "¡Concéntrate!\p"
-	.string "…\p"
-	.string "¡AH!$"
-
-DewfordTown_Text_WallyGym2::
-	.string "G-gracias, Ralts, pensé que ese- COF,\n"
-	.string "COF- Em… Ese Meditite iba a\l"
-	.string "lastimarme…\p"
-	.string "¡Pero ahora, Ralts, usa {COLOR LIGHT_RED}Brillo Mágico{COLOR DARK_GRAY}!$"
-
-DewfordTown_Text_WallyGym3::
-	.string "¡Bien hecho, Ralts!\n"
-	.string "¡Eso fue increíble!\p"
-	.string "Ahora… Yo estudié la arquitectura de\n"
-	.string "este Gimnasio… El Líder debería\l"
-	.string "estar…\l"
-	.string "………\p"
-	.string "¡Acá!\n"
-	.string "¡Ja! ¡Lo sabía! ¡Vamos, Ralts!$"
-
-DewfordTown_Text_WallyGymBattle::
-	.string "Y ahora, Ralts… ¡¡Usa {COLOR LIGHT_RED}Campo Psíquico{COLOR DARK_GRAY}, y\n"
-	.string "luego usa {COLOR LIGHT_RED}Confusión{COLOR DARK_GRAY}!!$"
-DewfordTown_Text_WallyGymBattle2::
-	.string "{COLOR RED}D-detección{COLOR DARK_GRAY}…\n"
-	.string "Brawly leyó mi estrategia y reaccionó\l"
-	.string "acorde…$"
-DewfordTown_Text_WallyGymBattle3::
-	.string "¡Cuidado, Ralts, esquiva eso!\p"
-	.string "………\p"
-	.string "¿E-eh?$"
-DewfordTown_Text_WallyGymBattle4::
-	.string "¡R-Ralts! ¡Evolucionaste a Kirlia!\n"
-	.string "¡Estoy t-tan orgulloso de tí, Ra- Eh,\l"
-	.string "Kirlia!\p"
-	.string "-COF, COF, COF- Em… Ahora, ¡Usa {COLOR LIGHT_RED}Fuerza\n"
-	.string "Expansiva{COLOR DARK_GRAY}!$"
-DewfordTown_Text_WallyAfter::
-	.string "¡G-gané, {PLAYER}, gané!\n"
-	.string "¡Y Ralts evolucionó a Kirlia, también!\p"
-	.string "Muchas gracias por estar ahí,\n"
-	.string "{PLAYER}, sin tu apoyo, no habría\l"
-	.string "podido hacer nada...\p"
-	.string "Ahora, ¡Voy a continuar mejorando, y un\n"
-	.string "día, voy a derrotarte en un combate,\l"
-	.string "{PLAYER}!$"
-
 
 DewfordTown_Movement_WallyGoToGym::
 	walk_right
@@ -386,8 +635,7 @@ DewfordTown_Movement_PlayerBackDown:
 	unlock_facing_direction
 	step_end
 
-DewfordTown_EventScript_Trigger_Text_2:
-	.string "El Gimnasio está cerrado.$"
+
 DewfordTown_EventScript_TriggerNada::
 	releaseall
 	end
@@ -425,8 +673,7 @@ DewfordTown_Movement_PlayerApproach2:
 	walk_faster_up
 	step_end
 
-DewfordTown_EventScript_Trigger_Text_0:
-	.string "(¿Q-qué fue eso…?)$"
+
 
 
 
@@ -452,11 +699,12 @@ DewfordTown_EventScript_ChoosePetalburg::
 	end
 
 DewfordTown_EventScript_ChooseSlateport::
-	msgbox DewfordTown_Text_SlateportWereSettingSail, MSGBOX_DEFAULT
+	msgbox DewfordTown_Text_SlateportWereSettingSail, MSGBOX_YESNO
 	closemessage
-	goto DewfordTown_EventScript_SailToSlateport
+	goto_if_eq VAR_RESULT, YES, DewfordTown_EventScript_SailToSlateport
+	msgbox DewfordTown_Text_HopeYouEnjoyed, MSGBOX_DEFAULT
 	release
-	end
+	end 
 
 DewfordTown_EventScript_CancelSailSelect::
 	msgbox DewfordTown_Text_JustTellMeWhenYouNeedToSetSail, MSGBOX_DEFAULT
@@ -1050,118 +1298,5 @@ DewfordTown_EventScript_PhraseNotTrendyEnough::
 	release
 	end
 
-DewfordTown_Text_TinyIslandCommunity:
-	.string "Dewford es una pequeña comunidad.\pSi algo se pone de moda,\ntodos lo saben.$"
 
-DewfordTown_Text_TownSign:
-	.string "PUEBLO DEWFORD\n"
-	.string "“Una islita en el mar azul.”$"
-
-DewfordTown_Text_GymSign:
-	.string "GIMNASIO DE PUEBLO DEWFORD\n"
-	.string "Líder: Brawly\l"
-	.string "“¡Una enorme ola de poder!”$"
-
-DewfordTown_Text_HallSign:
-	.string "SALÓN COMUNITARIO DEWFORD\n"
-	.string "“¡Un lugar de encuentros!”$"
-
-Route104_Text_LandedInDewfordDeliverLetter:
-	.string "¡Ahoy, mariner{OA}!\n¡Esto es Dewford!\pAhora podrás entregar la carta.$"
-
-DewfordTown_Text_SetSailBackToPetalburg:
-	.string "¿Has terminado y quieres volver?$"
-
-DewfordTown_Text_PetalburgWereSettingSail2:
-	.string "¡A Petalburg entonces!$"
-
-DewfordTown_Text_GoDeliverIllBeWaiting:
-	.string "Ah, esperaré entonces.$"
-
-DewfordTown_Text_BrineyLandedInDewford:
-	.string "¡Ahoy!\n¡Llegamos!$"
-
-DewfordTown_Text_WhereAreWeBound:
-	.string "¡Ahoy! ¡Allá vamos!$"
-
-DewfordTown_Text_PetalburgWereSettingSail:
-	.string "¿A Petalburg?\n¡Vamos, Peeko, queridita!$"
-
-DewfordTown_Text_SlateportWereSettingSail:
-	.string "¿A Slaterport?\n¡Vamos, Peeko, queridita!$"
-
-DewfordTown_Text_JustTellMeWhenYouNeedToSetSail:
-	.string "¡Aquí esperaré!$"
-
-DewfordTown_Text_GettingItchToFish:
-	.string "¡Ah! ¡Quiero pescar!\p¿Tú no?$"
-
-DewfordTown_Text_GiveYouOneOfMyRods:
-	.string "¡Te escucho fuerte y claro!\p¡Toma esto, pequeñ{OA}!$"
-
-DewfordTown_Text_ThrowInFishingAdvice:
-	.string "¿Sabes?\pHe desarrollado una caña que puede\npescar Pokémon, ¡Sin necesidad\lde esperar tanto!$"
-
-DewfordTown_Text_ThatsTooBadThen:
-	.string "Qué mal.$"
-
-DewfordTown_Text_HowsYourFishing:
-	.string "¡Ey!\n"
-	.string "¿Cómo va todo?$"
-
-DewfordTown_Text_GreatHaulInSomeBigOnes:
-	.string "¡Genial, atrapa unos grandes!$"
-
-DewfordTown_Text_FishingAdvice:
-	.string "Oh, bueno, ¡Ya irá mejor!$"
-
-DewfordTown_Text_XIsTheBiggestHappeningThingRight:
-	.string "Osea, está muy de moda eso de\n“{STR_VAR_1}”\p"
-	.string "Obvio lo conoces, osea,\n"
-	.string "“{STR_VAR_1}”…\l"
-	.string "¡Todos hablan de eso!\n"
-	.string "“{STR_VAR_1}”\l"
-	.string "Es lo más, ¿no?$"
-
-DewfordTown_Text_TellMeWhatsNewAndIn:
-	.string "¿Qué?\n¿Ya pasó de moda?\pEntonces, ¿Qué es lo más?$"
-
-DewfordTown_Text_OfCourseIKnowAboutThat:
-	.string "¿“{STR_VAR_2}”?\p"
-	.string "… …\p"
-	.string "…Eh… ¡Sí! ¡Claro, claro!\n"
-	.string "“{STR_VAR_2},” ¿No?\p"
-	.string "Pfff, ¡Obvio!\n"
-	.string "“{STR_VAR_2}”\pEs lo más.$"
-
-DewfordTown_Text_XHuhIThinkYIsCool:
-	.string "Mmmhhh…\n"
-	.string "“{STR_VAR_2},” ¿No?\p"
-	.string "Aunque pienso que\n"
-	.string "“{STR_VAR_1}”\l"
-	.string "es mucho mejor.$"
-
-DewfordTown_Text_HearOfAnyTrendsComeShareWithMe:
-	.string "Bueno, si hay otras\ntrends, dímelo, ¿Sí?$"
-
-DewfordTown_Text_YeahDefinitionOfInRightNow:
-	.string "¡Osea, obvio!\p"
-	.string "“{STR_VAR_1}” es la\n"
-	.string "definición de cool.$"
-
-DewfordTown_EventScript_WallyHello:
-	.string "¡O-oh!\n"
-	.string "-COF COF-\l"
-	.string "¡{PLAYER}!\p"
-	.string "N-no sabía que vendrías…\n"
-	.string "¡Pero que bien que estés aquí!$"
-
-DewfordTown_EventScript_WallyBeginSpeech:
-	.string "Sabes, tengo mucho miedo de comenzar mi\n"
-	.string "{COLOR BLUE}Desafío de los Gimnasios{COLOR DARK_GRAY}, y n-no sé si\l"
-	.string "sea algo en lo que pueda siquiera\l"
-	.string "aspirar a ser bueno…\p"
-	.string "Tengo miedo de fallar, y que todos se\n"
-	.string "burlen de mí denuevo…$"
-	
 `

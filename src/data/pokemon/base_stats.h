@@ -8891,9 +8891,9 @@ const struct BaseStats gBaseStats[] =
     [SPECIES_WAILORD] =
     {
         .baseHP        = 170,
-        .baseAttack    = 90,
+        .baseAttack    = 95,
         .baseDefense   = 45,
-        .baseSpeed     = 60,
+        .baseSpeed     = 55,
         .baseSpAttack  = 90,
         .baseSpDefense = 45,
         .type1 = TYPE_WATER,

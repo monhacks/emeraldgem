@@ -1,3 +1,202 @@
+
+const LOCALID_RIVAL = 2
+
+text Route103_Text_MayDefeated {
+	poryswitch(LANGUAGE){
+		ES{
+			format("… … … … … … … ¡Y listo!\p"
+			"¡Wow! Nunca creí que se comportara así…\p¡Gracias!")
+		}
+		EN{
+			format("… … … … … … … … And done!\p"
+			"Wow! Never thought it'd behave in such a way…\pThanks!")
+		}
+	}
+	
+}
+
+text Route103_Text_ShouldHaveBroughtPotion {
+	poryswitch(LANGUAGE){
+		ES{
+			format("Mi Pokémon…\n"
+			"No esperaba que de noche…")
+		}
+		EN{
+			format("My Pokémon…\n"
+			"Didn't expect that at night…")
+		}
+	}
+	
+}
+
+text Route103_Text_ShortcutToOldale {
+	poryswitch(LANGUAGE){
+		ES{
+			format("¡ATAJOOOOOOOOO!")
+		}
+		EN{
+			format("SHOOORRTTCUUTTT!")
+		}
+	}
+	
+}
+
+text Route103_Text_RouteSign {
+	poryswitch(LANGUAGE){
+		ES{
+			format("RUTA 103\n"
+	"{DOWN_ARROW} PUEBLO OLDALE")
+		}
+		EN{
+			format("ROUTE 103\n"
+	"{DOWN_ARROW} OLDALE TOWN")
+		}
+	}
+	
+}
+
+text Route103_Text_SafariSign {
+	poryswitch(LANGUAGE){
+		ES{
+			format("Mini-Safari\n¡Captura Pokémon muy raros!")
+		}
+		EN{
+			format("Mini-Safari\nCatch rare Pokémon!")
+		}
+	}
+	
+}
+
+text Route103_EventScript_SafariGuard_Text_0 {
+	poryswitch(LANGUAGE){
+		ES{
+			format("¡Hola, Joven Entrenador{A}!\p"
+			"Estamos preparando un nuevo Juego del\n"
+			"Safari... Aún falta, ¡Pero visítanos a\l"
+			"menudo para saber si hemos abierto!")
+		}
+		EN{
+			format("Hi, young one!\p"
+			"We're preparing the newest Safari Game!\n"
+			"We still need time to prepare everything... Come back soon!")
+		}
+	}
+	
+}
+
+text Route103_EventScript_SafariGuard_Text_1 {
+	poryswitch(LANGUAGE){
+		ES{
+			format("¡Hola, Joven Entrenador{A}!\p"
+		"Estamos preparando un nuevo Juego del Safari... ¡Pero falta muy poco!\p"
+		"Entretanto, ¿Porqué no vas a desafiar a Wattson?\p¡Habremos abierto para entonces!")
+		}
+		EN{
+			format("Hi, young one!\p"
+			"We're preparing the newest Safari Game!\n"
+			"But we're almost done! In the meantime, why don't you go challenge Wattson?\pWe'll be done by then, for sure!")
+		}
+	}
+	
+}
+
+text Route103_EventScript_SafariGuard_Text_2 {
+	poryswitch(LANGUAGE){
+		ES{
+			format("¡Hola, Joven Entrenador{A}!\p"
+			"El Mini-Safari ha abierto,\n"
+			"¡Buena suerte!")
+		}
+		EN{
+			format("Hi, young one!\p"
+			"The Mini-Safari's open,\n"
+			"Good luck!")
+		}
+	}
+	
+}
+
+
+script Route103_EventScript_Rival {
+	
+	lockall
+	checkplayergender
+	questmenu (QUEST_MENU_SET_ACTIVE SIDE_QUEST_1)
+	questmenu (QUEST_MENU_COMPLETE_QUEST SIDE_QUEST_1)
+	namebox (Rival)
+	poryswitch(LANGUAGE){
+		ES{
+			msgbox(format("Ah, Sentret, Ducklett, ¿Quién más?"))
+		}
+		EN{
+			msgbox(format("So, Ducklett, Setret, and who else?"))
+		}
+	}
+	closemessage
+	hidenamebox
+	faceplayer
+	if (var(VAR_RESULT) == MALE) {
+		playbgm (MUS_ENCOUNTER_MAY, TRUE)
+	}
+	else
+	{
+		playbgm (MUS_ENCOUNTER_BRENDAN, TRUE)
+	}
+	applymovement (LOCALID_RIVAL, Common_Movement_FacePlayer)
+	waitmovement (0)
+	applymovement (LOCALID_RIVAL, Common_Movement_ExclamationMark)
+	waitmovement (0)
+	delay (48)
+	namebox (Rival)
+	poryswitch(LANGUAGE){
+		ES{
+			msgbox(format("¡Ah, hola, {PLAYER}!\pQué bueno que llegas, porque quería investigar el comportamiento en combate de nuestros iniciales.\p¡Prepárate!"))
+		}
+		EN{
+			msgbox(format("Oh, hi,  {PLAYER}!\pGood you came, I wanted to study the behavior of our starters in battle.\pGet ready!"))
+		}
+	}
+	checkplayergender
+	if (var(VAR_RESULT) == MALE) {
+		switch (var(VAR_STARTER_MON)){
+			case 0:
+				trainerbattle_no_intro (TRAINER_MAY_ROUTE_103_TREECKO, Route103_Text_MayDefeated)
+			case 1:
+				trainerbattle_no_intro (TRAINER_MAY_ROUTE_103_TORCHIC, Route103_Text_MayDefeated)
+			case 2:
+				trainerbattle_no_intro (TRAINER_MAY_ROUTE_103_MUDKIP, Route103_Text_MayDefeated)
+				
+		}
+	}
+	else
+	{
+		switch (var(VAR_STARTER_MON)){
+			case 0:
+				trainerbattle_no_intro (TRAINER_BRENDAN_ROUTE_103_TREECKO, Route103_Text_MayDefeated)
+			case 1:
+				trainerbattle_no_intro (TRAINER_BRENDAN_ROUTE_103_TORCHIC, Route103_Text_MayDefeated)
+			case 2:
+				trainerbattle_no_intro (TRAINER_BRENDAN_ROUTE_103_MUDKIP, Route103_Text_MayDefeated)
+				
+		}
+	}
+	hidenamebox
+	closemessage
+	namebox (Rival)
+	poryswitch(LANGUAGE){
+		ES{
+			msgbox(format("¡Genial! ¡Papá amará estos datos!"))
+		}
+		EN{
+			msgbox(format("Great! Dad will love this data!"))
+		}
+	}
+	closemessage
+	hidenamebox
+	goto (Route103_EventScript_RivalExit)
+	end
+}
+
 raw `
 .set LOCALID_RIVAL, 2
 
@@ -15,90 +214,6 @@ Route103_OnTransition:
 Route103_Transition_MoveCamper:
 	setobjectxyperm 21, 5, 11
 	return
-	
-
-Route103_EventScript_Rival::
-	lockall
-	checkplayergender
-	questmenu QUEST_MENU_SET_ACTIVE SIDE_QUEST_1
-	questmenu QUEST_MENU_COMPLETE_QUEST SIDE_QUEST_1
-	goto_if_eq VAR_RESULT, MALE, Route103_EventScript_RivalMay
-	goto_if_eq VAR_RESULT, FEMALE, Route103_EventScript_RivalBrendan
-	end
-
-Route103_EventScript_RivalMay::
-	msgbox Route103_Text_MayRoute103Pokemon, MSGBOX_DEFAULT
-	closemessage
-	playbgm MUS_ENCOUNTER_MAY, TRUE
-	applymovement LOCALID_RIVAL, Common_Movement_FacePlayer
-	waitmovement 0
-	applymovement LOCALID_RIVAL, Common_Movement_ExclamationMark
-	waitmovement 0
-	applymovement LOCALID_RIVAL, Common_Movement_Delay48
-	waitmovement 0
-	msgbox Route103_Text_MayLetsBattle, MSGBOX_DEFAULT
-	switch VAR_STARTER_MON
-	case 0, Route103_EventScript_StartMayBattleTreecko
-	case 1, Route103_EventScript_StartMayBattleTorchic
-	case 2, Route103_EventScript_StartMayBattleMudkip
-	end
-
-Route103_EventScript_RivalBrendan::
-	msgbox Route103_Text_MayRoute103Pokemon, MSGBOX_DEFAULT
-	closemessage
-	playbgm MUS_ENCOUNTER_BRENDAN, TRUE
-	applymovement LOCALID_RIVAL, Common_Movement_FacePlayer
-	waitmovement 0
-	applymovement LOCALID_RIVAL, Common_Movement_ExclamationMark
-	waitmovement 0
-	applymovement LOCALID_RIVAL, Common_Movement_Delay48
-	waitmovement 0
-	msgbox Route103_Text_MayLetsBattle, MSGBOX_DEFAULT
-	switch VAR_STARTER_MON
-	case 0, Route103_EventScript_StartBrendanBattleTreecko
-	case 1, Route103_EventScript_StartBrendanBattleTorchic
-	case 2, Route103_EventScript_StartBrendanBattleMudkip
-	end
-
-Route103_EventScript_StartMayBattleTreecko::
-	trainerbattle_no_intro TRAINER_MAY_ROUTE_103_TREECKO, Route103_Text_MayDefeated
-	goto Route103_EventScript_AfterMayBattle
-	end
-
-Route103_EventScript_StartMayBattleTorchic::
-	trainerbattle_no_intro TRAINER_MAY_ROUTE_103_TORCHIC, Route103_Text_MayDefeated
-	goto Route103_EventScript_AfterMayBattle
-	end
-
-Route103_EventScript_StartMayBattleMudkip::
-	trainerbattle_no_intro TRAINER_MAY_ROUTE_103_MUDKIP, Route103_Text_MayDefeated
-	goto Route103_EventScript_AfterMayBattle
-	end
-
-Route103_EventScript_StartBrendanBattleTreecko::
-	trainerbattle_no_intro TRAINER_BRENDAN_ROUTE_103_TREECKO, Route103_Text_MayDefeated
-	goto Route103_EventScript_AfterBrendanBattle
-	end
-
-Route103_EventScript_StartBrendanBattleTorchic::
-	trainerbattle_no_intro TRAINER_BRENDAN_ROUTE_103_TORCHIC, Route103_Text_MayDefeated
-	goto Route103_EventScript_AfterBrendanBattle
-	end
-
-Route103_EventScript_StartBrendanBattleMudkip::
-	trainerbattle_no_intro TRAINER_BRENDAN_ROUTE_103_MUDKIP, Route103_Text_MayDefeated
-	goto Route103_EventScript_AfterBrendanBattle
-	end
-
-Route103_EventScript_AfterMayBattle::
-	msgbox Route103_Text_MayTimeToHeadBack, MSGBOX_DEFAULT
-	goto Route103_EventScript_RivalExit
-	end
-
-Route103_EventScript_AfterBrendanBattle::
-	msgbox Route103_Text_MayTimeToHeadBack, MSGBOX_DEFAULT
-	goto Route103_EventScript_RivalExit
-	end
 
 Route103_EventScript_RivalExit::
 	closemessage
@@ -179,25 +294,6 @@ Route103_EventScript_SafariGuard_9:
 	goto Route103_EventScript_SafariGuard_7
 
 
-Route103_EventScript_SafariGuard_Text_0:
-	.string "¡Hola, Joven Entrenador{A}!\p"
-	.string "Estamos preparando un nuevo Juego del\n"
-	.string "Safari... Aún falta, ¡Pero visítanos a\l"
-	.string "menudo para saber si hemos abierto!$"
-
-Route103_EventScript_SafariGuard_Text_1:
-	.string "¡Hola, Joven Entrenador{A}!\p"
-	.string "Estamos preparando un nuevo Juego del\n"
-	.string "Safari... ¡Pero falta muy poco!\p"
-	.string "Vuelve cuando hayas derrotado a\n"
-	.string "Wattson, el Líder de Gimnasio de Ciudad\l"
-	.string "Mauville, ¡Habremos abierto para\l"
-	.string "entonces!$"
-
-Route103_EventScript_SafariGuard_Text_2:
-	.string "¡Hola, Joven Entrenador{A}!\p"
-	.string "El Mini-Safari ha abierto,\n"
-	.string "¡Buena suerte!$"
 
 Route103_Movement_RivalExitFacingNorth1:
 	walk_left
@@ -340,47 +436,5 @@ Route103_EventScript_Isabelle::
 	trainerbattle_single TRAINER_ISABELLE, Route103_Text_IsabelleIntro, Route103_Text_IsabelleDefeated
 	msgbox Route103_Text_IsabellePostBattle, MSGBOX_AUTOCLOSE
 	end
-
-Route103_Text_MayRoute103Pokemon:
-	.string "Veamos, entonces los\n"
-	.string "nuevos aquí son…\p"
-	.string "¿Ducklett, Sentret y…?$"
-
-Route103_Text_MayLetsBattle:
-	.string "{RIVAL}: ¡Oh!\n"
-	.string "Hola, {PLAYER}, ¿Necesitas algo?\p"
-	.string "¿O eres {ELLA} chic{OA} de los recados\n"
-	.string "ahora? Jaja, no lo tomes en serio.\p"
-	.string "La verdad mucho no me importa, pero,\n"
-	.string "¿Qué tal si combatimos para poder\l"
-	.string "anotar algunos datos sobre el\l"
-	.string "comportamiento de nuestros Iniciales\l"
-	.string "en las batallas?$"
-
-
-Route103_Text_MayDefeated:
-	.string "… … … … … … … … … … … …\p"
-	.string "No te lo niego, sabes lo que haces…$"
-
-Route103_Text_MayTimeToHeadBack:
-	.string "Creo… que entiendo lo que\n"
-	.string "decía mi Padre sobre ti, {PLAYER},\l"
-	.string "con todo el conocimiento que tienes… … … Quizá\l"
-	.string "seas de gran ayuda, pero…\l"
-	.string "No, nada, olvídalo…$"
-
-Route103_Text_ShouldHaveBroughtPotion:
-	.string "Mi Pokémon…\n"
-	.string "No esperaba que hubiera un…$"
-
-Route103_Text_ShortcutToOldale:
-	.string "¡ATAJOOOOOOOOO!$"
-
-Route103_Text_RouteSign:
-	.string "RUTA 103\n"
-	.string "{DOWN_ARROW} PUEBLO OLDALE$"
-
-Route103_Text_SafariSign:
-	.string "Mini-Safari\n¡Captura Pokémon muy raros!$"
 
 `

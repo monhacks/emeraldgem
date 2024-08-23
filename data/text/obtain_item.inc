@@ -1,31 +1,41 @@
 gText_ObtainedTheItem::
-	.string "Obtained the {STR_VAR_2}!$"
+# 1 "data/text/obtain_item.pory"
+	.string "¡Obtuviste una unidad de\n"
+	.string "{STR_VAR_2}!$"
 
 gText_TheBagIsFull::
-	.string "The BAG is full…$"
+# 13 "data/text/obtain_item.pory"
+	.string "La Mochila está llena…$"
 
 gText_PutItemInPocket::
-	.string "{PLAYER} put away the {STR_VAR_2}\n"
-	.string "in the {STR_VAR_3} POCKET.$"
+# 24 "data/text/obtain_item.pory"
+	.string "{PLAYER} puso {STR_VAR_2} en el\n"
+	.string "bolsillo {STR_VAR_3}.$"
 
 gText_PlayerFoundOneItem::
-	.string "{PLAYER} found one {STR_VAR_2}!$"
+# 35 "data/text/obtain_item.pory"
+	.string "¡{PLAYER} encontró una unidad de\n"
+	.string "{STR_VAR_2}!$"
 
 gText_TooBadBagIsFull::
-	.string "Too bad!\n"
-	.string "The BAG is full…$"
+# 46 "data/text/obtain_item.pory"
+	.string "¡Qué mal! La Mochila está llena…$"
 
 gText_PlayerPutItemInBag::
-	.string "{PLAYER} put away the {STR_VAR_2}\n"
-	.string "in the BAG.$"
+# 57 "data/text/obtain_item.pory"
+	.string "{PLAYER} guardó {STR_VAR_2} en la\n"
+	.string "Mochila.$"
 
 gText_ObtainedTheDecor::
-	.string "Obtained the {STR_VAR_2}!$"
+# 68 "data/text/obtain_item.pory"
+	.string "¡Conseguiste una unidad de\n"
+	.string "{STR_VAR_2}!$"
 
 gText_NoRoomLeftForAnother::
-	.string "Too bad! There's no room left for\n"
-	.string "another {STR_VAR_2}…$"
+# 79 "data/text/obtain_item.pory"
+	.string "¡Pero ya no hay espacio para más\n"
+	.string "{STR_VAR_2}!$"
 
 gText_TheDecorWasTransferredToThePC::
-	.string "The {STR_VAR_2} was transferred\n"
-	.string "to the PC.$"
+# 90 "data/text/obtain_item.pory"
+	.string "¡{STR_VAR_2} fue transferido al PC!$"

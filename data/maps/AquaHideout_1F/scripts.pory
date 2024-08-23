@@ -21,19 +21,19 @@ script AquaHideout_1F_EventScript_HideoutEntranceGrunts{
 	if (flag(FLAG_GROUDON_AWAKENED_MAGMA_HIDEOUT))
 	{
 		msgbox(format("¿Escuchaste lo que el Jefe está haciendo en Ciudad Slateport?"))
-		msgbox(format("¡Sí! Está yendo a buscar el Submarino...\nEspera a ver la cara del público cuando\lse enteren para quién Devon ha-{PAUSE 20} "), MSGBOX_INTERRUPT)
+		msgbox(format("¡Sí! Está yendo a buscar el Submarino…\nEspera a ver la cara del público cuando\lse enteren para quién Devon ha-{PAUSE 20} "), MSGBOX_INTERRUPT)
 		msgbox(format("¡Calla, calla! ¿Quién sabe si alguien nos está escuchando?"))
 	}
 	elif (flag(FLAG_RECEIVED_RED_OR_BLUE_ORB))
 	{
-		msgbox(format("¿Te enteraste?\n¡El Equipo Magma está siendo acorralado en su Base Secreta!\pDeberíamos intentar proteger mejor la nuestra, que muy Secreta no es..."))
-		msgbox(format("Escuché que es otro Equipo como nostros... Uno que ha estado atacando a tanto Aqua como Magma...\p"
-				"Escuché que Shelly los vio, pero que les dijo a los Reclutas que los vieron que cerraran la boca..."))
+		msgbox(format("¿Te enteraste?\n¡El Equipo Magma está siendo acorralado en su Base Secreta!\pDeberíamos intentar proteger mejor la nuestra, que muy Secreta no es…"))
+		msgbox(format("Escuché que es otro Equipo como nostros… Uno que ha estado atacando a tanto Aqua como Magma…\p"
+				"Escuché que Shelly los vio, pero que les dijo a los Reclutas que los vieron que cerraran la boca…"))
 		msgbox(format("¡No seas tonto!\nNuestros Admins nunca se dejarían vencer por idiotas así, ¡Nunca!"))
 	}
 	else {
 		msgbox(format("¿Escuchaste lo que el Jefe está haciendo en la Ruta 122?"))
-		msgbox(format("¡Sí!\nPor lo que escuché, está intentando robar un Orbe, pero creo que... ¿Están siendo ayudados por el Equipo Magma?"))
+		msgbox(format("¡Sí!\nPor lo que escuché, está intentando robar un Orbe, pero creo que… ¿Están siendo ayudados por el Equipo Magma?"))
 		msgbox(format("¡No seas tonto!\nNuestro Jefe nunca se juntaría con el idiota de Maxie, ¡Ya no más, al menos!"))
 	}
 	hidenamebox
@@ -52,7 +52,7 @@ script AquaHideout_1F_EventScript_Grunt1 {
 	lockall
 	faceplayer
 	namebox (Aqua)
-	msgbox(format("M-mis pobres Pokémon...\nEstos desgraciados los dejaron muy lastimados...\pE-estoy tan preocupado por ellos, te prometo que no te haré nada si me ayudas...\p¿Podrías darme algún Revivir para curarlos?"), MSGBOX_YESNO)
+	msgbox(format("M-mis pobres Pokémon…\nEstos desgraciados los dejaron muy lastimados…\pE-estoy tan preocupado por ellos, te prometo que no te haré nada si me ayudas…\p¿Podrías darme algún Revivir para curarlos?"), MSGBOX_YESNO)
 	if (var(VAR_RESULT) == YES){
 		hidenamebox
 		checkitem (ITEM_REVIVE)
@@ -84,14 +84,14 @@ script AquaHideout_1F_EventScript_Grunt1 {
 		}
 	}
 	namebox (Aqua)
-	msgbox(format("Oh... Está bien...\nM-mis pobres Pokémon.."))
+	msgbox(format("Oh… Está bien…\nM-mis pobres Pokémon.."))
 	hidenamebox
 	closemessage
 	releaseall
 }
 
 script AquaHideout_1F_EventScript_Grunt1Helped {
-	msgbox(format("¡M-muchas gracias!\nAhora podré ir a un Centro Pokémon..."))
+	msgbox(format("¡M-muchas gracias!\nAhora podré ir a un Centro Pokémon…"))
 	waitmessage
 	hidenamebox
 	closemessage

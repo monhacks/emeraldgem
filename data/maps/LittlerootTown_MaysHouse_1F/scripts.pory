@@ -1,3 +1,57 @@
+
+text RivalsHouse_1F_Text_LikeChildLikeFather {
+	poryswitch(LANGUAGE) {
+	 EN {
+		 format("My husband's… UGH…\n"
+		"He's likely out, studying\l"
+		"some other big stupid thing…\p"
+		"What a guy, huh…?")
+	 }
+	ES {
+		format("Mi esposo debe… UGH…\n"
+		"Debe estar en el campo\l"
+		"estudiando alguna estupidez…\p"
+		"Que gran tipo, ¿no…?")
+	}
+	}
+}
+
+text RivalsHouse_1F_Text_TooBusyToNoticeVisit {
+poryswitch(LANGUAGE) {
+	 EN {
+		 format("Ah, my {RIVAL}, they must be in their room.")
+	 }
+	ES {
+		format("Ah, mi {RIVAL}, debe estar en su cuarto.")
+	}
+	}
+}
+
+text RivalsHouse_1F_Text_WentOutToRoute103 {
+poryswitch(LANGUAGE) {
+	 EN {
+		 format("Ah, my {RIVAL}, they're at Route 103.\pThey worry me, {PLAYER}, last time they stayed investigating till they passed out.")
+	 }
+	ES {
+		format("Ah, mi {RIVAL}, creo que está\n"
+		"en la Ruta 103 estudiando Pokémon,\l"
+		"así que deberías buscarle, {PLAYER}.\l"
+		"La última vez, se quedó investigando hasta que se desmayó.")
+	}
+	}
+}
+text RivalsHouse_1F_Text_DoYouHavePokemon {
+	poryswitch(LANGUAGE) {
+	 EN {
+		 format("I no shpeek english!")
+	 }
+	ES {
+		format("¡Hoda, veshin{OA}!\p"
+		"¿Ya tienesh Pokémon?")
+	}
+	}
+}
+
 raw `
 .set LOCALID_MOM, 1
 .set LOCALID_RIVAL_MOM, 4
@@ -99,24 +153,14 @@ LittlerootTown_MaysHouse_1F_EventScript_YoureNewNeighbor::
 	applymovement LOCALID_RIVAL_MOM, LittlerootTown_MaysHouse_1F_Movement_RivalMomApproach
 	waitmovement 0
 	namebox Marta
-	msgbox LittlerootTown_MaysHouse_1F_EventScript_YoureNewNeighbor_Text_1
+	setvar VAR_LAST_TALKED, LOCALID_RIVAL
+	call EventScript_YoureNewNeighbor_Translated
 	setflag FLAG_MET_RIVAL_MOM
 	setvar VAR_LITTLEROOT_HOUSES_STATE_BRENDAN, 2
-	call LittlerootTown_MaysHouse_1F_EventScript_MeetRival
 	closemessage
 	hidenamebox
 	releaseall
 	end
-
-
-LittlerootTown_MaysHouse_1F_EventScript_YoureNewNeighbor_Text_1:
-	.string "¡AH! ¿QUIÉN ERES?\p"
-	.string "… … … … … … … … …\n"
-	.string "… … … … … … … … …\p"
-	.string "Ah, ya veo, eres {PLAYER}, {ELLA} hij{OA} de\n"
-	.string "Norman…\p"
-	.string "Pues, nuestr{AO} hij{AO} vive arriba, ¡Ve a\n"
-	.string "presentarte!$"
 
 LittlerootTown_MaysHouse_1F_Movement_RivalMomApproach:
 	walk_down
@@ -175,38 +219,6 @@ LittlerootTown_MaysHouse_1F_EventScript_GoSeeRoom::
 	goto PlayersHouse_1F_EventScript_MomGoSeeRoom
 	end
 
-LittlerootTown_MaysHouse_1F_EventScript_MeetRival::
-	playse SE_EXIT
-	delay 10
-	addobject LOCALID_RIVAL
-	delay 30
-	playse SE_PIN
-	applymovement LOCALID_RIVAL, Common_Movement_ExclamationMark
-	waitmovement 0
-	applymovement LOCALID_RIVAL, Common_Movement_FacePlayer
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceLeft
-	waitmovement 0
-	playbgm MUS_ENCOUNTER_MAY, TRUE
-	applymovement LOCALID_RIVAL, LittlerootTown_MaysHouse_1F_Movement_MayApproachPlayer
-	waitmovement 0
-	namebox Rival
-	msgbox RivalsHouse_1F_Text_MayWhoAreYou, MSGBOX_DEFAULT
-	closemessage
-	hidenamebox
-	call LittlerootTown_MaysHouse_1F_EventScript_MayGoUpstairs
-	playse SE_EXIT
-	removeobject LOCALID_RIVAL
-	setflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_MAY
-	setflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_2F_POKE_BALL
-	clearflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_RIVAL_BEDROOM
-	delay 30
-	setvar VAR_LITTLEROOT_RIVAL_STATE, 3
-	setvar VAR_LITTLEROOT_TOWN_STATE, 1
-	savebgm MUS_DUMMY
-	fadedefaultbgm
-	releaseall
-	end
-
 
 LittlerootTown_MaysHouse_1F_Movement_MayApproachPlayer:
 	walk_in_place_faster_right
@@ -237,26 +249,6 @@ LittlerootTown_MaysHouse_1F_Movement_MayGoUpstairs:
 	walk_up
 	step_end
 
-
-
-RivalsHouse_1F_Text_LikeChildLikeFather:
-	.string "Mi esposo debe… UGH…\n"
-	.string "Debe estar en el campo\l"
-	.string "estudiando alguna estupidez…\p"
-	.string "Que gran tipo, ¿no…?$"
-
-RivalsHouse_1F_Text_TooBusyToNoticeVisit:
-	.string "Ah, mi {RIVAL}, creo que está\n"
-	.string "usando toda su concentración en su\l"
-	.string "investigación como para notar tu\l"
-	.string "llegada, {PLAYER}. Ve a buscarle.$"
-
-RivalsHouse_1F_Text_WentOutToRoute103:
-	.string "Ah, mi {RIVAL}, creo que está\n"
-	.string "en la Ruta 103 estudiando Pokémon,\l"
-	.string "así que deberías buscarle, {PLAYER}.\l"
-	.string "No quiero que le gane el cansancio.$"
-
 RivalsHouse_1F_Text_ShouldGoHomeEverySoOften:
 	.string "Es INCREÍBLE que la gente viaje\n"
 	.string "con Pokémon, pero JAMÁS deberían\l"
@@ -267,18 +259,5 @@ RivalsHouse_1F_Text_ShouldGoHomeEverySoOften:
 	.string "hijos…\p"
 	.string "Pero bueno…$"
 
-RivalsHouse_1F_Text_MayWhoAreYou:
-	.string "Oh, tú eres… {PLAYER},\n"
-	.string "¿Qué haces en mi casa?\p"
-	.string "… … … … … … … … … … … …\p"
-	.string "Mhhh… Mi papá dijo que vendrías,\n"
-	.string "{PLAYER}, ¡Y que seamos amigos!\l"
-	.string "Pero recién nos conocimos hoy,\l"
-	.string "¿Verdad?\p"
-	.string "No tengo mucho tiempo de todas formas,\n"
-	.string "{PLAYER}, espero lo entiendas.$"
 
-RivalsHouse_1F_Text_DoYouHavePokemon:
-	.string "¡Hoda, veshin{OA}!\p"
-	.string "¿Ya tienesh Pokémon?$"
 `

@@ -23,7 +23,7 @@ script MagmaHideout_3F_1R_EventScripts_PrepareMagmaWin {
 script MagmaHideout_3F_1R_EventScript_Grunt9 {
 	lockall
 	namebox (Magma)
-	msgbox ("¿Un{A} intrus{OA}? ¡Vete de aquí!")
+	msgbox (format("¿Un{A} intrus{OA}? ¡Vete de aquí!"))
 	hidenamebox
 	closemessage
 	releaseall
@@ -32,7 +32,7 @@ script MagmaHideout_3F_1R_EventScript_Grunt9 {
 script MagmaHideout_3F_1R_EventScript_Grunt16 {
 	lockall
 	namebox (Magma)
-	msgbox ("¿No tan fuertes por sí solos, eh?")
+	msgbox (format("¿No tan fuertes por sí solos, eh?"))
 	hidenamebox
 	closemessage
 	releaseall

@@ -48,7 +48,7 @@ script AquaHideout_B2F_EventScript_MattNoticePlayer {
 	namebox (Matt)
 	msgbox(format("¡No voy a dejarte que le hagas nada a Archie! ¡Apártate!"))
 	namebox (Winona)
-	msgbox(format("Qué lástima, no quería tener que luchar, pero..."))
+	msgbox(format("Qué lástima, no quería tener que luchar, pero…"))
 	hidenamebox
 	if (var(VAR_EVIL_TEAM_SIDE) > 3){
 		if (var(VAR_TEMP_1) == 1) {
@@ -61,7 +61,7 @@ script AquaHideout_B2F_EventScript_MattNoticePlayer {
 		namebox (Matt)
 		msgbox(format("¿Nos vas a ayudar?"))
 		namebox(Archie)
-		msgbox(format("Será sólo un{A} niñ{OA}, pero ha estado de nuestro lado antes... Aún así, Matt, esto no es necesario..."))
+		msgbox(format("Será sólo un{A} niñ{OA}, pero ha estado de nuestro lado antes… Aún así, Matt, esto no es necesario…"))
 		call (AquaHideout_B2F_EventScript_WinonaPrepare)
 		// call (AquaHideout_B2F_EventScript_LostMultiBattle)
 		multi_fixed_2_vs_1 (TRAINER_WINONA_AQUA_HIDEOUT, "¡Impresionante!\nNo me esperaba menos\pdel Equipo Aqua.", TRAINER_MATT_PARTNER, TRAINER_BACK_PIC_RED)
@@ -78,11 +78,11 @@ script AquaHideout_B2F_EventScript_MattNoticePlayer {
 		}
 		waitmovement (0)
 		namebox (Matt)
-		msgbox(format("Así que estás en nuetra contra después de todo..."))
+		msgbox(format("Así que estás en nuetra contra después de todo…"))
 		namebox(Archie)
-		msgbox(format("No me sorprende... Aún así, Matt, esto no es necesario..."))
+		msgbox(format("No me sorprende… Aún así, Matt, esto no es necesario…"))
 		call (AquaHideout_B2F_EventScript_WinonaPrepare)
-		multi_fixed_2_vs_1 (TRAINER_MATT, "¡N-no! Archie, te defraudé...", TRAINER_WINONA_AQUA_HIDEOUT, TRAINER_BACK_PIC_RED)
+		multi_fixed_2_vs_1 (TRAINER_MATT, "¡N-no! Archie, te defraudé…", TRAINER_WINONA_AQUA_HIDEOUT, TRAINER_BACK_PIC_RED)
 		specialvar (VAR_RESULT, GetBattleOutcome)
 		compare (VAR_RESULT, B_OUTCOME_LOST)
 		goto_if_eq (MtChimney_EventScript_LostMultiBattle)

@@ -236,7 +236,7 @@
 #define VAR_HAS_TALKED_TO_SEAFLOOR_CAVERN_ENTRANCE_GRUNT 0x40D9
 #define VAR_REGISTER_BIRCH_STATE             0x40DA
 #define VAR_MISTERIO	                     0x40DB 
-#define VAR_EVIL_TEAM_SIDE                   0x40DC 
+#define VAR_EVIL_TEAM_SIDE                   0x40DC // usually at 3, 0-2 values are Team Aqua side, 4-6 are Team Magma side. 3 defaults to Team Aqua side.
 #define VAR_GIFT_PICHU_SLOT                  0x40DD
 #define VAR_SAFARI_ZONE_RIGHT                0x40DE 
 #define VAR_MAGMA_HIDEOUT_STATE              0x40DF 

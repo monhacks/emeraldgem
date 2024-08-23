@@ -327,7 +327,7 @@ AquaHideout_B1F_Movement_LeavesFirstRoom:
 AquaHideout_B1F_EventScript_Trigger_Text_0:
 # 41 "data/maps/AquaHideout_B1F/scripts.pory"
 	.string "¡N-{PAUSE 5}No!\n"
-	.string "Me derrotó usando un solo Pokémon...$"
+	.string "Me derrotó usando un solo Pokémon…$"
 
 AquaHideout_B1F_EventScript_Trigger_Text_1:
 # 43 "data/maps/AquaHideout_B1F/scripts.pory"
@@ -341,17 +341,17 @@ AquaHideout_B1F_EventScript_Trigger_Text_2:
 AquaHideout_B1F_EventScript_Grunt3_Text_0:
 # 116 "data/maps/AquaHideout_B1F/scripts.pory"
 	.string "Normalmente, te atacaría, pero ya no\n"
-	.string "tengo Pokémon...\p"
+	.string "tengo Pokémon…\p"
 	.string "¡Igual! ¡Todo estará bien!\n"
 	.string "Le avisé a nuestro {COLOR BLUE}Administrador Matt{COLOR DARK_GRAY}\l"
-	.string "sobre esta intrusa...\p"
+	.string "sobre esta intrusa…\p"
 	.string "¡El poder que él posee es abismal!$"
 
 AquaHideout_B1F_EventScript_Grunt5_Text_0:
 # 138 "data/maps/AquaHideout_B1F/scripts.pory"
 	.string "Tomó todo lo que teníamos, hasta los\n"
 	.string "más débiles, pero parece que logramos\l"
-	.string "detenerla...\p"
+	.string "detenerla…\p"
 	.string "¡Estos idiotas no son tan invencibles\n"
 	.string "como creíamos!$"
 
@@ -370,4 +370,4 @@ AquaHideout_B1F_EventScript_Delta2_Text_2:
 
 AquaHideout_B1F_EventScript_Delta2_Text_3:
 # 194 "data/maps/AquaHideout_B1F/scripts.pory"
-	.string "M-me han... Derrotado.$"
+	.string "M-me han… Derrotado.$"

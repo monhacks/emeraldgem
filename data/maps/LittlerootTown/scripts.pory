@@ -1,3 +1,219 @@
+
+script LittlerootTown_EventScript_TownSign {
+	poryswitch(LANGUAGE){
+		ES{
+			msgbox (format("VILLA LITTLEROOT\n“Una Villa bonita.”"), MSGBOX_SIGN)
+		}
+		EN{
+			msgbox (format("LITTLEROOT TOWN\n“A pretty Town.”"), MSGBOX_SIGN)
+		}
+	}
+	end
+}
+
+script LittlerootTown_EventScript_BirchsLabSign {
+	poryswitch(LANGUAGE){
+		ES{
+			msgbox (format("LABORATORIO DEL PROFESOR BIRCH"), MSGBOX_SIGN)
+		}
+		EN{
+			msgbox (format("PROF BIRCH'S LAB"), MSGBOX_SIGN)
+		}
+	}
+	end
+}
+
+script LittlerootTown_EventScript_BrendansHouseSign {
+	lockall
+	checkplayergender
+	if (var(VAR_RESULT) == MALE) {
+		poryswitch(LANGUAGE){
+			ES{
+				msgbox (format("CASA DE {PLAYER}"), MSGBOX_SIGN)
+			}
+			EN{
+				msgbox (format("{PLAYER}'S HOUSE"), MSGBOX_SIGN)
+			}
+		}
+	}
+	else {
+		poryswitch(LANGUAGE){
+			ES{
+				msgbox (format("CASA DE {RIVAL}"), MSGBOX_SIGN)
+			}
+			EN{
+				msgbox (format("{RIVAL}'S HOUSE"), MSGBOX_SIGN)
+			}
+		}
+	}
+	releaseall
+	end
+}
+
+script LittlerootTown_EventScript_MaysHouseSign {
+	lockall
+	checkplayergender
+	if (var(VAR_RESULT) != MALE) {
+		poryswitch(LANGUAGE){
+			ES{
+				msgbox (format("CASA DE {PLAYER}"), MSGBOX_SIGN)
+			}
+			EN{
+				msgbox (format("{PLAYER}'S HOUSE"), MSGBOX_SIGN)
+			}
+		}
+	}
+	else {
+		poryswitch(LANGUAGE){
+			ES{
+				msgbox (format("CASA DE {RIVAL}"), MSGBOX_SIGN)
+			}
+			EN{
+				msgbox (format("{RIVAL}'S HOUSE"), MSGBOX_SIGN)
+			}
+		}
+	}
+	releaseall
+	end
+}
+
+script LittlerootTown_EventScript_MLMSign {
+	poryswitch(LANGUAGE){
+		ES{
+			msgbox (format("CASA DE ESMERALDA"), MSGBOX_SIGN)
+		}
+		EN{
+			msgbox (format("ESMERALDA'S HOUSE"), MSGBOX_SIGN)
+		}
+	}
+	end
+}
+
+
+script LittlerootTown_EventScript_GiveRunningShoesTrigger {
+	checkplayergender
+	if (var(VAR_RESULT) == MALE) {
+		call (LittlerootTown_EventScript_MomNoticePlayerMale)
+		call (LittlerootTown_EventScript_SetHomeDoorCoordsMale)
+	}
+	else {
+		call (LittlerootTown_EventScript_MomNoticePlayerFemale)
+		call (LittlerootTown_EventScript_SetHomeDoorCoordsFemale)
+	}
+	namebox (Mama)
+	msgbox (format("Ah, {PLAYER}."))
+	hidenamebox
+	closemessage
+	checkplayergender
+	if (var(VAR_RESULT) == MALE) {
+		call (LittlerootTown_EventScript_MomApproachPlayerMale)
+		call (LittlerootTown_EventScript_GiveRunningShoes)
+		call (LittlerootTown_EventScript_MomReturnHomeMale)
+	}
+	else {
+		call (LittlerootTown_EventScript_MomApproachPlayerFemale)
+		call (LittlerootTown_EventScript_GiveRunningShoes)
+		call (LittlerootTown_EventScript_MomReturnHomeFemale)
+	} 
+	goto (LittlerootTown_EventScript_SetReceivedRunningShoes)
+	end
+}
+
+script LittlerootTown_EventScript_FatMan {
+	lockall
+	faceplayer
+	namebox (Carlos)
+	poryswitch(LANGUAGE){
+		ES{
+			msgbox (format("Mi esposo me dice siempre que paso demasiado tiempo afuera, pero… ¡Amo el aire fresco y limpio, y la naturaleza tan bella…!\p"
+					"Aunque entiendo que debería pasar más tiempo con él dentro de casa…"))
+		}
+		EN{
+			msgbox (format("My husband's always complaining that I'm outside too much, but… I love the clean air, the beautiful nature too…!\p"
+					"But I guess I could spend more time inside with him and our daughter…"))
+		}
+	}
+	hidenamebox
+	closemessage
+	releaseall
+	end
+}	
+
+script LittlerootTown_EventScript_Boy {
+	faceplayer
+	lock
+	poryswitch(LANGUAGE){
+		ES{
+			msgbox (format("Ese Profesor. Se la pasa siempre fuera de su casa investigando, ¿Qué no extraña a su familia?"))
+		}
+		EN{
+			msgbox (format("That Proffesor. Always out in field studies, does he not miss his family?"))
+		}
+	}
+	release
+	end
+}
+
+script LittlerootTown_EventScript_GiveRunningShoes {
+	poryswitch(LANGUAGE){
+		ES{
+			namebox (Mama)
+			msgbox (format("¡Mi amor!\p¡Ah, el Profesor te dio un Pokémon!\p-sniff sniff- …{PAUSE 5} …{PAUSE 5} …{PAUSE 5}\lPerdón por llorar pero… {PAUSE 5}Estoy tan orgullosa de ti, mi pequeñ{ITOITA}…\p"
+					"Pero bueno… {PAUSE 5}No puedo evitar que crezcas, así que… {PAUSE 5}Toma esto, mi amor."))
+			hidenamebox
+			giveitem (ITEM_MACH_BIKE, 1)
+			setflag (FLAG_NOT_DOUBLE_BIKE)
+			playfanfare (MUS_OBTAIN_ITEM)
+			waitfanfare
+			setflag (FLAG_RECEIVED_RUNNING_SHOES)
+			namebox (Mama)
+			msgbox (format("Es una Bici Dos-En-Uno, aunque creo que no funciona… ¡Quizá la puedan reparar en la Tienda de Bicis!\p"
+					"… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}…\n… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}…\p"
+					"Ya tienes un Pokémon…\n Estoy tan, tan orgullosa de ti, mi pequeñ{OA}…\p"
+					"Si pasa algo, acá está mami para darte amor y cariño.\p"
+					"Cuídate mucho, mi amor…\n Voy a extrañarte…"))
+		}
+		EN{
+			namebox (Mama)
+			msgbox (format("My baby!\pI see the Professor gave you a Pokémon!\p-sniff sniff- …{PAUSE 5} …{PAUSE 5} …{PAUSE 5}\lSorry for crying, but… {PAUSE 5}I'm so proud of you, my baby…\p"
+					"But… {PAUSE 5}I can't avoid seeing you grow up, so… {PAUSE 5}I have a gift for you."))
+			hidenamebox
+			giveitem (ITEM_MACH_BIKE, 1)
+			setflag (FLAG_NOT_DOUBLE_BIKE)
+			playfanfare (MUS_OBTAIN_ITEM)
+			waitfanfare
+			setflag (FLAG_RECEIVED_RUNNING_SHOES)
+			namebox (Mama)
+			msgbox (format("It's a 2-in-1 Bike, but it seems it can't change modes anymore… Maybe the Bike Shop Owner can fix it!\p"
+					"… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}…\n… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}…\p"
+					"You have a Pokémon…\nOh, Mew, I'm so, so proud of you…\p"
+					"If something happens, here's Mom to take care of you.\p"
+					"Take care, my sweetie…\nI'll miss you…"))
+		}
+	}
+	hidenamebox
+	closemessage
+	delay (30)
+	return
+}
+
+script LittlerootTown_EventScript_OurNewHomeLetsGoInside {
+	poryswitch(LANGUAGE){
+		ES{
+			msgbox (format("¡LLegamos, amor!\pLamento haberte dejado en el camión, pero no teníamos más dinero…¡Pero bueno, esto es Villa Littleroot!\p"
+			"¿Te gusta? Se me hace que es un lugar tranquilo para vivir.\p"
+			"¡Entremos!"))
+		}
+		EN {
+			msgbox (format("We're here, sweetie!\pSorry you had to travel in the truck, we were running out of money… But here we are, Littleroot Town!\p"
+			"Do you like it? Seems like such a nice place to live.\p"
+			"Let's go inside!"))
+		}
+	}
+	return
+}
+
+
 raw `
 .set LOCALID_TWIN, 1
 .set LOCALID_MOM, 4
@@ -54,6 +270,15 @@ LittlerootTown_OnTransition:
 	call_if_eq VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 2, LittlerootTown_EventScript_LeftLabAfterDexUpgrade
 	end
 
+LittlerootTown_EventScript_MakePlayerInvisible::
+	applymovement OBJ_EVENT_ID_PLAYER, LittlerootTown_Movement_MakePlayerInvisible
+	waitmovement 0
+	return
+
+LittlerootTown_Movement_MakePlayerInvisible:
+	set_invisible
+	step_end
+
 LittlerootTown_EventScript_LeftLabAfterDexUpgrade::
 	setvar VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 3
 	return
@@ -66,10 +291,6 @@ LittlerootTown_EventScript_SetRivalLeftForRoute103::
 	setflag FLAG_RIVAL_LEFT_FOR_ROUTE103
 	return
 
-LittlerootTown_EventScript_MLMSign::
-	msgbox LittlerootTown_Text_MLMSign
-	closemessage
-	end
 	
 LittlerootTown_Text_MLMSign::
 	.string "CASA DE ESMERALDA$"
@@ -85,7 +306,7 @@ LittlerootTown_EventScript_SetExitedHouseAfterLatiSSTicketEvent::
 	return
 
 LittlerootTown_EventScript_MoveMomToMaysDoor::
-	setobjectxyperm LOCALID_MOM, 14, 8
+	setobjectxyperm LOCALID_MOM, 16, 8
 	return
 
 LittlerootTown_EventScript_SetTwinPos::
@@ -159,7 +380,7 @@ LittlerootTown_EventScript_GoInsideWithMom::
 	applymovement LOCALID_MOM, LittlerootTown_Movement_MomApproachPlayerAtTruck
 	waitmovement 0
 	namebox Mama
-	msgbox LittlerootTown_Text_OurNewHomeLetsGoInside, MSGBOX_DEFAULT
+	call LittlerootTown_EventScript_OurNewHomeLetsGoInside
 	hidenamebox
 	closemessage
 	applymovement LOCALID_MOM, LittlerootTown_Movement_MomApproachDoor
@@ -178,9 +399,6 @@ LittlerootTown_EventScript_GoInsideWithMom::
 	clearflag FLAG_HIDE_LITTLEROOT_TOWN_FAT_MAN
 	clearflag FLAG_HIDE_MAP_NAME_POPUP
 	return
-
-Mama:
-	.string "{COLOR LIGHT_RED}{SHADOW RED}Mamá$"
 
 LittlerootTown_Movement_MomExitHouse:
 	walk_down
@@ -219,6 +437,8 @@ LittlerootTown_Movement_PlayerEnterHouse:
 
 LittlerootTown_Movement_PlayerStepOffTruck:
 	jump_right
+	delay_8
+	set_visible
 	delay_16
 	delay_16
 	delay_16
@@ -262,16 +482,11 @@ LittlerootTown_EventScript_SetRivalBirchPosForDexUpgradeFemale::
 	setobjectxy LOCALID_RIVAL, 13, 10
 	setobjectxy LOCALID_BIRCH, 14, 10
 	end
-
-LittlerootTown_EventScript_FatMan::
-	namebox Carlos
+	
+LittlerootTown_EventScript_FatMan_1:
 	questmenu QUEST_MENU_CHECK_UNLOCKED SIDE_QUEST_3
-	lockall
-	faceplayer
 	compare VAR_RESULT, TRUE
 	goto_if_eq LittlerootTown_EventScript_FatMan_2
-	msgbox LittlerootTown_EventScript_FatMan_Text_5
-LittlerootTown_EventScript_FatMan_1:
 	hidenamebox
 	closemessage
 	releaseall
@@ -294,7 +509,7 @@ LittlerootTown_EventScript_FatMan_8:
 	goto LittlerootTown_EventScript_FatMan_1
 
 LittlerootTown_EventScript_FatMan_9:
-	msgbox LittlerootTown_EventScript_FatMan_Text_0
+	msgbox LittlerootTown_EventScript_FatMan_Text_Unused_0
 	goto LittlerootTown_EventScript_FatMan_8
 
 LittlerootTown_EventScript_FatMan_11:
@@ -312,7 +527,7 @@ LittlerootTown_EventScript_FatMan_14:
 
 
 
-LittlerootTown_EventScript_FatMan_Text_0:
+LittlerootTown_EventScript_FatMan_Text_Unused_0:
 	.string "Mi esposo me dice siempre que\n"
 	.string "paso demasiado tiempo afuera…\p"
 	.string "… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}…\p"
@@ -367,24 +582,17 @@ LittlerootTown_EventScript_FatMan_Text_4:
 	.string "Entonces las ilusiones de\l"
 	.string "Zoroark son así de fuertes…$"
 
-
-LittlerootTown_EventScript_Boy::
-	msgbox LittlerootTown_Text_BirchSpendsDaysInLab, MSGBOX_NPC
-	end
-
 LittlerootTown_EventScript_Twin::
 	lock
 	faceplayer
-	goto_if_set FLAG_ADVENTURE_STARTED, LittlerootTown_EventScript_GoodLuck
-	goto_if_set FLAG_RESCUED_BIRCH, LittlerootTown_EventScript_YouSavedBirch
 	goto_if_ne VAR_LITTLEROOT_TOWN_STATE, 0, LittlerootTown_EventScript_GoSaveBirch
-	msgbox LittlerootTown_Text_IfYouGoInGrassPokemonWillJumpOut, MSGBOX_DEFAULT
+	msgbox LittlerootTown_Text_DangerousIfYouDontHavePokemon, MSGBOX_DEFAULT
 	release
 	end
 
 LittlerootTown_EventScript_GoSaveBirch::
 	special GetPlayerBigGuyGirlString
-	msgbox LittlerootTown_Text_CanYouGoSeeWhatsHappening, MSGBOX_DEFAULT
+	msgbox LittlerootTown_Text_DangerousIfYouDontHavePokemon, MSGBOX_DEFAULT
 	closemessage
 	applymovement LOCALID_TWIN, Common_Movement_FaceOriginalDirection
 	waitmovement 0
@@ -392,80 +600,19 @@ LittlerootTown_EventScript_GoSaveBirch::
 	release
 	end
 
-LittlerootTown_EventScript_YouSavedBirch::
-	lockall
-	msgbox LittlerootTown_EventScript_YouSavedBirch_Text_0
-	addmoney 10
-	questmenu QUEST_MENU_COMPLETE_QUEST SIDE_QUEST_3
-	msgbox LittlerootTown_EventScript_YouSavedBirch_Text_1
-	releaseall
-	return
-
-
-LittlerootTown_EventScript_YouSavedBirch_Text_0:
-	.string "¡LO SALVASTE! ¡GRACIAS!\p"
-	.string "¡Toma esto como agradecimiento!$"
-
-LittlerootTown_EventScript_YouSavedBirch_Text_1:
-	.string "¡Gracias!$"
-
-
-LittlerootTown_EventScript_GoodLuck::
-	msgbox LittlerootTown_Text_GoodLuckCatchingPokemon, MSGBOX_DEFAULT
-	release
-	end
-
 LittlerootTown_EventScript_NeedPokemonTriggerLeft::
 	lockall
-	applymovement LOCALID_TWIN, LittlerootTown_Movement_TwinApproachPlayerLeft
-	waitmovement 0
 	call LittlerootTown_EventScript_DangerousWithoutPokemon
-	applymovement LOCALID_TWIN, LittlerootTown_Movement_TwinReturnLeft
-	waitmovement 0
 	releaseall
 	end
 
 LittlerootTown_EventScript_DangerousWithoutPokemon::
-	msgbox LittlerootTown_Text_IfYouGoInGrassPokemonWillJumpOut, MSGBOX_DEFAULT
-	closemessage
-	applymovement LOCALID_TWIN, LittlerootTown_Movement_TwinPushPlayerFromRoute
 	applymovement OBJ_EVENT_ID_PLAYER, LittlerootTown_Movement_PushPlayerBackFromRoute
 	waitmovement 0
 	msgbox LittlerootTown_Text_DangerousIfYouDontHavePokemon, MSGBOX_DEFAULT
 	closemessage
 	return
 
-LittlerootTown_Movement_TwinApproachPlayerLeft:
-	face_right
-	delay_8
-	disable_jump_landing_ground_effect
-	jump_in_place_right
-	delay_8
-	walk_fast_right
-	walk_fast_right
-	walk_fast_right
-	walk_fast_right
-	walk_fast_up
-	walk_fast_up
-	walk_fast_left
-	face_down
-	step_end
-
-LittlerootTown_Movement_TwinPushPlayerFromRoute:
-	walk_down
-	step_end
-
-LittlerootTown_Movement_TwinReturnLeft:
-	walk_right
-	walk_down
-	walk_down
-	walk_left
-	walk_left
-	walk_left
-	walk_left
-	walk_up
-	walk_in_place_faster_down
-	step_end
 
 LittlerootTown_Movement_PushPlayerBackFromRoute:
 	lock_facing_direction
@@ -475,37 +622,9 @@ LittlerootTown_Movement_PushPlayerBackFromRoute:
 
 LittlerootTown_EventScript_NeedPokemonTriggerRight::
 	lockall
-	applymovement LOCALID_TWIN, LittlerootTown_Movement_TwinApproachPlayerRight
-	waitmovement 0
 	call LittlerootTown_EventScript_DangerousWithoutPokemon
-	applymovement LOCALID_TWIN, LittlerootTown_Movement_TwinReturnRight
-	waitmovement 0
 	releaseall
 	end
-
-LittlerootTown_Movement_TwinApproachPlayerRight:
-	face_right
-	delay_8
-	disable_jump_landing_ground_effect
-	jump_in_place_right
-	delay_8
-	walk_fast_right
-	walk_fast_right
-	walk_fast_right
-	walk_fast_up
-	walk_fast_up
-	walk_fast_right
-	face_down
-	step_end
-
-LittlerootTown_Movement_TwinReturnRight:
-	walk_left
-	walk_down
-	walk_left
-	walk_left
-	walk_left
-	walk_in_place_faster_down
-	step_end
 
 LittlerootTown_EventScript_GoSaveBirchTrigger::
 	lockall
@@ -513,54 +632,13 @@ LittlerootTown_EventScript_GoSaveBirchTrigger::
 	waitmovement 0
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
-	msgbox LittlerootTown_Text_CanYouGoSeeWhatsHappening, MSGBOX_DEFAULT
+	msgbox LittlerootTown_Text_DangerousIfYouDontHavePokemon, MSGBOX_DEFAULT
 	closemessage
 	applymovement LOCALID_TWIN, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	setvar VAR_LITTLEROOT_TOWN_STATE, 2
 	releaseall
 	end
-
-LittlerootTown_EventScript_TownSign::
-	setflag FLAG_SYS_DEXNAV_GET
-	msgbox LittlerootTown_Text_TownSign, MSGBOX_SIGN
-	end
-
-LittlerootTown_EventScript_BirchsLabSign::
-	msgbox LittlerootTown_Text_ProfBirchsLab, MSGBOX_SIGN
-	end
-
-LittlerootTown_EventScript_BrendansHouseSign::
-	lockall
-	checkplayergender
-	call_if_eq VAR_RESULT, MALE, LittlerootTown_EventScript_PlayersHouseSignMale
-	call_if_eq VAR_RESULT, FEMALE, LittlerootTown_EventScript_BirchsHouseSignFemale
-	releaseall
-	end
-
-LittlerootTown_EventScript_PlayersHouseSignMale::
-	msgbox LittlerootTown_Text_PlayersHouse, MSGBOX_DEFAULT
-	return
-
-LittlerootTown_EventScript_BirchsHouseSignFemale::
-	msgbox LittlerootTown_Text_ProfBirchsHouse, MSGBOX_DEFAULT
-	return
-
-LittlerootTown_EventScript_MaysHouseSign::
-	lockall
-	checkplayergender
-	call_if_eq VAR_RESULT, MALE, LittlerootTown_EventScript_BirchsHouseSignMale
-	call_if_eq VAR_RESULT, FEMALE, LittlerootTown_EventScript_PlayersHouseSignFemale
-	releaseall
-	end
-
-LittlerootTown_EventScript_BirchsHouseSignMale::
-	msgbox LittlerootTown_Text_ProfBirchsHouse, MSGBOX_DEFAULT
-	return
-
-LittlerootTown_EventScript_PlayersHouseSignFemale::
-	msgbox LittlerootTown_Text_PlayersHouse, MSGBOX_DEFAULT
-	return
 
 LittlerootTown_EventScript_GiveRunningShoesTrigger2::
 	lockall
@@ -584,27 +662,6 @@ LittlerootTown_EventScript_GiveRunningShoesTrigger5::
 	lockall
 	setvar VAR_0x8008, 5
 	goto LittlerootTown_EventScript_GiveRunningShoesTrigger
-	end
-
-LittlerootTown_EventScript_GiveRunningShoesTrigger::
-	checkplayergender
-	call_if_eq VAR_RESULT, MALE, LittlerootTown_EventScript_MomNoticePlayerMale
-	call_if_eq VAR_RESULT, FEMALE, LittlerootTown_EventScript_MomNoticePlayerFemale
-	checkplayergender
-	call_if_eq VAR_RESULT, MALE, LittlerootTown_EventScript_SetHomeDoorCoordsMale
-	call_if_eq VAR_RESULT, FEMALE, LittlerootTown_EventScript_SetHomeDoorCoordsFemale
-	namebox Mama
-	msgbox LittlerootTown_Text_WaitPlayer, MSGBOX_DEFAULT
-	hidenamebox
-	closemessage
-	checkplayergender
-	call_if_eq VAR_RESULT, MALE, LittlerootTown_EventScript_MomApproachPlayerMale
-	call_if_eq VAR_RESULT, FEMALE, LittlerootTown_EventScript_MomApproachPlayerFemale
-	call LittlerootTown_EventScript_GiveRunningShoes
-	checkplayergender
-	call_if_eq VAR_RESULT, MALE, LittlerootTown_EventScript_MomReturnHomeMale
-	call_if_eq VAR_RESULT, FEMALE, LittlerootTown_EventScript_MomReturnHomeFemale
-	goto LittlerootTown_EventScript_SetReceivedRunningShoes
 	end
 
 LittlerootTown_EventScript_SetHomeDoorCoordsMale::
@@ -980,106 +1037,8 @@ LittlerootTown_EventScript_SetReceivedRunningShoes::
 	release
 	end
 
-LittlerootTown_EventScript_GiveRunningShoes::
-	namebox Mama
-	msgbox LittlerootTown_Text_WearTheseRunningShoes, MSGBOX_DEFAULT
-	hidenamebox
-	giveitem ITEM_MACH_BIKE, 1
-	setflag FLAG_NOT_DOUBLE_BIKE
-	playfanfare MUS_OBTAIN_ITEM
-	waitfanfare
-	setflag FLAG_RECEIVED_RUNNING_SHOES
-	namebox Mama
-	msgbox LittlerootTown_Text_ExplainRunningShoes, MSGBOX_DEFAULT
-	msgbox LittlerootTown_Text_ComeHomeIfAnythingHappens, MSGBOX_DEFAULT
-	hidenamebox
-	closemessage
-	delay 30
-	return
-
-LittlerootTown_Text_OurNewHomeLetsGoInside:
-	.string "¡LLegamos, amor!\p"
-	.string "Lamento haberte dejado en el camión,\n"
-	.string "pero no teníamos más dinero…\p"
-	.string "¡Pero bueno, esto es Villa Littleroot!\n"
-	.string "¿Te gusta? Se me hace que es un lugar\l"
-	.string "tranquilo para vivir.\p"
-	.string "¡Entremos!$"
-
-LittlerootTown_Text_WaitPlayer:
-	.string "¡Alto, {PLAYER}!$"
-
-LittlerootTown_Text_WearTheseRunningShoes:
-	.string "¡Cariño! {PAUSE 2}¿Ya le hablaste al Profe?\p"
-	.string "¡Ah, ya veo que te dio un Pokémon!\p"
-	.string "Y es el mismo que tu padre eligió…\n"
-	.string "-sniff sniff- …{PAUSE 5} …{PAUSE 5} …{PAUSE 5}\l"
-	.string "Perdón por llorar pero… {PAUSE 5}Estoy tan\l"
-	.string "orgullosa de ti, mi pequeñ{ITOITA}…\p"
-	.string "Pero bueno… {PAUSE 5}No puedo evitar que\n"
-	.string "crezcas, así que… {PAUSE 5}Toma esto, mi amor.$"
-
-LittlerootTown_Text_ExplainRunningShoes:
-	.string "Amor, esa Bici es especial. Es\n"
-	.string "capaz de {COLOR BLUE}cambiar de función{COLOR DARK_GRAY} si tocas el\l"
-	.string "botón R. Pero parece estar rota…\p¡En Ciudad Mauville seguro la podrán reparar!$"
-
-LittlerootTown_Text_ComeHomeIfAnythingHappens:
-	.string "… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}…\n"
-	.string "… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}… {PAUSE 5}…\p"
-	.string "Ya tienes un Pokémon…\n"
-	.string "Estoy tan, tan orgullosa de ti, mi\l"
-	.string "pequeñ{OA}…\p"
-	.string "Si pasa algo, acá está mami para darte\n"
-	.string "amor y cariño.\p"
-	.string "Cuídate mucho, mi amor…\n"
-	.string "Voy a extrañarte…$"
-
-LittlerootTown_EventScript_FatMan_Text_5:
-	.string "Mi esposo me dice siempre que\n"
-	.string "paso demasiado tiempo afuera, pero es\l"
-	.string "que… ¡Acá es mejor!\p"
-	.string "El aire es fresco y limpio, la naturaleza\n"
-	.string "es bella…\p"
-	.string "Aunque entiendo que debería pasar\n"
-	.string "más tiempo con él dentro de casa…$"
-
-LittlerootTown_Text_BirchSpendsDaysInLab:
-	.string "El Profesor Birch se la pasa todo el día,\n"
-	.string "o bien en el Laboratorio, o afuera de la\l"
-	.string "Villa estudiando…\p"
-	.string "¿Cuándo está con su familia ese tipo?$"
-
-LittlerootTown_Text_IfYouGoInGrassPokemonWillJumpOut:
-	.string "¡NOOOOOOOOOOOOOOOOO\n"
-	.string "OOOOOOOOOOOOOOOOOOO\l"
-	.string "OOOOOOOOOOOOOOOOOOO!\l"
-	.string "¡VETE!$"
-
 LittlerootTown_Text_DangerousIfYouDontHavePokemon:
-	.string "¡NO!.$"
-
-LittlerootTown_Text_CanYouGoSeeWhatsHappening:
-	.string "¡EY EY!\p"
-	.string "¡Están atacando al Profe! ¡Por favor,\n"
-	.string "rescátalo!$"
-
-
-LittlerootTown_Text_GoodLuckCatchingPokemon:
-	.string "¿VAS A ATRAPAR POKÉMON? ¡GENIAL!$"
-
-LittlerootTown_Text_TownSign:
-	.string "VILLA LITTLEROOT\n"
-	.string "“Una Villa bonita.”$"
-
-LittlerootTown_Text_ProfBirchsLab:
-	.string "LABORATORIO DEL PROFE BIRCH$"
-
-LittlerootTown_Text_PlayersHouse:
-	.string "CASA DE {PLAYER}$"
-
-LittlerootTown_Text_ProfBirchsHouse:
-	.string "CASA DEL PROFE BIRCH$"
+	.string "…………$"
 
 LittlerootTown_Text_BirchSomethingToShowYouAtLab:
 	.string "¡Bueno, bueno, {PLAYER}, sabía que\n"
@@ -1088,4 +1047,5 @@ LittlerootTown_Text_BirchSomethingToShowYouAtLab:
 	.string "¡Te ha llevado a lograr tanto!\p"
 	.string "Gracias a eso, voy a darte algo…\p"
 	.string "Ven a mi Laboratorio…$"
+
 `

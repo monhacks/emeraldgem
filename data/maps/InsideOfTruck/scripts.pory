@@ -16,6 +16,7 @@ InsideOfTruck_OnResume:
 
 InsideOfTruck_EventScript_SetIntroFlags::
 	lockall
+	setflag FLAG_SPAWN_INVISIBLE
 	setflag FLAG_HIDE_MAP_NAME_POPUP
 	setflag FLAG_HIDE_RALTS_102
 	setflag FLAG_HIDE_ZIGZA_102

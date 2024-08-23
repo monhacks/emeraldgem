@@ -1,3 +1,5 @@
+
+
 raw `
 .set LOCALID_MOM, 1
 .set LOCALID_RIVAL_MOM, 4
@@ -61,8 +63,10 @@ LittlerootTown_BrendansHouse_1F_OnFrame:
 
 LittlerootTown_BrendansHouse_1F_EventScript_GoUpstairsToSetClock::
 	lockall
+	namebox Mama
 	msgbox PlayersHouse_1F_Text_GoSetTheClock, MSGBOX_DEFAULT
 	closemessage
+	hidenamebox
 	applymovement OBJ_EVENT_ID_PLAYER, LittlerootTown_BrendansHouse_1F_Movement_PushTowardStairs
 	applymovement LOCALID_MOM, LittlerootTown_BrendansHouse_1F_Movement_PushTowardStairs
 	waitmovement 0
@@ -100,8 +104,8 @@ LittlerootTown_BrendansHouse_1F_EventScript_YoureNewNeighbor::
 	applymovement LOCALID_RIVAL_MOM, LittlerootTown_BrendansHouse_1F_Movement_RivalMomApproach
 	waitmovement 0
 	namebox Marta
-	msgbox LittlerootTown_MaysHouse_1F_EventScript_YoureNewNeighbor_Text_1
-	call LittlerootTown_BrendansHouse_1F_EventScript_MeetRival
+	setvar VAR_LAST_TALKED, LOCALID_RIVAL
+	call EventScript_YoureNewNeighbor_Translated
 	setflag FLAG_MET_RIVAL_MOM
 	setvar VAR_LITTLEROOT_HOUSES_STATE_MAY, 2
 	releaseall
@@ -123,36 +127,6 @@ LittlerootTown_BrendansHouse_1F_EventScript_GoSeeRoom::
 	applymovement VAR_0x8004, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
 	goto PlayersHouse_1F_EventScript_MomGoSeeRoom
-	end
-
-LittlerootTown_BrendansHouse_1F_EventScript_MeetRival::
-	playse SE_EXIT
-	delay 10
-	addobject LOCALID_RIVAL
-	delay 30
-	playse SE_PIN
-	applymovement LOCALID_RIVAL, Common_Movement_ExclamationMark
-	waitmovement 0
-	applymovement LOCALID_RIVAL, Common_Movement_FacePlayer
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceRight
-	waitmovement 0
-	playbgm MUS_ENCOUNTER_BRENDAN, TRUE
-	call LittlerootTown_BrendansHouse_1F_EventScript_BrendanApproachPlayer
-	namebox Rival
-	msgbox RivalsHouse_1F_Text_MayWhoAreYou, MSGBOX_DEFAULT
-	closemessage
-	call LittlerootTown_BrendansHouse_1F_EventScript_BrendanGoUpstairs
-	playse SE_EXIT
-	removeobject LOCALID_RIVAL
-	setflag FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_BRENDAN
-	setflag FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F_POKE_BALL
-	clearflag FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_RIVAL_BEDROOM
-	delay 30
-	setvar VAR_LITTLEROOT_RIVAL_STATE, 3
-	setvar VAR_LITTLEROOT_TOWN_STATE, 1
-	savebgm MUS_DUMMY
-	fadedefaultbgm
-	releaseall
 	end
 
 
@@ -191,33 +165,6 @@ LittlerootTown_BrendansHouse_1F_Movement_BrendanGoUpstairs:
 	walk_up
 	step_end
 
-
-PlayersHouse_1F_Text_IsntItNiceInHere:
-	.string "¿Ves, amor?\p"
-	.string "Nuestra casa es muy linda.$"
-
-PlayersHouse_1F_Text_MoversPokemonGoSetClock:
-	.string "Pokémon Movers hace todo el trabajo, Y\n"
-	.string "LIMPIAN, por un módico precio.\p"
-	.string "Tu cuarto está subiendo las escaleras,\n"
-	.string "amor, y Papá te compró un reloj muy\l"
-	.string "bonito que deberías poner en hora.$"
-
-PlayersHouse_1F_Text_ArentYouInterestedInRoom:
-	.string "Te dije que hicieras algo, ¿no?$"
-
-PlayersHouse_1F_Text_GoSetTheClock:
-	.string "{PLAYER}.\p"
-	.string "No te vas hasta que ajustes ese reloj.$"
-
-PlayersHouse_1F_Text_OhComeQuickly:
-	.string "¡{PLAYER}, {PLAYER}!\n"
-	.string "¡MIRA!$"
-
-PlayersHouse_1F_Text_MaybeDadWillBeOn:
-	.string "¡ES EL GIMNAIO PETALBURG!\n"
-	.string "¡Una entrevista, además!$"
-
 PlayersHouse_1F_Text_ItsOverWeMissedHim:
 	.string "……………………………………………$"
 
@@ -233,15 +180,6 @@ PlayersHouse_1F_Text_SeeYouHoney:
 
 PlayersHouse_1F_Text_DidYouMeetProfBirch:
 	.string "¿Ya fuiste?$"
-
-PlayersHouse_1F_Text_YouShouldRestABit:
-	.string "¿Cómo va todo, amor?\n"
-	.string "Te ves cansad{OA}.\p"
-	.string "Descansa un rato, amor,\n"
-	.string "y toma algo de paso.$"
-
-PlayersHouse_1F_Text_TakeCareHoney:
-	.string "¡Cuídate cariño!$"
 
 PlayersHouse_1F_Text_GotDadsBadgeHeresSomethingFromMom:
 	.string "¡WOW! ¡Es la medalla de tu Papá!\p"
@@ -264,14 +202,6 @@ PlayersHouse_1F_Text_Vigoroth1:
 
 PlayersHouse_1F_Text_Vigoroth2:
 	.string "Oh… Oth… VIGOROTH!$"
-
-PlayersHouse_1F_Text_ReportFromPetalburgGym:
-	.string "Entrevistador: ¡Y bueno, aunque\n"
-	.string "nervioso, ese fue Norman, el\l"
-	.string "Líder de Gimnasio!\p"
-	.string "Ahora seguiremos con nuestra\n"
-	.string "entrevista al nuevo donador de Devon,\l"
-	.string "el señor -BZZT-$"
 
 
 PlayersHouse_1F_Text_TheresAMovieOnTV:

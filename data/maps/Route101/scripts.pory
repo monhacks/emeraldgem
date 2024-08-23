@@ -1,3 +1,65 @@
+
+script Route101_EventScript_HelpMe {
+	poryswitch(LANGUAGE){
+		ES{
+			msgbox(format("¡ALGUIEN, AYÚDEME!"))
+		}
+		EN{
+			msgbox(format("SOMEBODY, HELP ME!"))
+		}
+	}
+	return
+}
+
+script Route101_EventScript_PleaseHelp {
+	poryswitch(LANGUAGE){
+		ES{
+			msgbox(format("¡Tú, ayúdame, soy alérgico a este Pokémon, y olvidé mi EPI-Pen!\p¡Usa las PokéBall que están en mi maletín!"))
+		}
+		EN{
+			msgbox(format("You, help me, I'm allergic to this one, and of course I had to forget my EPI-Pen!\pGrab a Ball from the case!"))
+		}
+	}
+	return
+}
+
+script Route101_EventScript_DontLeaveMe {
+	poryswitch(LANGUAGE){
+		ES{
+			msgbox(format("¡No me dejes así!"))
+		}
+		EN{
+			msgbox(format("Don't leave me like this!"))
+		}
+	}
+	return
+}
+
+script Route101_EventScript_YouSavedMe {
+	poryswitch(LANGUAGE){
+		ES{
+			namebox (Unknown)
+			msgbox (format("¡UFF! ¡MUCHÍSIMAS GRACIAS!\p"
+					"Eso estuvo cerca…\nEstaba estudiando los Pokémon de esta ruta, y me atacó un Zigzagoon…\p"
+					"¡Por cierto, yo soy el {COLOR BLUE}Profesor Birch{COLOR DARK_GRAY}!"))
+			hidenamebox
+			namebox (Birch)
+			msgbox (format("¡Encantado!\nTe invito a mi Laboratorio para charlar más."))
+			hidenamebox
+		}
+		EN{
+			namebox (Unknown)
+			msgbox (format("PUFF! THANK YOU SO MUCH!\p"
+					"That was close…\nI was studying the Pokémon here, and then that Zigzagoon…\p"
+					"Anyway, I'm {COLOR BLUE}Professor Birch{COLOR DARK_GRAY}!"))
+			hidenamebox
+			namebox (Birch)
+			msgbox (format("Glad to meet you!\nLet's go to my Lab to talk more."))
+			hidenamebox
+		}
+	}
+	return
+}
 raw `
 .set LOCALID_BIRCH, 2
 .set LOCALID_ZIGZAGOON, 4
@@ -51,8 +113,10 @@ Route101_EventScript_HideMapNamePopup::
 Route101_EventScript_StartBirchRescue::
 	lockall
 	playbgm MUS_HELP, TRUE
-	msgbox Route101_Text_HelpMe, MSGBOX_DEFAULT
+	namebox Unknown
+	call Route101_EventScript_HelpMe
 	closemessage
+	hidenamebox
 	setobjectxy LOCALID_BIRCH, 0, 16
 	setobjectxy LOCALID_ZIGZAGOON, 0, 17
 	applymovement OBJ_EVENT_ID_PLAYER, Route101_Movement_EnterScene
@@ -68,7 +132,7 @@ Route101_EventScript_StartBirchRescue::
 	applymovement LOCALID_BIRCH, Route101_Movement_BirchFaceZigzagoon
 	waitmovement 0
 	namebox Unknown
-	msgbox Route101_Text_PleaseHelp, MSGBOX_DEFAULT
+	call Route101_EventScript_PleaseHelp
 	closemessage
 	hidenamebox
 	setvar VAR_ROUTE101_STATE, 2
@@ -78,7 +142,7 @@ Route101_EventScript_StartBirchRescue::
 Route101_EventScript_PreventExitSouth::
 	lockall
 	namebox Unknown
-	msgbox Route101_Text_DontLeaveMe, MSGBOX_DEFAULT
+	call Route101_EventScript_DontLeaveMe
 	hidenamebox
 	closemessage
 	applymovement OBJ_EVENT_ID_PLAYER, Route101_Movement_PreventExitSouth
@@ -89,7 +153,7 @@ Route101_EventScript_PreventExitSouth::
 Route101_EventScript_PreventExitWest::
 	lockall
 	namebox Unknown
-	msgbox Route101_Text_DontLeaveMe, MSGBOX_DEFAULT
+	call Route101_EventScript_DontLeaveMe
 	closemessage
 	hidenamebox
 	applymovement OBJ_EVENT_ID_PLAYER, Route101_Movement_PreventExitWest
@@ -100,7 +164,7 @@ Route101_EventScript_PreventExitWest::
 Route101_EventScript_PreventExitNorth::
 	lockall
 	namebox Unknown
-	msgbox Route101_Text_DontLeaveMe, MSGBOX_DEFAULT
+	call Route101_EventScript_DontLeaveMe
 	closemessage
 	hidenamebox
 	applymovement OBJ_EVENT_ID_PLAYER, Route101_Movement_PreventExitNorth
@@ -238,16 +302,18 @@ Route101_Movement_PokemonEscape:
 	walk_fast_up
 	walk_fast_up
 	walk_fast_up
-	walk_fast_up
 	walk_fast_right
 	walk_fast_right
 	walk_fast_right
 	walk_fast_right
 	walk_fast_right
-	set_invisible
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
 	walk_fast_right
 	walk_fast_left
 	walk_fast_right
+	set_invisible
 	step_end
 
 Route101_EventScript_Youngster::
@@ -283,23 +349,20 @@ Route101_EventScript_BirchsBag::
 	waitstate
 	playse SE_PIN
 	applymovement LOCALID_ZIGZAGOON, Common_Movement_ExclamationMark
+	waitmovement 0
 	applymovement LOCALID_ZIGZAGOON, Route101_Movement_PokemonEscape
 	waitmovement 0
-	removeobject LOCALID_ZIGZAGOON
 	applymovement LOCALID_BIRCH, Route101_Movement_BirchApproachPlayer
 	waitmovement 0
-	namebox Unknown
-	msgbox Route101_Text_YouSavedMe, MSGBOX_DEFAULT
-	hidenamebox
-	namebox Birch
-	msgbox Route101_Text_YouSavedMe2, MSGBOX_DEFAULT
-	hidenamebox
+	call Route101_EventScript_YouSavedMe
 	special HealPlayerParty
+	removeobject LOCALID_ZIGZAGOON
 	setflag FLAG_HIDE_ROUTE_101_BIRCH_ZIGZAGOON_BATTLE
 	clearflag FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_BIRCH
 	setflag FLAG_HIDE_ROUTE_101_BIRCH_STARTERS_BAG
 	setvar VAR_BIRCH_LAB_STATE, 2
 	setvar VAR_ROUTE101_STATE, 3
+	setvar VAR_OLDALE_TOWN_STATE, 1
 	clearflag FLAG_HIDE_MAP_NAME_POPUP
 	getemptyslot
 	checkplayergender
@@ -321,30 +384,6 @@ Route101_EventScript_HideBrendanInBedroom::
 Route101_Movement_BirchApproachPlayer:
 	walk_right
 	step_end
-
-Route101_Text_HelpMe:
-	.string "¡A-Ayúdame!$"
-
-Route101_Text_PleaseHelp:
-	.string "¡Tú, sí, tú!\n"
-	.string "¡En mi Mochila hay {COLOR LIGHT_RED SHADOW RED} Pokéballs{COLOR DARK_GRAY SHADOW LIGHT_GRAY}, agarra una\l"
-	.string "y sálvame, soy alérgico a este Pokémon!$"
-
-Route101_Text_DontLeaveMe:
-	.string "¡¿A-adónde vas?! ¡NO ME DEJES!$"
-
-Route101_Text_YouSavedMe:
-	.string "¡UFF! ¡MUCHÍSIMAS GRACIAS!\p"
-	.string "Eso estuvo cerca…\n"
-	.string "Estaba estudiando los Pokémon de\l"
-	.string "esta ruta, y me atacó un Zigzagoon…\p"
-	.string "Ya era muy tarde cuando noté que no\n"
-	.string "tenía mis EPI-Pen…\p"
-	.string "¡Por cierto, yo soy el {COLOR BLUE}Profesor Birch{COLOR DARK_GRAY}!$"
-Route101_Text_YouSavedMe2:
-	.string "¡Encantado de conocerte!\n"
-	.string "Te invito a mi Laboratorio para charlar\l"
-	.string "más.$"
 
 
 Route101_Text_TakeTiredPokemonToPokeCenter:

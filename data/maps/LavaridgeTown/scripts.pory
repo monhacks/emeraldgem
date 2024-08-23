@@ -29,7 +29,7 @@ script LavaridgeTown_EventScript_EggWoman {
 	}
 	getpartysize
 	if (var(VAR_RESULT)== PARTY_SIZE){
-		msgbox("Oh... No tienes espacio...")
+		msgbox(format("Oh... No tienes espacio..."))
 		release
 		end
 	}
@@ -219,7 +219,7 @@ script LavaridgeTown_EventScript_EggWoman {
 	waitfanfare
 	clearflag(FLAG_SHINY_CREATION)
 	clearflag(FLAG_NO_SHINIES)
-	msgbox("¡Cuida bien de él, joven!")
+	msgbox(format("¡Cuida bien de él, joven!"))
 	release
 }
 

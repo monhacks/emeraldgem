@@ -622,7 +622,7 @@ AquaHideout_B2F_EventScript_MattNoticePlayer_Text_4:
 AquaHideout_B2F_EventScript_MattNoticePlayer_Text_5:
 # 51 "data/maps/AquaHideout_B2F/scripts.pory"
 	.string "Qué lástima, no quería tener que luchar,\n"
-	.string "pero...$"
+	.string "pero…$"
 
 AquaHideout_B2F_EventScript_MattNoticePlayer_Text_6:
 # 62 "data/maps/AquaHideout_B2F/scripts.pory"
@@ -631,8 +631,8 @@ AquaHideout_B2F_EventScript_MattNoticePlayer_Text_6:
 AquaHideout_B2F_EventScript_MattNoticePlayer_Text_7:
 # 64 "data/maps/AquaHideout_B2F/scripts.pory"
 	.string "Será sólo un{A} niñ{OA}, pero ha estado de\n"
-	.string "nuestro lado antes... Aún así, Matt,\l"
-	.string "esto no es necesario...$"
+	.string "nuestro lado antes… Aún así, Matt, esto\l"
+	.string "no es necesario…$"
 
 AquaHideout_B2F_EventScript_MattNoticePlayer_Text_8:
 # 67 "data/maps/AquaHideout_B2F/scripts.pory"
@@ -641,16 +641,16 @@ AquaHideout_B2F_EventScript_MattNoticePlayer_Text_8:
 AquaHideout_B2F_EventScript_MattNoticePlayer_Text_9:
 # 81 "data/maps/AquaHideout_B2F/scripts.pory"
 	.string "Así que estás en nuetra contra después\n"
-	.string "de todo...$"
+	.string "de todo…$"
 
 AquaHideout_B2F_EventScript_MattNoticePlayer_Text_10:
 # 83 "data/maps/AquaHideout_B2F/scripts.pory"
-	.string "No me sorprende... Aún así, Matt, esto no\n"
-	.string "es necesario...$"
+	.string "No me sorprende… Aún así, Matt, esto no\n"
+	.string "es necesario…$"
 
 AquaHideout_B2F_EventScript_MattNoticePlayer_Text_11:
 # 85 "data/maps/AquaHideout_B2F/scripts.pory"
-	.string "¡N-no! Archie, te defraudé...$"
+	.string "¡N-no! Archie, te defraudé…$"
 
 AquaHideout_B2F_EventScript_WinonaPrepare_Text_0:
 # 107 "data/maps/AquaHideout_B2F/scripts.pory"

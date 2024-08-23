@@ -17,10 +17,10 @@ Route104_PrettyPetalFlowerShop_EventScript_ShopOwner::
 	faceplayer
 	msgbox Route104_PrettyPetalFlowerShop_Text_ShopOwner_Decorations, MSGBOX_YESNO
 	call_if_eq VAR_RESULT, YES, Route104_PrettyPetalFlowerShop_EventScript_SellDecorations
-	setflag FLAG_BAYASMART
 	msgbox Route104_PrettyPetalFlowerShop_Text_ShopOwner_Berries, MSGBOX_YESNO
 	call_if_eq VAR_RESULT, NO, Route104_PrettyPetalFlowerShop_Script_ShopOwner_ComeBack
 	message gText_PlayerWhatCanIDoForYou
+	pokemart Route104_PrettyPetalFlowerShop_Pokemart_Mulch
 	release
 	end
 
@@ -57,6 +57,17 @@ Route104_PrettyPetalFlowerShop_Pokemart_Plants:
 	.2byte DECOR_NONE
 	release
 	end
+
+	.align 2
+Route104_PrettyPetalFlowerShop_Pokemart_Mulch:
+	.2byte ITEM_GROWTH_MULCH
+	.2byte ITEM_DAMP_MULCH
+	.2byte ITEM_STABLE_MULCH
+	.2byte ITEM_SURPRISE_MULCH
+	.2byte ITEM_NONE
+	release
+	end
+
 
 Route104_PrettyPetalFlowerShop_EventScript_WailmerPailGirl::
 	lock
@@ -98,7 +109,7 @@ Route104_PrettyPetalFlowerShop_Text_ShopOwner_Decorations:
 	.string "¡Bienvenid{OA} seas a la Floristería!\p¿Te gustaría comprar decoraciones?$"
 	
 Route104_PrettyPetalFlowerShop_Text_ShopOwner_Berries:
-	.string "Entonces, ¿Quieres comprar Bayas?$"
+	.string "Ah, ¿Quieres comprar Abono de Baya?$"
 
 Route104_PrettyPetalFlowerShop_Text_ShopOwner_ComeBackSoon:
 	.string "¡Vuelve pronto!$"

@@ -1,3 +1,381 @@
+text RustboroCity_Text_WallyPokeCenter {
+	format("¡Ah, hola {PLAYER}!\n"
+	"Estoy acá para comprar Pociones y\l"
+	"cosas así. Quiero enfrentarme al\l"
+	"siguiente Gimnasio, pero no sé si podré\l"
+	"sin Objetos Curativos...\p"
+	"He atrapado un Roselia, ¡Así que tendré\n"
+	"algo de ventaja de tipos aquí también!\p"
+	"Bueno, {PLAYER} te veo cuando\n"
+	"termine mis compras.")
+}
+
+text RustboroCity_Text_LittleBoyNo {
+	format("No tienes tipos Normal.")
+}
+
+text RustboroCity_Text_WallyPrepared {
+	format("¡Ahora ya estoy listo! Acompáñame,\n"
+	"{PLAYER}, así tendré a alguien\l"
+	"apoyándome y podré tener más\l"
+	"confianza.")
+}
+
+
+text RustboroCity_Text_WeShortenItToDevon {
+	format("La {COLOR BLUE}Corporación Devon{COLOR DARK_GRAY}, o simplemente Devon,\n"
+	"es una compañía que hace toda clase de cosas.\p"
+	"¡La necesitamos para nuestra subsistencia!")
+}
+
+text RustboroCity_Text_SneakyLookingManWentAroundCorner {
+	format("¿Un hombre sospechoso?\n"
+	"Ahora que lo mencionas, sí,\l"
+	"vi a un hombre disfrazado por aquí…")
+}
+
+text RustboroCity_Text_HaveYouChallengedGym {
+	format("Las personas no respetan mucho a\n"
+	"quienes no tienen medallas de Gimnasio.\p"
+	"Quienes sí las tienen, sin\n"
+	"embargo, se convierten en mini\l"
+	"celebridades en su ciudad.\p"
+	"Yo no puedo conseguir ninguna ni con {COLOR GREEN}Pokémon Tipo Planta{COLOR DARK_GRAY}.")
+}
+
+
+text RustboroCity_Text_HeyThatsRustborosGymBadge {
+	format("¡Ey, es la {COLOR GREEN}Medalla de Rustboro{COLOR DARK_GRAY}!\n"
+	"En mi opinión, es la mejor.")
+}
+
+text RustboroCity_Text_YoureNewAroundHere {
+	format("¿Oh? ¿Eres nuev{OA} por aquí?\n"
+	"¿Acaso te transfirieron al colegio?")
+}
+
+text RustboroCity_Text_GymLeaderIsntEasyWithFire {
+	format("La Líder del Gimnasio, {COLOR RED}Roxxane{COLOR DARK_GRAY},\n"
+	"tiene más o menos mi edad, 17 años,\l"
+	"y sin embargo, ¡Ella es mucho más bonita\l"
+	"y fuerte que yo!\p"
+	"¡Qué envidia!")
+}
+
+text RustboroCity_Text_MrBrineyWalksInTheTunnel {
+	format("Desde que dejó a su mujer,\n"
+	"el Señor Briney vive en una cabañita cerca del mar.\p"
+	"Aunque lo he escuchado decir que ahora es mucho más feliz.\p"
+	"Supongo que el romance no es para todos.")
+}
+
+text RustboroCity_Text_MrBrineyLovesPeeko {
+	format("El Señor Briney vive con su mascota, Peeko.\p"
+	"Me contó que lo tiene desde que era un huevo, y que aunque ya hayan pasado años, no sabe combatir.\p"
+	"Es un alivio, pues él está muy grande ya para emociones fuertes…")
+}
+
+
+text RustboroCity_Text_WowYouHavePokemon {
+	format("¡Wow! ¡Tú tamdién tienes Pokémon!\n"
+	"Cuando sea gdande, sedé un Entdenadod podedosisímo!")
+}
+
+text RustboroCity_Text_CatchRarePokemonIfIGoToSchool {
+	format("¡Ah, me encontraste!\n¡Toma esto y déjame solo!")
+}
+
+text RustboroCity_Text_NinjaSubstitueAtSchool {
+	format("Puedes usarla como yo para saltarte\nclases, dejando un sustituto ahí.")
+}
+
+text RustboroCity_Text_NinjaLeaveMeAlone {
+	format("Ahora déjame solo.")
+}
+
+
+text RustboroCity_Text_PokemonCanChangeLookFromExp {
+	format("La evolución es un misterio.\n"
+	"Aunque se sabe que produce mucha,\l"
+	"pero que mucha energía.")
+}
+
+text RustboroCity_Text_PokemonChangeShape {
+	format("Si alguien usara la energia evolutiva\n"
+	"para cosas malas, ¡Lo mataría!")
+}
+
+text RustboroCity_Text_TradePokemonGrowFast {
+	format("Los Pokémon te podrían desobedecer pasado cierto nivel, pero te respetarán al ganar medallas…")
+}
+
+text RustboroCity_Text_OutOfTheWay {
+	poryswitch(LANGUAGE){
+		ES {
+			format("¡FUERA!\n"
+			"¡LARGO DE AQUÍ!")
+		}
+		EN {
+			
+		format("OUT OF THE WAY!\n"
+			"OUT OF MY SIGHT!")
+		}
+	}
+	
+}
+
+text RustboroCity_Text_WaitDontTakeMyGoods {
+	poryswitch(LANGUAGE){
+		ES {
+			format("¡NOOO! ¡POR FAVOOOORRR!\p"
+			"¡NO SE LLEVEN ESAS PARTES!")
+		}
+		EN {
+			format("NOOO! PLEAASEEEE!\p"
+			"DON'T TAKE THOSE GOODS!")
+		}
+	}
+	
+}
+
+text RustboroCity_Text_HelpMeIWasRobbed {
+	poryswitch(LANGUAGE){
+		ES {
+			format("¡E-eres tú!\p"
+			"¡Ayúdame, me han robado!\n"
+			"¡Se han robado las {COLOR BLUE}Partes{COLOR DARK_GRAY}!\p"
+			"Si no las re-recupero…")
+		}
+		EN {
+			format("It's you!\p"
+			"Help me again, I've been robbed!\n"
+			"The {COLOR BLUE}Goods{COLOR DARK_GRAY} were stolen!\p"
+			"I-if I lose them…")
+		}
+	}
+}
+
+text RustboroCity_Text_ShadyCharacterTookOffTowardsTunnel {
+	poryswitch(LANGUAGE){
+		ES {
+			format("¿El ladrón?\nSe fue hacia el Túnel.")
+		}
+		EN {
+			format("The thief?\nHe went to the Tunnel.")
+		}
+	}
+}
+
+text RustboroCity_Text_YouGotItThankYou {
+	poryswitch(LANGUAGE){
+		ES {
+			format("¡Ah, por Arceus, las recuperaste!\pTen esto como agradecimiento.")
+		}
+		EN {
+			format("Oh, Arceus, you did it!\pTake this as thanks.")
+		}
+	}
+}
+
+text RustboroCity_Text_YoureLoadedWithItems {
+	format("Ah, ok.")
+}
+
+text RustboroCity_Text_PleaseComeWithMe {
+	poryswitch(LANGUAGE){
+		ES {
+			format("¡Sígueme!")
+		}
+		EN {
+			format("Come along with me!")
+		}
+	}
+}
+
+text RustboroCity_Text_MayHiLetsRegister {
+	poryswitch(LANGUAGE){
+		ES {
+			format("Ah, hola {PLAYER}.\p¿Te regalaron el PokéNav por tu fuerza?\pYo... Tuve que comprarlo...\p"
+			"Pero... Eh... Tengamos otra batalla, si me ganas, combinaré los datos de tu Pokédex y la mía, para ayudarnos en la investigación.")
+		}
+		EN {
+			format("Oh, hi, {PLAYER}!\pYou were gifted a PokéNav for your strenght?\pI... had to buy it...\pBut... uh... Let's battle again.\p"
+			"If you win, we'll Record Mix our Pokédexes, to aid our investigations!")
+		}
+	}
+}
+
+text RustboroCity_Text_MayPassedBrineyWantToBattle {
+	poryswitch(LANGUAGE){
+		ES {
+			format("¡Prepárate!")
+		}
+		EN {
+			format("Get ready!")
+		}
+	}
+}
+
+text RustboroCity_Text_MayDefeat {
+	poryswitch(LANGUAGE){
+		ES {
+			format("Aún no puedo derrotarte…\pAún con todos estos datos, Papá no…")
+		}
+		EN {
+			format("I still can't best you…\pAnd even with all this data, Dad doesn't…")
+		}
+	}
+}
+
+text RustboroCity_Text_DexNav {
+	poryswitch(LANGUAGE){
+		ES {
+			format("¡{RIVAL} desbloqueó tu DexNav!")
+		}
+		EN {
+			format("{RIVAL} activated your DexNav!")
+		}
+	}
+	
+}
+
+text RustboroCity_Text_MayMrBrineyHint {
+	poryswitch(LANGUAGE){
+		ES {
+			format("Eso no lo tenías, ¿No?\pEs el {COLOR BLUE}DexNav{COLOR DARK_GRAY}.\nCon él, podrás {COLOR BLUE}Encadenar Pokémon{COLOR DARK_GRAY}.\pPues bueno, terminemos esto.\p"
+			"………………………………………………\n"
+			"………………………………………………\l"
+			"………………………………………………\p"
+			"Listo, te he añadido a los Pokémon que tengo yo.\p"
+			"Ah, sí, el Señor Briney me dijo que te está esperando en la Ruta 104.")
+		}
+		EN {
+			format("You didn't have this, did you?\pIt's the {COLOR BLUE}DexNav{COLOR DARK_GRAY}.\nNow, you can {COLOR BLUE}Chain Pokémon{COLOR DARK_GRAY}.\pAnd let's finish the Record Mixing.\p"
+			"………………………………………………\n"
+			"………………………………………………\l"
+			"………………………………………………\p"
+			"There. Now I've added the Pokémon I own.\p"
+			"Oh, and Mr. Briney told me that he'd be waiting for you in Route 104.")
+		}
+	}
+	
+}
+
+text RustboroCity_Text_MayNoMrBrineyHint {
+	poryswitch(LANGUAGE){
+		ES {
+			format("El Señor Briney me dijo que te está esperando en la Ruta 104.")
+		}
+		EN {
+			format("Mr. Briney told me that he'd be waiting for you in Route 104.")
+		}
+	}
+	
+}
+
+text RustboroCity_Text_TunnelNearingCompletion {
+	format("“¡Ahorra tiempo son este\n"
+	"magnífico túnel!”\l"
+	"Eso dice en el cartel,\l"
+	"pero tiene una gran “X” en medio…")
+}
+
+text RustboroCity_Text_DevonCorpSign {
+	format("CORPORACIÓN DEVON\p"
+	"“Por todas tus necesidades,\n"
+	"hacemos una máquina.”")
+}
+
+text RustboroCity_Text_GymSign {
+	format("Gimnasio Pokémon Rustboro\n"
+	"Líder: Roxxane\l"
+	"“La chica que ama las rocas.”")
+}
+
+text RustboroCity_Text_CitySign {
+	format("CIUDAD RUSTBORO\p"
+	"“La ciudad que integra\n"
+	"ciencia y naturaleza.”")
+}
+
+text RustboroCity_Text_TrainersSchoolSign {
+	format("ESCUELA POKÉMON")
+}
+
+text RustboroCity_Text_CuttersHouse {
+	format("Casa del Cortador")
+}
+
+text RustboroCity_Text_DevelopedNewPokenavFeature {
+	format("Ey, ¡tú!\n"
+	"El Presidente quería darte las\l"
+	"gracias con esto.")
+}
+
+text RustboroCity_Text_AddedMatchCallPleaseCallMrStone {
+	format("¡Listo!\n"
+	"Ahora podrás llamar personas con\l"
+	"tu PokéNav!")
+}
+
+text RustboroCity_Text_PleaseSelectPokenav {
+	format("Elije el POKéNAV.")
+}
+
+text RustboroCity_Text_IdBetterGetBackToWork {
+	format("Tengo que volver a trabajar.\n"
+	"¡Hasta pronto, {PLAYER}!")
+}
+
+text RustboroCity_Text_YouCanHave2On2Battle {
+	format("¡Ten cuidado!\n"
+	"¡Recientemente se ha descubierto\l"
+	"que los movimientos de tipo Bicho causan\l"
+	"daño súper efectivo contra las Hadas!\p"
+	"Además de eso, el cambio climático han\n"
+	"hecho a los tipo Hielo\l"
+	"resistentes a otros tipos.")
+}
+
+text RustboroCity_Text_WallyReady {
+	format("{PLAYER}… ¡Deséame suerte!")
+}
+
+text RustboroCity_Text_WallyBattle {
+	format("Muy bien, yo puedo con esto.")
+}
+
+text RustboroCity_Text_WallySilence {
+	format("…")
+}
+
+text RustboroCity_Text_WallySilence2 {
+	format("………\n………\l………\p¡Eso fue -COF, COF- increíble!\n-COF, COF, COF-\p¡{PLAYER}!\n¡Vencí a todos sus Pokémon\lsólamente usando a Roselia!")
+}
+
+text RustboroCity_Text_WallyExcited {
+	format("¡Muchísimas gracias, -COF, COF-\n"
+	"{PLAYER}, por estar acá conmigo!\l"
+	"-COF-\p"
+	"En serio no podría estarte más\n"
+	"agradecido...\p"
+	"Desde que inicié este viaje, tuve\n"
+	"muchas dudas sobre lo que pasaría.\l"
+	"¿Qué clase de personas conocería?\l"
+	"¿Qué clase de Pokémon? ¿Podría estar\l"
+	"listo para enfrentarme a problemas?\p"
+	"Cuando comencé, las respuestas\n"
+	"parecían ser “A nadie,” “A ninguno,” y\l"
+	"“Ni en tus sueños.”\p"
+	"Pero, gracias a tu apoyo, y a mi\n"
+	"determinación, ¡Parece que estoy\l"
+	"siendo capaz de mejorar!\p"
+	"En serio, muchas, muchísimas gracias,\n"
+	"{PLAYER}.\n"
+	"¡La próxima vez que nos veamos, causaré\l"
+	"una Tormenta de Arena por donde vaya!")
+}
+
 raw `
 .set LOCALID_LITTLE_BOY, 7
 .set LOCALID_LITTLE_GIRL, 8
@@ -525,8 +903,7 @@ RustboroCity_EventScript_LittleBoyNo::
 	release
 	end
 	
- RustboroCity_Text_LittleBoyNo:
-	.string "No tienes tipos Normal.$"
+ 
 
 RustboroCity_EventScript_LittleGirl::
 	lock
@@ -1137,29 +1514,22 @@ RustboroCity_EventScript_MayEncounter::
 	msgbox RustboroCity_Text_MayHiLetsRegister, MSGBOX_DEFAULT
 	closemessage
 	delay 30
-	playfanfare MUS_REGISTER_MATCH_CALL
-	msgbox RustboroCity_Text_RegisteredMay, MSGBOX_DEFAULT
-	waitfanfare
-	closemessage
-	delay 30
 	setflag FLAG_ENABLE_RIVAL_MATCH_CALL
 	setvar VAR_RUSTBORO_CITY_STATE, 8
 	setvar VAR_ROUTE104_STATE, 2
 	setvar VAR_0x8008, 0
-	msgbox RustboroCity_Text_MayPassedBrineyWantToBattle
 	goto RustboroCity_EventScript_BattleMay
 	releaseall
 	end
 
 RustboroCity_EventScript_MayAskToBattle::
 	setvar VAR_0x8008, 1
-	msgbox RustboroCity_Text_MayWantToBattle, MSGBOX_DEFAULT
+	msgbox RustboroCity_Text_MayPassedBrineyWantToBattle, MSGBOX_DEFAULT
 	goto RustboroCity_EventScript_BattleMay
 	releaseall
 	end
 
 RustboroCity_EventScript_BattleMay::
-	msgbox RustboroCity_Text_MayImNotGoingToLose, MSGBOX_DEFAULT
 	switch VAR_STARTER_MON
 	case 0, RustboroCity_EventScript_BattleMayTreecko
 	case 1, RustboroCity_EventScript_BattleMayTorchic
@@ -1197,10 +1567,6 @@ RustboroCity_EventScript_MayBrineyNoHint::
 	call_if_eq VAR_0x8008, 0, RustboroCity_EventScript_RestoreBgm
 	releaseall
 	end
-RustboroCity_Text_MayNoMrBrineyHint:
-	.string "Ah, sí, el Señor Briney me pidió que te\n"
-	.string "dijera que te está esperando en su\l"
-	.string "cabaña en la Ruta 104.$"
 
 RustboroCity_EventScript_RestoreBgm::
 	savebgm MUS_DUMMY
@@ -1234,16 +1600,9 @@ RustboroCity_EventScript_BrendanEncounter::
 	setflag FLAG_MET_RIVAL_RUSTBORO
 	msgbox RustboroCity_Text_MayHiLetsRegister, MSGBOX_DEFAULT
 	closemessage
-	delay 30
-	playfanfare MUS_REGISTER_MATCH_CALL
-	msgbox RustboroCity_Text_RegisteredMay, MSGBOX_DEFAULT
-	waitfanfare
-	closemessage
-	delay 30
 	setflag FLAG_ENABLE_RIVAL_MATCH_CALL
 	setvar VAR_RUSTBORO_CITY_STATE, 8
 	setvar VAR_ROUTE104_STATE, 2
-	msgbox RustboroCity_Text_MayPassedBrineyWantToBattle, MSGBOX_DEFAULT
 	goto RustboroCity_EventScript_BattleBrendan
 	call RustboroCity_EventScript_RestoreBgm
 	releaseall
@@ -1251,7 +1610,7 @@ RustboroCity_EventScript_BrendanEncounter::
 
 
 RustboroCity_EventScript_BattleBrendan::
-	msgbox RustboroCity_Text_BrendanIWontGoEasy, MSGBOX_DEFAULT
+	msgbox RustboroCity_Text_MayPassedBrineyWantToBattle, MSGBOX_DEFAULT
 	switch VAR_STARTER_MON
 	case 0, RustboroCity_EventScript_BattleBrendanTreecko
 	case 1, RustboroCity_EventScript_BattleBrendanTorchic
@@ -1261,7 +1620,7 @@ RustboroCity_EventScript_BattleBrendan::
 
 
 RustboroCity_EventScript_BattleBrendanTreecko::
-	trainerbattle_no_intro TRAINER_BRENDAN_RUSTBORO_TREECKO, RustboroCity_Text_BrendanDefeat
+	trainerbattle_no_intro TRAINER_BRENDAN_RUSTBORO_TREECKO, RustboroCity_Text_MayDefeat
 	setflag FLAG_DEFEATED_RIVAL_RUSTBORO
 	setcaughtmon SPECIES_HAPPINY
 	setcaughtmon SPECIES_LOTAD
@@ -1269,7 +1628,7 @@ RustboroCity_EventScript_BattleBrendanTreecko::
 	end
 
 RustboroCity_EventScript_BattleBrendanTorchic::
-	trainerbattle_no_intro TRAINER_BRENDAN_RUSTBORO_TORCHIC, RustboroCity_Text_BrendanDefeat
+	trainerbattle_no_intro TRAINER_BRENDAN_RUSTBORO_TORCHIC, RustboroCity_Text_MayDefeat
 	setflag FLAG_DEFEATED_RIVAL_RUSTBORO
 	setcaughtmon SPECIES_SLUGMA
 	setcaughtmon SPECIES_HAPPINY
@@ -1277,7 +1636,7 @@ RustboroCity_EventScript_BattleBrendanTorchic::
 	end
 
 RustboroCity_EventScript_BattleBrendanMudkip::
-	trainerbattle_no_intro TRAINER_BRENDAN_RUSTBORO_MUDKIP, RustboroCity_Text_BrendanDefeat
+	trainerbattle_no_intro TRAINER_BRENDAN_RUSTBORO_MUDKIP, RustboroCity_Text_MayDefeat
 	setflag FLAG_DEFEATED_RIVAL_RUSTBORO
 	setcaughtmon SPECIES_WINGULL
 	setcaughtmon SPECIES_HAPPINY
@@ -1344,288 +1703,5 @@ RustboroCity_EventScript_Boy1::
 	msgbox RustboroCity_Text_YouCanHave2On2Battle, MSGBOX_NPC
 	end
 
-RustboroCity_Text_WallyPokeCenter:
-	.string "¡Ah, hola {PLAYER}!\n"
-	.string "Estoy acá para comprar Pociones y\l"
-	.string "cosas así. Quiero enfrentarme al\l"
-	.string "siguiente Gimnasio, pero no sé si podré\l"
-	.string "sin Objetos Curativos...\p"
-	.string "He atrapado un Roselia, ¡Así que tendré\n"
-	.string "algo de ventaja de tipos aquí también!\p"
-	.string "Bueno, {PLAYER} te veo cuando\n"
-	.string "termine mis compras.$"
 
-RustboroCity_Text_WallyPrepared:
-	.string "¡Ahora ya estoy listo! Acompáñame,\n"
-	.string "{PLAYER}, así tendré a alguien\l"
-	.string "apoyándome y podré tener más\l"
-	.string "confianza.$"
-
-
-RustboroCity_Text_WeShortenItToDevon:
-	.string "La {COLOR BLUE}Corporación Devon{COLOR DARK_GRAY}, o simplemente Devon,\n"
-	.string "es una compañía que hace toda clase de cosas.\p"
-	.string "¡La necesitamos para nuestra subsistencia!$"
-
-RustboroCity_Text_SneakyLookingManWentAroundCorner:
-	.string "¿Un hombre sospechoso?\n"
-	.string "Ahora que lo mencionas, sí,\l"
-	.string "vi a un hombre disfrazado por aquí…$"
-
-RustboroCity_Text_HaveYouChallengedGym:
-	.string "Las personas no respetan mucho a\n"
-	.string "quienes no tienen medallas de Gimnasio.\p"
-	.string "Quienes sí las tienen, sin\n"
-	.string "embargo, se convierten en mini\l"
-	.string "celebridades en su ciudad.\p"
-	.string "Yo no puedo conseguir ninguna ni con {COLOR GREEN}Pokémon Tipo Planta{COLOR DARK_GRAY}.$"
-
-
-RustboroCity_Text_HeyThatsRustborosGymBadge:
-	.string "¡Ey, es la {COLOR GREEN}Medalla de Rustboro{COLOR DARK_GRAY}!\n"
-	.string "En mi opinión, es la mejor.$"
-
-RustboroCity_Text_YoureNewAroundHere:
-	.string "¿Oh? ¿Eres nuev{OA} por aquí?\n"
-	.string "¿Acaso te transfirieron al colegio?$"
-
-RustboroCity_Text_GymLeaderIsntEasyWithFire:
-	.string "La Líder del Gimnasio, {COLOR RED}Roxxane{COLOR DARK_GRAY},\n"
-	.string "tiene más o menos mi edad, 13 años,\l"
-	.string "y sin embargo, ¡Ella es mucho más bonita\l"
-	.string "y fuerte que yo!\p"
-	.string "¡Qué envidia!$"
-
-RustboroCity_Text_MrBrineyWalksInTheTunnel:
-	.string "Desde que su esposa lo dejó,\n"
-	.string "el Señor Briney vive en una cabañita\l"
-	.string "cerca del mar.\p"
-	.string "Aunque lo he escuchado decir que ahora\n"
-	.string "es mucho más feliz.\p"
-	.string "Supongo que el romance no es para todos.$"
-
-RustboroCity_Text_MrBrineyLovesPeeko:
-	.string "El Señor Briney vive con\n"
-	.string "su mascota, Peeko.\p"
-	.string "Me contó que lo tiene desde\n"
-	.string "que era un huevo, y que aunque\l"
-	.string "ya hayan pasado años,\l"
-	.string "no sabe combatir.\p"
-	.string "Es un alivio, pues él está muy\n"
-	.string "grande ya para emociones fuertes…$"
-
-
-RustboroCity_Text_WowYouHavePokemon:
-	.string "¡Wow! ¡Tú tamdién tienes Pokémon!\n"
-	.string "Cuando sea gdande,\l"
-	.string "sedé un Entdenadod podedosisímo!$"
-
-RustboroCity_Text_CatchRarePokemonIfIGoToSchool:
-	.string "¡Ah, me encontraste!\n¡Toma esto y déjame solo!$"
-
-RustboroCity_Text_NinjaSubstitueAtSchool:
-	.string "Puedes usarla como yo para saltarte\nclases, dejando un sustituto ahí.$"
-
-RustboroCity_Text_NinjaLeaveMeAlone:
-	.string "Ahora déjame solo.$"
-
-
-RustboroCity_Text_PokemonCanChangeLookFromExp:
-	.string "La evolución es un misterio.\n"
-	.string "Aunque se sabe que produce mucha,\l"
-	.string "pero que mucha energía.$"
-
-RustboroCity_Text_PokemonChangeShape:
-	.string "Si alguien usara la energia evolutiva\n"
-	.string "para cosas malas, ¡Lo mataría!$"
-
-RustboroCity_Text_TradePokemonGrowFast:
-	.string "Los Pokémon te podrían desobedecer\n"
-	.string "pasado cierto nivel, pero te\l"
-	.string "respetarán al ganar medallas…$"
-
-RustboroCity_Text_OutOfTheWay:
-	.string "¡FUERA!\n"
-	.string "¡LARGO DE AQUÍ!$"
-
-RustboroCity_Text_WaitDontTakeMyGoods:
-	.string "¡NOOO! ¡POR FAVOOOORRR!\p"
-	.string "¡NO SE LLEVEN MIS PARTES!$"
-
-RustboroCity_Text_HelpMeIWasRobbed:
-	.string "¡E-eres tú!\p"
-	.string "¡Ayúdame, me han robado!\n"
-	.string "¡El {COLOR BLUE}Equipo Aqua{COLOR DARK_GRAY}se robó las {COLOR RED}Partes{COLOR DARK_GRAY}!\p"
-	.string "Si no las re-recupero…\n"
-	.string "AHHHH NO QUIERO PENSAR EN ESO.$"
-
-RustboroCity_Text_ShadyCharacterTookOffTowardsTunnel:
-	.string "Ese lin-ladrón s-se fue para allá.\n"
-	.string "Corrió al túnel nuevo.$"
-
-RustboroCity_Text_YouGotItThankYou:
-	.string "¿CÓMO T-TE FUE?\n"
-	.string "¡AH SI! ¡LO HICISTE!\p"
-	.string "¡Recuperaste las {COLOR RED}Partes Devon{COLOR DARK_GRAY}!\p"
-	.string "¡En serio eres genial!\p"
-	.string "¡Como recompensa, ten esto!$"
-
-RustboroCity_Text_YoureLoadedWithItems:
-	.string "Ah, que mal. Bueno no importa.$"
-
-RustboroCity_Text_PleaseComeWithMe:
-	.string "¡Sígueme!$"
-
-RustboroCity_Text_MayHiLetsRegister:
-	.string "Ah, hola, {PLAYER}.\n"
-	.string "¿También te dieron el PC Portátil y el\l"
-	.string "PokéNav?\l"
-	.string "Creí que eran raros de conseguir…\p"
-	.string "¡Pero bueno! Ya que estamos, añádeme a\n"
-	.string "tu lista de contactos para controlar\l"
-	.string "tu progreso o algo así.$"
-
-RustboroCity_Text_RegisteredMay:
-	.string "{RIVAL} se registró sol{AO} en tu\n"
-	.string "PokeNav.$"
-
-RustboroCity_Text_MayPassedBrineyWantToBattle:
-	.string "Ah, sí, por cierto, ¿Cómo va tu\n"
-	.string "Pokédex?\n"
-	.string "Seguro que no tan bien como la mía.\p"
-	.string "La mía está increíble, ¿Sabías?\p"
-	.string "Además, algo me dijo mi Papá sobre las\n"
-	.string "Dexes, que podemos {COLOR GREEN}intercambiar los\l"
-	.string "datos registrados{COLOR DARK_GRAY} para poder\l"
-	.string "completarla más rápido.\p"
-	.string "También, me dijo que te diera el DexNav,\n"
-	.string "para ayudarme con la Pokédex, aunque\l"
-	.string "prefería hacerlo sol{AO}... Así\l"
-	.string "que hagamos una cosa:\p"
-	.string "Si me ganas en una Batalla Pokémon, voy\n"
-	.string "a intercambiarte los datos.$"
-
-RustboroCity_Text_MayWantToBattle:
-	.string "Si me ganas en una Batalla Pokémon, voy\n"
-	.string "a intercambiarte los datos.$"
-
-RustboroCity_Text_MayImNotGoingToLose:
-	.string "¡Ganaré!$"
-
-RustboroCity_Text_MayDefeat:
-	.string "………………………………………………\n"
-	.string "No… Puedo derrotarte…\l"
-	.string "Pero si he… Considerado todo…$"
-
-RustboroCity_Text_DexNav:
-	.string "¡Has obtenido un DexNav!$"
-
-RustboroCity_Text_MayMrBrineyHint:
-	.string "Eso es un {COLOR RED}DexNav{COLOR DARK_GRAY}.\nCon él, podrás {COLOR BLUE}Encadenar Pokémon{COLOR DARK_GRAY}, para\lencontrar individuos más y más\lraros progresivamente.\pPues bueno, terminemos esto.\p"
-	.string "………………………………………………\n"
-	.string "………………………………………………\l"
-	.string "………………………………………………\l"
-	.string "………………………………………………\l"
-	.string "………………………………………………\l"
-	.string "………………………………………………\p"
-	.string "Listo, te he añadido a tu Pokédex como\n"
-	.string "{COLOR RED}atrapados{COLOR DARK_GRAY} los Pokémon que tengo yo.\p"
-	.string "Ah, sí, el Señor Briney me pidió que te\n"
-	.string "dijera que te está esperando en su\l"
-	.string "cabaña en la Ruta 104.$"
-
-RustboroCity_Text_BrendanIWontGoEasy:
-	.string "¡Ganaré!$"
-
-RustboroCity_Text_BrendanDefeat:
-	.string "………………………………………………\n"
-	.string "No… Puedo derrotarte…\l"
-	.string "Pero si he… Considerado todo…$"
-
-RustboroCity_Text_TunnelNearingCompletion:
-	.string "“¡Ahorra tiempo son este\n"
-	.string "magnífico túnel!”\l"
-	.string "Eso dice en el cartel,\l"
-	.string "pero tiene una gran “X” en medio…$"
-
-RustboroCity_Text_DevonCorpSign:
-	.string "CORPORACIÓN DEVON\p"
-	.string "“Por todas tus necesidades,\n"
-	.string "hacemos una máquina.”$"
-
-RustboroCity_Text_GymSign:
-	.string "Gimnasio Pokémon Rustboro\n"
-	.string "Líder: Roxxane\l"
-	.string "“La chica que ama las rocas.”$"
-
-RustboroCity_Text_CitySign:
-	.string "CIUDAD RUSTBORO\p"
-	.string "“La ciudad que integra\n"
-	.string "ciencia y naturaleza.”$"
-
-RustboroCity_Text_TrainersSchoolSign:
-	.string "ESCUELA POKÉMON$"
-
-RustboroCity_Text_CuttersHouse:
-	.string "Casa del Cortador$"
-
-RustboroCity_Text_DevelopedNewPokenavFeature:
-	.string "Ey, ¡tú!\n"
-	.string "El Presidente quería darte las\l"
-	.string "gracias con esto.$"
-
-RustboroCity_Text_AddedMatchCallPleaseCallMrStone:
-	.string "¡Listo!\n"
-	.string "Ahora podrás llamar personas con\l"
-	.string "tu PokéNav!$"
-
-RustboroCity_Text_PleaseSelectPokenav:
-	.string "Elije el POKéNAV.$"
-
-RustboroCity_Text_IdBetterGetBackToWork:
-	.string "Tengo que volver a trabajar.\n"
-	.string "¡Hasta pronto, {PLAYER}!$"
-
-RustboroCity_Text_YouCanHave2On2Battle:
-	.string "¡Ten cuidado!\n"
-	.string "¡Recientemente se ha descubierto\l"
-	.string "que los movimientos de tipo Bicho causan\l"
-	.string "daño súper efectivo contra las Hadas!\p"
-	.string "Además de eso, el cambio climático han\n"
-	.string "hecho a los tipo Hielo\l"
-	.string "resistentes a otros tipos.$"
-
-RustboroCity_Text_WallyReady:
-	.string "{PLAYER}… ¡Deséame suerte!$"
-
-RustboroCity_Text_WallyBattle:
-	.string "Muy bien, yo puedo con esto.$"
-
-RustboroCity_Text_WallySilence:
-	.string "…$"
-
-RustboroCity_Text_WallySilence2:
-	.string "………\n………\l………\p¡Eso fue -COF, COF- increíble!\n-COF, COF, COF-\p¡{PLAYER}!\n¡Vencí a todos sus Pokémon\lsólamente usando a Roselia!$"
-
-RustboroCity_Text_WallyExcited:
-	.string "¡Muchísimas gracias, -COF, COF-\n"
-	.string "{PLAYER}, por estar acá conmigo!\l"
-	.string "-COF-\p"
-	.string "En serio no podría estarte más\n"
-	.string "agradecido...\p"
-	.string "Desde que inicié este viaje, tuve\n"
-	.string "muchas dudas sobre lo que pasaría.\l"
-	.string "¿Qué clase de personas conocería?\l"
-	.string "¿Qué clase de Pokémon? ¿Podría estar\l"
-	.string "listo para enfrentarme a problemas?\p"
-	.string "Cuando comencé, las respuestas\n"
-	.string "parecían ser “A nadie,” “A ninguno,” y\l"
-	.string "“Ni en tus sueños.”\p"
-	.string "Pero, gracias a tu apoyo, y a mi\n"
-	.string "determinación, ¡Parece que estoy\l"
-	.string "siendo capaz de mejorar!\p"
-	.string "En serio, muchas, muchísimas gracias,\n"
-	.string "{PLAYER}.\n"
-	.string "¡La próxima vez que nos veamos, causaré\l"
-	.string "una Tormenta de Arena por donde vaya!$"
 `

@@ -1,0 +1,101 @@
+raw `
+
+AbandonedShip_CaptainsOffice_Text_NoSuccessFindingScanner:
+	.string "I'm investigating this ship on behalf\n"
+	.string "of CAPT. STERN.\p"
+	.string "He also asked me to find a SCANNER,\n"
+	.string "but I haven't had any success…$"
+
+AbandonedShip_CaptainsOffice_Text_OhCanYouDeliverScanner:
+	.string "Oh! That's a SCANNER!\p"
+	.string "Listen, can I get you to deliver that\n"
+	.string "to CAPT. STERN?\p"
+	.string "I want to investigate this ship a\n"
+	.string "little more.$"
+
+AbandonedShip_CaptainsOffice_Text_ThisIsSSCactus:
+	.string "This ship is called S.S. CACTUS.\n"
+	.string "It seems to be from an earlier era.$"
+
+AbandonedShip_Corridors_1F_Text_CharlieIntro:
+	.string "What's so funny about having my inner\n"
+	.string "tube aboard the ship?$"
+
+AbandonedShip_Corridors_1F_Text_CharlieDefeat:
+	.string "Whoa, you overwhelmed me!$"
+
+AbandonedShip_Corridors_1F_Text_CharliePostBattle:
+	.string "It's not easy throwing POKé BALLS\n"
+	.string "while hanging on to an inner tube!$"
+
+AbandonedShip_Corridors_1F_Text_IsntItFunHere:
+	.string "Isn't it fun here?\n"
+	.string "I get excited just being here!$"
+	
+AbandonedShip_Corridors_B1F_Text_DuncanIntro:
+	.string "When we go out to sea, we SAILORS\n"
+	.string "always bring our POKéMON.\l"
+	.string "How about a quick battle?$"
+
+AbandonedShip_Corridors_B1F_Text_DuncanDefeat:
+	.string "Whoops, I'm sunk!$"
+
+AbandonedShip_Corridors_B1F_Text_DuncanPostBattle:
+	.string "The ship's bottom has sunk into the\n"
+	.string "depths.\p"
+	.string "If a POKéMON knew how to go underwater,\n"
+	.string "we might make some progress…$"
+
+AbandonedShip_Corridors_B1F_Text_YayItsAShip:
+	.string "Yay!\n"
+	.string "It's a ship!$"
+
+AbandonedShip_Corridors_B1F_Text_DoorIsLocked:
+	.string "The door is locked.\p"
+	.string "“STORAGE” is painted on the door.$"
+
+AbandonedShip_Corridors_B1F_Text_InsertedStorageKey:
+	.string "{PLAYER} inserted and turned the\n"
+	.string "STORAGE KEY.\p"
+	.string "The inserted KEY stuck fast,\n"
+	.string "but the door opened.$"
+
+AbandonedShip_Text_TheDoorIsOpen:
+	.string "The door is open.$"
+
+
+AbandonedShip_HiddenFloorCorridors_Text_Rm1DoorIsLocked:
+	.string "The door is locked.\p"
+	.string "“RM. 1” is painted on the door.$"
+
+AbandonedShip_HiddenFloorCorridors_Text_Rm2DoorIsLocked:
+	.string "The door is locked.\p"
+	.string "“RM. 2” is painted on the door.$"
+
+AbandonedShip_HiddenFloorCorridors_Text_Rm4DoorIsLocked:
+	.string "The door is locked.\p"
+	.string "“RM. 4” is painted on the door.$"
+
+AbandonedShip_HiddenFloorCorridors_Text_Rm6DoorIsLocked:
+	.string "The door is locked.\p"
+	.string "“RM. 6” is painted on the door.$"
+
+AbandonedShip_HiddenFloorCorridors_Text_InsertedKey:
+	.string "{PLAYER} inserted and turned the\n"
+	.string "KEY.\p"
+	.string "The inserted KEY stuck fast,\n"
+	.string "but the door opened.$"
+
+
+
+AbandonedShip_HiddenFloorRooms_Text_BrightShinyTrash:
+	.string "It's bright and shiny!\n"
+	.string "But it's just trash…$"
+	
+
+
+
+
+
+
+`

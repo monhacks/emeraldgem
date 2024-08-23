@@ -29,9 +29,11 @@ static u8 CalcBerryYieldInternal(u16 max, u16 min, u8 water);
 static u8 CalcBerryYield(struct BerryTree *tree);
 static u8 GetBerryCountByBerryTreeId(u8 id);
 static u16 GetStageDurationByBerryType(u8 berry, struct BerryTree *tree);
-
-//.rodata
+static u16 GetMulchItem(u8 mulchID);
 #if GAME_LANGUAGE == LANGUAGE_SPANISH
+	
+//.rodata
+
 	static const u8 sBerryDescriptionPart1_Cheri[] = _("Florece con bellas y delicadas flores.");
 	static const u8 sBerryDescriptionPart2_Cheri[] = _("Es de color rojo vivo y sabor picante.");
 	static const u8 sBerryDescriptionPart1_Chesto[]= _("Tiene la cáscara y el fruto duros.");
@@ -166,7 +168,9 @@ static u16 GetStageDurationByBerryType(u8 berry, struct BerryTree *tree);
 	static const u8 sBerryDescriptionPart2_Kee[] = _("sube la Defensa.");
 	static const u8 sBerryDescriptionPart1_Maranga[] = _("Si es golpeado por un ataque especial,");
 	static const u8 sBerryDescriptionPart2_Maranga[] = _("sube la Def.Esp.");
+	static const u8 sDelicateCare[] = _("mucho cuidado.");
 #else
+	static const u8 sDelicateCare[] = _("delicate care.");
 	static const u8 sBerryDescriptionPart1_Cheri[] = _("Blooms with delicate pretty flowers.");
 	static const u8 sBerryDescriptionPart2_Cheri[] = _("The bright red Berry is very spicy.");
 	static const u8 sBerryDescriptionPart1_Chesto[] = _("The Berry's thick skin and fruit are");
@@ -2008,15 +2012,51 @@ void ObjectEventInteractionGetBerryCountString(void)
 	
     u8 berry = GetBerryTypeByBerryTreeId(treeId);
     u8 count = GetBerryCountByBerryTreeId(treeId);
+    u16 mulch = GetMulchItem(gSaveBlock1Ptr->berryTrees[treeId].mulch);
 
 	gSpecialVar_0x8006 = BerryTypeToItemId(berry);
     GetBerryCountStringByBerryType(berry, gStringVar1, count);
-	ConvertIntToDecimalStringN(gStringVar3, gSaveBlock1Ptr->berryTrees[treeId].mulch, STR_CONV_MODE_RIGHT_ALIGN, 1);
+	
+	CopyItemName(mulch,gStringVar3);
+	if (mulch == 0) {
+		StringCopy(gStringVar3, sDelicateCare);
+	}
+	
+	// ConvertIntToDecimalStringN(gStringVar3, gSaveBlock1Ptr->berryTrees[tjreeId].mulch, STR_CONV_MODE_RIGHT_ALIGN, 1);
 }
 
 void Bag_ChooseBerry(void)
 {
     SetMainCallback2(CB2_ChooseBerry);
+}
+
+u16 GetMulchItem(u8 mulchID)
+{
+	/*
+	GROWTH_MULCH = 1, // done, cuts grow time in half
+	DAMP_MULCH, // done, forces the soil to always be watered
+	STABLE_MULCH, // done, trees grow 25% faster and it's watered 50% of times
+//	GOOEY_MULCH, // wip, trees always revive ??? sounds pretty useless. maybe tree doesnt die
+	RICH_MULCH, // done, +5 extra berries
+	SURPRISE_MULCH, // done, gives a random amount of a random berry, excluding miracle berry
+//	BOOST_MULCH, // wip, ???? a true mystery 
+	AMAZE_MULCH //
+	*/
+	switch (mulchID) {
+		case GROWTH_MULCH:
+			return ITEM_GROWTH_MULCH;
+		case DAMP_MULCH:
+			return ITEM_DAMP_MULCH;
+		case STABLE_MULCH:
+			return ITEM_STABLE_MULCH;
+		case RICH_MULCH:
+			return ITEM_RICH_MULCH;
+		case SURPRISE_MULCH:
+			return ITEM_SURPRISE_MULCH;
+		case AMAZE_MULCH:
+			return ITEM_AMAZE_MULCH;
+	}
+    return 0;
 }
 
 void ObjectEventInteractionPlantBerryTree(void)

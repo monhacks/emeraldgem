@@ -259,7 +259,7 @@
       "y": 20,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
-      "script": "NULL"
+      "script": "LittlerootTown_EventScript_MLMSign"
     },
     {
       "type": "sign",

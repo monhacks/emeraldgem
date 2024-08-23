@@ -1,3 +1,95 @@
+text GraniteCave_StevensRoom_Text_Done {
+	format("¡Una puerta se abrió!")
+}
+
+text GraniteCave_StevensRoom_Text_ImStevenLetterForMe {
+	poryswitch(LANGUAGE){
+		ES {
+			format("Ah, ¡Hola, mi nombre es {COLOR BLUE}Steven{COLOR DARK_GRAY}!")
+		}
+		EN {
+			format("Ah, hi! I'm {COLOR BLUE}Steven{COLOR DARK_GRAY}.")
+		}
+	}
+}
+
+text GraniteCave_StevensRoom_Text_ImStevenLetterForMe2 {
+	poryswitch(LANGUAGE){
+		ES {
+			format("Amo la geología, y la historia de Hoenn, por eso vine a esta cueva.\p"
+			"Estas rocas aquí datan de hace más de 10.000 años, y parecen estar llenas de energía única de gran poder.\p"
+			"Ah, ¿Una carta para mí?\p"
+			"Ja, ¿Porqué me miras así? Parece que me estuvieras callando.\p"
+			"¡Pero gracias por traerla!")
+		}
+		EN {
+			format("I love both geology and Hoenn's untold history, so I came to this cave.\p"
+			"The rocks here are 10,000 years old, and exhibit an unique, powerful energy.\p"
+			"Ah, a letter, for me?\p"
+			"Ha, what's with the long face? You look like you want me to shut up.\p"
+			"Thank for bringing me this!")
+		}
+	}
+	
+}
+
+text GraniteCave_StevensRoom_Text_ThankYouTakeThis {
+	poryswitch(LANGUAGE){
+		ES {
+			format("¡Voy a darte esto como\n"
+	"agradecimiento!")
+		}
+		EN {
+			format("Take this as thanks!")
+		}
+	}
+	
+}
+
+text GraniteCave_StevensRoom_Text_CouldBecomeChampionLetsRegister {
+	poryswitch(LANGUAGE){
+		ES {
+			format("Creo que sería útil mantener el\n"
+			"contacto, así que voy a registrarme en\l"
+			"tu PokéNav.\p"
+			"… … … … … …")
+		}
+		EN {
+			format("I think it'd be useful to keep contact.\pI'll register myself in your PokéNav.\p"
+			"… … … … … …")
+		}
+	}
+	
+}
+
+text GraniteCave_StevensRoom_Text_RegisteredSteven {
+	poryswitch(LANGUAGE){
+		ES {
+			format("Steven se registró en tu PokéNav, por algún motivo.")
+		}
+		EN {
+			format("Steven added himself to your PokéNav, for some reason.")
+		}
+	}
+	
+}
+
+text GraniteCave_StevensRoom_Text_IveGotToHurryAlong {
+	poryswitch(LANGUAGE){
+		ES {
+			"Ah, debería irme ahora."
+		}
+		EN {
+			"I should get going now."
+		}
+	}
+}
+
+text GraniteCave_StevensRoom_Text_OhBagIsFull {
+	format("Oh, your BAG is full…\n"
+	"That's too bad, then.")
+}
+
 raw `
 .set LOCALID_STEVEN, 1
 
@@ -107,8 +199,7 @@ GraniteCave_Braille_1_Done::
 	release
 	end
 
-GraniteCave_StevensRoom_Text_Done:
-	.string "¡Una puerta se abrió!$"
+
 
 GraniteCave_Braille_None::
 	release
@@ -213,41 +304,5 @@ GraniteCave_StevensRoom_Movement_StevenExitSouth:
 	walk_left
 	delay_8
 	step_end
-
-GraniteCave_StevensRoom_Text_ImStevenLetterForMe:
-	.string "Ah, ¡Hola, mi nombre es {COLOR BLUE}Steven{COLOR DARK_GRAY}.$"
-
-GraniteCave_StevensRoom_Text_ImStevenLetterForMe2:
-	.string "Me interesa la geología, y la historia\n"
-	.string "que Hoenn tiene para contar, por eso\l"
-	.string "vine a esta cueva.\p"
-	.string "Estas rocas aquí datan de hace más de\n"
-	.string "10.000 años, y parecen estar llenas de\l"
-	.string "algún tipo de energía de gran poder.\p"
-	.string "Ah, ¿Una carta para mí?\p"
-	.string "Ja, ¿Porqué lo dices así? Parece que me\n"
-	.string "estuvieras callando.\p"
-	.string "¡Pero gracias por traerla!$"
-
-GraniteCave_StevensRoom_Text_ThankYouTakeThis:
-	.string "¡Voy a darte esto como\n"
-	.string "agradecimiento!$"
-
-GraniteCave_StevensRoom_Text_CouldBecomeChampionLetsRegister:
-	.string "Creo que sería útil mantener el\n"
-	.string "contacto, así que voy a registrarme en\l"
-	.string "tu PokéNav.\p"
-	.string "… … … … … …$"
-
-GraniteCave_StevensRoom_Text_RegisteredSteven:
-	.string "Steven se registró en tu\n"
-	.string "POKéNAV, por algún motivo.$"
-
-GraniteCave_StevensRoom_Text_IveGotToHurryAlong:
-	.string "Ahora debería irme.$"
-
-GraniteCave_StevensRoom_Text_OhBagIsFull:
-	.string "Oh, your BAG is full…\n"
-	.string "That's too bad, then.$"
 
 `

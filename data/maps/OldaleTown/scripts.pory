@@ -1,3 +1,95 @@
+
+text OldaleTown_Text_SavingMyProgress {
+	poryswitch(LANGUAGE){
+		EN {
+			format("I want to level up my team faster…\p"
+			"I'm changing the settings to\n"
+			"“Training Mode”.")
+		}ES {
+			format("Quiero entrenar a mis Pokémon\n"
+			"un poquito más rápido…\p"
+			"Estoy cambiando las opciones a\n"
+			"“Modo Entrenamiento”.")
+		}
+	}
+
+}
+
+
+text OldaleTown_Text_IWorkAtPokemonMart {
+	poryswitch(LANGUAGE){
+		EN {
+			format("Hi!\nI work in Hoenn's last Pokémon Mart. Take this as a prmo gift!")
+		}ES {
+			format("¡Hola! ¡Trabajo en la última Tienda Pokémon, y\n"
+			"me gustaría darte esto!")
+		}
+	}
+}
+
+text OldaleTown_Text_PotionExplanation {
+	poryswitch(LANGUAGE){
+		EN {
+			format("It's a free Potion!\p"
+			"Hope you come by to our Mart.")
+		}ES {
+			format("¡Es una Poción de cortesía!\p"
+			"Espero que eso haga que quieras\n"
+			"comprar en nuestra tienda.")
+		}
+	}
+
+}
+
+text OldaleTown_Text_WaitDontComeInHere {
+	poryswitch(LANGUAGE){
+		EN {
+			format("NOOOOOO!\nYou can't come in, you'll ruin everything")
+		}ES {
+			format("¡NOOOOOO! ¡BASTA!\p"
+			"¡¡Vas a arruinar todo si pasas!")
+		}
+	}
+
+}
+
+text OldaleTown_Text_DiscoveredFootprints {
+	poryswitch(LANGUAGE){
+		EN {
+			format("Go away! You'll ruin everything!")
+		}ES {
+			format("¡Vas a arruinar\n"
+			"todo si pasas!")
+		}
+	}
+
+}
+
+text OldaleTown_Text_FinishedSketchingFootprints {
+	poryswitch(LANGUAGE){
+		EN {
+			format("Just a Ralts…")
+		}ES {
+			format("Pues… Sólo era un Ralts…")	
+		}
+	}
+
+}
+
+
+text OldaleTown_Text_TownSign {
+	poryswitch(LANGUAGE){
+		EN {
+			format("{COLOR LIGHT_GREEN SHADOW GREEN} OLDALE TOWN\n"
+			"{COLOR DARK_GRAY SHADOW LIGHT_GRAY} “In touch with old traditions.”")
+		}ES {
+			format("{COLOR LIGHT_GREEN SHADOW GREEN} PUEBLO OLDALE\n"
+			"{COLOR DARK_GRAY SHADOW LIGHT_GRAY} “En contacto con nuestras tradiciones.”")
+		}
+	}
+
+}
+
 raw `
 .set LOCALID_MART_EMPLOYEE, 2
 .set LOCALID_FOOTPRINTS_MAN, 3
@@ -9,13 +101,7 @@ OldaleTown_MapScripts::
 OldaleTown_OnTransition:
 	setflag FLAG_VISITED_OLDALE_TOWN
 	call_if_unset FLAG_ADVENTURE_STARTED, OldaleTown_EventScript_BlockWestEntrance
-	call_if_set FLAG_ADVENTURE_STARTED, OldaleTown_EventScript_SetOldaleState
 	end
-
-@ This script seems pointless because nothing uses VAR_OLDALE_TOWN_STATE
-OldaleTown_EventScript_SetOldaleState::
-	setvar VAR_OLDALE_TOWN_STATE, 1
-	return
 
 OldaleTown_EventScript_BlockWestEntrance::
 	setobjectxyperm LOCALID_FOOTPRINTS_MAN, 4, 13
@@ -110,39 +196,5 @@ OldaleTown_Movement_ReturnToOriginalPosition:
 	walk_down
 	walk_left
 	step_end
-
-OldaleTown_Text_SavingMyProgress:
-	.string "Quiero entrenar a mis Pokémon\n"
-	.string "un poquito más rápido…\p"
-	.string "Estoy cambiando las opciones a\n"
-	.string "“Modo Entrenamiento”.$"
-
-
-OldaleTown_Text_IWorkAtPokemonMart:
-	.string "¡Hola! ¡Trabajo en una Tienda Pokémon, y\n"
-	.string "me gustaría darte esto!$"
-
-OldaleTown_Text_PotionExplanation:
-	.string "¡Es una Poción de cortesía!\p"
-	.string "Espero que eso haga que quieras\n"
-	.string "comprar en nuestra tienda.$"
-
-OldaleTown_Text_WaitDontComeInHere:
-	.string "¡NOOOOOO! ¡BASTA!\p"
-	.string "¡ESTAMOS INVESTIGANDO POKÉMON QUE HAN\n"
-	.string "MIGRADO RECIENTEMENTE A HOENN! ¡Vas a\l"
-	.string "arruinar todo si pasas!$"
-
-OldaleTown_Text_DiscoveredFootprints:
-	.string "¡Vas a arruinar\n"
-	.string "todo si pasas!$"
-
-OldaleTown_Text_FinishedSketchingFootprints:
-	.string "Pues… Sólo era un Ralts…$"
-
-
-OldaleTown_Text_TownSign:
-	.string "{COLOR LIGHT_GREEN SHADOW GREEN} PUEBLO OLDALE\n"
-	.string "{COLOR DARK_GRAY SHADOW LIGHT_GRAY} “Donde nunca pasa nada.”$"
 
 `

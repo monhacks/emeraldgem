@@ -405,7 +405,7 @@ AquaHideout_1F_EventScript_HideoutEntranceGrunts_Text_0:
 
 AquaHideout_1F_EventScript_HideoutEntranceGrunts_Text_1:
 # 24 "data/maps/AquaHideout_1F/scripts.pory"
-	.string "¡Sí! Está yendo a buscar el Submarino...\n"
+	.string "¡Sí! Está yendo a buscar el Submarino…\n"
 	.string "Espera a ver la cara del público cuando\l"
 	.string "se enteren para quién Devon ha-{PAUSE 20}$"
 
@@ -420,16 +420,16 @@ AquaHideout_1F_EventScript_HideoutEntranceGrunts_Text_3:
 	.string "¡El Equipo Magma está siendo acorralado\l"
 	.string "en su Base Secreta!\p"
 	.string "Deberíamos intentar proteger mejor la\n"
-	.string "nuestra, que muy Secreta no es...$"
+	.string "nuestra, que muy Secreta no es…$"
 
 AquaHideout_1F_EventScript_HideoutEntranceGrunts_Text_4:
 # 30 "data/maps/AquaHideout_1F/scripts.pory"
 	.string "Escuché que es otro Equipo como\n"
-	.string "nostros... Uno que ha estado atacando a\l"
-	.string "tanto Aqua como Magma...\p"
+	.string "nostros… Uno que ha estado atacando a\l"
+	.string "tanto Aqua como Magma…\p"
 	.string "Escuché que Shelly los vio, pero que les\n"
 	.string "dijo a los Reclutas que los vieron que\l"
-	.string "cerraran la boca...$"
+	.string "cerraran la boca…$"
 
 AquaHideout_1F_EventScript_HideoutEntranceGrunts_Text_5:
 # 32 "data/maps/AquaHideout_1F/scripts.pory"
@@ -446,7 +446,7 @@ AquaHideout_1F_EventScript_HideoutEntranceGrunts_Text_7:
 # 36 "data/maps/AquaHideout_1F/scripts.pory"
 	.string "¡Sí!\n"
 	.string "Por lo que escuché, está intentando\l"
-	.string "robar un Orbe, pero creo que... ¿Están\l"
+	.string "robar un Orbe, pero creo que… ¿Están\l"
 	.string "siendo ayudados por el Equipo Magma?$"
 
 AquaHideout_1F_EventScript_HideoutEntranceGrunts_Text_8:
@@ -462,12 +462,12 @@ AquaHideout_1F_EventScript_HideoutEntranceGrunts_Text_9:
 
 AquaHideout_1F_EventScript_Grunt1_Text_0:
 # 55 "data/maps/AquaHideout_1F/scripts.pory"
-	.string "M-mis pobres Pokémon...\n"
+	.string "M-mis pobres Pokémon…\n"
 	.string "Estos desgraciados los dejaron muy\l"
-	.string "lastimados...\p"
+	.string "lastimados…\p"
 	.string "E-estoy tan preocupado por ellos, te\n"
 	.string "prometo que no te haré nada si me\l"
-	.string "ayudas...\p"
+	.string "ayudas…\p"
 	.string "¿Podrías darme algún Revivir para\n"
 	.string "curarlos?$"
 
@@ -485,13 +485,13 @@ AquaHideout_1F_EventScript_Grunt1_Text_3:
 
 AquaHideout_1F_EventScript_Grunt1_Text_4:
 # 87 "data/maps/AquaHideout_1F/scripts.pory"
-	.string "Oh... Está bien...\n"
+	.string "Oh… Está bien…\n"
 	.string "M-mis pobres Pokémon..$"
 
 AquaHideout_1F_EventScript_Grunt1Helped_Text_0:
 # 94 "data/maps/AquaHideout_1F/scripts.pory"
 	.string "¡M-muchas gracias!\n"
-	.string "Ahora podré ir a un Centro Pokémon...$"
+	.string "Ahora podré ir a un Centro Pokémon…$"
 
 AquaHideout_1F_Triggers_Text_0:
 # 134 "data/maps/AquaHideout_1F/scripts.pory"

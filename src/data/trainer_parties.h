@@ -4241,17 +4241,6 @@ static const struct TrainerMon sParty_Brawly1[] = {
 	.ball = ITEM_DIVE_BALL,
     .moves = {MOVE_DRAIN_PUNCH, MOVE_LIGHT_SCREEN, MOVE_REFLECT, MOVE_BULK_UP}
     },
-	{
-    .iv = 100,
-    .lvl = 17,
-    .species = SPECIES_MACHOP,
-	.ability = ABILITY_SLOT_1,
-    .heldItem = ITEM_BLACK_GLASSES,
-	.build = TRAINER_MON_SPEED_PHYS,
-	.difficulty = TRAINER_HARD,
-	.ball = ITEM_DIVE_BALL,
-    .moves = {MOVE_DYNAMIC_PUNCH, MOVE_BULK_UP, MOVE_ROCK_TOMB, MOVE_THROAT_CHOP}
-    },
     {
     .iv = 200,
     .lvl = 18,
@@ -4266,28 +4255,6 @@ static const struct TrainerMon sParty_Brawly1[] = {
 };
 
 static const struct TrainerMon sEasyParty_Brawly1[] = {
-    {
-    .iv = 100,
-    .lvl = 17,
-    .species = SPECIES_MEDITITE,
-	.ability = ABILITY_SLOT_1,
-    .heldItem = ITEM_NONE,
-	.build = TRAINER_MON_SPEED_PHYS,
-	.difficulty = TRAINER_HARD,
-	.ball = ITEM_DIVE_BALL,
-    .moves = {MOVE_FOCUS_PUNCH, MOVE_REFLECT, MOVE_NONE, MOVE_NONE}
-    },
-	{
-    .iv = 100,
-    .lvl = 17,
-    .species = SPECIES_MACHOP,
-	.ability = ABILITY_SLOT_1,
-    .heldItem = ITEM_NONE,
-	.build = TRAINER_MON_SPEED_PHYS,
-	.difficulty = TRAINER_HARD,
-	.ball = ITEM_DIVE_BALL,
-    .moves = {MOVE_MACH_PUNCH, MOVE_BULK_UP, MOVE_ROCK_TOMB, MOVE_NONE}
-    },
     {
     .iv = 200,
     .lvl = 18,
@@ -4323,17 +4290,6 @@ static const struct TrainerMon sHardParty_Brawly1[] = {
 	.difficulty = TRAINER_HARD,
 	.ball = ITEM_DIVE_BALL,
     .moves = {MOVE_DRAIN_PUNCH, MOVE_THROAT_CHOP, MOVE_ROCK_TOMB, MOVE_SWORDS_DANCE}
-    },
-	{
-    .iv = 100,
-    .lvl = 17,
-    .species = SPECIES_MACHOP,
-	.ability = ABILITY_SLOT_1,
-    .heldItem = ITEM_BLACK_GLASSES,
-	.build = TRAINER_MON_SPEED_PHYS,
-	.difficulty = TRAINER_HARD,
-	.ball = ITEM_DIVE_BALL,
-    .moves = {MOVE_STORM_THROW, MOVE_BULK_UP, MOVE_ROCK_TOMB, MOVE_THROAT_CHOP}
     },
     {
     .iv = 200,
@@ -4381,28 +4337,6 @@ static const struct TrainerMon sHardcoreParty_Brawly1[] = {
 	.difficulty = TRAINER_HARD,
 	.ball = ITEM_DIVE_BALL,
     .moves = {MOVE_STORM_THROW, MOVE_BULK_UP, MOVE_ROCK_TOMB, MOVE_THROAT_CHOP}
-    },
-    {
-    .iv = 200,
-    .lvl = 18,
-    .species = SPECIES_MAKUHITA,
-    .heldItem = ITEM_FLAME_ORB,
-	.ability = ABILITY_SLOT_2,
-	.build = TRAINER_MON_HP_DEF,
-	.difficulty = TRAINER_HARD,
-	.ball = ITEM_DIVE_BALL,
-    .moves = {MOVE_STORM_THROW, MOVE_KNOCK_OFF, MOVE_BULK_UP, MOVE_ICE_PUNCH}
-    },
-	{
-    .iv = 200,
-    .lvl = 18,
-    .species = SPECIES_MAKUHITA,
-    .heldItem = ITEM_FLAME_ORB,
-	.ability = ABILITY_SLOT_2,
-	.build = TRAINER_MON_HP_DEF,
-	.difficulty = TRAINER_HARD,
-	.ball = ITEM_DIVE_BALL,
-    .moves = {MOVE_STORM_THROW, MOVE_KNOCK_OFF, MOVE_BULK_UP, MOVE_ICE_PUNCH}
     },
 	{
     .iv = 200,
