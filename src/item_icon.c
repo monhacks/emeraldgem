@@ -2,16 +2,101 @@
 #include "decompress.h"
 #include "graphics.h"
 #include "item_icon.h"
+#include "item.h"
 #include "malloc.h"
 #include "sprite.h"
 #include "constants/items.h"
+#include "data.h"
 
 // EWRAM vars
 EWRAM_DATA u8 *gItemIconDecompressionBuffer = NULL;
 EWRAM_DATA u8 *gItemIcon4x4Buffer = NULL;
 
+
+const struct TypeInfo gTypesInfo[NUMBER_OF_MON_TYPES] =
+{
+    [TYPE_NORMAL] =
+    {
+        .paletteTMHM = gItemIconPalette_NormalTMHM,
+    },
+    [TYPE_FIGHTING] =
+    {
+        .paletteTMHM = gItemIconPalette_FightingTMHM,
+    },
+    [TYPE_FLYING] =
+    {
+        .paletteTMHM = gItemIconPalette_FlyingTMHM,
+    },
+    [TYPE_POISON] =
+    {
+        .paletteTMHM = gItemIconPalette_PoisonTMHM,
+    },
+    [TYPE_GROUND] =
+    {
+        .paletteTMHM = gItemIconPalette_GroundTMHM,
+    },
+    [TYPE_ROCK] =
+    {
+        .paletteTMHM = gItemIconPalette_RockTMHM,
+    },
+    [TYPE_BUG] =
+    {
+        .paletteTMHM = gItemIconPalette_BugTMHM,
+    },
+    [TYPE_GHOST] =
+    {
+        .paletteTMHM = gItemIconPalette_GhostTMHM,
+    },
+    [TYPE_STEEL] =
+    {
+        .paletteTMHM = gItemIconPalette_SteelTMHM,
+    },
+    [TYPE_MYSTERY] =
+    {
+		.paletteTMHM = gItemIconPalette_PoisonTMHM,
+    },
+    [TYPE_FIRE] =
+    {
+        .paletteTMHM = gItemIconPalette_FireTMHM,
+    },
+    [TYPE_WATER] =
+    {
+        .paletteTMHM = gItemIconPalette_WaterTMHM,
+    },
+    [TYPE_GRASS] =
+    {
+        .paletteTMHM = gItemIconPalette_GrassTMHM,
+    },
+    [TYPE_ELECTRIC] =
+    {
+        .paletteTMHM = gItemIconPalette_ElectricTMHM,
+    },
+    [TYPE_PSYCHIC] =
+    {
+        .paletteTMHM = gItemIconPalette_PsychicTMHM,
+    },
+    [TYPE_ICE] =
+    {
+        .paletteTMHM = gItemIconPalette_IceTMHM,
+    },
+    [TYPE_DRAGON] =
+    {
+        .paletteTMHM = gItemIconPalette_DragonTMHM,
+    },
+    [TYPE_DARK] =
+    {
+        .paletteTMHM = gItemIconPalette_DarkTMHM,
+    },
+    [TYPE_FAIRY] =
+    {
+        .paletteTMHM = gItemIconPalette_FairyTMHM,
+    },
+};
+
+
+
 // const rom data
-#include "data/item_icon_table.h"
+// #include "data/item_icon_table.h"
 
 static const struct OamData sOamData_ItemIcon =
 {
@@ -96,14 +181,14 @@ u8 AddItemIconSprite(u16 tilesTag, u16 paletteTag, u16 itemId)
         struct CompressedSpritePalette spritePalette;
         struct SpriteTemplate *spriteTemplate;
 
-        LZDecompressWram(GetItemIconPicOrPalette(itemId, 0), gItemIconDecompressionBuffer);
+        LZDecompressWram(GetItemIconSprite(itemId), gItemIconDecompressionBuffer);
         CopyItemIconPicTo4x4Buffer(gItemIconDecompressionBuffer, gItemIcon4x4Buffer);
         spriteSheet.data = gItemIcon4x4Buffer;
         spriteSheet.size = 0x200;
         spriteSheet.tag = tilesTag;
         LoadSpriteSheet(&spriteSheet);
 
-        spritePalette.data = GetItemIconPicOrPalette(itemId, 1);
+        spritePalette.data = GetItemIconPalette(itemId);
         spritePalette.tag = paletteTag;
         LoadCompressedSpritePalette(&spritePalette);
 
@@ -133,14 +218,14 @@ u8 AddCustomItemIconSprite(const struct SpriteTemplate *customSpriteTemplate, u1
         struct CompressedSpritePalette spritePalette;
         struct SpriteTemplate *spriteTemplate;
 
-        LZDecompressWram(GetItemIconPicOrPalette(itemId, 0), gItemIconDecompressionBuffer);
+        LZDecompressWram(GetItemIconSprite(itemId), gItemIconDecompressionBuffer);
         CopyItemIconPicTo4x4Buffer(gItemIconDecompressionBuffer, gItemIcon4x4Buffer);
         spriteSheet.data = gItemIcon4x4Buffer;
         spriteSheet.size = 0x200;
         spriteSheet.tag = tilesTag;
         LoadSpriteSheet(&spriteSheet);
 
-        spritePalette.data = GetItemIconPicOrPalette(itemId, 1);
+        spritePalette.data = GetItemIconPalette(itemId);
         spritePalette.tag = paletteTag;
         LoadCompressedSpritePalette(&spritePalette);
 
@@ -157,12 +242,31 @@ u8 AddCustomItemIconSprite(const struct SpriteTemplate *customSpriteTemplate, u1
     }
 }
 
-const void *GetItemIconPicOrPalette(u16 itemId, u8 which)
+const void *GetItemIconSprite(u16 itemId)
 {
     if (itemId == 0xFFFF)
-        itemId = ITEM_FIELD_ARROW;
+        return gItemIcon_ReturnToFieldArrow;
     else if (itemId >= ITEMS_COUNT)
-        itemId = 0;
+        return gItems[0].iconSprite;
+	if (itemId >= ITEM_TM01 && itemId < ITEM_HM01 + NUM_HIDDEN_MACHINES)
+    {
+		if (itemId < ITEM_TM01 + NUM_TECHNICAL_MACHINES)
+            return gItemIcon_TM;
+        return gItemIcon_HM;
+    }
+		
+    
+    return gItems[itemId].iconSprite;
+}
 
-    return gItemIconTable[itemId][which];
+const void *GetItemIconPalette(u16 itemId)
+{
+    if (itemId == 0xFFFF)
+        return gItemIconPalette_ReturnToFieldArrow;
+    if (itemId >= ITEMS_COUNT)
+        return gItems[0].iconPalette;
+    if (itemId >= ITEM_TM01 && itemId < ITEM_HM01 + NUM_HIDDEN_MACHINES)
+        return gTypesInfo[gBattleMoves[ItemId_GetSecondaryId(itemId)].type].paletteTMHM;
+
+    return gItems[itemId].iconPalette;
 }

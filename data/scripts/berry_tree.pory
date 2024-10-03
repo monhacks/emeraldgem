@@ -145,8 +145,8 @@ text BerryTree_Text_WantToPick {
 			"Wanna pick them up?")
 		}
 		ES {
-			format("¡{STR_VAR_2} {STR_VAR_1}!\p"
-			"¿Te llevarías algunas\n"
+			format("¿¡{STR_VAR_2} {STR_VAR_1}!\p"
+			"¿Te llevarás algunas\n"
 			"{STR_VAR_1}?")
 		}
 	}
@@ -243,7 +243,7 @@ text BerryTree_Text_MulchWasAdded {
 			"Choose a Berry to plant.")
 		}
 		ES {
-			format("Abonó el suelo con {STR_VAR_2}.\n"
+			format("Abonaste el suelo con {STR_VAR_2}.\n"
 			"Elige una baya para plantar.")
 		}
 	}

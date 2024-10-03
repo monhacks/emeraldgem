@@ -140,7 +140,5 @@
       "script": "LittlerootTown_BrendansHouse_1F_EventScript_GoSeeRoom"
     }
   ],
-  "bg_events": [
-
-  ]
+  "bg_events": []
 }

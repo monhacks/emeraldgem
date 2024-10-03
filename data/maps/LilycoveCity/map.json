@@ -353,7 +353,7 @@
       "y": 14,
       "elevation": 0,
       "dest_map": "MAP_LILYCOVE_CITY_POKEMON_TRAINER_FAN_CLUB",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 70,
@@ -409,7 +409,7 @@
       "y": 5,
       "elevation": 0,
       "dest_map": "MAP_LILYCOVE_CITY_LILYCOVE_MUSEUM_1F",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     }
   ],
   "coord_events": [

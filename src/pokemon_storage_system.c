@@ -715,8 +715,8 @@ static void MultiMove_DeselectColumn(u8, u8, u8);
 
 // Move Items mode
 static bool32 IsItemIconAtPosition(u8, u8);
-static const u32 *GetItemIconPic(u16);
-static const u32 *GetItemIconPalette(u16);
+// static const u32 *GetItemIconSprite(u16);
+// static const u32 *GetItemIconPalette(u16);
 static u8 GetNewItemIconIdx(void);
 static void SetItemIconPosition(u8, u8, u8);
 static void LoadItemIconGfx(u8, const u32 *, const u32 *);
@@ -8834,7 +8834,7 @@ static void TryLoadItemIconAtPos(u8 cursorArea, u8 cursorPos)
 
     if (heldItem != ITEM_NONE)
     {
-        const u32 *tiles = GetItemIconPic(heldItem);
+        const u32 *tiles = GetItemIconSprite(heldItem);
         const u32 *pal = GetItemIconPalette(heldItem);
         u8 id = GetNewItemIconIdx();
 
@@ -8889,7 +8889,7 @@ static void TakeItemFromMon(u8 cursorArea, u8 cursorPos)
 
 static void InitItemIconInCursor(u16 itemId)
 {
-    const u32 *tiles = GetItemIconPic(itemId);
+    const u32 *tiles = GetItemIconSprite(itemId);
     const u32 *pal = GetItemIconPalette(itemId);
     u8 id = GetNewItemIconIdx();
     LoadItemIconGfx(id, tiles, pal);
@@ -9227,16 +9227,6 @@ static void SetItemIconActive(u8 id, bool8 active)
 
     sStorage->itemIcons[id].active = active;
     sStorage->itemIcons[id].sprite->invisible = (active == FALSE);
-}
-
-static const u32 *GetItemIconPic(u16 itemId)
-{
-    return GetItemIconPicOrPalette(itemId, 0);
-}
-
-static const u32 *GetItemIconPalette(u16 itemId)
-{
-    return GetItemIconPicOrPalette(itemId, 1);
 }
 
 static void PrintItemDescription(void)

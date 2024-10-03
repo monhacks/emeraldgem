@@ -885,3 +885,25 @@ gTileset_DewfordNew::
 	.4byte gMetatiles_DewfordNew
 	.4byte gMetatileAttributes_DewfordNew
 	.4byte NULL @ animation callback
+
+	.align 2
+gTileset_SlateportNew::
+	.byte TRUE @ is compressed
+	.byte TRUE @ is secondary
+	.2byte 0 @ padding
+	.4byte gTilesetTiles_SlateportNew
+	.4byte gTilesetPalettes_SlateportNew
+	.4byte gMetatiles_SlateportNew
+	.4byte gMetatileAttributes_SlateportNew
+	.4byte NULL @ animation callback
+
+	.align 2
+gTileset_SlateportCity::
+	.byte TRUE @ is compressed
+	.byte TRUE @ is secondary
+	.2byte 0 @ padding
+	.4byte gTilesetTiles_SlateportCity
+	.4byte gTilesetPalettes_SlateportCity
+	.4byte gMetatiles_SlateportCity
+	.4byte gMetatileAttributes_SlateportCity
+	.4byte NULL @ animation callback

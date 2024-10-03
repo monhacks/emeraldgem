@@ -597,3 +597,19 @@ gMetatiles_DewfordNew::
 	.align 1
 gMetatileAttributes_DewfordNew::
 	.incbin "data/tilesets/secondary/dewford_new/metatile_attributes.bin"
+
+	.align 1
+gMetatiles_SlateportNew::
+	.incbin "data/tilesets/secondary/slateport_new/metatiles.bin"
+
+	.align 1
+gMetatileAttributes_SlateportNew::
+	.incbin "data/tilesets/secondary/slateport_new/metatile_attributes.bin"
+
+	.align 1
+gMetatiles_SlateportCity::
+	.incbin "data/tilesets/secondary/slateport_city/metatiles.bin"
+
+	.align 1
+gMetatileAttributes_SlateportCity::
+	.incbin "data/tilesets/secondary/slateport_city/metatile_attributes.bin"

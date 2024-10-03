@@ -107,6 +107,12 @@ struct Trainer
 
 #define TRAINER_ENCOUNTER_MUSIC(trainer)((gTrainers[trainer].encounterMusic_gender & 0x7F))
 
+
+struct TypeInfo
+{
+    const u32 *const paletteTMHM;
+};
+
 extern const u16 gMinigameDigits_Pal[];
 extern const u32 gMinigameDigits_Gfx[];
 

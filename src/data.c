@@ -14,6 +14,11 @@ static const u32 sMinigameDigitsThin_Gfx[] = INCBIN_U32("graphics/link/minigame_
 
 #define BATTLER_OFFSET(i) (gHeap + 0x8000 + MON_PIC_SIZE * (i))
 
+// .generic is large enough that the text for TYPE_ELECTRIC will exceed TEXT_BUFF_ARRAY_COUNT.
+// In this array there's commented-out data such as references to type-resist berries that would otherwise would go unused.
+// However, we figured this information would be useful for users that want to add their own types as a reminder of
+// what data would they need to add in order to have their new types be fully fledged like official types.
+
 const struct SpriteFrameImage gBattlerPicTable_PlayerLeft[] =
 {
     BATTLER_OFFSET(0), MON_PIC_SIZE,

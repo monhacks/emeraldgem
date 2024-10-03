@@ -23,6 +23,8 @@ struct Item
     ItemUseFunc battleUseFunc;
     u8 secondaryId;
     u8 flingPower;
+	const u32 *iconSprite;
+    const u32 *iconPalette;
 };
 
 struct BagPocket
@@ -31,7 +33,7 @@ struct BagPocket
     u8 capacity;
 };
 
-extern const struct Item gItems[];
+extern const struct Item gItems[ITEMS_COUNT];
 extern struct BagPocket gBagPockets[];
 
 u16 GetBagItemQuantity(u16 *quantity);

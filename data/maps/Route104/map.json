@@ -182,8 +182,8 @@
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route104_EventScript_ItemPokeBall",
+      "trainer_sight_or_berry_tree_id": "ITEM_GREAT_BALL",
+      "script": "Common_EventScript_FindItem",
       "flag": "FLAG_ITEM_ROUTE_104_POKE_BALL"
     },
     {
@@ -239,28 +239,28 @@
       "y": 5,
       "elevation": 3,
       "dest_map": "MAP_PETALBURG_WOODS",
-      "dest_warp_id": 2
+      "dest_warp_id": "2"
     },
     {
       "x": 11,
       "y": 5,
       "elevation": 3,
       "dest_map": "MAP_PETALBURG_WOODS",
-      "dest_warp_id": 3
+      "dest_warp_id": "3"
     },
     {
       "x": 32,
       "y": 9,
       "elevation": 3,
       "dest_map": "MAP_PETALBURG_WOODS",
-      "dest_warp_id": 4
+      "dest_warp_id": "4"
     },
     {
       "x": 33,
       "y": 9,
       "elevation": 3,
       "dest_map": "MAP_PETALBURG_WOODS",
-      "dest_warp_id": 5
+      "dest_warp_id": "5"
     }
   ],
   "coord_events": [

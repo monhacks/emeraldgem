@@ -131,6 +131,7 @@ RAMSCRGEN := tools/ramscrgen/ramscrgen$(EXE)
 FIX := tools/gbafix/gbafix$(EXE)
 MAPJSON := tools/mapjson/mapjson$(EXE)
 JSONPROC := tools/jsonproc/jsonproc$(EXE)
+SCRIPT := tools/poryscript/poryscript$(EXE)
 
 PERL := perl
 
@@ -249,6 +250,7 @@ mostlyclean: tidynonmodern tidymodern
 	rm -f $(patsubst %.pory,%.inc,$(shell find data/ -type f -name '*.pory'))
 	@$(MAKE) clean -C berry_fix
 	@$(MAKE) clean -C libagbsyscall
+	
 
 tidy: tidynonmodern tidymodern
 
@@ -293,10 +295,12 @@ LANG := ES
 
 ifeq ($(LANG),ES)
 override CPPFLAGS += -D GAME_LANGUAGE=LANGUAGE_SPANISH
-data/%.inc: data/%.pory; $(SCRIPT) -i $< -o $@ -s LANGUAGE=ES -fc tools/poryscript/font_config.json
+data/%.inc: data/%.pory; $(SCRIPT) -i $< -o $@ -s LANGUAGE=ES -fc tools/poryscript/font_config.json -cc tools/poryscript/command_config.json
+
 else
 override CPPFLAGS += -D GAME_LANGUAGE=LANGUAGE_ENGLISH
-data/%.inc: data/%.pory; $(SCRIPT) -i $< -o $@ -s LANGUAGE=EN -fc tools/poryscript/font_config.json
+data/%.inc: data/%.pory; $(SCRIPT) -i $< -o $@ -s LANGUAGE=EN -fc tools/poryscript/font_config.json -cc tools/poryscript/command_config.json
+
 endif
 
 
@@ -355,7 +359,7 @@ endif
 endef
 $(foreach src, $(C_SRCS), $(eval $(call C_DEP,$(patsubst $(C_SUBDIR)/%.c,$(C_BUILDDIR)/%.o,$(src)),$(src),$(patsubst $(C_SUBDIR)/%.c,%,$(src)))))
 endif
-SCRIPT := tools/poryscript/poryscript$(EXE)
+
 ifeq ($(NODEP),1)
 $(GFLIB_BUILDDIR)/%.o: $(GFLIB_SUBDIR)/%.c $$(c_dep)
 ifeq (,$(KEEP_TEMPS))

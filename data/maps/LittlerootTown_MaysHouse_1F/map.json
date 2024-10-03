@@ -140,7 +140,5 @@
       "script": "LittlerootTown_MaysHouse_1F_EventScript_GoSeeRoom"
     }
   ],
-  "bg_events": [
-
-  ]
+  "bg_events": []
 }

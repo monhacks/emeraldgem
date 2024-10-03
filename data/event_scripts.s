@@ -1087,6 +1087,8 @@ Script_RemoveTint::
 	.include "data/text/save.inc"
 	.include "data/text/birch_speech.inc"
 	.include "data/text/name_boxes.inc"
+	.include "data/text/npc_dialogue.inc"
+	.include "data/text/story_dialogue.inc"
 	.include "data/scripts/chain.inc"
 	.include "data/scripts/check_fossils.inc"
 	.include "data/scripts/password_system.inc"

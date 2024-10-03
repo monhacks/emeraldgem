@@ -221,7 +221,5 @@
       "script": "SlateportCity_Harbor_EventScript_AquaEscapeTrigger2"
     }
   ],
-  "bg_events": [
-
-  ]
+  "bg_events": []
 }

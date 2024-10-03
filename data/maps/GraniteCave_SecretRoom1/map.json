@@ -177,7 +177,7 @@
       "y": 22,
       "elevation": 0,
       "dest_map": "MAP_GRANITE_CAVE_STEVENS_ROOM",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     }
   ],
   "coord_events": [

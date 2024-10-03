@@ -224,11 +224,3 @@ AbandonedShip_HiddenFloorRooms_EventScript_Trash::
 	releaseall
 # 113 "data/maps/AbandonedShip_HiddenFloorRooms/scripts.pory"
 	end
-# 114 "data/maps/AbandonedShip_HiddenFloorRooms/scripts.pory"
-
-# 115 "data/maps/AbandonedShip_HiddenFloorRooms/scripts.pory"
-AbandonedShip_HiddenFloorRooms_Text_BrightShinyTrash:
-# 116 "data/maps/AbandonedShip_HiddenFloorRooms/scripts.pory"
-	.string "It's bright and shiny!\n"
-# 117 "data/maps/AbandonedShip_HiddenFloorRooms/scripts.pory"
-	.string "But it's just trash…$"

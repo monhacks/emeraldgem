@@ -103,7 +103,5 @@
       "script": "AquaHideout_1F_TriggerLeft"
     }
   ],
-  "bg_events": [
-
-  ]
+  "bg_events": []
 }

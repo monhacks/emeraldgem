@@ -43,7 +43,8 @@ extern const u8 Password3[];
 extern const u8 PasswordMuchos[];
 extern const u8 PasswordFallo[];
 extern const u8 PasswordEvento1[];
-extern const u8 PasswordAsh[];
+extern const u8 PasswordAshSM1[];
+extern const u8 PasswordAshSM2[];
 
 enum {
     INPUT_NONE,
@@ -2686,9 +2687,8 @@ static const struct SpritePalette sSpritePalettes[] =
 };
 
 
-//contraseñas
+//contraseñas pueden tener hasta 15 caracteres
 static const u8 gText_TextoInicialContra[] = _("");
-static const u8 gText_Contrasena1[] = _("WORLDOFPOKEMON");
 static const u8 gText_Recompensa1[] = _("un Paquete de Caramelos EXP");
 static const u8 gText_Contrasena2[] = _("PASSWORD");
 static const u8 gText_Contrasena3[] = _("RECIEVEPOKEMON");
@@ -2703,7 +2703,6 @@ static const u8 gText_EquipoDeAsh3[] = _("ASHADVANCE192");
 static const u8 gText_EquipoDeAsh4[] = _("ASHDIAPEA191");
 static const u8 gText_EquipoDeAsh5[] = _("ASHBEWI142");
 static const u8 gText_EquipoDeAsh6[] = _("ASHXYZ140");
-static const u8 gText_EquipoDeAsh7[] = _("ASHSUMO147");
 static const u8 gText_EquipoDeAsh7Region[] = _("Alola");
 static const u8 gText_EquipoDeAsh8[] = _("ASHMASTERS8");
 
@@ -2715,7 +2714,7 @@ void DoPasswordNamingScreen(void)
 
 static void CB2_HandleGivenPassword(void)
 {
-	if (StringCompare(gStringVar2, gText_Contrasena1) == 0) {
+	if (StringCompare(gStringVar2, COMPOUND_STRING("WORLDOFPOKEMON") ) == 0) {
 		ScriptGiveMon(SPECIES_DITTO, 20, ITEM_EXP_CANDY_S, 0, 0, 0);
 		AddBagItem(ITEM_EXP_CANDY_XS, 5);
 		AddBagItem(ITEM_EXP_CANDY_S, 5);
@@ -2726,13 +2725,14 @@ static void CB2_HandleGivenPassword(void)
 		StringCopy(gStringVar2, gText_Recompensa1);
 		ScriptContext_SetupScript(Password2);
     }
-	else if (StringCompare(gStringVar2, gText_Contrasena2) == 0) {
-		ScriptGiveMon(SPECIES_ARCEUS, 100, ITEM_MASTER_BALL, 0, 0, 0);
-		AddBagItem(ITEM_MASTER_BALL, 15);
-		AddBagItem(ITEM_RARE_CANDY, 151);
-		GetSpeciesName(gStringVar1, SPECIES_ARCEUS);
-		CopyItemName(ITEM_MASTER_BALL, gStringVar2);
-		CopyItemName(ITEM_RARE_CANDY, gStringVar3);
+	else if (StringCompare(gStringVar2, COMPOUND_STRING("CATCHINGAID")) == 0) {
+		// ScriptGiveMon(SPECIES_ARCEUS, 100, ITEM_MASTER_BALL, 0, 0, 0);
+		AddBagItem(ITEM_POKE_BALL, 15);
+		AddBagItem(ITEM_GREAT_BALL,10);
+		AddBagItem(ITEM_ULTRA_BALL, 5);
+		CopyItemName(ITEM_POKE_BALL, gStringVar1);
+		CopyItemName(ITEM_GREAT_BALL, gStringVar2);
+		CopyItemName(ITEM_ULTRA_BALL, gStringVar3);
 		ScriptContext_SetupScript(Password3);
     }
 	else if (StringCompare(gStringVar2, gText_Contrasena3) == 0) {
@@ -2762,9 +2762,13 @@ static void CB2_HandleGivenPassword(void)
 	else if (StringCompare(gStringVar2, gText_Contrasena8) == 0) {
 		ScriptContext_SetupScript(PasswordEvento1);
     }
-	else if (StringCompare(gStringVar2, gText_EquipoDeAsh7) == 0) {
+	else if (StringCompare(gStringVar2, COMPOUND_STRING("ASHSUMO147")) == 0) {
 		StringCopy(gStringVar1, gText_EquipoDeAsh7Region);
-		ScriptContext_SetupScript(PasswordAsh);
+		ScriptContext_SetupScript(PasswordAshSM1);
+	}
+	else if (StringCompare(gStringVar2, COMPOUND_STRING("ASHSUMO147V2")) == 0) {
+		StringCopy(gStringVar1, gText_EquipoDeAsh7Region);
+		ScriptContext_SetupScript(PasswordAshSM2);
 	}
 	else
 		ScriptContext_SetupScript(PasswordFallo);

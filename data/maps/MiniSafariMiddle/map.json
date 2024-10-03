@@ -60,14 +60,14 @@
       "y": 13,
       "elevation": 0,
       "dest_map": "MAP_ROUTE103",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 14,
       "y": 13,
       "elevation": 0,
       "dest_map": "MAP_ROUTE103",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 3,

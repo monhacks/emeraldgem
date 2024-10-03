@@ -49,8 +49,8 @@
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "NewMap1_EventScript_ItemNugget",
+      "trainer_sight_or_berry_tree_id": "ITEM_NUGGET",
+      "script": "Common_EventScript_FindItem",
       "flag": "FLAG_MINI_SAFARI_NUGGET"
     },
     {
@@ -62,8 +62,8 @@
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "NewMap1_EventScript_ItemParkBall",
+      "trainer_sight_or_berry_tree_id": "ITEM_MAX_ELIXIR",
+      "script": "Common_EventScript_FindItem",
       "flag": "FLAG_MINI_SAFARI_PARK_BALL"
     },
     {
@@ -229,7 +229,7 @@
       "y": 33,
       "elevation": 0,
       "dest_map": "MAP_MINI_SAFARI_MIDDLE",
-      "dest_warp_id": 2
+      "dest_warp_id": "2"
     },
     {
       "x": 48,

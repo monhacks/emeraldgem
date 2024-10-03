@@ -1,6 +1,9 @@
 #ifndef GUARD_BATTLE_MAIN_H
 #define GUARD_BATTLE_MAIN_H
 
+#include "pokemon.h"
+#include "data.h"
+
 struct TrainerMoney
 {
     u8 classId;
@@ -108,5 +111,6 @@ extern const u8 gStatusConditionString_ConfusionJpn[8];
 extern const u8 gStatusConditionString_LoveJpn[8];
 
 extern const u8 *const gStatusConditionStringsTable[7][2];
+extern const struct TypeInfo gTypesInfo[NUMBER_OF_MON_TYPES];
 
 #endif // GUARD_BATTLE_MAIN_H

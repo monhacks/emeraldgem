@@ -513,8 +513,8 @@ BerryTree_Text_CareAdverbGood::
 
 BerryTree_Text_WantToPick::
 # 141 "data/scripts/berry_tree.pory"
-	.string "¡{STR_VAR_2} {STR_VAR_1}!\p"
-	.string "¿Te llevarías algunas\n"
+	.string "¿¡{STR_VAR_2} {STR_VAR_1}!\p"
+	.string "¿Te llevarás algunas\n"
 	.string "{STR_VAR_1}?$"
 
 BerryTree_Text_PickedTheBerry::
@@ -555,5 +555,5 @@ BerryTree_Text_ExclamationPoint::
 
 BerryTree_Text_MulchWasAdded::
 # 239 "data/scripts/berry_tree.pory"
-	.string "Abonó el suelo con {STR_VAR_2}.\n"
+	.string "Abonaste el suelo con {STR_VAR_2}.\n"
 	.string "Elige una baya para plantar.$"

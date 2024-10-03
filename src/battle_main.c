@@ -69,6 +69,7 @@
 #include "constants/trainers.h"
 #include "cable_club.h"
 #include "constants/region_map_sections.h"
+#include "data/types_info.h"
 
 extern struct Evolution gEvolutionTable[][EVOS_PER_MON];
 

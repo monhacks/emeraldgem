@@ -1,3 +1,9 @@
+
+script Route111_Trigger {
+	addvar(VAR_TEMP_0, 1)
+	msgbox(format("Hasta aqui llega esta DEMO. Puedes seguir si quieres, pero los mapas y eventos estarán a medio terminar."))
+}
+
 raw `
 .set LOCALID_VICTOR, 1
 .set LOCALID_VICTORIA, 2

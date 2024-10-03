@@ -1614,6 +1614,11 @@ static void Task_NewGameBirchSpeech_StartNamingScreen(u8 taskId)
 static void Task_NewGameBirchSpeech_SoItsPlayerName(u8 taskId)
 {
     NewGameBirchSpeech_ClearWindow(0);
+	if (gSaveBlock2Ptr->playerName == COMPOUND_STRING("Birch")) {
+		StringExpandPlaceholders(gStringVar4, gText_Birch_YouCantBirch);
+		if (!RunTextPrintersAndIsPrinter0Active())
+			gTasks[taskId].func = Task_NewGameBirchSpeech_WaitPressBeforeNameChoice;
+	}
     StringExpandPlaceholders(gStringVar4, gText_Birch_SoItsPlayer);
     AddTextPrinterForMessage(TRUE);
     gTasks[taskId].func = Task_NewGameBirchSpeech_CreateNameYesNo;
