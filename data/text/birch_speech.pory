@@ -38,10 +38,10 @@ text gText_Birch_AndYouAre {
 text gText_Birch_BoyOrGirl {
 	poryswitch(LANGUAGE){
 		ES {
-			format("¿A Brendan o May?\p")
+			format("¿A Brendan o May?")
 		}
 		EN {
-			format("Brendan? Or perhaps May?\p")
+			format("Brendan? Or perhaps May?")
 		}
 	}
 }
@@ -98,15 +98,15 @@ text gText_Birch_YouCantBirch {
 }
 
 text gText_Birch_WaitYoureG {
-	"E-eres… ¿{PLAYER}?\p¡Genial, yo soy bi!\pPero ahora, por favor,\nescribe un nombre…\pA menos… Que quieras que\nte digan así…\p¿Quieres llamarte {PLAYER}?"
+	"E-eres… ¿{PLAYER}?\p¡Genial, yo soy bi!\pPero ahora, por favor,\nescribe un nombre…\pA menos que quieras que\nte digan así.\p¿Quieres llamarte {PLAYER}?"
 }
 
-text gText_Birch_YouCantMayBoy {
-	"N-no… May es el nombre\nde MI hija…\pPor favor elije otro nombre…"
+text gText_Birch_TheSameAsDaughter {
+	"¡Ah, igual que mi hija entonces!\pEspero no confunda…\l¿{PLAYER} te parece bien?"
 }
 
-text gText_Birch_YouCantBrendanGirl {
-	"N-no… Brendan es el nombre\nde MI hijo…\pPor favor elije otro nombre…"
+text gText_Birch_TheSameAsSon {
+	"¡Ah, igual que mi hijo entonces!\pEspero no confunda…\l¿{PLAYER} te parece bien?"
 }
 
 text gText_Birch_NotVeryOriginal {

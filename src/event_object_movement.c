@@ -2,7 +2,9 @@
 #include "malloc.h"
 #include "battle_pyramid.h"
 #include "berry.h"
+#include "character_customization.h"
 #include "decoration.h"
+#include "decompress.h"
 #include "event_data.h"
 #include "event_object_movement.h"
 #include "event_scripts.h"
@@ -169,6 +171,7 @@ static void CreateLevitateMovementTask(struct ObjectEvent *);
 static void DestroyLevitateMovementTask(u8);
 static bool8 NpcTakeStep(struct Sprite *);
 static bool8 AreElevationsCompatible(u8, u8);
+
 
 static const struct SpriteFrameImage sPicTable_PechaBerryTree[];
 
@@ -1523,8 +1526,13 @@ static u8 TrySetupObjectEventSprite(struct ObjectEventTemplate *objectEventTempl
     graphicsInfo = GetObjectEventGraphicsInfo(objectEvent->graphicsId);
     if (spriteTemplate->paletteTag != 0xFFFF)
     {
-		LoadObjectEventPalette(spriteTemplate->paletteTag);
-        UpdatePaletteGammaType(IndexOfSpritePaletteTag(spriteTemplate->paletteTag), GAMMA_ALT);
+		if (CheckPlayerGenderSpriteAndPalTag(spriteTemplate->paletteTag))
+			LoadCustomObjectEventPalette(spriteTemplate->paletteTag, objectEventId);
+		else
+			LoadObjectEventPalette(spriteTemplate->paletteTag);
+		
+		UpdatePaletteGammaType(IndexOfSpritePaletteTag(spriteTemplate->paletteTag), GAMMA_ALT);
+		// }
     }
 
     if (objectEvent->movementType == MOVEMENT_TYPE_INVISIBLE)
@@ -1830,8 +1838,13 @@ static void SpawnObjectEventOnReturnToField(u8 objectEventId, s16 x, s16 y)
     spriteTemplate.images = &spriteFrameImage;
 
     if (spriteTemplate.paletteTag != 0xFFFF) {
-		LoadObjectEventPalette(spriteTemplate.paletteTag);
-        UpdatePaletteGammaType(IndexOfSpritePaletteTag(spriteTemplate.paletteTag), GAMMA_ALT);
+		
+		if (CheckPlayerGenderSpriteAndPalTag(spriteTemplate.paletteTag))
+			LoadCustomObjectEventPalette(spriteTemplate.paletteTag, objectEventId);
+		else
+			LoadObjectEventPalette(spriteTemplate.paletteTag);
+		
+		UpdatePaletteGammaType(IndexOfSpritePaletteTag(spriteTemplate.paletteTag), GAMMA_ALT);
 	}
 
     i = CreateSprite(&spriteTemplate, 0, 0, 0);
@@ -2074,9 +2087,20 @@ void FreeAndReserveObjectSpritePalettes(void)
 void LoadObjectEventPalette(u16 paletteTag)
 {
     u16 i = FindObjectEventPaletteIndexByTag(paletteTag);
-
-    if (i != OBJ_EVENT_PAL_TAG_NONE) // always true
+	const void *palette = &sObjectEventSpritePalettes[i];
+	/*if ((paletteTag == OBJ_EVENT_PAL_TAG_BRENDAN && gSaveBlock2Ptr->playerGender == MALE) || (paletteTag == OBJ_EVENT_PAL_TAG_MAY && gSaveBlock2Ptr->playerGender == FEMALE)) {
+		LoadOutfitPaletteOW((u32*) palette, i, 0x20);
+	}
+	else*/ if (i != OBJ_EVENT_PAL_TAG_NONE) // always true
         LoadSpritePaletteIfTagExists(&sObjectEventSpritePalettes[i]);
+}
+
+void LoadCustomObjectEventPalette(u16 paletteTag, u8 index)
+{
+    u16 i = FindObjectEventPaletteIndexByTag(paletteTag);
+	const void *palette = &sObjectEventSpritePalettes[i];
+	// if ((paletteTag == OBJ_EVENT_PAL_TAG_BRENDAN && gSaveBlock2Ptr->playerGender == MALE) || (paletteTag == OBJ_EVENT_PAL_TAG_MAY && gSaveBlock2Ptr->playerGender == FEMALE)) {
+	LoadCustomizedObjectEventSpritePalette(palette);
 }
 
 // Unused

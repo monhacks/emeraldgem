@@ -168,7 +168,7 @@ void NewGameInitData(void)
     ClearSav1();
     ClearAllMail();
     gSaveBlock2Ptr->specialSaveWarpFlags = 0;
-    gSaveBlock2Ptr->gcnLinkFlags = 0;
+    // gSaveBlock2Ptr->gcnLinkFlags = 0;
     InitPlayerTrainerId();
 	// gSaveBlock1Ptr->trainerType = (gSaveBlock1Ptr->secretBases[secretBaseIdx].trainerId[0] % 5)
          // + (gSaveBlock1Ptr->secretBases[secretBaseIdx].gender * 5);
@@ -220,6 +220,11 @@ void NewGameInitData(void)
     memset(&gSaveBlock2Ptr->itemFlags, 0, sizeof(gSaveBlock2Ptr->itemFlags));
     // memset(gSaveBlock1Ptr->dexNavSearchLevels, 0, sizeof(gSaveBlock1Ptr->dexNavSearchLevels));
     gSaveBlock1Ptr->dexNavChain = 0;
+	gSaveBlock2Ptr->customization[0] = 0;
+	gSaveBlock2Ptr->customization[1] = 0;
+	gSaveBlock2Ptr->customization[2] = 0;
+	gSaveBlock2Ptr->customization[3] = 0;
+	gSaveBlock2Ptr->customization[4] = 0;
 }
 
 static void ResetMiniGamesRecords(void)

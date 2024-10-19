@@ -1188,3 +1188,31 @@ void StripExtCtrlCodes(u8 *str)
     }
     str[destIndex] = EOS;
 }
+
+u8 *StringToUpper(u8 *dest, const u8 *src){
+	u8 limit = PLAYER_NAME_LENGTH;
+	u8 i;
+	for (i=0;i<limit;i++){
+		if (src[i] >= CHAR_a && src[i] <= CHAR_z)
+		{
+			dest[i] = src[i] - 0x1A;
+		}
+		else if (src[i] >= CHAR_a_ACUTE && src[i] <= CHAR_n_TILDE){
+			dest[i] = src[i] - 0x15;
+		}
+		else if (src[i] == CHAR_i_ACUTE){
+			dest[i] = CHAR_I_ACUTE;
+		}
+		else if (src[i] == CHAR_u_DIAERESIS){
+			dest[i] = CHAR_U_DIAERESIS;
+		}
+		else
+		{
+			dest[i] = src[i];
+		}
+	}
+    dest[i] = EOS;
+    return dest;
+}
+
+

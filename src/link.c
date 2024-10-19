@@ -323,6 +323,10 @@ static void InitLocalLinkPlayer(void)
     gLocalLinkPlayer.version = gGameVersion + 0x4000;
     gLocalLinkPlayer.lp_field_2 = 0x8000;
     gLocalLinkPlayer.progressFlags = IsNationalPokedexEnabled();
+    gLocalLinkPlayer.customization[0] = gSaveBlock2Ptr->customization[0];
+    gLocalLinkPlayer.customization[1] = gSaveBlock2Ptr->customization[1];
+    gLocalLinkPlayer.customization[2] = gSaveBlock2Ptr->customization[2];
+    gLocalLinkPlayer.customization[3] = gSaveBlock2Ptr->customization[3];
     if (FlagGet(FLAG_IS_CHAMPION))
     {
         gLocalLinkPlayer.progressFlags |= 0x10;

@@ -21,8 +21,7 @@ text OldaleTown_Text_IWorkAtPokemonMart {
 		EN {
 			format("Hi!\nI work in Hoenn's last Pokémon Mart. Take this as a prmo gift!")
 		}ES {
-			format("¡Hola! ¡Trabajo en la última Tienda Pokémon, y\n"
-			"me gustaría darte esto!")
+			format("¡Hola! ¡Trabajo en la última Tienda Pokémon, y me gustaría darte esto!")
 		}
 	}
 }
@@ -34,8 +33,7 @@ text OldaleTown_Text_PotionExplanation {
 			"Hope you come by to our Mart.")
 		}ES {
 			format("¡Es una Poción de cortesía!\p"
-			"Espero que eso haga que quieras\n"
-			"comprar en nuestra tienda.")
+			"Espero que eso haga que quieras comprar en nuestra tienda.")
 		}
 	}
 

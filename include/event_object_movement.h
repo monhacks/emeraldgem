@@ -91,6 +91,7 @@ void RemoveObjectEvent(struct ObjectEvent *objectEvent);
 void LoadPlayerObjectReflectionPalette(u16, u8);
 void LoadSpecialObjectReflectionPalette(u16, u8);
 void LoadObjectEventPalette(u16 paletteTag);
+void LoadCustomObjectEventPalette(u16 paletteTag, u8 index);
 void TryMoveObjectEventToMapCoords(u8, u8, u8, s16, s16);
 void PatchObjectPalette(u16, u8);
 void SpawnObjectEventsOnReturnToField(s16, s16);

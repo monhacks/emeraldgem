@@ -160,3 +160,4 @@
 	.include "src/dexnav.o"
 	.include "src/ui_menu.o"
 	.include "src/battle_controller_player.o"
+	.include "src/character_customization.o"

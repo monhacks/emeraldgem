@@ -1925,7 +1925,7 @@ PlayersHouse_1F_EventScript_EnterHouseMovingInTranslation_Text_1:
 # 253 "data/scripts/players_house.pory"
 	.string "Mientras Pokémon Movers termina de\n"
 	.string "acomodar, ¿Porqué no pones en marcha el\l"
-	.string "reloj que te compro Papá?$"
+	.string "reloj que te compró Papá?$"
 
 PlayersHouse_1F_EventScript_MomGoSeeRoomTranslated_Text_0:
 # 276 "data/scripts/players_house.pory"

@@ -23,8 +23,7 @@ gText_Birch_AndYouAre::
 
 gText_Birch_BoyOrGirl::
 # 38 "data/text/birch_speech.pory"
-	.string "¿A Brendan o May?\p"
-	.string "$"
+	.string "¿A Brendan o May?$"
 
 gText_Birch_WhatsYourName::
 # 49 "data/text/birch_speech.pory"
@@ -55,15 +54,15 @@ gText_Birch_YouCantBirch::
 
 gText_Birch_WaitYoureG::
 # 100 "data/text/birch_speech.pory"
-	.string "E-eres… ¿{PLAYER}?\p¡Genial, yo soy bi!\pPero ahora, por favor,\nescribe un nombre…\pA menos… Que quieras que\nte digan así…\p¿Quieres llamarte {PLAYER}?$"
+	.string "E-eres… ¿{PLAYER}?\p¡Genial, yo soy bi!\pPero ahora, por favor,\nescribe un nombre…\pA menos que quieras que\nte digan así.\p¿Quieres llamarte {PLAYER}?$"
 
-gText_Birch_YouCantMayBoy::
+gText_Birch_TheSameAsDaughter::
 # 104 "data/text/birch_speech.pory"
-	.string "N-no… May es el nombre\nde MI hija…\pPor favor elije otro nombre…$"
+	.string "¡Ah, igual que mi hija entonces!\pEspero no confunda…\l¿{PLAYER} te parece bien?$"
 
-gText_Birch_YouCantBrendanGirl::
+gText_Birch_TheSameAsSon::
 # 108 "data/text/birch_speech.pory"
-	.string "N-no… Brendan es el nombre\nde MI hijo…\pPor favor elije otro nombre…$"
+	.string "¡Ah, igual que mi hijo entonces!\pEspero no confunda…\l¿{PLAYER} te parece bien?$"
 
 gText_Birch_NotVeryOriginal::
 # 112 "data/text/birch_speech.pory"

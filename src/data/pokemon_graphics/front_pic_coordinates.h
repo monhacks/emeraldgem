@@ -2528,7 +2528,7 @@ const struct MonCoords gMonFrontPicCoords[] =
     [SPECIES_OSHAWOTT] =
     {
         .size = MON_COORDS_SIZE(32, 40),
-        .y_offset = 14,
+        .y_offset = 0,
     },
     [SPECIES_DEWOTT] =
     {

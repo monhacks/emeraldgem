@@ -179,6 +179,7 @@ struct LinkPlayer
     /* 0x14 */ u32 linkType;
     /* 0x18 */ u16 id; // battler id in battles
     /* 0x1A */ u16 language;
+    /* 0x1A */ u8  customization[4];
 };
 
 struct LinkPlayerBlock

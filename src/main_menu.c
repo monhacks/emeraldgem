@@ -1614,14 +1614,33 @@ static void Task_NewGameBirchSpeech_StartNamingScreen(u8 taskId)
 static void Task_NewGameBirchSpeech_SoItsPlayerName(u8 taskId)
 {
     NewGameBirchSpeech_ClearWindow(0);
-	if (gSaveBlock2Ptr->playerName == COMPOUND_STRING("Birch")) {
+	StringToUpper(gStringVar4, gSaveBlock2Ptr->playerName);
+	if (StringCompare(gStringVar4, COMPOUND_STRING("BIRCH")) == 0) {
 		StringExpandPlaceholders(gStringVar4, gText_Birch_YouCantBirch);
-		if (!RunTextPrintersAndIsPrinter0Active())
-			gTasks[taskId].func = Task_NewGameBirchSpeech_WaitPressBeforeNameChoice;
+		NewGameBirchSpeech_ClearWindow(0);
+		AddTextPrinterForMessage(TRUE);
+		gTasks[taskId].func = Task_NewGameBirchSpeech_WaitForWhatsYourNameToPrint;
 	}
-    StringExpandPlaceholders(gStringVar4, gText_Birch_SoItsPlayer);
-    AddTextPrinterForMessage(TRUE);
-    gTasks[taskId].func = Task_NewGameBirchSpeech_CreateNameYesNo;
+	else if (StringCompare(gStringVar4, COMPOUND_STRING("MAY")) == 0 && (gSaveBlock2Ptr->playerGender == MALE)) {
+		StringExpandPlaceholders(gStringVar4, gText_Birch_TheSameAsDaughter);
+		AddTextPrinterForMessage(TRUE);
+		gTasks[taskId].func = Task_NewGameBirchSpeech_CreateNameYesNo;
+	}
+	else if (StringCompare(gStringVar4, COMPOUND_STRING("BRENDAN")) == 0 && (gSaveBlock2Ptr->playerGender == FEMALE)) {
+		StringExpandPlaceholders(gStringVar4, gText_Birch_TheSameAsSon);
+		AddTextPrinterForMessage(TRUE);
+		gTasks[taskId].func = Task_NewGameBirchSpeech_CreateNameYesNo;
+	}
+	else if (StringCompare(gStringVar4, COMPOUND_STRING("GAY")) == 0) {
+		StringExpandPlaceholders(gStringVar4, gText_Birch_WaitYoureG);
+		AddTextPrinterForMessage(TRUE);
+		gTasks[taskId].func = Task_NewGameBirchSpeech_CreateNameYesNo;
+	}
+	else {
+		StringExpandPlaceholders(gStringVar4, gText_Birch_SoItsPlayer);
+		AddTextPrinterForMessage(TRUE);
+		gTasks[taskId].func = Task_NewGameBirchSpeech_CreateNameYesNo;
+	}
 }
 
 static void Task_NewGameBirchSpeech_CreateNameYesNo(u8 taskId)

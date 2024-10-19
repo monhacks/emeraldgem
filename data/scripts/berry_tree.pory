@@ -145,7 +145,7 @@ text BerryTree_Text_WantToPick {
 			"Wanna pick them up?")
 		}
 		ES {
-			format("¿¡{STR_VAR_2} {STR_VAR_1}!\p"
+			format("¡{STR_VAR_2} {STR_VAR_1}!\p"
 			"¿Te llevarás algunas\n"
 			"{STR_VAR_1}?")
 		}

@@ -4506,6 +4506,32 @@ u32 GetPokemonAttribute(void){
 	return data;
 }
 
+void SetCustomization(void) {
+	u8 area = gSpecialVar_0x8004;
+	u8 clothing = gSpecialVar_0x8005;
+	switch (area){
+		case 0:
+			ConvertIntToDecimalStringN(gStringVar1, gSaveBlock2Ptr->customization[0], STR_CONV_MODE_LEFT_ALIGN, 5);
+			gSaveBlock2Ptr->customization[0] = clothing;
+			ConvertIntToDecimalStringN(gStringVar2, gSaveBlock2Ptr->customization[0], STR_CONV_MODE_LEFT_ALIGN, 5);
+			break;
+		case 1:
+			ConvertIntToDecimalStringN(gStringVar1, gSaveBlock2Ptr->customization[1], STR_CONV_MODE_LEFT_ALIGN, 5);
+			gSaveBlock2Ptr->customization[1] = clothing;
+			ConvertIntToDecimalStringN(gStringVar2, gSaveBlock2Ptr->customization[1], STR_CONV_MODE_LEFT_ALIGN, 5);
+			break;
+		case 2:
+			ConvertIntToDecimalStringN(gStringVar1, gSaveBlock2Ptr->customization[2], STR_CONV_MODE_LEFT_ALIGN, 5);
+			gSaveBlock2Ptr->customization[2] = clothing;
+			ConvertIntToDecimalStringN(gStringVar2, gSaveBlock2Ptr->customization[2], STR_CONV_MODE_LEFT_ALIGN, 5);
+			break;
+		case 3:
+			ConvertIntToDecimalStringN(gStringVar1, gSaveBlock2Ptr->customization[3], STR_CONV_MODE_LEFT_ALIGN, 5);
+			gSaveBlock2Ptr->customization[3] = clothing;
+			ConvertIntToDecimalStringN(gStringVar2, gSaveBlock2Ptr->customization[3], STR_CONV_MODE_LEFT_ALIGN, 5);
+			break;
+	}
+}
 
 /*
 enum {

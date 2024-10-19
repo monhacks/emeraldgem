@@ -138,6 +138,8 @@ text Route102_Text_RouteSignPetalburg {
 
 
 script Route102_EventScript_Boy{
+	faceplayer
+	lock
 	CheckItem(ITEM_GREAT_BALL)
 	if (var(VAR_RESULT) == TRUE){
 		poryswitch(LANGUAGE){
@@ -168,6 +170,7 @@ script Route102_EventScript_Boy{
 		}
 	}
 	closemessage
+	releaseall
 }
 
 

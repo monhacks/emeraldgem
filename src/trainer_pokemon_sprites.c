@@ -4,10 +4,12 @@
 #include "malloc.h"
 #include "palette.h"
 #include "decompress.h"
+#include "event_data.h"
 #include "trainer_pokemon_sprites.h"
 #include "data.h"
 #include "pokemon.h"
 #include "constants/trainers.h"
+#include "character_customization.h"
 
 struct PicData
 {
@@ -108,10 +110,15 @@ static void LoadPicPaletteByTagOrSlot(u16 species, u32 otId, u32 personality, u8
 
 static void LoadPicPaletteBySlot(u16 species, u32 otId, u32 personality, u8 paletteSlot, bool8 isTrainer)
 {
-    if (!isTrainer)
-        LoadCompressedPalette(GetMonSpritePalFromSpeciesAndPersonality(species, otId, personality), paletteSlot * 0x10, 0x20);
-    else
-        LoadCompressedPalette(gTrainerFrontPicPaletteTable[species].data, paletteSlot * 0x10, 0x20);
+    if (!isTrainer){
+		const void *palette = GetMonSpritePalFromSpeciesAndPersonality(species, otId, personality);
+        LoadCompressedPalette((u32*) palette, paletteSlot * 0x10, 0x20);
+    }
+	else
+	{
+		const void *palette = gTrainerFrontPicPaletteTable[species].data;
+		LoadOutfitPalette((u32*) palette, paletteSlot * 0x10, 0x20);
+	}		
 }
 
 static void AssignSpriteAnimsTable(bool8 isTrainer)

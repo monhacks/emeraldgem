@@ -513,7 +513,7 @@ BerryTree_Text_CareAdverbGood::
 
 BerryTree_Text_WantToPick::
 # 141 "data/scripts/berry_tree.pory"
-	.string "¿¡{STR_VAR_2} {STR_VAR_1}!\p"
+	.string "¡{STR_VAR_2} {STR_VAR_1}!\p"
 	.string "¿Te llevarás algunas\n"
 	.string "{STR_VAR_1}?$"
 

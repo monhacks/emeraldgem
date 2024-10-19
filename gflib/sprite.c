@@ -2,6 +2,7 @@
 #include "sprite.h"
 #include "main.h"
 #include "palette.h"
+#include "character_customization.h"
 
 #define MAX_SPRITE_COPY_REQUESTS 64
 
@@ -1776,4 +1777,23 @@ bool8 AddSubspritesToOamBuffer(struct Sprite *sprite, struct OamData *destOam, u
     }
 
     return 0;
+}
+
+u8 LoadCustomizedObjectEventSpritePalette(const struct SpritePalette *palette)
+{
+    u8 index = IndexOfSpritePaletteTag(0xFFFF);
+
+    if (index == 0xFF)
+    {
+        return 0xFF;
+    }
+    else
+    {
+        sSpritePaletteTags[index] = palette->tag;
+        DoLoadSpritePalette(palette->data, PLTT_ID(index));
+		LoadOutfitPaletteOW(palette->data, OBJ_PLTT_ID(index), PLTT_SIZE_4BPP, index);
+        // UniquePaletteByPersonality(OBJ_PLTT_ID(index), species, personality);
+        CpuCopy32(&gPlttBufferFaded[OBJ_PLTT_ID(index)], &gPlttBufferUnfaded[OBJ_PLTT_ID(index)], PLTT_SIZE_4BPP);
+        return index;
+    }
 }

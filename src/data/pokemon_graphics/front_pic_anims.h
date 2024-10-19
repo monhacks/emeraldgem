@@ -5853,8 +5853,9 @@ static const union AnimCmd sAnim_EMBOAR_1[] =
 
 static const union AnimCmd sAnim_OSHAWOTT_1[] =
 {
-    ANIMCMD_FRAME(0, 30),
-    ANIMCMD_FRAME(1, 30),
+	ANIMCMD_FRAME(0, 8),
+    ANIMCMD_FRAME(0, 32),
+    ANIMCMD_FRAME(1, 32),
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_END,
 };

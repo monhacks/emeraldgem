@@ -158,7 +158,7 @@ script LittlerootTown_EventScript_GiveRunningShoes {
 	poryswitch(LANGUAGE){
 		ES{
 			namebox (Mama)
-			msgbox (format("¡Mi amor!\p¡Ah, el Profesor te dio un Pokémon!\p-sniff sniff- …{PAUSE 5} …{PAUSE 5} …{PAUSE 5}\lPerdón por llorar pero… {PAUSE 5}Estoy tan orgullosa de ti, mi pequeñ{ITOITA}…\p"
+			msgbox (format("¡Mi amor!\p¡Ah, el Profesor te dio un Pokémon!\p-sniff sniff- …{PAUSE 5} …{PAUSE 5} …{PAUSE 5}\nPerdón por llorar pero… {PAUSE 5}Estoy tan orgullosa de ti, mi pequeñ{ITOITA}…\p"
 					"Pero bueno… {PAUSE 5}No puedo evitar que crezcas, así que… {PAUSE 5}Toma esto, mi amor."))
 			hidenamebox
 			giveitem (ITEM_MACH_BIKE, 1)
@@ -175,13 +175,11 @@ script LittlerootTown_EventScript_GiveRunningShoes {
 		}
 		EN{
 			namebox (Mama)
-			msgbox (format("My baby!\pI see the Professor gave you a Pokémon!\p-sniff sniff- …{PAUSE 5} …{PAUSE 5} …{PAUSE 5}\lSorry for crying, but… {PAUSE 5}I'm so proud of you, my baby…\p"
+			msgbox (format("My baby!\pI see the Professor gave you a Pokémon!\p-sniff sniff- …{PAUSE 5} …{PAUSE 5} …{PAUSE 5}\nSorry for crying, but… {PAUSE 5}I'm so proud of you, my baby…\p"
 					"But… {PAUSE 5}I can't avoid seeing you grow up, so… {PAUSE 5}I have a gift for you."))
 			hidenamebox
 			giveitem (ITEM_MACH_BIKE, 1)
 			setflag (FLAG_NOT_DOUBLE_BIKE)
-			playfanfare (MUS_OBTAIN_ITEM)
-			waitfanfare
 			setflag (FLAG_RECEIVED_RUNNING_SHOES)
 			namebox (Mama)
 			msgbox (format("It's a 2-in-1 Bike, but it seems it can't change modes anymore… Maybe the Bike Shop Owner can fix it!\p"

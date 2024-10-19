@@ -2851,6 +2851,7 @@ static void PrintNotEggInfo(void)
     PrintTextOnWindow(PSS_LABEL_WINDOW_PORTRAIT_SPECIES, gStringVar1, 24, 17, 0, 1);
     GetMonNickname(mon, gStringVar1);
 	// StringAppend(gStringVar1, mon);
+	ConvertIntToDecimalStringN(gStringVar1, sizeof(struct BoxPokemon), STR_CONV_MODE_LEFT_ALIGN, 10);
     PrintTextOnWindow(PSS_LABEL_WINDOW_PORTRAIT_NICKNAME, gStringVar1, 0, 1, 0, 1);
     strArray[0] = CHAR_SLASH;
     StringCopy(&strArray[1], &gSpeciesNames[summary->species2][0]);

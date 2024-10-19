@@ -2,6 +2,7 @@
 #include "malloc.h"
 #include "data.h"
 #include "decompress.h"
+#include "character_customization.h"
 #include "pokemon.h"
 #include "pokemon_debug.h"
 #include "text.h"
@@ -303,3 +304,14 @@ bool8 LoadCompressedSpritePaletteUsingHeap(const struct CompressedSpritePalette 
     Free(buffer);
     return FALSE;
 }
+
+void LoadCompressedCustomizedSpritePaletteWithTag(const u32 *pal, u16 tag, u32 personality)
+{
+    struct SpritePalette dest;
+
+    LZ77UnCompWram(pal, gDecompressionBuffer);
+    dest.data = (void *) gDecompressionBuffer;
+    dest.tag = tag;
+    LoadCustomizedObjectEventSpritePalette(&dest);
+}
+

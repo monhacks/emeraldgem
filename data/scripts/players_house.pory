@@ -250,7 +250,7 @@ script PlayersHouse_1F_EventScript_EnterHouseMovingInTranslation {
 			waitmovement (0)
 			call_if_eq (VAR_0x8005, MALE, PlayersHouse_1F_EventScript_MomFacePlayerMovingInMale)
 			call_if_eq (VAR_0x8005, FEMALE, PlayersHouse_1F_EventScript_MomFacePlayerMovingInFemale)
-			msgbox (format("Mientras Pokémon Movers termina de acomodar, ¿Porqué no pones en marcha el reloj que te compro Papá?"))
+			msgbox (format("Mientras Pokémon Movers termina de acomodar, ¿Porqué no pones en marcha el reloj que te compró Papá?"))
 		}
 		EN{
 			msgbox (format("Isn't this house cute?"))
@@ -258,7 +258,7 @@ script PlayersHouse_1F_EventScript_EnterHouseMovingInTranslation {
 			waitmovement (0)
 			call_if_eq (VAR_0x8005, MALE, PlayersHouse_1F_EventScript_MomFacePlayerMovingInMale)
 			call_if_eq (VAR_0x8005, FEMALE, PlayersHouse_1F_EventScript_MomFacePlayerMovingInFemale)
-			msgbox (format("While Pokémon Movers finishes setting up the house, why don't you go set up the clock Dad bought you?"))
+			msgbox (format("While Pokémon Movers finishes setting up the house, why don't you go set up the clock Dad bought for you?"))
 		}
 	}
 	closemessage

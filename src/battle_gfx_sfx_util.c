@@ -5,6 +5,7 @@
 #include "battle_anim.h"
 #include "constants/battle_anim.h"
 #include "battle_interface.h"
+#include "character_customization.h"
 #include "main.h"
 #include "dma3.h"
 #include "malloc.h"
@@ -656,8 +657,16 @@ void DecompressTrainerBackPic(u16 backPicId, u8 battlerId)
     DecompressPicFromTable(&gTrainerBackPicTable[backPicId],
                            gMonSpritesGfxPtr->sprites.ptr[position],
                            SPECIES_NONE);
-    LoadCompressedPalette(gTrainerBackPicPaletteTable[backPicId].data,
-                          0x100 + 16 * battlerId, 0x20);
+	if ((backPicId == 0 && gSaveBlock2Ptr->playerGender == MALE) || (backPicId == 1 && gSaveBlock2Ptr->playerGender == FEMALE))
+	{
+		LoadOutfitPalette((u32*)gTrainerBackPicPaletteTable[gSaveBlock2Ptr->playerGender].data,
+									  0x100 + 16 * battlerId, 32);
+	}
+	else
+	{
+		LoadCompressedPalette(gTrainerBackPicPaletteTable[backPicId].data,
+			                  0x100 + 16 * battlerId, 0x20);
+	}
 }
 
 void BattleGfxSfxDummy3(u8 gender)

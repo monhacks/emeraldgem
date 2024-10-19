@@ -39,3 +39,4 @@ porymap.project.cfg
 *.sym
 *.js
 a msys2 terminal.bat.lnk
+a WSL1 terminal.lnk

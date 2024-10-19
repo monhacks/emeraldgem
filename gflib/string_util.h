@@ -22,6 +22,7 @@ u8 *StringCopy(u8 *dest, const u8 *src);
 u8 *StringAppend(u8 *dest, const u8 *src);
 u8 *StringCopyN(u8 *dest, const u8 *src, u8 n);
 u8 *StringAppendN(u8 *dest, const u8 *src, u8 n);
+u8 *StringToUpper(u8 *dest, const u8 *src);
 u16 StringLength(const u8 *str);
 u16 StringLengthMinusColor(const u8 *str);
 s32 StringCompare(const u8 *str1, const u8 *str2);
@@ -46,5 +47,6 @@ u8 GetExtCtrlCodeLength(u8 code);
 s32 StringCompareWithoutExtCtrlCodes(const u8 *str1, const u8 *str2);
 void ConvertInternationalString(u8 *s, u8 language);
 void StripExtCtrlCodes(u8 *str);
+
 
 #endif // GUARD_STRING_UTIL_H
